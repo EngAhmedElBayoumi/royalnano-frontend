@@ -14,6 +14,32 @@ export default {
         primary: "var(--primary)",
         secondary: "var(--secondary)",
       },
+      // screens: {
+      //   xs: "400px",
+      // },
+    },
+    fontSize: {
+      "hero-header": [
+        "40px",
+        {
+          lineHeight: "74px",
+          fontWeight: "700",
+        },
+      ],
+      "link-text": [
+        "25px",
+        {
+          lineHeight: "46px",
+          fontWeight: "700",
+        },
+      ],
+      "text-sm": [
+        "18px",
+        {
+          fontWeight: "500",
+          lineHeight: "34px",
+        },
+      ],
     },
   },
   plugins: [],

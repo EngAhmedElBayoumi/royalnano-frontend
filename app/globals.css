@@ -15,7 +15,18 @@
     --foreground: #ededed;
   }
 }
-
+.main-container {
+  width: 92vw;
+}
+@media (max-width: 576px) {
+  .main-container {
+    width: 100%;
+    padding: 0 1rem;
+  }
+}
+.main {
+  min-height: 50vh;
+}
 body {
   color: var(--foreground);
   background: var(--background);
