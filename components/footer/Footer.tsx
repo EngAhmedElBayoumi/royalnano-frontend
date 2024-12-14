@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { socialLinks, navLinks } from "./FooterData";
+import { navLinks, socialLinks } from "@/components/footer/FooterData";
 
 const Footer = () => {
   return (
