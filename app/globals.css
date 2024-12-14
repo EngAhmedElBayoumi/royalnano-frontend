@@ -27,6 +27,10 @@
 .main {
   min-height: 42.5vh;
 }
+.topbar {
+  @apply fixed top-0 z-30 flex-col sm:flex-col lg:flex-row gap-8;
+}
+
 body {
   color: var(--foreground);
   background: var(--background);
