@@ -14,26 +14,36 @@ export default {
         primary: "var(--primary)",
         secondary: "var(--secondary)",
       },
+      borderWidth: {
+        "5": "5px",
+        "10": "10px",
+      },
+      borderColor: {
+        primary: "var(--primary)",
+      },
+      borderRadius: {
+        "10": "10px",
+      },
       // screens: {
       //   xs: "400px",
       // },
     },
     fontSize: {
-      "hero-header": [
+      lg: [
         "40px",
         {
           lineHeight: "74px",
           fontWeight: "700",
         },
       ],
-      "link-text": [
+      md: [
         "25px",
         {
           lineHeight: "46px",
           fontWeight: "700",
         },
       ],
-      "text-sm": [
+      sm: [
         "18px",
         {
           fontWeight: "500",
