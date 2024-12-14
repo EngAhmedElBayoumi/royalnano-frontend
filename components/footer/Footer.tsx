@@ -44,7 +44,7 @@ const Footer = () => {
             </ul>
           </section>
           <address>
-            <h3 className="text-md mb-2">Reach out!</h3>
+            <h3 className="text-md">Reach out!</h3>
             <hr className="border-t-5 rounded-10 border-primary mb-2 w-[115px]" />
             <p className="text-sm">
               <a href="tel:+201032222542">+20 103 2222 542</a>
