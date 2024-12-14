@@ -1,6 +1,7 @@
-import Footer from "@/components/shared/footer";
-import Navbar from "@/components/shared/navbar";
+import Footer from "@/components/Footer/Footer";
+import Navbar from "@/components/Navbar";
 import { Cairo } from "next/font/google";
+import "../globals.css";
 
 const cairo = Cairo({ subsets: ["latin"] }); // Initialize Cairo font
 
