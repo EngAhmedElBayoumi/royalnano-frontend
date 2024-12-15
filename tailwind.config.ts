@@ -13,6 +13,7 @@ export default {
         foreground: "var(--foreground)",
         primary: "var(--primary)",
         secondary: "var(--secondary)",
+        gray: "#969696",
       },
       borderWidth: {
         "5": "5px",

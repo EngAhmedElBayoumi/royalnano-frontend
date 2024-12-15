@@ -3,19 +3,13 @@ import { contactInfo, NavbarSocialLinks } from "./NavbarData";
 
 const TopSection = () => {
   return (
-    <div className="top-0 w-full bg-secondary h-[44px] flex justify-between px-2 items-center py-[5px] ">
-      <div className="flex gap-2">
+    <div className="top-0 w-full bg-secondary md:h-[44px]  flex justify-between  px-2 items-center py-[5px] ">
+      <div className="md:flex sm:block gap-2 sm:py-2 ">
         {contactInfo.map((info) => (
-          <>
-            <Image
-              key={info.text}
-              alt={info.text}
-              src={info.src}
-              width={24}
-              height={24}
-            />
-            <p className="text-white text-sm">{info.text}</p>
-          </>
+          <div className="flex " key={info.text}>
+            <Image alt={info.text} src={info.src} width={24} height={24} />
+            <p className="text-white md:text-sm ms-2">{info.text}</p>
+          </div>
         ))}
       </div>
       <div className=" flex justify-between gap-7">
