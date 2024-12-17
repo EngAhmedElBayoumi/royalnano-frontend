@@ -1,5 +1,5 @@
 import Footer from "@/components/footer/Footer";
-import Navbar from "@/components/navbar/Navbar";
+import Navbar from "@/components/navbar/MainNavbar";
 import { Cairo } from "next/font/google";
 import "../globals.css";
 

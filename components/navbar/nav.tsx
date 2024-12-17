@@ -3,15 +3,19 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { navLinks } from "@/components/footer/FooterData";
 import Link from "next/link";
+
 const Nav = () => {
-  const [isClicked, setisClicked] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
   const toggleNavbar = () => {
-    setisClicked(!isClicked);
+    setIsClicked(!isClicked);
   };
+
   return (
-    <nav className=" bg-transparent z-10 flex justify-between items-center pt-8 ps-8 pe-3">
+    <nav className="bg-transparent z-10 flex justify-between items-center pt-8 ps-8 pe-3">
       <Image src="/assets/icons/logo.svg" alt="logo" width={90} height={122} />
-      <div className="hidden md:flex  lg:flex-row gap-8">
+
+      {/* desktop menuu */}
+      <div className="hidden md:flex gap-8">
         {navLinks.map((link) => (
           <Link
             className="hover:text-primary lg:text-md md:text-sm text-black text-nowrap"
@@ -22,30 +26,33 @@ const Nav = () => {
           </Link>
         ))}
       </div>
-      {/* auth */}
-      <div className="hidden md:flex  gap-5 items-center ">
+
+      {/* Auth Linkss */}
+      <div className="hidden md:flex gap-5 items-center ">
         <Link
-          className=" lg:text-md md:text-sm text-md hover:text-secondary text-nowrap text-primary"
+          className="lg:text-md md:text-sm text-md hover:text-secondary text-nowrap text-primary"
           href={"/"}
         >
           Log In
         </Link>
         <Link
-          className=" lg:text-md md:text-sm text-md hover:text-secondary text-primary"
+          className="lg:text-md md:text-sm text-md hover:text-secondary text-primary"
           href={"/"}
         >
           Register
         </Link>
       </div>
-      <div className="md:hidden flex items-center ">
+
+      {/* Mobile Humburger btnn */}
+      <div className="md:hidden flex items-center">
         <button
-          className=" inline-flex items-center justify-center rounded-md focus:ring-2 focus:ring-inset focus:ring-black "
+          className="inline-flex items-center justify-center rounded-md focus:ring-2 focus:ring-inset focus:ring-black"
           onClick={toggleNavbar}
         >
           {isClicked ? (
             <svg
               className="h-6 w-6 block"
-              xmlns="http://ww.w3.org/2000/svg"
+              xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -60,7 +67,7 @@ const Nav = () => {
           ) : (
             <svg
               className="h-6 w-6"
-              xmlns="http://ww.w3.org/2000/svg"
+              xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -75,9 +82,30 @@ const Nav = () => {
           )}
         </button>
       </div>
+
+      {/* mobile menuuuuu */}
       {isClicked && (
-        <div className="md:hidden">
-          <div className="md:hidden px-2 pb-3 space-y-1 sm:px-3">
+        <div className="md:hidden absolute top-20 left-0 right-0 bg-white p-6 rounded-lg shadow-lg z-20">
+          <button
+            className="absolute top-3 right-3 text-black"
+            onClick={toggleNavbar}
+          >
+            <svg
+              className="h-6 w-6"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+          <div className="flex flex-col space-y-4">
             {navLinks.map((link) => (
               <Link
                 className="hover:text-primary text-sm block text-black"
@@ -87,16 +115,14 @@ const Nav = () => {
                 {link.label}
               </Link>
             ))}
-            {/* </div> */}
-
             <Link
-              className="text-sm block hover:text-secondary text-nowrap text-primary"
+              className="hover:text-primary text-sm block text-black"
               href={"/"}
             >
               Log In
             </Link>
             <Link
-              className="clock text-sm hover:text-secondary text-primary"
+              className="hover:text-primary text-sm block text-black"
               href={"/"}
             >
               Register
