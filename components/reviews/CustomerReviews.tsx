@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
-// import "./styles.css";
+import "./styles.css";
 import { reviews } from "../../data/customerReviewsData";
 import ReviewCard from "../cards/ReviewCard";
 

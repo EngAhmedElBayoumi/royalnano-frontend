@@ -1,14 +1,14 @@
 "use client";
 import Image from "next/image";
 import React from "react";
-import { AboutData } from "./aboutData";
+import { AboutData } from "../../data/aboutData";
 import IconWithTitle from "./IconWithTitle";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 
-// import "./styles.css";
+import "./styles.css";
 const About = () => {
   return (
     <section className="py-8 bg-white ">
@@ -24,58 +24,61 @@ const About = () => {
 
 /> */}
 
-          <Swiper
-            breakpoints={{
-              768: { slidesPerView: 1 },
-              992: { slidesPerView: 1 },
-              1200: { slidesPerView: 1 },
-            }}
-            autoplay={{
-              delay: 2500,
-              disableOnInteraction: false,
-            }}
-            pagination={{
-              clickable: true,
-              renderBullet: (index, className) => {
-                return `<span class="${className} custom-bullet"></span>`;
-              },
-            }}
-            modules={[Autoplay, Pagination]}
-            className="main-container"
-          >
-            <SwiperSlide>
-              <Image
-                width={637}
-                height={513}
-                alt="aboutImg"
-                src="/assets/images/about1.png"
-              />
-            </SwiperSlide>
-            <SwiperSlide>
-              <Image
-                width={637}
-                height={513}
-                alt="aboutImg"
-                src="/assets/images/about2.png"
-              />
-            </SwiperSlide>
-            <SwiperSlide>
-              <Image
-                width={637}
-                height={513}
-                alt="aboutImg"
-                src="/assets/images/about3.png"
-              />
-            </SwiperSlide>
-            <SwiperSlide>
-              <Image
-                width={637}
-                height={513}
-                alt="aboutImg"
-                src="/assets/images/about4.png"
-              />
-            </SwiperSlide>
-          </Swiper>
+          <div className="w-full sm:w-[90%] md:w-[637px] mx-auto">
+            {" "}
+            <Swiper
+              style={{ paddingBottom: "30px" }}
+              breakpoints={{
+                768: { slidesPerView: 1 },
+                992: { slidesPerView: 1 },
+                1200: { slidesPerView: 1 },
+              }}
+              autoplay={{
+                delay: 2500,
+                disableOnInteraction: false,
+              }}
+              pagination={{
+                clickable: true,
+                renderBullet: (index, className) => {
+                  return `<span class="${className} custom-bullet"></span>`;
+                },
+              }}
+              modules={[Autoplay, Pagination]}
+            >
+              <SwiperSlide>
+                <Image
+                  width={637}
+                  height={513}
+                  alt="aboutImg"
+                  src="/assets/images/about.png"
+                />
+              </SwiperSlide>
+              <SwiperSlide>
+                <Image
+                  width={637}
+                  height={513}
+                  alt="aboutImg"
+                  src="/assets/images/about.png"
+                />
+              </SwiperSlide>
+              <SwiperSlide>
+                <Image
+                  width={637}
+                  height={513}
+                  alt="aboutImg"
+                  src="/assets/images/about.png"
+                />
+              </SwiperSlide>
+              <SwiperSlide>
+                <Image
+                  width={637}
+                  height={513}
+                  alt="aboutImg"
+                  src="/assets/images/about.png"
+                />
+              </SwiperSlide>
+            </Swiper>
+          </div>
 
           <div>
             <p className="text-lg text-secondary">Why Royal Nano</p>

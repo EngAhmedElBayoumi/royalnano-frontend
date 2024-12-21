@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { contactInfo, NavbarSocialLinks } from "./NavbarData";
+import { contactInfo, NavbarSocialLinks } from "@/data/NavbarData";
 
 const TopSection = () => {
   return (

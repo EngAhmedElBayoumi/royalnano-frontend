@@ -4,7 +4,7 @@
   background: var(--gray);
   border-radius: 10px;
   opacity: 0.5;
-  margin: 0 5px;
+  margin-top: 5px;
   transition: opacity 0.3s, background 0.3s;
 }
 
