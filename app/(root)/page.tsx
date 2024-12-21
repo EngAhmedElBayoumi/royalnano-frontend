@@ -3,6 +3,7 @@ import OurServices from "@/components/services/OurServices";
 import CustomerReviews from "@/components/reviews/CustomerReviews";
 import About from "@/components/about/About";
 import OurSolutions from "@/components/ourSolutions/OurSolutions";
+import Subscription from "@/components/Subscription";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
       <About />
       <OurSolutions />
       <CustomerReviews />
+      <Subscription />
     </>
   );
 }

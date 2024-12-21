@@ -15,7 +15,7 @@ const ServiceItem: React.FC<ServiceItemProps> = ({
   <li
     onMouseEnter={onMouseEnter}
     className={`flex justify-between items-center font-[500] text-sm lg:text-md border rounded-2xl px-5 py-2 cursor-pointer ${
-      isActive ? "bg-primary text-white" : "border-gray-300 text-gray"
+      isActive ? "bg-primary text-white" : "border-gray text-gray"
     }`}
   >
     <span>{service.name}</span>
