@@ -4,9 +4,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
-import "./styles.css";
-import { reviews } from "./customerReviewsData";
-import ReviewCard from "./ReviewCard";
+// import "./styles.css";
+import { reviews } from "../../data/customerReviewsData";
+import ReviewCard from "../cards/ReviewCard";
 
 const CustomerReviews: React.FC = () => {
   return (

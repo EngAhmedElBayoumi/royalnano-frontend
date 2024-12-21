@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import React, { useState } from "react";
-import { navLinks } from "@/components/footer/FooterData";
+import { navLinks } from "@/data/FooterData";
 import Link from "next/link";
 
 const Nav = () => {

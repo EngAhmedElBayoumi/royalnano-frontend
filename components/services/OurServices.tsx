@@ -1,9 +1,8 @@
 "use client";
-
 import React from "react";
 import ServiceItem from "./ServiceItem";
 import useActiveService from "./useActiveService";
-import { services } from "./servicesData";
+import { services } from "../../data/servicesData";
 
 const OurServices = () => {
   const { activeService, handleMouseEnter } = useActiveService(services[0]);

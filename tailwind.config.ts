@@ -16,6 +16,8 @@ export default {
         gray: "var(--gray)",
         lightGray: "#F5F2F2",
         darkGray: "#5A5A5A",
+        subtitle: "#7d7d7d",
+        neutralGray: "#ebece4",
       },
       borderWidth: {
         "5": "5px",
