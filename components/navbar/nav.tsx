@@ -1,24 +1,45 @@
 "use client";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { navLinks } from "@/data/FooterData";
 import Link from "next/link";
 
 const Nav = () => {
   const [isClicked, setIsClicked] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
   const toggleNavbar = () => {
     setIsClicked(!isClicked);
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 10) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <nav className="bg-transparent z-10 flex justify-between items-center pt-8 ps-8 pe-3">
+    <nav
+      className={`${
+        isScrolled ? "bg-black bg-opacity-50" : "bg-transparent"
+      } z-10 flex justify-between sticky top-0 items-center py-4 px-8 transition-colors duration-300`}
+    >
       <Image src="/assets/icons/logo.svg" alt="logo" width={90} height={122} />
 
-      {/* desktop menuu */}
+      {/* Desktop menu */}
       <div className="hidden md:flex gap-8">
         {navLinks.map((link) => (
           <Link
-            className="hover:text-primary lg:text-md md:text-sm text-black text-nowrap"
+            className="hover:text-primary lg:text-md md:text-sm text-white text-nowrap"
             key={link.href}
             href={link.href}
           >
@@ -27,8 +48,8 @@ const Nav = () => {
         ))}
       </div>
 
-      {/* Auth Linkss */}
-      <div className="hidden md:flex gap-5 items-center ">
+      {/* Auth Links */}
+      <div className="hidden md:flex gap-5 items-center">
         <Link
           className="lg:text-md md:text-sm text-md hover:text-secondary text-nowrap text-primary"
           href={"/"}
@@ -43,7 +64,7 @@ const Nav = () => {
         </Link>
       </div>
 
-      {/* Mobile Humburger btnn */}
+      {/* Mobile Hamburger Button */}
       <div className="md:hidden flex items-center">
         <button
           className="inline-flex items-center justify-center rounded-md focus:ring-2 focus:ring-inset focus:ring-black"
@@ -70,7 +91,7 @@ const Nav = () => {
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              stroke="currentColor"
+              stroke="white"
             >
               <path
                 strokeLinecap="round"
@@ -83,7 +104,7 @@ const Nav = () => {
         </button>
       </div>
 
-      {/* mobile menuuuuu */}
+      {/* Mobile Menu */}
       {isClicked && (
         <div className="md:hidden absolute top-20 left-0 right-0 bg-white p-6 rounded-lg shadow-lg z-20">
           <button

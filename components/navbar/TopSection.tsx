@@ -12,12 +12,12 @@ const TopSection = () => {
           </div>
         ))}
       </div>
-      <div className=" flex justify-between gap-7">
+      <div className=" flex justify-center md:gap-7 gap-1 items-center md:flex-row flex-col">
         {NavbarSocialLinks.map((link, i) => {
           if (i === 3) {
             return (
-              <div key="hello" className="gap-1 flex items-center">
-                <p className="text-white text-[15px]">EN</p>
+              <div key="hello" className="gap-1 md:py-2 py-2 flex items-center">
+                <p className="text-white text-[15px] md:flex hidden">EN</p>
                 <Image
                   key={link.href}
                   alt={link.alt}
@@ -35,6 +35,7 @@ const TopSection = () => {
                 src={link.src}
                 width={24}
                 height={24}
+                className="py-2 md:py-2 "
               />
             );
         })}

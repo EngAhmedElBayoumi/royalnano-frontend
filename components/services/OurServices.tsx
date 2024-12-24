@@ -8,7 +8,7 @@ const OurServices = () => {
   const { activeService, handleMouseEnter } = useActiveService(services[0]);
 
   return (
-    <section className="py-8 bg-white">
+    <section className="pb-8 bg-white relative top-[-100px]">
       <h2 className="text-center text-lg font-bold text-primary">
         Our Services
       </h2>
