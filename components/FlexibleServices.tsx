@@ -1,14 +1,12 @@
-"use client";
-
 import React from "react";
 
 const FlexibleServices = () => {
   return (
     <article
-      className="relative bg-cover bg-center h-[542px] text-white flex justify-center"
+      className="relative bg-cover bg-center h-[542px] text-white flex justify-center top-[-40px]"
       style={{ backgroundImage: "url('/assets/images/flex-service-bg.png')" }}
     >
-      <div className="absolute inset-0 bg-black opacity-50"></div>
+      <div className="absolute inset-0 bg-black opacity-60"></div>
       <header
         className="relative z-10 flex flex-col justify-center text-center 
       md:text-start items-center md:items-start h-full main-container text-md md:text-lg"

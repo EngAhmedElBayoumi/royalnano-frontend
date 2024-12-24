@@ -11,7 +11,7 @@ const Nav = () => {
   };
 
   return (
-    <nav className="bg-transparent z-10 flex justify-between items-center pt-8 ps-8 pe-3">
+    <nav className="bg-transparent z-10 flex justify-between items-center pt-8 ps-8 pe-3 relative">
       <Image src="/assets/icons/logo.svg" alt="logo" width={90} height={122} />
 
       {/* desktop menuu */}
