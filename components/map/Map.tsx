@@ -10,7 +10,7 @@ const MapComponent = () => {
     <MapContainer
       center={position}
       zoom={13}
-      className="h-[643px] w-[100%] rounded-16 border border-primary "
+      className="h-[643px] w-[100%] z-0 rounded-16 border border-primary "
     >
       <TileLayer
         className="rounded-16"
