@@ -30,7 +30,7 @@ const Nav = () => {
   return (
     <nav
       className={`${
-        isScrolled ? "bg-black bg-opacity-50" : "bg-transparent"
+        isScrolled ? "bg-black bg-opacity-90 mb-5" : "bg-transparent"
       } z-10 flex justify-between sticky top-0 items-center py-4 px-8 transition-colors duration-300`}
     >
       <Image src="/assets/icons/logo.svg" alt="logo" width={90} height={122} />
@@ -52,7 +52,7 @@ const Nav = () => {
       <div className="hidden md:flex gap-5 items-center">
         <Link
           className="lg:text-md md:text-sm text-md hover:text-secondary text-nowrap text-primary"
-          href={"/"}
+          href={"/log-in"}
         >
           Log In
         </Link>

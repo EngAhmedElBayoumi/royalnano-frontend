@@ -1,5 +1,3 @@
-import Footer from "@/components/footer/Footer";
-import Navbar from "@/components/navbar/MainNavbar";
 import { Cairo } from "next/font/google";
 import "../globals.css";
 import Head from "next/head";
@@ -23,9 +21,7 @@ export default function RootLayout({
         <meta name="description" content={metadata.description} />
       </Head>
       <body className={cairo.className}>
-        <Navbar />
         <main className="main">{children}</main>
-        <Footer />
       </body>
     </html>
   );
