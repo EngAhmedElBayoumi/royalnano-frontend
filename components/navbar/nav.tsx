@@ -31,7 +31,7 @@ const Nav = () => {
     <nav
       className={`${
         isScrolled ? "bg-black bg-opacity-90 mb-5" : "bg-transparent"
-      } z-10 flex justify-between sticky top-0 items-center py-4 px-8 transition-colors duration-300`}
+      } z-20 flex justify-between sticky top-0 items-center py-4 px-8 transition-colors duration-300`}
     >
       <Image src="/assets/icons/logo.svg" alt="logo" width={90} height={122} />
 

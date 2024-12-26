@@ -65,6 +65,9 @@ export default {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      boxShadow: {
+        custom: "0px 4px 4px 0px #00000040",
+      },
     },
     fontSize: {
       lg: [

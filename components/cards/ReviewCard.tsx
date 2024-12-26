@@ -22,7 +22,7 @@ const ReviewCard: React.FC<ReviewCardProps> = ({
           alt={name}
           width={130}
           height={130}
-          className="rounded-full border-2 border-gray-300 absolute -top-20"
+          className="rounded-full border-8 border-white absolute -top-20"
         />
         <section className="flex flex-col items-center gap-3 relative top-10">
           <h3 className="font-[500] text-md text-primary">{name}</h3>
