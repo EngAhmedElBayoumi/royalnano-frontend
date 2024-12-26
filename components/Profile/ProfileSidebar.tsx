@@ -2,8 +2,8 @@ import Image from "next/image";
 
 const ProfileSidebar = () => {
   return (
-    <section className="h-[410px] flex items-center relative top-[-50px] z-10 max-w-[368px]">
-      <div className="flex flex-col items-center py-6 px-10 rounded-2xl bg-lightGray h-[280px] relative border border-primary">
+    <section className="min-h-[420px] flex items-center relative top-[-40px] z-10 max-w-[368px]">
+      <div className="flex flex-col items-center py-6 px-10 rounded-2xl bg-lightGray relative border border-primary pb-[50px] min-h-[300px]">
         <div className="p-2 bg-white rounded-full absolute -top-20">
           <Image
             src="/assets/images/user-placeholder.jpg"

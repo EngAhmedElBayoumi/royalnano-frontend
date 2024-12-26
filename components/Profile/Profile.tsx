@@ -4,33 +4,51 @@ import ProfileSidebar from "./ProfileSidebar";
 
 const Profile = () => {
   return (
-    <section className="flex justify-center">
-      <main className="main-container flex gap-4">
+    <section className="flex justify-center flex-wrap">
+      <main className="main-container flex items-center md:items-start gap-4 flex-col md:flex-row">
         <ProfileSidebar />
-        <Tabs defaultValue="previous-services" className="mt-6">
-          <TabsList>
-            <TabsTrigger value="previous-services">
+        <Tabs
+          defaultValue="previous-services"
+          className="mt-6 top-[-120px] relative md:static"
+        >
+          <TabsList className="bg-transparent gap-2 md:gap-8 flex-wrap">
+            <TabsTrigger
+              value="previous-services"
+              className="p-0 text-xs md:text-md !font-semibold"
+            >
               Previous Services
             </TabsTrigger>
-            <TabsTrigger value="edit-profile">Edit Profile</TabsTrigger>
+            <TabsTrigger
+              value="edit-profile"
+              className="p-0 text-xs md:text-md !font-semibold"
+            >
+              Edit Profile
+            </TabsTrigger>
           </TabsList>
 
           <TabsContent value="previous-services">
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-4">
               {Array(6)
                 .fill(null)
                 .map((_, index) => (
-                  <div key={index} className="border rounded-lg p-4">
-                    <h3 className="font-semibold">Daimond Hypred</h3>
-                    <p>Warranty: 5 Years</p>
-                    <p>Country of manufacture: Use</p>
+                  <div
+                    key={index}
+                    className="border border-primary rounded-10 overflow-hidden"
+                  >
                     <Image
-                      src="/path/to/service-image.jpg"
+                      src="/assets/images/thermal1.png"
                       alt="Service"
-                      width={200}
-                      height={150}
-                      className="mt-2"
+                      width={250}
+                      height={200}
+                      className="w-full"
                     />
+                    <article className="bg-lightGray p-2">
+                      <h3 className="font-semibold text-primary text-[20px]">
+                        Daimond Hypred
+                      </h3>
+                      <p>Warranty: 5 Years</p>
+                      <p>Country of manufacture: Use</p>
+                    </article>
                   </div>
                 ))}
             </div>
