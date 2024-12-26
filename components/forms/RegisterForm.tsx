@@ -152,7 +152,7 @@ export default function LoginForm() {
                   <FormControl className="flex-1 text-gray-200 ">
                     <Input
                       type="password"
-                      placeholder="Conform Password"
+                      placeholder="Confirm Password"
                       className="p-1 bg-white border-[0.5] border-primary"
                       {...field}
                     />
