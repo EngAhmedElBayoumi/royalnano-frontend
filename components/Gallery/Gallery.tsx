@@ -1,39 +1,81 @@
 import Image from "next/image";
 import React from "react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const Gallery = () => {
   const images = [
-    "/assets/images/car1.jpg",
-    "/assets/images/car2.jpg",
-    "/assets/images/car3.jpg",
-    "/assets/images/car4.jpg",
-    "/assets/images/car5.jpg",
-    "/assets/images/car6.jpg",
-    "/assets/images/car7.jpg",
-    "/assets/images/car8.jpg",
+    "/assets/images/gallery/gallryTop1.png",
+    "/assets/images/gallery/gallryTop2.png",
+    "/assets/images/gallery/gallryTop5.png",
+    "/assets/images/gallery/gallryTop1.png",
+    "/assets/images/gallery/gallryTop2.png",
+    "/assets/images/gallery/gallryTop5.png",
+    "/assets/images/gallery/gallryTop1.png",
+    "/assets/images/gallery/gallryTop2.png",
+    "/assets/images/gallery/gallryTop5.png",
   ];
 
   return (
     <section className="py-10">
-      <h2 className="text-center text-xl font-bold mb-6">Latest Shots</h2>
-      <div className="flex justify-center mb-4">
-        <button className="mx-2 text-gold">All</button>
-        <button className="mx-2">Images</button>
-        <button className="mx-2">Videos</button>
-      </div>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {images.map((src, index) => (
-          <div key={index} className="overflow-hidden rounded-lg shadow-lg">
-            <Image
-              width={305}
-              height={310}
-              src={src}
-              alt={`Gallery Image ${index + 1}`}
-              className="w-full h-auto"
-            />
-          </div>
-        ))}
-      </div>
+      <h2 className="text-center text-[30px] font-[600] mb-6 text-primary">
+        Latest Shots
+      </h2>
+      <Tabs defaultValue="all" className="w-full">
+        <TabsList className="text-center w-full bg-transparent mb-5">
+          <TabsTrigger value="all" className="mx-2 text-[30px] font-[600]">
+            All
+          </TabsTrigger>
+          <TabsTrigger value="images" className="mx-2 text-[30px] font-[600]">
+            Images
+          </TabsTrigger>
+          <TabsTrigger value="videos" className="mx-2 text-[30px] font-[600]">
+            Videos
+          </TabsTrigger>
+        </TabsList>
+        <TabsContent value="all">
+          <section className="flex justify-center">
+            <main className="main-container grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              {images.map((src, index) => (
+                <div
+                  key={index}
+                  className="overflow-hidden rounded-lg shadow-lg"
+                >
+                  <Image
+                    width={305}
+                    height={310}
+                    src={src}
+                    alt={`Gallery Image ${index + 1}`}
+                    className="w-full h-auto"
+                  />
+                </div>
+              ))}
+            </main>
+          </section>
+        </TabsContent>
+        <TabsContent value="images">
+          <section className="flex justify-center">
+            <main className="main-container grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              {images.map((src, index) => (
+                <div
+                  key={index}
+                  className="overflow-hidden rounded-lg shadow-lg"
+                >
+                  <Image
+                    width={305}
+                    height={310}
+                    src={src}
+                    alt={`Gallery Image ${index + 1}`}
+                    className="w-full h-auto"
+                  />
+                </div>
+              ))}
+            </main>
+          </section>
+        </TabsContent>
+        <TabsContent value="videos">
+          <p className="text-center">No videos available.</p>
+        </TabsContent>
+      </Tabs>
     </section>
   );
 };
