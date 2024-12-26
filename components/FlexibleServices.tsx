@@ -8,7 +8,7 @@ const FlexibleServices = () => {
     >
       <div className="absolute inset-0 bg-black opacity-60"></div>
       <header
-        className="relative z-10 flex flex-col justify-center text-center 
+        className="relative flex flex-col justify-center text-center 
       md:text-start items-center md:items-start h-full main-container text-md md:text-lg"
       >
         <h2 className="mb-2">Flexible Services</h2>
