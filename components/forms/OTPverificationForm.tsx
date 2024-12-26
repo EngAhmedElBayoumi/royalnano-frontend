@@ -6,12 +6,10 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { OTPValidation } from "@/lib/validations/OTPValidation";
-import Image from "next/image";
 
 export default function OTPverificationForm() {
   const form = useForm({
