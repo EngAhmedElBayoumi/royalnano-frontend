@@ -11,9 +11,11 @@ export default function AboutPage() {
   return (
     <>
       <Hero />
-      <About />
-      <OurSolutions />
-      <CustomerReviews />
+      <div className="relative top-[-100px]">
+        <About />
+        <OurSolutions />
+        <CustomerReviews />
+      </div>
     </>
   );
 }
