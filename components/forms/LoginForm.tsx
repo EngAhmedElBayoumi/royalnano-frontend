@@ -80,15 +80,18 @@ export default function LoginForm() {
         >
           Forget Password?
         </Link>
-        <Button
-          className="bg-[#BD9D28] text-white py-1.5 px-[71px] text-md w-[100%] m-auto"
+        <button
+          className="bg-[#BD9D28] text-white py-1.5 rounded-xl px-[71px] text-md w-[100%] m-auto"
           type="submit"
         >
           Log in
-        </Button>
+        </button>
+
         <div className="flex font-[600] text-[20px] justify-center">
           <p className="mr-1  text-[#8B8B8B] ">Don`t have account ? </p>{" "}
-          <span className="text-primary">Register</span>
+          <Link href="/register" className="text-primary">
+            Register
+          </Link>
         </div>
         <div className="flex items-center">
           <div className="w-[203px] h-[2px] bg-subtitle"></div>
