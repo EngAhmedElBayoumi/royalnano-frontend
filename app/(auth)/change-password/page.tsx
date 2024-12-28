@@ -6,6 +6,7 @@ export const metadata = {
   title: "Change Password | Royal Nano",
   description: "",
 };
+//edit form
 const Page = () => {
   return (
     <>

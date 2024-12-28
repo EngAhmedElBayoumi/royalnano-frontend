@@ -16,7 +16,7 @@ const OurSolutions = () => {
             company ensures top-level protection and quality, delivering a
             unique experience that makes them the leading choice in the market
           </p>
-          <div className="flex items-center md:items-start flex-col md:flex-row gap-7">
+          <div className="flex items-center md:items-start flex-col lg:flex-row gap-7">
             {OurSolutionsData.map((item) => (
               <GradientCard
                 paragraph={item.paragraph}

@@ -86,7 +86,7 @@ export default function ContactForm() {
               <FormControl className="flex-1 text-gray-200 ">
                 <Input
                   placeholder="Phone Number"
-                  type="tel"
+                  type="text"
                   className="p-3 border-[0.5] border-primary bg-white"
                   {...field}
                 />

@@ -32,7 +32,9 @@ export default function OTPverificationForm() {
         onSubmit={form.handleSubmit(onSubmit)}
         className="gap-5 h-[100%] flex flex-col pt-[80px] pr-10 pl-7"
       >
-        <p className="text-center font-[600] text-[25px]">OTP Verification</p>
+        <p className="text-center text-primary font-[600] text-[25px]">
+          OTP Verification
+        </p>
         <div>
           <p className="text-center text-[#8B8B8B] font-[400] text-[20px]">
             Please enter the code send to your mobile
