@@ -1,8 +1,47 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import Image from "next/image";
 import ProfileSidebar from "./ProfileSidebar";
+import ServiceCard from "@/components/cards/ServiceCard";
 
 const Profile = () => {
+  const services = [
+    {
+      title: "Daimond Hypred",
+      warranty: "5 Years",
+      country: "Use",
+      imageSrc: "/assets/images/thermal1.png",
+    },
+    {
+      title: "Service 2",
+      warranty: "2 Years",
+      country: "Country 2",
+      imageSrc: "/assets/images/thermal1.png",
+    },
+    {
+      title: "Service 3",
+      warranty: "3 Years",
+      country: "Country 3",
+      imageSrc: "/assets/images/thermal1.png",
+    },
+    {
+      title: "Service 4",
+      warranty: "1 Year",
+      country: "Country 4",
+      imageSrc: "/assets/images/thermal1.png",
+    },
+    {
+      title: "Service 5",
+      warranty: "6 Months",
+      country: "Country 5",
+      imageSrc: "/assets/images/thermal1.png",
+    },
+    {
+      title: "Service 6",
+      warranty: "1 Year",
+      country: "Country 6",
+      imageSrc: "/assets/images/thermal1.png",
+    },
+  ];
+
   return (
     <section className="flex justify-center flex-wrap">
       <main className="main-container flex items-center md:items-start gap-4 flex-col md:flex-row">
@@ -28,29 +67,15 @@ const Profile = () => {
 
           <TabsContent value="previous-services">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-4">
-              {Array(6)
-                .fill(null)
-                .map((_, index) => (
-                  <div
-                    key={index}
-                    className="border border-primary rounded-10 overflow-hidden"
-                  >
-                    <Image
-                      src="/assets/images/thermal1.png"
-                      alt="Service"
-                      width={250}
-                      height={200}
-                      className="w-full"
-                    />
-                    <article className="bg-lightGray p-2">
-                      <h3 className="font-semibold text-primary text-[20px]">
-                        Daimond Hypred
-                      </h3>
-                      <p>Warranty: 5 Years</p>
-                      <p>Country of manufacture: Use</p>
-                    </article>
-                  </div>
-                ))}
+              {services.map((service, index) => (
+                <ServiceCard
+                  key={index}
+                  title={service.title}
+                  warranty={service.warranty}
+                  country={service.country}
+                  imageSrc={service.imageSrc}
+                />
+              ))}
             </div>
           </TabsContent>
 
