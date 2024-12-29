@@ -13,17 +13,8 @@ const About = () => {
   return (
     <section className="py-8 bg-white ">
       <h2 className="text-center text-lg font-bold text-primary">About</h2>
-      <div className="flex gap-11 justify-center">
-        <main className="main-container grid grid-cols-1 md:grid-cols-2 items-center ">
-          {/* <div className="flex "> */}
-          {/* <Image
-            width={637}
-            height={513}
-            alt="aboutImg"
-            src="/assets/images/about.png"
-
-/> */}
-
+      <div className="flex  justify-center">
+        <main className="main-container grid grid-cols-1 xl:grid-cols-2 items-center ">
           <div className="w-full sm:w-[90%] md:w-[637px] mx-auto">
             {" "}
             <Swiper

@@ -3,11 +3,12 @@ import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import { navLinks } from "@/data/FooterData";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const Nav = () => {
   const [isClicked, setIsClicked] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-
+  const pathname = usePathname();
   const toggleNavbar = () => {
     setIsClicked(!isClicked);
   };
@@ -41,7 +42,11 @@ const Nav = () => {
       <div className="hidden md:flex gap-8">
         {navLinks.map((link) => (
           <Link
-            className="hover:text-primary lg:text-md md:text-sm text-white text-nowrap"
+            className={`${
+              pathname === link.href
+                ? "text-primary" // Apply text-primary if the link is active
+                : "text-white"
+            } hover:text-primary active:text-primary lg:text-md md:text-sm text-nowrap`}
             key={link.href}
             href={link.href}
           >
@@ -54,13 +59,13 @@ const Nav = () => {
       <div className="hidden md:flex gap-5 items-center">
         <Link
           className="lg:text-md md:text-sm text-md hover:text-secondary text-nowrap text-primary"
-          href={"/log-in"}
+          href={"/login"}
         >
           Log In
         </Link>
         <Link
           className="lg:text-md md:text-sm text-md hover:text-secondary text-primary"
-          href={"/"}
+          href={"/register"}
         >
           Register
         </Link>
