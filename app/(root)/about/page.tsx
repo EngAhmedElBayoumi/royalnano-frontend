@@ -12,7 +12,7 @@ export default function AboutPage() {
     <>
       <Hero />
       <div className="relative top-[-100px]">
-        <About />
+        <About showTitle={true} />
         <OurSolutions />
         <CustomerReviews />
       </div>

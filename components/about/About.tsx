@@ -9,10 +9,16 @@ import "swiper/css";
 import "swiper/css/pagination";
 
 import "./styles.css";
-const About = () => {
+const About = ({ showTitle }: { showTitle: boolean }) => {
   return (
-    <section className="py-8 bg-white ">
-      <h2 className="text-center text-lg font-bold text-primary">About</h2>
+    <section className={` ${showTitle ? "py-8" : "py-0"} bg-white `}>
+      <h2
+        className={` ${
+          showTitle ? "text-center text-lg font-bold text-primary" : "hidden"
+        } `}
+      >
+        About
+      </h2>
       <div className="flex  justify-center">
         <main className="main-container grid grid-cols-1 xl:grid-cols-2 items-center ">
           <div className="w-full sm:w-[90%] md:w-[637px] mx-auto">

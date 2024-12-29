@@ -14,7 +14,7 @@ export default function Home() {
       <Hero />
       <OurServices />
       <FlexibleServices />
-      <About />
+      <About showTitle={true} />
       <OurSolutions />
       <CustomerReviews />
       <ContactUs />
