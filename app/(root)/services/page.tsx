@@ -2,18 +2,26 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/pagination";
-import { reviews } from "../../data/customerReviewsData";
-import ReviewCard from "../cards/ReviewCard";
+import Hero from "@/components/Hero";
+import OurServices from "@/components/services/OurServices";
+import { services } from "@/data/profileServices";
+import ServiceCard from "@/components/cards/ServiceCard";
 
-const CustomerReviews: React.FC = () => {
+// export const metadata = {
+//   title: "Services | Royal Nano",
+//   description: "Service  page",
+// };
+export default function Services() {
   return (
-    <section className="py-8 bg-white">
-      <h2 className="text-center text-lg font-bold text-primary mb-6">
-        Customers
-      </h2>
-      <div className="flex justify-center">
+    <>
+      <Hero />
+      <OurServices />
+
+      <section className="pb-8 bg-white relative top-[-100px]">
+        <h2 className="text-center text-lg font-bold text-primary">
+          Nano ceramic products
+        </h2>
+
         <Swiper
           spaceBetween={30}
           breakpoints={{
@@ -40,20 +48,18 @@ const CustomerReviews: React.FC = () => {
           modules={[Autoplay, Pagination]}
           className="main-container"
         >
-          {reviews.map((review, index) => (
+          {services.map((service, index) => (
             <SwiperSlide key={index}>
-              <ReviewCard
-                name={review.name}
-                rating={review.rating}
-                comment={review.comment}
-                image={review.image}
+              <ServiceCard
+                title={service.title}
+                warranty={service.warranty}
+                country={service.country}
+                imageSrc={service.imageSrc}
               />
             </SwiperSlide>
           ))}
         </Swiper>
-      </div>
-    </section>
+      </section>
+    </>
   );
-};
-
-export default CustomerReviews;
+}
