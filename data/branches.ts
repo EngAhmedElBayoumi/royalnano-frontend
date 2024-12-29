@@ -1,0 +1,17 @@
+export const branches = [
+  "October",
+  "Nasr City",
+  "Mohandessin",
+  "Sheikh Zayed",
+  "Alexandria",
+  "Sohag",
+  "Hurghada",
+  "Tanta",
+  "Mansoura",
+  "Zagazig",
+  "Ismailia",
+  "Port Said",
+  "Suez",
+  "Minya",
+  "Assiut",
+];
