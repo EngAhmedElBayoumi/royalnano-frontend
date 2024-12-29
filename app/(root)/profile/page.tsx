@@ -1,5 +1,5 @@
 import Profile from "@/components/Profile/Profile";
-import Hero from "@/components/Hero";
+import PageHeader from "@/components/PageHeader";
 
 export const metadata = {
   title: "Profile | Royal Nano",
@@ -8,7 +8,7 @@ export const metadata = {
 export default function ProfilePage() {
   return (
     <>
-      <Hero />
+      <PageHeader title="profile" />
       <div className="relative top-[-160px]">
         <Profile />
       </div>
