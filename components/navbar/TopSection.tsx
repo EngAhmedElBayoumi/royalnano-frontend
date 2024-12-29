@@ -3,7 +3,7 @@ import { contactInfo, NavbarSocialLinks } from "@/data/NavbarData";
 
 const TopSection = () => {
   return (
-    <div className="top-0 w-full bg-secondary md:h-[44px]  flex justify-between  px-2 items-center py-[5px] ">
+    <div className="top-0 w-full bg-secondary hidden md:flex md:h-[44px]   justify-between  px-2 items-center py-[5px] ">
       <div className="md:flex sm:block gap-2 sm:py-2 ">
         {contactInfo.map((info) => (
           <div className="flex " key={info.text}>

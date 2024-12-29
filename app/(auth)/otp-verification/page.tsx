@@ -6,6 +6,8 @@ export const metadata = {
   title: "OTP Verification | Royal Nano",
   description: "",
 };
+//y2bl 1 integer when typed , g to next one,..
+//book now
 const Page = () => {
   return (
     <>
