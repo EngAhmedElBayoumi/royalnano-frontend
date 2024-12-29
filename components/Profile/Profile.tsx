@@ -3,6 +3,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ProfileSidebar from "./ProfileSidebar";
 import ServiceCard from "@/components/cards/ServiceCard";
 import ProfileForm from "./ProfileForm";
+import Link from "next/link";
 
 const Profile = () => {
   const services = [
@@ -70,13 +71,19 @@ const Profile = () => {
           <TabsContent value="previous-services">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 mt-4">
               {services.map((service, index) => (
-                <ServiceCard
+                <Link
                   key={index}
-                  title={service.title}
-                  warranty={service.warranty}
-                  country={service.country}
-                  imageSrc={service.imageSrc}
-                />
+                  href={`/services/${service.title
+                    .replace(/\s+/g, "-")
+                    .toLowerCase()}`}
+                >
+                  <ServiceCard
+                    title={service.title}
+                    warranty={service.warranty}
+                    country={service.country}
+                    imageSrc={service.imageSrc}
+                  />
+                </Link>
               ))}
             </div>
           </TabsContent>
