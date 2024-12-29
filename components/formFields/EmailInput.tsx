@@ -1,21 +1,23 @@
 import React from "react";
 import { Input } from "@/components/ui/input";
 import { FieldError, UseFormRegister } from "react-hook-form";
-import "./EmailInput.css";
 
 interface EmailInputProps {
   register: UseFormRegister<{ email: string }>;
   errors: { email?: FieldError };
   className?: string;
+  label?: string;
 }
 
 const EmailInput: React.FC<EmailInputProps> = ({
   register,
   errors,
   className,
+  label,
 }) => {
   return (
     <div className={className}>
+      {label && <label>{label}</label>}
       <Input
         type="email"
         placeholder="Enter your email address"

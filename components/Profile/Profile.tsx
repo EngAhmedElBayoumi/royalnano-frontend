@@ -1,6 +1,8 @@
+"use client";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ProfileSidebar from "./ProfileSidebar";
 import ServiceCard from "@/components/cards/ServiceCard";
+import ProfileForm from "./ProfileForm";
 
 const Profile = () => {
   const services = [
@@ -44,13 +46,13 @@ const Profile = () => {
 
   return (
     <section className="flex justify-center flex-wrap">
-      <main className="main-container flex items-center md:items-start gap-4 flex-col md:flex-row">
+      <main className="main-container flex items-center md:items-start gap-5 flex-col md:flex-row">
         <ProfileSidebar />
         <Tabs
           defaultValue="previous-services"
           className="mt-6 top-[-120px] relative md:static"
         >
-          <TabsList className="bg-transparent gap-2 md:gap-8 flex-wrap">
+          <TabsList className="bg-transparent gap-2 md:gap-8 flex-wrap p-0">
             <TabsTrigger
               value="previous-services"
               className="p-0 text-xs md:text-md !font-semibold"
@@ -80,29 +82,7 @@ const Profile = () => {
           </TabsContent>
 
           <TabsContent value="edit-profile">
-            <div className="mt-4">
-              <label className="block mb-2" htmlFor="full-name">
-                Full Name
-              </label>
-              <input
-                type="text"
-                id="full-name"
-                placeholder="Full Name"
-                className="border rounded-lg p-2 w-full mb-4"
-              />
-              <label className="block mb-2" htmlFor="phone-number">
-                Phone Number
-              </label>
-              <input
-                type="text"
-                id="phone-number"
-                placeholder="Phone Number"
-                className="border rounded-lg p-2 w-full mb-4"
-              />
-              <button className="bg-gold text-white rounded-lg px-4 py-2">
-                Save
-              </button>
-            </div>
+            <ProfileForm />
           </TabsContent>
         </Tabs>
       </main>

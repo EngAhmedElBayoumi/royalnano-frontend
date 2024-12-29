@@ -4,7 +4,7 @@ import React from "react";
 import { z, ZodSchema } from "zod";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import EmailInput from "@/components/formFields/EmailInput/EmailInput";
+import EmailInput from "@/components/formFields/EmailInput";
 import CustomButton from "@/components/formFields/CustomButton";
 
 const emailSchema: ZodSchema<{ email: string }> = z.object({

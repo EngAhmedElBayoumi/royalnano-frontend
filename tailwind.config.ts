@@ -14,6 +14,7 @@ export default {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: "var(--primary)",
+        primaryDark: "var(--primary-dark)",
         secondary: "var(--secondary)",
         gray: "var(--gray)",
         lightGray: "#F5F2F2",
@@ -67,6 +68,7 @@ export default {
       },
       boxShadow: {
         custom: "0px 4px 4px 0px #00000040",
+        lg: "0px 14px 24px 0px #00000040",
       },
     },
     fontSize: {
