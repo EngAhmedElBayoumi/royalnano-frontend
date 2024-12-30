@@ -110,17 +110,17 @@ input[type="number"] {
 }
 
 .custom-bullet {
-  width: 23px;
-  height: 5px;
-  background: var(--gray);
-  border-radius: 10px;
-  opacity: 0.5;
-  margin: 0 5px;
-  transition: opacity 0.3s, background 0.3s;
+  width: 23px !important;
+  height: 5px !important;
+  background: var(--gray) !important;
+  border-radius: 10px !important;
+  opacity: 0.5 !important;
+  margin: 0 5px !important;
+  transition: opacity 0.3s, background 0.3s !important;
 }
 
 .swiper-pagination-bullet-active {
-  background: var(--primary);
-  opacity: 1;
-  width: 67px;
+  background: var(--primary) !important;
+  opacity: 1 !important;
+  width: 67px !important;
 }

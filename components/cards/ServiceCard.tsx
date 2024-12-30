@@ -1,11 +1,14 @@
 import React from "react";
 import Image from "next/image";
+import CustomButton from "@/components/formFields/CustomButton";
+import Link from "next/link";
 
 interface ServiceCardProps {
   title: string;
   warranty: string;
   country: string;
   imageSrc: string;
+  book?: boolean;
 }
 
 const ServiceCard: React.FC<ServiceCardProps> = ({
@@ -13,6 +16,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
   warranty,
   country,
   imageSrc,
+  book,
 }) => {
   return (
     <div className="border border-primary rounded-10 overflow-hidden">
@@ -24,7 +28,18 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
         className="w-full"
       />
       <article className="bg-lightGray p-2 text-darkGray text-sm h-full pb-4">
-        <h3 className="font-semibold text-primary text-[20px]">{title}</h3>
+        <div className="flex justify-between">
+          <h3 className="font-semibold text-primary text-[20px]">{title}</h3>
+          {book && (
+            <Link href="/book-now">
+              <CustomButton
+                text="book now"
+                variant="outline"
+                className="text-sm capitalize h-[35px] border-primary !text-primary"
+              />
+            </Link>
+          )}
+        </div>
         <p>
           Warranty: <span className="text-subtitle">{warranty}</span>
         </p>

@@ -8,7 +8,6 @@ import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 
-import "./styles.css";
 const About = ({ showTitle }: { showTitle: boolean }) => {
   return (
     <section className={` ${showTitle ? "py-8" : "py-0"} bg-white `}>
