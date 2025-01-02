@@ -27,7 +27,12 @@ export default function ContactForm() {
       message: "",
     },
   });
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: {
+    full_name: string;
+    email: string;
+    phone_number: string;
+    message: string;
+  }) => {
     await postContact(data);
   };
 
