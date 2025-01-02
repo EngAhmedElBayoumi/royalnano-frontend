@@ -1,12 +1,17 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { contactApi } from "./services/contactApi";
 import { setupListeners } from "@reduxjs/toolkit/query";
+import { contactApi } from "./services/contactApi";
+import { customerReviewApi } from "./services/customerReviewApi";
+
 export const store = configureStore({
   reducer: {
     [contactApi.reducerPath]: contactApi.reducer,
+    [customerReviewApi.reducerPath]: customerReviewApi.reducer,
   },
   middleware: (getDefaultMiddleware) => {
-    return getDefaultMiddleware().concat(contactApi.middleware);
+    return getDefaultMiddleware()
+      .concat(contactApi.middleware)
+      .concat(customerReviewApi.middleware);
   },
 });
 setupListeners(store.dispatch);

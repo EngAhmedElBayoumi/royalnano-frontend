@@ -6,8 +6,12 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { reviews } from "../../data/customerReviewsData";
 import ReviewCard from "../cards/ReviewCard";
+import { useGetAllReviewsQuery } from "@/redux/services/customerReviewApi";
 
 const CustomerReviews: React.FC = () => {
+  const [data, { isLoading, isError }] = useGetAllReviewsQuery();
+  console.log(data);
+
   return (
     <section className="py-8 bg-white">
       <h2 className="text-center text-lg font-bold text-primary mb-6">
