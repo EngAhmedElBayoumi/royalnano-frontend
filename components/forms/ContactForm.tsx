@@ -14,8 +14,10 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "../ui/textarea";
+import { usePostContactMutation } from "@/redux/services/contact";
 
 export default function ContactForm() {
+  const [postContact, { isLoading }] = usePostContactMutation();
   const form = useForm({
     resolver: zodResolver(aboutValidation),
     defaultValues: {
@@ -26,7 +28,7 @@ export default function ContactForm() {
     },
   });
   const onSubmit = async (data: any) => {
-    console.log("Submitted Data:", data);
+    await postContact(data);
   };
 
   return (
@@ -118,7 +120,7 @@ export default function ContactForm() {
           className="bg-[#BD9D28] text-white py-1.5 px-[71px] text-md w-[197px] m-auto"
           type="submit"
         >
-          Send
+          {isLoading ? "Sending..." : "Send"}
         </Button>
       </form>
     </Form>
