@@ -4,47 +4,9 @@ import ProfileSidebar from "./ProfileSidebar";
 import ServiceCard from "@/components/cards/ServiceCard";
 import ProfileForm from "./ProfileForm";
 import Link from "next/link";
+import { services } from "@/data/profileServices";
 
 const Profile = () => {
-  const services = [
-    {
-      title: "Daimond Hypred",
-      warranty: "5 Years",
-      country: "Use",
-      imageSrc: "/assets/images/thermal1.png",
-    },
-    {
-      title: "Service 2",
-      warranty: "2 Years",
-      country: "Country 2",
-      imageSrc: "/assets/images/thermal1.png",
-    },
-    {
-      title: "Service 3",
-      warranty: "3 Years",
-      country: "Country 3",
-      imageSrc: "/assets/images/thermal1.png",
-    },
-    {
-      title: "Service 4",
-      warranty: "1 Year",
-      country: "Country 4",
-      imageSrc: "/assets/images/thermal1.png",
-    },
-    {
-      title: "Service 5",
-      warranty: "6 Months",
-      country: "Country 5",
-      imageSrc: "/assets/images/thermal1.png",
-    },
-    {
-      title: "Service 6",
-      warranty: "1 Year",
-      country: "Country 6",
-      imageSrc: "/assets/images/thermal1.png",
-    },
-  ];
-
   return (
     <section className="flex justify-center flex-wrap">
       <main className="main-container flex items-center md:items-start gap-5 flex-col md:flex-row">

@@ -1,30 +1,9 @@
-interface Service {
-  title: string;
-  warranty: string;
-  country: string;
-  description: string;
-  status: "waiting" | "completed" | "canceled";
-}
+import { services } from "@/data/profileServices";
 
 const ServiceDetails = ({ params }: { params: { title: string } }) => {
-  const services: Service[] = [
-    {
-      title: "daimond-hypred",
-      warranty: "5 Years",
-      country: "USA",
-      description: "Details about Daimond Hypred",
-      status: "completed",
-    },
-    {
-      title: "service-2",
-      warranty: "2 Years",
-      country: "Country 2",
-      description: "Details about Service 2",
-      status: "waiting",
-    },
-  ];
-
-  const fetchedService = services.find((s) => s.title === params.title);
+  const fetchedService = services.find(
+    (s) => s.title.replace(/\s+/g, "-").toLowerCase() === params.title
+  );
 
   return (
     <>
