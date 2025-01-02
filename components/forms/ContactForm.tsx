@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "../ui/textarea";
-import { usePostContactMutation } from "@/redux/services/contact";
+import { usePostContactMutation } from "@/redux/services/contactApi";
 
 export default function ContactForm() {
   const [postContact, { isLoading }] = usePostContactMutation();
