@@ -1,6 +1,5 @@
 import { Cairo } from "next/font/google";
 import "../globals.css";
-import Head from "next/head";
 
 const cairo = Cairo({ subsets: ["latin"] });
 
@@ -16,10 +15,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Head>
-        <title>{metadata.title}</title>
-        <meta name="description" content={metadata.description} />
-      </Head>
       <body className={cairo.className}>
         <main className="main">{children}</main>
       </body>
