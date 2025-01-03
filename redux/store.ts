@@ -4,6 +4,13 @@ import { contactApi } from "./services/contactApi";
 import { customerReviewApi } from "./services/customerReviewApi";
 import { galleryAPi } from "./services/galleryApi";
 import { profileApi } from "./services/profileApi";
+import { loginApi } from "./services/loginApi";
+import { logoutApi } from "./services/logoutApi";
+import { registerApi } from "./services/registerApi";
+import { forgotPasswordApi } from "./services/forgotPassword";
+import { resendOTPApi } from "./services/resendOTP";
+import { verifyOTPApi } from "./services/verifyOTP";
+import { resetPasswordPApi } from "./services/resetPassword";
 
 export const store = configureStore({
   reducer: {
@@ -11,13 +18,27 @@ export const store = configureStore({
     [customerReviewApi.reducerPath]: customerReviewApi.reducer,
     [galleryAPi.reducerPath]: galleryAPi.reducer,
     [profileApi.reducerPath]: profileApi.reducer,
+    [loginApi.reducerPath]: loginApi.reducer,
+    [logoutApi.reducerPath]: logoutApi.reducer,
+    [registerApi.reducerPath]: registerApi.reducer,
+    [forgotPasswordApi.reducerPath]: forgotPasswordApi.reducer,
+    [resendOTPApi.reducerPath]: resendOTPApi.reducer,
+    [verifyOTPApi.reducerPath]: verifyOTPApi.reducer,
+    [resetPasswordPApi.reducerPath]: resetPasswordPApi.reducer,
   },
   middleware: (getDefaultMiddleware) => {
     return getDefaultMiddleware()
       .concat(contactApi.middleware)
       .concat(customerReviewApi.middleware)
       .concat(galleryAPi.middleware)
-      .concat(profileApi.middleware);
+      .concat(profileApi.middleware)
+      .concat(loginApi.middleware)
+      .concat(logoutApi.middleware)
+      .concat(registerApi.middleware)
+      .concat(forgotPasswordApi.middleware)
+      .concat(resendOTPApi.middleware)
+      .concat(verifyOTPApi.middleware)
+      .concat(resetPasswordPApi.middleware);
   },
 });
 setupListeners(store.dispatch);
