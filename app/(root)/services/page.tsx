@@ -15,7 +15,7 @@ export default function Services() {
       <OurServices />
 
       <section className="pb-8 bg-white relative top-[-100px]">
-        <h2 className="text-center text-lg font-bold text-primary">
+        <h2 className="text-center text-lg font-bold text-primary mb-3">
           Nano ceramic products
         </h2>
         <ServicesSwiper />
@@ -24,7 +24,7 @@ export default function Services() {
       <Difference />
 
       <section className="pb-8 bg-white relative top-[-100px]">
-        <h2 className="text-center text-lg font-bold text-primary">
+        <h2 className="text-center text-lg font-bold text-primary mb-3">
           Thermal isolation Products
         </h2>
         <ServicesSwiper />

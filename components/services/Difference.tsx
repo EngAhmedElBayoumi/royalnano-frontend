@@ -2,77 +2,68 @@ import Image from "next/image";
 
 const Difference = () => {
   return (
-    <>
-      <h2 className="text-center text-lg font-bold text-primary">
+    <section className="pb-8 bg-white relative top-[-100px]">
+      <h2 className="text-center text-lg font-bold text-primary mb-3">
         See The Difference
       </h2>
       <div className="flex justify-center">
-        <section className="main-container flex justify-center items-center w-full">
-          <div className="flex px-2 ml-2">
-            <figure>
-              <Image
-                src="/assets/images/car.png"
-                alt="Car 1"
-                width={500}
-                height={300}
-              />
-              <figcaption>Car 1</figcaption>
-            </figure>
-            <figure>
-              <Image
-                src="/assets/images/car2.png"
-                alt="Car 2"
-                width={500}
-                height={300}
-              />
-              <figcaption>Car 2</figcaption>
-            </figure>
+        <main className="main-container grid md:grid-cols-3 gap-2 md:gap-[3rem]">
+          <div className="flex rounded-10 overflow-hidden">
+            <Image
+              className="w-1/2 h-[220px] object-cover h-[200px]"
+              src="/assets/images/car.png"
+              alt="Car 1"
+              width={200}
+              height={220}
+            />
+
+            <Image
+              className="w-1/2 h-[220px] object-cover h-[200px]"
+              src="/assets/images/car2.png"
+              alt="Car 2"
+              width={200}
+              height={220}
+            />
           </div>
 
-          <div className="flex px-15">
-            <figure>
-              <Image
-                src="/assets/images/car.png"
-                alt="Car 1"
-                width={500}
-                height={300}
-              />
-              <figcaption>Car 1</figcaption>
-            </figure>
-            <figure>
-              <Image
-                src="/assets/images/car2.png"
-                alt="Car 2"
-                width={500}
-                height={300}
-              />
-              <figcaption>Car 2</figcaption>
-            </figure>
+          <div className="flex rounded-10 overflow-hidden">
+            <Image
+              className="w-1/2 h-[220px] object-cover h-[200px]"
+              src="/assets/images/car.png"
+              alt="Car 1"
+              width={200}
+              height={220}
+            />
+
+            <Image
+              className="w-1/2 h-[220px] object-cover h-[200px]"
+              src="/assets/images/car2.png"
+              alt="Car 2"
+              width={200}
+              height={220}
+            />
           </div>
 
-          <div className="flex">
-            <figure>
-              <Image
-                src="/assets/images/car.png"
-                alt="Car 1"
-                width={500}
-                height={300}
-              />
-              <figcaption>Car 1</figcaption>
-            </figure>
-            <figure>
-              <Image
-                src="/assets/images/car2.png"
-                alt="Car 2"
-                width={500}
-                height={300}
-              />
-              <figcaption>Car 2</figcaption>
-            </figure>
+          <div className="flex rounded-10 overflow-hidden">
+            <Image
+              className="w-1/2 h-[220px] object-cover h-[200px]"
+              src="/assets/images/car.png"
+              alt="Car 1"
+              width={200}
+              height={220}
+            />
+
+            <Image
+              className="w-1/2 h-[220px] object-cover h-[200px]"
+              src="/assets/images/car2.png"
+              alt="Car 2"
+              width={200}
+              height={220}
+            />
           </div>
-        </section>
+        </main>
       </div>
-    </>
+    </section>
   );
 };
 
