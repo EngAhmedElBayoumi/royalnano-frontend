@@ -13,8 +13,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { changePasswordValidation } from "@/lib/validations/changePasswordValidation";
 import { useState } from "react"; // Import useState for checkbox state
+import { useResetPasswordMutation } from "@/redux/services/resetPassword";
 
 export default function ChangePasswordForm() {
+  const [resetPassword, { isLoading }] = useResetPasswordMutation();
   const form = useForm({
     resolver: zodResolver(changePasswordValidation),
     defaultValues: {
@@ -26,7 +28,12 @@ export default function ChangePasswordForm() {
   const [isNumbersChecked, setIsNumbersChecked] = useState(false);
   const [isLettersChecked, setIsLettersChecked] = useState(false);
 
-  const onSubmit = async () => {};
+  const onSubmit = async (data: {
+    confirmPassword: string;
+    password: string;
+  }) => {
+    await resetPassword(data);
+  };
 
   return (
     <Form {...form}>
@@ -122,7 +129,7 @@ export default function ChangePasswordForm() {
           className="bg-[#BD9D28] text-white py-1.5 rounded-xl px-[71px] text-md w-[100%] m-auto mt-[15%]"
           type="submit"
         >
-          Reset
+          {isLoading ? "submitting ..." : "Reset"}
         </button>
       </form>
     </Form>

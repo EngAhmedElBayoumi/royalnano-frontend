@@ -1,10 +1,10 @@
 import { z } from "zod";
 
 export const OTPValidation = z.object({
-  num1: z.string().min(1).max(1).regex(/^\d$/, "Must be a digit"),
-  num2: z.string().min(1).max(1).regex(/^\d$/, "Must be a digit"),
-  num3: z.string().min(1).max(1).regex(/^\d$/, "Must be a digit"),
-  num4: z.string().min(1).max(1).regex(/^\d$/, "Must be a digit"),
-  num5: z.string().min(1).max(1).regex(/^\d$/, "Must be a digit"),
-  num6: z.string().min(1).max(1).regex(/^\d$/, "Must be a digit"),
+  num1: z.number().min(1).max(1),
+  num2: z.number().min(1).max(1),
+  num3: z.number().min(1).max(1),
+  num4: z.number().min(1).max(1),
+  num5: z.number().min(1).max(1),
+  num6: z.number().min(1).max(1),
 });

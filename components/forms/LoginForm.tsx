@@ -15,8 +15,11 @@ import { Input } from "@/components/ui/input";
 import { loginValidation } from "@/lib/validations/login";
 import Link from "next/link";
 import Image from "next/image";
+import { useLoginMutation } from "@/redux/services/loginApi";
 
 export default function LoginForm() {
+  const [Login, { isLoading }] = useLoginMutation();
+
   const form = useForm({
     resolver: zodResolver(loginValidation),
     defaultValues: {
@@ -25,7 +28,9 @@ export default function LoginForm() {
       password: "",
     },
   });
-  const onSubmit = async () => {};
+  const onSubmit = async (data: { email: string; password: string }) => {
+    await Login(data);
+  };
 
   return (
     <Form {...form}>
@@ -90,7 +95,7 @@ export default function LoginForm() {
         <div className="flex font-[600] text-[20px] justify-center">
           <p className="mr-1  text-[#8B8B8B] ">Don`t have account ? </p>{" "}
           <Link href="/register" className="text-primary">
-            Register
+            {isLoading ? "Submitting..." : "Login"}
           </Link>
         </div>
         <div className="flex items-center">

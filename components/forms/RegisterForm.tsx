@@ -15,8 +15,11 @@ import { Input } from "@/components/ui/input";
 import { registerValidation } from "@/lib/validations/register";
 import Link from "next/link";
 import Image from "next/image";
+import { useRegisterMutation } from "@/redux/services/registerApi";
 
-export default function LoginForm() {
+export default function RegisterForm() {
+  const [register, { isLoading }] = useRegisterMutation();
+
   const form = useForm({
     resolver: zodResolver(registerValidation),
     defaultValues: {
@@ -28,7 +31,16 @@ export default function LoginForm() {
       phoneNumber: "",
     },
   });
-  const onSubmit = async () => {};
+  const onSubmit = async (data: {
+    email: string;
+    confirmPassword: string;
+    lastName: string;
+    firstName: string;
+    password: string;
+    phoneNumber: string;
+  }) => {
+    await register(data);
+  };
 
   return (
     <Form {...form}>
@@ -168,7 +180,7 @@ export default function LoginForm() {
           className="bg-[#BD9D28] text-white py-1.5 rounded-xl px-[71px] text-md w-[100%] m-auto"
           type="submit"
         >
-          Register
+          {isLoading ? "Submitting..." : "Register"}
         </button>
 
         <div className="flex font-[600] text-[20px] justify-center">

@@ -4,14 +4,14 @@ export const registerValidation = z
   .object({
     email: z
       .string()
-      .email("Invalid email format")
-      .nonempty("Email is required"),
+      .nonempty("Email is required")
+      .email("Invalid email format"),
 
     password: z
       .string()
+      .nonempty("Password is required")
       .min(3, "Password must be at least 3 characters")
-      .max(1000, "Password is too long")
-      .nonempty("Password is required"),
+      .max(1000, "Password is too long"),
 
     confirmPassword: z.string().nonempty("Confirm password is required"),
 
@@ -27,8 +27,8 @@ export const registerValidation = z
 
     phone_number: z
       .string()
-      .regex(/^01[0125]\d{8}$/, "Invalid Egyptian phone number")
-      .nonempty("Phone number is required"),
+      .nonempty("Phone number is required")
+      .regex(/^01[0125]\d{8}$/, "Invalid Egyptian phone number"),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords must match",

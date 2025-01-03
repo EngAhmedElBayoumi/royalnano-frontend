@@ -12,8 +12,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { forgetPasswordValidation } from "@/lib/validations/forgetPasswordValidation";
 import Image from "next/image";
+import { useForgotPasswordMutation } from "@/redux/services/forgotPassword";
 
 export default function ForgetPasswordForm() {
+  const [forgotPassword, { isLoading }] = useForgotPasswordMutation();
   const form = useForm({
     resolver: zodResolver(forgetPasswordValidation),
     defaultValues: {
@@ -22,7 +24,7 @@ export default function ForgetPasswordForm() {
   });
 
   const onSubmit = async (data: { phoneNumber: string }) => {
-    console.log(data);
+    await forgotPassword(data);
   };
 
   return (
@@ -82,7 +84,7 @@ export default function ForgetPasswordForm() {
           className="bg-[#BD9D28] text-white py-1.5 rounded-xl px-[71px] font-[700] text-[20px] w-[100%] mt-[50%]"
           type="submit"
         >
-          Send OTP
+          {isLoading ? "sending ..." : "Send OTP"}
         </button>
       </form>
     </Form>

@@ -1,30 +1,41 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { OTPValidation } from "@/lib/validations/OTPValidation";
+import { useVerifyOTPMutation } from "@/redux/services/verifyOTP";
+import { useResendOTPMutation } from "@/redux/services/resendOTP";
 
 export default function OTPverificationForm() {
+  const [verifyOTP, { isLoading }] = useVerifyOTPMutation();
+  const [resendOTPFn] = useResendOTPMutation();
   const form = useForm({
     resolver: zodResolver(OTPValidation),
     defaultValues: {
-      num1: "",
-      num2: "",
-      num3: "",
-      num4: "",
-      num5: "",
-      num6: "",
+      num1: 0,
+      num2: 0,
+      num3: 0,
+      num4: 0,
+      num5: 0,
+      num6: 0,
     },
   });
 
-  const onSubmit = async () => {};
+  const onSubmit = async (data: {
+    num1: number;
+    num2: number;
+    num3: number;
+    num4: number;
+    num5: number;
+    num6: number;
+  }) => {
+    await verifyOTP(data);
+  };
+
+  const resendOTP = async (data: { data: string }) => {
+    await resendOTPFn(data);
+  };
 
   return (
     <Form {...form}>
@@ -37,138 +48,64 @@ export default function OTPverificationForm() {
         </p>
         <div>
           <p className="text-center text-[#8B8B8B] font-[400] text-[20px]">
-            Please enter the code send to your mobile
+            Please enter the code sent to your mobile
           </p>
           <p className="text-center text-[#8B8B8B] font-[400] text-[20px]">
             number <span className="text-primary">01027489652</span>
           </p>
         </div>
         <div className="flex items-center justify-center gap-2">
-          <FormField
-            control={form.control}
-            name="num1"
-            render={({ field }) => (
-              <FormItem className="flex flex-col gap-0 w-full h-[48px] w-[48px]">
-                <FormControl>
-                  <div className="flex items-center bg-white border border-primary rounded-lg overflow-hidden">
-                    <Input
-                      type="number"
-                      className="p-3 border rounded-1 focus:outline-1 focus:ring-0 appearance-none"
-                      {...field}
-                      value={field.value}
-                    />
-                  </div>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="num2"
-            render={({ field }) => (
-              <FormItem className="flex flex-col gap-0 w-full h-[48px] w-[48px]">
-                <FormControl>
-                  <div className="flex items-center bg-white border border-primary rounded-lg overflow-hidden">
-                    <Input
-                      type="number"
-                      className="p-3 border rounded-1 focus:outline-1 focus:ring-0 appearance-none"
-                      {...field}
-                      value={field.value}
-                    />
-                  </div>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="num3"
-            render={({ field }) => (
-              <FormItem className="flex flex-col gap-0 w-full h-[48px] w-[48px]">
-                <FormControl>
-                  <div className="flex items-center bg-white border border-primary rounded-lg overflow-hidden">
-                    <Input
-                      type="number"
-                      className="p-3 border rounded-1 focus:outline-1 focus:ring-0 appearance-none"
-                      {...field}
-                      value={field.value}
-                    />
-                  </div>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="num4"
-            render={({ field }) => (
-              <FormItem className="flex flex-col gap-0 w-full h-[48px] w-[48px]">
-                <FormControl>
-                  <div className="flex items-center bg-white border border-primary rounded-lg overflow-hidden">
-                    <Input
-                      type="number"
-                      className="p-3 border rounded-1 focus:outline-1 focus:ring-0 appearance-none"
-                      {...field}
-                      value={field.value}
-                    />
-                  </div>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="num5"
-            render={({ field }) => (
-              <FormItem className="flex flex-col gap-0 w-full h-[48px] w-[48px]">
-                <FormControl>
-                  <div className="flex items-center bg-white border border-primary rounded-lg overflow-hidden">
-                    <Input
-                      type="number"
-                      className="p-3 border rounded-1 focus:outline-1 focus:ring-0 appearance-none"
-                      {...field}
-                      value={field.value}
-                    />
-                  </div>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="num6"
-            render={({ field }) => (
-              <FormItem className="flex flex-col gap-0 w-full h-[48px] w-[48px]">
-                <FormControl>
-                  <div className="flex items-center bg-white border border-primary rounded-lg overflow-hidden">
-                    <Input
-                      type="number"
-                      className="p-3 border rounded-1 focus:outline-1 focus:ring-0 appearance-none"
-                      {...field}
-                      value={field.value}
-                    />
-                  </div>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
+          {[1, 2, 3, 4, 5, 6].map((item) => {
+            const fieldName = `num${item}` as
+              | "num1"
+              | "num2"
+              | "num3"
+              | "num4"
+              | "num5"
+              | "num6";
 
-        <p className="text-center text-[#8B8B8B] font-[400] text-[20px]">
-          I didn`t receive any code . RESEND
-        </p>
+            return (
+              <FormField
+                key={item}
+                control={form.control}
+                name={fieldName}
+                render={({ field }) => (
+                  <FormItem className="flex flex-col gap-0 w-full h-[48px] w-[48px]">
+                    <FormControl>
+                      <div
+                        className={`flex items-center bg-white border ${
+                          form.formState.errors[`num${item}`]
+                            ? "border-red-500"
+                            : "border-primary"
+                        } rounded-lg overflow-hidden`}
+                      >
+                        <Input
+                          type="number"
+                          className="p-3 border rounded-1 focus:outline-1 focus:ring-0 appearance-none"
+                          {...field}
+                          value={field.value}
+                        />
+                      </div>
+                    </FormControl>
+                    {/* <FormMessage /> */}
+                  </FormItem>
+                )}
+              />
+            );
+          })}
+        </div>
+        <div className="text-center text-[#8B8B8B] font-[400] text-[20px] flex justify-center items-center gap-1">
+          <p>I didn't receive any code.</p>
+          <button onClick={() => resendOTP({ data: "" })} className="bg-none ">
+            RESEND
+          </button>
+        </div>
 
         <button
           className="bg-[#BD9D28] text-white py-1.5 rounded-xl px-[71px] font-[700] text-[20px] w-[100%] mt-[40%]"
           type="submit"
         >
-          Submit
+          {isLoading ? "Submitting ..." : "Submit"}
         </button>
       </form>
     </Form>
