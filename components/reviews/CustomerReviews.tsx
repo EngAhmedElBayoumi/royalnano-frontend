@@ -4,13 +4,12 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
-import { reviews } from "../../data/customerReviewsData";
-import ReviewCard from "../cards/ReviewCard";
+import { reviews } from "@/data/customerReviewsData";
+import ReviewCard from "@/components/cards/ReviewCard";
 import { useGetAllReviewsQuery } from "@/redux/services/customerReviewApi";
 
 const CustomerReviews: React.FC = () => {
-  const [data, { isLoading, isError }] = useGetAllReviewsQuery();
-  console.log(data);
+  const { data, isLoading, error } = useGetAllReviewsQuery();
 
   return (
     <section className="py-8 bg-white">

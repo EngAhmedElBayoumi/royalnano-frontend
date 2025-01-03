@@ -6,9 +6,7 @@ export const customerReviewApi = createApi({
   baseQuery,
   endpoints: (builder) => ({
     getAllReviews: builder.query({
-      query: () => ({
-        url: "/website/customer-review/",
-      }),
+      query: () => "/website/customer-review/",
     }),
   }),
 });

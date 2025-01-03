@@ -1,8 +1,12 @@
+"use client";
 import Image from "next/image";
 import React from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useGetGalleryQuery } from "@/redux/services/galleryApi";
 
 const Gallery = () => {
+  const { data, isLoading, error } = useGetGalleryQuery();
+
   const images = [
     "/assets/images/gallery/gallryTop1.png",
     "/assets/images/gallery/gallryTop2.png",

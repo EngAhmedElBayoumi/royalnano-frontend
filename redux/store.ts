@@ -2,16 +2,19 @@ import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { contactApi } from "./services/contactApi";
 import { customerReviewApi } from "./services/customerReviewApi";
+import { galleryAPi } from "./services/galleryApi";
 
 export const store = configureStore({
   reducer: {
     [contactApi.reducerPath]: contactApi.reducer,
     [customerReviewApi.reducerPath]: customerReviewApi.reducer,
+    [galleryAPi.reducerPath]: galleryAPi.reducer,
   },
   middleware: (getDefaultMiddleware) => {
     return getDefaultMiddleware()
       .concat(contactApi.middleware)
-      .concat(customerReviewApi.middleware);
+      .concat(customerReviewApi.middleware)
+      .concat(galleryAPi.middleware);
   },
 });
 setupListeners(store.dispatch);
