@@ -4,7 +4,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { profileSchema } from "@/lib/validations/profileSchema";
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
+import { useUpdateProfileMutation } from "@/redux/services/profileApi";
+
 const ProfileForm = () => {
+  const [updateProfile, { isLoading }] = useUpdateProfileMutation();
+
   interface FormValues {
     full_name: string;
     phone_number: string;
@@ -17,7 +21,14 @@ const ProfileForm = () => {
     },
   });
 
-  const onSubmit = async () => {};
+  const onSubmit = async (data: {
+    full_name: string;
+    email: string;
+    phone_number: string;
+    message: string;
+  }) => {
+    await updateProfile(data);
+  };
 
   return (
     <Form {...form}>

@@ -6,7 +6,7 @@ export const galleryAPi = createApi({
   baseQuery,
   endpoints: (builder) => ({
     getGallery: builder.query({
-      query: () => "/website/gallery/",
+      query: () => "website/gallery/",
     }),
   }),
 });
