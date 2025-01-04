@@ -1,6 +1,5 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import {
@@ -23,23 +22,25 @@ export default function RegisterForm() {
   const form = useForm({
     resolver: zodResolver(registerValidation),
     defaultValues: {
-      email: "",
-      confirmPassword: "",
-      lastName: "",
-      firstName: "",
+      email_address: "",
+      // confirmPassword: "",
+      // lastName: "",
+      // firstName: "",
+      name: "",
       password: "",
-      phoneNumber: "",
+      phone_number: "",
     },
   });
   const onSubmit = async (data: {
-    email: string;
-    confirmPassword: string;
-    lastName: string;
-    firstName: string;
+    // confirmPassword: string;
+    // lastName: string;
+    // firstName: string;
+    email_address: string;
+    name: string;
     password: string;
-    phoneNumber: string;
+    phone_number: string;
   }) => {
-    await register(data);
+    await register({ ...data, role: "client" });
   };
 
   return (
@@ -53,11 +54,11 @@ export default function RegisterForm() {
           <div className="mr-4  flex flex-col gap-4">
             <FormField
               control={form.control}
-              name="firstName"
+              name="name"
               render={({ field }) => (
                 <FormItem className="flex flex-col gap-0 w-full">
                   <FormLabel className="text-subtitle font-[500] text-[20px] ">
-                    First Name
+                    Name
                   </FormLabel>
                   <FormControl className="flex-1 text-gray-200 ">
                     <Input
@@ -71,9 +72,10 @@ export default function RegisterForm() {
                 </FormItem>
               )}
             />
+
             <FormField
               control={form.control}
-              name="phoneNumber"
+              name="phone_number"
               render={({ field }) => (
                 <FormItem className="flex flex-col gap-0 w-full">
                   <FormLabel className="text-subtitle font-[500] text-[20px] ">
@@ -113,7 +115,7 @@ export default function RegisterForm() {
             />
           </div>
           <div className="flex flex-col gap-4">
-            <FormField
+            {/* <FormField
               control={form.control}
               name="lastName"
               render={({ field }) => (
@@ -132,10 +134,10 @@ export default function RegisterForm() {
                   <FormMessage />
                 </FormItem>
               )}
-            />
+            /> */}
             <FormField
               control={form.control}
-              name="email"
+              name="email_address"
               render={({ field }) => (
                 <FormItem className="flex flex-col gap-0 w-full">
                   <FormLabel className="text-subtitle font-[500] text-[20px] ">
@@ -153,7 +155,7 @@ export default function RegisterForm() {
                 </FormItem>
               )}
             />
-            <FormField
+            {/* <FormField
               control={form.control}
               name="confirmPassword"
               render={({ field }) => (
@@ -172,7 +174,7 @@ export default function RegisterForm() {
                   <FormMessage />
                 </FormItem>
               )}
-            />
+            /> */}
           </div>
         </div>
 

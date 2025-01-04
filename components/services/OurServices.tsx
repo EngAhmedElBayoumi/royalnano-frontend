@@ -8,7 +8,7 @@ const OurServices = () => {
   const { activeService, handleMouseEnter } = useActiveService(services[0]);
 
   return (
-    <section className="pb-8 bg-white relative top-[-100px]">
+    <section className="pb-8 bg-white relative top-[-100px] animate-on-scroll">
       <h2 className="text-center text-lg font-bold text-primary">
         Our Services
       </h2>

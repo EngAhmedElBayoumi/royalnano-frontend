@@ -22,7 +22,7 @@ const Hero = () => {
 
   return (
     <Swiper
-      className="relative h-[580px] text-white top-[-160px]"
+      className="relative h-[580px] text-white top-[-113px]"
       modules={[Autoplay]}
       autoplay={{
         delay: 2500,

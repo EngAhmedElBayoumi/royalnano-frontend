@@ -7,7 +7,7 @@ import { profileApi } from "./services/profileApi";
 import { loginApi } from "./services/loginApi";
 import { logoutApi } from "./services/logoutApi";
 import { registerApi } from "./services/registerApi";
-import { forgotPasswordApi } from "./services/forgotPassword";
+import { forgotPasswordApi } from "./services/forgotPasswordApi";
 import { resendOTPApi } from "./services/resendOTP";
 import { verifyOTPApi } from "./services/verifyOTP";
 import { resetPasswordPApi } from "./services/resetPassword";

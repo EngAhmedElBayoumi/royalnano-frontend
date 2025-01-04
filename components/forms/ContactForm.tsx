@@ -1,6 +1,5 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
-
 import { useForm } from "react-hook-form";
 import { aboutValidation } from "@/lib/validations/contact";
 import { Button } from "@/components/ui/button";
@@ -15,6 +14,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "../ui/textarea";
 import { usePostContactMutation } from "@/redux/services/contactApi";
+import { toast } from "react-toastify";
 
 export default function ContactForm() {
   const [postContact, { isLoading }] = usePostContactMutation();
@@ -34,7 +34,8 @@ export default function ContactForm() {
     message: string;
   }) => {
     await postContact(data);
-    console.log("succes");
+    form.reset();
+    toast.success("We've received your message successfully!");
   };
 
   return (

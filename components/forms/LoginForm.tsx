@@ -16,20 +16,35 @@ import { loginValidation } from "@/lib/validations/login";
 import Link from "next/link";
 import Image from "next/image";
 import { useLoginMutation } from "@/redux/services/loginApi";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 export default function LoginForm() {
   const [Login, { isLoading }] = useLoginMutation();
+  const router = useRouter();
 
   const form = useForm({
     resolver: zodResolver(loginValidation),
     defaultValues: {
-      email: "",
+      email_address: "",
 
       password: "",
     },
   });
-  const onSubmit = async (data: { email: string; password: string }) => {
-    await Login(data);
+  const onSubmit = async (data: {
+    email_address: string;
+    password: string;
+  }) => {
+    try {
+      const response = await Login(data).unwrap(); // Use .unwrap() to handle the promise
+      toast.success("Successfully logged in");
+      localStorage.setItem("token", response.access); // Access the token from response.data
+      console.log("token", response.access);
+      router.push("/");
+    } catch (error) {
+      toast.error("Failed to log in");
+      console.log(error);
+    }
   };
 
   return (
@@ -41,7 +56,7 @@ export default function LoginForm() {
         <p className="text-center  font-[600] text-[25px]"> Log in</p>
         <FormField
           control={form.control}
-          name="email"
+          name="email_address"
           render={({ field }) => (
             <FormItem className="flex flex-col gap-0 w-full">
               <FormLabel className="text-subtitle font-[500] text-[20px] ">
