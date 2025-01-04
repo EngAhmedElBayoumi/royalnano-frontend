@@ -8,8 +8,10 @@ import {
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
+import "swiper/css/navigation";
 import Image from "next/image";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
+import { Navigation } from "swiper/modules";
 
 interface GalleryItem {
   type: string;
@@ -39,7 +41,14 @@ const GalleryItemModal: React.FC<GalleryItemModalProps> = ({
           </VisuallyHidden>
         </DialogHeader>
         {item.type === "image" ? (
-          <Swiper className="w-full h-full">
+          <Swiper
+            className="w-full h-full"
+            navigation={{
+              nextEl: ".swiper-button-next",
+              prevEl: ".swiper-button-prev",
+            }}
+            modules={[Navigation]}
+          >
             {item.images.map((image, index) => (
               <SwiperSlide
                 key={index}
@@ -54,6 +63,8 @@ const GalleryItemModal: React.FC<GalleryItemModalProps> = ({
                 />
               </SwiperSlide>
             ))}
+            <div className="swiper-button-prev border-primary" />
+            <div className="swiper-button-next border-primary" />
           </Swiper>
         ) : (
           <video controls className="w-full h-full">

@@ -14,7 +14,7 @@ interface GalleryItem {
 const Gallery = () => {
   const { data, isLoading, error } = useGetGalleryQuery();
   const [isModalOpen, setModalOpen] = useState(false);
-  const [selectedItem, setSelectedItem] = useState(null);
+  const [selectedItem, setSelectedItem] = useState<GalleryItem | null>(null);
 
   const handleOpenModal = (item: GalleryItem) => {
     setSelectedItem(item);
@@ -40,7 +40,7 @@ const Gallery = () => {
 
   const galleryItems = images.map((src) => ({
     type: "image",
-    images: [src],
+    images: [src, src],
     videoSrc: "",
   }));
 
