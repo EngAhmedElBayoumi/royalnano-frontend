@@ -2,7 +2,7 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useGetGalleryQuery } from "@/redux/services/galleryApi";
+// import { useGetGalleryQuery } from "@/redux/services/galleryApi";
 import GalleryItemModal from "./GalleryItemModal";
 
 interface GalleryItem {
@@ -12,10 +12,10 @@ interface GalleryItem {
 }
 
 const Gallery = () => {
-  const { data, isLoading, error } = useGetGalleryQuery();
+  // const { data, isLoading, error } = useGetGalleryQuery();
   const [isModalOpen, setModalOpen] = useState(false);
-  const [selectedItem, setSelectedItem] = useState(null);
-
+  // const [selectedItem, setSelectedItem] = useState(null);
+  const [selectedItem, setSelectedItem] = useState<GalleryItem | null>(null);
   const handleOpenModal = (item: GalleryItem) => {
     setSelectedItem(item);
     setModalOpen(true);

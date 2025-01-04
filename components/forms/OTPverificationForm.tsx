@@ -4,11 +4,12 @@ import { useForm } from "react-hook-form";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { OTPValidation } from "@/lib/validations/OTPValidation";
-import { useVerifyOTPMutation } from "@/redux/services/verifyOTP";
+// import { useVerifyOTPMutation } from "@/redux/services/verifyOTP";
 import { useResendOTPMutation } from "@/redux/services/resendOTP";
+// import { OTPFieldName } from "../services/types";
 
 export default function OTPverificationForm() {
-  const [verifyOTP, { isLoading }] = useVerifyOTPMutation();
+  // const [verifyOTP, { isLoading }] = useVerifyOTPMutation();
   const [resendOTPFn] = useResendOTPMutation();
   const form = useForm({
     resolver: zodResolver(OTPValidation),
@@ -22,21 +23,23 @@ export default function OTPverificationForm() {
     },
   });
 
-  const onSubmit = async (data: {
-    num1: number;
-    num2: number;
-    num3: number;
-    num4: number;
-    num5: number;
-    num6: number;
-  }) => {
-    await verifyOTP(data);
-  };
+  const onSubmit = async () =>
+    //   data: {
+    //   num1: number;
+    //   num2: number;
+    //   num3: number;
+    //   num4: number;
+    //   num5: number;
+    //   num6: number;
+    // }
+    {
+      // await verifyOTP(data);
+    };
 
   const resendOTP = async (data: { data: string }) => {
     await resendOTPFn(data);
   };
-
+  type OTPFieldName = "num1" | "num2" | "num3" | "num4" | "num5" | "num6";
   return (
     <Form {...form}>
       <form
@@ -56,13 +59,7 @@ export default function OTPverificationForm() {
         </div>
         <div className="flex items-center justify-center gap-2">
           {[1, 2, 3, 4, 5, 6].map((item) => {
-            const fieldName = `num${item}` as
-              | "num1"
-              | "num2"
-              | "num3"
-              | "num4"
-              | "num5"
-              | "num6";
+            const fieldName = `num${item}` as OTPFieldName;
 
             return (
               <FormField
@@ -74,7 +71,7 @@ export default function OTPverificationForm() {
                     <FormControl>
                       <div
                         className={`flex items-center bg-white border ${
-                          form.formState.errors[`num${item}`]
+                          form.formState.errors[fieldName]
                             ? "border-red-500"
                             : "border-primary"
                         } rounded-lg overflow-hidden`}
@@ -95,7 +92,7 @@ export default function OTPverificationForm() {
           })}
         </div>
         <div className="text-center text-[#8B8B8B] font-[400] text-[20px] flex justify-center items-center gap-1">
-          <p>I didn't receive any code.</p>
+          <p>I didn&apos;t receive any code.</p>
           <button onClick={() => resendOTP({ data: "" })} className="bg-none ">
             RESEND
           </button>
@@ -105,7 +102,8 @@ export default function OTPverificationForm() {
           className="bg-[#BD9D28] text-white py-1.5 rounded-xl px-[71px] font-[700] text-[20px] w-[100%] mt-[40%]"
           type="submit"
         >
-          {isLoading ? "Submitting ..." : "Submit"}
+          Submit
+          {/* {isLoading ? "Submitting ..." : "Submit"} */}
         </button>
       </form>
     </Form>
