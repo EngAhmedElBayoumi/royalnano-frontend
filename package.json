@@ -32,7 +32,8 @@
     "swiper": "^11.1.15",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
-    "vis-network": "^9.1.9",
+    "vis-network": "^7.10.2",
+    "vis-util": "^4.3.4",
     "zod": "^3.24.1"
   },
   "devDependencies": {
