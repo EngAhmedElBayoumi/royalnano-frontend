@@ -14,7 +14,7 @@ const Nav = () => {
 
   return (
     <nav
-      className={`bg-black bg-opacity-90 z-20 flex justify-between sticky top-0 items-center py-4 px-8 transition-colors duration-300 mb-5`}
+      className={`bg-black bg-opacity-90 z-20 flex justify-between sticky top-0 items-center py-4 px-8 transition-colors duration-300 mb-2`}
     >
       <Image src="/assets/icons/logo.svg" alt="logo" width={60} height={100} />
 

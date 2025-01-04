@@ -14,9 +14,13 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "../ui/textarea";
 import { usePostContactMutation } from "@/redux/services/contactApi";
-import { toast } from "react-toastify";
+
+import { useState } from "react";
+import CustomModal from "../modals/CustomModal";
 
 export default function ContactForm() {
+  const [isOpen, setIsOpen] = useState(false);
+
   const [postContact, { isLoading }] = usePostContactMutation();
   const form = useForm({
     resolver: zodResolver(aboutValidation),
@@ -35,15 +39,22 @@ export default function ContactForm() {
   }) => {
     await postContact(data);
     form.reset();
-    toast.success("We've received your message successfully!");
+    setIsOpen(true);
+    // toast.success("We've received your message successfully!");
   };
-
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
         className="w-[100%] md:mb-0 mb-4 flex flex-col gap-2 h-[643px] border border-primary rounded-[16px] pt-9 px-6 pb-5 bg-[#EDEDED]"
       >
+        <CustomModal
+          isOpen={isOpen}
+          onChange={(isOpen) => setIsOpen(isOpen)}
+          title="Thank you!"
+          description="We have received your message. we will get back to you as soon as possible."
+        />
+
         <FormField
           control={form.control}
           name="full_name"
