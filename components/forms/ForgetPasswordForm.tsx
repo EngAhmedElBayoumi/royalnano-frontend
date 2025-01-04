@@ -11,20 +11,27 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { forgetPasswordValidation } from "@/lib/validations/forgetPasswordValidation";
-import Image from "next/image";
-import { useForgotPasswordMutation } from "@/redux/services/forgotPassword";
+import { useForgotPasswordMutation } from "@/redux/services/forgotPasswordApi";
+import { toast } from "react-toastify";
 
 export default function ForgetPasswordForm() {
   const [forgotPassword, { isLoading }] = useForgotPasswordMutation();
   const form = useForm({
     resolver: zodResolver(forgetPasswordValidation),
     defaultValues: {
-      phoneNumber: "",
+      email_address: "",
     },
   });
 
-  const onSubmit = async (data: { phoneNumber: string }) => {
-    await forgotPassword(data);
+  const onSubmit = async (data: { email_address: string }) => {
+    try {
+      const response = await forgotPassword(data).unwrap();
+      form.reset();
+      toast.success(response.message);
+    } catch (e) {
+      console.log(e);
+      toast.error("failed to process your request");
+    }
   };
 
   return (
@@ -36,7 +43,7 @@ export default function ForgetPasswordForm() {
         <p className="text-center font-[600] text-[25px]">Forget Password</p>
         <div>
           <p className="text-center text-[#8B8B8B] font-[400] text-[20px]">
-            Please enter your mobile to send to
+            Please enter your email to send to
           </p>
           <p className="text-center text-[#8B8B8B] font-[400] text-[20px]">
             you a verification code
@@ -45,15 +52,15 @@ export default function ForgetPasswordForm() {
 
         <FormField
           control={form.control}
-          name="phoneNumber"
+          name="email_address"
           render={({ field }) => (
             <FormItem className="flex flex-col gap-0 w-full">
               <FormLabel className="text-subtitle font-[500] text-[20px]">
-                Phone Number
+                Email address
               </FormLabel>
               <FormControl>
                 <div className="flex items-center bg-white border border-primary rounded-lg overflow-hidden">
-                  <div className="flex items-center px-3 bg-gray-100">
+                  {/* <div className="flex items-center px-3 bg-gray-100">
                     <span className="text-[#8B8B8B] font-[500] text-[16px] me-2">
                       +20
                     </span>
@@ -64,11 +71,11 @@ export default function ForgetPasswordForm() {
                       alt="Egyptian flag"
                       className="mr-2"
                     />
-                  </div>
+                  </div> */}
                   {/* Input Field */}
                   <Input
-                    placeholder="Phone Number"
-                    type="tel"
+                    placeholder="Email address"
+                    type="email"
                     className="p-3 border-0 rounded-none flex-1 focus:outline-none focus:ring-0"
                     {...field}
                     value={field.value}

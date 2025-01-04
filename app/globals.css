@@ -124,3 +124,19 @@ input[type="number"] {
   opacity: 1 !important;
   width: 67px !important;
 }
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%); /* Start off-screen from the left */
+    opacity: 0; /* Start hidden */
+  }
+  100% {
+    transform: translateX(0); /* End at normal position */
+    opacity: 1; /* Fade in */
+  }
+}
+
+.slide-in {
+  animation: slideInFromLeft 1s ease-out forwards; /* 1s duration, ease-out timing */
+  opacity: 0; /* Initially hidden */
+}

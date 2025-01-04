@@ -1,42 +1,22 @@
 "use client";
 import Image from "next/image";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { navLinks } from "@/data/FooterData";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const Nav = () => {
   const [isClicked, setIsClicked] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
   const toggleNavbar = () => {
     setIsClicked(!isClicked);
   };
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 10) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
   return (
     <nav
-      className={`${
-        isScrolled
-          ? "bg-black bg-opacity-90 mb-5"
-          : "md:bg-transparent bg-black bg-opacity-90 md:mb-0 mb-5"
-      } z-20 flex justify-between sticky top-0 items-center py-4 px-8 transition-colors duration-300`}
+      className={`bg-black bg-opacity-90 z-20 flex justify-between sticky top-0 items-center py-4 px-8 transition-colors duration-300 mb-5`}
     >
-      <Image src="/assets/icons/logo.svg" alt="logo" width={90} height={122} />
+      <Image src="/assets/icons/logo.svg" alt="logo" width={60} height={100} />
 
       {/* Desktop menu */}
       <div className="hidden md:flex gap-8">
@@ -58,13 +38,13 @@ const Nav = () => {
       {/* Auth Links */}
       <div className="hidden md:flex gap-5 items-center">
         <Link
-          className="lg:text-md md:text-sm text-md hover:text-secondary text-nowrap text-primary"
+          className="lg:text-md md:text-sm text-md hover:text-white text-nowrap text-primary"
           href={"/login"}
         >
           Log In
         </Link>
         <Link
-          className="lg:text-md md:text-sm text-md hover:text-secondary text-primary"
+          className="lg:text-md md:text-sm text-md hover:text-white text-primary"
           href={"/register"}
         >
           Register

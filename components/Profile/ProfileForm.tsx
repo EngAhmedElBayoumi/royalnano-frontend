@@ -7,7 +7,8 @@ import TextInput from "@/components/formFields/TextInput";
 import { useUpdateProfileMutation } from "@/redux/services/profileApi";
 
 const ProfileForm = () => {
-  const [updateProfile, { isLoading }] = useUpdateProfileMutation();
+  // const [updateProfile, { isLoading }] = useUpdateProfileMutation();
+  const [updateProfile] = useUpdateProfileMutation();
 
   interface FormValues {
     full_name: string;
@@ -20,13 +21,8 @@ const ProfileForm = () => {
       phone_number: "",
     },
   });
-
-  const onSubmit = async (data: {
-    full_name: string;
-    email: string;
-    phone_number: string;
-    message: string;
-  }) => {
+  //hena deft formvalues 3shan el type error eli kan 3nd onsubmittt
+  const onSubmit = async (data: FormValues) => {
     await updateProfile(data);
   };
 

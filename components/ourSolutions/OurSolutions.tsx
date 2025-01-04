@@ -8,7 +8,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 const OurSolutions = () => {
   return (
-    <section className="py-8 bg-white">
+    <section className="py-8 bg-white animate-on-scroll">
       <h2 className="text-center text-lg font-bold text-primary">
         Our Solutions
       </h2>

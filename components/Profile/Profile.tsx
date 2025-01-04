@@ -5,10 +5,10 @@ import ServiceCard from "@/components/cards/ServiceCard";
 import ProfileForm from "./ProfileForm";
 import Link from "next/link";
 import { services } from "@/data/profileServices";
-import { useGetProfileQuery } from "@/redux/services/profileApi";
+// import { useGetProfileQuery } from "@/redux/services/profileApi";
 
 const Profile = () => {
-  const { data, isLoading, error } = useGetProfileQuery();
+  // const { data, isLoading, error } = useGetProfileQuery();
 
   return (
     <section className="flex justify-center flex-wrap">

@@ -10,7 +10,9 @@ import "swiper/css/pagination";
 
 const About = ({ showTitle }: { showTitle: boolean }) => {
   return (
-    <section className={` ${showTitle ? "py-8" : "py-0"} bg-white `}>
+    <section
+      className={` ${showTitle ? "py-8" : "py-0"} bg-white animate-on-scroll`}
+    >
       <h2
         className={` ${
           showTitle ? "text-center text-lg font-bold text-primary" : "hidden"

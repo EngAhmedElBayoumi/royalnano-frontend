@@ -1,14 +1,24 @@
 import Image from "next/image";
 import { contactInfo, NavbarSocialLinks } from "@/data/NavbarData";
+import Link from "next/link";
 
 const TopSection = () => {
   return (
     <div className="top-0 w-full bg-secondary hidden md:flex md:h-[44px]   justify-between  px-2 items-center py-[5px] ">
       <div className="md:flex sm:block gap-2 sm:py-2 ">
         {contactInfo.map((info) => (
-          <div className="flex " key={info.text}>
-            <Image alt={info.text} src={info.src} width={24} height={24} />
-            <p className="text-white md:text-sm ms-2">{info.text}</p>
+          <div className="flex" key={info.text}>
+            <a
+              href={
+                info.text.includes("@")
+                  ? `mailto:${info.text}`
+                  : `tel:${info.text.replace(/\s+/g, "")}`
+              }
+              className="flex items-center"
+            >
+              <Image alt={info.text} src={info.src} width={24} height={24} />
+              <p className="text-white md:text-sm ms-2">{info.text}</p>
+            </a>
           </div>
         ))}
       </div>
@@ -29,14 +39,15 @@ const TopSection = () => {
             );
           } else
             return (
-              <Image
-                key={link.href}
-                alt={link.alt}
-                src={link.src}
-                width={24}
-                height={24}
-                className="py-2 md:py-2 "
-              />
+              <Link key={link.href} href={link.href}>
+                <Image
+                  alt={link.alt}
+                  src={link.src}
+                  width={24}
+                  height={24}
+                  className="py-2 md:py-2 "
+                />
+              </Link>
             );
         })}
       </div>
