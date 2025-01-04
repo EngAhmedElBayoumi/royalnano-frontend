@@ -9,6 +9,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import Image from "next/image";
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 
 interface GalleryItem {
   type: string;
@@ -29,27 +30,33 @@ const GalleryItemModal: React.FC<GalleryItemModalProps> = ({
 }) => {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-[800px] h-[80vh]">
+      <DialogContent className="sm:max-w-[800px] h-[80vh] bg-[transparent] border-none">
         <DialogHeader>
-          <DialogTitle>
-            {item.type === "image" ? "Image Gallery" : "Video"}
-          </DialogTitle>
+          <VisuallyHidden>
+            <DialogTitle>
+              {item.type === "image" ? "Image Gallery" : "Video"}
+            </DialogTitle>
+          </VisuallyHidden>
         </DialogHeader>
         {item.type === "image" ? (
-          <Swiper spaceBetween={10} slidesPerView={1}>
+          <Swiper className="w-full h-full">
             {item.images.map((image, index) => (
-              <SwiperSlide key={index} className="flex justify-center w-full">
+              <SwiperSlide
+                key={index}
+                className="flex justify-center w-full h-full"
+              >
                 <Image
                   src={image}
                   alt={`Gallery Image ${index + 1}`}
                   width={400}
                   height={400}
+                  className="w-full h-full object-cover rounded-lg"
                 />
               </SwiperSlide>
             ))}
           </Swiper>
         ) : (
-          <video controls>
+          <video controls className="w-full h-full">
             <source src={item.videoSrc} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
