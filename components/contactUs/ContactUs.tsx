@@ -1,10 +1,10 @@
 "use client";
 import React from "react";
-// import dynamic from "next/dynamic";
+import dynamic from "next/dynamic";
 import ContactForm from "../forms/ContactForm";
-import MapComponent from "@/components/map/Map";
+// import MapComponent from "@/components/map/Map";
 // Dynamically Load the Map Component on the Client Side to solve ssr issue accessing window
-// const MapComponent = dynamic(() => import("../map/Map"), { ssr: false });
+const MapComponent = dynamic(() => import("../map/Map"), { ssr: false });
 
 const ContactUs = () => {
   return (
