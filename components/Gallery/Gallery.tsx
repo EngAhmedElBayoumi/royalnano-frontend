@@ -3,14 +3,20 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useGetGalleryQuery } from "@/redux/services/galleryApi";
-// import GalleryItemModal from "./GalleryItemModal";
+import GalleryItemModal from "./GalleryItemModal";
+
+interface GalleryItem {
+  type: string;
+  images: string[];
+  videoSrc: string;
+}
 
 const Gallery = () => {
   const { data, isLoading, error } = useGetGalleryQuery();
   const [isModalOpen, setModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
 
-  const handleOpenModal = (item) => {
+  const handleOpenModal = (item: GalleryItem) => {
     setSelectedItem(item);
     setModalOpen(true);
   };
@@ -32,7 +38,7 @@ const Gallery = () => {
     "/assets/images/gallery/gallryTop5.png",
   ];
 
-  const galleryItems = images.map((src, index) => ({
+  const galleryItems = images.map((src) => ({
     type: "image",
     images: [src],
     videoSrc: "",
@@ -101,11 +107,13 @@ const Gallery = () => {
           <p className="text-center">No videos available.</p>
         </TabsContent>
       </Tabs>
-      {/* <GalleryItemModal
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
-        item={selectedItem}
-      /> */}
+      {selectedItem && (
+        <GalleryItemModal
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+          item={selectedItem}
+        />
+      )}
     </section>
   );
 };
