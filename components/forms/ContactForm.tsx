@@ -40,7 +40,6 @@ export default function ContactForm() {
     await postContact(data);
     form.reset();
     setIsOpen(true);
-    // toast.success("We've received your message successfully!");
   };
   return (
     <Form {...form}>
