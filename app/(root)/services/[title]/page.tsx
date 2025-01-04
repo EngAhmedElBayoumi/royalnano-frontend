@@ -5,16 +5,17 @@ export const metadata = {
   title: "ServiceDetails | Royal Nano",
   description: "Service Details page",
 };
-export default function ServiceDetailsPage({
+export default async function ServiceDetailsPage({
   params,
 }: {
-  params: { title: string };
+  params: Promise<{ title: string }>;
 }) {
+  const resolvedParams = await params;
   return (
     <>
       <PageHeader title="service details" />
       <div className="relative top-[-160px]">
-        <ServiceDetails params={params} />
+        <ServiceDetails params={resolvedParams} />
       </div>
     </>
   );
