@@ -12,31 +12,31 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("slide-in");
-          }
-        });
-      },
-      { threshold: 0.5 }
-    );
+    if (typeof window !== "undefined") {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("slide-in");
+            }
+          });
+        },
+        { threshold: 0.5 }
+      );
 
-    // Select all elements you want to animate on scroll
-    const elements = document.querySelectorAll(".animate-on-scroll");
+      const elements = document.querySelectorAll(".animate-on-scroll");
 
-    elements.forEach((element) => {
-      observer.observe(element);
-    });
-
-    // Cleanup observer on unmount
-    return () => {
       elements.forEach((element) => {
-        observer.unobserve(element);
+        observer.observe(element);
       });
-    };
-  }, []); // The empty dependency array ensures the effect runs only once on mount
+
+      return () => {
+        elements.forEach((element) => {
+          observer.unobserve(element);
+        });
+      };
+    }
+  }, []);
 
   return (
     <html lang="en">
