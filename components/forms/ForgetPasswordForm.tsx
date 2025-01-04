@@ -12,7 +12,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { forgetPasswordValidation } from "@/lib/validations/forgetPasswordValidation";
 import { useForgotPasswordMutation } from "@/redux/services/forgotPasswordApi";
-import { toast } from "react-toastify";
 
 export default function ForgetPasswordForm() {
   const [forgotPassword, { isLoading }] = useForgotPasswordMutation();
@@ -27,10 +26,8 @@ export default function ForgetPasswordForm() {
     try {
       const response = await forgotPassword(data).unwrap();
       form.reset();
-      toast.success(response.message);
     } catch (e) {
       console.log(e);
-      toast.error("failed to process your request");
     }
   };
 
