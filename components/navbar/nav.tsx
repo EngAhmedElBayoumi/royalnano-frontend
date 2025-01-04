@@ -58,13 +58,13 @@ const Nav = () => {
       {/* Auth Links */}
       <div className="hidden md:flex gap-5 items-center">
         <Link
-          className="lg:text-md md:text-sm text-md hover:text-secondary text-nowrap text-primary"
+          className="lg:text-md md:text-sm text-md hover:text-white text-nowrap text-primary"
           href={"/login"}
         >
           Log In
         </Link>
         <Link
-          className="lg:text-md md:text-sm text-md hover:text-secondary text-primary"
+          className="lg:text-md md:text-sm text-md hover:text-white text-primary"
           href={"/register"}
         >
           Register

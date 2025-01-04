@@ -34,6 +34,7 @@ export default function ContactForm() {
     message: string;
   }) => {
     await postContact(data);
+    console.log("succes");
   };
 
   return (
