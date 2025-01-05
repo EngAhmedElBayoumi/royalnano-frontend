@@ -1,5 +1,5 @@
 import BookingForm from "@/components/forms/BookingForm";
-import Hero from "@/components/Hero";
+import PageHeader from "@/components/PageHeader";
 
 export const metadata = {
   title: "Book Now | Royal Nano",
@@ -8,12 +8,9 @@ export const metadata = {
 export default function Page() {
   return (
     <>
-      <Hero />
+      <PageHeader title="book now" />
       <div className="relative top-[-100px]">
         <BookingForm />
-        {/* <About />
-        <OurSolutions />
-        <CustomerReviews /> */}
       </div>
     </>
   );

@@ -1,20 +1,38 @@
 "use client";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { navLinks } from "@/data/FooterData";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const Nav = () => {
   const [isClicked, setIsClicked] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
   const pathname = usePathname();
   const toggleNavbar = () => {
     setIsClicked(!isClicked);
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 10) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <nav
-      className={`bg-black bg-opacity-90 z-20 flex justify-between sticky top-0 items-center py-4 px-8 transition-colors duration-300 mb-2`}
+      className={`${
+        isScrolled ? "bg-black bg-opacity-90" : "md:bg-transparent"
+      } z-20 flex justify-between sticky top-0 items-center py-4 px-8 transition-colors duration-300 `}
     >
       <Image src="/assets/icons/logo.svg" alt="logo" width={60} height={100} />
 

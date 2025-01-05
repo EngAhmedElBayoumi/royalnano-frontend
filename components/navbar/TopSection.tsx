@@ -4,8 +4,8 @@ import Link from "next/link";
 
 const TopSection = () => {
   return (
-    <div className="top-0 w-full bg-secondary hidden md:flex md:h-[44px]   justify-between  px-2 items-center py-[5px] ">
-      <div className="md:flex sm:block gap-2 sm:py-2 ">
+    <div className="top-0 w-full bg-secondary hidden md:flex md:h-[44px] justify-between px-2 items-center py-[5px] relative z-20">
+      <div className="md:flex sm:block gap-2 sm:py-2">
         {contactInfo.map((info) => (
           <div className="flex" key={info.text}>
             <a
