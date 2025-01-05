@@ -8,7 +8,7 @@ export const metadata = {
 export default async function ServiceDetailsPage({
   params,
 }: {
-  params: { title: string };
+  params: Promise<{ title: string }>;
 }) {
   const resolvedParams = await params;
   return (
