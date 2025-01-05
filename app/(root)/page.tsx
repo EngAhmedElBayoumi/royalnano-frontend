@@ -5,7 +5,6 @@ import CustomerReviews from "@/components/reviews/CustomerReviews";
 import About from "@/components/about/About";
 import OurSolutions from "@/components/ourSolutions/OurSolutions";
 import Subscription from "@/components/Subscription";
-import "leaflet/dist/leaflet.css";
 import ContactUs from "@/components/contactUs/ContactUs";
 
 export default function Home() {

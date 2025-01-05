@@ -7,7 +7,9 @@ const Page = () => {
   return (
     <>
       <Hero />
-      <ContactUs />
+      <div className="relative top-[-100px]">
+        <ContactUs />
+      </div>
     </>
   );
 };
