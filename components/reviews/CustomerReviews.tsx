@@ -36,7 +36,7 @@ const CustomerReviews: React.FC = () => {
           }}
           pagination={{
             clickable: true,
-            renderBullet: (className) => {
+            renderBullet: (_, className) => {
               return `<span class="${className} custom-bullet"></span>`;
             },
           }}

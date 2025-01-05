@@ -37,7 +37,7 @@ const About = ({ showTitle }: { showTitle: boolean }) => {
               }}
               pagination={{
                 clickable: true,
-                renderBullet: (index, className) => {
+                renderBullet: (_, className) => {
                   return `<span class="${className} custom-bullet"></span>`;
                 },
               }}
