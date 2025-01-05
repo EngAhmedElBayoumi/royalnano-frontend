@@ -9,7 +9,7 @@ export default function GalleryPage() {
   return (
     <>
       <Hero />
-      <div className="relative top-[-160px]">
+      <div className="relative top-[-130px]">
         <Gallery />
       </div>
     </>

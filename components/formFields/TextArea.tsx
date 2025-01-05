@@ -30,7 +30,7 @@ const CustomTextArea = <T extends FieldValues>({
       render={({ field }) => (
         <FormItem>
           {label && (
-            <FormLabel className="text-darkGray text-sm">{label}</FormLabel>
+            <FormLabel className="text-darkGray xl:text-sm">{label}</FormLabel>
           )}
           <FormControl>
             <Textarea

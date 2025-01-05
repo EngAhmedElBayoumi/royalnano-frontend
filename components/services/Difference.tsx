@@ -3,7 +3,7 @@ import Image from "next/image";
 const Difference = () => {
   return (
     <section className="pb-8 bg-white relative top-[-100px]">
-      <h2 className="text-center text-lg font-bold text-primary mb-3">
+      <h2 className="text-center text-md lg:text-lg xl:text-xl font-bold text-primary mb-3">
         See The Difference
       </h2>
       <div className="flex justify-center">

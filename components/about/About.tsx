@@ -11,26 +11,26 @@ import "swiper/css/pagination";
 const About = ({ showTitle }: { showTitle: boolean }) => {
   return (
     <section
-      className={` ${showTitle ? "py-8" : "py-0"} bg-white animate-on-scroll`}
+      className={` ${
+        showTitle ? "py-4 lg:py-6 xl:py-8" : "py-0"
+      } bg-white animate-on-scroll`}
     >
       <h2
         className={` ${
-          showTitle ? "text-center text-lg font-bold text-primary" : "hidden"
+          showTitle
+            ? "text-center text-md lg:text-lg xl:text-xl font-bold text-primary"
+            : "hidden"
         } `}
       >
         About
       </h2>
-      <div className="flex  justify-center">
-        <main className="main-container grid grid-cols-1 xl:grid-cols-2 items-center ">
-          <div className="w-full sm:w-[90%] md:w-[637px] mx-auto">
+      <div className="flex justify-center">
+        <main className="main-container grid grid-cols-1 lg:grid-cols-2 items-center gap-10">
+          <div className="w-full mx-auto">
             {" "}
             <Swiper
+              className="w-full h-full"
               style={{ paddingBottom: "30px" }}
-              breakpoints={{
-                768: { slidesPerView: 1 },
-                992: { slidesPerView: 1 },
-                1200: { slidesPerView: 1 },
-              }}
               autoplay={{
                 delay: 2500,
                 disableOnInteraction: false,
@@ -43,32 +43,36 @@ const About = ({ showTitle }: { showTitle: boolean }) => {
               }}
               modules={[Autoplay, Pagination]}
             >
-              <SwiperSlide>
+              <SwiperSlide className="flex justify-center w-full h-full">
                 <Image
+                  className="mx-auto"
                   width={637}
                   height={513}
                   alt="aboutImg"
                   src="/assets/images/about.png"
                 />
               </SwiperSlide>
-              <SwiperSlide>
+              <SwiperSlide className="flex justify-center w-full h-full">
                 <Image
+                  className="mx-auto"
                   width={637}
                   height={513}
                   alt="aboutImg"
                   src="/assets/images/about.png"
                 />
               </SwiperSlide>
-              <SwiperSlide>
+              <SwiperSlide className="flex justify-center w-full h-full">
                 <Image
+                  className="mx-auto"
                   width={637}
                   height={513}
                   alt="aboutImg"
                   src="/assets/images/about.png"
                 />
               </SwiperSlide>
-              <SwiperSlide>
+              <SwiperSlide className="flex justify-center w-full h-full">
                 <Image
+                  className="mx-auto"
                   width={637}
                   height={513}
                   alt="aboutImg"
@@ -79,7 +83,9 @@ const About = ({ showTitle }: { showTitle: boolean }) => {
           </div>
 
           <div>
-            <p className="text-lg text-secondary">Why Royal Nano</p>
+            <p className="text-md lg:text-lg xl:text-xl text-secondary">
+              Why Royal Nano
+            </p>
             {AboutData.map((data) => (
               <IconWithTitle
                 key={data.title}
@@ -89,7 +95,6 @@ const About = ({ showTitle }: { showTitle: boolean }) => {
               />
             ))}
           </div>
-          {/* </div> */}
         </main>
       </div>
     </section>

@@ -59,7 +59,7 @@ export default function ContactForm() {
           name="full_name"
           render={({ field }) => (
             <FormItem className="flex flex-col gap-0 w-full">
-              <FormLabel className="text-subtitle font-[500] text-[20px] ">
+              <FormLabel className="text-subtitle font-[500] text-sm xl:text-[20px] ">
                 Full Name
               </FormLabel>
               <FormControl className="flex-1 text-gray-200 ">
@@ -79,7 +79,7 @@ export default function ContactForm() {
           name="email"
           render={({ field }) => (
             <FormItem className="flex flex-col gap-0 w-full">
-              <FormLabel className="text-subtitle font-[500] text-[20px] ">
+              <FormLabel className="text-subtitle font-[500] text-sm xl:text-[20px] ">
                 Email
               </FormLabel>
               <FormControl className="flex-1 text-gray-200 ">
@@ -99,7 +99,7 @@ export default function ContactForm() {
           name="phone_number"
           render={({ field }) => (
             <FormItem className="flex flex-col gap-0 w-full">
-              <FormLabel className="text-subtitle font-[500] text-[20px] ">
+              <FormLabel className="text-subtitle font-[500] text-sm xl:text-[20px] ">
                 Phone Number
               </FormLabel>
               <FormControl className="flex-1 text-gray-200 ">
@@ -119,7 +119,7 @@ export default function ContactForm() {
           name="message"
           render={({ field }) => (
             <FormItem className="flex flex-col gap-0 w-full ">
-              <FormLabel className="text-subtitle font-[500] text-[20px]  ">
+              <FormLabel className="text-subtitle font-[500] text-sm xl:text-[20px]  ">
                 Message
               </FormLabel>
               <FormControl className="flex-1 text-gray-200 ">
@@ -134,7 +134,7 @@ export default function ContactForm() {
           )}
         />
         <Button
-          className="bg-[#BD9D28] text-white py-1.5 px-[71px] text-md w-[197px] m-auto"
+          className="bg-[#BD9D28] text-white py-1.5 px-[71px] md:text-sm xl:text-md w-[197px] m-auto"
           type="submit"
         >
           {isLoading ? "Sending..." : "Send"}

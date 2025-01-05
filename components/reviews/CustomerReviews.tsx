@@ -12,8 +12,8 @@ const CustomerReviews: React.FC = () => {
   // const { data, isLoading, error } = useGetAllReviewsQuery();
 
   return (
-    <section className="py-8 bg-white">
-      <h2 className="text-center text-lg font-bold text-primary mb-6">
+    <section className="py-4 lg:py-6 xl:py-8 bg-white">
+      <h2 className="text-center text-md lg:text-lg xl:text-xl font-bold text-primary mb-6">
         Customers
       </h2>
       <div className="flex justify-center">

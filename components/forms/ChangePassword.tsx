@@ -50,7 +50,7 @@ export default function ChangePasswordForm() {
           name="password"
           render={({ field }) => (
             <FormItem className="flex flex-col gap-0 w-full ">
-              <FormLabel className="text-subtitle font-[500] text-[20px] ">
+              <FormLabel className="text-subtitle font-[500] text-sm xl:text-[20px] ">
                 Password
               </FormLabel>
               <FormControl className="flex-1 text-gray-200 ">
@@ -70,7 +70,7 @@ export default function ChangePasswordForm() {
           name="confirmPassword"
           render={({ field }) => (
             <FormItem className="flex flex-col gap-0 w-full">
-              <FormLabel className="text-subtitle font-[500] text-[20px] ">
+              <FormLabel className="text-subtitle font-[500] text-sm xl:text-[20px] ">
                 Confirm Password
               </FormLabel>
               <FormControl className="flex-1 text-gray-200 ">
@@ -126,7 +126,7 @@ export default function ChangePasswordForm() {
         </div>
 
         <button
-          className="bg-[#BD9D28] text-white py-1.5 rounded-xl px-[71px] text-md w-[100%] m-auto mt-[15%]"
+          className="bg-[#BD9D28] text-white py-1.5 rounded-xl px-[71px] md:text-sm xl:text-md w-[100%] m-auto mt-[15%]"
           type="submit"
         >
           {isLoading ? "submitting ..." : "Reset"}

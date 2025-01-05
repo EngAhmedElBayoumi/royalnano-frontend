@@ -36,7 +36,7 @@ const GalleryItemModal: React.FC<GalleryItemModalProps> = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-[700px] h-[100vh] bg-[transparent] border-none">
+      <DialogContent className="max-w-[600px] h-[90vh] bg-[transparent] border-none">
         <DialogHeader>
           <VisuallyHidden>
             <DialogTitle>

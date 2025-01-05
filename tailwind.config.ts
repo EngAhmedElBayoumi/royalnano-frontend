@@ -71,11 +71,24 @@ export default {
         lg: "0px 14px 24px 0px #00000040",
       },
     },
+    screens: {
+      sm: "640px",
+      md: "992px",
+      lg: "1200px",
+      xl: "1800px",
+    },
     fontSize: {
-      lg: [
+      xl: [
         "40px",
         {
           lineHeight: "74px",
+          fontWeight: "700",
+        },
+      ],
+      lg: [
+        "30",
+        {
+          lineHeight: "50px",
           fontWeight: "700",
         },
       ],

@@ -103,7 +103,7 @@ export default function BookingForm() {
         />
 
         <CustomButton
-          className="bg-[#BD9D28]  text-white py-1.5 rounded-xl px-[71px] text-md w-fit 
+          className="bg-[#BD9D28]  text-white py-1.5 rounded-xl px-[71px] md:text-sm xl:text-md w-fit 
           shadow-[0px_14px_24px_0px_rgba(0,0,0,0.25)]
           "
           type="submit"

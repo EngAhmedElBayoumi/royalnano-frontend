@@ -50,10 +50,10 @@ export default function OTPverificationForm() {
           OTP Verification
         </p>
         <div>
-          <p className="text-center text-[#8B8B8B] font-[400] text-[20px]">
+          <p className="text-center text-[#8B8B8B] font-[400] text-sm xl:text-[20px]">
             Please enter the code sent to your mobile
           </p>
-          <p className="text-center text-[#8B8B8B] font-[400] text-[20px]">
+          <p className="text-center text-[#8B8B8B] font-[400] text-sm xl:text-[20px]">
             number <span className="text-primary">01027489652</span>
           </p>
         </div>
@@ -91,7 +91,7 @@ export default function OTPverificationForm() {
             );
           })}
         </div>
-        <div className="text-center text-[#8B8B8B] font-[400] text-[20px] flex justify-center items-center gap-1">
+        <div className="text-center text-[#8B8B8B] font-[400] text-sm xl:text-[20px] flex justify-center items-center gap-1">
           <p>I didn&apos;t receive any code.</p>
           <button onClick={() => resendOTP({ data: "" })} className="bg-none ">
             RESEND
@@ -99,7 +99,7 @@ export default function OTPverificationForm() {
         </div>
 
         <button
-          className="bg-[#BD9D28] text-white py-1.5 rounded-xl px-[71px] font-[700] text-[20px] w-[100%] mt-[40%]"
+          className="bg-[#BD9D28] text-white py-1.5 rounded-xl px-[71px] font-[700] text-sm xl:text-[20px] w-[100%] mt-[40%]"
           type="submit"
         >
           Submit

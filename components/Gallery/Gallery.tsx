@@ -46,18 +46,27 @@ const Gallery = () => {
 
   return (
     <section className="py-10">
-      <h2 className="text-center text-[30px] font-[600] mb-6 text-primary">
+      <h2 className="text-center text-md xl:text-lg font-[600] mb-6 text-primary">
         Latest Shots
       </h2>
       <Tabs defaultValue="all" className="w-full">
         <TabsList className="text-center w-full bg-transparent mb-5">
-          <TabsTrigger value="all" className="mx-2 text-[30px] font-[600]">
+          <TabsTrigger
+            value="all"
+            className="mx-2 text-md xl:text-lg font-[600]"
+          >
             All
           </TabsTrigger>
-          <TabsTrigger value="images" className="mx-2 text-[30px] font-[600]">
+          <TabsTrigger
+            value="images"
+            className="mx-2 text-md xl:text-lg font-[600]"
+          >
             Images
           </TabsTrigger>
-          <TabsTrigger value="videos" className="mx-2 text-[30px] font-[600]">
+          <TabsTrigger
+            value="videos"
+            className="mx-2 text-md xl:text-lg font-[600]"
+          >
             Videos
           </TabsTrigger>
         </TabsList>

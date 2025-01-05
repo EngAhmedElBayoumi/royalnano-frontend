@@ -13,7 +13,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({ title }) => {
       }}
     >
       <main className="main-container flex flex-col justify-center items-start">
-        <h2 className="mt-16 text-sm sm:text-md lg:text-lg capitalize">
+        <h2 className="mt-16 text-md lg:text-lg xl:text-xl capitalize">
           {title}
         </h2>
       </main>

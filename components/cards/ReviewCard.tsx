@@ -15,8 +15,8 @@ const ReviewCard: React.FC<ReviewCardProps> = ({
   image,
 }) => {
   return (
-    <section className="h-[410px] flex items-center">
-      <div className="flex flex-col items-center py-6 px-10 rounded-2xl bg-lightGray h-[280px] relative">
+    <section className="h-[370px] xl:h-[410px] flex items-center">
+      <div className="flex flex-col items-center pt-6 px-10 rounded-xl xl:rounded-2xl bg-lightGray h-[250px] xl:h-[280px] relative">
         <Image
           src={image}
           alt={name}
@@ -25,7 +25,9 @@ const ReviewCard: React.FC<ReviewCardProps> = ({
           className="rounded-full border-8 border-white absolute -top-20"
         />
         <section className="flex flex-col items-center gap-3 relative top-10">
-          <h3 className="font-[500] text-md text-primary">{name}</h3>
+          <h3 className="font-[500] md:text-sm xl:text-md text-primary">
+            {name}
+          </h3>
           <div className="flex gap-1">
             {Array.from({ length: Math.round(rating) }, (_, i) => (
               <Image
@@ -34,6 +36,7 @@ const ReviewCard: React.FC<ReviewCardProps> = ({
                 width={18}
                 height={18}
                 key={i}
+                layout="responsive"
               />
             ))}
             {Array.from({ length: 5 - Math.round(rating) }, (_, i) => (
@@ -46,7 +49,7 @@ const ReviewCard: React.FC<ReviewCardProps> = ({
               />
             ))}
           </div>
-          <p className="text-darkGray text-center text-sm">
+          <p className="text-darkGray text-center">
             {comment?.substring(0, 80)}
           </p>
         </section>

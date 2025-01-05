@@ -16,7 +16,7 @@
   }
 } */
 .main-container {
-  width: 92vw;
+  width: 84vw;
 }
 @media (max-width: 576px) {
   .main-container {

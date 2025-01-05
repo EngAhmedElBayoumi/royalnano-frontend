@@ -5,7 +5,7 @@ import { navLinks, socialLinks } from "@/data/FooterData";
 
 const Footer = () => {
   return (
-    <footer className="bg-black text-white py-8 flex justify-center">
+    <footer className="bg-black text-white py-4 lg:py-6 xl:py-8 flex justify-center">
       <section className="main-container w-full px-4 md:px-0">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           <article className="mb-4 lg:mb-0 flex gap-3">
@@ -16,15 +16,15 @@ const Footer = () => {
               height={88}
               className="h-[88px]"
             />
-            <p className="text-sm">
+            <p className="xl:text-sm">
               Royal Nano Ceramic is a leading car protection company in Egypt,
               offering advanced nano ceramic coatings to protect and enhance.
             </p>
           </article>
           <nav className="mb-4 lg:mb-0">
-            <h3 className="text-md">Company</h3>
+            <h3 className="md:text-sm xl:text-md">Company</h3>
             <hr className="border-t-5 rounded-10 border-primary mb-2 w-[101px]" />
-            <ul className="text-sm">
+            <ul className="xl:text-sm">
               {navLinks.map((link) => (
                 <li key={link.href}>
                   <Link href={link.href}>{link.label}</Link>
@@ -33,9 +33,9 @@ const Footer = () => {
             </ul>
           </nav>
           <section className="mb-4 lg:mb-0">
-            <h3 className="text-md">Branches</h3>
+            <h3 className="md:text-sm xl:text-md">Branches</h3>
             <hr className="border-t-5 rounded-10 border-primary mb-2 w-[102px]" />
-            <ul className="text-sm">
+            <ul className="xl:text-sm">
               <li>October</li>
               <li>Nasr City</li>
               <li>Mohandessin</li>
@@ -44,12 +44,12 @@ const Footer = () => {
             </ul>
           </section>
           <address>
-            <h3 className="text-md">Reach out!</h3>
+            <h3 className="md:text-sm xl:text-md">Reach out!</h3>
             <hr className="border-t-5 rounded-10 border-primary mb-2 w-[115px]" />
-            <p className="text-sm">
+            <p className="xl:text-sm">
               <a href="tel:+201032222542">+20 103 2222 542</a>
             </p>
-            <p className="text-sm">
+            <p className="xl:text-sm">
               <a href="mailto:contact@royalnanoceramic.com">
                 contact@royalnanoceramic.com
               </a>
@@ -58,7 +58,7 @@ const Footer = () => {
         </div>
         <hr className="mt-8 border-t-10 rounded-10 border-primary" />
         <div className="pt-4 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-sm mb-4 md:mb-0 font-semibold">
+          <p className="xl:text-sm mb-4 md:mb-0 font-semibold">
             Copyright by Royal @2024
           </p>
           <div className="flex space-x-8">

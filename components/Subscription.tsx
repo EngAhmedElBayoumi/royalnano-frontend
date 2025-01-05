@@ -27,7 +27,7 @@ const Subscription = () => {
   return (
     <section className="py-5 md:pt-0 sm:pb-0 bg-gray300 text-black flex justify-between items-center mb-8">
       <article className="px-4 md:pl-[50px] w-full md:w-auto">
-        <h2 className="text-sm sm:text-md lg:text-lg mb-4 max-w-[530px]">
+        <h2 className="text-md lg:text-lg xl:text-xl mb-4 max-w-[530px] lg:w-2/3">
           Subscribe to get the latest car maintenance updates
         </h2>
         <form onSubmit={handleSubmit(onSubmit)} className="flex gap-2">
@@ -40,7 +40,7 @@ const Subscription = () => {
         alt="Car"
         width={430}
         height={400}
-        className="mt-4 md:mt-0 hidden sm:block w-[30%] lg:w-fit"
+        className="mt-4 md:mt-0 hidden sm:block w-[30%] lg:w-fit h-[300px] xl:h-[400px]"
       />
     </section>
   );

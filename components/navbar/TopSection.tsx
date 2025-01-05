@@ -17,12 +17,12 @@ const TopSection = () => {
               className="flex items-center"
             >
               <Image alt={info.text} src={info.src} width={24} height={24} />
-              <p className="text-white md:text-sm ms-2">{info.text}</p>
+              <p className="text-white xl:text-sm ms-2">{info.text}</p>
             </a>
           </div>
         ))}
       </div>
-      <div className=" flex justify-center md:gap-7 gap-1 items-center md:flex-row flex-col">
+      <div className=" flex justify-center gap-1 md:gap-3 xl:gap-7 items-center md:flex-row flex-col">
         {NavbarSocialLinks.map((link, i) => {
           if (i === 3) {
             return (

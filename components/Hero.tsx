@@ -22,7 +22,7 @@ const Hero = () => {
 
   return (
     <Swiper
-      className="relative h-[580px] text-white top-[-125px]"
+      className="relative h-[70vh] text-white top-[-125px]"
       modules={[Autoplay]}
       autoplay={{
         delay: 2500,
@@ -38,15 +38,15 @@ const Hero = () => {
         >
           <div className="flex justify-center h-full">
             <main className="main-container flex flex-col justify-center items-start h-full">
-              <h2 className="mt-16 text-sm sm:text-md lg:text-lg">
+              <h2 className="mt-16 text-md lg:text-lg xl:text-xl">
                 {slide.title}
               </h2>
-              <p className="md:text-sm lg:text-md max-w-[800px]">
+              <p className="md:text-sm xl:text-md lg:w-[45%]">
                 {slide.description}
               </p>
               <CustomButton
                 text="Protect Your Car"
-                className="text-white mt-4 rounded-2xl text-[14px] sm:text-sm lg:text-md px-6"
+                className="text-white mt-4 rounded-xl xl:rounded-2xl text-[14px] md:text-sm xl:text-md py-1 xl:py-2 px-4 xl:px-6"
               />
             </main>
           </div>

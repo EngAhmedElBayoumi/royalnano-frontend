@@ -45,7 +45,7 @@ const ProfileForm = () => {
         </div>
         <CustomButton
           text="Save"
-          className="text-white rounded-lg bg-primaryDark shadow-lg min-w-[170px] font-bold text-[20px]"
+          className="text-white rounded-lg bg-primaryDark shadow-lg min-w-[170px] font-bold text-sm xl:text-[20px]"
         />
       </form>
     </Form>

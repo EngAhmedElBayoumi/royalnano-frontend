@@ -9,7 +9,7 @@ const OurServices = () => {
 
   return (
     <section className="pb-8 bg-white relative top-[-100px] animate-on-scroll">
-      <h2 className="text-center text-lg font-bold text-primary">
+      <h2 className="text-center text-md lg:text-lg xl:text-xl font-bold text-primary">
         Our Services
       </h2>
       <div className="flex justify-center">
@@ -28,7 +28,7 @@ const OurServices = () => {
           <img
             src={activeService.image}
             alt={activeService.name}
-            className="rounded-lg h-[400px] w-full"
+            className="rounded-lg h-[350px] xl:h-[400px] w-full object-cover"
           />
         </main>
       </div>

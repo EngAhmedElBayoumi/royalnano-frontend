@@ -41,10 +41,10 @@ export default function ForgetPasswordForm() {
       >
         <p className="text-center font-[600] text-[25px]">Forget Password</p>
         <div>
-          <p className="text-center text-[#8B8B8B] font-[400] text-[20px]">
+          <p className="text-center text-[#8B8B8B] font-[400] text-sm xl:text-[20px]">
             Please enter your email to send to
           </p>
-          <p className="text-center text-[#8B8B8B] font-[400] text-[20px]">
+          <p className="text-center text-[#8B8B8B] font-[400] text-sm xl:text-[20px]">
             you a verification code
           </p>
         </div>
@@ -54,7 +54,7 @@ export default function ForgetPasswordForm() {
           name="email_address"
           render={({ field }) => (
             <FormItem className="flex flex-col gap-0 w-full">
-              <FormLabel className="text-subtitle font-[500] text-[20px]">
+              <FormLabel className="text-subtitle font-[500] text-sm xl:text-[20px]">
                 Email address
               </FormLabel>
               <FormControl>
@@ -87,7 +87,7 @@ export default function ForgetPasswordForm() {
         />
 
         <button
-          className="bg-[#BD9D28] text-white py-1.5 rounded-xl px-[71px] font-[700] text-[20px] w-[100%] mt-[50%]"
+          className="bg-[#BD9D28] text-white py-1.5 rounded-xl px-[71px] font-[700] text-sm xl:text-[20px] w-[100%] mt-[50%]"
           type="submit"
         >
           {isLoading ? "sending ..." : "Send OTP"}

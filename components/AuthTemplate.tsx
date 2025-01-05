@@ -19,11 +19,11 @@ const AuthTemplate = ({
             height={122}
             className="mb-10"
           />
-          <div className="flex text-[20px] lg:text-[40px] font-[400] ">
+          <div className="flex text-sm xl:text-[20px] lg:text-[40px] font-[400] ">
             <p className="mr-1 text-nowrap">Welcome To</p>
             <span className="text-primary">Royal</span>
           </div>
-          <p className=" mb-0 text-[20px] lg:text-[40px]  font-[400] ">
+          <p className=" mb-0 text-sm xl:text-[20px] lg:text-[40px]  font-[400] ">
             Nano Ceramic
           </p>
           <Image

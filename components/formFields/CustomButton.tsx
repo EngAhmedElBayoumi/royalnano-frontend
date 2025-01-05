@@ -24,7 +24,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
     <Button
       variant={variant}
       type={type}
-      className={`h-fit rounded-lg  ${className}`}
+      className={`h-fit rounded-lg ${className}`}
     >
       {text}
     </Button>

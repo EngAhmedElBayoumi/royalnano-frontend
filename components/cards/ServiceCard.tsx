@@ -27,15 +27,17 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
         height={200}
         className="w-full"
       />
-      <article className="bg-lightGray p-2 text-darkGray text-sm h-full pb-4">
+      <article className="bg-lightGray p-2 text-darkGray h-full pb-4">
         <div className="flex justify-between">
-          <h3 className="font-semibold text-primary text-[20px]">{title}</h3>
+          <h3 className="font-semibold text-primary text-sm xl:text-[20px]">
+            {title}
+          </h3>
           {book && (
             <Link href="/book-now">
               <CustomButton
                 text="book now"
                 variant="outline"
-                className="text-sm capitalize h-[35px] border-primary !text-primary"
+                className="capitalize h-[35px] border-primary !text-primary"
               />
             </Link>
           )}

@@ -21,20 +21,20 @@ const Profile = () => {
           <TabsList className="bg-transparent gap-2 md:gap-8 flex-wrap p-0">
             <TabsTrigger
               value="previous-services"
-              className="p-0 text-xs md:text-md !font-semibold"
+              className="p-0 md:text-sm xl:text-md !font-semibold"
             >
               Previous Services
             </TabsTrigger>
             <TabsTrigger
               value="edit-profile"
-              className="p-0 text-xs md:text-md !font-semibold"
+              className="p-0 md:text-sm xl:text-md !font-semibold"
             >
               Edit Profile
             </TabsTrigger>
           </TabsList>
 
           <TabsContent value="previous-services">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 mt-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-4">
               {services.map((service, index) => (
                 <Link
                   key={index}

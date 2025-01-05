@@ -56,7 +56,7 @@ export default function LoginForm() {
           name="email_address"
           render={({ field }) => (
             <FormItem className="flex flex-col gap-0 w-full">
-              <FormLabel className="text-subtitle font-[500] text-[20px] ">
+              <FormLabel className="text-subtitle font-[500] text-sm xl:text-[20px] ">
                 Email
               </FormLabel>
               <FormControl className="flex-1 text-gray-200 ">
@@ -76,7 +76,7 @@ export default function LoginForm() {
           name="password"
           render={({ field }) => (
             <FormItem className="flex flex-col gap-0 w-full ">
-              <FormLabel className="text-subtitle font-[500] text-[20px]  ">
+              <FormLabel className="text-subtitle font-[500] text-sm xl:text-[20px]  ">
                 Password
               </FormLabel>
               <FormControl className="flex-1 text-gray-200 ">
@@ -92,19 +92,19 @@ export default function LoginForm() {
           )}
         />
         <Link
-          className="ml-auto text-[#969696] text-[20px] font-[600]"
+          className="ml-auto text-[#969696] text-sm xl:text-[20px] font-[600]"
           href={"/forget-password"}
         >
           Forget Password?
         </Link>
         <button
-          className="bg-[#BD9D28] text-white py-1.5 rounded-xl px-[71px] text-md w-[100%] m-auto"
+          className="bg-[#BD9D28] text-white py-1.5 rounded-xl px-[71px] md:text-sm xl:text-md w-[100%] m-auto"
           type="submit"
         >
           Log in
         </button>
 
-        <div className="flex font-[600] text-[20px] justify-center">
+        <div className="flex font-[600] text-sm xl:text-[20px] justify-center">
           <p className="mr-1  text-[#8B8B8B] ">Don`t have account ? </p>{" "}
           <Link href="/register" className="text-primary">
             {isLoading ? "Submitting..." : "Login"}

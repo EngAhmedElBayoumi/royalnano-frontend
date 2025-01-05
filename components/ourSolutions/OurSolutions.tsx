@@ -8,13 +8,13 @@ import "swiper/css";
 import "swiper/css/pagination";
 const OurSolutions = () => {
   return (
-    <section className="py-8 bg-white animate-on-scroll">
-      <h2 className="text-center text-lg font-bold text-primary">
+    <section className="py-4 lg:py-6 xl:py-8 bg-white animate-on-scroll">
+      <h2 className="text-center text-md lg:text-lg xl:text-xl font-bold text-primary">
         Our Solutions
       </h2>
       <div className="flex justify-center ">
         <main className="main-container grid grid-cols-1  ">
-          <p className="md:text-[30px] lg:text-start text-center text-[20px] mb-3 leading-[56.22px] text-gray font-[600]">
+          <p className="md:text-sm xl:text-md lg:text-start text-center mb-3 leading-[56.22px] text-gray font-[600]">
             Royal Nano Ceramic offers advanced protection services for vehicles,
             aircraft, boats, and motorcycles in Egypt. Using the best
             international materials and modern nano-ceramic technologies, the

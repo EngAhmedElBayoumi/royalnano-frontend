@@ -57,7 +57,7 @@ export default function RegisterForm() {
               name="name"
               render={({ field }) => (
                 <FormItem className="flex flex-col gap-0 w-full">
-                  <FormLabel className="text-subtitle font-[500] text-[20px] ">
+                  <FormLabel className="text-subtitle font-[500] text-sm xl:text-[20px] ">
                     Name
                   </FormLabel>
                   <FormControl className="flex-1 text-gray-200 ">
@@ -78,7 +78,7 @@ export default function RegisterForm() {
               name="phone_number"
               render={({ field }) => (
                 <FormItem className="flex flex-col gap-0 w-full">
-                  <FormLabel className="text-subtitle font-[500] text-[20px] ">
+                  <FormLabel className="text-subtitle font-[500] text-sm xl:text-[20px] ">
                     Phone Number
                   </FormLabel>
                   <FormControl className="flex-1 text-gray-200 ">
@@ -98,7 +98,7 @@ export default function RegisterForm() {
               name="password"
               render={({ field }) => (
                 <FormItem className="flex flex-col gap-0 w-full ">
-                  <FormLabel className="text-subtitle font-[500] text-[20px]  ">
+                  <FormLabel className="text-subtitle font-[500] text-sm xl:text-[20px]  ">
                     Password
                   </FormLabel>
                   <FormControl className="flex-1 text-gray-200 ">
@@ -120,7 +120,7 @@ export default function RegisterForm() {
               name="lastName"
               render={({ field }) => (
                 <FormItem className="flex flex-col gap-0 w-full">
-                  <FormLabel className="text-subtitle font-[500] text-[20px] ">
+                  <FormLabel className="text-subtitle font-[500] text-sm xl:text-[20px] ">
                     Last Name
                   </FormLabel>
                   <FormControl className="flex-1 text-gray-200 ">
@@ -140,7 +140,7 @@ export default function RegisterForm() {
               name="email_address"
               render={({ field }) => (
                 <FormItem className="flex flex-col gap-0 w-full">
-                  <FormLabel className="text-subtitle font-[500] text-[20px] ">
+                  <FormLabel className="text-subtitle font-[500] text-sm xl:text-[20px] ">
                     Email
                   </FormLabel>
                   <FormControl className="flex-1 text-gray-200 ">
@@ -160,7 +160,7 @@ export default function RegisterForm() {
               name="confirmPassword"
               render={({ field }) => (
                 <FormItem className="flex flex-col gap-0 w-full ">
-                  <FormLabel className="text-subtitle font-[500] text-[20px]  ">
+                  <FormLabel className="text-subtitle font-[500] text-sm xl:text-[20px]  ">
                     Confirm Password
                   </FormLabel>
                   <FormControl className="flex-1 text-gray-200 ">
@@ -179,13 +179,13 @@ export default function RegisterForm() {
         </div>
 
         <button
-          className="bg-[#BD9D28] text-white py-1.5 rounded-xl px-[71px] text-md w-[100%] m-auto"
+          className="bg-[#BD9D28] text-white py-1.5 rounded-xl px-[71px] md:text-sm xl:text-md w-[100%] m-auto"
           type="submit"
         >
           {isLoading ? "Submitting..." : "Register"}
         </button>
 
-        <div className="flex font-[600] text-[20px] justify-center">
+        <div className="flex font-[600] text-sm xl:text-[20px] justify-center">
           <p className="mr-1  text-[#8B8B8B] ">Already have an account ? </p>{" "}
           <Link href={"/login"} className="text-primary">
             Log in
