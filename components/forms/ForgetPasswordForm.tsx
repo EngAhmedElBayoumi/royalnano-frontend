@@ -25,6 +25,8 @@ export default function ForgetPasswordForm() {
   const onSubmit = async (data: { email_address: string }) => {
     try {
       const response = await forgotPassword(data).unwrap();
+      console.log(response);
+
       form.reset();
     } catch (e) {
       console.log(e);
