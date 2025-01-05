@@ -109,6 +109,11 @@ input[type="number"] {
   box-shadow: none !important;
 }
 
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  color: var(--primary) !important;
+}
+
 .custom-bullet {
   width: 23px !important;
   height: 5px !important;
