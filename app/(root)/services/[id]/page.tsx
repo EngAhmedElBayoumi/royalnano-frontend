@@ -2,6 +2,9 @@ import ServiceDetails from "@/components/Profile/ServiceDetails";
 import PageHeader from "@/components/PageHeader";
 import { Metadata } from "next";
 
+// ensure Next.js treats the route as dynamically rendered
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "ServiceDetails | Royal Nano",
   description: "Service Details page",
@@ -37,5 +40,3 @@ const ServiceDetailsPage = async ({ params }: ServiceDetailsPageProps) => {
 };
 
 export default ServiceDetailsPage;
-
-export const dynamic = "force-dynamic";
