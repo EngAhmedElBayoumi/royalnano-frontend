@@ -1,9 +1,7 @@
 import { services } from "@/data/profileServices";
 
-const ServiceDetails = ({ params }: { params: { title: string } }) => {
-  const fetchedService = services.find(
-    (s) => s.title.replace(/\s+/g, "-").toLowerCase() === params.title
-  );
+const ServiceDetails = ({ params }: { params: { id: string } }) => {
+  const fetchedService = services.find((s) => s.id === Number(params.id));
 
   return (
     <>

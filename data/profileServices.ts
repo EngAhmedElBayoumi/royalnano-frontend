@@ -1,5 +1,6 @@
 export const services = [
   {
+    id: 1,
     title: "Daimond Hypred",
     warranty: "5 Years",
     country: "Use",
@@ -7,6 +8,7 @@ export const services = [
     status: "completed",
   },
   {
+    id: 2,
     title: "Service 2",
     warranty: "2 Years",
     country: "Country 2",
@@ -14,6 +16,7 @@ export const services = [
     status: "waiting",
   },
   {
+    id: 3,
     title: "Service 3",
     warranty: "3 Years",
     country: "Country 3",
@@ -21,6 +24,7 @@ export const services = [
     status: "waiting",
   },
   {
+    id: 4,
     title: "Service 4",
     warranty: "1 Year",
     country: "Country 4",
@@ -28,6 +32,7 @@ export const services = [
     status: "completed",
   },
   {
+    id: 5,
     title: "Service 5",
     warranty: "6 Months",
     country: "Country 5",
@@ -35,6 +40,7 @@ export const services = [
     status: "canceled",
   },
   {
+    id: 6,
     title: "Service 6",
     warranty: "1 Year",
     country: "Country 6",
