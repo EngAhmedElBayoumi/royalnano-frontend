@@ -24,3 +24,5 @@ const ServiceDetailsPage = async ({ params }: ServiceDetailsPageProps) => {
 };
 
 export default ServiceDetailsPage;
+
+export const dynamic = "force-dynamic";
