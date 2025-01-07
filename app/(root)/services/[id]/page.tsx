@@ -1,18 +1,21 @@
 import ServiceDetails from "@/components/Profile/ServiceDetails";
 import PageHeader from "@/components/PageHeader";
+import { Metadata } from "next";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "ServiceDetails | Royal Nano",
   description: "Service Details page",
 };
-interface serviceDetailsProps {
-  params: { id: string };
+
+interface ServiceDetailsPageProps {
+  params: Promise<{ id: string }>;
 }
-const ServiceDetailsPage: React.FC<serviceDetailsProps> = ({ params }) => {
-  const resolvedParams = params;
+
+const ServiceDetailsPage = async ({ params }: ServiceDetailsPageProps) => {
+  const resolvedParams = await params; // Resolve the Promise
   return (
     <>
-      <PageHeader title="service details" />
+      <PageHeader title="Service Details" />
       <div className="relative top-[-160px]">
         <ServiceDetails params={resolvedParams} />
       </div>
