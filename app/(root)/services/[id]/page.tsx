@@ -2,9 +2,6 @@ import ServiceDetails from "@/components/Profile/ServiceDetails";
 import PageHeader from "@/components/PageHeader";
 import { Metadata } from "next";
 
-// ensure Next.js treats the route as dynamically rendered
-export const dynamic = "force-dynamic";
-
 export const metadata: Metadata = {
   title: "ServiceDetails | Royal Nano",
   description: "Service Details page",
@@ -12,19 +9,6 @@ export const metadata: Metadata = {
 
 interface ServiceDetailsPageProps {
   params: Promise<{ id: string }>;
-}
-
-// generateStaticParams tells Next.js to pre-render pages for the specified parameters.
-// This avoids Vercel treating the route as "not found."
-export async function generateStaticParams() {
-  return [
-    { id: "1" },
-    { id: "2" },
-    { id: "3" },
-    { id: "4" },
-    { id: "5" },
-    { id: "6" },
-  ];
 }
 
 const ServiceDetailsPage = async ({ params }: ServiceDetailsPageProps) => {
