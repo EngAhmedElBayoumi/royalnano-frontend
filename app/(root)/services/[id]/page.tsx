@@ -5,12 +5,11 @@ export const metadata = {
   title: "ServiceDetails | Royal Nano",
   description: "Service Details page",
 };
-export default async function ServiceDetailsPage({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
-  const resolvedParams = await params;
+interface serviceDetailsProps {
+  params: { id: string };
+}
+const ServiceDetailsPage: React.FC<serviceDetailsProps> = ({ params }) => {
+  const resolvedParams = params;
   return (
     <>
       <PageHeader title="service details" />
@@ -19,4 +18,6 @@ export default async function ServiceDetailsPage({
       </div>
     </>
   );
-}
+};
+
+export default ServiceDetailsPage;
