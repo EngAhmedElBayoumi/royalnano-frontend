@@ -1,6 +1,10 @@
+import React from "react";
 import { services } from "@/data/profileServices";
 
-const ServiceDetails = ({ params }: { params: { id: string } }) => {
+interface serviceDetailsProps {
+  params: { id: string };
+}
+const ServiceDetails: React.FC<serviceDetailsProps> = ({ params }) => {
   const fetchedService = services.find((s) => s.id === Number(params.id));
 
   return (
