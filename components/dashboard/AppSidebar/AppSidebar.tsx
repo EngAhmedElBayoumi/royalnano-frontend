@@ -17,7 +17,6 @@ import { usePathname } from "next/navigation";
 
 export function AppSidebar() {
   const currentPath = usePathname();
-  console.log(`/dashboard/${sidebarLinks[0].path}`);
 
   return (
     <Sidebar collapsible="icon">
@@ -29,7 +28,10 @@ export function AppSidebar() {
           <SidebarGroupContent>
             <SidebarMenu className="gap-2">
               {sidebarLinks.map((link) => {
-                const isActive = `/dashboard${link.path}` === currentPath + "/";
+                const isActive =
+                  link.path === "/"
+                    ? currentPath === "/dashboard"
+                    : currentPath.includes(link.path);
 
                 return (
                   <SidebarMenuItem
@@ -63,7 +65,7 @@ export function AppSidebar() {
           <SidebarGroupContent>
             <SidebarMenuButton
               asChild
-              isActive={"/dashboard/settings" === currentPath}
+              isActive={currentPath.includes("settings")}
               className="py-6 !rounded-10"
             >
               <Link href="/dashboard/settings">
