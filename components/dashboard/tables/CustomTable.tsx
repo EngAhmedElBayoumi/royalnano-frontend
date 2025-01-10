@@ -67,7 +67,7 @@ export default function CustomTable({ data, rows, columns }: CustomTableProps) {
   return (
     <div className="card">
       <DataTable
-        lazy
+        // lazy
         value={customers}
         paginator
         rows={rows}
