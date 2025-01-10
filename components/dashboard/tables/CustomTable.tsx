@@ -36,7 +36,7 @@ export default function CustomTable({ data, rows, columns }: CustomTableProps) {
   const [globalFilterValue, setGlobalFilterValue] = useState<string>("");
 
   useEffect(() => {
-    setCustomers(data);
+    setCustomers([]);
   }, [data]);
 
   const onGlobalFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
