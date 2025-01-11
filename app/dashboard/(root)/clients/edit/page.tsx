@@ -25,5 +25,9 @@ export default function EditClients() {
     // await updateClient(data);
   };
 
-  return <ClientForm onSubmit={handleSubmit} defaultValues={defaultValues} />;
+  return (
+    <main className="mx-7">
+      <ClientForm onSubmit={handleSubmit} defaultValues={defaultValues} />
+    </main>
+  );
 }

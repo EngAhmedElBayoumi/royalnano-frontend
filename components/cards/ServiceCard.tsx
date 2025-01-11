@@ -19,7 +19,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
   book,
 }) => {
   return (
-    <div className="border border-primary rounded-10 overflow-hidden">
+    <div className="border border-primary rounded-10 overflow-hidden max-w-[274px]">
       <Image
         src={imageSrc}
         alt={title}

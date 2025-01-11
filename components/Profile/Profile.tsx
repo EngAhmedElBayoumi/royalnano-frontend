@@ -18,7 +18,7 @@ const Profile = () => {
           defaultValue="previous-services"
           className="mt-6 top-[-120px] relative md:static"
         >
-          <TabsList className="bg-transparent gap-2 md:gap-8 flex-wrap p-0">
+          <TabsList className="bg-transparent gap-8 flex-wrap p-0">
             <TabsTrigger
               value="previous-services"
               className="p-0 md:text-sm xl:text-md !font-semibold"
@@ -34,7 +34,7 @@ const Profile = () => {
           </TabsList>
 
           <TabsContent value="previous-services">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-4">
+            <div className="justify-center grid xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-4 w-[90vw] md:w-fit">
               {services.map((service, index) => (
                 <Link key={index} href={`/services/${service.id}`}>
                   <ServiceCard

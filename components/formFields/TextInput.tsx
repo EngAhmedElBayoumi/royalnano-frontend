@@ -14,6 +14,7 @@ interface TextInputProps<T extends FieldValues> {
   label?: string;
   placeholder: string;
   type?: string;
+  className?: string;
 }
 
 const TextInput = <T extends FieldValues>({
@@ -22,13 +23,14 @@ const TextInput = <T extends FieldValues>({
   label,
   placeholder,
   type = "text",
+  className,
 }: TextInputProps<T>) => {
   return (
     <FormField
       control={control}
       name={name}
       render={({ field }) => (
-        <FormItem>
+        <FormItem className={className}>
           {label && (
             <FormLabel className="text-darkGray xl:text-sm">{label}</FormLabel>
           )}
@@ -36,7 +38,7 @@ const TextInput = <T extends FieldValues>({
             <Input
               placeholder={placeholder}
               type={type}
-              className="bg-[#F4F4F4] border-[0.6] border-gray rounded-10 px-2 py-7 min-w-[270px] md:min-w-[400px]"
+              className="bg-[#F4F4F4] border-[0.6] border-gray rounded-10 px-2 py-5 xl:py-7"
               {...field}
             />
           </FormControl>

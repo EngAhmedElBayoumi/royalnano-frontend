@@ -13,5 +13,9 @@ export default function CreateClients() {
     // await createClient(data);
   };
 
-  return <ClientForm onSubmit={handleSubmit} />;
+  return (
+    <main className="mx-7">
+      <ClientForm onSubmit={handleSubmit} />
+    </main>
+  );
 }

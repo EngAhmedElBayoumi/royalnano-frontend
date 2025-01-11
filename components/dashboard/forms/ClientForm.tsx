@@ -51,7 +51,7 @@ const ClientForm = ({ onSubmit, defaultValues }: ClientFormProps) => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="mt-6">
-        <div className="flex flex-wrap gap-10 w-full mb-5">
+        <div className="grid sm:grid-cols-2 gap-x-4 gap-y-2 xl:gap-y-5 lg:gap-x-10 mb-5">
           <TextInput
             control={form.control}
             name="client_name"

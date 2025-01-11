@@ -20,7 +20,7 @@ export default function RootLayout({
       <body className={cairo.className}>
         <SidebarProvider>
           <AppSidebar />
-          <main className="main">
+          <main className="main w-full">
             <SidebarTrigger />
             {children}
           </main>
