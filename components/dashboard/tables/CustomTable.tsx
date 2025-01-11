@@ -25,7 +25,7 @@ interface ColumnConfig {
 interface CustomTableProps {
   data: Customer[];
   rows: number;
-  columns: ColumnConfig[]; // Accept columns dynamically from the parent
+  columns: ColumnConfig[];
 }
 
 export default function CustomTable({ data, rows, columns }: CustomTableProps) {
