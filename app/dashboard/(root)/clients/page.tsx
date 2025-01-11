@@ -1,4 +1,4 @@
-import CustomTable from "@/components/dashboard/tables/CustomTable";
+import CustomTable from "@/components/dashboard/CustomTable";
 
 export default function Clients() {
   

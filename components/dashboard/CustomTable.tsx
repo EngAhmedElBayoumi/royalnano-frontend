@@ -1,5 +1,4 @@
 "use client";
-import './CustomTbale.css'
 import React, { useState, useEffect } from "react";
 import { DataTable, DataTableFilterMeta } from "primereact/datatable";
 import { Column } from "primereact/column";
@@ -7,9 +6,10 @@ import { InputText } from "primereact/inputtext";
 import { IconField } from "primereact/iconfield";
 import { InputIcon } from "primereact/inputicon";
 import { FilterMatchMode } from "primereact/api";
-import InfoCard from '../cards/InfoCard';
-import IconWithTitle from '../IconWithTitle';
+import InfoCard from './cards/InfoCard';
+import IconWithTitle from './IconWithTitle';
 import { Button } from '@/components/ui/button';
+import EmptyMessage from './EmptyMessage';
 
 interface Customer {
   id: number;
@@ -46,7 +46,7 @@ export default function CustomTable({ data, rows, columns }: CustomTableProps) {
     { title: 'Products', num: 48 },
   ];
   useEffect(() => {
-    setCustomers(data); // Update customers with new data
+    setCustomers(data); 
   }, [data]);
 
   const onGlobalFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -61,7 +61,7 @@ export default function CustomTable({ data, rows, columns }: CustomTableProps) {
       
       
       <div className="flex justify-content-center items-center">
-        <IconField >
+        <IconField  >
           <InputIcon className="pi pi-search" />
           <div className='flex justify-center items-center mb-10 gap-6'>
             
@@ -70,7 +70,7 @@ export default function CustomTable({ data, rows, columns }: CustomTableProps) {
           }
 
           </div>
-          <div className='flex justify-between'>
+          <div className='flex justify-between self-center'>
             
           <InputText
             className="mb-4 border border-[#474747] px-2 py-3 rounded-[10px]"
@@ -79,7 +79,7 @@ export default function CustomTable({ data, rows, columns }: CustomTableProps) {
             placeholder="Search"
             
             />
-            <Button className='bg-primary ' title='jjj'/>
+            <Button className='bg-primary text-white' >Add Client</Button>
             </div>
            {/* <InputIcon className="pi pi-search absolute right-2 top-2.5" /> */}
         </IconField>
@@ -91,8 +91,8 @@ export default function CustomTable({ data, rows, columns }: CustomTableProps) {
   const header = renderHeader();
   const headerStyle = {
     backgroundColor: "#C8AE50",
-    borderTopLeftRadius: "10px", 
-    borderTopRightRadius: "10px", 
+    // borderTopLeftRadius: "10px", 
+    // borderTopRightRadius: "10px", 
   };
   
 
@@ -113,7 +113,7 @@ export default function CustomTable({ data, rows, columns }: CustomTableProps) {
         filters={filters}
         globalFilterFields={columns.map((col) => col.field)}
         header={header}
-        emptyMessage="No customers found."
+        emptyMessage=<EmptyMessage/>
         dataKey="id"
         className="rounded-tl-[10px] rounded-tr-[10px]"
         rowClassName={(data) => {

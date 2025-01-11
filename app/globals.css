@@ -163,3 +163,6 @@ input[type="number"] {
 }
 
 
+.p-datatable-wrapper {
+  overflow: hidden !important;
+}
