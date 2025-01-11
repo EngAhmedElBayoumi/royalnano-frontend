@@ -1,10 +1,10 @@
 "use client";
-
 import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { VariantProps, cva } from "class-variance-authority";
 import { PanelLeft } from "lucide-react";
-
+import { DialogTitle } from "@radix-ui/react-dialog";
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -206,6 +206,9 @@ const Sidebar = React.forwardRef<
             }
             side={side}
           >
+            <DialogTitle>
+              <VisuallyHidden>Sidebar Menu</VisuallyHidden>
+            </DialogTitle>
             <div className="flex h-full w-full flex-col">{children}</div>
           </SheetContent>
         </Sheet>
