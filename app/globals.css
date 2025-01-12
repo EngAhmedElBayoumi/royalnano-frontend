@@ -145,6 +145,12 @@ input[type="number"] {
   opacity: 1 !important;
   width: 67px !important;
 }
+textarea {
+  max-height: 200px;
+}
+textarea::-webkit-resizer {
+  display: none;
+}
 
 @keyframes slideInFromLeft {
   0% {
