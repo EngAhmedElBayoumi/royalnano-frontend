@@ -148,20 +148,23 @@ input[type="number"] {
 
 @keyframes slideInFromLeft {
   0% {
-    transform: translateX(-100%); /* Start off-screen from the left */
-    opacity: 0; /* Start hidden */
+    transform: translateX(-100%);
+    opacity: 0;
   }
   100% {
-    transform: translateX(0); /* End at normal position */
-    opacity: 1; /* Fade in */
+    transform: translateX(0);
+    opacity: 1;
   }
 }
 
 .slide-in {
-  animation: slideInFromLeft 1s ease-out forwards; /* 1s duration, ease-out timing */
-  opacity: 0; /* Initially hidden */
+  animation: slideInFromLeft 1s ease-out forwards;
+  opacity: 0;
 }
 
+.p-datatable-wrapper {
+  overflow: hidden !important;
+}
 .react-international-phone-input-container {
   border: 1px solid gray !important;
   background-color: #f4f4f4 !important;
