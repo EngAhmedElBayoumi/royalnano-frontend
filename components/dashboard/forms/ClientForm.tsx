@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { clientSchema } from "@/lib/validations/dashboard/clientSchema";
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
+import PhoneInputField from "@/components/formFields/PhoneInputField";
 // import {
 //   useCreateClientMutation,
 //   useUpdateClientMutation,
@@ -64,11 +65,10 @@ const ClientForm = ({ onSubmit, defaultValues }: ClientFormProps) => {
             label="Email"
             placeholder="Email"
           />
-          <TextInput
+          <PhoneInputField
             control={form.control}
             name="phone_number"
             label="Phone Number"
-            placeholder="Phone Number"
           />
           <TextInput
             control={form.control}

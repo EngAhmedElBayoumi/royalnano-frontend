@@ -5,26 +5,25 @@ import {
   FormControl,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+import { PhoneInput } from "react-international-phone";
+import "react-international-phone/style.css";
 import { Control, FieldValues, Path } from "react-hook-form";
 
-interface TextInputProps<T extends FieldValues> {
+interface PhoneInputFieldProps<T extends FieldValues> {
   control: Control<T>;
   name: Path<T>;
   label?: string;
-  placeholder: string;
-  type?: string;
+  defaultCountry?: string;
   className?: string;
 }
 
-const TextInput = <T extends FieldValues>({
+const PhoneInputField = <T extends FieldValues>({
   control,
   name,
   label,
-  placeholder,
-  type = "text",
+  defaultCountry = "eg",
   className,
-}: TextInputProps<T>) => {
+}: PhoneInputFieldProps<T>) => {
   return (
     <FormField
       control={control}
@@ -35,11 +34,10 @@ const TextInput = <T extends FieldValues>({
             <FormLabel className="text-darkGray xl:text-sm">{label}</FormLabel>
           )}
           <FormControl>
-            <Input
-              placeholder={placeholder}
-              type={type}
-              className="bg-[#F4F4F4] border-[0.6] border-gray xl:rounded-10 px-2 py-5 xl:py-7"
-              {...field}
+            <PhoneInput
+              defaultCountry={defaultCountry}
+              value={field.value}
+              onChange={field.onChange}
             />
           </FormControl>
           <FormMessage />
@@ -49,4 +47,4 @@ const TextInput = <T extends FieldValues>({
   );
 };
 
-export default TextInput;
+export default PhoneInputField;

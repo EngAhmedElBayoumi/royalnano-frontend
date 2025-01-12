@@ -148,21 +148,38 @@ input[type="number"] {
 
 @keyframes slideInFromLeft {
   0% {
-    transform: translateX(-100%); 
+    transform: translateX(-100%);
     opacity: 0;
   }
   100% {
-    transform: translateX(0); 
-    opacity: 1; 
+    transform: translateX(0);
+    opacity: 1;
   }
 }
 
 .slide-in {
-  animation: slideInFromLeft 1s ease-out forwards; 
+  animation: slideInFromLeft 1s ease-out forwards;
   opacity: 0;
 }
 
-
 .p-datatable-wrapper {
   overflow: hidden !important;
+}
+.react-international-phone-input-container {
+  border: 1px solid gray !important;
+  background-color: #f4f4f4 !important;
+  border-radius: 6px !important;
+  padding: 3px !important;
+}
+@media screen and (min-width: 1800px) {
+  .react-international-phone-input-container {
+    padding: 10px !important;
+    border-radius: 10px !important;
+  }
+}
+.react-international-phone-input,
+.react-international-phone-country-selector-button {
+  border: none !important;
+  background-color: #f4f4f4 !important;
+  font-size: 18px !important;
 }
