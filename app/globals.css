@@ -161,3 +161,22 @@ input[type="number"] {
   animation: slideInFromLeft 1s ease-out forwards; /* 1s duration, ease-out timing */
   opacity: 0; /* Initially hidden */
 }
+
+.react-international-phone-input-container {
+  border: 1px solid gray !important;
+  background-color: #f4f4f4 !important;
+  border-radius: 6px !important;
+  padding: 3px !important;
+}
+@media screen and (min-width: 1800px) {
+  .react-international-phone-input-container {
+    padding: 10px !important;
+    border-radius: 10px !important;
+  }
+}
+.react-international-phone-input,
+.react-international-phone-country-selector-button {
+  border: none !important;
+  background-color: #f4f4f4 !important;
+  font-size: 18px !important;
+}
