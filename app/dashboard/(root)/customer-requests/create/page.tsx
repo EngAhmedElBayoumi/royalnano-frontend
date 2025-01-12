@@ -18,7 +18,7 @@ export default function CreateCustomerRequests() {
       <div className="flex">
         <IconWithTitle
           imageSrc="/assets/icons/add.svg"
-          title="Add CustomerRequest"
+          title="Add Customer Request"
           backgroundColor="#F8F7F7"
           textColor="primary"
         />

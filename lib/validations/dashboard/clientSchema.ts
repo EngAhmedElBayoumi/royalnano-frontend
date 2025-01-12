@@ -1,4 +1,5 @@
 import * as z from "zod";
+import { phoneRegex } from "@/lib/utils/phoneRegex";
 
 export const clientSchema = z.object({
   client_name: z.string().nonempty("Client name is required"),
@@ -9,10 +10,7 @@ export const clientSchema = z.object({
   phone_number: z
     .string()
     .nonempty("Phone number is required")
-    .regex(
-      /^\+?\d{1,3}[- ]?\d{1,4}[- ]?\d{1,4}[- ]?\d{1,9}$/,
-      "Invalid phone number"
-    ),
+    .regex(phoneRegex, "Invalid phone number"),
   facility_name: z.string().nonempty("Facility name is required"),
   tax_number: z.string().nonempty("Tax number is required"),
   address: z.string().nonempty("Address is required"),
