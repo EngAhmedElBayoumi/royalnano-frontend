@@ -7,6 +7,7 @@ import { clientSchema } from "@/lib/validations/dashboard/clientSchema";
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
 import PhoneInputField from "@/components/formFields/PhoneInputField";
+import Link from "next/link";
 // import {
 //   useCreateClientMutation,
 //   useUpdateClientMutation,
@@ -51,7 +52,7 @@ const ClientForm = ({ onSubmit, defaultValues }: ClientFormProps) => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="mt-6">
+      <form onSubmit={form.handleSubmit(onSubmit)}>
         <div className="grid sm:grid-cols-2 gap-x-4 gap-y-2 xl:gap-y-5 lg:gap-x-10 mb-5">
           <TextInput
             control={form.control}
@@ -119,10 +120,20 @@ const ClientForm = ({ onSubmit, defaultValues }: ClientFormProps) => {
             placeholder="Condition"
           />
         </div>
-        <CustomButton
-          text="Save"
-          className="text-white rounded-lg bg-primaryDark shadow-lg min-w-[170px] font-bold text-sm xl:text-[20px]"
-        />
+        <div className="flex justify-end gap-2">
+          <Link href="/dashboard/clients">
+            <CustomButton
+              text="Cancel"
+              type="reset"
+              className="text-white rounded-lg bg-secondary min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
+            />
+          </Link>
+
+          <CustomButton
+            text="Save"
+            className="text-white rounded-lg min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
+          />
+        </div>
       </form>
     </Form>
   );
