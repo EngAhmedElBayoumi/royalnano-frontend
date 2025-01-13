@@ -152,6 +152,14 @@ input[type="number"] {
   width: 67px !important;
 }
 
+textarea {
+  max-height: 200px;
+}
+
+textarea::-webkit-resizer {
+  display: none;
+}
+
 @keyframes slideInFromLeft {
   0% {
     transform: translateX(-100%);
@@ -169,7 +177,6 @@ input[type="number"] {
   opacity: 0;
 }
 
-
 .p-datatable-wrapper {
   overflow: hidden !important;
 
@@ -180,4 +187,26 @@ input[type="number"] {
     overflow: auto !important;
 
   }
+
+}
+
+.react-international-phone-input-container {
+  border: 1px solid gray !important;
+  background-color: #f4f4f4 !important;
+  border-radius: 6px !important;
+  padding: 3px !important;
+}
+
+@media screen and (min-width: 1800px) {
+  .react-international-phone-input-container {
+    padding: 10px !important;
+    border-radius: 10px !important;
+  }
+}
+
+.react-international-phone-input,
+.react-international-phone-country-selector-button {
+  border: none !important;
+  background-color: #f4f4f4 !important;
+  font-size: 18px !important;
 }

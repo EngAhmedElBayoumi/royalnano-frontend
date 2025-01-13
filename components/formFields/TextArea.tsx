@@ -14,6 +14,7 @@ interface CustomTextAreaProps<T extends FieldValues> {
   label?: string;
   placeholder: string;
   rows?: number;
+  className?: string;
 }
 
 const CustomTextArea = <T extends FieldValues>({
@@ -22,13 +23,14 @@ const CustomTextArea = <T extends FieldValues>({
   label,
   placeholder,
   rows = 4,
+  className,
 }: CustomTextAreaProps<T>) => {
   return (
     <FormField
       control={control}
       name={name}
       render={({ field }) => (
-        <FormItem>
+        <FormItem className={className}>
           {label && (
             <FormLabel className="text-darkGray xl:text-sm">{label}</FormLabel>
           )}
@@ -36,7 +38,7 @@ const CustomTextArea = <T extends FieldValues>({
             <Textarea
               placeholder={placeholder}
               rows={rows}
-              className="bg-[#F4F4F4] border-[0.6] border-gray rounded-10 px-2 py-7 min-w-[270px] md:min-w-[400px]"
+              className="bg-[#F4F4F4] border-[0.6] border-gray rounded-10 px-2 min-w-[270px] md:min-w-[400px] mt-1"
               {...field}
             />
           </FormControl>
