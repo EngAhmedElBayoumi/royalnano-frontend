@@ -38,7 +38,7 @@ const TextInput = <T extends FieldValues>({
             <Input
               placeholder={placeholder}
               type={type}
-              className="bg-[#F4F4F4] border-[0.6] border-gray xl:rounded-10 px-2 py-5 xl:py-7"
+              className="bg-[#F4F4F4] border-[0.6] border-gray xl:rounded-10 px-2 py-5 xl:py-7 mt-1"
               {...field}
             />
           </FormControl>

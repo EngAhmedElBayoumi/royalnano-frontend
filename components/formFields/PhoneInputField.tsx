@@ -38,6 +38,7 @@ const PhoneInputField = <T extends FieldValues>({
               defaultCountry={defaultCountry}
               value={field.value}
               onChange={field.onChange}
+              className="mt-1"
             />
           </FormControl>
           <FormMessage />

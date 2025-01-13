@@ -39,7 +39,7 @@ const CustomSelect = <T extends FieldValues>({
           )}
           <FormControl>
             <Select onValueChange={field.onChange} value={field.value}>
-              <SelectTrigger className="bg-[#F4F4F4] border-[0.6] border-gray text-gray rounded-10 px-2 py-5 xl:py-7 min-w-[270px] md:min-w-[400px]">
+              <SelectTrigger className="mt-1 bg-[#F4F4F4] border-[0.6] border-gray text-gray rounded-10 px-2 py-5 xl:py-7 min-w-[270px] md:min-w-[400px]">
                 {field.value || placeholder}
               </SelectTrigger>
               <SelectContent>

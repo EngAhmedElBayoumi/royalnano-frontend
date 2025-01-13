@@ -27,7 +27,7 @@ const SwitchField = <T extends FieldValues>({
       name={name}
       render={({ field }) => (
         <FormItem
-          className={`"flex flex-row items-center justify-between ${className}`}
+          className={`flex flex-row items-center justify-between ${className}`}
         >
           <FormLabel className="text-base">{label}</FormLabel>
 

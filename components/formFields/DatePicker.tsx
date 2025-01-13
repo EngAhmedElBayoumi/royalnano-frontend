@@ -37,15 +37,15 @@ const DatePicker = <T extends FieldValues>({
       control={control}
       name={name}
       render={({ field }) => (
-        <FormItem className={`flex flex-col ${className}`}>
-          <FormLabel>{label}</FormLabel>
+        <FormItem className={`flex flex-col justify-between ${className}`}>
+          <FormLabel className="text-darkGray xl:text-sm">{label}</FormLabel>
           <Popover>
             <PopoverTrigger asChild>
               <FormControl>
                 <Button
                   variant={"outline"}
                   className={cn(
-                    "bg-[#F4F4F4] border-[0.6] border-gray xl:rounded-10 px-2 py-5 xl:py-7 pl-3 text-left font-normal",
+                    "bg-[#F4F4F4] border-[0.6] border-gray xl:rounded-10 px-2 py-5 xl:py-7",
                     !field.value && "text-muted-foreground"
                   )}
                 >

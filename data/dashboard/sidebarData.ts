@@ -7,6 +7,6 @@ export const sidebarLinks = [
     icon: "customer_requests.svg",
   },
   { path: "/branches", name: "Branches", icon: "branches.svg" },
-  { path: "/hr", name: "hr", icon: "hr.svg" },
+  { path: "/hr/employees", name: "hr", icon: "hr.svg" },
   { path: "/inventory", name: "Inventory", icon: "inventory.svg" },
 ];
