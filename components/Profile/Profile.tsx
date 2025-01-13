@@ -16,7 +16,7 @@ const Profile = () => {
         <ProfileSidebar />
         <Tabs
           defaultValue="previous-services"
-          className="mt-6 top-[-120px] relative md:static"
+          className="top-[-75px] relative md:static"
         >
           <TabsList className="bg-transparent gap-8 flex-wrap p-0">
             <TabsTrigger
