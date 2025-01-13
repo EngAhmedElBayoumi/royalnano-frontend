@@ -60,6 +60,12 @@ const VacationsForm = ({ onSubmit, defaultValues }: VacationsFormProps) => {
             />
             <DatePicker
               control={form.control}
+              name="date"
+              label="Date"
+              placeholder="Select Date"
+            />
+            <DatePicker
+              control={form.control}
               name="from"
               label="From"
               placeholder="Select From Date"
@@ -69,12 +75,6 @@ const VacationsForm = ({ onSubmit, defaultValues }: VacationsFormProps) => {
               name="to"
               label="To"
               placeholder="Select To Date"
-            />
-            <DatePicker
-              control={form.control}
-              name="date"
-              label="Date"
-              placeholder="Select Date"
             />
           </div>
         </section>
