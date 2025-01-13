@@ -31,7 +31,7 @@ const Nav = () => {
   return (
     <nav
       className={`${
-        isScrolled ? "bg-black bg-opacity-90" : "md:bg-transparent"
+        isScrolled ? "bg-secondary bg-opacity-90" : "md:bg-transparent"
       } z-20 sticky top-0 transition-colors duration-300 flex justify-center`}
     >
       <main className="main-container flex justify-between py-2 items-center">

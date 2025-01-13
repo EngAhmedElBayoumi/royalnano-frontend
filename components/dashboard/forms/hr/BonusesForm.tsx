@@ -2,34 +2,45 @@
 import { Form } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { salarySchema } from "@/lib/validations/dashboard/hr/salarySchema";
+import { bonusSchema } from "@/lib/validations/dashboard/hr/bonusSchema";
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
 import DatePicker from "@/components/formFields/DatePicker";
+import CustomSelect from "@/components/formFields/CustomSelect";
 import Link from "next/link";
 
-interface SalaryFormProps {
-  onSubmit: (data: SalaryFormValues) => Promise<void>;
-  defaultValues?: SalaryFormValues;
+interface BonusesFormProps {
+  onSubmit: (data: BonusesFormValues) => Promise<void>;
+  defaultValues?: BonusesFormValues;
 }
 
-export interface SalaryFormValues {
+export interface BonusesFormValues {
   name: string;
-  job_title: string;
-  salary: string;
+  branch_name: string;
+  rewards: string;
+  start: Date;
+  end: Date;
   date: Date;
 }
 
-const SalaryForm = ({ onSubmit, defaultValues }: SalaryFormProps) => {
+const BonusesForm = ({ onSubmit, defaultValues }: BonusesFormProps) => {
   const form = useForm({
-    resolver: zodResolver(salarySchema),
+    resolver: zodResolver(bonusSchema),
     defaultValues: defaultValues || {
       name: "",
-      job_title: "",
-      salary: "",
+      branch_name: "",
+      rewards: "",
+      start: new Date(),
+      end: new Date(),
       date: new Date(),
     },
   });
+
+  const branchOptions = [
+    { value: "Branch 1", label: "Branch 1" },
+    { value: "Branch 2", label: "Branch 2" },
+    { value: "Branch 3", label: "Branch 3" },
+  ];
 
   return (
     <Form {...form}>
@@ -42,17 +53,30 @@ const SalaryForm = ({ onSubmit, defaultValues }: SalaryFormProps) => {
               label="Name"
               placeholder="Name"
             />
-            <TextInput
+            <CustomSelect
               control={form.control}
-              name="job_title"
-              label="Job Title"
-              placeholder="Job Title"
+              name="branch_name"
+              label="Branch Name"
+              placeholder="Select Branch"
+              options={branchOptions}
             />
             <TextInput
               control={form.control}
-              name="salary"
-              label="Salary"
-              placeholder="Salary"
+              name="rewards"
+              label="Rewards"
+              placeholder="Rewards"
+            />
+            <DatePicker
+              control={form.control}
+              name="start"
+              label="Start"
+              placeholder="Select Start Date"
+            />
+            <DatePicker
+              control={form.control}
+              name="end"
+              label="End"
+              placeholder="Select End Date"
             />
             <DatePicker
               control={form.control}
@@ -63,7 +87,7 @@ const SalaryForm = ({ onSubmit, defaultValues }: SalaryFormProps) => {
           </div>
         </section>
         <div className="flex justify-end gap-2 mt-5">
-          <Link href="/dashboard/salaries">
+          <Link href="/dashboard/bonuses">
             <CustomButton
               text="Cancel"
               type="reset"
@@ -81,4 +105,4 @@ const SalaryForm = ({ onSubmit, defaultValues }: SalaryFormProps) => {
   );
 };
 
-export default SalaryForm;
+export default BonusesForm;

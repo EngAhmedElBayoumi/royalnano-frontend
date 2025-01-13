@@ -5,7 +5,7 @@ import { navLinks, socialLinks } from "@/data/FooterData";
 
 const Footer = () => {
   return (
-    <footer className="bg-black text-white py-4 lg:py-6 xl:py-8 flex justify-center">
+    <footer className="bg-secondary text-white py-4 lg:py-6 xl:py-8 flex justify-center">
       <section className="main-container w-full px-4 md:px-0">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           <article className="mb-4 lg:mb-0 flex gap-3">
