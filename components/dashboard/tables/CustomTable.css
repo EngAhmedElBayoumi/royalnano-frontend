@@ -1,0 +1,89 @@
+.first-column-header {
+    border-top-left-radius: 10px;
+}
+
+.last-column-header {
+    border-top-right-radius: 10px;
+}
+
+
+.p-paginator {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background-color: #f8f7f7;
+    border-radius: 8px;
+}
+
+.p-paginator-page {
+    background-color: #C8AE50;
+    color: white;
+    padding: 8px 16px;
+    margin: 0 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.p-paginator-page:hover {
+    background-color: #a57a2a;
+}
+
+.p-paginator-current {
+    background-color: #6a582b;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.p-paginator-prev,
+.p-paginator-next {
+    background-color: #C8AE50;
+    color: white;
+    padding: 8px 16px;
+    margin: 0 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.p-paginator-prev:hover,
+.p-paginator-next:hover {
+    background-color: var(--primary);
+}
+
+.p-paginator-prev.p-disabled,
+.p-paginator-next.p-disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.hoverable-row:hover {
+    background-color: var(--primary) !important;
+    cursor: pointer;
+}
+
+.p-datatable .p-column {
+    border-right: 2px solid #ffffff;
+}
+
+.p-datatable .p-column:last-child {
+    border-right: none;
+}
+
+.p-datatable .p-datatable-tbody>tr {
+    border-bottom: 4px solid #ffffff;
+}
+
+
+
+.p-datatable {
+    border: 1px solid #ffffff;
+}
+
+.p-datatable .p-datatable-thead>tr>th {
+    border-bottom: 4px solid #ffffff;
+}

@@ -2,7 +2,7 @@
 import CustomTable from "@/components/dashboard/tables/CustomTable";
 import { useRouter } from "next/navigation";
 
-export default function Clients() {
+export default function CustomerRequests() {
   const router=useRouter()
 
   const columns = [
@@ -37,15 +37,14 @@ export default function Clients() {
   ];
   
   const cardsData = [
-    { title: 'Customers', num: 145 },
-    { title: 'Orders', num: 87 },
-    { title: 'Revenue', num: 3200 },
-    { title: 'Products', num: 48 },
-    { title: 'Products', num: 48 },
-    { title: 'Products', num: 48 },
+    { title: 'New requests', num: 145 },
+    { title: 'Complete', num: 87 },
+    { title: 'Pending', num: 3200 },
+    { title: 'Failed', num: 48 },
+    { title: 'Paid', num: 48 },
   ];
   const handleClick = () => {
-    router.push("/dashboard/clients/create");
+    router.push("/dashboard/customer-requests/create");
   };
   return (
     <>
@@ -54,7 +53,7 @@ export default function Clients() {
           rows={10} 
           columns={columns} 
           cardData={cardsData} 
-          buttonText="Add Client" 
+          buttonText="Add Customer Requests" 
           ButtonEvent={handleClick}/>
       </div>
     </>

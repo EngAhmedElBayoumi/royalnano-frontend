@@ -13,7 +13,8 @@ function IconWithTitle({ imageSrc, title, backgroundColor, textColor  }: IconWit
     style={{ backgroundColor: backgroundColor }}
     className={`flex py-[18px] px-[34px] gap-1.5`}>
       <img src={imageSrc} alt={title} className="w-6 h-6" /> 
-      <p className={`text-[20px] text-${textColor}`}>{title}</p>
+      <p className={`md:text-sm xl:text-md  ">
+          {title} text-${textColor}`}>{title}</p>
     </div>
   )
 }

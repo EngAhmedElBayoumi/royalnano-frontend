@@ -18,15 +18,18 @@
 .main-container {
   width: 84vw;
 }
+
 @media (max-width: 576px) {
   .main-container {
     width: 100%;
     padding: 0 1rem;
   }
 }
+
 .main {
   min-height: 42.5vh;
 }
+
 .topbar {
   @apply fixed top-0 z-30 flex-col sm:flex-col lg:flex-row gap-8;
 }
@@ -67,6 +70,7 @@
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
+
   .dark {
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
@@ -107,10 +111,12 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }
 }
+
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -148,21 +154,30 @@ input[type="number"] {
 
 @keyframes slideInFromLeft {
   0% {
-    transform: translateX(-100%); 
+    transform: translateX(-100%);
     opacity: 0;
   }
+
   100% {
-    transform: translateX(0); 
-    opacity: 1; 
+    transform: translateX(0);
+    opacity: 1;
   }
 }
 
 .slide-in {
-  animation: slideInFromLeft 1s ease-out forwards; 
+  animation: slideInFromLeft 1s ease-out forwards;
   opacity: 0;
 }
 
 
 .p-datatable-wrapper {
   overflow: hidden !important;
+
+}
+
+@media screen and (max-width: 768px) {
+  .p-datatable-wrapper {
+    overflow: auto !important;
+
+  }
 }
