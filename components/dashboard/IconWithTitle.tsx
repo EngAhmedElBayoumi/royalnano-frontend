@@ -11,7 +11,7 @@ function IconWithTitle({ imageSrc, title, backgroundColor, textColor  }: IconWit
   return (
     <div
     style={{ backgroundColor: backgroundColor }}
-    className={`flex py-[18px] px-[34px] gap-1.5`}>
+    className={`flex items-center py-[18px] px-[34px] gap-[6px]`}>
       <img src={imageSrc} alt={title} className="w-6 h-6" /> 
       <p className={`md:text-sm xl:text-md  ">
           {title} text-${textColor}`}>{title}</p>
