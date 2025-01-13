@@ -38,43 +38,45 @@ const BranchForm = ({ onSubmit, defaultValues }: BranchFormProps) => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <div className="grid sm:grid-cols-2 gap-x-4 gap-y-2 xl:gap-y-5 lg:gap-x-10">
-          <TextInput
-            control={form.control}
-            name="branch_name"
-            label="Branch Name"
-            placeholder="Branch Name"
-          />
-          <PhoneInputField
-            control={form.control}
-            name="phone_number"
-            label="Phone Number"
-          />
-          <TextInput
-            control={form.control}
-            name="address"
-            label="Address"
-            placeholder="Address"
-          />
-          <TextInput
-            control={form.control}
-            name="branch_code"
-            label="Branch Code"
-            placeholder="Branch Code"
-          />
-          <TextInput
-            control={form.control}
-            name="email"
-            label="Email"
-            placeholder="Email"
-          />
-          <TextInput
-            control={form.control}
-            name="branch_manager"
-            label="Branch Manager"
-            placeholder="Branch Manager"
-          />
-        </div>
+        <section className="min-h-[60vh]">
+          <div className="grid sm:grid-cols-2 gap-x-4 gap-y-2 xl:gap-y-5 lg:gap-x-10">
+            <TextInput
+              control={form.control}
+              name="branch_name"
+              label="Branch Name"
+              placeholder="Branch Name"
+            />
+            <PhoneInputField
+              control={form.control}
+              name="phone_number"
+              label="Phone Number"
+            />
+            <TextInput
+              control={form.control}
+              name="address"
+              label="Address"
+              placeholder="Address"
+            />
+            <TextInput
+              control={form.control}
+              name="branch_code"
+              label="Branch Code"
+              placeholder="Branch Code"
+            />
+            <TextInput
+              control={form.control}
+              name="email"
+              label="Email"
+              placeholder="Email"
+            />
+            <TextInput
+              control={form.control}
+              name="branch_manager"
+              label="Branch Manager"
+              placeholder="Branch Manager"
+            />
+          </div>
+        </section>
         <div className="flex justify-end gap-2 mt-5">
           <Link href="/dashboard/branches">
             <CustomButton

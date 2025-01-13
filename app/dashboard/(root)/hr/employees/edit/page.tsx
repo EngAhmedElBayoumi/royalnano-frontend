@@ -1,7 +1,7 @@
 "use client";
 import EmployeeForm, {
   EmployeeFormValues,
-} from "@/components/dashboard/forms/EmployeeForm";
+} from "@/components/dashboard/forms/hr/EmployeeForm";
 import IconWithTitle from "@/components/dashboard/IconWithTitle";
 // import { useUpdateEmployeeMutation } from "@/redux/services/EmployeeApi";
 

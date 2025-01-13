@@ -37,8 +37,10 @@ const DatePicker = <T extends FieldValues>({
       control={control}
       name={name}
       render={({ field }) => (
-        <FormItem className={`flex flex-col justify-between ${className}`}>
-          <FormLabel className="text-darkGray xl:text-sm">{label}</FormLabel>
+        <FormItem className={`flex flex-col ${className}`}>
+          <FormLabel className="text-darkGray xl:text-sm mt-1 mb-[6px]">
+            {label}
+          </FormLabel>
           <Popover>
             <PopoverTrigger asChild>
               <FormControl>

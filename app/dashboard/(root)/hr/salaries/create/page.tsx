@@ -1,16 +1,16 @@
 "use client";
-import EmployeeForm, {
-  EmployeeFormValues,
-} from "@/components/dashboard/forms/hr/EmployeeForm";
+import SalaryForm, {
+  SalaryFormValues,
+} from "@/components/dashboard/forms/hr/SalaryForm";
 import IconWithTitle from "@/components/dashboard/IconWithTitle";
-// import { useCreateEmployeeMutation } from "@/redux/services/EmployeeApi";
+// import { useCreateSalaryMutation } from "@/redux/services/SalaryApi";
 
-export default function CreateEmployee() {
-  // const [createEmployee] = useCreateEmployeeMutation();
+export default function CreateSalary() {
+  // const [createSalary] = useCreateSalaryMutation();
 
-  const handleSubmit = async (data: EmployeeFormValues) => {
+  const handleSubmit = async (data: SalaryFormValues) => {
     console.log(data);
-    // await createEmployee(data);
+    // await createSalary(data);
   };
 
   return (
@@ -18,14 +18,14 @@ export default function CreateEmployee() {
       <div className="flex">
         <IconWithTitle
           imageSrc="/assets/icons/add.svg"
-          title="Add Employee"
+          title="Add Salary"
           backgroundColor="#F8F7F7"
           textColor="primary"
         />
       </div>
 
       <div className="bg-[#F8F7F7] px-6 pt-5 pb-8 rounded-r-[20px] rounded-bl-[20px] lg:pr-[200px]">
-        <EmployeeForm onSubmit={handleSubmit} />
+        <SalaryForm onSubmit={handleSubmit} />
       </div>
     </main>
   );
