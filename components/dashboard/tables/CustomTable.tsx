@@ -169,8 +169,8 @@ export default function CustomTable({
                   </DropdownMenuContent>
                 </DropdownMenu>
             )}
-            // headerStyle={\}
-            header="actions"
+            headerClassName="text-center  text-white text-[16px] font-[500] py-[13px] px-[38px] border-r border-white border-[2px] bg-primary"
+            header="     "
             style={{ width: "5rem", textAlign: "center" }}
           />
         </DataTable>)
