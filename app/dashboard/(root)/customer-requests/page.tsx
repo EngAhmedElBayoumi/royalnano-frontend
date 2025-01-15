@@ -49,7 +49,13 @@ export default function CustomerRequests() {
   return (
     <>
       <div className="px-7 pt-7 pb-25  ">
-          <CustomTable data={yourCustomerData} 
+          <CustomTable 
+          editRoute="/dashboard/customer-requests/edit/"
+          headerBG="#F8F7F7"
+          headerTextColor="#C8AE50"
+          headerTitle="Customer requests"
+          headerIcon="/assets/icons/customer-request.svg"
+          data={yourCustomerData} 
           rows={10} 
           columns={columns} 
           cardData={cardsData} 

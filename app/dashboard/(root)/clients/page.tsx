@@ -50,7 +50,17 @@ export default function Clients() {
   return (
     <>
       <div className="px-7 pt-7 pb-25  ">
-          <CustomTable data={yourCustomerData} 
+          <CustomTable
+          editRoute="/dashboard/clients/edit/"
+          secondHeaderBG="transparent"
+          secondHeaderTitle="Import Customer List"
+          secondHeaderIcon="/assets/icons/importCustomerList.svg"
+          secondHeaderTextColor="#C8AE50"
+          headerBG="#F8F7F7"
+          headerTextColor="#C8AE50"
+          headerTitle="Client"
+          headerIcon="/assets/icons/client.svg"
+          data={yourCustomerData} 
           rows={10} 
           columns={columns} 
           cardData={cardsData} 
