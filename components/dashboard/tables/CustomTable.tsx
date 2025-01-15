@@ -9,8 +9,10 @@ import IconWithTitle from "@/components/dashboard/IconWithTitle";
 import { FilterMatchMode } from "primereact/api";
 import EmptyMessage from "@/components/dashboard/EmptyMessage";
 import Image from "next/image";
+//pop over or dropdown form schad cn
+//nesting action bta3 l dropdown
 
-interface DataInTable {
+export interface DataInTable {
   id: number;
   [key: string]: any;
 }
@@ -63,12 +65,14 @@ export default function CustomTable({
 
   const handleDropdownToggle = (id: number) => {
     setDropdownVisibility((prevState) => ({
+      
       ...prevState,
       [id]: !prevState[id], 
     }));
   };
 
-  const handleEditClick = (id: number) => {
+  const handleEditClick = (id: number,e: React.MouseEvent) => {
+    e.stopPropagation()
     router.push(`${editRoute}?id=${id}`);
     console.log(editRoute)
   };
@@ -100,8 +104,10 @@ export default function CustomTable({
           <IconWithTitle imageSrc={secondHeaderIcon} title={secondHeaderTitle} backgroundColor={secondHeaderBG} textColor={secondHeaderTextColor} />
         )}
       </div>
-      <div className="bg-[#F8F7F7] px-4 pt-4 pb-1 rounded-tr-[20px] rounded-bl-[20px] rounded-br-[20px] card mb-5 ">
-        <DataTable
+      <div className="bg-dashboardBg px-4 pt-4 pb-1 rounded-tr-[20px] rounded-bl-[20px] rounded-br-[20px] card mb-5 ">
+        {data && data.length>0 ?
+   
+       ( <DataTable
           value={customers}
           paginator
           rows={rows}
@@ -150,8 +156,8 @@ export default function CustomTable({
                 {dropdownVisibility[rowData.id] && (
                   <div className="absolute right-0 bg-white shadow-lg rounded-md mt-2 w-40 p-2">
                     <button
-                      onClick={() => {
-                        handleEditClick(rowData.id);
+                      onClick={(e) => {
+                        handleEditClick(rowData.id,e);
                         setDropdownVisibility((prevState) => ({ ...prevState, [rowData.id]: false })); 
                       }}
                       className="w-full text-left px-3 py-1 text-gray-700 hover:bg-gray-200 rounded-md"
@@ -162,10 +168,12 @@ export default function CustomTable({
                 )}
               </div>
             )}
-            header=""
+            // headerStyle={\}
+            header="actions"
             style={{ width: "5rem", textAlign: "center" }}
           />
-        </DataTable>
+        </DataTable>)
+           : <EmptyMessage />  }
       </div>
     </>
   );

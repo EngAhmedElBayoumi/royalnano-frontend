@@ -18,6 +18,7 @@ export default {
         secondary: "var(--secondary)",
         gray: "var(--gray)",
         lightGray: "#F5F2F2",
+        dashboardBg:"#F8F7F7",
         gray300: "#E9E8E8",
         darkGray: "#5A5A5A",
         subtitle: "#7d7d7d",
