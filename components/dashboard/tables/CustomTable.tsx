@@ -10,8 +10,7 @@ import { FilterMatchMode } from "primereact/api";
 import EmptyMessage from "@/components/dashboard/EmptyMessage";
 import Image from "next/image";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
-//pop over or dropdown form schad cn
-//nesting action bta3 l dropdown
+import './CustomTable.css';
 
 export interface DataInTable {
   id: number;
@@ -111,6 +110,7 @@ export default function CustomTable({
        ( <DataTable
           value={customers}
           paginator
+
           rows={rows}
           filters={filters}
           globalFilterFields={columns.map((col) => col.field)}
