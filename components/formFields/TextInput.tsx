@@ -40,6 +40,14 @@ const TextInput = <T extends FieldValues>({
               type={type}
               className="bg-[#F4F4F4] border-[0.6] border-gray xl:rounded-10 px-2 py-5 xl:py-7 mt-1"
               {...field}
+              onChange={(e) => {
+                if (type === "number") {
+                  // Convert the input value to a number
+                  field.onChange(parseInt(e.target.value, 10));
+                } else {
+                  field.onChange(e.target.value);
+                }
+              }}
             />
           </FormControl>
           <FormMessage />

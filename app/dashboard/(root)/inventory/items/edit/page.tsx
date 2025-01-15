@@ -30,7 +30,7 @@ export default function EditItem() {
         />
       </div>
 
-      <div className="bg-[#F8F7F7] px-6 pt-5 pb-8 rounded-r-[20px] rounded-bl-[20px] lg:pr-[200px]">
+      <div className="bg-dashboardBg px-6 pt-5 pb-8 rounded-r-[20px] rounded-bl-[20px] lg:pr-[200px]">
         <ItemForm onSubmit={handleSubmit} defaultValues={defaultValues} />
       </div>
     </main>
