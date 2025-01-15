@@ -24,13 +24,18 @@ interface DatePickerProps<T extends FieldValues> {
   label?: string;
   placeholder: string;
   className?: string;
+  disabledStartDate?: Date;
+  disabledEndDate?: Date;
 }
+
 const DatePicker = <T extends FieldValues>({
   control,
   name,
   label,
   placeholder,
   className,
+  disabledStartDate,
+  disabledEndDate,
 }: DatePickerProps<T>) => {
   return (
     <FormField
@@ -66,7 +71,7 @@ const DatePicker = <T extends FieldValues>({
                 selected={field.value}
                 onSelect={field.onChange}
                 disabled={(date) =>
-                  date > new Date() || date < new Date("1900-01-01")
+                  date > disabledEndDate || date < disabledStartDate
                 }
                 initialFocus
               />
@@ -78,4 +83,5 @@ const DatePicker = <T extends FieldValues>({
     />
   );
 };
+
 export default DatePicker;
