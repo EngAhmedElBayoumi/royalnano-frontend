@@ -70,9 +70,12 @@ const DatePicker = <T extends FieldValues>({
                 mode="single"
                 selected={field.value}
                 onSelect={field.onChange}
-                disabled={(date) =>
-                  date > disabledEndDate || date < disabledStartDate
-                }
+                disabled={(date) => {
+                  const startDate =
+                    disabledStartDate || new Date(-8640000000000000); // Minimum date
+                  const endDate = disabledEndDate || new Date(8640000000000000); // Maximum date
+                  return date > endDate || date < startDate;
+                }}
                 initialFocus
               />
             </PopoverContent>

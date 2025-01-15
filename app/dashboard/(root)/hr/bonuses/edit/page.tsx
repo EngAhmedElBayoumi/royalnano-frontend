@@ -12,7 +12,7 @@ export default function EditBonus() {
     branch_name: "Branch 1",
     rewards: "1000",
     start: new Date(),
-    end: new Date(),
+    end: new Date(new Date().setDate(new Date().getDate() + 1)),
     date: new Date(),
   }; // Fetch existing bonus data and set as default values
 

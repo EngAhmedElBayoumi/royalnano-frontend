@@ -6,8 +6,8 @@ import { attendanceSchema } from "@/lib/validations/dashboard/hr/attendanceSchem
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
 import DateTimePicker from "@/components/formFields/DateTimePicker";
-import DatePicker from "@/components/formFields/DatePicker";
 import Link from "next/link";
+import { useEffect } from "react";
 
 interface AttendanceFormProps {
   onSubmit: (data: AttendanceFormValues) => Promise<void>;
@@ -32,6 +32,28 @@ const AttendanceForm = ({ onSubmit, defaultValues }: AttendanceFormProps) => {
     },
   });
 
+  // Watch for changes in attendance, departure, and working_hours
+  const attendance = form.watch("attendance");
+  const departure = form.watch("departure");
+  const workingHours = form.watch("working_hours");
+
+  useEffect(() => {
+    if (attendance && departure) {
+      const hours =
+        (departure.getTime() - attendance.getTime()) / (1000 * 60 * 60);
+      form.setValue("working_hours", hours);
+    }
+  }, [attendance, departure, form]);
+
+  useEffect(() => {
+    if (attendance) {
+      const newDeparture = new Date(
+        attendance.getTime() + workingHours * 60 * 60 * 1000
+      );
+      form.setValue("departure", newDeparture);
+    }
+  }, [workingHours, form]);
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -55,12 +77,14 @@ const AttendanceForm = ({ onSubmit, defaultValues }: AttendanceFormProps) => {
               name="attendance"
               label="Attendance"
               placeholder="Select Attendance Time"
+              disabledEndDate={form.watch("departure")}
             />
             <DateTimePicker
               control={form.control}
               name="departure"
               label="Departure"
               placeholder="Select Departure Time"
+              disabledStartDate={form.watch("attendance")}
             />
           </div>
         </section>

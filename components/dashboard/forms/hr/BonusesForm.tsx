@@ -31,7 +31,7 @@ const BonusesForm = ({ onSubmit, defaultValues }: BonusesFormProps) => {
       branch_name: "",
       rewards: "",
       start: new Date(),
-      end: new Date(),
+      end: new Date(new Date().setDate(new Date().getDate() + 1)),
       date: new Date(),
     },
   });
@@ -68,21 +68,23 @@ const BonusesForm = ({ onSubmit, defaultValues }: BonusesFormProps) => {
             />
             <DatePicker
               control={form.control}
+              name="date"
+              label="Date"
+              placeholder="Select Date"
+            />
+            <DatePicker
+              control={form.control}
               name="start"
               label="Start"
               placeholder="Select Start Date"
+              disabledEndDate={form.watch("end")}
             />
             <DatePicker
               control={form.control}
               name="end"
               label="End"
               placeholder="Select End Date"
-            />
-            <DatePicker
-              control={form.control}
-              name="date"
-              label="Date"
-              placeholder="Select Date"
+              disabledStartDate={form.watch("start")}
             />
           </div>
         </section>

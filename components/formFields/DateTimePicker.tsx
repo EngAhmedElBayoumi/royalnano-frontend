@@ -25,6 +25,8 @@ interface DateTimePickerProps<T extends FieldValues> {
   label?: string;
   placeholder: string;
   className?: string;
+  disabledStartDate?: Date;
+  disabledEndDate?: Date;
 }
 const DateTimePicker = <T extends FieldValues>({
   control,
@@ -32,6 +34,8 @@ const DateTimePicker = <T extends FieldValues>({
   label,
   placeholder,
   className,
+  disabledStartDate,
+  disabledEndDate,
 }: DateTimePickerProps<T>) => {
   function handleTimeChange(
     field: { value: Date | null; onChange: (value: Date) => void },
@@ -55,7 +59,12 @@ const DateTimePicker = <T extends FieldValues>({
       }
     }
 
-    field.onChange(newDate);
+    const startDate = disabledStartDate || new Date(-8640000000000000);
+    const endDate = disabledEndDate || new Date(8640000000000000);
+
+    if (newDate >= startDate && newDate <= endDate) {
+      field.onChange(newDate);
+    }
   }
 
   return (
@@ -92,6 +101,13 @@ const DateTimePicker = <T extends FieldValues>({
                   mode="single"
                   selected={field.value}
                   onSelect={field.onChange}
+                  disabled={(date) => {
+                    const startDate =
+                      disabledStartDate || new Date(-8640000000000000); // Minimum date
+                    const endDate =
+                      disabledEndDate || new Date(8640000000000000); // Maximum date
+                    return date > endDate || date < startDate;
+                  }}
                   initialFocus
                 />
                 <div className="flex flex-col sm:flex-row sm:h-[300px] divide-y sm:divide-y-0 sm:divide-x">
