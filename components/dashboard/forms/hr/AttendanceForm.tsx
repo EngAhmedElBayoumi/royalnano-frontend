@@ -52,6 +52,7 @@ const AttendanceForm = ({ onSubmit, defaultValues }: AttendanceFormProps) => {
       );
       form.setValue("departure", newDeparture);
     }
+    // eslint-disable-next-line
   }, [workingHours, form]);
 
   return (

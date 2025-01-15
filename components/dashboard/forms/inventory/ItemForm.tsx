@@ -1,0 +1,81 @@
+"use client";
+import { Form } from "@/components/ui/form";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { itemSchema } from "@/lib/validations/dashboard/inventory/itemSchema";
+import CustomButton from "@/components/formFields/CustomButton";
+import TextInput from "@/components/formFields/TextInput";
+
+interface ItemFormProps {
+  onSubmit: (data: ItemFormValues) => Promise<void>;
+  defaultValues?: ItemFormValues;
+}
+
+export interface ItemFormValues {
+  itemName: string;
+  itemCode: string;
+  quantity: number;
+  price: number;
+}
+
+const ItemForm = ({ onSubmit, defaultValues }: ItemFormProps) => {
+  const form = useForm({
+    resolver: zodResolver(itemSchema),
+    defaultValues: defaultValues || {
+      itemName: "",
+      itemCode: "",
+      quantity: 0,
+      price: 0,
+    },
+  });
+
+  return (
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)}>
+        <section className="min-h-[60vh]">
+          <div className="grid sm:grid-cols-2 gap-x-4 gap-y-2 xl:gap-y-5 lg:gap-x-10">
+            <TextInput
+              control={form.control}
+              name="itemName"
+              label="Item Name"
+              placeholder="Item Name"
+            />
+            <TextInput
+              control={form.control}
+              name="itemCode"
+              label="Item Code"
+              placeholder="Item Code"
+            />
+            <TextInput
+              control={form.control}
+              name="quantity"
+              label="Quantity"
+              placeholder="Quantity"
+              type="number"
+            />
+            <TextInput
+              control={form.control}
+              name="price"
+              label="Price"
+              placeholder="Price"
+              type="number"
+            />
+          </div>
+        </section>
+        <div className="flex justify-end gap-2 mt-5">
+          <CustomButton
+            text="Cancel"
+            type="reset"
+            className="text-white rounded-lg bg-secondary min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
+          />
+          <CustomButton
+            text="Save"
+            className="text-white rounded-lg min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
+          />
+        </div>
+      </form>
+    </Form>
+  );
+};
+
+export default ItemForm;
