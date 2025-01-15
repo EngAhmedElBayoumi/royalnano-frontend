@@ -30,7 +30,7 @@ const VacationsForm = ({ onSubmit, defaultValues }: VacationsFormProps) => {
       job_title: "",
       vacation_period: "",
       from: new Date(),
-      to: new Date(),
+      to: new Date(new Date().setDate(new Date().getDate() + 1)),
       date: new Date(),
     },
   });
@@ -69,12 +69,19 @@ const VacationsForm = ({ onSubmit, defaultValues }: VacationsFormProps) => {
               name="from"
               label="From"
               placeholder="Select From Date"
+              disabledEndDate={form.watch("to")}
             />
             <DatePicker
               control={form.control}
               name="to"
               label="To"
               placeholder="Select To Date"
+              disabledStartDate={form.watch("from")}
+              disabledEndDate={
+                new Date(
+                  form.watch("from").getTime() + 30 * 24 * 60 * 60 * 1000
+                )
+              } // 30 days after 'from'
             />
           </div>
         </section>

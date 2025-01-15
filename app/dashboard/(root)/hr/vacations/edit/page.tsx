@@ -12,7 +12,7 @@ export default function EditVacation() {
     job_title: "Developer",
     vacation_period: "2 weeks",
     from: new Date(),
-    to: new Date(),
+    to: new Date(new Date().setDate(new Date().getDate() + 1)),
     date: new Date(),
   }; // Fetch existing vacation data and set as default values
 
