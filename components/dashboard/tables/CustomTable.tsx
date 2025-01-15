@@ -9,6 +9,7 @@ import IconWithTitle from "@/components/dashboard/IconWithTitle";
 import { FilterMatchMode } from "primereact/api";
 import EmptyMessage from "@/components/dashboard/EmptyMessage";
 import Image from "next/image";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
 //pop over or dropdown form schad cn
 //nesting action bta3 l dropdown
 
@@ -149,24 +150,24 @@ export default function CustomTable({
           ))}
           <Column
             body={(rowData: DataInTable) => (
-              <div className="relative">
-                <button onClick={() => handleDropdownToggle(rowData.id)} className="text-gray-500">
-                <Image width={30} height={30} alt="img" src="/assets/icons/menuIcon.svg"/>
-                </button>
-                {dropdownVisibility[rowData.id] && (
-                  <div className="absolute right-0 bg-white shadow-lg rounded-md mt-2 w-40 p-2">
-                    <button
+              <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <button className="text-gray-500">
+                      <Image width={30} height={30} alt="img" src="/assets/icons/menuIcon.svg" />
+                    </button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="w-40">
+                    <DropdownMenuItem
+                    className="bg-dashboardBg shadow-md py-1 cursor-pointer"
                       onClick={(e) => {
-                        handleEditClick(rowData.id,e);
-                        setDropdownVisibility((prevState) => ({ ...prevState, [rowData.id]: false })); 
+                        e.stopPropagation();
+                        handleEditClick(rowData.id, e);
                       }}
-                      className="w-full text-left px-3 py-1 text-gray-700 hover:bg-gray-200 rounded-md"
                     >
                       Edit
-                    </button>
-                  </div>
-                )}
-              </div>
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
             )}
             // headerStyle={\}
             header="actions"
