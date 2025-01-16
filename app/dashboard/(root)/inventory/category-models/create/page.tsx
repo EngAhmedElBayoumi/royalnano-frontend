@@ -1,16 +1,16 @@
 "use client";
-import ItemForm, {
-  ItemFormValues,
-} from "@/components/dashboard/forms/inventory/ItemForm";
+import CategoryForm, {
+  CategoryFormValues,
+} from "@/components/dashboard/forms/inventory/CategoryForm";
 import IconWithTitle from "@/components/dashboard/IconWithTitle";
-// import { useCreateItemMutation } from "@/redux/services/InventoryApi";
+// import { useCreateCategoryMutation } from "@/redux/services/InventoryApi";
 
-export default function CreateItem() {
-  // const [createItem] = useCreateItemMutation();
+export default function CreateCategory() {
+  // const [createCategory] = useCreateCategoryMutation();
 
-  const handleSubmit = async (data: ItemFormValues) => {
+  const handleSubmit = async (data: CategoryFormValues) => {
     console.log(data);
-    // await createItem(data);
+    // await createCategory(data);
   };
 
   return (
@@ -18,14 +18,14 @@ export default function CreateItem() {
       <div className="flex">
         <IconWithTitle
           imageSrc="/assets/icons/add.svg"
-          title="Add Item"
+          title="Add Category"
           backgroundColor="#F8F7F7"
           textColor="primary"
         />
       </div>
 
       <div className="bg-dashboardBg px-6 pt-5 pb-8 rounded-r-[20px] rounded-bl-[20px] lg:pr-[200px]">
-        <ItemForm onSubmit={handleSubmit} />
+        <CategoryForm onSubmit={handleSubmit} />
       </div>
     </main>
   );
