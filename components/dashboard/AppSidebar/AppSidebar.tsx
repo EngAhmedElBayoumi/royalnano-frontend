@@ -50,7 +50,9 @@ export function AppSidebar() {
                           width={30}
                           height={30}
                         />
-                        <span className="text-primary">{link.name}</span>
+                        <span className="text-primary capitalize">
+                          {link.name}
+                        </span>
                       </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
