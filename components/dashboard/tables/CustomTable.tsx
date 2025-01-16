@@ -131,7 +131,7 @@ export default function CustomTable({
               header={col.header}
               className={`m-auto py-[13px] px-[38px] text-[14px] font-[500] border-r border-white border-[2px]`}
               headerClassName={`text-center  text-white text-[16px] font-[500] py-[13px] px-[38px] border-r border-white border-[2px] ${
-                index === 0 ? "first-column-header" : index === columns.length - 1 ? "last-column-header" : ""
+                index === 0 ? "first-column-header" : index === columns.length - 1 ? "" : ""
               }`}
               style={{ minWidth: "12rem" }}
               body={(rowData: DataInTable) => {
@@ -153,12 +153,12 @@ export default function CustomTable({
               <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <button className="text-gray-500">
-                      <Image width={30} height={30} alt="img" src="/assets/icons/menuIcon.svg" />
+                      <Image className="hover:fill-white" width={30} height={30} alt="img" src="/assets/icons/menuIcon.svg" />
                     </button>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent className="w-40">
+                  <DropdownMenuContent className="w-40 ">
                     <DropdownMenuItem
-                    className="bg-dashboardBg shadow-md py-1 cursor-pointer"
+                    className="bg-dashboardBg shadow-md py-1 cursor-pointer  "
                       onClick={(e) => {
                         e.stopPropagation();
                         handleEditClick(rowData.id, e);
@@ -169,7 +169,7 @@ export default function CustomTable({
                   </DropdownMenuContent>
                 </DropdownMenu>
             )}
-            headerClassName="text-center  text-white text-[16px] font-[500] py-[13px] px-[38px] border-r border-white border-[2px] bg-primary"
+            headerClassName="text-center  text-white text-[16px] font-[500] py-[13px] px-[38px] border-r border-white border-[2px] bg-primary rounded-tr-[1e0px]"
             header="     "
             style={{ width: "5rem", textAlign: "center" }}
           />
