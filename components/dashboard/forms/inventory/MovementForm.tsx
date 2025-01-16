@@ -2,29 +2,34 @@
 import { Form } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { categorySchema } from "@/lib/validations/dashboard/inventory/categorySchema";
+import { movementSchema } from "@/lib/validations/dashboard/inventory/movementSchema";
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
+import DateTimePicker from "@/components/formFields/DateTimePicker";
 import Link from "next/link";
 
-interface CategoryFormProps {
-  onSubmit: (data: CategoryFormValues) => Promise<void>;
-  defaultValues?: CategoryFormValues;
+interface MovementFormProps {
+  onSubmit: (data: MovementFormValues) => Promise<void>;
+  defaultValues?: MovementFormValues;
 }
 
-export interface CategoryFormValues {
-  categoryName: string;
-  itemCode: string;
+export interface MovementFormValues {
+  preorderLevel: number;
+  item: string;
   quantity: number;
+  movementType: string;
+  date: Date;
 }
 
-const CategoryForm = ({ onSubmit, defaultValues }: CategoryFormProps) => {
+const MovementForm = ({ onSubmit, defaultValues }: MovementFormProps) => {
   const form = useForm({
-    resolver: zodResolver(categorySchema),
+    resolver: zodResolver(movementSchema),
     defaultValues: defaultValues || {
-      categoryName: "",
-      itemCode: "",
+      preorderLevel: 0,
+      item: "",
       quantity: 0,
+      movementType: "",
+      date: new Date(),
     },
   });
 
@@ -35,15 +40,16 @@ const CategoryForm = ({ onSubmit, defaultValues }: CategoryFormProps) => {
           <div className="grid sm:grid-cols-2 gap-x-4 gap-y-2 xl:gap-y-5 lg:gap-x-10">
             <TextInput
               control={form.control}
-              name="categoryName"
-              label="Category Name"
-              placeholder="Category name"
+              name="preorderLevel"
+              label="Preorder Level"
+              placeholder="Preorder level"
+              type="number"
             />
             <TextInput
               control={form.control}
-              name="itemCode"
-              label="Item Code"
-              placeholder="Item Code"
+              name="item"
+              label="Item"
+              placeholder="Item"
             />
             <TextInput
               control={form.control}
@@ -51,6 +57,18 @@ const CategoryForm = ({ onSubmit, defaultValues }: CategoryFormProps) => {
               label="Quantity"
               placeholder="Quantity"
               type="number"
+            />
+            <TextInput
+              control={form.control}
+              name="movementType"
+              label="Movement Type"
+              placeholder="Movement Type"
+            />
+            <DateTimePicker
+              control={form.control}
+              name="date"
+              label="Date"
+              placeholder="Date"
             />
           </div>
         </section>
@@ -71,4 +89,4 @@ const CategoryForm = ({ onSubmit, defaultValues }: CategoryFormProps) => {
   );
 };
 
-export default CategoryForm;
+export default MovementForm;

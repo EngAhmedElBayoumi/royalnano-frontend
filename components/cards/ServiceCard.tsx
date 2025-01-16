@@ -33,7 +33,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
             {title}
           </h3>
           {book && (
-            <Link href="/book-now">
+            <Link href="/book-now" passHref>
               <CustomButton
                 text="book now"
                 variant="outline"

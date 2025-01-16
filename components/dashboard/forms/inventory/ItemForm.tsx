@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { itemSchema } from "@/lib/validations/dashboard/inventory/itemSchema";
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
+import Link from "next/link";
 
 interface ItemFormProps {
   onSubmit: (data: ItemFormValues) => Promise<void>;
@@ -63,11 +64,12 @@ const ItemForm = ({ onSubmit, defaultValues }: ItemFormProps) => {
           </div>
         </section>
         <div className="flex justify-end gap-2 mt-5">
-          <CustomButton
-            text="Cancel"
-            type="reset"
-            className="text-white rounded-lg bg-secondary min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
-          />
+          <Link href="/dashboard/inventory" passHref>
+            <CustomButton
+              text="Cancel"
+              className="text-white rounded-lg bg-secondary min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
+            />
+          </Link>
           <CustomButton
             text="Save"
             className="text-white rounded-lg min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"

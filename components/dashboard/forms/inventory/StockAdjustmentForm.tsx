@@ -2,29 +2,37 @@
 import { Form } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { categorySchema } from "@/lib/validations/dashboard/inventory/categorySchema";
+import { stockAdjustmentSchema } from "@/lib/validations/dashboard/inventory/stockAdjustmentSchema";
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
+import DateTimePicker from "@/components/formFields/DateTimePicker";
 import Link from "next/link";
 
-interface CategoryFormProps {
-  onSubmit: (data: CategoryFormValues) => Promise<void>;
-  defaultValues?: CategoryFormValues;
+interface StockAdjustmentFormProps {
+  onSubmit: (data: StockAdjustmentFormValues) => Promise<void>;
+  defaultValues?: StockAdjustmentFormValues;
 }
 
-export interface CategoryFormValues {
-  categoryName: string;
-  itemCode: string;
+export interface StockAdjustmentFormValues {
+  reason: string;
+  item: string;
   quantity: number;
+  type: string;
+  date: Date;
 }
 
-const CategoryForm = ({ onSubmit, defaultValues }: CategoryFormProps) => {
+const StockAdjustmentForm = ({
+  onSubmit,
+  defaultValues,
+}: StockAdjustmentFormProps) => {
   const form = useForm({
-    resolver: zodResolver(categorySchema),
+    resolver: zodResolver(stockAdjustmentSchema),
     defaultValues: defaultValues || {
-      categoryName: "",
-      itemCode: "",
+      reason: "",
+      item: "",
       quantity: 0,
+      type: "",
+      date: new Date(),
     },
   });
 
@@ -35,15 +43,15 @@ const CategoryForm = ({ onSubmit, defaultValues }: CategoryFormProps) => {
           <div className="grid sm:grid-cols-2 gap-x-4 gap-y-2 xl:gap-y-5 lg:gap-x-10">
             <TextInput
               control={form.control}
-              name="categoryName"
-              label="Category Name"
-              placeholder="Category name"
+              name="reason"
+              label="Reason"
+              placeholder="Reason"
             />
             <TextInput
               control={form.control}
-              name="itemCode"
-              label="Item Code"
-              placeholder="Item Code"
+              name="item"
+              label="Item"
+              placeholder="Item"
             />
             <TextInput
               control={form.control}
@@ -51,6 +59,18 @@ const CategoryForm = ({ onSubmit, defaultValues }: CategoryFormProps) => {
               label="Quantity"
               placeholder="Quantity"
               type="number"
+            />
+            <TextInput
+              control={form.control}
+              name="type"
+              label="Type"
+              placeholder="Type"
+            />
+            <DateTimePicker
+              control={form.control}
+              name="date"
+              label="Date"
+              placeholder="Date"
             />
           </div>
         </section>
@@ -63,7 +83,7 @@ const CategoryForm = ({ onSubmit, defaultValues }: CategoryFormProps) => {
           </Link>
           <CustomButton
             text="Save"
-            className="text-white rounded-lg min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
+            className="text-white rounded-lg bg-gold min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
           />
         </div>
       </form>
@@ -71,4 +91,4 @@ const CategoryForm = ({ onSubmit, defaultValues }: CategoryFormProps) => {
   );
 };
 
-export default CategoryForm;
+export default StockAdjustmentForm;

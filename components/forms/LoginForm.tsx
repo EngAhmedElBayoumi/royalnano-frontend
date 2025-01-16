@@ -94,6 +94,7 @@ export default function LoginForm() {
         <Link
           className="ml-auto text-[#969696] text-sm xl:text-[20px] font-[600]"
           href={"/forget-password"}
+          passHref
         >
           Forget Password?
         </Link>
@@ -106,7 +107,7 @@ export default function LoginForm() {
 
         <div className="flex font-[600] text-sm xl:text-[20px] justify-center">
           <p className="mr-1  text-[#8B8B8B] ">Don`t have account ? </p>{" "}
-          <Link href="/register" className="text-primary">
+          <Link href="/register" className="text-primary" passHref>
             {isLoading ? "Submitting..." : "Login"}
           </Link>
         </div>
