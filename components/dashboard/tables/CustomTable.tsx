@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, MouseEventHandler } from "react";
+import React, { useState, useEffect, MouseEventHandler, ReactNode } from "react";
 import { DataTable, DataTableFilterMeta } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { InputText } from "primereact/inputtext";
@@ -11,10 +11,11 @@ import EmptyMessage from "@/components/dashboard/EmptyMessage";
 import Image from "next/image";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
 import './CustomTable.css';
+import InfoCardsComponent, { InfoCardInterface } from "../cards/InfoCard";
 
 export interface DataInTable {
   id: number;
-  [key: string]: any;
+  [key: string]: ReactNode;
 }
 
 interface ColumnConfig {
@@ -26,13 +27,13 @@ interface CustomTableProps {
   data: DataInTable[];
   rows: number;
   columns: ColumnConfig[];
-  cardData: any[];
+  cardData: InfoCardInterface[];
   buttonText: string;
   ButtonEvent?: MouseEventHandler<HTMLButtonElement>;
-  headerIcon: string;
-  headerTitle: string;
-  headerBG: string;
-  headerTextColor: string;
+  headerIcon?: string;
+  headerTitle?: string;
+  headerBG?: string;
+  headerTextColor?: string;
   secondHeaderIcon?: string;
   secondHeaderTitle?: string;
   secondHeaderBG?: string;
@@ -51,7 +52,6 @@ export default function CustomTable({
     global: { value: null, matchMode: FilterMatchMode.CONTAINS },
   });
   const [globalFilterValue, setGlobalFilterValue] = useState<string>("");
-  const [dropdownVisibility, setDropdownVisibility] = useState<{ [key: number]: boolean }>({}); 
 
   useEffect(() => {
     setCustomers(data);
@@ -63,13 +63,7 @@ export default function CustomTable({
     setGlobalFilterValue(value);
   };
 
-  const handleDropdownToggle = (id: number) => {
-    setDropdownVisibility((prevState) => ({
-      
-      ...prevState,
-      [id]: !prevState[id], 
-    }));
-  };
+
 
   const handleEditClick = (id: number,e: React.MouseEvent) => {
     e.stopPropagation()
@@ -78,17 +72,20 @@ export default function CustomTable({
   };
 
   const renderHeader = () => (
+    <>
+    <InfoCardsComponent data={cardData}/>
     <div className="flex mb-4 justify-between self-center">
       <InputText
         className="border bg-transparent border-[#474747] pl-2 w-[25%] py-2 rounded-[10px]"
         value={globalFilterValue}
         onChange={onGlobalFilterChange}
         placeholder="Search"
-      />
+        />
       <Button className="bg-primary text-white" onClick={ButtonEvent}>
         {buttonText}
       </Button>
     </div>
+        </>
   );
 
   const header = renderHeader();
@@ -99,7 +96,9 @@ export default function CustomTable({
   return (
     <>
       <div className="flex">
+      {headerIcon && headerTitle && headerBG && headerTextColor && (
         <IconWithTitle imageSrc={headerIcon} title={headerTitle} backgroundColor={headerBG} textColor={headerTextColor} />
+      )}
         {secondHeaderIcon && secondHeaderTitle && secondHeaderBG && secondHeaderTextColor && (
           <IconWithTitle imageSrc={secondHeaderIcon} title={secondHeaderTitle} backgroundColor={secondHeaderBG} textColor={secondHeaderTextColor} />
         )}

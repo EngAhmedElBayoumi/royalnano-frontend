@@ -2,7 +2,7 @@
 import CustomTable from "@/components/dashboard/tables/CustomTable";
 import { useRouter } from "next/navigation";
 
-export default function Employees() {
+export default function Bonuses() {
   const router=useRouter()
 
   const columns = [
@@ -44,22 +44,18 @@ export default function Employees() {
     { title: 'Paid', num: 48 },
   ];
   const handleClick = () => {
-    router.push("/dashboard/customer-requests/create");
+    router.push("/dashboard/hr/bonuses/create");
   };
   return (
     <>
-      <div className="px-7 pt-7 pb-25  ">
+      <div className="px-7 pb-25  ">
           <CustomTable 
-          editRoute="/dashboard/customer-requests/edit/"
-          headerBG="#F8F7F7"
-          headerTextColor="#C8AE50"
-          headerTitle="Customer requests"
-          headerIcon="/assets/icons/customer-request.svg"
+          editRoute="/dashboard/hr/bonuses/edit/"
           data={yourCustomerData} 
           rows={10} 
           columns={columns} 
           cardData={cardsData} 
-          buttonText="Add Customer Requests" 
+          buttonText="Add Bonuses" 
           ButtonEvent={handleClick}/>
       </div>
     </>
