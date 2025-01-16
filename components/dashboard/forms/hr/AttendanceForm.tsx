@@ -90,7 +90,7 @@ const AttendanceForm = ({ onSubmit, defaultValues }: AttendanceFormProps) => {
           </div>
         </section>
         <div className="flex justify-end gap-2 mt-5">
-          <Link href="/dashboard/attendance">
+          <Link href="/dashboard/hr" passHref>
             <CustomButton
               text="Cancel"
               type="reset"

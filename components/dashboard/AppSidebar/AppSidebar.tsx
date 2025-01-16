@@ -43,7 +43,7 @@ export function AppSidebar() {
                       isActive={isActive}
                       className="py-6 !rounded-10"
                     >
-                      <Link href={`/dashboard${link.path}`}>
+                      <Link href={`/dashboard${link.path}`} passHref>
                         <Image
                           src={`/assets/icons/sidebar/${link.icon}`}
                           alt={link.name}
@@ -68,7 +68,7 @@ export function AppSidebar() {
               isActive={currentPath.includes("settings")}
               className="py-6 !rounded-10"
             >
-              <Link href="/dashboard/settings">
+              <Link href="/dashboard/settings" passHref>
                 <Image
                   src={`/assets/icons/sidebar/setting.svg`}
                   alt="settings"

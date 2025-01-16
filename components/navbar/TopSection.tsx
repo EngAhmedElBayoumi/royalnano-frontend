@@ -39,7 +39,7 @@ const TopSection = () => {
             );
           } else
             return (
-              <Link key={link.href} href={link.href}>
+              <Link key={link.href} href={link.href} passHref>
                 <Image
                   alt={link.alt}
                   src={link.src}

@@ -27,7 +27,9 @@ const Footer = () => {
             <ul className="xl:text-sm">
               {navLinks.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href}>{link.label}</Link>
+                  <Link href={link.href} passHref>
+                    {link.label}
+                  </Link>
                 </li>
               ))}
             </ul>

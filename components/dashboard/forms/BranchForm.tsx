@@ -78,7 +78,7 @@ const BranchForm = ({ onSubmit, defaultValues }: BranchFormProps) => {
           </div>
         </section>
         <div className="flex justify-end gap-2 mt-5">
-          <Link href="/dashboard/branches">
+          <Link href="/dashboard/branches" passHref>
             <CustomButton
               text="Cancel"
               type="reset"

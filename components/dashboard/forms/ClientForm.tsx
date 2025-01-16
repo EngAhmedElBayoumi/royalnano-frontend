@@ -116,7 +116,7 @@ const ClientForm = ({ onSubmit, defaultValues }: ClientFormProps) => {
           />
         </div>
         <div className="flex justify-end gap-2">
-          <Link href="/dashboard/clients">
+          <Link href="/dashboard/clients" passHref>
             <CustomButton
               text="Cancel"
               type="reset"

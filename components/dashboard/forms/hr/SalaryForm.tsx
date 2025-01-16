@@ -63,7 +63,7 @@ const SalaryForm = ({ onSubmit, defaultValues }: SalaryFormProps) => {
           </div>
         </section>
         <div className="flex justify-end gap-2 mt-5">
-          <Link href="/dashboard/salaries">
+          <Link href="/dashboard/hr" passHref>
             <CustomButton
               text="Cancel"
               type="reset"

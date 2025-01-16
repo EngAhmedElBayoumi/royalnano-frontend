@@ -118,7 +118,7 @@ const CustomerRequestForm = ({
           className="mt-2 xl:mt-5"
         />
         <div className="flex justify-end gap-2 mt-5">
-          <Link href="/dashboard/clients">
+          <Link href="/dashboard/customer-requests" passHref>
             <CustomButton
               text="Cancel"
               type="reset"

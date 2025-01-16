@@ -86,7 +86,7 @@ const VacationsForm = ({ onSubmit, defaultValues }: VacationsFormProps) => {
           </div>
         </section>
         <div className="flex justify-end gap-2 mt-5">
-          <Link href="/dashboard/vacations">
+          <Link href="/dashboard/hr" passHref>
             <CustomButton
               text="Cancel"
               type="reset"

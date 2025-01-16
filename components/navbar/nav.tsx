@@ -48,6 +48,7 @@ const Nav = () => {
               } hover:text-primary active:text-primary md:text-sm xl:text-md text-nowrap`}
               key={link.href}
               href={link.href}
+              passHref
             >
               {link.label}
             </Link>
@@ -59,12 +60,14 @@ const Nav = () => {
           <Link
             className="md:text-sm xl:text-md hover:text-white text-nowrap text-primary"
             href={"/login"}
+            passHref
           >
             Log In
           </Link>
           <Link
             className="md:text-sm xl:text-md hover:text-white text-primary"
             href={"/register"}
+            passHref
           >
             Register
           </Link>
@@ -138,6 +141,7 @@ const Nav = () => {
                   className="hover:text-primary xl:text-sm block text-black"
                   key={link.href}
                   href={link.href}
+                  passHref
                 >
                   {link.label}
                 </Link>
@@ -145,12 +149,14 @@ const Nav = () => {
               <Link
                 className="hover:text-primary xl:text-sm block text-black"
                 href={"/login"}
+                passHref
               >
                 Log In
               </Link>
               <Link
                 className="hover:text-primary xl:text-sm block text-black"
                 href={"/register"}
+                passHref
               >
                 Register
               </Link>

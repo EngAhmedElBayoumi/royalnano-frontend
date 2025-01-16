@@ -36,7 +36,7 @@ const Profile = () => {
           <TabsContent value="previous-services">
             <div className="justify-center grid xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-4 w-[90vw] md:w-fit">
               {services.map((service, index) => (
-                <Link key={index} href={`/services/${service.id}`}>
+                <Link key={index} href={`/services/${service.id}`} passHref>
                   <ServiceCard
                     title={service.title}
                     warranty={service.warranty}

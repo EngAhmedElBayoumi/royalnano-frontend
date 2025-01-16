@@ -108,7 +108,7 @@ const EmployeeForm = ({ onSubmit, defaultValues }: EmployeeFormProps) => {
           </div>
         </section>
         <section className="flex justify-end gap-2 mt-5">
-          <Link href="/dashboard/employees">
+          <Link href="/dashboard/hr" passHref>
             <CustomButton
               text="Cancel"
               type="reset"

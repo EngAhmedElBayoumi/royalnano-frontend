@@ -187,7 +187,7 @@ export default function RegisterForm() {
 
         <div className="flex font-[600] text-sm xl:text-[20px] justify-center">
           <p className="mr-1  text-[#8B8B8B] ">Already have an account ? </p>{" "}
-          <Link href={"/login"} className="text-primary">
+          <Link href={"/login"} className="text-primary" passHref>
             Log in
           </Link>
         </div>
