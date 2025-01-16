@@ -51,7 +51,7 @@ export default function Branches() {
     <>
       <div className="px-7 pt-7 pb-25  ">
           <CustomTable
-          editRoute="/dashboard/branches/create/edit/"
+          editRoute="/dashboard/branches/edit/"
           headerBG="#F8F7F7"
     
           headerTextColor="#C8AE50"
