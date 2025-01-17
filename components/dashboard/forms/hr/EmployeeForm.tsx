@@ -96,7 +96,7 @@ const EmployeeForm = ({ onSubmit, defaultValues }: EmployeeFormProps) => {
         </section>
         <section className="mt-5">
           <h3 className="font-bold text-primary">Permission</h3>
-          <div className="grid grid-cols-2 gap-4 mt-2 border border-gray rounded-md xl:rounded-10 p-5 xl:px-7 xl:py-5">
+          <div className="grid grid-cols-2 gap-4 mt-2 border border-gray rounded-md xl:rounded-10 p-5 xl:px-6 xl:py-5">
             {permissionOptions.map((permission) => (
               <SwitchField
                 key={permission}
