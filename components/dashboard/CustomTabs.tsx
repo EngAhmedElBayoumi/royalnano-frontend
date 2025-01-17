@@ -1,9 +1,12 @@
-import React from 'react';
+import React from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-
 interface CustomTabsProps {
-  tabs: Array<{ label: string, content: React.ReactNode, icon?: React.ReactNode }>;
+  tabs: Array<{
+    label: string;
+    content: React.ReactNode;
+    icon?: React.ReactNode;
+  }>;
   defaultTab?: string;
 }
 
