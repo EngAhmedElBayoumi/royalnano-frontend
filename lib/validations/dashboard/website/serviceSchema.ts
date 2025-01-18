@@ -7,5 +7,4 @@ export const serviceSchema = z.object({
   image: z.instanceof(File).refine((file) => file instanceof File, {
     message: "Image is required",
   }),
-  date: z.date({ required_error: "Date is required" }),
 });

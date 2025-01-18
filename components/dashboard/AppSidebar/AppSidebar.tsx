@@ -23,7 +23,7 @@ export function AppSidebar() {
       <SidebarHeader className="items-center">
         <Image src="/assets/icons/logo.svg" alt="logo" width={50} height={80} />
       </SidebarHeader>
-      <SidebarContent className="mt-10">
+      <SidebarContent className="mt-6">
         <SidebarGroup>
           <SidebarGroupContent>
             <SidebarMenu className="gap-2">

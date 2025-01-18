@@ -12,7 +12,6 @@ export default function EditService() {
     type: "Sample Type",
     price: 100,
     image: new File([], "sample.png"),
-    date: new Date(),
   };
 
   const handleSubmit = async (data: ServiceFormValues) => {

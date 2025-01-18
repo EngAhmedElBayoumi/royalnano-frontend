@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/form";
 import { Control, FieldValues, Path } from "react-hook-form";
 import { Input } from "@/components/ui/input";
+import Image from "next/image";
 
 interface FileInputProps<T extends FieldValues> {
   control: Control<T>;
@@ -27,14 +28,14 @@ const FileInput = <T extends FieldValues>({
       control={control}
       name={name}
       render={({ field }) => (
-        <FormItem className={className}>
+        <FormItem className={`relative ${className}`}>
           {label && (
             <FormLabel className="text-darkGray xl:text-sm">{label}</FormLabel>
           )}
           <FormControl>
             <Input
               type="file"
-              className="bg-[#F4F4F4] border-[0.6] border-gray xl:rounded-10 px-2 py-5 xl:py-7 mt-1"
+              className="bg-[#F4F4F4] border-[0.6] border-gray xl:rounded-10 px-1 py-[2px] xl:py-[10px] mt-1 h-fit cursor-pointer"
               onChange={(e) => {
                 if (e.target.files) {
                   field.onChange(e.target.files[0]);
@@ -42,6 +43,13 @@ const FileInput = <T extends FieldValues>({
               }}
             />
           </FormControl>
+          <Image
+            src="/assets/icons/dashboard/camera.svg"
+            width="24"
+            height="24"
+            alt="icon"
+            className="absolute top-9 right-2"
+          />
           <FormMessage />
         </FormItem>
       )}

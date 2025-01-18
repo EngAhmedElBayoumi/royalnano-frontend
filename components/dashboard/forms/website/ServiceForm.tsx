@@ -6,7 +6,6 @@ import { serviceSchema } from "@/lib/validations/dashboard/website/serviceSchema
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
 import FileInput from "@/components/formFields/FileInput";
-import DateTimePicker from "@/components/formFields/DateTimePicker";
 
 interface ServiceFormProps {
   onSubmit: (data: ServiceFormValues) => Promise<void>;
@@ -18,7 +17,6 @@ export interface ServiceFormValues {
   type: string;
   price: number;
   image: File;
-  date: Date;
 }
 
 const ServiceForm = ({ onSubmit, defaultValues }: ServiceFormProps) => {
@@ -29,7 +27,6 @@ const ServiceForm = ({ onSubmit, defaultValues }: ServiceFormProps) => {
       type: "",
       price: 0,
       image: undefined,
-      date: new Date(),
     },
   });
 
@@ -58,12 +55,6 @@ const ServiceForm = ({ onSubmit, defaultValues }: ServiceFormProps) => {
               type="number"
             />
             <FileInput control={form.control} name="image" label="Image" />
-            <DateTimePicker
-              control={form.control}
-              name="date"
-              label="Date"
-              placeholder="Date"
-            />
           </div>
         </section>
         <div className="flex justify-end gap-2 mt-5">
