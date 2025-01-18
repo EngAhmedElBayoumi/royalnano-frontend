@@ -101,7 +101,10 @@ export default function CustomTable({
           onChange={onGlobalFilterChange}
           placeholder="Search"
         />
-        <Button className="bg-primary text-white" onClick={ButtonEvent}>
+        <Button
+          className="bg-primary text-white capitalize"
+          onClick={ButtonEvent}
+        >
           {buttonText}
         </Button>
       </div>
@@ -115,33 +118,33 @@ export default function CustomTable({
 
   return (
     <>
-      {(headerIcon && headerTitle && headerBG && headerTextColor) ||
+      {((headerIcon && headerTitle && headerBG && headerTextColor) ||
         (secondHeaderIcon &&
           secondHeaderTitle &&
           secondHeaderBG &&
-          secondHeaderTextColor && (
-            <div className="flex">
-              {headerIcon && headerTitle && headerBG && headerTextColor && (
-                <IconWithTitle
-                  imageSrc={headerIcon}
-                  title={headerTitle}
-                  backgroundColor={headerBG}
-                  textColor={headerTextColor}
-                />
-              )}
-              {secondHeaderIcon &&
-                secondHeaderTitle &&
-                secondHeaderBG &&
-                secondHeaderTextColor && (
-                  <IconWithTitle
-                    imageSrc={secondHeaderIcon}
-                    title={secondHeaderTitle}
-                    backgroundColor={secondHeaderBG}
-                    textColor={secondHeaderTextColor}
-                  />
-                )}
-            </div>
-          ))}
+          secondHeaderTextColor)) && (
+        <div className="flex">
+          {headerIcon && headerTitle && headerBG && headerTextColor && (
+            <IconWithTitle
+              imageSrc={headerIcon}
+              title={headerTitle}
+              backgroundColor={headerBG}
+              textColor={headerTextColor}
+            />
+          )}
+          {secondHeaderIcon &&
+            secondHeaderTitle &&
+            secondHeaderBG &&
+            secondHeaderTextColor && (
+              <IconWithTitle
+                imageSrc={secondHeaderIcon}
+                title={secondHeaderTitle}
+                backgroundColor={secondHeaderBG}
+                textColor={secondHeaderTextColor}
+              />
+            )}
+        </div>
+      )}
       <div className="bg-dashboardBg px-4 pt-4 pb-1 rounded-tr-[20px] rounded-bl-[20px] rounded-br-[20px] card mb-5 ">
         {data && data.length > 0 ? (
           <DataTable

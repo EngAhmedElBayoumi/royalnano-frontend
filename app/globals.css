@@ -8,7 +8,10 @@
   --secondary: #000000;
   --gray: #969696;
 }
-
+.data-\[state\=active\]\:bg-dashboardBg[data-state="active"] img {
+  filter: brightness(0) saturate(100%) invert(68%) sepia(42%) saturate(528%)
+    hue-rotate(10deg) brightness(96%) contrast(85%);
+}
 /* @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
@@ -179,15 +182,12 @@ textarea::-webkit-resizer {
 
 .p-datatable-wrapper {
   overflow: hidden !important;
-
 }
 
 @media screen and (max-width: 768px) {
   .p-datatable-wrapper {
     overflow: auto !important;
-
   }
-
 }
 
 .react-international-phone-input-container {

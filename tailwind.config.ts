@@ -18,7 +18,7 @@ export default {
         secondary: "var(--secondary)",
         gray: "var(--gray)",
         lightGray: "#F5F2F2",
-        dashboardBg:"#F8F7F7",
+        dashboardBg: "#F8F7F7",
         gray300: "#E9E8E8",
         darkGray: "#5A5A5A",
         subtitle: "#7d7d7d",
@@ -80,6 +80,10 @@ export default {
       boxShadow: {
         custom: "0px 4px 4px 0px #00000040",
         lg: "0px 14px 24px 0px #00000040",
+      },
+      filter: {
+        primary:
+          "brightness(0) saturate(100%) invert(68%) sepia(42%) saturate(528%) hue-rotate(10deg) brightness(96%) contrast(85%)",
       },
     },
     screens: {
