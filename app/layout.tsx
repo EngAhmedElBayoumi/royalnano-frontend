@@ -3,7 +3,10 @@
 // import { useEffect, useState } from "react";
 import { Provider } from "react-redux";
 import { store } from "@/redux/store";
+import { Cairo } from "next/font/google";
 import "./globals.css";
+
+const cairo = Cairo({ subsets: ["latin"] });
 
 export default function RootLayout({
   children,
@@ -47,5 +50,11 @@ export default function RootLayout({
   //   return null; // Optionally return a loading or empty component during SSR
   // }
 
-  return <Provider store={store}>{children}</Provider>;
+  return (
+    <html lang="en">
+      <body className={cairo.className}>
+        <Provider store={store}>{children}</Provider>
+      </body>
+    </html>
+  );
 }
