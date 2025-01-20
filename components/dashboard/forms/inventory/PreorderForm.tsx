@@ -7,6 +7,7 @@ import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
 import TextArea from "@/components/formFields/TextArea";
 import Link from "next/link";
+import CustomSelect from "@/components/formFields/CustomSelect";
 
 interface PreorderFormProps {
   onSubmit: (data: PreorderFormValues) => Promise<void>;
@@ -29,6 +30,11 @@ const PreorderForm = ({ onSubmit, defaultValues }: PreorderFormProps) => {
     },
   });
 
+  const itemsOptions = [
+    { value: "item 1", label: "item 1" },
+    { value: "item 2", label: "item 2" },
+    { value: "item 3", label: "item 3" },
+  ];
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -41,11 +47,12 @@ const PreorderForm = ({ onSubmit, defaultValues }: PreorderFormProps) => {
               placeholder="Preorder level"
               type="number"
             />
-            <TextInput
+            <CustomSelect
               control={form.control}
               name="item"
               label="Item"
               placeholder="Item"
+              options={itemsOptions}
             />
           </div>
           <TextArea

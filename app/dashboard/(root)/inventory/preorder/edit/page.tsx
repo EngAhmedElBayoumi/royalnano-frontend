@@ -9,7 +9,7 @@ export default function EditPreorder() {
   // const [updatePreorder] = useUpdatePreorderMutation();
   const defaultValues: PreorderFormValues = {
     preorderLevel: 10,
-    item: "Sample Item",
+    item: "Item 3",
     description: "Sample description",
   };
 
