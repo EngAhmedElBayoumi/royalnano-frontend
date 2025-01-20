@@ -2,6 +2,7 @@
 import { Form } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { ACCEPTED_IMAGE_TYPES } from "@/lib/utils/types";
 import { serviceSchema } from "@/lib/validations/dashboard/website/serviceSchema";
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
@@ -54,7 +55,12 @@ const ServiceForm = ({ onSubmit, defaultValues }: ServiceFormProps) => {
               placeholder="Price"
               type="number"
             />
-            <FileInput control={form.control} name="image" label="Image" />
+            <FileInput
+              control={form.control}
+              name="image"
+              label="Image"
+              accepted={ACCEPTED_IMAGE_TYPES.join(",")}
+            />
           </div>
         </section>
         <div className="flex justify-end gap-2 mt-5">

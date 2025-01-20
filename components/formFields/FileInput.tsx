@@ -15,6 +15,7 @@ interface FileInputProps<T extends FieldValues> {
   name: Path<T>;
   label?: string;
   className?: string;
+  accepted?: string;
 }
 
 const FileInput = <T extends FieldValues>({
@@ -22,6 +23,7 @@ const FileInput = <T extends FieldValues>({
   name,
   label,
   className,
+  accepted,
 }: FileInputProps<T>) => {
   return (
     <FormField
@@ -35,10 +37,12 @@ const FileInput = <T extends FieldValues>({
           <FormControl>
             <Input
               type="file"
+              accept={accepted}
               className="bg-[#F4F4F4] border-[0.6] border-gray xl:rounded-10 px-1 py-[2px] xl:py-[10px] mt-1 h-fit cursor-pointer"
               onChange={(e) => {
                 if (e.target.files) {
                   field.onChange(e.target.files[0]);
+                  console.log(e.target.files[0].type);
                 }
               }}
             />
