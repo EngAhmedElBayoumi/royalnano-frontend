@@ -5,7 +5,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { preorderSchema } from "@/lib/validations/dashboard/inventory/preorderSchema";
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
-import DateTimePicker from "@/components/formFields/DateTimePicker";
 import TextArea from "@/components/formFields/TextArea";
 import Link from "next/link";
 
@@ -17,7 +16,6 @@ interface PreorderFormProps {
 export interface PreorderFormValues {
   preorderLevel: number;
   item: string;
-  date: Date;
   description?: string;
 }
 
@@ -27,7 +25,6 @@ const PreorderForm = ({ onSubmit, defaultValues }: PreorderFormProps) => {
     defaultValues: defaultValues || {
       preorderLevel: 0,
       item: "",
-      date: new Date(),
       description: "",
     },
   });
@@ -49,12 +46,6 @@ const PreorderForm = ({ onSubmit, defaultValues }: PreorderFormProps) => {
               name="item"
               label="Item"
               placeholder="Item"
-            />
-            <DateTimePicker
-              control={form.control}
-              name="date"
-              label="Date"
-              placeholder="Date"
             />
           </div>
           <TextArea

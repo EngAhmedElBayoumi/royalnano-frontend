@@ -10,7 +10,6 @@ export default function EditPreorder() {
   const defaultValues: PreorderFormValues = {
     preorderLevel: 10,
     item: "Sample Item",
-    date: new Date(),
     description: "Sample description",
   };
 
