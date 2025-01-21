@@ -55,13 +55,14 @@ const ServiceForm = ({ onSubmit, defaultValues }: ServiceFormProps) => {
               placeholder="Price"
               type="number"
             />
-            <FileInput
-              control={form.control}
-              name="image"
-              label="Image"
-              accepted={ACCEPTED_IMAGE_TYPES.join(",")}
-            />
           </div>
+          <FileInput
+            control={form.control}
+            name="image"
+            label="Image"
+            accepted={ACCEPTED_IMAGE_TYPES.join(",")}
+            className="mt-2 xl:mt-5"
+          />
         </section>
         <div className="flex justify-end gap-2 mt-5">
           <CustomButton
