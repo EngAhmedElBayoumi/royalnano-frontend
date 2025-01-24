@@ -45,7 +45,7 @@ export default function ContactForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="w-[100%] md:mb-0 mb-4 flex flex-col gap-2 h-[643px] border border-primary rounded-[16px] pt-9 px-6 pb-5 bg-[#EDEDED]"
+        className="w-[80%] md:mb-0 mb-4 flex flex-col gap-2 h-[643px] border border-primary rounded-[16px] pt-9 px-6 pb-5 bg-[#EDEDED]"
       >
         <CustomModal
           isOpen={isOpen}

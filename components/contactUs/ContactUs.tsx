@@ -1,10 +1,10 @@
 "use client";
 import React from "react";
-import dynamic from "next/dynamic";
+// import dynamic from "next/dynamic";
 import ContactForm from "../forms/ContactForm";
 // import MapComponent from "@/components/map/Map";
 // Dynamically Load the Map Component on the Client Side to solve ssr issue accessing window
-const MapComponent = dynamic(() => import("../map/Map"), { ssr: false });
+// const MapComponent = dynamic(() => import("../map/Map"), { ssr: false });
 
 const ContactUs = () => {
   return (
@@ -13,10 +13,10 @@ const ContactUs = () => {
         Contact Us
       </h2>
       <div className="flex gap-11 justify-center">
-        <main className="main-container gap-2 grid grid-cols-1 md:grid-cols-2 items-center ">
+        {/* <main className="main-container  items-center "> */}
           <ContactForm />
-          <MapComponent />
-        </main>
+          {/* <MapComponent /> */}
+        {/* </main> */}
       </div>
     </section>
   );
