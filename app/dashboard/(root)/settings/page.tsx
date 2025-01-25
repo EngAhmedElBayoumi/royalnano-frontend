@@ -1,4 +1,7 @@
 import CustomTabs from '@/components/dashboard/CustomTabs'
+import PermissionsContent from '@/components/dashboard/settingsTabs/PermissionsContent';
+import ProfileContent from '@/components/dashboard/settingsTabs/ProfileContent';
+import SettingsContent from '@/components/dashboard/settingsTabs/SettingsContent';
 import Image from 'next/image';
 import React from 'react'
 
@@ -10,11 +13,11 @@ export default function Page() {
             width="24"
             height="24"
             alt="bonuses"
-            src="/assets/icons/dashboard/hr/bonuses.svg"
+            src="/assets/icons/dashboard/settings/setting.svg"
           />
         ),
         label: "Setting",
-        content: <h1>gg</h1>,
+        content: <SettingsContent/>,
       },
       {
         icon: (
@@ -22,11 +25,11 @@ export default function Page() {
             width="24"
             height="24"
             alt="vacations"
-            src="/assets/icons/dashboard/hr/vacations.svg"
+            src="/assets/icons/dashboard/settings/permission.svg"
           />
         ),
         label: "Permission",
-        content:<h1>gg</h1>,
+        content: <PermissionsContent/>,
       },
       {
         icon: (
@@ -34,11 +37,11 @@ export default function Page() {
             width="24"
             height="24"
             alt="vacations"
-            src="/assets/icons/dashboard/hr/vacations.svg"
+            src="/assets/icons/dashboard/settings/profile.svg"
           />
         ),
         label: "Profile",
-        content:<h1>gg</h1>,
+        content:<ProfileContent/>,
       },
    
     ];
