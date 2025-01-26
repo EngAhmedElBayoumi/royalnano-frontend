@@ -79,7 +79,7 @@ const FileInput = <T extends FieldValues>({
                   height="200"
                 />
               ) : file.type.startsWith("video/") ? (
-                <video controls className="mt-2">
+                <video controls className="mt-2" width="200" height="200">
                   <source src={URL.createObjectURL(file)} type={file.type} />
                   Your browser does not support the video tag.
                 </video>
