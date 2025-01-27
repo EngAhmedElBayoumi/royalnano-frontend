@@ -2,14 +2,18 @@
 
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import { Controller, Control } from "react-hook-form";
+import React from "react";
+import { Controller, Control, FieldValues, Path } from "react-hook-form";
 
-interface TiptapEditorProps {
-  control: Control<any>; // Adjust the type as needed
-  name: string; // Adjust the type as needed
+interface TiptapEditorProps<T extends FieldValues> {
+  control: Control<T>;
+  name: Path<T>;
 }
 
-const TiptapEditor = ({ control, name }: TiptapEditorProps) => {
+const TiptapEditor = <T extends FieldValues>({
+  control,
+  name,
+}: TiptapEditorProps<T>) => {
   const editor = useEditor({
     extensions: [StarterKit],
     content: "<p>Hello World!</p>",
