@@ -36,11 +36,12 @@ const GalleryForm = ({ onSubmit, defaultValues }: GalleryFormProps) => {
   // State to hold accepted file types
   const [acceptedFileTypes, setAcceptedFileTypes] = useState<string>("image/*");
 
+  const itemType = form.watch("item_type");
+
   // Update accepted file types based on item_type
   useEffect(() => {
-    const itemType = form.watch("item_type");
     setAcceptedFileTypes(itemType === "image" ? "image/*" : "video/*");
-  }, [form.watch("item_type")]);
+  }, [itemType]);
 
   return (
     <Form {...form}>
