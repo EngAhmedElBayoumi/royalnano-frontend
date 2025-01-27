@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ACCEPTED_IMAGE_TYPES } from "@/lib/utils/types";
 import { aboutSchema } from "@/lib/validations/dashboard/website/aboutSchema";
 import CustomButton from "@/components/formFields/CustomButton";
-import TiptapEditor from "@/components/formFields/TiptapEditor";
+import TextEditor from "@/components/formFields/TextEditor";
 import FileInput from "@/components/formFields/FileInput";
 
 interface AboutFormProps {
@@ -37,7 +37,7 @@ const AboutForm = ({ onSubmit, defaultValues }: AboutFormProps) => {
             accepted={ACCEPTED_IMAGE_TYPES.join(",")}
             className="mb-2 xl:mb-5"
           />
-          <TiptapEditor control={form.control} name="description" />
+          <TextEditor control={form.control} name="description" />
         </section>
         <div className="flex justify-end gap-2 mt-5">
           <CustomButton
