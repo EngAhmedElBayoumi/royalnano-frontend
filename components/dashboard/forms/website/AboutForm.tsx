@@ -29,15 +29,27 @@ const AboutForm = ({ onSubmit, defaultValues }: AboutFormProps) => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <FileInput
-          control={form.control}
-          name="image"
-          label="Image"
-          accepted={ACCEPTED_IMAGE_TYPES.join(",")}
-          className="mt-2 xl:mt-5"
-        />
-        <TiptapEditor control={form.control} name="description" />
-        <CustomButton text="Submit" />
+        <section className="min-h-[60vh] mb-2 xl:mb-5">
+          <FileInput
+            control={form.control}
+            name="image"
+            label="Image"
+            accepted={ACCEPTED_IMAGE_TYPES.join(",")}
+            className="mb-2 xl:mb-5"
+          />
+          <TiptapEditor control={form.control} name="description" />
+        </section>
+        <div className="flex justify-end gap-2 mt-5">
+          <CustomButton
+            text="Cancel"
+            type="reset"
+            className="text-white rounded-lg bg-secondary min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
+          />
+          <CustomButton
+            text="Save"
+            className="text-white rounded-lg min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
+          />
+        </div>
       </form>
     </Form>
   );
