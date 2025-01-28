@@ -37,7 +37,11 @@ const AboutForm = ({ onSubmit, defaultValues }: AboutFormProps) => {
             accepted={ACCEPTED_IMAGE_TYPES.join(",")}
             className="mb-2 xl:mb-5"
           />
-          <TextEditor control={form.control} name="description" />
+          <TextEditor
+            control={form.control}
+            name="description"
+            label="Description"
+          />
         </section>
         <div className="flex justify-end gap-2 mt-5">
           <CustomButton

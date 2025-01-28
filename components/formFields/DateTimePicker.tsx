@@ -82,7 +82,7 @@ const DateTimePicker = <T extends FieldValues>({
                 <Button
                   variant={"outline"}
                   className={cn(
-                    "bg-[#F4F4F4] border-[0.6] border-gray xl:rounded-10 px-2 py-5 xl:py-7",
+                    "bg-[#F4F4F4] border-gray xl:rounded-10 px-2 py-5 xl:py-7",
                     !field.value && "text-muted-foreground"
                   )}
                 >

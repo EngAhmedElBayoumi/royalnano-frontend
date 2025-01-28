@@ -50,7 +50,7 @@ const FileInput = <T extends FieldValues>({
               type="file"
               accept={accepted}
               name={name}
-              className="bg-[#F4F4F4] border-[0.6] border-gray xl:rounded-10 px-1 py-[2px] xl:py-[10px] mt-1 h-fit cursor-pointer"
+              className="bg-[#F4F4F4] border-gray xl:rounded-10 px-1 py-[2px] xl:py-[10px] mt-1 h-fit cursor-pointer"
               onChange={(e) => {
                 if (e.target.files) {
                   const selectedFile = e.target.files[0];

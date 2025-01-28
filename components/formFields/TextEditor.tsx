@@ -1,53 +1,50 @@
 "use client";
 
-import {
-  ClassicEditor,
-  Context,
-  Bold,
-  Essentials,
-  Italic,
-  Paragraph,
-  ContextWatchdog,
-} from "ckeditor5";
-import { CKEditor, CKEditorContext } from "@ckeditor/ckeditor5-react";
-import "ckeditor5/ckeditor5.css";
+import { Editor } from "primereact/editor";
 import React from "react";
-import { Controller, Control, FieldValues, Path } from "react-hook-form";
+import { Control, FieldValues, Path } from "react-hook-form";
+import {
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormMessage,
+} from "@/components/ui/form";
 
 interface TextEditorProps<T extends FieldValues> {
   control: Control<T>;
   name: Path<T>;
+  label?: string;
 }
 
 const TextEditor = <T extends FieldValues>({
   control,
   name,
+  label,
 }: TextEditorProps<T>) => {
   return (
-    <CKEditorContext context={Context} contextWatchdog={ContextWatchdog}>
-      <Controller
-        control={control}
-        name={name}
-        render={({ field }) => (
-          <CKEditor
-            editor={ClassicEditor}
-            config={{
-              licenseKey: "<YOUR_LICENSE_KEY>", // Or 'GPL'.
-              plugins: [Essentials, Bold, Italic, Paragraph],
-              toolbar: ["undo", "redo", "|", "bold", "italic"],
-            }}
-            data="<p>Hello from the CKEditor!</p>"
-            onReady={(editor) => {
-              console.log("CKEditor is ready to use!", editor);
-            }}
-            onChange={(event, editor) => {
-              const data = editor.getData();
-              field.onChange(data); // Update the field value on editor content change
-            }}
-          />
-        )}
-      />
-    </CKEditorContext>
+    <FormField
+      control={control}
+      name={name}
+      render={({ field }) => (
+        <FormItem>
+          {label && (
+            <FormLabel className="text-darkGray xl:text-sm">{label}</FormLabel>
+          )}
+          <FormControl>
+            <Editor
+              value={field.value}
+              onTextChange={(e) => {
+                field.onChange(e.htmlValue);
+              }}
+              className="mt-1 bg-[#F4F4F4] border border-gray rounded-lg xl:rounded-10 overflow-hidden"
+              style={{ height: "15rem", border: "none" }}
+            />
+          </FormControl>
+          <FormMessage />
+        </FormItem>
+      )}
+    />
   );
 };
 
