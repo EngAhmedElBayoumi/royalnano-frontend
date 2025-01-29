@@ -6,10 +6,10 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { reviews } from "@/data/customerReviewsData";
 import ReviewCard from "@/components/cards/ReviewCard";
-// import { useGetAllReviewsQuery } from "@/redux/services/customerReviewApi";
+import { useGetAllReviewsQuery } from "@/redux/services/customerReviewApi";
 
 const CustomerReviews: React.FC = () => {
-  // const { data, isLoading, error } = useGetAllReviewsQuery();
+  const { data, isLoading, error } = useGetAllReviewsQuery();
 
   return (
     <section className="py-4 lg:py-6 xl:py-8 bg-white">
