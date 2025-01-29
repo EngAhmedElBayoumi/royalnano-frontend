@@ -17,8 +17,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { useLoginMutation } from "@/redux/services/loginApi";
 import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { setCredentials } from "@/redux/slices/authSlice";
 
 export default function LoginForm() {
+  const dispatch = useDispatch();
   const [Login, { isLoading }] = useLoginMutation();
   const router = useRouter();
 
@@ -26,18 +29,24 @@ export default function LoginForm() {
     resolver: zodResolver(loginValidation),
     defaultValues: {
       email_address: "",
-
       password: "",
     },
   });
+
   const onSubmit = async (data: {
     email_address: string;
     password: string;
   }) => {
     try {
-      const response = await Login(data).unwrap(); // Use .unwrap() to handle the promise
-      localStorage.setItem("token", response.access); // Access the token from response.data
-      console.log("token", response.access);
+      const response = await Login(data).unwrap();
+      dispatch(
+        setCredentials({
+          userId: response.user_id,
+          emailAddress: response.email_address,
+          accessToken: response.access,
+          refreshToken: response.refresh,
+        })
+      );
       router.push("/");
     } catch (error) {
       console.log(error);
