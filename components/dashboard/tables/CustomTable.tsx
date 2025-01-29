@@ -182,7 +182,6 @@ export default function CustomTable({
                     ? ""
                     : ""
                 }`}
-                // style={{ minWidth: "12rem" }}
                 body={(rowData: DataInTable) => {
                   if (col.field === "verified") {
                     return (

@@ -7,9 +7,7 @@ export const baseQuery = async (args: any, api: any, extraOptions: any) => {
   const baseQuery = fetchBaseQuery({
     baseUrl,
     prepareHeaders: (headers) => {
-      headers.set("Accept", "application/json");
-      headers.set("Access-Control-Allow-Origin", "*");
-
+      headers.set("content-type", "application/json");
       return headers;
     },
   });
