@@ -8,6 +8,7 @@ import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
 import CustomSelect from "@/components/formFields/CustomSelect";
 import FileInput from "@/components/formFields/FileInput";
+import Link from "next/link";
 
 interface GalleryFormProps {
   onSubmit: (data: GalleryFormValues) => Promise<void>;
@@ -71,11 +72,12 @@ const GalleryForm = ({ onSubmit, defaultValues }: GalleryFormProps) => {
           />
         </div>
         <div className="flex justify-end gap-2 mt-5">
-          <CustomButton
-            text="Cancel"
-            type="reset"
-            className="text-white rounded-lg bg-secondary min-w-[160px] font-bold text-sm"
-          />
+          <Link href="/dashboard/website" passHref>
+            <CustomButton
+              text="Cancel"
+              className="text-white rounded-lg bg-secondary min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
+            />
+          </Link>
           <CustomButton
             text="Submit"
             className="text-white rounded-lg min-w-[160px] font-bold text-sm"

@@ -7,6 +7,7 @@ import { serviceSchema } from "@/lib/validations/dashboard/website/serviceSchema
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
 import FileInput from "@/components/formFields/FileInput";
+import Link from "next/link";
 
 interface ServiceFormProps {
   onSubmit: (data: ServiceFormValues) => Promise<void>;
@@ -65,11 +66,12 @@ const ServiceForm = ({ onSubmit, defaultValues }: ServiceFormProps) => {
           />
         </section>
         <div className="flex justify-end gap-2 mt-5">
-          <CustomButton
-            text="Cancel"
-            type="reset"
-            className="text-white rounded-lg bg-secondary min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
-          />
+          <Link href="/dashboard/website" passHref>
+            <CustomButton
+              text="Cancel"
+              className="text-white rounded-lg bg-secondary min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
+            />
+          </Link>
           <CustomButton
             text="Save"
             className="text-white rounded-lg min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"

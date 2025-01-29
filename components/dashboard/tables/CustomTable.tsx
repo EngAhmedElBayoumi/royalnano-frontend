@@ -38,7 +38,7 @@ interface CustomTableProps {
   rows: number;
   columns: ColumnConfig[];
   cardData: InfoCardInterface[];
-  buttonText: string;
+  buttonText?: string;
   ButtonEvent?: MouseEventHandler<HTMLButtonElement>;
   headerIcon?: string;
   headerTitle?: string;
@@ -48,7 +48,7 @@ interface CustomTableProps {
   secondHeaderTitle?: string;
   secondHeaderBG?: string;
   secondHeaderTextColor?: string;
-  editRoute: string;
+  editRoute?: string;
 }
 
 export default function CustomTable({
@@ -101,12 +101,14 @@ export default function CustomTable({
           onChange={onGlobalFilterChange}
           placeholder="Search"
         />
-        <Button
-          className="bg-primary text-white capitalize"
-          onClick={ButtonEvent}
-        >
-          {buttonText}
-        </Button>
+        {buttonText && (
+          <Button
+            className="bg-primary text-white capitalize"
+            onClick={ButtonEvent}
+          >
+            {buttonText}
+          </Button>
+        )}
       </div>
     </>
   );
@@ -180,7 +182,7 @@ export default function CustomTable({
                     ? ""
                     : ""
                 }`}
-                style={{ minWidth: "12rem" }}
+                // style={{ minWidth: "12rem" }}
                 body={(rowData: DataInTable) => {
                   if (col.field === "verified") {
                     return (
@@ -197,37 +199,39 @@ export default function CustomTable({
                 }}
               />
             ))}
-            <Column
-              body={(rowData: DataInTable) => (
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <button className="text-gray-500">
-                      <Image
-                        className="hover:fill-white"
-                        width={30}
-                        height={30}
-                        alt="img"
-                        src="/assets/icons/menuIcon.svg"
-                      />
-                    </button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent className="w-40 ">
-                    <DropdownMenuItem
-                      className="bg-dashboardBg shadow-md py-1 cursor-pointer  "
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleEditClick(rowData.id, e);
-                      }}
-                    >
-                      Edit
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              )}
-              headerClassName="text-center  text-white text-[16px] font-[500] py-[13px] px-[38px] border-r border-white border-[2px] bg-primary rounded-tr-[1e0px]"
-              header="     "
-              style={{ width: "5rem", textAlign: "center" }}
-            />
+            {editRoute && (
+              <Column
+                body={(rowData: DataInTable) => (
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <button className="text-gray-500">
+                        <Image
+                          className="hover:fill-white"
+                          width={30}
+                          height={30}
+                          alt="img"
+                          src="/assets/icons/menuIcon.svg"
+                        />
+                      </button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent className="w-40 ">
+                      <DropdownMenuItem
+                        className="bg-dashboardBg shadow-md py-1 cursor-pointer  "
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleEditClick(rowData.id, e);
+                        }}
+                      >
+                        Edit
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                )}
+                headerClassName="text-center  text-white text-[16px] font-[500] py-[13px] px-[38px] border-r border-white border-[2px] bg-primary rounded-tr-[1e0px]"
+                header="     "
+                style={{ width: "5rem", textAlign: "center" }}
+              />
+            )}
           </DataTable>
         ) : (
           <EmptyMessage />
