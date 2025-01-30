@@ -15,7 +15,7 @@ import { verifyOTPApi } from "./services/verifyOTP";
 import { resetPasswordPApi } from "./services/resetPassword";
 import authReducer from "./slices/authSlice";
 import { movementApi } from "./services/dashboard/movementApi";
-import { preorderApi } from "./services/dashboard/getPreorderApi";
+import { preorderApi } from "./services/dashboard/preorderApi";
 import { AddPreorderApi } from "./services/dashboard/addPreorderApi";
 
 const persistConfig = {
@@ -40,7 +40,6 @@ export const store = configureStore({
     [resetPasswordPApi.reducerPath]: resetPasswordPApi.reducer,
     [movementApi.reducerPath]: movementApi.reducer,
     [preorderApi.reducerPath]: preorderApi.reducer,
-    [AddPreorderApi.reducerPath]: AddPreorderApi.reducer,
     auth: persistedAuthReducer,
   },
   middleware: (getDefaultMiddleware) => {

@@ -1,6 +1,6 @@
 "use client";
 import CustomTable from "@/components/dashboard/tables/CustomTable";
-import { useGetPreorderQuery } from "@/redux/services/dashboard/getPreorderApi";
+import { useGetPreorderQuery } from "@/redux/services/dashboard/preorderApi";
 import { useRouter } from "next/navigation";
 
 export default function Preorder() {
