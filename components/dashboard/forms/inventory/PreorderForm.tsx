@@ -15,16 +15,17 @@ interface PreorderFormProps {
 }
 
 export interface PreorderFormValues {
-  preorderLevel: number;
+  preorder_level: number;
   item: string;
   description?: string;
 }
 
 const PreorderForm = ({ onSubmit, defaultValues }: PreorderFormProps) => {
+
   const form = useForm({
     resolver: zodResolver(preorderSchema),
     defaultValues: defaultValues || {
-      preorderLevel: 0,
+      preorder_level: 0,
       item: "",
       description: "",
     },
@@ -42,7 +43,7 @@ const PreorderForm = ({ onSubmit, defaultValues }: PreorderFormProps) => {
           <div className="grid sm:grid-cols-2 gap-x-4 gap-y-2 xl:gap-y-5 lg:gap-x-10">
             <TextInput
               control={form.control}
-              name="preorderLevel"
+              name="preorder_level"
               label="Preorder Level"
               placeholder="Preorder level"
               type="number"

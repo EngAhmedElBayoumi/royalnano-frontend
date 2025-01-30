@@ -15,6 +15,8 @@ import { verifyOTPApi } from "./services/verifyOTP";
 import { resetPasswordPApi } from "./services/resetPassword";
 import authReducer from "./slices/authSlice";
 import { movementApi } from "./services/dashboard/movementApi";
+import { preorderApi } from "./services/dashboard/getPreorderApi";
+import { AddPreorderApi } from "./services/dashboard/addPreorderApi";
 
 const persistConfig = {
   key: "root",
@@ -37,6 +39,8 @@ export const store = configureStore({
     [verifyOTPApi.reducerPath]: verifyOTPApi.reducer,
     [resetPasswordPApi.reducerPath]: resetPasswordPApi.reducer,
     [movementApi.reducerPath]: movementApi.reducer,
+    [preorderApi.reducerPath]: preorderApi.reducer,
+    [AddPreorderApi.reducerPath]: AddPreorderApi.reducer,
     auth: persistedAuthReducer,
   },
   middleware: (getDefaultMiddleware) => {
@@ -57,7 +61,8 @@ export const store = configureStore({
       .concat(resendOTPApi.middleware)
       .concat(verifyOTPApi.middleware)
       .concat(resetPasswordPApi.middleware)
-      .concat(movementApi.middleware);
+      .concat(movementApi.middleware)
+      .concat(preorderApi.middleware);
   },
 });
 

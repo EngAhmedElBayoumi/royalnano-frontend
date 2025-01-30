@@ -1,9 +1,13 @@
 "use client";
 import CustomTable from "@/components/dashboard/tables/CustomTable";
+import { useGetPreorderQuery } from "@/redux/services/dashboard/getPreorderApi";
 import { useRouter } from "next/navigation";
 
 export default function Preorder() {
+  const { data: inventoryItems } = useGetPreorderQuery({});
+  if(inventoryItems){console.log(inventoryItems);}
   const router = useRouter();
+
 
   const columns = [
     { field: "itemCode", header: "Item Code" },
