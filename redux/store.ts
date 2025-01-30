@@ -14,6 +14,7 @@ import { resendOTPApi } from "./services/resendOTP";
 import { verifyOTPApi } from "./services/verifyOTP";
 import { resetPasswordPApi } from "./services/resetPassword";
 import authReducer from "./slices/authSlice";
+import { movementApi } from "./services/dashboard/movementApi";
 
 const persistConfig = {
   key: "root",
@@ -35,6 +36,7 @@ export const store = configureStore({
     [resendOTPApi.reducerPath]: resendOTPApi.reducer,
     [verifyOTPApi.reducerPath]: verifyOTPApi.reducer,
     [resetPasswordPApi.reducerPath]: resetPasswordPApi.reducer,
+    [movementApi.reducerPath]: movementApi.reducer,
     auth: persistedAuthReducer,
   },
   middleware: (getDefaultMiddleware) => {
@@ -54,7 +56,8 @@ export const store = configureStore({
       .concat(forgotPasswordApi.middleware)
       .concat(resendOTPApi.middleware)
       .concat(verifyOTPApi.middleware)
-      .concat(resetPasswordPApi.middleware);
+      .concat(resetPasswordPApi.middleware)
+      .concat(movementApi.middleware);
   },
 });
 
