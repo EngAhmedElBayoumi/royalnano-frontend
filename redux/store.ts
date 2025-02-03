@@ -16,7 +16,6 @@ import { resetPasswordPApi } from "./services/resetPassword";
 import authReducer from "./slices/authSlice";
 import { movementApi } from "./services/dashboard/movementApi";
 import { preorderApi } from "./services/dashboard/preorderApi";
-import { AddPreorderApi } from "./services/dashboard/addPreorderApi";
 
 const persistConfig = {
   key: "root",
