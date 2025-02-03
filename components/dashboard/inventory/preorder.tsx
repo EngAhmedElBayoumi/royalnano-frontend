@@ -5,7 +5,9 @@ import { useRouter } from "next/navigation";
 
 export default function Preorder() {
   const { data: inventoryItems } = useGetPreorderQuery({});
-  if(inventoryItems){console.log(inventoryItems);}
+  if(inventoryItems){
+    console.log("successful...")
+    console.log(inventoryItems);}
   const router = useRouter();
 
 
