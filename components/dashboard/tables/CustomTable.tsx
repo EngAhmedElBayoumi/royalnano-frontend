@@ -49,10 +49,12 @@ interface CustomTableProps {
   secondHeaderBG?: string;
   secondHeaderTextColor?: string;
   editRoute?: string;
+  detailsRoute?: string;
 }
 
 export default function CustomTable({
   editRoute,
+  detailsRoute,
   data,
   rows,
   columns,
@@ -89,6 +91,11 @@ export default function CustomTable({
     e.stopPropagation();
     router.push(`${editRoute}?id=${id}`);
     console.log(editRoute);
+  };
+  const handleDetailsClick = (id: number, e: React.MouseEvent) => {
+    e.stopPropagation();
+    router.push(`${detailsRoute}?id=${id}`);
+    console.log(detailsRoute);
   };
 
   const renderHeader = () => (
@@ -158,6 +165,9 @@ export default function CustomTable({
             header={header}
             emptyMessage={<EmptyMessage />}
             dataKey="id"
+            onRowClick={(e) => {
+              router.push(`${detailsRoute}${e.data.id}`);
+            }}
             className="rounded-tl-[10px] rounded-tr-[10px] custom-header"
             rowClassName={(data) => {
               const rowIndex = customers.findIndex(
