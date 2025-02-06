@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { deleteCookie, setCookie } from "cookies-next";
 
 interface AuthState {
   userId: number | null;
@@ -25,12 +26,18 @@ const authSlice = createSlice({
       state.emailAddress = emailAddress;
       state.accessToken = accessToken;
       state.refreshToken = refreshToken;
+      // setCookie("accessToken", accessToken);
+      setCookie("accessToken", accessToken, {
+        secure: process.env.NODE_ENV === "production", // Secure in production
+        maxAge: 60 * 60 * 24, // 1 day
+      });
     },
     logout: (state) => {
       state.userId = null;
       state.emailAddress = null;
       state.accessToken = null;
       state.refreshToken = null;
+      deleteCookie("accessToken");
     },
   },
 });

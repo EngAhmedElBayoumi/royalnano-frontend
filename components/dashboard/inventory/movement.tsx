@@ -1,6 +1,6 @@
 "use client";
-import CustomTable from "@/components/dashboard/tables/CustomTable";
 import { useRouter } from "next/navigation";
+import CustomTable from "@/components/dashboard/tables/CustomTable";
 import { useGetMovementsQuery } from "@/redux/services/dashboard/movementApi";
 
 export default function Movement() {

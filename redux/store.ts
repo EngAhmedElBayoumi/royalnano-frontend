@@ -14,6 +14,7 @@ import { resendOTPApi } from "./services/resendOTP";
 import { verifyOTPApi } from "./services/verifyOTP";
 import { resetPasswordPApi } from "./services/resetPassword";
 import authReducer from "./slices/authSlice";
+import { branchApi } from "./services/dashboard/branches";
 import { movementApi } from "./services/dashboard/movementApi";
 import { preorderApi } from "./services/dashboard/preorderApi";
 
@@ -37,6 +38,7 @@ export const store = configureStore({
     [resendOTPApi.reducerPath]: resendOTPApi.reducer,
     [verifyOTPApi.reducerPath]: verifyOTPApi.reducer,
     [resetPasswordPApi.reducerPath]: resetPasswordPApi.reducer,
+    [branchApi.reducerPath]: branchApi.reducer,
     [movementApi.reducerPath]: movementApi.reducer,
     [preorderApi.reducerPath]: preorderApi.reducer,
     auth: persistedAuthReducer,
@@ -59,6 +61,7 @@ export const store = configureStore({
       .concat(resendOTPApi.middleware)
       .concat(verifyOTPApi.middleware)
       .concat(resetPasswordPApi.middleware)
+      .concat(branchApi.middleware)
       .concat(movementApi.middleware)
       .concat(preorderApi.middleware);
   },

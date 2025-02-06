@@ -7,7 +7,7 @@ export const movementApi = createApi({
   endpoints: (builder) => ({
     getMovements: builder.query({
       query: ({ search, ordering, page, page_size }) => ({
-        url: `inventory/movement/`,
+        url: `inventory/movement`,
         params: { search, ordering, page, page_size },
       }),
     }),
