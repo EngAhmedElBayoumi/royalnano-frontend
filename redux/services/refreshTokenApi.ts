@@ -1,9 +1,12 @@
-import { createApi } from "@reduxjs/toolkit/query/react";
-import { baseQuery } from "./common";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import config from "@/lib/config";
+const baseUrl = config.apiUrl;
 
 export const refreshTokenApi = createApi({
   reducerPath: "refreshTokenApi",
-  baseQuery,
+  baseQuery: fetchBaseQuery({
+    baseUrl,
+  }),
   endpoints: (builder) => ({
     refreshToken: builder.mutation({
       query: (data) => ({
