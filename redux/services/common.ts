@@ -1,7 +1,7 @@
-import config from "@/lib/config";
 import { fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RootState } from "@/redux/store";
 import { selectAccessToken } from "@/redux/slices/authSlice";
+import config from "@/lib/config";
 
 const baseUrl = config.apiUrl;
 

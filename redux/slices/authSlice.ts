@@ -26,7 +26,6 @@ const authSlice = createSlice({
       state.emailAddress = emailAddress;
       state.accessToken = accessToken;
       state.refreshToken = refreshToken;
-      // setCookie("accessToken", accessToken);
       setCookie("accessToken", accessToken, {
         secure: process.env.NODE_ENV === "production", // Secure in production
         maxAge: 60 * 60 * 24, // 1 day
