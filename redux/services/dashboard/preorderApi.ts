@@ -23,8 +23,17 @@ export const preorderApi = createApi({
     }),
     getPreorderById: builder.query({
       query: (id) => `inventory/preorder/${id}/`,
-    })
+    }),
+    updatePreorder: builder.mutation({
+      query: ({ id, ...data }) => ({
+        url: `inventory/preorder/${id}/`,
+        method: "PATCH",
+        body: data,
+      }),
+    }),
+
+    
   }),
 });
 
-export const { useGetPreorderQuery,useCreatePreorderMutation, useGetPreorderByIdQuery } = preorderApi;
+export const { useGetPreorderQuery,useCreatePreorderMutation, useGetPreorderByIdQuery, useUpdatePreorderMutation } = preorderApi;

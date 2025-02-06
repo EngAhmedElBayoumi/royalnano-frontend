@@ -3,20 +3,41 @@ import PreorderForm, {
   PreorderFormValues,
 } from "@/components/dashboard/forms/inventory/PreorderForm";
 import IconWithTitle from "@/components/dashboard/IconWithTitle";
-// import { useUpdatePreorderMutation } from "@/redux/services/InventoryApi";
+import { useUpdatePreorderMutation } from "@/redux/services/dashboard/preorderApi";
+import { useParams } from "next/navigation";
 
 export default function EditPreorder() {
-  // const [updatePreorder] = useUpdatePreorderMutation();
+
+  const [updatePreorder] = useUpdatePreorderMutation();
   const defaultValues: PreorderFormValues = {
-    preorderLevel: 10,
-    item: "Item 3",
+    preorder_level: 10,
+    item: "",
     description: "Sample description",
   };
+  const {id} = useParams()
 
   const handleSubmit = async (data: PreorderFormValues) => {
-    console.log(data);
-    // await updatePreorder(data);
+    try{
+      console.log("submit btn clicked")
+      const payload = {
+        ...data,
+        item: Number(data.item), 
+
+      };
+      console.log(data);
+      const response=  await updatePreorder({...payload,id});
+      console.log("req sent")
+      console.log(response)
+    }catch(error){
+      console.log(error)
+     
+    }
+    
   };
+
+
+
+
 
   return (
     <main className="mx-7 my-5">

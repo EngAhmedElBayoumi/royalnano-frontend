@@ -3,13 +3,14 @@ import CustomTable from "@/components/dashboard/tables/CustomTable";
 import { useGetPreorderQuery } from "@/redux/services/dashboard/preorderApi";
 import { useRouter } from "next/navigation";
 
-interface Item {
+export interface Item {
   item: {
     item_code: string;
+    item_name:string
   };
   preorder_level: number;
   description: string;
-  id:string
+  id:string;
 }
 
 
@@ -37,16 +38,16 @@ export default function Preorder() {
     { title: "Paid", num: 48 },
   ];
 
-  const handleClick = () => {
-    router.push("/dashboard/inventory/preorder/create");
-  };
-
   const formattedData = inventoryItems?.results?.map((item: Item) => ({
     id: item.id, 
     itemCode: item.item.item_code,
     preorderLevel: item.preorder_level,
     description: item.description,
   })) || [];
+  const handleClick = () => {
+    router.push("/dashboard/inventory/preorder/create");
+  };
+
 
   return (
     <div className="px-6 pb-25">

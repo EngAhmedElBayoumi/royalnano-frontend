@@ -8,6 +8,11 @@ import TextInput from "@/components/formFields/TextInput";
 import TextArea from "@/components/formFields/TextArea";
 import Link from "next/link";
 import CustomSelect from "@/components/formFields/CustomSelect";
+import { useGetPreorderQuery } from "@/redux/services/dashboard/preorderApi";
+import { Item } from "../../inventory/preorder";
+import { useState } from "react";
+import CustomModal from "@/components/modals/CustomModal";
+import { useRouter } from "next/navigation";
 
 interface PreorderFormProps {
   onSubmit: (data: PreorderFormValues) => Promise<void>;
@@ -21,24 +26,53 @@ export interface PreorderFormValues {
 }
 
 const PreorderForm = ({ onSubmit, defaultValues }: PreorderFormProps) => {
+  const [isModalOpen, setIsModalOpen] = useState(false); 
+const router = useRouter();
+
+  const { data: inventoryItems } = useGetPreorderQuery({});
+
+  const itemsOptions = inventoryItems?.results?.map((item: Item) => ({
+    value:  String(item.item.item_code),
+   
+
+    label:  item.item.item_name,
+
+  })) || [] ;
 
   const form = useForm({
     resolver: zodResolver(preorderSchema),
     defaultValues: defaultValues || {
-      preorder_level: 0,
-      item: "",
+      preorder_level: 1,
+      item: itemsOptions[0]?.label,
       description: "",
     },
   });
-
-  const itemsOptions = [
-    { value: "item 1", label: "item 1" },
-    { value: "item 2", label: "item 2" },
-    { value: "item 3", label: "item 3" },
-  ];
+  const handleSubmit = async (data: PreorderFormValues) => {
+    try {
+      await onSubmit(data);
+      
+      
+    } catch (error) {
+      console.error("Submission Error:", error);
+      setIsModalOpen(true); 
+      
+    }
+  };
+  const handleModalChange = (isOpen: boolean) => {
+    setIsModalOpen(isOpen); 
+    if (!isOpen) {
+      router.push("/dashboard/inventory"); 
+    }
+  };
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
+       <CustomModal
+        isOpen={isModalOpen}
+        onChange={handleModalChange}
+        title="Error!"
+        description="Your Request wasn't processed successfully.."
+      />
+        <form onSubmit={form.handleSubmit(handleSubmit)}>
         <section className="min-h-[60vh]">
           <div className="grid sm:grid-cols-2 gap-x-4 gap-y-2 xl:gap-y-5 lg:gap-x-10">
             <TextInput
@@ -48,6 +82,7 @@ const PreorderForm = ({ onSubmit, defaultValues }: PreorderFormProps) => {
               placeholder="Preorder level"
               type="number"
             />
+            
             <CustomSelect
               control={form.control}
               name="item"

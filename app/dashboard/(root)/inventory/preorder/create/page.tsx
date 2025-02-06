@@ -3,15 +3,30 @@ import PreorderForm, {
   PreorderFormValues,
 } from "@/components/dashboard/forms/inventory/PreorderForm";
 import IconWithTitle from "@/components/dashboard/IconWithTitle";
-// import { useCreatePreorderMutation } from "@/redux/services/InventoryApi";
+import { useCreatePreorderMutation } from "@/redux/services/dashboard/preorderApi";
+
 
 export default function CreatePreorder() {
+  const [createPreorder] = useCreatePreorderMutation()
 
-  // const [createPreorder] = useCreatePreorderMutation();
-
+  
   const handleSubmit = async (data: PreorderFormValues) => {
-    console.log(data);
-    // await createPreorder(data);
+    try{
+      console.log("submit btn clicked")
+      const payload = {
+        ...data,
+        item: Number(data.item), 
+
+      };
+      console.log(data);
+     const response= await createPreorder(payload);
+      console.log("req sent")
+      console.log(response)
+    }catch(error){
+      console.log(error)
+     
+    }
+    
   };
 
 
@@ -27,6 +42,9 @@ export default function CreatePreorder() {
       </div>
 
       <div className="bg-[#F8F7F7] px-6 pt-5 pb-8 rounded-r-[20px] rounded-bl-[20px] lg:pr-[200px]">
+     
+
+        
         <PreorderForm onSubmit={handleSubmit} />
       </div>
     </main>
