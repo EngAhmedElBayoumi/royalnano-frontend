@@ -3,6 +3,20 @@ import { useRouter } from "next/navigation";
 import CustomTable from "@/components/dashboard/tables/CustomTable";
 import { useGetMovementsQuery } from "@/redux/services/dashboard/movementApi";
 
+// Define the type for movement
+interface Movement {
+  id: number;
+  item: {
+    id: number;
+    item_name: string;
+    item_code: string;
+  };
+  movement_date: string;
+  quantity: number;
+  movement_type: string;
+  description: string;
+}
+
 export default function Movement() {
   const router = useRouter();
 
@@ -16,6 +30,12 @@ export default function Movement() {
     page: 1,
     page_size: 10,
   });
+
+  // Transform movementData to only include item_name
+  const transformedData = movementData.results.map((movement: Movement) => ({
+    ...movement,
+    item: movement.item.item_name, // Update to only include item_name
+  }));
 
   const columns = [
     { field: "id", header: "ID" },
@@ -45,7 +65,7 @@ export default function Movement() {
     <div className="px-6 pb-25">
       <CustomTable
         editRoute="/dashboard/inventory/movement/edit/"
-        data={movementData.results}
+        data={transformedData}
         rows={10}
         columns={columns}
         cardData={cardsData}
