@@ -17,6 +17,7 @@ import authReducer from "./slices/authSlice";
 import { branchApi } from "./services/dashboard/branches";
 import { movementApi } from "./services/dashboard/movementApi";
 import { preorderApi } from "./services/dashboard/preorderApi";
+import { refreshTokenApi } from "./services/refreshTokenApi";
 
 const persistConfig = {
   key: "root",
@@ -41,6 +42,7 @@ export const store = configureStore({
     [branchApi.reducerPath]: branchApi.reducer,
     [movementApi.reducerPath]: movementApi.reducer,
     [preorderApi.reducerPath]: preorderApi.reducer,
+    [refreshTokenApi.reducerPath]: refreshTokenApi.reducer,
     auth: persistedAuthReducer,
   },
   middleware: (getDefaultMiddleware) => {
@@ -63,7 +65,8 @@ export const store = configureStore({
       .concat(resetPasswordPApi.middleware)
       .concat(branchApi.middleware)
       .concat(movementApi.middleware)
-      .concat(preorderApi.middleware);
+      .concat(preorderApi.middleware)
+      .concat(refreshTokenApi.middleware);
   },
 });
 
