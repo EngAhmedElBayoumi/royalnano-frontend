@@ -5,6 +5,8 @@ import { navLinks } from "@/data/FooterData";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { getCookie, deleteCookie } from "cookies-next";
+import { useDispatch } from "react-redux";
+import { logout } from "@/redux/slices/authSlice";
 // import { useLogoutMutation } from "@/redux/services/logoutApi";
 
 const Nav = () => {
@@ -32,16 +34,13 @@ const Nav = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
-  const handleLogout = async () => {
+const dispatch = useDispatch()
+  const handleLogout = () => {
     try {
-      // Call the logout API without arguments
-      // await logout().unwrap();
-  
-      // Clear the access token cookie
+      dispatch(logout());
+
       deleteCookie("accessToken");
-  
-      // Redirect the user to the login page
+
       router.push("/login");
     } catch (error) {
       console.error("Logout failed:", error);
