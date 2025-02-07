@@ -16,9 +16,11 @@ export default function Items() {
   const columns = [
     { field: "item_code", header: "Item Code" },
     { field: "item_name", header: "Item Name" },
-    { field: "category", header: "category" },
     { field: "unit", header: "unit" },
-    { field: "purchase_price", header: "purchase_price" },
+    { field: "purchase_price", header: "purchase price" },
+    { field: "selling_price", header: "selling price" },
+    { field: "quantity", header: "quantity" },
+    { field: "description", header: "description" },
   ];
 
   const cardsData = [

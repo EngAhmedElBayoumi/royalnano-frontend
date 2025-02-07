@@ -185,7 +185,7 @@ export default function CustomTable({
                 field={col.field}
                 header={col.header}
                 className={`m-auto py-[13px] px-[38px] text-[14px] font-[500] border-r border-white border-[2px]`}
-                headerClassName={`text-center  text-white text-[16px] font-[500] py-[13px] px-[38px] border-r border-white border-[2px] ${
+                headerClassName={`text-center capitalize text-white text-[16px] font-[500] py-[13px] px-[38px] border-r border-white border-[2px] ${
                   index === 0
                     ? "first-column-header"
                     : index === columns.length - 1
