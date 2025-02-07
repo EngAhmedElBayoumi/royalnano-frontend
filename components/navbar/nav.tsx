@@ -76,7 +76,7 @@ const dispatch = useDispatch()
 
         {/* Desktop Auth Buttons */}
         {!accessToken ? (
-          <div className="hidden md:flex items-center">
+          <div className="hidden md:flex gap-5 items-center">
             <Link
               className="md:text-sm xl:text-md hover:text-white text-nowrap text-primary"
               href={"/login"}

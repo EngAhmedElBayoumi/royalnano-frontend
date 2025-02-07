@@ -3,12 +3,24 @@ import PreorderForm, {
   PreorderFormValues,
 } from "@/components/dashboard/forms/inventory/PreorderForm";
 import IconWithTitle from "@/components/dashboard/IconWithTitle";
+import CustomModal from "@/components/modals/CustomModal";
 import { useCreatePreorderMutation } from "@/redux/services/dashboard/preorderApi";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 
 export default function CreatePreorder() {
+  const router = useRouter();
+  
   const [createPreorder] = useCreatePreorderMutation()
-
+  const [isModalOpen, setIsModalOpen] = useState(false); 
+  const handleModalChange = (isOpen: boolean) => {
+    setIsModalOpen(isOpen); 
+    if (!isOpen) {
+      router.push("/dashboard/inventory"); 
+    }
+  };
+  
   
   const handleSubmit = async (data: PreorderFormValues) => {
     try{
@@ -22,8 +34,16 @@ export default function CreatePreorder() {
      const response= await createPreorder(payload);
       console.log("req sent")
       console.log(response)
-    }catch(error){
+      if(response.error){
+        throw new Error("creation failed")
+      }
+    }
+    
+    catch(error){
+      setIsModalOpen(true); 
+
       console.log(error)
+      console.log("error in c reation")
      
     }
     
@@ -32,6 +52,12 @@ export default function CreatePreorder() {
 
   return (
     <main className="mx-7 my-5">
+       <CustomModal
+        isOpen={isModalOpen}
+        onChange={handleModalChange}
+        title="Error!"
+        description="Your Request wasn't processed successfully.."
+      />
       <div className="flex">
         <IconWithTitle
           imageSrc="/assets/icons/add.svg"
