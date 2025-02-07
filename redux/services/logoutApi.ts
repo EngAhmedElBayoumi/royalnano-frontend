@@ -6,10 +6,9 @@ export const logoutApi = createApi({
   baseQuery,
   endpoints: (builder) => ({
     Logout: builder.mutation({
-      query: (data) => ({
+      query: () => ({
         url: "core/logout",
         method: "POST",
-        body: data,
       }),
     }),
   }),

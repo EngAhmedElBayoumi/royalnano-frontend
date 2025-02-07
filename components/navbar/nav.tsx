@@ -3,13 +3,20 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { navLinks } from "@/data/FooterData";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { getCookie, deleteCookie } from "cookies-next";
+import { useDispatch } from "react-redux";
+import { logout } from "@/redux/slices/authSlice";
+// import { useLogoutMutation } from "@/redux/services/logoutApi";
 
 const Nav = () => {
   const [isClicked, setIsClicked] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-
   const pathname = usePathname();
+  const router = useRouter();
+  const accessToken = getCookie("accessToken");
+  // const [logout, { isLoading }] = useLogoutMutation();
+
   const toggleNavbar = () => {
     setIsClicked(!isClicked);
   };
@@ -27,6 +34,18 @@ const Nav = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+const dispatch = useDispatch()
+  const handleLogout = () => {
+    try {
+      dispatch(logout());
+
+      deleteCookie("accessToken");
+
+      router.push("/login");
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  };
 
   return (
     <nav
@@ -43,7 +62,7 @@ const Nav = () => {
             <Link
               className={`${
                 pathname === link.href
-                  ? "text-primary" // Apply text-primary if the link is active
+                  ? "text-primary" 
                   : "text-white"
               } hover:text-primary active:text-primary md:text-sm xl:text-md text-nowrap`}
               key={link.href}
@@ -55,23 +74,36 @@ const Nav = () => {
           ))}
         </div>
 
-        {/* Auth Links */}
-        <div className="hidden md:flex gap-5 items-center">
-          <Link
+        {/* Desktop Auth Buttons */}
+        {!accessToken ? (
+          <div className="hidden md:flex gap-5 items-center">
+            <Link
+              className="md:text-sm xl:text-md hover:text-white text-nowrap text-primary"
+              href={"/login"}
+              passHref
+            >
+              Log In
+            </Link>
+            <Link
+              className="md:text-sm xl:text-md hover:text-white text-primary"
+              href={"/register"}
+              passHref
+            >
+              Register
+            </Link>
+          </div>
+        ) : (
+          <div className="hidden md:flex gap-5 items-center">
+            <button
             className="md:text-sm xl:text-md hover:text-white text-nowrap text-primary"
-            href={"/login"}
-            passHref
+            onClick={handleLogout}
+            // disabled={isLoading}
           >
-            Log In
-          </Link>
-          <Link
-            className="md:text-sm xl:text-md hover:text-white text-primary"
-            href={"/register"}
-            passHref
-          >
-            Register
-          </Link>
-        </div>
+            logout
+            {/* {isLoading ? "Logging out..." : "Logout"} */}
+          </button>
+          </div>
+        )}
 
         {/* Mobile Hamburger Button */}
         <div className="md:hidden flex items-center">
@@ -146,20 +178,33 @@ const Nav = () => {
                   {link.label}
                 </Link>
               ))}
-              <Link
-                className="hover:text-primary xl:text-sm block text-black"
-                href={"/login"}
-                passHref
+              {!accessToken ? (
+                <>
+                  <Link
+                    className="hover:text-primary xl:text-sm block text-black"
+                    href={"/login"}
+                    passHref
+                  >
+                    Log In
+                  </Link>
+                  <Link
+                    className="hover:text-primary xl:text-sm block text-black"
+                    href={"/register"}
+                    passHref
+                  >
+                    Register
+                  </Link>
+                </>
+              ) : (
+                <button
+                className="hover:text-primary xl:text-sm block text-black text-left"
+                onClick={handleLogout}
+                // disabled={isLoading}
               >
-                Log In
-              </Link>
-              <Link
-                className="hover:text-primary xl:text-sm block text-black"
-                href={"/register"}
-                passHref
-              >
-                Register
-              </Link>
+                {/* {isLoading ? "Logging out..." : "Logout"} */}
+              logout
+              </button>
+              )}
             </div>
           </div>
         )}
