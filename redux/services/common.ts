@@ -26,7 +26,7 @@ export const baseQuery = async (args: any, api: any, extraOptions: any) => {
     return fetchBaseQuery({ baseUrl })(args, api, extraOptions);
 
   // Check if accessToken is expired
-  if (accessToken && checkToken(accessToken) && refreshToken) {
+  if (accessToken && !checkToken(accessToken) && refreshToken) {
     // Refresh token using RTK Query
     const refreshResult = await api.dispatch(
       refreshTokenApi.endpoints.refreshToken.initiate({ refresh: refreshToken })
