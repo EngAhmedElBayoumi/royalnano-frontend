@@ -14,7 +14,7 @@ import { resendOTPApi } from "./services/resendOTP";
 import { verifyOTPApi } from "./services/verifyOTP";
 import { resetPasswordPApi } from "./services/resetPassword";
 import authReducer from "./slices/authSlice";
-import { branchApi } from "./services/dashboard/branches";
+import { branchApi } from "./services/dashboard/branchesApi";
 import { movementApi } from "./services/dashboard/movementApi";
 import { preorderApi } from "./services/dashboard/preorderApi";
 import { refreshTokenApi } from "./services/refreshTokenApi";
