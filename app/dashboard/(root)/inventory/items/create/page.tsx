@@ -1,20 +1,50 @@
 "use client";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import ItemForm, {
   ItemFormValues,
 } from "@/components/dashboard/forms/inventory/ItemForm";
 import IconWithTitle from "@/components/dashboard/IconWithTitle";
-// import { useCreateItemMutation } from "@/redux/services/InventoryApi";
+import { useCreateItemMutation } from "@/redux/services/dashboard/itemsApi";
+import CustomModal from "@/components/modals/CustomModal";
 
 export default function CreateItem() {
-  // const [createItem] = useCreateItemMutation();
+  const router = useRouter();
+
+  const [createItem] = useCreateItemMutation();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleModalChange = (isOpen: boolean) => {
+    setIsModalOpen(isOpen);
+  };
 
   const handleSubmit = async (data: ItemFormValues) => {
-    console.log(data);
-    // await createItem(data);
+    try {
+      const payload = {
+        ...data,
+        category: Number(data.category),
+        branch: Number(data.branch),
+        supplier: Number(data.supplier),
+      };
+
+      const response = await createItem(payload);
+
+      if (response.error) throw new Error("creation failed");
+      else router.push("/dashboard/inventory");
+    } catch (error) {
+      setIsModalOpen(true);
+      console.log(error);
+    }
   };
 
   return (
     <main className="mx-7 my-5">
+      <CustomModal
+        isOpen={isModalOpen}
+        onChange={handleModalChange}
+        title="Error!"
+        description="Your Request wasn't processed successfully.."
+      />
       <div className="flex">
         <IconWithTitle
           imageSrc="/assets/icons/add.svg"

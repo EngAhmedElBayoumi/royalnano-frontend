@@ -55,13 +55,13 @@ const ItemForm = ({ onSubmit, defaultValues }: ItemFormProps) => {
   ];
 
   const branchesOptions = [
-    { value: "October", label: "October" },
-    { value: "Zagazig", label: "Zagazig" },
+    { value: "1", label: "October" },
+    { value: "2", label: "Zagazig" },
   ];
 
   const suppliersOptions = [
-    { value: "October", label: "October" },
-    { value: "Zagazig", label: "Zagazig" },
+    { value: "1", label: "October" },
+    { value: "2", label: "Zagazig" },
   ];
   return (
     <Form {...form}>
