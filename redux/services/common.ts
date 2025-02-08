@@ -9,7 +9,11 @@ const baseUrl = config.apiUrl;
 
 // Define public API endpoints (No auth required)
 const PUBLIC_ENDPOINTS = ["/core", "/token", "/website"];
-export const baseQuery = async (args: any, api: any, extraOptions: any) => {
+export const baseQuery = async (
+  args: string | { url: string; body?: any },
+  api: any,
+  extraOptions: Record<string, any>
+) => {
   const state: RootState = api.getState();
   let accessToken = state.auth.accessToken;
   const refreshToken = state.auth.refreshToken;

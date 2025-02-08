@@ -4,6 +4,7 @@ import { Form } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { itemSchema } from "@/lib/validations/dashboard/inventory/itemSchema";
+import { useGetItemCategoryQuery } from "@/redux/services/dashboard/itemCategoryApi";
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
 import CustomSelect from "@/components/formFields/CustomSelect";
@@ -26,6 +27,10 @@ export interface ItemFormValues {
   supplier: number;
   description: string;
 }
+export interface Category {
+  id: number;
+  name: string;
+}
 
 const ItemForm = ({ onSubmit, defaultValues }: ItemFormProps) => {
   const form = useForm({
@@ -43,11 +48,13 @@ const ItemForm = ({ onSubmit, defaultValues }: ItemFormProps) => {
       description: "",
     },
   });
+  const { data: categories } = useGetItemCategoryQuery({});
 
-  const categoriesOptions = [
-    { value: "1", label: "SUV" },
-    { value: "2", label: "Truck" },
-  ];
+  const categoriesOptions =
+    categories?.map((category: Category) => ({
+      value: String(category.id),
+      label: category.name,
+    })) || [];
 
   const unitsOptions = [
     { value: "Egp", label: "Egp" },
