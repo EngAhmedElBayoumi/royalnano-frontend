@@ -3,20 +3,42 @@ import CategoryForm, {
   CategoryFormValues,
 } from "@/components/dashboard/forms/inventory/CategoryForm";
 import IconWithTitle from "@/components/dashboard/IconWithTitle";
-// import { useUpdateCategoryMutation } from "@/redux/services/InventoryApi";
+import { useGetCategoryByIdQuery, useUpdateCategoryMutation } from "@/redux/services/dashboard/itemCategoryApi";
+import {  useRouter, useSearchParams } from "next/navigation";
 
 export default function EditCategory() {
-  // const [updateCategory] = useUpdateCategoryMutation();
+      const router = useRouter();
+  
+  const [updateCategory] = useUpdateCategoryMutation();
+  const searchParams = useSearchParams();
+  const id = searchParams.get("id"); 
+  console.log("ID:", id);
+  const { data: category, isLoading, error } = useGetCategoryByIdQuery(id);
+
   const defaultValues: CategoryFormValues = {
-    categoryName: "Sample Category",
-    itemCode: "ITEM123",
-    quantity: 10,
+    name: category?.name || "",
   };
 
   const handleSubmit = async (data: CategoryFormValues) => {
-    console.log(data);
-    // await updateCategory(data);
+    try {
+      console.log("submit btn clicked");
+      const payload = {
+        ...data,
+      };
+      console.log(data);
+      const response = await updateCategory({ ...payload, id });
+      console.log("req sent");
+      console.log(response);
+      router.push("/dashboard/inventory"); 
+
+    } catch (error) {
+      console.log(error);
+
+    }
   };
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error loading category data</div>;
 
   return (
     <main className="mx-7 my-5">

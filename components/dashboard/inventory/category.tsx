@@ -1,27 +1,22 @@
 "use client";
 import CustomTable from "@/components/dashboard/tables/CustomTable";
+import { useGetItemCategoryQuery } from "@/redux/services/dashboard/itemCategoryApi";
 import { useRouter } from "next/navigation";
 
 export default function Category() {
+    const { data: itemCategories } = useGetItemCategoryQuery({});
+    if (itemCategories){
+
+      console.log(itemCategories);
+    }
   const router = useRouter();
 
   const columns = [
-    { field: "categoryModel", header: "Category Models" },
-    { field: "date", header: "Date" },
+    { field: "id", header: "ID" },
+    { field: "name", header: "Name" },
   ];
 
-  const yourCustomerData = [
-    { id: 1, categoryModel: "Model A", date: "Dec. 3204" },
-    { id: 2, categoryModel: "Model B", date: "Dec. 3204" },
-    { id: 3, categoryModel: "Model C", date: "Dec. 3204" },
-    { id: 4, categoryModel: "Model D", date: "Dec. 3204" },
-    { id: 5, categoryModel: "Model E", date: "Dec. 3204" },
-    { id: 6, categoryModel: "Model F", date: "Dec. 3204" },
-    { id: 7, categoryModel: "Model G", date: "Dec. 3204" },
-    { id: 8, categoryModel: "Model H", date: "Dec. 3204" },
-    { id: 9, categoryModel: "Model I", date: "Dec. 3204" },
-    { id: 10, categoryModel: "Model J", date: "Dec. 3204" },
-  ];
+ 
 
   const cardsData = [
     { title: "New requests", num: 145 },
@@ -37,7 +32,7 @@ export default function Category() {
     <div className="px-6 pb-25">
       <CustomTable
         editRoute="/dashboard/inventory/category-models/edit/"
-        data={yourCustomerData}
+        data={itemCategories}
         rows={10}
         columns={columns}
         cardData={cardsData}

@@ -19,6 +19,7 @@ import { movementApi } from "./services/dashboard/movementApi";
 import { preorderApi } from "./services/dashboard/preorderApi";
 import { refreshTokenApi } from "./services/refreshTokenApi";
 import { itemsApi } from "./services/dashboard/itemsApi";
+import { itemCategoryApi } from "./services/dashboard/itemCategoryApi";
 
 const persistConfig = {
   key: "root",
@@ -45,12 +46,13 @@ export const store = configureStore({
     [preorderApi.reducerPath]: preorderApi.reducer,
     [refreshTokenApi.reducerPath]: refreshTokenApi.reducer,
     [itemsApi.reducerPath]: itemsApi.reducer,
+    [itemCategoryApi.reducerPath]: itemCategoryApi.reducer,
+    
     auth: persistedAuthReducer,
   },
   middleware: (getDefaultMiddleware) => {
     return getDefaultMiddleware({
       serializableCheck: {
-        // Allow non-serializable values
         ignoredActions: ["persist/PERSIST", "persist/REHYDRATE"],
       },
     })
@@ -69,7 +71,9 @@ export const store = configureStore({
       .concat(movementApi.middleware)
       .concat(preorderApi.middleware)
       .concat(refreshTokenApi.middleware)
-      .concat(itemsApi.middleware);
+      .concat(itemsApi.middleware)
+      .concat(itemCategoryApi.middleware);
+
   },
 });
 
