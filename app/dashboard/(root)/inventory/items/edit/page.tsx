@@ -8,10 +8,16 @@ import IconWithTitle from "@/components/dashboard/IconWithTitle";
 export default function EditItem() {
   // const [updateItem] = useUpdateItemMutation();
   const defaultValues: ItemFormValues = {
-    itemName: "Sample Item",
-    itemCode: "ITEM123",
+    item_name: "Sample Item",
+    item_code: "ITEM123",
     quantity: 10,
-    price: 100,
+    unit: "",
+    purchase_price: 0,
+    selling_price: 0,
+    branch: 1,
+    supplier: 1,
+    description: "",
+    category: 1,
   };
 
   const handleSubmit = async (data: ItemFormValues) => {
