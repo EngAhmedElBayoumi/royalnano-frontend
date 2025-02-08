@@ -13,18 +13,18 @@ interface CategoryFormProps {
 }
 
 export interface CategoryFormValues {
-  categoryName: string;
-  itemCode: string;
-  quantity: number;
+  name: string;
+  // itemCode: string;
+  // quantity: number;
 }
 
 const CategoryForm = ({ onSubmit, defaultValues }: CategoryFormProps) => {
   const form = useForm({
     resolver: zodResolver(categorySchema),
     defaultValues: defaultValues || {
-      categoryName: "",
-      itemCode: "",
-      quantity: 0,
+      name: "",
+      // itemCode: "",
+      // quantity: 0,
     },
   });
 
@@ -35,11 +35,11 @@ const CategoryForm = ({ onSubmit, defaultValues }: CategoryFormProps) => {
           <div className="grid sm:grid-cols-2 gap-x-4 gap-y-2 xl:gap-y-5 lg:gap-x-10">
             <TextInput
               control={form.control}
-              name="categoryName"
+              name="name"
               label="Category Name"
               placeholder="Category name"
             />
-            <TextInput
+            {/* <TextInput
               control={form.control}
               name="itemCode"
               label="Item Code"
@@ -51,7 +51,7 @@ const CategoryForm = ({ onSubmit, defaultValues }: CategoryFormProps) => {
               label="Quantity"
               placeholder="Quantity"
               type="number"
-            />
+            /> */}
           </div>
         </section>
         <div className="flex justify-end gap-2 mt-5">

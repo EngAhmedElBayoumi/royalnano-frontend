@@ -1,4 +1,5 @@
-import React from "react";
+"use client"
+import React, { useEffect, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 interface CustomTabsProps {
@@ -11,8 +12,17 @@ interface CustomTabsProps {
 }
 
 function CustomTabs({ tabs, defaultTab = tabs[0]?.label }: CustomTabsProps) {
+  const [activeTab, setActiveTab] = useState<string>(() => {
+    return localStorage.getItem("activeTab") || defaultTab;
+  });
+
+  useEffect(() => {
+    localStorage.setItem("activeTab", activeTab);
+  }, [activeTab]);
   return (
     <Tabs
+    value={activeTab}
+    onValueChange={setActiveTab} 
       defaultValue={defaultTab}
       className="bg-white mr-auto pt-4 mb-0 rounded-tr-[20px] rounded-bl-[20px] rounded-br-[20px]  "
     >
