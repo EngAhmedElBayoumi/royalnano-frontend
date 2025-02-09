@@ -11,6 +11,7 @@ import ItemForm, {
 import IconWithTitle from "@/components/dashboard/IconWithTitle";
 import CustomModal from "@/components/modals/CustomModal";
 import FormSkelton from "@/components/dashboard/skelton/FormSkelton";
+import Image from "next/image";
 
 export default function EditItem() {
   const router = useRouter();
@@ -50,8 +51,6 @@ export default function EditItem() {
     }
   };
 
-  if (error) return <div>Error loading items</div>;
-
   return (
     <main className="mx-7 my-5">
       <CustomModal
@@ -69,11 +68,25 @@ export default function EditItem() {
         />
       </div>
 
-      <div className="bg-dashboardBg px-6 pt-5 pb-8 rounded-r-[20px] rounded-bl-[20px] lg:pr-[200px]">
+      <div className="bg-dashboardBg px-6 pt-5 pb-8 rounded-r-[20px] rounded-bl-[20px]">
         {isLoading ? (
-          <FormSkelton />
+          <div className="lg:pr-[200px]">
+            <FormSkelton />
+          </div>
+        ) : error ? (
+          <div className="flex justify-center flex-col items-center">
+            <Image
+              src="/assets/icons/dashboard/loading-error.svg"
+              alt="loading error"
+              width="400"
+              height="300"
+            />
+            Error loading data
+          </div>
         ) : (
-          <ItemForm onSubmit={handleSubmit} defaultValues={defaultValues} />
+          <div className="lg:pr-[200px]">
+            <ItemForm onSubmit={handleSubmit} defaultValues={defaultValues} />
+          </div>
         )}
       </div>
     </main>
