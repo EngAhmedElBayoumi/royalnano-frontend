@@ -1,23 +1,21 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useCreateItemMutation } from "@/redux/services/dashboard/itemsApi";
+import IconWithTitle from "@/components/dashboard/IconWithTitle";
 import ItemForm, {
   ItemFormValues,
 } from "@/components/dashboard/forms/inventory/ItemForm";
-import IconWithTitle from "@/components/dashboard/IconWithTitle";
-import { useCreateItemMutation } from "@/redux/services/dashboard/itemsApi";
 import CustomModal from "@/components/modals/CustomModal";
 
 export default function CreateItem() {
   const router = useRouter();
-
   const [createItem] = useCreateItemMutation();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleModalChange = (isOpen: boolean) => {
     setIsModalOpen(isOpen);
   };
-
   const handleSubmit = async (data: ItemFormValues) => {
     try {
       const payload = {
