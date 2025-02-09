@@ -10,6 +10,7 @@ import ItemForm, {
 } from "@/components/dashboard/forms/inventory/ItemForm";
 import IconWithTitle from "@/components/dashboard/IconWithTitle";
 import CustomModal from "@/components/modals/CustomModal";
+import FormSkelton from "@/components/dashboard/skelton/FormSkelton";
 
 export default function EditItem() {
   const router = useRouter();
@@ -49,7 +50,6 @@ export default function EditItem() {
     }
   };
 
-  if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading items</div>;
 
   return (
@@ -70,7 +70,11 @@ export default function EditItem() {
       </div>
 
       <div className="bg-dashboardBg px-6 pt-5 pb-8 rounded-r-[20px] rounded-bl-[20px] lg:pr-[200px]">
-        <ItemForm onSubmit={handleSubmit} defaultValues={defaultValues} />
+        {isLoading ? (
+          <FormSkelton />
+        ) : (
+          <ItemForm onSubmit={handleSubmit} defaultValues={defaultValues} />
+        )}
       </div>
     </main>
   );
