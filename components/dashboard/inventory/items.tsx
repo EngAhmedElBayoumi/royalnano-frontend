@@ -3,8 +3,8 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useGetItemsQuery } from "@/redux/services/dashboard/itemsApi";
 import CustomTable from "@/components/dashboard/tables/CustomTable";
-import TableSkelton from "../skelton/TableSkelton";
-import CardsSkelton from "../skelton/CardsSkelton";
+import TableSkelton from "@/components/dashboard/skelton/TableSkelton";
+import CardsSkelton from "@/components/dashboard/skelton/CardsSkelton";
 
 export default function Items() {
   const router = useRouter();

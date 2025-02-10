@@ -1,7 +1,10 @@
 "use client";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
-import CustomTable from "@/components/dashboard/tables/CustomTable";
 import { useGetMovementsQuery } from "@/redux/services/dashboard/movementApi";
+import CustomTable from "@/components/dashboard/tables/CustomTable";
+import TableSkelton from "@/components/dashboard/skelton/TableSkelton";
+import CardsSkelton from "@/components/dashboard/skelton/CardsSkelton";
 
 // Define the type for movement
 interface Movement {
@@ -34,7 +37,7 @@ export default function Movement() {
   // Transform movementData to only include item_name
   const transformedData = movementData.results.map((movement: Movement) => ({
     ...movement,
-    item: movement.item.item_name, // Update to only include item_name
+    item: movement.item.item_name,
   }));
 
   const columns = [
@@ -58,20 +61,34 @@ export default function Movement() {
     router.push("/dashboard/inventory/movement/create");
   };
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error loading movements</div>;
-
   return (
     <div className="px-6 pb-25">
-      <CustomTable
-        editRoute="/dashboard/inventory/movement/edit/"
-        data={transformedData}
-        rows={10}
-        columns={columns}
-        cardData={cardsData}
-        buttonText="Add Movement"
-        ButtonEvent={handleClick}
-      />
+      {isLoading ? (
+        <div className="bg-dashboardBg px-4 pt-4 pb-1 rounded-tr-[20px] rounded-bl-[20px] rounded-br-[20px] card mb-5 ">
+          <CardsSkelton />
+          <TableSkelton />
+        </div>
+      ) : error ? (
+        <div className="flex justify-center flex-col items-center bg-dashboardBg pb-10 rounded-tr-[20px] rounded-bl-[20px] rounded-br-[20px] card mb-5">
+          <Image
+            src="/assets/icons/dashboard/loading-error.svg"
+            alt="loading error"
+            width="400"
+            height="300"
+          />
+          Error loading data
+        </div>
+      ) : (
+        <CustomTable
+          editRoute="/dashboard/inventory/movement/edit/"
+          data={transformedData}
+          rows={10}
+          columns={columns}
+          cardData={cardsData}
+          buttonText="Add Movement"
+          ButtonEvent={handleClick}
+        />
+      )}
     </div>
   );
 }
