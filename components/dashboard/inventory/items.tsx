@@ -2,6 +2,7 @@
 import CustomTable from "@/components/dashboard/tables/CustomTable";
 import { useRouter } from "next/navigation";
 import { useGetItemsQuery } from "@/redux/services/dashboard/itemsApi";
+import TableSkelton from "../skelton/TableSkelton";
 
 export default function Items() {
   const router = useRouter();
@@ -34,20 +35,25 @@ export default function Items() {
     router.push("/dashboard/inventory/items/create");
   };
 
-  if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading items</div>;
 
   return (
     <div className="px-6 pb-25">
-      <CustomTable
-        editRoute="/dashboard/inventory/items/edit/"
-        data={data.results}
-        rows={10}
-        columns={columns}
-        cardData={cardsData}
-        buttonText="Add Item"
-        ButtonEvent={handleClick}
-      />
+      {isLoading ? (
+        <div className="bg-dashboardBg px-4 pt-4 pb-1 rounded-tr-[20px] rounded-bl-[20px] rounded-br-[20px] card mb-5 ">
+          <TableSkelton />
+        </div>
+      ) : (
+        <CustomTable
+          editRoute="/dashboard/inventory/items/edit/"
+          data={data.results}
+          rows={10}
+          columns={columns}
+          cardData={cardsData}
+          buttonText="Add Item"
+          ButtonEvent={handleClick}
+        />
+      )}
     </div>
   );
 }
