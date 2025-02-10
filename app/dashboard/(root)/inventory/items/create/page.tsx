@@ -10,8 +10,8 @@ import CustomModal from "@/components/modals/CustomModal";
 
 export default function CreateItem() {
   const router = useRouter();
-  const [createItem] = useCreateItemMutation();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [createItem] = useCreateItemMutation();
 
   const handleModalChange = (isOpen: boolean) => {
     setIsModalOpen(isOpen);

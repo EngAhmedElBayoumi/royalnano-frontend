@@ -8,10 +8,9 @@ import IconWithTitle from "@/components/dashboard/IconWithTitle";
 export default function EditMovement() {
   // const [updateMovement] = useUpdateMovementMutation();
   const defaultValues: MovementFormValues = {
-    preorderLevel: 10,
     item: "Sample Item",
     quantity: 5,
-    movementType: "In",
+    movement_type: "In",
     date: new Date(),
   };
 

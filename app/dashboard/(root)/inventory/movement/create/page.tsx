@@ -1,20 +1,47 @@
 "use client";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useCreateMovementMutation } from "@/redux/services/dashboard/movementApi";
 import MovementForm, {
   MovementFormValues,
 } from "@/components/dashboard/forms/inventory/MovementForm";
 import IconWithTitle from "@/components/dashboard/IconWithTitle";
-// import { useCreateMovementMutation } from "@/redux/services/InventoryApi";
+import CustomModal from "@/components/modals/CustomModal";
 
 export default function CreateMovement() {
-  // const [createMovement] = useCreateMovementMutation();
+  const router = useRouter();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [createMovement] = useCreateMovementMutation();
 
+  const handleModalChange = (isOpen: boolean) => {
+    setIsModalOpen(isOpen);
+  };
   const handleSubmit = async (data: MovementFormValues) => {
-    console.log(data);
-    // await createMovement(data);
+    try {
+      const payload = {
+        ...data,
+        item: Number(data.item),
+        movement_date: new Date(data.movement_date).toISOString().slice(0, 10),
+      };
+
+      const response = await createMovement(payload);
+
+      if (response.error) throw new Error("creation failed");
+      else router.push("/dashboard/inventory");
+    } catch (error) {
+      setIsModalOpen(true);
+      console.log(error);
+    }
   };
 
   return (
     <main className="mx-7 my-5">
+      <CustomModal
+        isOpen={isModalOpen}
+        onChange={handleModalChange}
+        title="Error!"
+        description="Your Request wasn't processed successfully.."
+      />
       <div className="flex">
         <IconWithTitle
           imageSrc="/assets/icons/add.svg"
