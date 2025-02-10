@@ -1,68 +1,57 @@
 "use client";
 import CustomTable from "@/components/dashboard/tables/CustomTable";
 import { useRouter } from "next/navigation";
+import { useGetStockAdjustmentsQuery } from "@/redux/services/dashboard/stockApi";
+import Image from "next/image";
+import TableSkelton from "@/components/dashboard/skelton/TableSkelton";
+import CardsSkelton from "@/components/dashboard/skelton/CardsSkelton";
+
+// Define the type for stock adjustment
+interface StockAdjustment {
+  id: number;
+  item: {
+    item_code: string;
+    item_name?: string; // Optional, add other properties as needed
+  };
+  quantity_adjusted: number;
+  reason: string;
+  adjustment_type: string;
+  adjustment_date: string;
+}
 
 export default function StockAdjustment() {
   const router = useRouter();
 
+  const {
+    data: stockAdjustmentData = { results: [] },
+    isLoading,
+    error,
+  } = useGetStockAdjustmentsQuery({
+    search: "",
+    ordering: "id",
+    page: 1,
+    page_size: 10,
+  });
+
+  const transformedData = stockAdjustmentData.results.map(
+    (adjustment: StockAdjustment) => ({
+      id: adjustment.id,
+      itemName: adjustment.item.item_name,
+      quantity: adjustment.quantity_adjusted,
+      reason: adjustment.reason,
+      type: adjustment.adjustment_type,
+      date: adjustment.adjustment_date,
+    })
+  );
+
   const columns = [
-    { field: "itemCode", header: "Item Code" },
+    { field: "itemName", header: "Item Name" },
     { field: "quantity", header: "Quantity" },
     { field: "reason", header: "Reason" },
     { field: "type", header: "Type" },
-    { field: "date", header: "Date" },
+    { field: "date", header: "Adjustment Date" },
   ];
 
-  const stockAdjustmentData = [
-    {
-      id: 1,
-      itemCode: "1",
-      quantity: 100,
-      reason: "Stock Take",
-      type: "Increase",
-      date: "Dec. 3204",
-    },
-    {
-      id: 2,
-      itemCode: "2",
-      quantity: 200,
-      reason: "Restock",
-      type: "Increase",
-      date: "Dec. 3204",
-    },
-    {
-      id: 3,
-      itemCode: "3",
-      quantity: 50,
-      reason: "Damaged Goods",
-      type: "Decrease",
-      date: "Dec. 3204",
-    },
-    {
-      id: 4,
-      itemCode: "4",
-      quantity: 30,
-      reason: "Inventory Adjustment",
-      type: "Decrease",
-      date: "Dec. 3204",
-    },
-    {
-      id: 5,
-      itemCode: "5",
-      quantity: 150,
-      reason: "Return",
-      type: "Increase",
-      date: "Dec. 3204",
-    },
-    {
-      id: 6,
-      itemCode: "6",
-      quantity: 75,
-      reason: "Stock Take",
-      type: "Decrease",
-      date: "Dec. 3204",
-    },
-  ];
   const cardsData = [
     { title: "New requests", num: 145 },
     { title: "Complete", num: 87 },
@@ -70,21 +59,39 @@ export default function StockAdjustment() {
     { title: "Failed", num: 48 },
     { title: "Paid", num: 48 },
   ];
+
   const handleClick = () => {
     router.push("/dashboard/inventory/stock-adjustment/create");
   };
 
   return (
     <div className="px-6 pb-25">
-      <CustomTable
-        editRoute="/dashboard/inventory/stock-adjustment/edit/"
-        data={stockAdjustmentData}
-        cardData={cardsData}
-        rows={10}
-        columns={columns}
-        buttonText="Add Stock Adjustment"
-        ButtonEvent={handleClick}
-      />
+      {isLoading ? (
+        <div className="bg-dashboardBg px-4 pt-4 pb-1 rounded-tr-[20px] rounded-bl-[20px] rounded-br-[20px] card mb-5">
+          <CardsSkelton />
+          <TableSkelton />
+        </div>
+      ) : error ? (
+        <div className="flex justify-center flex-col items-center bg-dashboardBg pb-10 rounded-tr-[20px] rounded-bl-[20px] rounded-br-[20px] card mb-5">
+          <Image
+            src="/assets/icons/dashboard/loading-error.svg"
+            alt="loading error"
+            width="400"
+            height="300"
+          />
+          Error loading data
+        </div>
+      ) : (
+        <CustomTable
+          editRoute="/dashboard/inventory/stock-adjustment/edit/"
+          data={transformedData}
+          cardData={cardsData}
+          rows={10}
+          columns={columns}
+          buttonText="Add Stock Adjustment"
+          ButtonEvent={handleClick}
+        />
+      )}
     </div>
   );
 }

@@ -20,6 +20,7 @@ import { preorderApi } from "./services/dashboard/preorderApi";
 import { refreshTokenApi } from "./services/refreshTokenApi";
 import { itemsApi } from "./services/dashboard/itemsApi";
 import { itemCategoryApi } from "./services/dashboard/itemCategoryApi";
+import { stockApi } from "./services/dashboard/stockApi";
 
 const persistConfig = {
   key: "root",
@@ -47,7 +48,7 @@ export const store = configureStore({
     [refreshTokenApi.reducerPath]: refreshTokenApi.reducer,
     [itemsApi.reducerPath]: itemsApi.reducer,
     [itemCategoryApi.reducerPath]: itemCategoryApi.reducer,
-    
+    [stockApi.reducerPath]: stockApi.reducer,
     auth: persistedAuthReducer,
   },
   middleware: (getDefaultMiddleware) => {
@@ -72,8 +73,8 @@ export const store = configureStore({
       .concat(preorderApi.middleware)
       .concat(refreshTokenApi.middleware)
       .concat(itemsApi.middleware)
-      .concat(itemCategoryApi.middleware);
-
+      .concat(itemCategoryApi.middleware)
+      .concat(stockApi.middleware);
   },
 });
 

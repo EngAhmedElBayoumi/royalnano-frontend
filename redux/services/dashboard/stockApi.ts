@@ -1,0 +1,31 @@
+import { createApi } from "@reduxjs/toolkit/query/react";
+import { baseQuery } from "../common";
+
+export const stockApi = createApi({
+  reducerPath: "stockApi",
+  baseQuery,
+  endpoints: (builder) => ({
+    getStockAdjustments: builder.query({
+      query: ({ search, ordering, page, page_size }) => ({
+        url: `inventory/stock-adjustment`,
+        params: { search, ordering, page, page_size },
+      }),
+    }),
+    getStockAdjustmentById: builder.query({
+      query: (id) => `inventory/stock-adjustment/${id}/`,
+    }),
+    createStockAdjustment: builder.mutation({
+      query: (data) => ({
+        url: `inventory/stock-adjustment/`,
+        method: "POST",
+        body: data,
+      }),
+    }),
+  }),
+});
+
+export const {
+  useGetStockAdjustmentsQuery,
+  useGetStockAdjustmentByIdQuery,
+  useCreateStockAdjustmentMutation,
+} = stockApi;
