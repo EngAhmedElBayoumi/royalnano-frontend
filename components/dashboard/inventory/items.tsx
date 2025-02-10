@@ -3,6 +3,7 @@ import CustomTable from "@/components/dashboard/tables/CustomTable";
 import { useRouter } from "next/navigation";
 import { useGetItemsQuery } from "@/redux/services/dashboard/itemsApi";
 import TableSkelton from "../skelton/TableSkelton";
+import CardsSkelton from "../skelton/CardsSkelton";
 
 export default function Items() {
   const router = useRouter();
@@ -41,6 +42,7 @@ export default function Items() {
     <div className="px-6 pb-25">
       {isLoading ? (
         <div className="bg-dashboardBg px-4 pt-4 pb-1 rounded-tr-[20px] rounded-bl-[20px] rounded-br-[20px] card mb-5 ">
+          <CardsSkelton />
           <TableSkelton />
         </div>
       ) : (
