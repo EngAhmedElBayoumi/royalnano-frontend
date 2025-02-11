@@ -83,6 +83,8 @@ export default function StockAdjustment() {
         </div>
       ) : (
         <CustomTable
+        EmptyMessage="no stock adjustment data found"
+
           editRoute="/dashboard/inventory/stock-adjustment/view/"
           data={transformedData}
           cardData={cardsData}

@@ -59,6 +59,8 @@ export default function About() {
   return (
     <div className="px-6 pb-25">
       <CustomTable
+                      EmptyMessage="no About data found"
+
         editRoute="/dashboard/website/about/edit/"
         data={data}
         rows={10}

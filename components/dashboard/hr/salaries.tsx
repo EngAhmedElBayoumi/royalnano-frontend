@@ -190,6 +190,8 @@ export default function Salaries() {
     <>
       <div className="px-6  pb-25 ">
         <CustomTable
+                        EmptyMessage="no salaries data found"
+
           editRoute="/dashboard/hr/salaries/edit/"
           data={yourCustomerData}
           rows={10}

@@ -70,6 +70,8 @@ export default function Gallery() {
   return (
     <div className="px-6 pb-25">
       <CustomTable
+                      EmptyMessage="no gallery data found"
+
         editRoute="/dashboard/website/gallery/edit/"
         data={data}
         rows={10}

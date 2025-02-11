@@ -58,6 +58,8 @@ export default function Items() {
         </div>
       ) : (
         <CustomTable
+        EmptyMessage="no items data found"
+
           editRoute="/dashboard/inventory/items/edit/"
           data={data.results}
           rows={10}

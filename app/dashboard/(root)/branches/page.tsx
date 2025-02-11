@@ -42,6 +42,7 @@ export default function Branches() {
     <>
       <div className="px-6 pt-7 pb-25  ">
         <CustomTable
+        EmptyMessage="you have no branches"
           editRoute="/dashboard/branches/edit/"
           headerBG="#F8F7F7"
           headerTextColor="#C8AE50"

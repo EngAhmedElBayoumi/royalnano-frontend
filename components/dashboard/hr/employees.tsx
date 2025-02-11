@@ -190,6 +190,8 @@ export default function Employees() {
     <>
       <div className="px-6  pb-25 ">
         <CustomTable
+                        EmptyMessage="no employees data found"
+
           editRoute="/dashboard/hr/employees/edit/"
           data={yourCustomerData}
           rows={10}

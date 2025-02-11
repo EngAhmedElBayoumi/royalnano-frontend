@@ -50,6 +50,7 @@ interface CustomTableProps {
   secondHeaderTextColor?: string;
   editRoute?: string;
   detailsRoute?: string;
+  EmptyMessage:string
 }
 
 export default function CustomTable({
@@ -69,6 +70,7 @@ export default function CustomTable({
   secondHeaderIcon,
   secondHeaderTextColor,
   secondHeaderTitle,
+  emptyMessage
 }: CustomTableProps) {
   const router = useRouter();
   const [customers, setCustomers] = useState<DataInTable[]>(data);
@@ -92,11 +94,7 @@ export default function CustomTable({
     router.push(`${editRoute}?id=${id}`);
     console.log(editRoute);
   };
-  const handleDetailsClick = (id: number, e: React.MouseEvent) => {
-    e.stopPropagation();
-    router.push(`${detailsRoute}?id=${id}`);
-    console.log(detailsRoute);
-  };
+
 
   const renderHeader = () => (
     <>
@@ -163,7 +161,7 @@ export default function CustomTable({
             filters={filters}
             globalFilterFields={columns.map((col) => col.field)}
             header={header}
-            emptyMessage={<EmptyMessage />}
+            emptyMessage={<EmptyMessage  emptyMessage={emptyMessage}/>}
             dataKey="id"
             onRowClick={(e) => {
               router.push(`${detailsRoute}${e.data.id}`);
@@ -243,7 +241,7 @@ export default function CustomTable({
             )}
           </DataTable>
         ) : (
-          <EmptyMessage />
+          <EmptyMessage emptyMessage={emptyMessage} />
         )}
       </div>
     </>
