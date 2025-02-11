@@ -26,6 +26,7 @@ interface DatePickerProps<T extends FieldValues> {
   className?: string;
   disabledStartDate?: Date;
   disabledEndDate?: Date;
+  readonly?: boolean;
 }
 
 const DatePicker = <T extends FieldValues>({
@@ -36,6 +37,7 @@ const DatePicker = <T extends FieldValues>({
   className,
   disabledStartDate,
   disabledEndDate,
+  readonly,
 }: DatePickerProps<T>) => {
   return (
     <FormField
@@ -48,7 +50,7 @@ const DatePicker = <T extends FieldValues>({
           </FormLabel>
           <Popover>
             <PopoverTrigger asChild>
-              <FormControl>
+              <FormControl disabled={readonly}>
                 <Button
                   variant={"outline"}
                   className={cn(

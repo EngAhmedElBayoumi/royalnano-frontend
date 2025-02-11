@@ -14,6 +14,7 @@ import DatePicker from "@/components/formFields/DatePicker";
 interface MovementFormProps {
   onSubmit: (data: MovementFormValues) => Promise<void>;
   defaultValues?: MovementFormValues;
+  isView: boolean;
 }
 
 export interface MovementFormValues {
@@ -24,7 +25,11 @@ export interface MovementFormValues {
   description: string;
 }
 
-const MovementForm = ({ onSubmit, defaultValues }: MovementFormProps) => {
+const MovementForm = ({
+  onSubmit,
+  defaultValues,
+  isView,
+}: MovementFormProps) => {
   const form = useForm({
     resolver: zodResolver(movementSchema),
     defaultValues: defaultValues || {
@@ -59,6 +64,7 @@ const MovementForm = ({ onSubmit, defaultValues }: MovementFormProps) => {
               label="Item"
               placeholder="Item"
               options={itemsOptions}
+              readonly={isView}
             />
             <TextInput
               control={form.control}
@@ -66,6 +72,7 @@ const MovementForm = ({ onSubmit, defaultValues }: MovementFormProps) => {
               label="Quantity"
               placeholder="Quantity"
               type="number"
+              readonly={isView}
             />
 
             <CustomSelect
@@ -74,12 +81,14 @@ const MovementForm = ({ onSubmit, defaultValues }: MovementFormProps) => {
               label="Movement Type"
               placeholder="Movement Type"
               options={typeOptions}
+              readonly={isView}
             />
             <DatePicker
               control={form.control}
               name="movement_date"
               label="Date"
               placeholder="Date"
+              readonly={isView}
             />
           </div>
           <CustomTextArea
@@ -88,20 +97,23 @@ const MovementForm = ({ onSubmit, defaultValues }: MovementFormProps) => {
             label="Description"
             placeholder="Description"
             className="mt-2 xl:mt-5"
+            readonly={isView}
           />
         </section>
-        <div className="flex justify-end gap-2 mt-5">
-          <Link href="/dashboard/inventory" passHref>
+        {!isView && (
+          <div className="flex justify-end gap-2 mt-5">
+            <Link href="/dashboard/inventory" passHref>
+              <CustomButton
+                text="Cancel"
+                className="text-white rounded-lg bg-secondary min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
+              />
+            </Link>
             <CustomButton
-              text="Cancel"
-              className="text-white rounded-lg bg-secondary min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
+              text="Save"
+              className="text-white rounded-lg min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
             />
-          </Link>
-          <CustomButton
-            text="Save"
-            className="text-white rounded-lg min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
-          />
-        </div>
+          </div>
+        )}
       </form>
     </Form>
   );

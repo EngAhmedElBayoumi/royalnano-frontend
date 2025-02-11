@@ -19,6 +19,7 @@ interface CustomSelectProps<T extends FieldValues> {
   label?: string;
   placeholder: string;
   options: { value: string; label: string }[];
+  readonly?: boolean;
 }
 
 const CustomSelect = <T extends FieldValues>({
@@ -27,6 +28,7 @@ const CustomSelect = <T extends FieldValues>({
   label,
   placeholder,
   options,
+  readonly,
 }: CustomSelectProps<T>) => {
   return (
     <FormField
@@ -34,15 +36,22 @@ const CustomSelect = <T extends FieldValues>({
       name={name}
       render={({ field }) => {
         const selectedLabel =
-          options.find((opt) => opt.value === field.value)?.label || placeholder;
+          options.find((opt) => opt.value === field.value)?.label ||
+          placeholder;
 
         return (
           <FormItem>
             {label && (
-              <FormLabel className="text-darkGray xl:text-sm">{label}</FormLabel>
+              <FormLabel className="text-darkGray xl:text-sm">
+                {label}
+              </FormLabel>
             )}
             <FormControl>
-              <Select onValueChange={field.onChange} value={field.value}>
+              <Select
+                onValueChange={field.onChange}
+                value={field.value}
+                disabled={readonly}
+              >
                 <SelectTrigger
                   className={`mt-1 bg-[#F4F4F4] border-gray rounded-10 px-2 py-5 xl:py-7 min-w-[270px] md:min-w-[400px] ${
                     !field.value ? "text-gray" : ""
@@ -67,4 +76,4 @@ const CustomSelect = <T extends FieldValues>({
   );
 };
 
-export default CustomSelect;
+export default CustomSelect;

@@ -80,7 +80,7 @@ export default function Movement() {
         </div>
       ) : (
         <CustomTable
-          editRoute="/dashboard/inventory/movement/edit/"
+          editRoute="/dashboard/inventory/movement/view/"
           data={transformedData}
           rows={10}
           columns={columns}

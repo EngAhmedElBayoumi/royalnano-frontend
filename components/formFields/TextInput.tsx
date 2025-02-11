@@ -15,6 +15,7 @@ interface TextInputProps<T extends FieldValues> {
   placeholder: string;
   type?: string;
   className?: string;
+  readonly?: boolean;
 }
 
 const TextInput = <T extends FieldValues>({
@@ -24,6 +25,7 @@ const TextInput = <T extends FieldValues>({
   placeholder,
   type = "text",
   className,
+  readonly,
 }: TextInputProps<T>) => {
   return (
     <FormField
@@ -38,6 +40,7 @@ const TextInput = <T extends FieldValues>({
             <Input
               placeholder={placeholder}
               type={type}
+              disabled={readonly}
               className="bg-[#F4F4F4] border-gray xl:rounded-10 px-2 py-5 xl:py-7 mt-1"
               {...field}
               onChange={(e) => {
