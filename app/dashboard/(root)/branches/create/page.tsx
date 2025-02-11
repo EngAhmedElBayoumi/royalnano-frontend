@@ -1,20 +1,41 @@
-// import { useCreateBranchMutation } from "@/redux/services/BranchApi";
 "use client";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useCreateBranchMutation } from "@/redux/services/dashboard/branchesApi";
+import IconWithTitle from "@/components/dashboard/IconWithTitle";
+import CustomModal from "@/components/modals/CustomModal";
 import BranchForm, {
   BranchFormValues,
 } from "@/components/dashboard/forms/BranchForm";
-import IconWithTitle from "@/components/dashboard/IconWithTitle";
 
 export default function CreateBranchs() {
-  // const [createBranch] = useCreateBranchMutation();
+  const router = useRouter();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [createBranch] = useCreateBranchMutation();
+
+  const handleModalChange = (isOpen: boolean) => {
+    setIsModalOpen(isOpen);
+  };
 
   const handleSubmit = async (data: BranchFormValues) => {
-    console.log(data);
-    // await createBranch(data);
+    try {
+      const response = await createBranch(data);
+      if (response.error) throw new Error("creation failed");
+      else router.push("/dashboard/inventory");
+    } catch (error) {
+      setIsModalOpen(true);
+      console.log(error);
+    }
   };
 
   return (
     <main className="mx-7 my-5">
+      <CustomModal
+        isOpen={isModalOpen}
+        onChange={handleModalChange}
+        title="Error!"
+        description="Your Request wasn't processed successfully.."
+      />
       <div className="flex">
         <IconWithTitle
           imageSrc="/assets/icons/add.svg"
