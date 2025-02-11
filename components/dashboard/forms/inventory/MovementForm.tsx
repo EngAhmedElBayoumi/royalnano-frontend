@@ -14,7 +14,7 @@ import DatePicker from "@/components/formFields/DatePicker";
 interface MovementFormProps {
   onSubmit: (data: MovementFormValues) => Promise<void>;
   defaultValues?: MovementFormValues;
-  isView: boolean;
+  isView?: boolean;
 }
 
 export interface MovementFormValues {

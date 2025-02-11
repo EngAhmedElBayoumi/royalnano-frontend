@@ -1,24 +1,24 @@
 "use client";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
-import { useGetMovementByIdQuery } from "@/redux/services/dashboard/movementApi";
-import MovementForm, {
-  MovementFormValues,
-} from "@/components/dashboard/forms/inventory/MovementForm";
+import { useGetStockAdjustmentByIdQuery } from "@/redux/services/dashboard/stockApi";
+import StockAdjustmentForm, {
+  StockAdjustmentFormValues,
+} from "@/components/dashboard/forms/inventory/StockAdjustmentForm";
 import IconWithTitle from "@/components/dashboard/IconWithTitle";
 import FormSkelton from "@/components/dashboard/skelton/FormSkelton";
 
-export default function EditMovement() {
+export default function EditStockAdjustment() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
-  const { data, isLoading, error } = useGetMovementByIdQuery(id);
+  const { data, isLoading, error } = useGetStockAdjustmentByIdQuery(id);
 
-  const defaultValues: MovementFormValues = data && {
+  const defaultValues: StockAdjustmentFormValues = data && {
     ...data,
     item: String(data.item.id),
   };
 
-  const handleSubmit = async (data: MovementFormValues) => {
+  const handleSubmit = async (data: StockAdjustmentFormValues) => {
     console.log(data);
   };
 
@@ -27,7 +27,7 @@ export default function EditMovement() {
       <div className="flex">
         <IconWithTitle
           imageSrc="/assets/icons/view.svg"
-          title="View Movement"
+          title="View Stock Adjustment"
           backgroundColor="#F8F7F7"
           textColor="primary"
         />
@@ -50,7 +50,7 @@ export default function EditMovement() {
           </div>
         ) : (
           <div className="lg:pr-[200px]">
-            <MovementForm
+            <StockAdjustmentForm
               onSubmit={handleSubmit}
               defaultValues={defaultValues}
               isView={true}

@@ -83,7 +83,7 @@ export default function StockAdjustment() {
         </div>
       ) : (
         <CustomTable
-          editRoute="/dashboard/inventory/stock-adjustment/edit/"
+          editRoute="/dashboard/inventory/stock-adjustment/view/"
           data={transformedData}
           cardData={cardsData}
           rows={10}
