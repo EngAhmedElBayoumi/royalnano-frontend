@@ -109,7 +109,7 @@ export default function Services() {
   return (
     <div className="px-6 pb-25">
       <CustomTable
-                      EmptyMessage="no services data found"
+                      emptyMessage="no services data found"
 
         editRoute="/dashboard/website/services/edit/"
         data={data}

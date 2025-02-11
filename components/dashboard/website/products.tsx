@@ -55,7 +55,7 @@ export default function Products() {
   return (
     <div className="px-6 pb-25">
       <CustomTable
-                      EmptyMessage="no products data found"
+                      emptyMessage="no products data found"
 
         editRoute="/dashboard/website/products/edit/"
         data={data}

@@ -50,7 +50,7 @@ export default function Category() {
         </div>
       ) : (
       <CustomTable
-      EmptyMessage="no customer requests data found"
+      emptyMessage="no customer requests data found"
 
         editRoute="/dashboard/inventory/category-models/edit/"
         data={itemCategories}

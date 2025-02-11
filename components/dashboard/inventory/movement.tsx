@@ -80,7 +80,7 @@ export default function Movement() {
         </div>
       ) : (
         <CustomTable
-        EmptyMessage="no movements data found"
+        emptyMessage="no movements data found"
 
           editRoute="/dashboard/inventory/movement/view/"
           data={transformedData}

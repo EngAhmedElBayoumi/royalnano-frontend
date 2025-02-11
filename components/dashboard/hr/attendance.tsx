@@ -190,7 +190,7 @@ export default function Attendance() {
     <>
       <div className="px-6 pb-25  ">
         <CustomTable
-                EmptyMessage="no attendance data found"
+                emptyMessage="no attendance data found"
 
           editRoute="/dashboard/hr/attendance/edit/"
           data={yourCustomerData}

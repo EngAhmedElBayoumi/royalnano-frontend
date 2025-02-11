@@ -30,7 +30,7 @@ export default function Clients() {
     <>
       <div className="px-6 pt-7 pb-25  ">
         <CustomTable
-                EmptyMessage="you have no clients"
+                emptyMessage="you have no clients"
 
           editRoute="/dashboard/clients/edit/"
           secondHeaderBG="transparent"

@@ -190,6 +190,8 @@ export default function Bonuses() {
     <>
       <div className="px-6 pb-25  ">
         <CustomTable
+                emptyMessage="no bonuses data found"
+
           editRoute="/dashboard/hr/bonuses/edit/"
           data={yourCustomerData}
           rows={10}

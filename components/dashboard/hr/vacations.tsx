@@ -190,7 +190,7 @@ export default function Vacations() {
     <>
       <div className="px-6  pb-25 ">
         <CustomTable
-                        EmptyMessage="no vacations data found"
+                        emptyMessage="no vacations data found"
 
           editRoute="/dashboard/hr/vacations/edit/"
           data={yourCustomerData}

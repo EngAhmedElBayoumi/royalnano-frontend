@@ -190,7 +190,7 @@ export default function CustomerRequests() {
     <>
       <div className="px-6 pt-7 pb-25  ">
         <CustomTable
-                EmptyMessage="you have no customer requests"
+                emptyMessage="you have no customer requests"
 
           editRoute="/dashboard/customer-requests/edit/"
           headerBG="#F8F7F7"

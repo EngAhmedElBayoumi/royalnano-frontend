@@ -50,7 +50,7 @@ interface CustomTableProps {
   secondHeaderTextColor?: string;
   editRoute?: string;
   detailsRoute?: string;
-  EmptyMessage:string
+  emptyMessage:string
 }
 
 export default function CustomTable({
