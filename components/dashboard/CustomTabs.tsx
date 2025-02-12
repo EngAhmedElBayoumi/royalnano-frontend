@@ -1,6 +1,7 @@
 "use client"
 import React, { useEffect, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useRouter, useSearchParams } from "next/navigation";
 
 interface CustomTabsProps {
   tabs: Array<{
@@ -12,13 +13,17 @@ interface CustomTabsProps {
 }
 
 function CustomTabs({ tabs, defaultTab = tabs[0]?.label }: CustomTabsProps) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const [activeTab, setActiveTab] = useState<string>(() => {
-    return localStorage.getItem("activeTab") || defaultTab;
+    return searchParams.get("tab") || defaultTab;
   });
 
   useEffect(() => {
-    localStorage.setItem("activeTab", activeTab);
-  }, [activeTab]);
+    const url = new URL(window.location.href);
+    url.searchParams.set("tab", activeTab);
+    router.replace(url.toString(), { scroll: false }); 
+  }, [activeTab, router]);
   return (
     <Tabs
     value={activeTab}
