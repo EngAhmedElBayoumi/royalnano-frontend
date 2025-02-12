@@ -49,11 +49,13 @@ interface CustomTableProps {
   secondHeaderBG?: string;
   secondHeaderTextColor?: string;
   editRoute?: string;
+  viewRoute?: string;
   detailsRoute?: string;
-  emptyMessage:string
+  emptyMessage: string;
 }
 
 export default function CustomTable({
+  viewRoute,
   editRoute,
   detailsRoute,
   data,
@@ -70,7 +72,7 @@ export default function CustomTable({
   secondHeaderIcon,
   secondHeaderTextColor,
   secondHeaderTitle,
-  emptyMessage
+  emptyMessage,
 }: CustomTableProps) {
   const router = useRouter();
   const [customers, setCustomers] = useState<DataInTable[]>(data);
@@ -89,12 +91,14 @@ export default function CustomTable({
     setGlobalFilterValue(value);
   };
 
+  const handleViewClick = (id: number, e: React.MouseEvent) => {
+    e.stopPropagation();
+    router.push(`${viewRoute}?id=${id}`);
+  };
   const handleEditClick = (id: number, e: React.MouseEvent) => {
     e.stopPropagation();
     router.push(`${editRoute}?id=${id}`);
-    console.log(editRoute);
   };
-
 
   const renderHeader = () => (
     <>
@@ -161,7 +165,7 @@ export default function CustomTable({
             filters={filters}
             globalFilterFields={columns.map((col) => col.field)}
             header={header}
-            emptyMessage={<EmptyMessage  emptyMessage={emptyMessage}/>}
+            emptyMessage={<EmptyMessage emptyMessage={emptyMessage} />}
             dataKey="id"
             onRowClick={(e) => {
               router.push(`${detailsRoute}${e.data.id}`);
@@ -206,7 +210,8 @@ export default function CustomTable({
                 }}
               />
             ))}
-            {editRoute && (
+
+            {(viewRoute || editRoute) && (
               <Column
                 body={(rowData: DataInTable) => (
                   <DropdownMenu>
@@ -221,16 +226,29 @@ export default function CustomTable({
                         />
                       </button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent className="w-40 ">
-                      <DropdownMenuItem
-                        className="bg-dashboardBg shadow-md py-1 cursor-pointer  "
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleEditClick(rowData.id, e);
-                        }}
-                      >
-                        Edit
-                      </DropdownMenuItem>
+                    <DropdownMenuContent className="w-40">
+                      {viewRoute && (
+                        <DropdownMenuItem
+                          className="bg-dashboardBg shadow-md py-1 cursor-pointer"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleViewClick(rowData.id, e);
+                          }}
+                        >
+                          View
+                        </DropdownMenuItem>
+                      )}
+                      {editRoute && (
+                        <DropdownMenuItem
+                          className="bg-dashboardBg shadow-md py-1 cursor-pointer  "
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleEditClick(rowData.id, e);
+                          }}
+                        >
+                          Edit
+                        </DropdownMenuItem>
+                      )}
                     </DropdownMenuContent>
                   </DropdownMenu>
                 )}
