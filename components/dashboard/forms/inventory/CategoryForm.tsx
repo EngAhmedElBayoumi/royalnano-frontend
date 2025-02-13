@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { categorySchema } from "@/lib/validations/dashboard/inventory/categorySchema";
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
-import Link from "next/link";
+import {Link} from '@/i18n/routing';
 
 interface CategoryFormProps {
   onSubmit: (data: CategoryFormValues) => Promise<void>;

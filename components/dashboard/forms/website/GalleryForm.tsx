@@ -8,7 +8,7 @@ import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
 import CustomSelect from "@/components/formFields/CustomSelect";
 import FileInput from "@/components/formFields/FileInput";
-import Link from "next/link";
+import {Link} from '@/i18n/routing';
 
 interface GalleryFormProps {
   onSubmit: (data: GalleryFormValues) => Promise<void>;

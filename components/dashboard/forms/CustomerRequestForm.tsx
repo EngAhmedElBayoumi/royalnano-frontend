@@ -7,7 +7,7 @@ import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
 import PhoneInputField from "@/components/formFields/PhoneInputField";
 import CustomSelect from "@/components/formFields/CustomSelect";
-import Link from "next/link";
+import {Link} from '@/i18n/routing';
 import TextArea from "@/components/formFields/TextArea";
 
 interface CustomerRequestFormProps {

@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/sidebar";
 import Image from "next/image";
 import { sidebarLinks } from "@/data/dashboard/sidebarData";
-import Link from "next/link";
+import {Link} from '@/i18n/routing';
 import { usePathname } from "next/navigation";
 
 export function AppSidebar() {

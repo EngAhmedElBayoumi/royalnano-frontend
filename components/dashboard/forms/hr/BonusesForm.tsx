@@ -7,7 +7,7 @@ import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
 import DatePicker from "@/components/formFields/DatePicker";
 import CustomSelect from "@/components/formFields/CustomSelect";
-import Link from "next/link";
+import {Link} from '@/i18n/routing';
 
 interface BonusesFormProps {
   onSubmit: (data: BonusesFormValues) => Promise<void>;

@@ -6,7 +6,7 @@ import { salarySchema } from "@/lib/validations/dashboard/hr/salarySchema";
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
 import DatePicker from "@/components/formFields/DatePicker";
-import Link from "next/link";
+import {Link} from '@/i18n/routing';
 
 interface SalaryFormProps {
   onSubmit: (data: SalaryFormValues) => Promise<void>;

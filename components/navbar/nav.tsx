@@ -2,7 +2,7 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { navLinks } from "@/data/FooterData";
-import Link from "next/link";
+import {Link} from '@/i18n/routing';
 import { usePathname, useRouter } from "next/navigation";
 import { getCookie, deleteCookie } from "cookies-next";
 import { useDispatch } from "react-redux";

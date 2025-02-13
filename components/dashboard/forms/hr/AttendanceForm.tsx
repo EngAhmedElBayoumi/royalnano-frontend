@@ -6,7 +6,7 @@ import { attendanceSchema } from "@/lib/validations/dashboard/hr/attendanceSchem
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
 import DateTimePicker from "@/components/formFields/DateTimePicker";
-import Link from "next/link";
+import {Link} from '@/i18n/routing';
 import { useEffect } from "react";
 
 interface AttendanceFormProps {

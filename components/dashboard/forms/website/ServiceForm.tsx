@@ -7,7 +7,7 @@ import { serviceSchema } from "@/lib/validations/dashboard/website/serviceSchema
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
 import FileInput from "@/components/formFields/FileInput";
-import Link from "next/link";
+import {Link} from '@/i18n/routing';
 
 interface ServiceFormProps {
   onSubmit: (data: ServiceFormValues) => Promise<void>;

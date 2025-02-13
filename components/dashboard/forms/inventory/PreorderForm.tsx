@@ -6,7 +6,7 @@ import { preorderSchema } from "@/lib/validations/dashboard/inventory/preorderSc
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
 import TextArea from "@/components/formFields/TextArea";
-import Link from "next/link";
+import {Link} from '@/i18n/routing';
 import CustomSelect from "@/components/formFields/CustomSelect";
 import { useGetPreorderQuery } from "@/redux/services/dashboard/preorderApi";
 import { Item } from "../../inventory/preorder";

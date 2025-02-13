@@ -6,7 +6,7 @@ import { branchSchema } from "@/lib/validations/dashboard/branchSchema";
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
 import PhoneInputField from "@/components/formFields/PhoneInputField";
-import Link from "next/link";
+import {Link} from '@/i18n/routing';
 import CustomTextArea from "@/components/formFields/TextArea";
 
 interface BranchFormProps {

@@ -1,5 +1,5 @@
 "use client";
-import Link from "next/link";
+import {Link} from '@/i18n/routing';
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { movementSchema } from "@/lib/validations/dashboard/inventory/movementSchema";

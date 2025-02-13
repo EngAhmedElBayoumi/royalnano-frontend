@@ -7,7 +7,7 @@ import { aboutSchema } from "@/lib/validations/dashboard/website/aboutSchema";
 import CustomButton from "@/components/formFields/CustomButton";
 import TextEditor from "@/components/formFields/TextEditor";
 import FileInput from "@/components/formFields/FileInput";
-import Link from "next/link";
+import {Link} from '@/i18n/routing';
 
 interface AboutFormProps {
   onSubmit: (data: AboutFormValues) => Promise<void>;

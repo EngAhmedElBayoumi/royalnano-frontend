@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { loginValidation } from "@/lib/validations/login";
-import Link from "next/link";
+import {Link} from '@/i18n/routing';
 import Image from "next/image";
 import { useLoginMutation } from "@/redux/services/loginApi";
 import { useRouter } from "next/navigation";

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { contactInfo, NavbarSocialLinks } from "@/data/NavbarData";
-import Link from "next/link";
+import {Link} from '@/i18n/routing';
 
 const TopSection = () => {
   return (

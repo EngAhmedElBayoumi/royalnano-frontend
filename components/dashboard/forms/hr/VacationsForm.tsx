@@ -6,7 +6,7 @@ import { vacationSchema } from "@/lib/validations/dashboard/hr/vacationSchema";
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
 import DatePicker from "@/components/formFields/DatePicker";
-import Link from "next/link";
+import {Link} from '@/i18n/routing';
 
 interface VacationsFormProps {
   onSubmit: (data: VacationsFormValues) => Promise<void>;
