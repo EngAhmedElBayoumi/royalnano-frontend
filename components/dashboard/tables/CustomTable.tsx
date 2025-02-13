@@ -39,7 +39,7 @@ interface CustomTableProps {
   columns: ColumnConfig[];
   cardData: InfoCardInterface[];
   buttonText?: string;
-  ButtonEvent?: MouseEventHandler<HTMLButtonElement>;
+  ButtonEvent: MouseEventHandler<HTMLButtonElement>;
   headerIcon?: string;
   headerTitle?: string;
   headerBG?: string;
@@ -165,7 +165,7 @@ export default function CustomTable({
             filters={filters}
             globalFilterFields={columns.map((col) => col.field)}
             header={header}
-            emptyMessage={<EmptyMessage emptyMessage={emptyMessage} />}
+            emptyMessage={<EmptyMessage  onClick={ButtonEvent}  emptyMessage={emptyMessage} />}
             dataKey="id"
             onRowClick={(e) => {
               router.push(`${detailsRoute}${e.data.id}`);
@@ -259,7 +259,7 @@ export default function CustomTable({
             )}
           </DataTable>
         ) : (
-          <EmptyMessage emptyMessage={emptyMessage} />
+          <EmptyMessage onClick={ButtonEvent} emptyMessage={emptyMessage} />
         )}
       </div>
     </>
