@@ -1,6 +1,6 @@
-import { NextResponse, NextRequest } from 'next/server';
-import createMiddleware from 'next-intl/middleware';
-import { routing } from './i18n/routing';
+import { NextResponse, NextRequest } from "next/server";
+import createMiddleware from "next-intl/middleware";
+import { routing } from "./i18n/routing";
 
 // Create the next-intl middleware
 const intlMiddleware = createMiddleware({
@@ -11,54 +11,51 @@ const intlMiddleware = createMiddleware({
 export async function middleware(req: NextRequest) {
   // Apply the next-intl middleware first
   const intlResponse = intlMiddleware(req);
-  if (intlResponse) {
-    return intlResponse;
-  }
 
   // Your custom authentication logic
-  const accessToken = req.cookies.get('accessToken')?.value;
+  const accessToken = req.cookies.get("accessToken")?.value;
 
   // Define the public routes
   const publicRoutes = [
-    '/change-password',
-    '/forget-password',
-    '/login',
-    '/otp-verification',
-    '/register',
+    "/change-password",
+    "/forget-password",
+    "/login",
+    "/otp-verification",
+    "/register",
   ];
 
   // Define the protected routes
-  const protectedRoutes = ['/dashboard', '/profile', '/book-now'];
+  const protectedRoutes = ["/dashboard", "/profile", "/book-now"];
 
   // Check if the user is authenticated using the access token
   if (accessToken) {
     // Redirect to home page if trying to access public routes while logged in
     if (publicRoutes.includes(req.nextUrl.pathname)) {
-      return NextResponse.redirect(new URL('/', req.url));
+      return NextResponse.redirect(new URL("/", req.url));
     }
   } else {
     // Redirect to login page if trying to access protected routes while not authenticated
-    if (protectedRoutes.some((route) => req.nextUrl.pathname.startsWith(route))) {
-      return NextResponse.redirect(new URL('/login', req.url));
+    if (protectedRoutes.some((route) => req.nextUrl.pathname.includes(route))) {
+      return NextResponse.redirect(new URL("/login", req.url));
     }
   }
 
   // Allow the request to proceed if authenticated and accessing other routes
-  return NextResponse.next();
+  return intlResponse || NextResponse.next();
 }
 
 // Specify the paths where this middleware should apply
 export const config = {
   matcher: [
-    '/',
-    '/(ar|en)/:path*', // Matches locale-specific routes
-    '/change-password',
-    '/forget-password',
-    '/login',
-    '/otp-verification',
-    '/register',
-    '/dashboard/:path*', // Matches "/dashboard" and everything inside it
-    '/profile',
-    '/book-now',
+    "/",
+    "/(ar|en)/:path*", // Matches locale-specific routes
+    "/change-password",
+    "/forget-password",
+    "/login",
+    "/otp-verification",
+    "/register",
+    "/dashboard/:path*", // Matches "/dashboard" and everything inside it
+    "/profile",
+    "/book-now",
   ],
 };
