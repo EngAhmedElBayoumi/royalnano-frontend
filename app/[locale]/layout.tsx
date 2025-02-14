@@ -24,7 +24,7 @@ export default async function LocaleLayout({
   const messages = await getMessages({ locale });
 
   return (
-    <html lang={locale}>
+    <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
       <body className={cairo.className}>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ReduxProvider>{children}</ReduxProvider>
