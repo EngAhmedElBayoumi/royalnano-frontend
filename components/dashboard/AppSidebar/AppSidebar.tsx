@@ -12,14 +12,16 @@ import {
 } from "@/components/ui/sidebar";
 import Image from "next/image";
 import { sidebarLinks } from "@/data/dashboard/sidebarData";
-import {Link} from '@/i18n/routing';
+import { Link } from "@/i18n/routing";
 import { usePathname } from "next/navigation";
+import { useLocale } from "next-intl";
 
 export function AppSidebar() {
   const currentPath = usePathname();
+  const locale = useLocale();
 
   return (
-    <Sidebar collapsible="icon">
+    <Sidebar collapsible="icon" side={locale === "ar" ? "right" : "left"}>
       <SidebarHeader className="items-center">
         <Image src="/assets/icons/logo.svg" alt="logo" width={50} height={80} />
       </SidebarHeader>
