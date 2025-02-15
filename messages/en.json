@@ -14,5 +14,12 @@
     "sales": "Sales",
     "settings": "Settings",
     "logout": "Logout"
+  },
+  "Inventory": {
+    "stockAdjustment": "Stock Adjustment",
+    "movement": "Movement",
+    "preorder": "Preorder",
+    "categoryModel": "Category Model",
+    "items": "Items"
   }
 }

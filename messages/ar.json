@@ -14,5 +14,12 @@
     "sales": "المبيعات",
     "settings": "الإعدادات",
     "logout": "تسجيل الخروج"
+  },
+  "Inventory": {
+    "stockAdjustment": "تعديل المخزون",
+    "movement": "الحركة",
+    "preorder": "الطلب المسبق",
+    "categoryModel": "نموذج الفئة",
+    "items": "العناصر"
   }
 }
