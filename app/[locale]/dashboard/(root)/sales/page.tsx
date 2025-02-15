@@ -1,9 +1,9 @@
 import CustomTabs from "@/components/dashboard/CustomTabs";
 import Attendance from "@/components/dashboard/hr/attendance";
-import Bonuses from "@/components/dashboard/hr/Bonuses";
 import Employees from "@/components/dashboard/hr/employees";
 import Salaries from "@/components/dashboard/hr/salaries";
 import Vacations from "@/components/dashboard/hr/vacations";
+import SalesQuotation from "@/components/dashboard/sales/salesQuotation";
 import Image from "next/image";
 import React from "react";
 function SalesPage() {
@@ -42,7 +42,7 @@ function SalesPage() {
         />
       ),
       label: "Sales Quotation",
-      content: <Bonuses />,
+      content: <SalesQuotation />,
     },
     {
       icon: (
