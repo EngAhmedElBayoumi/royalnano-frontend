@@ -1,12 +1,13 @@
 import React from "react";
-
 interface PageHeaderProps {
   title: string;
+  params?:{locale?: string}
 }
-const PageHeader: React.FC<PageHeaderProps> = ({ title }) => {
+const PageHeader: React.FC<PageHeaderProps> = ({ title,params }) => {
+  const locale = params?.locale ?? "en"; 
   return (
     <section
-      className="relative bg-cover bg-center h-[400px] text-white flex justify-center top-[-160px]"
+      className={` ${locale === "ar" ? "rtl" : "ltr"} relative bg-cover bg-center h-[400px] text-white flex justify-center top-[-160px]`}
       style={{
         backgroundImage:
           "linear-gradient(180deg, rgba(0, 0, 0, 0.29) 0%, rgba(0, 0, 0, 0.77) 100%), url('/assets/images/hero/multiple-car.png')",
