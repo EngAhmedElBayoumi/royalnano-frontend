@@ -105,7 +105,7 @@ export default function CustomTable({
       <InfoCardsComponent data={cardData} />
       <div className="flex mb-4 justify-between self-center">
         <InputText
-          className="border bg-transparent border-[#474747] pl-2 w-[25%] py-2 rounded-[10px]"
+          className="border bg-transparent border-[#474747] px-2 w-[25%] py-2 rounded-[10px]"
           value={globalFilterValue}
           onChange={onGlobalFilterChange}
           placeholder="Search"
@@ -171,7 +171,7 @@ export default function CustomTable({
           onRowClick={(e) => {
             router.push(`${detailsRoute}${e.data.id}`);
           }}
-          className="rounded-tl-[10px] rounded-tr-[10px] custom-header"
+          className="custom-header"
           rowClassName={(data) => {
             const rowIndex = customers.findIndex((item) => item.id === data.id);
             return `hoverable-row ${
@@ -179,20 +179,14 @@ export default function CustomTable({
             }`;
           }}
         >
-          {columns.map((col, index) => (
+          {columns.map((col) => (
             <Column
               key={col.field}
               headerStyle={headerStyle}
               field={col.field}
               header={col.header}
               className={`m-auto py-[13px] px-[38px] text-[14px] font-[500] border-r border-white border-[2px]`}
-              headerClassName={`text-center capitalize text-white text-[16px] font-[500] py-[13px] px-[38px] border-r border-white border-[2px] ${
-                index === 0
-                  ? "first-column-header"
-                  : index === columns.length - 1
-                  ? ""
-                  : ""
-              }`}
+              headerClassName={`text-center capitalize text-white text-[16px] font-[500] py-[13px] px-[38px] border-r border-white border-[2px]`}
               body={(rowData: DataInTable) => {
                 if (col.field === "verified") {
                   return (

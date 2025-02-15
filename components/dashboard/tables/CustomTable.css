@@ -1,11 +1,7 @@
-.first-column-header {
-  border-top-left-radius: 10px;
+.p-datatable-wrapper {
+  border-radius: 1.5rem;
+  overflow: hidden;
 }
-
-.last-column-header {
-  border-top-right-radius: 10px;
-}
-
 .p-paginator {
   display: flex;
   justify-content: center;
@@ -47,6 +43,14 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
+}
+.p-paginator-first,
+.p-paginator-last {
+  display: none;
+}
+html[dir="rtl"] .p-paginator-prev,
+html[dir="rtl"] .p-paginator-next {
+  transform: scaleX(-1);
 }
 
 .p-paginator-prev:hover,
