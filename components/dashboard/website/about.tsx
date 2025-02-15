@@ -57,10 +57,9 @@ export default function About() {
   };
 
   return (
-    <div className="px-6 pb-25">
+    <>
       <CustomTable
-                      emptyMessage="no About data found"
-
+        emptyMessage="no About data found"
         editRoute="/dashboard/website/about/edit/"
         data={data}
         rows={10}
@@ -69,6 +68,6 @@ export default function About() {
         buttonText="Add About Entry"
         ButtonEvent={handleClick}
       />
-    </div>
+    </>
   );
 }

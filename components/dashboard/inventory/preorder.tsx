@@ -9,13 +9,12 @@ import CardsSkelton from "../skelton/CardsSkelton";
 export interface Item {
   item: {
     item_code: string;
-    item_name:string
+    item_name: string;
   };
   preorder_level: number;
   description: string;
-  id:string;
+  id: string;
 }
-
 
 export default function Preorder() {
   const { isLoading, error, data: inventoryItems } = useGetPreorderQuery({});
@@ -41,26 +40,26 @@ export default function Preorder() {
     { title: "Paid", num: 48 },
   ];
 
-  const formattedData = inventoryItems?.results?.map((item: Item) => ({
-    id: item.id, 
-    itemCode: item.item.item_code,
-    preorderLevel: item.preorder_level,
-    description: item.description,
-  })) || [];
+  const formattedData =
+    inventoryItems?.results?.map((item: Item) => ({
+      id: item.id,
+      itemCode: item.item.item_code,
+      preorderLevel: item.preorder_level,
+      description: item.description,
+    })) || [];
   const handleClick = () => {
     router.push("/dashboard/inventory/preorder/create");
   };
 
-
   return (
-    <div className="px-6 pb-25">
+    <>
       {isLoading ? (
-        <div className="bg-dashboardBg px-4 pt-4 pb-1 rounded-tr-[20px] rounded-bl-[20px] rounded-br-[20px] card mb-5 ">
+        <>
           <CardsSkelton />
           <TableSkelton />
-        </div>
+        </>
       ) : error ? (
-        <div className="flex justify-center flex-col items-center bg-dashboardBg pb-10 rounded-tr-[20px] rounded-bl-[20px] rounded-br-[20px] card mb-5">
+        <div className="flex justify-center flex-col items-center pb-10">
           <Image
             src="/assets/icons/dashboard/loading-error.svg"
             alt="loading error"
@@ -70,19 +69,18 @@ export default function Preorder() {
           Error loading data
         </div>
       ) : (
-      <CustomTable
-      emptyMessage="no preorder data found"
-
-        editRoute="/dashboard/inventory/preorder/edit/"
-        data={formattedData}
-        rows={10}
-        detailsRoute="/dashboard/inventory/preorder/"
-        columns={columns}
-        cardData={cardsData}
-        buttonText="Add Preorder"
-        ButtonEvent={handleClick}
-      />
+        <CustomTable
+          emptyMessage="no preorder data found"
+          editRoute="/dashboard/inventory/preorder/edit/"
+          data={formattedData}
+          rows={10}
+          detailsRoute="/dashboard/inventory/preorder/"
+          columns={columns}
+          cardData={cardsData}
+          buttonText="Add Preorder"
+          ButtonEvent={handleClick}
+        />
       )}
-    </div>
+    </>
   );
 }

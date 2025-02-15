@@ -7,19 +7,20 @@ import CardsSkelton from "../skelton/CardsSkelton";
 import Image from "next/image";
 
 export default function Category() {
-    const {  isLoading, error,data: itemCategories } = useGetItemCategoryQuery({});
-    if (itemCategories){
-
-      console.log(itemCategories);
-    }
+  const {
+    isLoading,
+    error,
+    data: itemCategories,
+  } = useGetItemCategoryQuery({});
+  if (itemCategories) {
+    console.log(itemCategories);
+  }
   const router = useRouter();
 
   const columns = [
     { field: "id", header: "ID" },
     { field: "name", header: "Name" },
   ];
-
- 
 
   const cardsData = [
     { title: "New requests", num: 145 },
@@ -32,14 +33,14 @@ export default function Category() {
     router.push("/dashboard/inventory/category-models/create");
   };
   return (
-    <div className="px-6 pb-25">
+    <>
       {isLoading ? (
-        <div className="bg-dashboardBg px-4 pt-4 pb-1 rounded-tr-[20px] rounded-bl-[20px] rounded-br-[20px] card mb-5 ">
+        <>
           <CardsSkelton />
           <TableSkelton />
-        </div>
+        </>
       ) : error ? (
-        <div className="flex justify-center flex-col items-center bg-dashboardBg pb-10 rounded-tr-[20px] rounded-bl-[20px] rounded-br-[20px] card mb-5">
+        <div className="flex justify-center flex-col items-center pb-10">
           <Image
             src="/assets/icons/dashboard/loading-error.svg"
             alt="loading error"
@@ -49,18 +50,17 @@ export default function Category() {
           Error loading data
         </div>
       ) : (
-      <CustomTable
-      emptyMessage="no customer requests data found"
-
-        editRoute="/dashboard/inventory/category-models/edit/"
-        data={itemCategories}
-        rows={10}
-        columns={columns}
-        cardData={cardsData}
-        buttonText="Add Category model"
-        ButtonEvent={handleClick}
-      />
+        <CustomTable
+          emptyMessage="no customer requests data found"
+          editRoute="/dashboard/inventory/category-models/edit/"
+          data={itemCategories}
+          rows={10}
+          columns={columns}
+          cardData={cardsData}
+          buttonText="Add Category model"
+          ButtonEvent={handleClick}
+        />
       )}
-    </div>
+    </>
   );
 }

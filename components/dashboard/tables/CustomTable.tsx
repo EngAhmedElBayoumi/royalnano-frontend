@@ -156,112 +156,110 @@ export default function CustomTable({
             )}
         </div>
       )}
-      <div className="bg-dashboardBg px-4 pt-4 pb-1 rounded-tr-[20px] rounded-bl-[20px] rounded-br-[20px] card mb-5 ">
-        {data && data.length > 0 ? (
-          <DataTable
-            value={customers}
-            paginator
-            rows={rows}
-            filters={filters}
-            globalFilterFields={columns.map((col) => col.field)}
-            header={header}
-            emptyMessage={<EmptyMessage  onClick={ButtonEvent}  emptyMessage={emptyMessage} />}
-            dataKey="id"
-            onRowClick={(e) => {
-              router.push(`${detailsRoute}${e.data.id}`);
-            }}
-            className="rounded-tl-[10px] rounded-tr-[10px] custom-header"
-            rowClassName={(data) => {
-              const rowIndex = customers.findIndex(
-                (item) => item.id === data.id
-              );
-              return `hoverable-row ${
-                rowIndex % 2 === 0 ? "bg-[#EAE4D1] mx-2 " : "bg-[#E9DDB1] mx-2"
-              }`;
-            }}
-          >
-            {columns.map((col, index) => (
-              <Column
-                key={col.field}
-                headerStyle={headerStyle}
-                field={col.field}
-                header={col.header}
-                className={`m-auto py-[13px] px-[38px] text-[14px] font-[500] border-r border-white border-[2px]`}
-                headerClassName={`text-center capitalize text-white text-[16px] font-[500] py-[13px] px-[38px] border-r border-white border-[2px] ${
-                  index === 0
-                    ? "first-column-header"
-                    : index === columns.length - 1
-                    ? ""
-                    : ""
-                }`}
-                body={(rowData: DataInTable) => {
-                  if (col.field === "verified") {
-                    return (
-                      <i
-                        className={`pi ${
-                          rowData[col.field]
-                            ? "pi-check-circle hover-bg-primary"
-                            : "pi-times-circle hover-bg-primary"
-                        }`}
-                      ></i>
-                    );
-                  }
-                  return rowData[col.field as keyof DataInTable];
-                }}
-              />
-            ))}
+      {data && data.length > 0 ? (
+        <DataTable
+          value={customers}
+          paginator
+          rows={rows}
+          filters={filters}
+          globalFilterFields={columns.map((col) => col.field)}
+          header={header}
+          emptyMessage={
+            <EmptyMessage onClick={ButtonEvent} emptyMessage={emptyMessage} />
+          }
+          dataKey="id"
+          onRowClick={(e) => {
+            router.push(`${detailsRoute}${e.data.id}`);
+          }}
+          className="rounded-tl-[10px] rounded-tr-[10px] custom-header"
+          rowClassName={(data) => {
+            const rowIndex = customers.findIndex((item) => item.id === data.id);
+            return `hoverable-row ${
+              rowIndex % 2 === 0 ? "bg-[#EAE4D1] mx-2 " : "bg-[#E9DDB1] mx-2"
+            }`;
+          }}
+        >
+          {columns.map((col, index) => (
+            <Column
+              key={col.field}
+              headerStyle={headerStyle}
+              field={col.field}
+              header={col.header}
+              className={`m-auto py-[13px] px-[38px] text-[14px] font-[500] border-r border-white border-[2px]`}
+              headerClassName={`text-center capitalize text-white text-[16px] font-[500] py-[13px] px-[38px] border-r border-white border-[2px] ${
+                index === 0
+                  ? "first-column-header"
+                  : index === columns.length - 1
+                  ? ""
+                  : ""
+              }`}
+              body={(rowData: DataInTable) => {
+                if (col.field === "verified") {
+                  return (
+                    <i
+                      className={`pi ${
+                        rowData[col.field]
+                          ? "pi-check-circle hover-bg-primary"
+                          : "pi-times-circle hover-bg-primary"
+                      }`}
+                    ></i>
+                  );
+                }
+                return rowData[col.field as keyof DataInTable];
+              }}
+            />
+          ))}
 
-            {(viewRoute || editRoute) && (
-              <Column
-                body={(rowData: DataInTable) => (
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <button className="text-gray-500">
-                        <Image
-                          className="hover:fill-white"
-                          width={30}
-                          height={30}
-                          alt="img"
-                          src="/assets/icons/menuIcon.svg"
-                        />
-                      </button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent className="w-40">
-                      {viewRoute && (
-                        <DropdownMenuItem
-                          className="bg-dashboardBg shadow-md py-1 cursor-pointer"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleViewClick(rowData.id, e);
-                          }}
-                        >
-                          View
-                        </DropdownMenuItem>
-                      )}
-                      {editRoute && (
-                        <DropdownMenuItem
-                          className="bg-dashboardBg shadow-md py-1 cursor-pointer  "
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleEditClick(rowData.id, e);
-                          }}
-                        >
-                          Edit
-                        </DropdownMenuItem>
-                      )}
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                )}
-                headerClassName="text-center  text-white text-[16px] font-[500] py-[13px] px-[38px] border-r border-white border-[2px] bg-primary rounded-tr-[1e0px]"
-                header="     "
-                style={{ width: "5rem", textAlign: "center" }}
-              />
-            )}
-          </DataTable>
-        ) : (
-          <EmptyMessage onClick={ButtonEvent} emptyMessage={emptyMessage} />
-        )}
-      </div>
+          {(viewRoute || editRoute) && (
+            <Column
+              body={(rowData: DataInTable) => (
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <button className="text-gray-500">
+                      <Image
+                        className="hover:fill-white"
+                        width={30}
+                        height={30}
+                        alt="img"
+                        src="/assets/icons/menuIcon.svg"
+                      />
+                    </button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="w-40">
+                    {viewRoute && (
+                      <DropdownMenuItem
+                        className="bg-dashboardBg shadow-md py-1 cursor-pointer"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleViewClick(rowData.id, e);
+                        }}
+                      >
+                        View
+                      </DropdownMenuItem>
+                    )}
+                    {editRoute && (
+                      <DropdownMenuItem
+                        className="bg-dashboardBg shadow-md py-1 cursor-pointer  "
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleEditClick(rowData.id, e);
+                        }}
+                      >
+                        Edit
+                      </DropdownMenuItem>
+                    )}
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              )}
+              headerClassName="text-center  text-white text-[16px] font-[500] py-[13px] px-[38px] border-r border-white border-[2px] bg-primary rounded-tr-[1e0px]"
+              header="     "
+              style={{ width: "5rem", textAlign: "center" }}
+            />
+          )}
+        </DataTable>
+      ) : (
+        <EmptyMessage onClick={ButtonEvent} emptyMessage={emptyMessage} />
+      )}
     </>
   );
 }
