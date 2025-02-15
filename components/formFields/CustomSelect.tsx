@@ -14,12 +14,15 @@ import {
 import { Control, FieldValues, Path } from "react-hook-form";
 
 interface CustomSelectProps<T extends FieldValues> {
-  control: Control<T>;
+  control?: Control<T>; 
   name: Path<T>;
   label?: string;
   placeholder: string;
+  className?:string;
   options: { value: string; label: string }[];
   readonly?: boolean;
+  value?: string; 
+  onChange?: (value: string) => void; 
 }
 
 const CustomSelect = <T extends FieldValues>({
@@ -29,8 +32,11 @@ const CustomSelect = <T extends FieldValues>({
   placeholder,
   options,
   readonly,
+  value,
+  onChange,
+  className
 }: CustomSelectProps<T>) => {
-  return (
+  return control ? (
     <FormField
       control={control}
       name={name}
@@ -40,7 +46,7 @@ const CustomSelect = <T extends FieldValues>({
           placeholder;
 
         return (
-          <FormItem>
+          <FormItem > 
             {label && (
               <FormLabel className="text-darkGray xl:text-sm">
                 {label}
@@ -73,6 +79,32 @@ const CustomSelect = <T extends FieldValues>({
         );
       }}
     />
+  ) : (
+    <FormItem>
+      {label && <FormLabel className="text-darkGray xl:text-sm">{label}</FormLabel>}
+      <FormControl>
+        <Select
+          onValueChange={onChange}
+          value={value}
+          disabled={readonly}
+        >
+          <SelectTrigger
+            className={` bg-[#F4F4F4] border-gray rounded-10   xl:py-7 min-w-[80px]  ${
+              !value ? "text-gray" : ""
+            } ${className}`}
+          >
+            {options.find((opt) => opt.value === value)?.label || placeholder}
+          </SelectTrigger>
+          <SelectContent>
+            {options.map((option) => (
+              <SelectItem key={option.value} value={option.value}>
+                {option.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </FormControl>
+    </FormItem>
   );
 };
 
