@@ -55,16 +55,15 @@ export default function ContactUs() {
   ];
 
   return (
-    <div className="px-6 pb-25">
+    <>
       <CustomTable
-                      emptyMessage="no contact data found"
-
+        emptyMessage="no contact data found"
         data={data}
         rows={10}
         columns={columns}
         cardData={cardsData}
         buttonText={undefined} // No button for adding entries
       />
-    </div>
+    </>
   );
 }

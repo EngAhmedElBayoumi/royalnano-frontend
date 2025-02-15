@@ -68,10 +68,9 @@ export default function Gallery() {
   };
 
   return (
-    <div className="px-6 pb-25">
+    <>
       <CustomTable
-                      emptyMessage="no gallery data found"
-
+        emptyMessage="no gallery data found"
         editRoute="/dashboard/website/gallery/edit/"
         data={data}
         rows={10}
@@ -80,6 +79,6 @@ export default function Gallery() {
         buttonText="Add Gallery Entry"
         ButtonEvent={handleClick}
       />
-    </div>
+    </>
   );
 }

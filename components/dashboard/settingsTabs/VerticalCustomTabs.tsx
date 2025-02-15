@@ -17,7 +17,7 @@ function VerticalCustomTabs({
   return (
     <Tabs
       defaultValue={defaultTab}
-      className="bg-white flex  mr-auto pt-4 mb-0 ltr:rounded-tr-[20px] rtl:rounded-tl-[20px] rounded-bl-[20px] rounded-br-[20px]  "
+      className="bg-white flex  mr-auto pt-4 mb-0 rounded-t-[20px] rounded-bl-[20px] rounded-br-[20px]  "
     >
       <TabsList className="bg-transparent flex flex-col  gap-2 justify-center mx-5">
         {tabs.map((tab, index) => (

@@ -40,14 +40,14 @@ export default function Items() {
   if (error) return <div>Error loading items</div>;
 
   return (
-    <div className="px-6 pb-25">
+    <>
       {isLoading ? (
-        <div className="bg-dashboardBg px-4 pt-4 pb-1 rounded-tr-[20px] rounded-bl-[20px] rounded-br-[20px] card mb-5 ">
+        <>
           <CardsSkelton />
           <TableSkelton />
-        </div>
+        </>
       ) : error ? (
-        <div className="flex justify-center flex-col items-center bg-dashboardBg pb-10 rounded-tr-[20px] rounded-bl-[20px] rounded-br-[20px] card mb-5">
+        <div className="flex justify-center flex-col items-center pb-10">
           <Image
             src="/assets/icons/dashboard/loading-error.svg"
             alt="loading error"
@@ -58,8 +58,7 @@ export default function Items() {
         </div>
       ) : (
         <CustomTable
-        emptyMessage="no items data found"
-
+          emptyMessage="no items data found"
           editRoute="/dashboard/inventory/items/edit/"
           data={data.results}
           rows={10}
@@ -69,6 +68,6 @@ export default function Items() {
           ButtonEvent={handleClick}
         />
       )}
-    </div>
+    </>
   );
 }

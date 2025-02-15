@@ -52,14 +52,14 @@ export default function Preorder() {
   };
 
   return (
-    <div className="px-6 pb-25">
+    <>
       {isLoading ? (
-        <div className="bg-dashboardBg px-4 pt-4 pb-1 ltr:rounded-tr-[20px] rtl:rounded-tl-[20px] rounded-bl-[20px] rounded-br-[20px] card mb-5 ">
+        <>
           <CardsSkelton />
           <TableSkelton />
-        </div>
+        </>
       ) : error ? (
-        <div className="flex justify-center flex-col items-center bg-dashboardBg pb-10 ltr:rounded-tr-[20px] rtl:rounded-tl-[20px] rounded-bl-[20px] rounded-br-[20px] card mb-5">
+        <div className="flex justify-center flex-col items-center pb-10">
           <Image
             src="/assets/icons/dashboard/loading-error.svg"
             alt="loading error"
@@ -81,6 +81,6 @@ export default function Preorder() {
           ButtonEvent={handleClick}
         />
       )}
-    </div>
+    </>
   );
 }
