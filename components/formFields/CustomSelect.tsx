@@ -48,7 +48,7 @@ const CustomSelect = <T extends FieldValues>({
         return (
           <FormItem>
             {label && (
-              <FormLabel className="text-darkGray xl:text-sm">
+              <FormLabel className="text-darkGray xl:text-sm ">
                 {label}
               </FormLabel>
             )}
@@ -57,7 +57,9 @@ const CustomSelect = <T extends FieldValues>({
                 onValueChange={field.onChange}
                 value={field.value}
                 disabled={readonly}
+                
               >
+
                 <SelectTrigger
                   className={`mt-1 bg-[#F4F4F4] border-gray rounded-10 px-2 py-5 xl:py-7  ${
                     !field.value ? "text-gray" : ""

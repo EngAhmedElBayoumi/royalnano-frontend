@@ -10,7 +10,13 @@ import CustomTextArea from "../formFields/TextArea";
 import CustomButton from "../formFields/CustomButton";
 import { bookingValidation } from "@/lib/validations/bookingValidation";
 
-export default function BookingForm() {
+export default function BookingForm({
+  locale,
+
+}: {
+  locale: string ;
+}) {
+  console.log("locale sent to form ", locale)
   const form = useForm({
     resolver: zodResolver(bookingValidation),
     defaultValues: {
@@ -33,6 +39,7 @@ export default function BookingForm() {
     label: branch,
     value: branch,
   }));
+
   return (
     <Form {...form}>
       <form
@@ -40,7 +47,7 @@ export default function BookingForm() {
         className=" gap-5 flex flex-col pt-[35px] pr-10 pl-7"
       >
         <div className=" grid grid-cols-1 lg:grid-cols-2">
-          <div className="mr-4  flex flex-col gap-4">
+          <div className={`  ${locale === "ar" ? "ml-4" : "mr-4"} flex flex-col gap-4 `}>
             <TextInput
               control={form.control}
               name="full_name"
@@ -56,6 +63,7 @@ export default function BookingForm() {
               label="Car Type"
             />{" "}
             <CustomSelect
+            // className=" flex flex-row-reverse "
               control={form.control}
               name="service"
               options={serviceNames}
@@ -68,7 +76,7 @@ export default function BookingForm() {
               name="phone_number"
               placeholder="Phone Number"
               label="Phone Number"
-              type="tel"
+              // type="tel"
               control={form.control}
             />
             <TextInput
