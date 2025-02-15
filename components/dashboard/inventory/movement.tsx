@@ -5,6 +5,7 @@ import { useGetMovementsQuery } from "@/redux/services/dashboard/movementApi";
 import CustomTable from "@/components/dashboard/tables/CustomTable";
 import TableSkelton from "@/components/dashboard/skelton/TableSkelton";
 import CardsSkelton from "@/components/dashboard/skelton/CardsSkelton";
+import { useTranslations } from "next-intl";
 
 // Define the type for movement
 interface Movement {
@@ -22,6 +23,7 @@ interface Movement {
 
 export default function Movement() {
   const router = useRouter();
+  const t = useTranslations("Add.Inventory");
 
   const {
     data: movementData = { results: [] },
@@ -86,7 +88,7 @@ export default function Movement() {
           rows={10}
           columns={columns}
           cardData={cardsData}
-          buttonText="Add Movement"
+          buttonText={t("movement")}
           ButtonEvent={handleClick}
         />
       )}

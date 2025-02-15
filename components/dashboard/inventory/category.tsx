@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import TableSkelton from "../skelton/TableSkelton";
 import CardsSkelton from "../skelton/CardsSkelton";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 export default function Category() {
   const {
@@ -16,6 +17,7 @@ export default function Category() {
     console.log(itemCategories);
   }
   const router = useRouter();
+  const t = useTranslations("Add.Inventory");
 
   const columns = [
     { field: "id", header: "ID" },
@@ -57,7 +59,7 @@ export default function Category() {
           rows={10}
           columns={columns}
           cardData={cardsData}
-          buttonText="Add Category model"
+          buttonText={t("categoryModel")}
           ButtonEvent={handleClick}
         />
       )}

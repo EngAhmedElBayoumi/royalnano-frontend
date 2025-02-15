@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { useGetItemsQuery } from "@/redux/services/dashboard/itemsApi";
 import CustomTable from "@/components/dashboard/tables/CustomTable";
 import TableSkelton from "@/components/dashboard/skelton/TableSkelton";
@@ -8,6 +9,7 @@ import CardsSkelton from "@/components/dashboard/skelton/CardsSkelton";
 
 export default function Items() {
   const router = useRouter();
+  const t = useTranslations("Add.Inventory");
 
   const { data, isLoading, error } = useGetItemsQuery({
     search: "",
@@ -64,7 +66,7 @@ export default function Items() {
           rows={10}
           columns={columns}
           cardData={cardsData}
-          buttonText="Add Item"
+          buttonText={t("item")}
           ButtonEvent={handleClick}
         />
       )}

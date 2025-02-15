@@ -5,6 +5,7 @@ import { useGetStockAdjustmentsQuery } from "@/redux/services/dashboard/stockApi
 import Image from "next/image";
 import TableSkelton from "@/components/dashboard/skelton/TableSkelton";
 import CardsSkelton from "@/components/dashboard/skelton/CardsSkelton";
+import { useTranslations } from "next-intl";
 
 // Define the type for stock adjustment
 interface StockAdjustment {
@@ -21,6 +22,7 @@ interface StockAdjustment {
 
 export default function StockAdjustment() {
   const router = useRouter();
+  const t = useTranslations("Add.Inventory");
 
   const {
     data: stockAdjustmentData = { results: [] },
@@ -87,7 +89,7 @@ export default function StockAdjustment() {
       cardData={cardsData}
       rows={10}
       columns={columns}
-      buttonText="Add Stock Adjustment"
+      buttonText={t("stockAdjustment")}
       ButtonEvent={handleClick}
     />
   );

@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import TableSkelton from "../skelton/TableSkelton";
 import CardsSkelton from "../skelton/CardsSkelton";
+import { useTranslations } from "next-intl";
 
 export interface Item {
   item: {
@@ -24,6 +25,7 @@ export default function Preorder() {
   }
 
   const router = useRouter();
+  const t = useTranslations("Add.Inventory");
 
   const columns = [
     { field: "itemCode", header: "Item Code" },
@@ -77,7 +79,7 @@ export default function Preorder() {
           detailsRoute="/dashboard/inventory/preorder/"
           columns={columns}
           cardData={cardsData}
-          buttonText="Add Preorder"
+          buttonText={t("preorder")}
           ButtonEvent={handleClick}
         />
       )}

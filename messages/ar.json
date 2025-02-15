@@ -1,8 +1,4 @@
 {
-  "HomePage": {
-    "title": "العنوان!",
-    "about": "معلومات"
-  },
   "Sidebar": {
     "home": "الرئيسية",
     "clients": "العملاء",
@@ -21,5 +17,14 @@
     "preorder": "الطلب المسبق",
     "categoryModel": "نموذج الفئة",
     "items": "العناصر"
+  },
+  "Add": {
+    "Inventory": {
+      "item": "إضافة عنصر",
+      "stockAdjustment": "إضافة تعديل المخزون",
+      "movement": "إضافة حركة",
+      "preorder": "إضافة طلب مسبق",
+      "categoryModel": "إضافة نموذج الفئة"
+    }
   }
 }

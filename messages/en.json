@@ -1,8 +1,4 @@
 {
-  "HomePage": {
-    "title": "Hello world!",
-    "about": "Go to the about page"
-  },
   "Sidebar": {
     "home": "Home",
     "clients": "Clients",
@@ -21,5 +17,14 @@
     "preorder": "Preorder",
     "categoryModel": "Category Model",
     "items": "Items"
+  },
+  "Add": {
+    "Inventory": {
+      "item": "Add Item",
+      "stockAdjustment": "Add Stock Adjustment",
+      "movement": "Add Movement",
+      "preorder": "Add Preorder",
+      "categoryModel": "Add Category Model"
+    }
   }
 }

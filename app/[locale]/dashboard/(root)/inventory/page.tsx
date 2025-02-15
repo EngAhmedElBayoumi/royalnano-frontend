@@ -1,12 +1,12 @@
 import React from "react";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import CustomTabs from "@/components/dashboard/CustomTabs";
 import Items from "@/components/dashboard/inventory/items";
 import Category from "@/components/dashboard/inventory/category";
 import Preorder from "@/components/dashboard/inventory/preorder";
 import Movement from "@/components/dashboard/inventory/movement";
 import StockAdjustment from "@/components/dashboard/inventory/stockAdjustment";
-import { useTranslations } from "next-intl";
 
 function InventoryPage() {
   const t = useTranslations("Inventory");
