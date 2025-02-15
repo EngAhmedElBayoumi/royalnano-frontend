@@ -1,6 +1,25 @@
 {
-    "HomePage": {
-        "title": "العنوان!",
-        "about": "معلومات"
-    }
+  "HomePage": {
+    "title": "العنوان!",
+    "about": "معلومات"
+  },
+  "Sidebar": {
+    "home": "الرئيسية",
+    "clients": "العملاء",
+    "customerRequests": "طلبات العملاء",
+    "branches": "الفروع",
+    "hr": "الموارد البشرية",
+    "inventory": "المخزون",
+    "website": "الموقع الإلكتروني",
+    "sales": "المبيعات",
+    "settings": "الإعدادات",
+    "logout": "تسجيل الخروج"
+  },
+  "Inventory": {
+    "stockAdjustment": "تعديل المخزون",
+    "movement": "الحركة",
+    "preorder": "الطلب المسبق",
+    "categoryModel": "نموذج الفئة",
+    "items": "العناصر"
+  }
 }

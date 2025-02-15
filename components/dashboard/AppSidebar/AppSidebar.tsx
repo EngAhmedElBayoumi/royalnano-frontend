@@ -14,11 +14,12 @@ import Image from "next/image";
 import { sidebarLinks } from "@/data/dashboard/sidebarData";
 import { Link } from "@/i18n/routing";
 import { usePathname } from "next/navigation";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 export function AppSidebar() {
   const currentPath = usePathname();
   const locale = useLocale();
+  const t = useTranslations("Sidebar");
 
   return (
     <Sidebar collapsible="icon" side={locale === "ar" ? "right" : "left"}>
@@ -48,12 +49,12 @@ export function AppSidebar() {
                       <Link href={`/dashboard${link.path}`} passHref>
                         <Image
                           src={`/assets/icons/sidebar/${link.icon}`}
-                          alt={link.name}
+                          alt={t(link.name)}
                           width={30}
                           height={30}
                         />
                         <span className="text-primary capitalize">
-                          {link.name}
+                          {t(link.name)}
                         </span>
                       </Link>
                     </SidebarMenuButton>
@@ -75,21 +76,21 @@ export function AppSidebar() {
               <Link href="/dashboard/settings" passHref>
                 <Image
                   src={`/assets/icons/sidebar/setting.svg`}
-                  alt="settings"
+                  alt={t("settings")}
                   width={30}
                   height={30}
                 />
-                <span className="text-primary">settings</span>
+                <span className="text-primary">{t("settings")}</span>
               </Link>
             </SidebarMenuButton>
             <SidebarMenuButton className="py-6 !rounded-10 !bg-transparent">
               <Image
                 src={`/assets/icons/sidebar/logout.svg`}
-                alt="settings"
+                alt={t("logout")}
                 width={30}
                 height={30}
               />
-              <span className="text-primary">logout</span>
+              <span className="text-primary">{t("logout")}</span>
             </SidebarMenuButton>
           </SidebarGroupContent>
         </SidebarGroup>

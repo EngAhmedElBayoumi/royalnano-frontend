@@ -6,11 +6,14 @@ import Category from "@/components/dashboard/inventory/category";
 import Preorder from "@/components/dashboard/inventory/preorder";
 import Movement from "@/components/dashboard/inventory/movement";
 import StockAdjustment from "@/components/dashboard/inventory/stockAdjustment";
+import { useTranslations } from "next-intl";
 
 function InventoryPage() {
+  const t = useTranslations("Inventory");
+
   const tabs = [
     {
-      label: "Items",
+      label: t("items"),
       icon: (
         <Image
           src="/assets/icons/dashboard/inventory/items.svg"
@@ -22,6 +25,7 @@ function InventoryPage() {
       content: <Items />,
     },
     {
+      label: t("categoryModel"),
       icon: (
         <Image
           src="/assets/icons/dashboard/inventory/category.svg"
@@ -30,10 +34,10 @@ function InventoryPage() {
           height="24"
         />
       ),
-      label: "category model",
       content: <Category />,
     },
     {
+      label: t("preorder"),
       icon: (
         <Image
           src="/assets/icons/dashboard/inventory/preorder.svg"
@@ -42,10 +46,10 @@ function InventoryPage() {
           height="24"
         />
       ),
-      label: "preorder",
       content: <Preorder />,
     },
     {
+      label: t("movement"),
       icon: (
         <Image
           src="/assets/icons/dashboard/inventory/movement.svg"
@@ -54,10 +58,10 @@ function InventoryPage() {
           height="24"
         />
       ),
-      label: "movement",
       content: <Movement />,
     },
     {
+      label: t("stockAdjustment"),
       icon: (
         <Image
           src="/assets/icons/dashboard/inventory/stock.svg"
@@ -66,12 +70,11 @@ function InventoryPage() {
           height="24"
         />
       ),
-      label: "stock adjustment",
       content: <StockAdjustment />,
     },
   ];
 
-  return <CustomTabs tabs={tabs} defaultTab="Items" />;
+  return <CustomTabs tabs={tabs} defaultTab={t("items")} />;
 }
 
 export default InventoryPage;
