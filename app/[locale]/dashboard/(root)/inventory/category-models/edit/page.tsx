@@ -3,15 +3,18 @@ import CategoryForm, {
   CategoryFormValues,
 } from "@/components/dashboard/forms/inventory/CategoryForm";
 import IconWithTitle from "@/components/dashboard/IconWithTitle";
-import { useGetCategoryByIdQuery, useUpdateCategoryMutation } from "@/redux/services/dashboard/itemCategoryApi";
-import {  useRouter, useSearchParams } from "next/navigation";
+import {
+  useGetCategoryByIdQuery,
+  useUpdateCategoryMutation,
+} from "@/redux/services/dashboard/itemCategoryApi";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function EditCategory() {
-      const router = useRouter();
-  
+  const router = useRouter();
+
   const [updateCategory] = useUpdateCategoryMutation();
   const searchParams = useSearchParams();
-  const id = searchParams.get("id"); 
+  const id = searchParams.get("id");
   console.log("ID:", id);
   const { data: category, isLoading, error } = useGetCategoryByIdQuery(id);
 
@@ -29,11 +32,9 @@ export default function EditCategory() {
       const response = await updateCategory({ ...payload, id });
       console.log("req sent");
       console.log(response);
-      router.push("/dashboard/inventory"); 
-
+      router.push("/dashboard/inventory");
     } catch (error) {
       console.log(error);
-
     }
   };
 
@@ -51,7 +52,7 @@ export default function EditCategory() {
         />
       </div>
 
-      <div className="bg-dashboardBg px-6 pt-5 pb-8 rounded-r-[20px] rounded-bl-[20px] lg:pr-[200px]">
+      <div className="bg-dashboardBg px-6 pt-5 pb-8 ltr:rounded-r-[20px] ltr:rounded-bl-[20px] rtl:rounded-l-[20px] rtl:rounded-br-[20px] ltr:lg:pr-[200px] rtl:lg:pl-[200px]">
         <CategoryForm onSubmit={handleSubmit} defaultValues={defaultValues} />
       </div>
     </main>

@@ -8,51 +8,43 @@ import { useCreatePreorderMutation } from "@/redux/services/dashboard/preorderAp
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-
 export default function CreatePreorder() {
   const router = useRouter();
-  
-  const [createPreorder] = useCreatePreorderMutation()
-  const [isModalOpen, setIsModalOpen] = useState(false); 
+
+  const [createPreorder] = useCreatePreorderMutation();
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const handleModalChange = (isOpen: boolean) => {
-    setIsModalOpen(isOpen); 
+    setIsModalOpen(isOpen);
     if (!isOpen) {
-      router.push("/dashboard/inventory"); 
+      router.push("/dashboard/inventory");
     }
   };
-  
-  
+
   const handleSubmit = async (data: PreorderFormValues) => {
-    try{
-      console.log("submit btn clicked")
+    try {
+      console.log("submit btn clicked");
       const payload = {
         ...data,
-        item: Number(data.item), 
-
+        item: Number(data.item),
       };
       console.log(data);
-     const response= await createPreorder(payload);
-      console.log("req sent")
-      console.log(response)
-      if(response.error){
-        throw new Error("creation failed")
+      const response = await createPreorder(payload);
+      console.log("req sent");
+      console.log(response);
+      if (response.error) {
+        throw new Error("creation failed");
       }
-    }
-    
-    catch(error){
-      setIsModalOpen(true); 
+    } catch (error) {
+      setIsModalOpen(true);
 
-      console.log(error)
-      console.log("error in c reation")
-     
+      console.log(error);
+      console.log("error in c reation");
     }
-    
   };
-
 
   return (
     <main className="mx-7 my-5">
-       <CustomModal
+      <CustomModal
         isOpen={isModalOpen}
         onChange={handleModalChange}
         title="Error!"
@@ -67,10 +59,7 @@ export default function CreatePreorder() {
         />
       </div>
 
-      <div className="bg-[#F8F7F7] px-6 pt-5 pb-8 rounded-r-[20px] rounded-bl-[20px] lg:pr-[200px]">
-     
-
-        
+      <div className="bg-[#F8F7F7] px-6 pt-5 pb-8 ltr:rounded-r-[20px] ltr:rounded-bl-[20px] rtl:rounded-l-[20px] rtl:rounded-br-[20px] ltr:lg:pr-[200px] rtl:lg:pl-[200px]">
         <PreorderForm onSubmit={handleSubmit} />
       </div>
     </main>

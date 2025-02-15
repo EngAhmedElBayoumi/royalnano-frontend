@@ -68,9 +68,9 @@ export default function EditItem() {
         />
       </div>
 
-      <div className="bg-dashboardBg px-6 pt-5 pb-8 rounded-r-[20px] rounded-bl-[20px]">
+      <div className="bg-dashboardBg px-6 pt-5 pb-8 ltr:rounded-r-[20px] ltr:rounded-bl-[20px] rtl:rounded-l-[20px] rtl:rounded-br-[20px]">
         {isLoading ? (
-          <div className="lg:pr-[200px]">
+          <div className="ltr:lg:pr-[200px] rtl:lg:pl-[200px]">
             <FormSkelton />
           </div>
         ) : error ? (
@@ -84,7 +84,7 @@ export default function EditItem() {
             Error loading data
           </div>
         ) : (
-          <div className="lg:pr-[200px]">
+          <div className="ltr:lg:pr-[200px] rtl:lg:pl-[200px]">
             <ItemForm onSubmit={handleSubmit} defaultValues={defaultValues} />
           </div>
         )}
