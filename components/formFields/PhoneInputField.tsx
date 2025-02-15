@@ -33,7 +33,7 @@ const PhoneInputField = <T extends FieldValues>({
           {label && (
             <FormLabel className="text-darkGray xl:text-sm">{label}</FormLabel>
           )}
-          <FormControl>
+          <FormControl style={{ direction: "ltr" }}>
             <PhoneInput
               defaultCountry={defaultCountry}
               value={field.value}

@@ -14,15 +14,15 @@ import {
 import { Control, FieldValues, Path } from "react-hook-form";
 
 interface CustomSelectProps<T extends FieldValues> {
-  control?: Control<T>; 
+  control?: Control<T>;
   name: Path<T>;
   label?: string;
   placeholder: string;
-  className?:string;
+  className?: string;
   options: { value: string; label: string }[];
   readonly?: boolean;
-  value?: string; 
-  onChange?: (value: string) => void; 
+  value?: string;
+  onChange?: (value: string) => void;
 }
 
 const CustomSelect = <T extends FieldValues>({
@@ -34,7 +34,7 @@ const CustomSelect = <T extends FieldValues>({
   readonly,
   value,
   onChange,
-  className
+  className,
 }: CustomSelectProps<T>) => {
   return control ? (
     <FormField
@@ -46,7 +46,7 @@ const CustomSelect = <T extends FieldValues>({
           placeholder;
 
         return (
-          <FormItem > 
+          <FormItem>
             {label && (
               <FormLabel className="text-darkGray xl:text-sm ">
                 {label}
@@ -59,13 +59,12 @@ const CustomSelect = <T extends FieldValues>({
                 disabled={readonly}
                 
               >
-               <SelectTrigger
-  className={`mt-1 bg-[#F4F4F4] border-gray rounded-10 px-2 py-5 xl:py-7 
-  min-w-[270px] md:min-w-[400px] flex justify-between items-center
- text-right
-  ltr:pr-8 rtl:pl-8`}
->
 
+                <SelectTrigger
+                  className={`mt-1 bg-[#F4F4F4] border-gray rounded-10 px-2 py-5 xl:py-7  ${
+                    !field.value ? "text-gray" : ""
+                  }`}
+                >
                   {selectedLabel}
                 </SelectTrigger>
                 <SelectContent>
@@ -84,13 +83,11 @@ const CustomSelect = <T extends FieldValues>({
     />
   ) : (
     <FormItem>
-      {label && <FormLabel className="text-darkGray xl:text-sm">{label}</FormLabel>}
+      {label && (
+        <FormLabel className="text-darkGray xl:text-sm">{label}</FormLabel>
+      )}
       <FormControl>
-        <Select
-          onValueChange={onChange}
-          value={value}
-          disabled={readonly}
-        >
+        <Select onValueChange={onChange} value={value} disabled={readonly}>
           <SelectTrigger
             className={` bg-[#F4F4F4] border-gray rounded-10   xl:py-7 min-w-[80px]  ${
               !value ? "text-gray" : ""
