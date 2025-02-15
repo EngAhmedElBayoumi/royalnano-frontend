@@ -10,11 +10,13 @@ const cairo = Cairo({ subsets: ["latin"] });
 
 export default async function LocaleLayout({
   children,
-  params: { locale },
+  params,
 }: {
   children: React.ReactNode;
-  params: { locale: string };
+  params?: { locale?: string }; //عملتها اوبشنال وحطيت ديفولت
 }) {
+  const locale = params?.locale ?? "en"; // Default to "en" if undefined
+
   // Ensure that the incoming `locale` is valid
   if (!routing.locales.includes(locale as "en" | "ar")) {
     notFound();
