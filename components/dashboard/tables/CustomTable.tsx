@@ -156,7 +156,7 @@ export default function CustomTable({
             )}
         </div>
       )}
-      <div className="bg-dashboardBg px-4 pt-4 pb-1 rounded-tr-[20px] rounded-bl-[20px] rounded-br-[20px] card mb-5 ">
+      <div className="bg-dashboardBg px-4 pt-4 pb-1 ltr:rounded-tr-[20px] rtl:rounded-tl-[20px] rounded-bl-[20px] rounded-br-[20px] card mb-5 ">
         {data && data.length > 0 ? (
           <DataTable
             value={customers}
@@ -165,7 +165,9 @@ export default function CustomTable({
             filters={filters}
             globalFilterFields={columns.map((col) => col.field)}
             header={header}
-            emptyMessage={<EmptyMessage  onClick={ButtonEvent}  emptyMessage={emptyMessage} />}
+            emptyMessage={
+              <EmptyMessage onClick={ButtonEvent} emptyMessage={emptyMessage} />
+            }
             dataKey="id"
             onRowClick={(e) => {
               router.push(`${detailsRoute}${e.data.id}`);

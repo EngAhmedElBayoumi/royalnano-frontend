@@ -1,7 +1,8 @@
-"use client"
+"use client";
 import React, { useEffect, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useLocale } from "next-intl";
 
 interface CustomTabsProps {
   tabs: Array<{
@@ -15,6 +16,8 @@ interface CustomTabsProps {
 function CustomTabs({ tabs, defaultTab = tabs[0]?.label }: CustomTabsProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const locale = useLocale();
+
   const [activeTab, setActiveTab] = useState<string>(() => {
     return searchParams.get("tab") || defaultTab;
   });
@@ -22,14 +25,15 @@ function CustomTabs({ tabs, defaultTab = tabs[0]?.label }: CustomTabsProps) {
   useEffect(() => {
     const url = new URL(window.location.href);
     url.searchParams.set("tab", activeTab);
-    router.replace(url.toString(), { scroll: false }); 
+    router.replace(url.toString(), { scroll: false });
   }, [activeTab, router]);
   return (
     <Tabs
-    value={activeTab}
-    onValueChange={setActiveTab} 
+      value={activeTab}
+      onValueChange={setActiveTab}
       defaultValue={defaultTab}
-      className="bg-white mr-auto pt-4 mb-0 rounded-tr-[20px] rounded-bl-[20px] rounded-br-[20px]  "
+      className="bg-white mr-auto pt-4 mb-0 rounded-tr-[20px] rounded-bl-[20px] rounded-br-[20px]"
+      dir={locale === "ar" ? "rtl" : "ltr"}
     >
       <TabsList className="bg-transparent flex gap-2 justify-start mx-5">
         {tabs.map((tab, index) => (
