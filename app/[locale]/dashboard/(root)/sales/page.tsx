@@ -6,7 +6,7 @@ import Salaries from "@/components/dashboard/hr/salaries";
 import Vacations from "@/components/dashboard/hr/vacations";
 import Image from "next/image";
 import React from "react";
-function HrPage() {
+function SalesPage() {
   const tabs = [
     {
       label: "Sales",
@@ -14,7 +14,7 @@ function HrPage() {
         <Image
           width="24"
           height="24"
-          alt="employees"
+          alt="sales"
           src="/assets/icons/dashboard/sales/sales.svg"
         />
       ),
@@ -25,7 +25,7 @@ function HrPage() {
         <Image
           width="24"
           height="24"
-          alt="salaries"
+          alt="customer"
           src="/assets/icons/dashboard/sales/customer.svg"
         />
       ),
@@ -37,7 +37,7 @@ function HrPage() {
         <Image
           width="24"
           height="24"
-          alt="bonuses"
+          alt="quotation"
           src="/assets/icons/dashboard/sales/quotation.svg"
         />
       ),
@@ -49,7 +49,7 @@ function HrPage() {
         <Image
           width="24"
           height="24"
-          alt="vacations"
+          alt="order"
           src="/assets/icons/dashboard/sales/order.svg"
         />
       ),
@@ -61,7 +61,7 @@ function HrPage() {
         <Image
           width="24"
           height="24"
-          alt="vacations"
+          alt="invoice"
           src="/assets/icons/dashboard/sales/invoice.svg"
         />
       ),
@@ -73,7 +73,7 @@ function HrPage() {
         <Image
           width="24"
           height="24"
-          alt="vacations"
+          alt="receipt"
           src="/assets/icons/dashboard/sales/receipt.svg"
         />
       ),
@@ -90,4 +90,4 @@ function HrPage() {
   );
 }
 
-export default HrPage;
+export default SalesPage;
