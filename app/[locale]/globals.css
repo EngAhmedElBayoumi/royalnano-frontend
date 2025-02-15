@@ -8,6 +8,16 @@
   --secondary: #000000;
   --gray: #969696;
 }
+::-webkit-scrollbar {
+  width: 0.2rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--primary);
+  width: 0.5rem;
+  border-radius: 0.5rem;
+}
+
 .data-\[state\=active\]\:bg-dashboardBg[data-state="active"] img {
   filter: brightness(0) saturate(100%) invert(68%) sepia(42%) saturate(528%)
     hue-rotate(10deg) brightness(96%) contrast(85%);
