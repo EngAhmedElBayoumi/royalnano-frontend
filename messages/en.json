@@ -1,6 +1,18 @@
 {
-    "HomePage": {
-        "title": "Hello world!",
-        "about": "Go to the about page"
-    }
+  "HomePage": {
+    "title": "Hello world!",
+    "about": "Go to the about page"
+  },
+  "Sidebar": {
+    "home": "Home",
+    "clients": "Clients",
+    "customerRequests": "Customer Requests",
+    "branches": "Branches",
+    "hr": "HR",
+    "inventory": "Inventory",
+    "website": "Website",
+    "sales": "Sales",
+    "settings": "Settings",
+    "logout": "Logout"
+  }
 }
