@@ -10,4 +10,5 @@ export const sidebarLinks = [
   { path: "/hr", name: "hr", icon: "hr.svg" },
   { path: "/inventory", name: "Inventory", icon: "inventory.svg" },
   { path: "/website", name: "website", icon: "website.svg" },
+  { path: "/sales", name: "Sales", icon: "sales.svg" },
 ];
