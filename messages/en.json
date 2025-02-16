@@ -26,5 +26,7 @@
       "preorder": "Add Preorder",
       "categoryModel": "Add Category Model"
     }
-  }
+  },
+  "edit": "edit",
+  "view": "view"
 }

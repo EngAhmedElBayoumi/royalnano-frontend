@@ -22,6 +22,7 @@ import {
 } from "@radix-ui/react-dropdown-menu";
 import "./CustomTable.css";
 import InfoCardsComponent, { InfoCardInterface } from "../cards/InfoCard";
+import { useTranslations } from "next-intl";
 
 export interface DataInTable {
   id: number;
@@ -75,6 +76,7 @@ export default function CustomTable({
   emptyMessage,
 }: CustomTableProps) {
   const router = useRouter();
+  const t = useTranslations();
   const [customers, setCustomers] = useState<DataInTable[]>(data);
   const [filters, setFilters] = useState<DataTableFilterMeta>({
     global: { value: null, matchMode: FilterMatchMode.CONTAINS },
@@ -222,24 +224,24 @@ export default function CustomTable({
                   <DropdownMenuContent className="w-40">
                     {viewRoute && (
                       <DropdownMenuItem
-                        className="bg-dashboardBg shadow-md py-1 cursor-pointer"
+                        className="bg-dashboardBg shadow-md py-1 cursor-pointer capitalize"
                         onClick={(e) => {
                           e.stopPropagation();
                           handleViewClick(rowData.id, e);
                         }}
                       >
-                        View
+                        {t("view")}
                       </DropdownMenuItem>
                     )}
                     {editRoute && (
                       <DropdownMenuItem
-                        className="bg-dashboardBg shadow-md py-1 cursor-pointer  "
+                        className="bg-dashboardBg shadow-md py-1 cursor-pointer capitalize"
                         onClick={(e) => {
                           e.stopPropagation();
                           handleEditClick(rowData.id, e);
                         }}
                       >
-                        Edit
+                        {t("edit")}
                       </DropdownMenuItem>
                     )}
                   </DropdownMenuContent>
