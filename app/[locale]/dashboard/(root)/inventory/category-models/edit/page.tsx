@@ -1,26 +1,33 @@
 "use client";
 import { useState } from "react";
-import CategoryForm, {
-  CategoryFormValues,
-} from "@/components/dashboard/forms/inventory/CategoryForm";
-import IconWithTitle from "@/components/dashboard/IconWithTitle";
+import Image from "next/image";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
+
 import {
   useGetCategoryByIdQuery,
   useUpdateCategoryMutation,
 } from "@/redux/services/dashboard/itemCategoryApi";
-import { useRouter, useSearchParams } from "next/navigation";
+
+import CategoryForm, {
+  CategoryFormValues,
+} from "@/components/dashboard/forms/inventory/CategoryForm";
+import IconWithTitle from "@/components/dashboard/IconWithTitle";
 import CustomModal from "@/components/modals/CustomModal";
-import { useTranslations } from "next-intl";
+import FormSkelton from "@/components/dashboard/skelton/FormSkelton";
 
 export default function EditCategory() {
   const router = useRouter();
-  const [updateCategory] = useUpdateCategoryMutation();
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
 
+  const [updateCategory] = useUpdateCategoryMutation();
   const { data: category, isLoading, error } = useGetCategoryByIdQuery(id);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   const t = useTranslations("Edit.Inventory");
+  const tabTranslate = useTranslations("Inventory");
 
   const defaultValues: CategoryFormValues = {
     name: category?.name || "",
@@ -31,22 +38,22 @@ export default function EditCategory() {
   };
   const handleSubmit = async (data: CategoryFormValues) => {
     try {
-      console.log("submit btn clicked");
       const payload = {
         ...data,
       };
-      console.log(data);
       const response = await updateCategory({ ...payload, id });
-      console.log("req sent");
-      console.log(response);
-      router.push("/dashboard/inventory");
+
+      if (response.error) throw new Error("creation failed");
+      else
+        router.push(
+          `/dashboard/inventory?tab=${tabTranslate("categoryModel")}`
+        );
     } catch (error) {
+      setIsModalOpen(true);
+
       console.log(error);
     }
   };
-
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error loading category data</div>;
 
   return (
     <main className="mx-7 my-5">
@@ -66,7 +73,28 @@ export default function EditCategory() {
       </div>
 
       <div className="bg-dashboardBg px-6 pt-5 pb-8 ltr:rounded-r-[20px] ltr:rounded-bl-[20px] rtl:rounded-l-[20px] rtl:rounded-br-[20px] ltr:lg:pr-[200px] rtl:lg:pl-[200px]">
-        <CategoryForm onSubmit={handleSubmit} defaultValues={defaultValues} />
+        {isLoading ? (
+          <div className="ltr:lg:pr-[200px] rtl:lg:pl-[200px]">
+            <FormSkelton />
+          </div>
+        ) : error ? (
+          <div className="flex justify-center flex-col items-center">
+            <Image
+              src="/assets/icons/dashboard/loading-error.svg"
+              alt="loading error"
+              width="400"
+              height="300"
+            />
+            Error loading data
+          </div>
+        ) : (
+          <div className="ltr:lg:pr-[200px] rtl:lg:pl-[200px]">
+            <CategoryForm
+              onSubmit={handleSubmit}
+              defaultValues={defaultValues}
+            />
+          </div>
+        )}
       </div>
     </main>
   );

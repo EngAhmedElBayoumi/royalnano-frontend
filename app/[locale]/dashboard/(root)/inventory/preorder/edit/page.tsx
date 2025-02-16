@@ -19,7 +19,9 @@ export default function EditPreorder() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
+
   const t = useTranslations("Edit.Inventory");
+  const tabTranslate = useTranslations("Inventory");
 
   const [updatePreorder] = useUpdatePreorderMutation();
   const { data, isLoading, error } = useGetPreorderByIdQuery(id);
@@ -43,7 +45,7 @@ export default function EditPreorder() {
       const response = await updatePreorder({ id, data: payload });
 
       if (response.error) throw new Error("creation failed");
-      else router.push("/dashboard/inventory");
+      else router.push(`/dashboard/inventory?tab=${tabTranslate("preorder")}`);
     } catch (error) {
       setIsModalOpen(true);
       console.log(error);
