@@ -12,6 +12,7 @@ import ItemForm, {
 import IconWithTitle from "@/components/dashboard/IconWithTitle";
 import CustomModal from "@/components/modals/CustomModal";
 import FormSkelton from "@/components/dashboard/skelton/FormSkelton";
+import { useTranslations } from "next-intl";
 
 export default function EditItem() {
   const router = useRouter();
@@ -20,6 +21,7 @@ export default function EditItem() {
 
   const [updateItem] = useUpdateItemMutation();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const t = useTranslations("Edit.Inventory");
 
   const { data, isLoading, error } = useGetItemByIdQuery(id);
 
@@ -41,7 +43,7 @@ export default function EditItem() {
         supplier: Number(data.supplier),
       };
 
-      const response = await updateItem({ id: id, data: payload });
+      const response = await updateItem({ id, data: payload });
 
       if (response.error) throw new Error("creation failed");
       else router.push("/dashboard/inventory");
@@ -62,7 +64,7 @@ export default function EditItem() {
       <div className="flex">
         <IconWithTitle
           imageSrc="/assets/icons/edit.svg"
-          title="Edit Item"
+          title={t("item")}
           backgroundColor="#F8F7F7"
           textColor="primary"
         />

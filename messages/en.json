@@ -28,5 +28,18 @@
     }
   },
   "edit": "edit",
-  "view": "view"
+  "Edit": {
+    "Inventory": {
+      "item": "Edit Item",
+      "preorder": "Edit Preorder",
+      "categoryModel": "Edit Category Model"
+    }
+  },
+  "view": "view",
+  "View": {
+    "Inventory": {
+      "stockAdjustment": "View Stock Adjustment",
+      "movement": "View Movement"
+    }
+  }
 }

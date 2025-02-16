@@ -28,5 +28,18 @@
     }
   },
   "edit": "تعديل",
-  "view": "عرض"
+  "Edit": {
+    "Inventory": {
+      "item": "تعديل العنصر",
+      "preorder": "تعديل الطلب المسبق",
+      "categoryModel": "تعديل نموذج الفئة"
+    }
+  },
+  "view": "عرض",
+  "View": {
+    "Inventory": {
+      "stockAdjustment": "عرض المخزون",
+      "movement": "عرض الحركة"
+    }
+  }
 }

@@ -9,6 +9,7 @@ import { useTranslations } from "next-intl";
 
 export interface Item {
   item: {
+    id: number;
     item_code: string;
     item_name: string;
   };
@@ -31,7 +32,6 @@ export default function Preorder() {
     { field: "itemCode", header: "Item Code" },
     { field: "preorderLevel", header: "Preorder Level" },
     { field: "description", header: "Description" },
-    // { field: "date", header: "Date" },
   ];
 
   const cardsData = [

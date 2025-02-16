@@ -8,12 +8,11 @@ import TextInput from "@/components/formFields/TextInput";
 import TextArea from "@/components/formFields/TextArea";
 import { Link } from "@/i18n/routing";
 import CustomSelect from "@/components/formFields/CustomSelect";
-import { useGetPreorderQuery } from "@/redux/services/dashboard/preorderApi";
-import { Item } from "../../inventory/preorder";
 import { useState } from "react";
 import CustomModal from "@/components/modals/CustomModal";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { useGetItemsQuery } from "@/redux/services/dashboard/itemsApi";
 
 interface PreorderFormProps {
   onSubmit: (data: PreorderFormValues) => Promise<void>;
@@ -31,12 +30,12 @@ const PreorderForm = ({ onSubmit, defaultValues }: PreorderFormProps) => {
   const router = useRouter();
   const t = useTranslations("Inventory");
 
-  const { data: inventoryItems } = useGetPreorderQuery({});
+  const { data: items } = useGetItemsQuery({});
 
   const itemsOptions =
-    inventoryItems?.results?.map((item: Item) => ({
-      value: String(item.item.item_code),
-      label: item.item.item_name,
+    items?.results?.map((item: { id: number; item_name: string }) => ({
+      value: String(item.id),
+      label: item.item_name,
     })) || [];
 
   const form = useForm({
