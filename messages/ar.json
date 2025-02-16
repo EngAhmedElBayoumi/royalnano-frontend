@@ -28,12 +28,12 @@
       "sellingPrice": "سعر البيع",
       "supplier": "المورد",
       "description": "الوصف",
+      "addItem": "إضافة عنصر",
       "noItemsDataFound": "لا توجد بيانات عناصر"
     }
   },
   "Add": {
     "Inventory": {
-      "item": "إضافة عنصر",
       "stockAdjustment": "إضافة تعديل المخزون",
       "movement": "إضافة حركة",
       "preorder": "إضافة طلب مسبق",

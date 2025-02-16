@@ -28,12 +28,12 @@
       "sellingPrice": "Selling Price",
       "supplier": "Supplier",
       "description": "Description",
+      "addItem": "Add Item",
       "noItemsDataFound": "No items data found"
     }
   },
   "Add": {
     "Inventory": {
-      "item": "Add Item",
       "stockAdjustment": "Add Stock Adjustment",
       "movement": "Add Movement",
       "preorder": "Add Preorder",

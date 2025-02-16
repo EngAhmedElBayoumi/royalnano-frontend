@@ -9,9 +9,7 @@ import CardsSkelton from "@/components/dashboard/skelton/CardsSkelton";
 
 export default function Items() {
   const router = useRouter();
-  const t = useTranslations("Add.Inventory");
-
-  const translate = useTranslations("Inventory.InventoryItem");
+  const t = useTranslations("Inventory.InventoryItem");
 
   const { data, isLoading, error } = useGetItemsQuery({
     search: "",
@@ -21,13 +19,13 @@ export default function Items() {
   });
 
   const columns = [
-    { field: "item_code", header: translate("itemCode") },
-    { field: "item_name", header: translate("itemName") },
-    { field: "unit", header: translate("unit") },
-    { field: "purchase_price", header: translate("purchasePrice") },
-    { field: "selling_price", header: translate("sellingPrice") },
-    { field: "quantity", header: translate("quantity") },
-    { field: "description", header: translate("description") },
+    { field: "item_code", header: t("itemCode") },
+    { field: "item_name", header: t("itemName") },
+    { field: "unit", header: t("unit") },
+    { field: "purchase_price", header: t("purchasePrice") },
+    { field: "selling_price", header: t("sellingPrice") },
+    { field: "quantity", header: t("quantity") },
+    { field: "description", header: t("description") },
   ];
 
   const cardsData = [
@@ -63,13 +61,13 @@ export default function Items() {
         </div>
       ) : (
         <CustomTable
-          emptyMessage={translate("noItemsDataFound") || "No items data found"}
+          emptyMessage={t("noItemsDataFound") || "No items data found"}
           editRoute="/dashboard/inventory/items/edit/"
           data={data.results}
           rows={10}
           columns={columns}
           cardData={cardsData}
-          buttonText={t("item")}
+          buttonText={t("addItem")}
           ButtonEvent={handleClick}
         />
       )}

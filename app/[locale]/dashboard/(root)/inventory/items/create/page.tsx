@@ -13,7 +13,7 @@ export default function CreateItem() {
   const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [createItem] = useCreateItemMutation();
-  const t = useTranslations("Add.Inventory");
+  const t = useTranslations("Inventory.InventoryItem");
 
   const handleModalChange = (isOpen: boolean) => {
     setIsModalOpen(isOpen);
@@ -48,7 +48,7 @@ export default function CreateItem() {
       <div className="flex">
         <IconWithTitle
           imageSrc="/assets/icons/add.svg"
-          title={t("item")}
+          title={t("addItem")}
           backgroundColor="#F8F7F7"
           textColor="primary"
         />
