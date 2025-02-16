@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { useGetStockAdjustmentByIdQuery } from "@/redux/services/dashboard/stockApi";
 import StockAdjustmentForm, {
   StockAdjustmentFormValues,
@@ -11,6 +12,8 @@ import FormSkelton from "@/components/dashboard/skelton/FormSkelton";
 export default function EditStockAdjustment() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
+  const t = useTranslations("View.Inventory");
+
   const { data, isLoading, error } = useGetStockAdjustmentByIdQuery(id);
 
   const defaultValues: StockAdjustmentFormValues = data && {
@@ -27,7 +30,7 @@ export default function EditStockAdjustment() {
       <div className="flex">
         <IconWithTitle
           imageSrc="/assets/icons/view.svg"
-          title="View Stock Adjustment"
+          title={t("stockAdjustment")}
           backgroundColor="#F8F7F7"
           textColor="primary"
         />

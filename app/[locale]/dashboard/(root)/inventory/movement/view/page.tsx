@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { useGetMovementByIdQuery } from "@/redux/services/dashboard/movementApi";
 import MovementForm, {
   MovementFormValues,
@@ -11,6 +12,8 @@ import FormSkelton from "@/components/dashboard/skelton/FormSkelton";
 export default function EditMovement() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
+  const t = useTranslations("View.Inventory");
+
   const { data, isLoading, error } = useGetMovementByIdQuery(id);
 
   const defaultValues: MovementFormValues = data && {
@@ -27,7 +30,7 @@ export default function EditMovement() {
       <div className="flex">
         <IconWithTitle
           imageSrc="/assets/icons/view.svg"
-          title="View Movement"
+          title={t("movement")}
           backgroundColor="#F8F7F7"
           textColor="primary"
         />

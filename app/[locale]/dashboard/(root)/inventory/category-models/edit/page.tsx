@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import CategoryForm, {
   CategoryFormValues,
 } from "@/components/dashboard/forms/inventory/CategoryForm";
@@ -8,20 +9,26 @@ import {
   useUpdateCategoryMutation,
 } from "@/redux/services/dashboard/itemCategoryApi";
 import { useRouter, useSearchParams } from "next/navigation";
+import CustomModal from "@/components/modals/CustomModal";
+import { useTranslations } from "next-intl";
 
 export default function EditCategory() {
   const router = useRouter();
-
   const [updateCategory] = useUpdateCategoryMutation();
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
-  console.log("ID:", id);
+
   const { data: category, isLoading, error } = useGetCategoryByIdQuery(id);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const t = useTranslations("Edit.Inventory");
 
   const defaultValues: CategoryFormValues = {
     name: category?.name || "",
   };
 
+  const handleModalChange = (isOpen: boolean) => {
+    setIsModalOpen(isOpen);
+  };
   const handleSubmit = async (data: CategoryFormValues) => {
     try {
       console.log("submit btn clicked");
@@ -43,10 +50,16 @@ export default function EditCategory() {
 
   return (
     <main className="mx-7 my-5">
+      <CustomModal
+        isOpen={isModalOpen}
+        onChange={handleModalChange}
+        title="Error!"
+        description="Your Request wasn't processed successfully.."
+      />
       <div className="flex">
         <IconWithTitle
           imageSrc="/assets/icons/edit.svg"
-          title="Edit Category"
+          title={t("categoryModel")}
           backgroundColor="#F8F7F7"
           textColor="primary"
         />
