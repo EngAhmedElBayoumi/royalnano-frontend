@@ -13,15 +13,13 @@ export default function Category() {
     error,
     data: itemCategories,
   } = useGetItemCategoryQuery({});
-  if (itemCategories) {
-    console.log(itemCategories);
-  }
+
   const router = useRouter();
-  const t = useTranslations("Add.Inventory");
+  const t = useTranslations("Inventory.InventoryCategory");
 
   const columns = [
     { field: "id", header: "ID" },
-    { field: "name", header: "Name" },
+    { field: "name", header: t("categoryName") },
   ];
 
   const cardsData = [
@@ -59,7 +57,7 @@ export default function Category() {
           rows={10}
           columns={columns}
           cardData={cardsData}
-          buttonText={t("categoryModel")}
+          buttonText={t("addCategory")}
           ButtonEvent={handleClick}
         />
       )}

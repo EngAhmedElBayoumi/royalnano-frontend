@@ -30,14 +30,18 @@
       "description": "الوصف",
       "addItem": "إضافة عنصر",
       "noItemsDataFound": "لا توجد بيانات عناصر"
+    },
+    "InventoryCategory": {
+      "categoryName": "اسم الفئة",
+      "noCategoriesDataFound": "لا توجد بيانات فئات",
+      "addCategory": "إضافة نموذج فئة"
     }
   },
   "Add": {
     "Inventory": {
       "stockAdjustment": "إضافة تعديل المخزون",
       "movement": "إضافة حركة",
-      "preorder": "إضافة طلب مسبق",
-      "categoryModel": "إضافة نموذج الفئة"
+      "preorder": "إضافة طلب مسبق"
     }
   },
   "edit": "تعديل",

@@ -35,8 +35,8 @@ const CategoryForm = ({ onSubmit, defaultValues }: CategoryFormProps) => {
             <TextInput
               control={form.control}
               name="name"
-              label="Category Name"
-              placeholder="Category name"
+              label={t("InventoryCategory.categoryName")}
+              placeholder={t("InventoryCategory.categoryName")}
             />
           </div>
         </section>

@@ -30,14 +30,18 @@
       "description": "Description",
       "addItem": "Add Item",
       "noItemsDataFound": "No items data found"
+    },
+    "InventoryCategory": {
+      "categoryName": "Category Name",
+      "noCategoriesDataFound": "No categories data found",
+      "addCategory": "Add Category Model"
     }
   },
   "Add": {
     "Inventory": {
       "stockAdjustment": "Add Stock Adjustment",
       "movement": "Add Movement",
-      "preorder": "Add Preorder",
-      "categoryModel": "Add Category Model"
+      "preorder": "Add Preorder"
     }
   },
   "edit": "edit",

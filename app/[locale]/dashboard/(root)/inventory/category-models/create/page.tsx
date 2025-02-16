@@ -15,8 +15,7 @@ export default function CreateCategory() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [createCategory] = useCreateCategoryMutation();
 
-  const t = useTranslations("Add.Inventory");
-  const tabTranslate = useTranslations("Inventory");
+  const t = useTranslations("Inventory");
 
   const handleModalChange = (isOpen: boolean) => {
     setIsModalOpen(isOpen);
@@ -31,10 +30,7 @@ export default function CreateCategory() {
 
       if (response.error) {
         throw new Error("creation failed");
-      } else
-        router.push(
-          `/dashboard/inventory?tab=${tabTranslate("categoryModel")}`
-        );
+      } else router.push(`/dashboard/inventory?tab=${t("categoryModel")}`);
     } catch (error) {
       setIsModalOpen(true);
       console.log(error);
@@ -51,7 +47,7 @@ export default function CreateCategory() {
         />
         <IconWithTitle
           imageSrc="/assets/icons/add.svg"
-          title={t("categoryModel")}
+          title={t("InventoryCategory.addCategory")}
           backgroundColor="#F8F7F7"
           textColor="primary"
         />
