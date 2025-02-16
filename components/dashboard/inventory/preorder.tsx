@@ -20,18 +20,14 @@ export interface Item {
 
 export default function Preorder() {
   const { isLoading, error, data: inventoryItems } = useGetPreorderQuery({});
-  if (inventoryItems) {
-    console.log("successful...");
-    console.log(inventoryItems);
-  }
 
   const router = useRouter();
-  const t = useTranslations("Add.Inventory");
+  const t = useTranslations("Inventory.InventoryPreorder");
 
   const columns = [
-    { field: "itemCode", header: "Item Code" },
-    { field: "preorderLevel", header: "Preorder Level" },
-    { field: "description", header: "Description" },
+    { field: "itemCode", header: t("item") },
+    { field: "preorderLevel", header: t("preorderLevel") },
+    { field: "description", header: t("description") },
   ];
 
   const cardsData = [
@@ -76,10 +72,9 @@ export default function Preorder() {
           editRoute="/dashboard/inventory/preorder/edit/"
           data={formattedData}
           rows={10}
-          detailsRoute="/dashboard/inventory/preorder/"
           columns={columns}
           cardData={cardsData}
-          buttonText={t("preorder")}
+          buttonText={t("addPreorder")}
           ButtonEvent={handleClick}
         />
       )}

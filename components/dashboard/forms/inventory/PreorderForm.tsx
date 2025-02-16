@@ -49,27 +49,26 @@ const PreorderForm = ({ onSubmit, defaultValues }: PreorderFormProps) => {
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <section className="min-h-[60vh]">
           <div className="grid sm:grid-cols-2 gap-x-4 gap-y-2 xl:gap-y-5 lg:gap-x-10">
-            <TextInput
-              control={form.control}
-              name="preorder_level"
-              label="Preorder Level"
-              placeholder="Preorder level"
-              type="number"
-            />
-
             <CustomSelect
               control={form.control}
               name="item"
-              label="Item"
-              placeholder="Item"
+              label={t("InventoryPreorder.item")}
+              placeholder={t("InventoryPreorder.item")}
               options={itemsOptions}
+            />
+            <TextInput
+              control={form.control}
+              name="preorder_level"
+              label={t("InventoryPreorder.preorderLevel")}
+              placeholder={t("InventoryPreorder.preorderLevel")}
+              type="number"
             />
           </div>
           <TextArea
             control={form.control}
             name="description"
-            label="Description"
-            placeholder="Description Optional"
+            label={t("InventoryPreorder.description")}
+            placeholder={t("InventoryPreorder.description")}
             className="mt-2 xl:mt-5"
           />
         </section>

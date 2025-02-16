@@ -15,8 +15,7 @@ export default function CreatePreorder() {
   const [createPreorder] = useCreatePreorderMutation();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const t = useTranslations("Add.Inventory");
-  const tabTranslate = useTranslations("Inventory");
+  const t = useTranslations("Inventory");
 
   const handleModalChange = (isOpen: boolean) => {
     setIsModalOpen(isOpen);
@@ -31,7 +30,7 @@ export default function CreatePreorder() {
       };
       const response = await createPreorder(payload);
       if (response.error) throw new Error("creation failed");
-      else router.push(`/dashboard/inventory?tab=${tabTranslate("preorder")}`);
+      else router.push(`/dashboard/inventory?tab=${t("preorder")}`);
     } catch (error) {
       setIsModalOpen(true);
       console.log(error);
@@ -49,7 +48,7 @@ export default function CreatePreorder() {
       <div className="flex">
         <IconWithTitle
           imageSrc="/assets/icons/add.svg"
-          title={t("preorder")}
+          title={t("InventoryPreorder.addPreorder")}
           backgroundColor="#F8F7F7"
           textColor="primary"
         />

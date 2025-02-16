@@ -35,13 +35,19 @@
       "categoryName": "اسم الفئة",
       "noCategoriesDataFound": "لا توجد بيانات فئات",
       "addCategory": "إضافة نموذج فئة"
+    },
+    "InventoryPreorder": {
+      "item": "العنصر",
+      "preorderLevel": "مستوى الطلب المسبق",
+      "description": "الوصف",
+      "noPreordersDataFound": "لا توجد بيانات طلبات مسبقة",
+      "addPreorder": "إضافة طلب مسبق"
     }
   },
   "Add": {
     "Inventory": {
       "stockAdjustment": "إضافة تعديل المخزون",
-      "movement": "إضافة حركة",
-      "preorder": "إضافة طلب مسبق"
+      "movement": "إضافة حركة"
     }
   },
   "edit": "تعديل",
