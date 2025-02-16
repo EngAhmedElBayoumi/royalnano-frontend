@@ -1,18 +1,17 @@
 "use client";
+
+import { useTranslations } from "next-intl";
 import { Form } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { preorderSchema } from "@/lib/validations/dashboard/inventory/preorderSchema";
+import { useGetItemsQuery } from "@/redux/services/dashboard/itemsApi";
+
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
 import TextArea from "@/components/formFields/TextArea";
 import { Link } from "@/i18n/routing";
 import CustomSelect from "@/components/formFields/CustomSelect";
-import { useState } from "react";
-import CustomModal from "@/components/modals/CustomModal";
-import { useRouter } from "next/navigation";
-import { useTranslations } from "next-intl";
-import { useGetItemsQuery } from "@/redux/services/dashboard/itemsApi";
 
 interface PreorderFormProps {
   onSubmit: (data: PreorderFormValues) => Promise<void>;
@@ -26,8 +25,6 @@ export interface PreorderFormValues {
 }
 
 const PreorderForm = ({ onSubmit, defaultValues }: PreorderFormProps) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const router = useRouter();
   const t = useTranslations("Inventory");
 
   const { data: items } = useGetItemsQuery({});
@@ -46,26 +43,10 @@ const PreorderForm = ({ onSubmit, defaultValues }: PreorderFormProps) => {
       description: "",
     },
   });
-  const handleSubmit = async (data: PreorderFormValues) => {
-    try {
-      await onSubmit(data);
-    } catch (error) {
-      console.error("Submission Error:", error);
-      setIsModalOpen(true);
-    }
-  };
-  const handleModalChange = (isOpen: boolean) => {
-    setIsModalOpen(isOpen);
-  };
+
   return (
     <Form {...form}>
-      <CustomModal
-        isOpen={isModalOpen}
-        onChange={handleModalChange}
-        title="Error!"
-        description="Your Request wasn't processed successfully.."
-      />
-      <form onSubmit={form.handleSubmit(handleSubmit)}>
+      <form onSubmit={form.handleSubmit(onSubmit)}>
         <section className="min-h-[60vh]">
           <div className="grid sm:grid-cols-2 gap-x-4 gap-y-2 xl:gap-y-5 lg:gap-x-10">
             <TextInput
