@@ -7,12 +7,15 @@ import CustomModal from "@/components/modals/CustomModal";
 import { useCreateCategoryMutation } from "@/redux/services/dashboard/itemCategoryApi";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 export default function CreateCategory() {
   const router = useRouter();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [createCategory] = useCreateCategoryMutation();
+  const t = useTranslations("Add.Inventory");
+
   const handleModalChange = (isOpen: boolean) => {
     setIsModalOpen(isOpen);
   };
@@ -48,7 +51,7 @@ export default function CreateCategory() {
         />
         <IconWithTitle
           imageSrc="/assets/icons/add.svg"
-          title="Add Category"
+          title={t("categoryModel")}
           backgroundColor="#F8F7F7"
           textColor="primary"
         />

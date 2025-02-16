@@ -7,11 +7,13 @@ import MovementForm, {
 } from "@/components/dashboard/forms/inventory/MovementForm";
 import IconWithTitle from "@/components/dashboard/IconWithTitle";
 import CustomModal from "@/components/modals/CustomModal";
+import { useTranslations } from "next-intl";
 
 export default function CreateMovement() {
   const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [createMovement] = useCreateMovementMutation();
+  const t = useTranslations("Add.Inventory");
 
   const handleModalChange = (isOpen: boolean) => {
     setIsModalOpen(isOpen);
@@ -45,7 +47,7 @@ export default function CreateMovement() {
       <div className="flex">
         <IconWithTitle
           imageSrc="/assets/icons/add.svg"
-          title="Add Movement"
+          title={t("movement")}
           backgroundColor="#F8F7F7"
           textColor="primary"
         />

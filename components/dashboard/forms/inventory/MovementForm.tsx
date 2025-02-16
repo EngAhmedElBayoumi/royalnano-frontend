@@ -1,5 +1,5 @@
 "use client";
-import {Link} from '@/i18n/routing';
+import { Link } from "@/i18n/routing";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { movementSchema } from "@/lib/validations/dashboard/inventory/movementSchema";
@@ -10,6 +10,7 @@ import TextInput from "@/components/formFields/TextInput";
 import CustomSelect from "@/components/formFields/CustomSelect";
 import CustomTextArea from "@/components/formFields/TextArea";
 import DatePicker from "@/components/formFields/DatePicker";
+import { useTranslations } from "next-intl";
 
 interface MovementFormProps {
   onSubmit: (data: MovementFormValues) => Promise<void>;
@@ -41,6 +42,7 @@ const MovementForm = ({
     },
   });
   const { data: items } = useGetItemsQuery({});
+  const t = useTranslations("Inventory");
 
   const itemsOptions =
     items?.results?.map((item: { id: number; item_name: string }) => ({
@@ -102,7 +104,7 @@ const MovementForm = ({
         </section>
         {!isView && (
           <div className="flex justify-end gap-2 mt-5">
-            <Link href="/dashboard/inventory" passHref>
+            <Link href={`/dashboard/inventory?tab=${t("movement")}`} passHref>
               <CustomButton
                 text="Cancel"
                 className="text-white rounded-lg bg-secondary min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"

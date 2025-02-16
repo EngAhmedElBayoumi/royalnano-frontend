@@ -7,11 +7,13 @@ import StockAdjustmentForm, {
 } from "@/components/dashboard/forms/inventory/StockAdjustmentForm";
 import IconWithTitle from "@/components/dashboard/IconWithTitle";
 import CustomModal from "@/components/modals/CustomModal";
+import { useTranslations } from "next-intl";
 
 export default function CreateStockAdjustment() {
   const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [createStockAdjustment] = useCreateStockAdjustmentMutation();
+  const t = useTranslations("Add.Inventory");
 
   const handleModalChange = (isOpen: boolean) => {
     setIsModalOpen(isOpen);
@@ -48,7 +50,7 @@ export default function CreateStockAdjustment() {
       <div className="flex">
         <IconWithTitle
           imageSrc="/assets/icons/add.svg"
-          title="Add Stock Adjustment"
+          title={t("stockAdjustment")}
           backgroundColor="#F8F7F7"
           textColor="primary"
         />

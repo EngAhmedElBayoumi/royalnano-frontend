@@ -7,12 +7,15 @@ import CustomModal from "@/components/modals/CustomModal";
 import { useCreatePreorderMutation } from "@/redux/services/dashboard/preorderApi";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 export default function CreatePreorder() {
   const router = useRouter();
 
   const [createPreorder] = useCreatePreorderMutation();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const t = useTranslations("Add.Inventory");
+
   const handleModalChange = (isOpen: boolean) => {
     setIsModalOpen(isOpen);
     if (!isOpen) {
@@ -53,7 +56,7 @@ export default function CreatePreorder() {
       <div className="flex">
         <IconWithTitle
           imageSrc="/assets/icons/add.svg"
-          title="Add Preorder"
+          title={t("preorder")}
           backgroundColor="#F8F7F7"
           textColor="primary"
         />

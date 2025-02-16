@@ -5,7 +5,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { categorySchema } from "@/lib/validations/dashboard/inventory/categorySchema";
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
-import {Link} from '@/i18n/routing';
+import { Link } from "@/i18n/routing";
+import { useTranslations } from "next-intl";
 
 interface CategoryFormProps {
   onSubmit: (data: CategoryFormValues) => Promise<void>;
@@ -14,8 +15,6 @@ interface CategoryFormProps {
 
 export interface CategoryFormValues {
   name: string;
-  // itemCode: string;
-  // quantity: number;
 }
 
 const CategoryForm = ({ onSubmit, defaultValues }: CategoryFormProps) => {
@@ -23,10 +22,10 @@ const CategoryForm = ({ onSubmit, defaultValues }: CategoryFormProps) => {
     resolver: zodResolver(categorySchema),
     defaultValues: defaultValues || {
       name: "",
-      // itemCode: "",
-      // quantity: 0,
     },
   });
+
+  const t = useTranslations("Inventory");
 
   return (
     <Form {...form}>
@@ -39,23 +38,13 @@ const CategoryForm = ({ onSubmit, defaultValues }: CategoryFormProps) => {
               label="Category Name"
               placeholder="Category name"
             />
-            {/* <TextInput
-              control={form.control}
-              name="itemCode"
-              label="Item Code"
-              placeholder="Item Code"
-            />
-            <TextInput
-              control={form.control}
-              name="quantity"
-              label="Quantity"
-              placeholder="Quantity"
-              type="number"
-            /> */}
           </div>
         </section>
         <div className="flex justify-end gap-2 mt-5">
-          <Link href="/dashboard/inventory" passHref>
+          <Link
+            href={`/dashboard/inventory?tab=${t("categoryModel")}`}
+            passHref
+          >
             <CustomButton
               text="Cancel"
               className="text-white rounded-lg bg-secondary min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
