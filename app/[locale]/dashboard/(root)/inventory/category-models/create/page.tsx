@@ -14,7 +14,9 @@ export default function CreateCategory() {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [createCategory] = useCreateCategoryMutation();
+
   const t = useTranslations("Add.Inventory");
+  const tabTranslate = useTranslations("Inventory");
 
   const handleModalChange = (isOpen: boolean) => {
     setIsModalOpen(isOpen);
@@ -22,22 +24,20 @@ export default function CreateCategory() {
 
   const handleSubmit = async (data: CategoryFormValues) => {
     try {
-      console.log("submit btn clicked");
       const payload = {
         ...data,
       };
-      console.log(data);
       const response = await createCategory(payload);
-      console.log("req sent");
-      console.log(response);
+
       if (response.error) {
         throw new Error("creation failed");
-      }
-      router.push("/dashboard/inventory");
+      } else
+        router.push(
+          `/dashboard/inventory?tab=${tabTranslate("categoryModel")}`
+        );
     } catch (error) {
       setIsModalOpen(true);
       console.log(error);
-      console.log("error in creation");
     }
   };
   return (

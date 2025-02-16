@@ -21,7 +21,7 @@ export default function CreateBranchs() {
     try {
       const response = await createBranch(data);
       if (response.error) throw new Error("creation failed");
-      else router.push("/dashboard/inventory");
+      else router.push("/dashboard/branches");
     } catch (error) {
       setIsModalOpen(true);
       console.log(error);

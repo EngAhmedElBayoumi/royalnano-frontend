@@ -11,9 +11,11 @@ import { useTranslations } from "next-intl";
 
 export default function CreateMovement() {
   const router = useRouter();
+  const t = useTranslations("Add.Inventory");
+  const tabTranslate = useTranslations("Inventory");
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [createMovement] = useCreateMovementMutation();
-  const t = useTranslations("Add.Inventory");
 
   const handleModalChange = (isOpen: boolean) => {
     setIsModalOpen(isOpen);
@@ -29,7 +31,7 @@ export default function CreateMovement() {
       const response = await createMovement(payload);
 
       if (response.error) throw new Error("creation failed");
-      else router.push("/dashboard/inventory");
+      else router.push(`/dashboard/inventory?tab=${tabTranslate("movement")}`);
     } catch (error) {
       setIsModalOpen(true);
       console.log(error);

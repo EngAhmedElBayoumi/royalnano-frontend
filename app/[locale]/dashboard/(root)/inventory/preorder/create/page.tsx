@@ -14,13 +14,12 @@ export default function CreatePreorder() {
 
   const [createPreorder] = useCreatePreorderMutation();
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   const t = useTranslations("Add.Inventory");
+  const tabTranslate = useTranslations("Inventory");
 
   const handleModalChange = (isOpen: boolean) => {
     setIsModalOpen(isOpen);
-    if (!isOpen) {
-      router.push("/dashboard/inventory");
-    }
   };
 
   const handleSubmit = async (data: PreorderFormValues) => {
@@ -30,18 +29,12 @@ export default function CreatePreorder() {
         ...data,
         item: Number(data.item),
       };
-      console.log(data);
       const response = await createPreorder(payload);
-      console.log("req sent");
-      console.log(response);
-      if (response.error) {
-        throw new Error("creation failed");
-      }
+      if (response.error) throw new Error("creation failed");
+      else router.push(`/dashboard/inventory?tab=${tabTranslate("preorder")}`);
     } catch (error) {
       setIsModalOpen(true);
-
       console.log(error);
-      console.log("error in c reation");
     }
   };
 

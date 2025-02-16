@@ -1,19 +1,22 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
+
 import { useCreateStockAdjustmentMutation } from "@/redux/services/dashboard/stockApi";
 import StockAdjustmentForm, {
   StockAdjustmentFormValues,
 } from "@/components/dashboard/forms/inventory/StockAdjustmentForm";
 import IconWithTitle from "@/components/dashboard/IconWithTitle";
 import CustomModal from "@/components/modals/CustomModal";
-import { useTranslations } from "next-intl";
 
 export default function CreateStockAdjustment() {
   const router = useRouter();
+  const t = useTranslations("Add.Inventory");
+  const tabTranslate = useTranslations("Inventory");
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [createStockAdjustment] = useCreateStockAdjustmentMutation();
-  const t = useTranslations("Add.Inventory");
 
   const handleModalChange = (isOpen: boolean) => {
     setIsModalOpen(isOpen);
@@ -32,7 +35,10 @@ export default function CreateStockAdjustment() {
       const response = await createStockAdjustment(payload);
 
       if (response.error) throw new Error("creation failed");
-      router.push("/dashboard/inventory");
+      else
+        router.push(
+          `/dashboard/inventory?tab=${tabTranslate("stockAdjustment")}`
+        );
     } catch (error) {
       setIsModalOpen(true);
       console.log(error);

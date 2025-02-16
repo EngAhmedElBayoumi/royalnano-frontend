@@ -56,9 +56,6 @@ const PreorderForm = ({ onSubmit, defaultValues }: PreorderFormProps) => {
   };
   const handleModalChange = (isOpen: boolean) => {
     setIsModalOpen(isOpen);
-    if (!isOpen) {
-      router.push("/dashboard/inventory");
-    }
   };
   return (
     <Form {...form}>
