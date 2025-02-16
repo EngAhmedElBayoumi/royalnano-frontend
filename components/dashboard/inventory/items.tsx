@@ -11,6 +11,8 @@ export default function Items() {
   const router = useRouter();
   const t = useTranslations("Add.Inventory");
 
+  const translate = useTranslations("Inventory.InventoryItem");
+
   const { data, isLoading, error } = useGetItemsQuery({
     search: "",
     ordering: "id",
@@ -19,13 +21,13 @@ export default function Items() {
   });
 
   const columns = [
-    { field: "item_code", header: "Item Code" },
-    { field: "item_name", header: "Item Name" },
-    { field: "unit", header: "unit" },
-    { field: "purchase_price", header: "purchase price" },
-    { field: "selling_price", header: "selling price" },
-    { field: "quantity", header: "quantity" },
-    { field: "description", header: "description" },
+    { field: "item_code", header: translate("itemCode") },
+    { field: "item_name", header: translate("itemName") },
+    { field: "unit", header: translate("unit") },
+    { field: "purchase_price", header: translate("purchasePrice") },
+    { field: "selling_price", header: translate("sellingPrice") },
+    { field: "quantity", header: translate("quantity") },
+    { field: "description", header: translate("description") },
   ];
 
   const cardsData = [
@@ -35,6 +37,7 @@ export default function Items() {
     { title: "Failed", num: 48 },
     { title: "Paid", num: 48 },
   ];
+
   const handleClick = () => {
     router.push("/dashboard/inventory/items/create");
   };
@@ -60,7 +63,7 @@ export default function Items() {
         </div>
       ) : (
         <CustomTable
-          emptyMessage="no items data found"
+          emptyMessage={translate("noItemsDataFound") || "No items data found"}
           editRoute="/dashboard/inventory/items/edit/"
           data={data.results}
           rows={10}

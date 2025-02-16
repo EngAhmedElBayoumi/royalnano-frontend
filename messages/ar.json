@@ -16,7 +16,20 @@
     "movement": "الحركة",
     "preorder": "الطلب المسبق",
     "categoryModel": "نموذج الفئة",
-    "items": "العناصر"
+    "items": "العناصر",
+    "InventoryItem": {
+      "itemCode": "رمز العنصر",
+      "itemName": "اسم العنصر",
+      "category": "الفئة",
+      "quantity": "الكمية",
+      "purchasePrice": "سعر الشراء",
+      "unit": "الوحدة",
+      "branch": "الفرع",
+      "sellingPrice": "سعر البيع",
+      "supplier": "المورد",
+      "description": "الوصف",
+      "noItemsDataFound": "لا توجد بيانات عناصر"
+    }
   },
   "Add": {
     "Inventory": {
@@ -31,6 +44,8 @@
   "Edit": {
     "Inventory": {
       "item": "تعديل العنصر",
+      "stockAdjustment": "تعديل المخزون",
+      "movement": "تعديل الحركة",
       "preorder": "تعديل الطلب المسبق",
       "categoryModel": "تعديل نموذج الفئة"
     }

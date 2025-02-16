@@ -16,7 +16,20 @@
     "movement": "Movement",
     "preorder": "Preorder",
     "categoryModel": "Category Model",
-    "items": "Items"
+    "items": "Items",
+    "InventoryItem": {
+      "itemCode": "Item Code",
+      "itemName": "Item Name",
+      "category": "Category",
+      "quantity": "Quantity",
+      "purchasePrice": "Purchase Price",
+      "unit": "Unit",
+      "branch": "Branch",
+      "sellingPrice": "Selling Price",
+      "supplier": "Supplier",
+      "description": "Description",
+      "noItemsDataFound": "No items data found"
+    }
   },
   "Add": {
     "Inventory": {

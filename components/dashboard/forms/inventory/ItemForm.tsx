@@ -1,5 +1,5 @@
 "use client";
-import {Link} from '@/i18n/routing';
+import { Link } from "@/i18n/routing";
 import { Form } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -9,6 +9,7 @@ import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
 import CustomSelect from "@/components/formFields/CustomSelect";
 import CustomTextArea from "@/components/formFields/TextArea";
+import { useTranslations } from "next-intl";
 
 interface ItemFormProps {
   onSubmit: (data: ItemFormValues) => Promise<void>;
@@ -48,6 +49,8 @@ const ItemForm = ({ onSubmit, defaultValues }: ItemFormProps) => {
       description: "",
     },
   });
+
+  const t = useTranslations("Inventory.InventoryItem");
   const { data: categories } = useGetItemCategoryQuery({});
 
   const categoriesOptions =
@@ -78,70 +81,70 @@ const ItemForm = ({ onSubmit, defaultValues }: ItemFormProps) => {
             <TextInput
               control={form.control}
               name="item_name"
-              label="Item Name"
-              placeholder="Item Name"
+              label={t("itemName")}
+              placeholder={t("itemName")}
             />
             <TextInput
               control={form.control}
               name="item_code"
-              label="Item Code"
-              placeholder="Item Code"
+              label={t("itemCode")}
+              placeholder={t("itemCode")}
             />
             <TextInput
               control={form.control}
               name="quantity"
-              label="Quantity"
-              placeholder="Quantity"
+              label={t("quantity")}
+              placeholder={t("quantity")}
               type="number"
             />
             <CustomSelect
               control={form.control}
               name="category"
-              label="Category"
-              placeholder="Category"
+              label={t("category")}
+              placeholder={t("category")}
               options={categoriesOptions}
             />
             <CustomSelect
               control={form.control}
               name="unit"
-              label="Unit"
-              placeholder="Unit"
+              label={t("unit")}
+              placeholder={t("unit")}
               options={unitsOptions}
             />
             <TextInput
               control={form.control}
               name="purchase_price"
-              label="Purchase price"
-              placeholder="Purchase price"
+              label={t("purchasePrice")}
+              placeholder={t("purchasePrice")}
               type="number"
             />
             <TextInput
               control={form.control}
               name="selling_price"
-              label="Selling price"
-              placeholder="Selling price"
+              label={t("sellingPrice")}
+              placeholder={t("sellingPrice")}
               type="number"
             />
             <CustomSelect
               control={form.control}
               name="branch"
-              label="Branch"
-              placeholder="Branch"
+              label={t("branch")}
+              placeholder={t("branch")}
               options={branchesOptions}
             />
             <CustomSelect
               control={form.control}
               name="supplier"
-              label="Supplier"
-              placeholder="Supplier"
+              label={t("supplier")}
+              placeholder={t("supplier")}
               options={suppliersOptions}
             />
           </div>
           <CustomTextArea
             control={form.control}
             name="description"
-            label="Description"
-            placeholder="Description"
+            label={t("description")}
+            placeholder={t("description")}
             className="mt-2 xl:mt-5"
           />
         </section>
