@@ -13,15 +13,27 @@ export const salesQuotationApi = createApi({
 
       }),
     }),
-
+    createSalesQuotation: builder.mutation({
+      query: (data) => ({
+        url: "sales/sales-quotation/",
+        method: "POST",
+        body: data,
+      }),
+    }),
 
     getSalesQuotationById: builder.query({
       query: (id) => `sales/sales-quotation/${id}/`,
     }),
-   
+    updateSalesQuotation: builder.mutation({
+      query: ({ id, ...data }) => ({
+        url: `sales/sales-quotation/${id}/`,
+        method: "PATCH",
+        body: data,
+      }),
+    }),
 
     
   }),
 });
 
-export const { useGetSalesQuotationQuery, useGetSalesQuotationByIdQuery } = salesQuotationApi;
+export const { useGetSalesQuotationQuery, useGetSalesQuotationByIdQuery ,useCreateSalesQuotationMutation, useUpdateSalesQuotationMutation} = salesQuotationApi;

@@ -13,17 +13,52 @@ export default function SalesQuotation() {
     error,
     data: salesQuotations,
   } = useGetSalesQuotationQuery({});
-  if (salesQuotations?.parameters) {
-    console.log(salesQuotations);
+  if (salesQuotations?.results) {
+    console.log("salesQuotations");
+    console.log(salesQuotations?.results);
   }{
     console.log("error")
   }
   const router = useRouter();
 
   const columns = [
-    { field: "id", header: "ID" },
-    { field: "name", header: "Name" },
+    { field: "quotation_number", header: "Quotation Number" },
+    
+    { field: "customer_name", header: "Customer Name" },
+    { field: "date", header: "Date" },
+    { field: "status", header: "Status" },
+    { field: "validity_period", header: "Validity Period" },
+    { field: "total_amount", header: "Total Amount" },
+    
+    { field: "items", header: "Items" },
+//     items
+// : 
+// Array(1)
+// 0
+// : 
+// discount
+// : 
+// "1.00"
+// discount_percent
+// : 
+// "1.00"
+// item_name
+// : 
+// "1"
+// quantity
+// : 
+// 1
+// tax_rate
+// : 
+// "1.00"
+// total
+// : 
+// "0.00"
+// unit_price
+// : 
+// "1.00"
   ];
+ 
 
   const cardsData = [
     { title: "New requests", num: 145 },
@@ -56,7 +91,7 @@ export default function SalesQuotation() {
         <CustomTable
           emptyMessage="no sales Quotations data found"
           editRoute="/dashboard/inventory/category-models/edit/"
-          data={salesQuotations}
+          data={salesQuotations?.results}
           rows={10}
           columns={columns}
           cardData={cardsData}

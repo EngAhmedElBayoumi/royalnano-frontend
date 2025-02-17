@@ -182,28 +182,38 @@ export default function CustomTable({
           }}
         >
           {columns.map((col) => (
-            <Column
-              key={col.field}
-              headerStyle={headerStyle}
-              field={col.field}
-              header={col.header}
-              className={`m-auto py-[13px] px-[38px] text-[14px] font-[500] border-r border-white border-[2px]`}
-              headerClassName={`text-center capitalize text-white text-[16px] font-[500] py-[13px] px-[38px] border-r border-white border-[2px]`}
-              body={(rowData: DataInTable) => {
-                if (col.field === "verified") {
-                  return (
-                    <i
-                      className={`pi ${
-                        rowData[col.field]
-                          ? "pi-check-circle hover-bg-primary"
-                          : "pi-times-circle hover-bg-primary"
-                      }`}
-                    ></i>
-                  );
-                }
-                return rowData[col.field as keyof DataInTable];
-              }}
-            />
+           <Column
+           key={col.field}
+           headerStyle={headerStyle}
+           field={col.field}
+           header={col.header}
+           className="m-auto py-[13px] px-[38px] text-[14px] font-[500] border-r border-white border-[2px]"
+           headerClassName="text-center capitalize text-white text-[16px] font-[500] py-[13px] px-[38px] border-r border-white border-[2px]"
+           body={(rowData: DataInTable) => {
+             if (col.field === "items") {
+               // Assuming 'items' is an array and you want to display the names of items
+               if(Array.isArray(rowData.items)){
+
+                 return rowData.items
+                   ? rowData.items.map((item: any) => item.item_name).join(", ") // Joining item names into a string
+                   : "No items"; // Handling the case when no items exist
+               }
+             }
+             if (col.field === "verified") {
+               return (
+                 <i
+                   className={`pi ${
+                     rowData[col.field]
+                       ? "pi-check-circle hover-bg-primary"
+                       : "pi-times-circle hover-bg-primary"
+                   }`}
+                 ></i>
+               );
+             }
+             return rowData[col.field as keyof DataInTable];
+           }}
+         />
+         
           ))}
 
           {(viewRoute || editRoute) && (
