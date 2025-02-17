@@ -22,6 +22,9 @@ import { itemsApi } from "./services/dashboard/itemsApi";
 import { itemCategoryApi } from "./services/dashboard/itemCategoryApi";
 import { stockApi } from "./services/dashboard/stockApi";
 import { salesQuotationApi } from "./services/dashboard/salesQuotationsApi";
+import { salesCustomerApi } from "./services/dashboard/salesCustomerApi";
+import { salesInvoiceApi } from "./services/dashboard/salesInvoiceApi";
+import { salesOrderApi } from "./services/dashboard/salesOrderApi";
 
 const persistConfig = {
   key: "root",
@@ -51,6 +54,10 @@ export const store = configureStore({
     [itemCategoryApi.reducerPath]: itemCategoryApi.reducer,
     [stockApi.reducerPath]: stockApi.reducer,
     [salesQuotationApi.reducerPath]: salesQuotationApi.reducer,
+    [salesCustomerApi.reducerPath]: salesCustomerApi.reducer,
+    [salesInvoiceApi.reducerPath]: salesInvoiceApi.reducer,
+    [salesOrderApi.reducerPath]: salesOrderApi.reducer,
+    
     
     auth: persistedAuthReducer,
   },
@@ -78,7 +85,12 @@ export const store = configureStore({
       .concat(itemsApi.middleware)
       .concat(itemCategoryApi.middleware)
       .concat(stockApi.middleware)
-      .concat(salesQuotationApi.middleware);
+      .concat(salesQuotationApi.middleware)
+      .concat(salesCustomerApi.middleware)
+      .concat(salesInvoiceApi.middleware)
+      .concat(salesOrderApi.middleware);
+      
+      
   },
 });
 
