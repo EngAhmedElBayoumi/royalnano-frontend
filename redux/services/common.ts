@@ -8,7 +8,7 @@ import { refreshTokenApi } from "./refreshTokenApi";
 const baseUrl = config.apiUrl;
 
 // Define public API endpoints (No auth required)
-const PUBLIC_ENDPOINTS = ["/core", "/token", "/website"];
+const PUBLIC_ENDPOINTS = ["core", "token", "website"];
 export const baseQuery = async (
   args: string | { url: string; body?: any },
   api: any,
