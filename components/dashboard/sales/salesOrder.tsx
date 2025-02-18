@@ -12,12 +12,7 @@ export default function SalesOrder() {
     error,
     data: salesOrders,
   } = useGetSalesOrderQuery({});
-  if (salesOrders?.results) {
-    console.log("salesOrders");
-    console.log(salesOrders?.results);
-  }{
-    console.log("error")
-  }
+  
   const router = useRouter();
 
   const columns = [
@@ -67,7 +62,7 @@ export default function SalesOrder() {
     { title: "Paid", num: 48 },
   ];
   const handleClick = () => {
-    router.push("/dashboard/sales/sales-quotation/create");
+    router.push("/dashboard/sales/sales-order/create");
   };
   return (
     <>

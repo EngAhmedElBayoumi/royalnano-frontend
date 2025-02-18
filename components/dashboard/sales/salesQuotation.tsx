@@ -13,12 +13,7 @@ export default function SalesQuotation() {
     error,
     data: salesQuotations,
   } = useGetSalesQuotationQuery({});
-  if (salesQuotations?.results) {
-    console.log("salesQuotations");
-    console.log(salesQuotations?.results);
-  }{
-    console.log("error")
-  }
+
   const router = useRouter();
 
   const columns = [

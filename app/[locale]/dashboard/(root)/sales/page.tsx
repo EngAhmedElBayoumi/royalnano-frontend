@@ -1,7 +1,7 @@
 import CustomTabs from "@/components/dashboard/CustomTabs";
-import Attendance from "@/components/dashboard/hr/attendance";
 import Employees from "@/components/dashboard/hr/employees";
 import Salaries from "@/components/dashboard/hr/salaries";
+import SalesInvoice from "@/components/dashboard/sales/salesInvoice";
 import SalesOrder from "@/components/dashboard/sales/salesOrder";
 import SalesQuotation from "@/components/dashboard/sales/salesQuotation";
 import { useTranslations } from "next-intl";
@@ -68,20 +68,20 @@ function SalesPage() {
         />
       ),
       label: t("invoice"),
-      content: <Attendance />,
+      content: <SalesInvoice />,
     },
-    {
-      icon: (
-        <Image
-          width="24"
-          height="24"
-          alt="receipt"
-          src="/assets/icons/dashboard/sales/receipt.svg"
-        />
-      ),
-      label: t("receipt"),
-      content: <Attendance />,
-    },
+    // {
+    //   icon: (
+    //     <Image
+    //       width="24"
+    //       height="24"
+    //       alt="receipt"
+    //       src="/assets/icons/dashboard/sales/receipt.svg"
+    //     />
+    //   ),
+    //   label: t("receipt"),
+    //   content: <Attendance />,
+    // },
     
   ];
 
