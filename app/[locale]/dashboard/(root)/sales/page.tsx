@@ -4,12 +4,14 @@ import Employees from "@/components/dashboard/hr/employees";
 import Salaries from "@/components/dashboard/hr/salaries";
 import Vacations from "@/components/dashboard/hr/vacations";
 import SalesQuotation from "@/components/dashboard/sales/salesQuotation";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import React from "react";
 function SalesPage() {
+  const t = useTranslations("Sales");
   const tabs = [
     {
-      label: "Sales",
+      label: t("sales"),
       icon: (
         <Image
           width="24"
@@ -29,7 +31,7 @@ function SalesPage() {
           src="/assets/icons/dashboard/sales/customer.svg"
         />
       ),
-      label: "Customer",
+      label:  t("customer"),
       content: <Salaries />,
     },
     {
@@ -41,7 +43,7 @@ function SalesPage() {
           src="/assets/icons/dashboard/sales/quotation.svg"
         />
       ),
-      label: "Sales Quotation",
+      label: t("salesQuotation"),
       content: <SalesQuotation />,
     },
     {
@@ -53,7 +55,7 @@ function SalesPage() {
           src="/assets/icons/dashboard/sales/order.svg"
         />
       ),
-      label: "Sales Order",
+      label: t("order"),
       content: <Vacations />,
     },
     {
@@ -65,7 +67,7 @@ function SalesPage() {
           src="/assets/icons/dashboard/sales/invoice.svg"
         />
       ),
-      label: "Sales Invoice",
+      label: t("invoice"),
       content: <Attendance />,
     },
     {
@@ -77,7 +79,7 @@ function SalesPage() {
           src="/assets/icons/dashboard/sales/receipt.svg"
         />
       ),
-      label: "Sales Receipt",
+      label: t("receipt"),
       content: <Attendance />,
     },
     

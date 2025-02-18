@@ -76,15 +76,12 @@
   "Sales": {
     "cancel": "إلغاء",
     "save": "حفظ",
+    "sales": "المبيعات",
+    "customer": "العملاء",
     "salesQuotation": "عرض الأسعار",
-    "tabs": {
-      "sales": "المبيعات",
-      "customer": "العملاء",
-      "salesQuotation": "عرض الأسعار",
-      "order": "أمر المبيعات",
-      "invoice": "فاتورة المبيعات",
-      "receipt": "إيصال المبيعات"
-    },
+    "order": "أمر المبيعات",
+    "invoice": "فاتورة المبيعات",
+    "receipt": "إيصال المبيعات",
     "SalesQuotation": {
       "date": "التاريخ",
       "customer": "العميل",

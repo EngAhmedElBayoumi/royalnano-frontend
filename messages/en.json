@@ -76,15 +76,12 @@
   "Sales": {
     "cancel": "Cancel",
     "save": "save",
+    "sales": "Sales",
+    "customer": "Customer",
     "salesQuotation": "Sales Quotation",
-    "tabs": {
-      "sales": "Sales",
-      "customer": "Customer",
-      "salesQuotation": "Sales Quotation",
-      "order": "Sales Order",
-      "invoice": "Sales Invoice",
-      "receipt": "Sales Receipt"
-    },
+    "order": "Sales Order",
+    "invoice": "Sales Invoice",
+    "receipt": "Sales Receipt",
     "SalesQuotation": {
       "date": "Date",
       "customer": "Customer",
