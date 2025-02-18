@@ -1,11 +1,11 @@
 "use client";
-import CustomTable from "@/components/dashboard/tables/CustomTable";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { useGetStockAdjustmentsQuery } from "@/redux/services/dashboard/stockApi";
-import Image from "next/image";
+import CustomTable from "@/components/dashboard/tables/CustomTable";
 import TableSkelton from "@/components/dashboard/skelton/TableSkelton";
 import CardsSkelton from "@/components/dashboard/skelton/CardsSkelton";
-import { useTranslations } from "next-intl";
+import LoadingError from "@/components/dashboard/LoadingError";
 
 // Define the type for stock adjustment
 interface StockAdjustment {
@@ -72,15 +72,7 @@ export default function StockAdjustment() {
       <TableSkelton />
     </>
   ) : error ? (
-    <div className="flex justify-center flex-col items-center pb-10">
-      <Image
-        src="/assets/icons/dashboard/loading-error.svg"
-        alt="loading error"
-        width="400"
-        height="300"
-      />
-      Error loading data
-    </div>
+    <LoadingError />
   ) : (
     <CustomTable
       emptyMessage="no stock adjustment data found"

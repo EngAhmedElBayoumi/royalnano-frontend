@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
@@ -14,6 +13,7 @@ import PreorderForm, {
 import IconWithTitle from "@/components/dashboard/IconWithTitle";
 import CustomModal from "@/components/modals/CustomModal";
 import FormSkelton from "@/components/dashboard/skelton/FormSkelton";
+import LoadingError from "@/components/dashboard/LoadingError";
 
 export default function EditPreorder() {
   const router = useRouter();
@@ -75,15 +75,7 @@ export default function EditPreorder() {
             <FormSkelton />
           </div>
         ) : error ? (
-          <div className="flex justify-center flex-col items-center">
-            <Image
-              src="/assets/icons/dashboard/loading-error.svg"
-              alt="loading error"
-              width="400"
-              height="300"
-            />
-            Error loading data
-          </div>
+          <LoadingError />
         ) : (
           <div className="ltr:lg:pr-[200px] rtl:lg:pl-[200px]">
             <PreorderForm

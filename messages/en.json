@@ -3,6 +3,7 @@
   "view": "view",
   "save": "save",
   "cancel": "cancel",
+  "loadingError": "Error loading data",
   "Sidebar": {
     "home": "Home",
     "clients": "Clients",

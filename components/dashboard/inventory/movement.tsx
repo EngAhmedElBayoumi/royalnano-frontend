@@ -1,10 +1,10 @@
 "use client";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useGetMovementsQuery } from "@/redux/services/dashboard/movementApi";
 import CustomTable from "@/components/dashboard/tables/CustomTable";
 import TableSkelton from "@/components/dashboard/skelton/TableSkelton";
 import CardsSkelton from "@/components/dashboard/skelton/CardsSkelton";
+import LoadingError from "@/components/dashboard/LoadingError";
 import { useTranslations } from "next-intl";
 
 // Define the type for movement
@@ -71,15 +71,7 @@ export default function Movement() {
           <TableSkelton />
         </>
       ) : error ? (
-        <div className="flex justify-center flex-col items-center pb-10">
-          <Image
-            src="/assets/icons/dashboard/loading-error.svg"
-            alt="loading error"
-            width="400"
-            height="300"
-          />
-          Error loading data
-        </div>
+        <LoadingError />
       ) : (
         <CustomTable
           viewRoute="/dashboard/inventory/movement/view/"

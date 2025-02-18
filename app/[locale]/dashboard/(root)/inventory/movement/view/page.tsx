@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useGetMovementByIdQuery } from "@/redux/services/dashboard/movementApi";
@@ -8,6 +7,7 @@ import MovementForm, {
 } from "@/components/dashboard/forms/inventory/MovementForm";
 import IconWithTitle from "@/components/dashboard/IconWithTitle";
 import FormSkelton from "@/components/dashboard/skelton/FormSkelton";
+import LoadingError from "@/components/dashboard/LoadingError";
 
 export default function EditMovement() {
   const searchParams = useSearchParams();
@@ -42,15 +42,7 @@ export default function EditMovement() {
             <FormSkelton />
           </div>
         ) : error ? (
-          <div className="flex justify-center flex-col items-center">
-            <Image
-              src="/assets/icons/dashboard/loading-error.svg"
-              alt="loading error"
-              width="400"
-              height="300"
-            />
-            Error loading data
-          </div>
+          <LoadingError />
         ) : (
           <div className="ltr:lg:pr-[200px] rtl:lg:pl-[200px]">
             <MovementForm

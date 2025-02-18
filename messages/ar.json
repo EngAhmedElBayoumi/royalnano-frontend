@@ -3,6 +3,7 @@
   "view": "عرض",
   "save": "حفظ",
   "cancel": "إلغاء",
+  "loadingError": "خطأ في تحميل البيانات",
   "Sidebar": {
     "home": "الرئيسية",
     "clients": "العملاء",

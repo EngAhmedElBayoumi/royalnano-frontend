@@ -1,11 +1,11 @@
 "use client";
-import CustomTable from "@/components/dashboard/tables/CustomTable";
-import { useGetItemCategoryQuery } from "@/redux/services/dashboard/itemCategoryApi";
 import { useRouter } from "next/navigation";
-import TableSkelton from "../skelton/TableSkelton";
-import CardsSkelton from "../skelton/CardsSkelton";
-import Image from "next/image";
 import { useTranslations } from "next-intl";
+import { useGetItemCategoryQuery } from "@/redux/services/dashboard/itemCategoryApi";
+import TableSkelton from "@/components/dashboard/skelton/TableSkelton";
+import CardsSkelton from "@/components/dashboard/skelton/CardsSkelton";
+import LoadingError from "@/components/dashboard/LoadingError";
+import CustomTable from "@/components/dashboard/tables/CustomTable";
 
 export default function Category() {
   const {
@@ -40,15 +40,7 @@ export default function Category() {
           <TableSkelton />
         </>
       ) : error ? (
-        <div className="flex justify-center flex-col items-center pb-10">
-          <Image
-            src="/assets/icons/dashboard/loading-error.svg"
-            alt="loading error"
-            width="400"
-            height="300"
-          />
-          Error loading data
-        </div>
+        <LoadingError />
       ) : (
         <CustomTable
           emptyMessage="no customer requests data found"

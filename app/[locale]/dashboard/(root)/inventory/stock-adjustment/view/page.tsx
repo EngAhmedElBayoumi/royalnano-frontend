@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useGetStockAdjustmentByIdQuery } from "@/redux/services/dashboard/stockApi";
@@ -8,6 +7,7 @@ import StockAdjustmentForm, {
 } from "@/components/dashboard/forms/inventory/StockAdjustmentForm";
 import IconWithTitle from "@/components/dashboard/IconWithTitle";
 import FormSkelton from "@/components/dashboard/skelton/FormSkelton";
+import LoadingError from "@/components/dashboard/LoadingError";
 
 export default function EditStockAdjustment() {
   const searchParams = useSearchParams();
@@ -42,15 +42,7 @@ export default function EditStockAdjustment() {
             <FormSkelton />
           </div>
         ) : error ? (
-          <div className="flex justify-center flex-col items-center">
-            <Image
-              src="/assets/icons/dashboard/loading-error.svg"
-              alt="loading error"
-              width="400"
-              height="300"
-            />
-            Error loading data
-          </div>
+          <LoadingError />
         ) : (
           <div className="ltr:lg:pr-[200px] rtl:lg:pl-[200px]">
             <StockAdjustmentForm
