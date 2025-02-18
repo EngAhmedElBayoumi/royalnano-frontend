@@ -72,5 +72,33 @@
       "addStockAdjustment": "Add Stock Adjustment",
       "viewStockAdjustment": "View Stock Adjustment"
     }
+  },
+  "Sales": {
+    "cancel": "Cancel",
+    "save": "save",
+    "salesQuotation": "Sales Quotation",
+    "tabs": {
+      "sales": "Sales",
+      "customer": "Customer",
+      "salesQuotation": "Sales Quotation",
+      "order": "Sales Order",
+      "invoice": "Sales Invoice",
+      "receipt": "Sales Receipt"
+    },
+    "SalesQuotation": {
+      "date": "Date",
+      "customer": "Customer",
+      "validityPeriod": "Validity Period",
+      "quotationNumber": "Quotation Number",
+      "items": "Items",
+      "itemName": "Item Name",
+      "quantity": "Quantity",
+      "unitPrice": "Unit Price",
+      "discount": "Discount",
+      "discountPercent": "Discount Percent",
+      "taxRate": "Tax Rate",
+      "save": "Save",
+      "cancel": "Cancel"
+    }
   }
 }

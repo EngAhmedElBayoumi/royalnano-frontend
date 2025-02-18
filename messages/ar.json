@@ -72,5 +72,33 @@
       "addStockAdjustment": "إضافة تعديل المخزون",
       "viewStockAdjustment": "عرض المخزون"
     }
+  },
+  "Sales": {
+    "cancel": "إلغاء",
+    "save": "حفظ",
+    "salesQuotation": "عرض الأسعار",
+    "tabs": {
+      "sales": "المبيعات",
+      "customer": "العملاء",
+      "salesQuotation": "عرض الأسعار",
+      "order": "أمر المبيعات",
+      "invoice": "فاتورة المبيعات",
+      "receipt": "إيصال المبيعات"
+    },
+    "SalesQuotation": {
+      "date": "التاريخ",
+      "customer": "العميل",
+      "validityPeriod": "فترة الصلاحية",
+      "quotationNumber": "رقم العرض",
+      "items": "العناصر",
+      "itemName": "اسم العنصر",
+      "quantity": "الكمية",
+      "unitPrice": "سعر الوحدة",
+      "discount": "الخصم",
+      "discountPercent": "نسبة الخصم",
+      "taxRate": "معدل الضريبة",
+      "save": "حفظ",
+      "cancel": "إلغاء"
+    }
   }
 }

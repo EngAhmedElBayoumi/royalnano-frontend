@@ -5,11 +5,15 @@ import Employees from "@/components/dashboard/hr/employees";
 import Salaries from "@/components/dashboard/hr/salaries";
 import Vacations from "@/components/dashboard/hr/vacations";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import React from "react";
+
 function SalesPage() {
+  const t = useTranslations("Sales");
+
   const tabs = [
     {
-      label: "Sales",
+      label: t("tabs.sales"),
       icon: (
         <Image
           width="24"
@@ -21,6 +25,7 @@ function SalesPage() {
       content: <Employees />,
     },
     {
+      label: t("tabs.customer"),
       icon: (
         <Image
           width="24"
@@ -29,10 +34,10 @@ function SalesPage() {
           src="/assets/icons/dashboard/sales/customer.svg"
         />
       ),
-      label: "Customer",
       content: <Salaries />,
     },
     {
+      label: t("tabs.quotation"),
       icon: (
         <Image
           width="24"
@@ -41,10 +46,10 @@ function SalesPage() {
           src="/assets/icons/dashboard/sales/quotation.svg"
         />
       ),
-      label: "Sales Quotation",
       content: <Bonuses />,
     },
     {
+      label: t("tabs.order"),
       icon: (
         <Image
           width="24"
@@ -53,10 +58,10 @@ function SalesPage() {
           src="/assets/icons/dashboard/sales/order.svg"
         />
       ),
-      label: "Sales Order",
       content: <Vacations />,
     },
     {
+      label: t("tabs.invoice"),
       icon: (
         <Image
           width="24"
@@ -65,10 +70,10 @@ function SalesPage() {
           src="/assets/icons/dashboard/sales/invoice.svg"
         />
       ),
-      label: "Sales Invoice",
       content: <Attendance />,
     },
     {
+      label: t("tabs.receipt"),
       icon: (
         <Image
           width="24"
@@ -77,17 +82,11 @@ function SalesPage() {
           src="/assets/icons/dashboard/sales/receipt.svg"
         />
       ),
-      label: "Sales Receipt",
       content: <Attendance />,
     },
-    
   ];
 
-  return (
-    <>
-      <CustomTabs tabs={tabs} defaultTab="Employees" />
-    </>
-  );
+  return <CustomTabs tabs={tabs} defaultTab="Employees" />;
 }
 
 export default SalesPage;
