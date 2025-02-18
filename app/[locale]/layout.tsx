@@ -12,14 +12,13 @@ export default async function LocaleLayout({
   params,
 }: {
   children: React.ReactNode;
-  params?: { locale?: string };
+  params: { locale?: string }; 
 }) {
-  const locale = await Promise.resolve(params?.locale); 
+  const { locale } = await Promise.resolve(params);
 
-  if (!(locale === "ar" || locale === "en")) {
+  if (!locale || !(locale === "ar" || locale === "en")) {
     return <p>Invalid locale</p>;
   }
-  
 
   const messages = await getMessages({ locale });
 
@@ -38,28 +37,4 @@ export async function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
-export const dynamicParams = false; 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+export const dynamicParams = false;

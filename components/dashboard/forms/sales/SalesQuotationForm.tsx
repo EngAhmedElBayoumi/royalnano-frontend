@@ -9,7 +9,8 @@ import { useTranslations } from "next-intl";
 import { salesQuotationSchema } from "@/lib/validations/dashboard/sales/salesQuotationSchema";
 
 interface SalesQuotationFormProps {
-  onSubmit: (data: SalesQuotationFormValues) => Promise<void>;
+  
+  onSubmit: (data: SalesQuotationFormValues) => void;
   defaultValues?: SalesQuotationFormValues;
 }
 
