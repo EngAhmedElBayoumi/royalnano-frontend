@@ -12,7 +12,7 @@ import FormSkelton from "@/components/dashboard/skelton/FormSkelton";
 export default function EditStockAdjustment() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
-  const t = useTranslations("View.Inventory");
+  const t = useTranslations("Inventory.InventoryStockAdjustment");
 
   const { data, isLoading, error } = useGetStockAdjustmentByIdQuery(id);
 
@@ -30,7 +30,7 @@ export default function EditStockAdjustment() {
       <div className="flex">
         <IconWithTitle
           imageSrc="/assets/icons/view.svg"
-          title={t("stockAdjustment")}
+          title={t("viewStockAdjustment")}
           backgroundColor="#F8F7F7"
           textColor="primary"
         />

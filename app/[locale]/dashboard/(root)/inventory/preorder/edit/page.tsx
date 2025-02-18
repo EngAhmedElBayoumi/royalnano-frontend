@@ -20,7 +20,7 @@ export default function EditPreorder() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
 
-  const t = useTranslations("Edit.Inventory");
+  const t = useTranslations("Inventory.InventoryPreorder");
   const tabTranslate = useTranslations("Inventory");
 
   const [updatePreorder] = useUpdatePreorderMutation();
@@ -63,7 +63,7 @@ export default function EditPreorder() {
       <div className="flex">
         <IconWithTitle
           imageSrc="/assets/icons/edit.svg"
-          title={t("preorder")}
+          title={t("editPreorder")}
           backgroundColor="#F8F7F7"
           textColor="primary"
         />

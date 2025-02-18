@@ -12,7 +12,7 @@ import FormSkelton from "@/components/dashboard/skelton/FormSkelton";
 export default function EditMovement() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
-  const t = useTranslations("View.Inventory");
+  const t = useTranslations("Inventory.InventoryMovement");
 
   const { data, isLoading, error } = useGetMovementByIdQuery(id);
 
@@ -30,7 +30,7 @@ export default function EditMovement() {
       <div className="flex">
         <IconWithTitle
           imageSrc="/assets/icons/view.svg"
-          title={t("movement")}
+          title={t("viewMovement")}
           backgroundColor="#F8F7F7"
           textColor="primary"
         />

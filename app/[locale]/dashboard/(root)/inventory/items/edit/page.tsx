@@ -21,7 +21,7 @@ export default function EditItem() {
 
   const [updateItem] = useUpdateItemMutation();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const t = useTranslations("Edit.Inventory");
+  const t = useTranslations("Inventory.InventoryItem");
 
   const { data, isLoading, error } = useGetItemByIdQuery(id);
 
@@ -64,7 +64,7 @@ export default function EditItem() {
       <div className="flex">
         <IconWithTitle
           imageSrc="/assets/icons/edit.svg"
-          title={t("item")}
+          title={t("editItem")}
           backgroundColor="#F8F7F7"
           textColor="primary"
         />

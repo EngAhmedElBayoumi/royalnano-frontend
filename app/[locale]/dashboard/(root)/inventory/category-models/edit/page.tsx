@@ -26,7 +26,7 @@ export default function EditCategory() {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const t = useTranslations("Edit.Inventory");
+  const t = useTranslations("Inventory.InventoryCategory");
   const tabTranslate = useTranslations("Inventory");
 
   const defaultValues: CategoryFormValues = {
@@ -66,7 +66,7 @@ export default function EditCategory() {
       <div className="flex">
         <IconWithTitle
           imageSrc="/assets/icons/edit.svg"
-          title={t("categoryModel")}
+          title={t("editCategory")}
           backgroundColor="#F8F7F7"
           textColor="primary"
         />
