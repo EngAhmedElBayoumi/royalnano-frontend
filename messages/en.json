@@ -1,4 +1,8 @@
 {
+  "edit": "edit",
+  "view": "view",
+  "save": "save",
+  "cancel": "cancel",
   "Sidebar": {
     "home": "Home",
     "clients": "Clients",
@@ -29,40 +33,43 @@
       "supplier": "Supplier",
       "description": "Description",
       "addItem": "Add Item",
+      "editItem": "Edit Item",
       "noItemsDataFound": "No items data found"
     },
     "InventoryCategory": {
       "categoryName": "Category Name",
       "noCategoriesDataFound": "No categories data found",
-      "addCategory": "Add Category Model"
+      "addCategory": "Add Category Model",
+      "editCategory": "Edit Category Model"
     },
     "InventoryPreorder": {
       "item": "Item",
       "preorderLevel": "Preorder Level",
       "description": "Description",
-      "noPreordersDataFound": "No preorders data found",
-      "addPreorder": "Add Preorder"
-    }
-  },
-  "Add": {
-    "Inventory": {
-      "stockAdjustment": "Add Stock Adjustment",
-      "movement": "Add Movement"
-    }
-  },
-  "edit": "edit",
-  "Edit": {
-    "Inventory": {
-      "item": "Edit Item",
-      "preorder": "Edit Preorder",
-      "categoryModel": "Edit Category Model"
-    }
-  },
-  "view": "view",
-  "View": {
-    "Inventory": {
-      "stockAdjustment": "View Stock Adjustment",
-      "movement": "View Movement"
+      "noPreorderDataFound": "No Preorder data found",
+      "addPreorder": "Add Preorder",
+      "editPreorder": "Edit Preorder"
+    },
+    "InventoryMovement": {
+      "item": "Item",
+      "quantity": "Quantity",
+      "date": "Date",
+      "movementType": "Movement Type",
+      "description": "Description",
+      "noMovementsDataFound": "No movements data found",
+      "addMovement": "Add Movement",
+      "viewMovement": "View Movement"
+    },
+    "InventoryStockAdjustment": {
+      "item": "Item",
+      "reason": "Reason",
+      "adjustmentType": "Adjustment Type",
+      "quantityAdjusted": "Quantity Adjusted",
+      "date": "Date",
+      "description": "Description",
+      "noStockAdjustmentsDataFound": "No stock adjustments data found",
+      "addStockAdjustment": "Add Stock Adjustment",
+      "viewStockAdjustment": "View Stock Adjustment"
     }
   }
 }

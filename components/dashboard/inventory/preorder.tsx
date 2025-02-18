@@ -68,7 +68,7 @@ export default function Preorder() {
         </div>
       ) : (
         <CustomTable
-          emptyMessage="no preorder data found"
+          emptyMessage={t("noPreorderDataFound")}
           editRoute="/dashboard/inventory/preorder/edit/"
           data={formattedData}
           rows={10}

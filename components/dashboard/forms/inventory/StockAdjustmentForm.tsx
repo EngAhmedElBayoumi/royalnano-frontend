@@ -65,49 +65,47 @@ const StockAdjustmentForm = ({
             <CustomSelect
               control={form.control}
               name="item"
-              label="Item"
-              placeholder="Item"
+              label={t("InventoryStockAdjustment.item")}
+              placeholder={t("InventoryStockAdjustment.item")}
               options={itemsOptions}
               readonly={isView}
             />
             <TextInput
               control={form.control}
               name="reason"
-              label="Reason"
-              placeholder="Reason"
+              label={t("InventoryStockAdjustment.reason")}
+              placeholder={t("InventoryStockAdjustment.reason")}
               readonly={isView}
             />
-
             <TextInput
               control={form.control}
               name="quantity_adjusted"
-              label="quantity_adjusted"
-              placeholder="quantity_adjusted"
+              label={t("InventoryStockAdjustment.quantityAdjusted")}
+              placeholder={t("InventoryStockAdjustment.quantityAdjusted")}
               type="number"
               readonly={isView}
             />
             <CustomSelect
               control={form.control}
               name="adjustment_type"
-              label="Adjustment Type"
-              placeholder="Adjustment Type"
+              label={t("InventoryStockAdjustment.adjustmentType")}
+              placeholder={t("InventoryStockAdjustment.adjustmentType")}
               options={typeOptions}
               readonly={isView}
             />
-
             <DatePicker
               control={form.control}
               name="adjustment_date"
-              label="Date"
-              placeholder="Date"
+              label={t("InventoryStockAdjustment.date")}
+              placeholder={t("InventoryStockAdjustment.date")}
               readonly={isView}
             />
           </div>
           <CustomTextArea
             control={form.control}
             name="description"
-            label="Description"
-            placeholder="Description"
+            label={t("InventoryStockAdjustment.description")}
+            placeholder={t("InventoryStockAdjustment.description")}
             className="mt-2 xl:mt-5"
             readonly={isView}
           />

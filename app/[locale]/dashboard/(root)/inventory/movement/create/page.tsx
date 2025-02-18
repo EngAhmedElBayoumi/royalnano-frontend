@@ -2,24 +2,23 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useCreateMovementMutation } from "@/redux/services/dashboard/movementApi";
+import IconWithTitle from "@/components/dashboard/IconWithTitle";
 import MovementForm, {
   MovementFormValues,
 } from "@/components/dashboard/forms/inventory/MovementForm";
-import IconWithTitle from "@/components/dashboard/IconWithTitle";
 import CustomModal from "@/components/modals/CustomModal";
 import { useTranslations } from "next-intl";
 
 export default function CreateMovement() {
   const router = useRouter();
-  const t = useTranslations("Add.Inventory");
-  const tabTranslate = useTranslations("Inventory");
-
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [createMovement] = useCreateMovementMutation();
+  const t = useTranslations("Inventory");
 
   const handleModalChange = (isOpen: boolean) => {
     setIsModalOpen(isOpen);
   };
+
   const handleSubmit = async (data: MovementFormValues) => {
     try {
       const payload = {
@@ -31,7 +30,7 @@ export default function CreateMovement() {
       const response = await createMovement(payload);
 
       if (response.error) throw new Error("creation failed");
-      else router.push(`/dashboard/inventory?tab=${tabTranslate("movement")}`);
+      else router.push(`/dashboard/inventory?tab=${t("movement")}`);
     } catch (error) {
       setIsModalOpen(true);
       console.log(error);
@@ -49,7 +48,7 @@ export default function CreateMovement() {
       <div className="flex">
         <IconWithTitle
           imageSrc="/assets/icons/add.svg"
-          title={t("movement")}
+          title={t("InventoryMovement.addMovement")}
           backgroundColor="#F8F7F7"
           textColor="primary"
         />

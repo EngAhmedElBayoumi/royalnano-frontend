@@ -22,7 +22,7 @@ interface StockAdjustment {
 
 export default function StockAdjustment() {
   const router = useRouter();
-  const t = useTranslations("Add.Inventory");
+  const t = useTranslations("Inventory.InventoryStockAdjustment");
 
   const {
     data: stockAdjustmentData = { results: [] },
@@ -47,11 +47,11 @@ export default function StockAdjustment() {
   );
 
   const columns = [
-    { field: "itemName", header: "Item Name" },
-    { field: "quantity", header: "Quantity" },
-    { field: "reason", header: "Reason" },
-    { field: "type", header: "Type" },
-    { field: "date", header: "Adjustment Date" },
+    { field: "itemName", header: t("item") },
+    { field: "quantity", header: t("quantityAdjusted") },
+    { field: "reason", header: t("reason") },
+    { field: "type", header: t("adjustmentType") },
+    { field: "date", header: t("date") },
   ];
 
   const cardsData = [
@@ -89,7 +89,7 @@ export default function StockAdjustment() {
       cardData={cardsData}
       rows={10}
       columns={columns}
-      buttonText={t("stockAdjustment")}
+      buttonText={t("addStockAdjustment")}
       ButtonEvent={handleClick}
     />
   );

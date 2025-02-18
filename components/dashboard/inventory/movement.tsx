@@ -23,7 +23,7 @@ interface Movement {
 
 export default function Movement() {
   const router = useRouter();
-  const t = useTranslations("Add.Inventory");
+  const t = useTranslations("Inventory.InventoryMovement");
 
   const {
     data: movementData = { results: [] },
@@ -44,11 +44,11 @@ export default function Movement() {
 
   const columns = [
     { field: "id", header: "ID" },
-    { field: "item", header: "Item" },
-    { field: "movement_date", header: "Movement Date" },
-    { field: "quantity", header: "Quantity" },
-    { field: "movement_type", header: "Movement Type" },
-    { field: "description", header: "Description" },
+    { field: "item", header: t("item") },
+    { field: "quantity", header: t("quantity") },
+    { field: "movement_date", header: t("date") },
+    { field: "movement_type", header: t("movementType") },
+    { field: "description", header: t("description") },
   ];
 
   const cardsData = [
@@ -82,14 +82,14 @@ export default function Movement() {
         </div>
       ) : (
         <CustomTable
-          emptyMessage="no movements data found"
           viewRoute="/dashboard/inventory/movement/view/"
           data={transformedData}
           rows={10}
           columns={columns}
           cardData={cardsData}
-          buttonText={t("movement")}
+          buttonText={t("addMovement")}
           ButtonEvent={handleClick}
+          emptyMessage={t("noMovementsDataFound") || "No movements data found"}
         />
       )}
     </>

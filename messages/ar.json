@@ -1,4 +1,8 @@
 {
+  "edit": "تعديل",
+  "view": "عرض",
+  "save": "حفظ",
+  "cancel": "إلغاء",
   "Sidebar": {
     "home": "الرئيسية",
     "clients": "العملاء",
@@ -29,42 +33,43 @@
       "supplier": "المورد",
       "description": "الوصف",
       "addItem": "إضافة عنصر",
+      "editItem": "تعديل العنصر",
       "noItemsDataFound": "لا توجد بيانات عناصر"
     },
     "InventoryCategory": {
       "categoryName": "اسم الفئة",
       "noCategoriesDataFound": "لا توجد بيانات فئات",
-      "addCategory": "إضافة نموذج فئة"
+      "addCategory": "إضافة نموذج فئة",
+      "editCategory": "تعديل نموذج الفئة"
     },
     "InventoryPreorder": {
       "item": "العنصر",
       "preorderLevel": "مستوى الطلب المسبق",
       "description": "الوصف",
-      "noPreordersDataFound": "لا توجد بيانات طلبات مسبقة",
-      "addPreorder": "إضافة طلب مسبق"
-    }
-  },
-  "Add": {
-    "Inventory": {
-      "stockAdjustment": "إضافة تعديل المخزون",
-      "movement": "إضافة حركة"
-    }
-  },
-  "edit": "تعديل",
-  "Edit": {
-    "Inventory": {
-      "item": "تعديل العنصر",
-      "stockAdjustment": "تعديل المخزون",
-      "movement": "تعديل الحركة",
-      "preorder": "تعديل الطلب المسبق",
-      "categoryModel": "تعديل نموذج الفئة"
-    }
-  },
-  "view": "عرض",
-  "View": {
-    "Inventory": {
-      "stockAdjustment": "عرض المخزون",
-      "movement": "عرض الحركة"
+      "noPreorderDataFound": "لا توجد بيانات طلبات مسبقة",
+      "addPreorder": "إضافة طلب مسبق",
+      "editPreorder": "تعديل الطلب المسبق"
+    },
+    "InventoryMovement": {
+      "item": "العنصر",
+      "quantity": "الكمية",
+      "date": "التاريخ",
+      "movementType": "نوع الحركة",
+      "description": "الوصف",
+      "noMovementsDataFound": "لا توجد بيانات حركة",
+      "addMovement": "إضافة حركة",
+      "viewMovement": "عرض الحركة"
+    },
+    "InventoryStockAdjustment": {
+      "item": "العنصر",
+      "reason": "السبب",
+      "adjustmentType": "نوع التعديل",
+      "quantityAdjusted": "الكمية المعدلة",
+      "date": "التاريخ",
+      "description": "الوصف",
+      "noStockAdjustmentsDataFound": "لا توجد بيانات تعديل المخزون",
+      "addStockAdjustment": "إضافة تعديل المخزون",
+      "viewStockAdjustment": "عرض المخزون"
     }
   }
 }

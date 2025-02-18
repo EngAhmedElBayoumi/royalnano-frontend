@@ -31,6 +31,8 @@ const MovementForm = ({
   defaultValues,
   isView,
 }: MovementFormProps) => {
+  const t = useTranslations("Inventory");
+
   const form = useForm({
     resolver: zodResolver(movementSchema),
     defaultValues: defaultValues || {
@@ -42,7 +44,6 @@ const MovementForm = ({
     },
   });
   const { data: items } = useGetItemsQuery({});
-  const t = useTranslations("Inventory");
 
   const itemsOptions =
     items?.results?.map((item: { id: number; item_name: string }) => ({
@@ -63,16 +64,16 @@ const MovementForm = ({
             <CustomSelect
               control={form.control}
               name="item"
-              label="Item"
-              placeholder="Item"
+              label={t("InventoryMovement.item")}
+              placeholder={t("InventoryMovement.item")}
               options={itemsOptions}
               readonly={isView}
             />
             <TextInput
               control={form.control}
               name="quantity"
-              label="Quantity"
-              placeholder="Quantity"
+              label={t("InventoryMovement.quantity")}
+              placeholder={t("InventoryMovement.quantity")}
               type="number"
               readonly={isView}
             />
@@ -80,24 +81,24 @@ const MovementForm = ({
             <CustomSelect
               control={form.control}
               name="movement_type"
-              label="Movement Type"
-              placeholder="Movement Type"
+              label={t("InventoryMovement.movementType")}
+              placeholder={t("InventoryMovement.movementType")}
               options={typeOptions}
               readonly={isView}
             />
             <DatePicker
               control={form.control}
               name="movement_date"
-              label="Date"
-              placeholder="Date"
+              label={t("InventoryMovement.date")}
+              placeholder={t("InventoryMovement.date")}
               readonly={isView}
             />
           </div>
           <CustomTextArea
             control={form.control}
             name="description"
-            label="Description"
-            placeholder="Description"
+            label={t("InventoryMovement.description")}
+            placeholder={t("InventoryMovement.description")}
             className="mt-2 xl:mt-5"
             readonly={isView}
           />
