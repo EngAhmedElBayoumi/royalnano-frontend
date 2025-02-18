@@ -6,22 +6,22 @@ import IconWithTitle from "@/components/dashboard/IconWithTitle";
 import CustomModal from "@/components/modals/CustomModal";
 import FormSkelton from "@/components/dashboard/skelton/FormSkelton";
 import LoadingError from "@/components/dashboard/LoadingError";
-import { useGetSalesQuotationByIdQuery, useUpdateSalesQuotationMutation } from "@/redux/services/dashboard/salesQuotationsApi";
-import SalesQuotationForm, { SalesQuotationFormValues } from "@/components/dashboard/forms/sales/SalesQuotationForm";
+import { useGetSalesOrderByIdQuery, useUpdateSalesOrderMutation } from "@/redux/services/dashboard/salesOrderApi";
+import SalesOrderForm, { SalesOrderFormValues } from "@/components/dashboard/forms/sales/SalesOrderForm";
 
-export default function EditSalesQuotation() {
+export default function EditSalesOrder() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
 
-  const t = useTranslations("Sales.SalesQuotation");
+  const t = useTranslations("Sales.SalesOrder");
   const tabTranslate = useTranslations("Sales");
 
-  const [updatePreorder] = useUpdateSalesQuotationMutation();
-  const { data, isLoading, error } = useGetSalesQuotationByIdQuery(id);
+  const [updatePreorder] = useUpdateSalesOrderMutation();
+  const { data, isLoading, error } = useGetSalesOrderByIdQuery(id);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const defaultValues: SalesQuotationFormValues = data && {
+  const defaultValues: SalesOrderFormValues = data && {
     ...data,
     // item: String(data.item.id),
   };
@@ -30,7 +30,7 @@ export default function EditSalesQuotation() {
     setIsModalOpen(isOpen);
   };
 
-  const handleSubmit = async (data: SalesQuotationFormValues) => {
+  const handleSubmit = async (data: SalesOrderFormValues) => {
     try {
       const payload = {
         ...data,
@@ -72,7 +72,7 @@ export default function EditSalesQuotation() {
           <LoadingError />
         ) : (
           <div className="ltr:lg:pr-[200px] rtl:lg:pl-[200px]">
-            <SalesQuotationForm
+            <SalesOrderForm
               onSubmit={handleSubmit}
               defaultValues={defaultValues}
             />

@@ -2,7 +2,7 @@ import CustomTabs from "@/components/dashboard/CustomTabs";
 import Attendance from "@/components/dashboard/hr/attendance";
 import Employees from "@/components/dashboard/hr/employees";
 import Salaries from "@/components/dashboard/hr/salaries";
-import Vacations from "@/components/dashboard/hr/vacations";
+import SalesOrder from "@/components/dashboard/sales/salesOrder";
 import SalesQuotation from "@/components/dashboard/sales/salesQuotation";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
@@ -56,7 +56,7 @@ function SalesPage() {
         />
       ),
       label: t("order"),
-      content: <Vacations />,
+      content: <SalesOrder />,
     },
     {
       icon: (

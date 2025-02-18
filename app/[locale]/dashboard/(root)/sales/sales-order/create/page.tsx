@@ -18,29 +18,28 @@ export default function CreateSalesQuotation() {
   };
 
   const handleSubmit = async (data: SalesQuotationFormValues): Promise<void> => {
-    console.log(data);
-    console.log("submied");
     try {
       console.log("submit btn clicked");
       const payload = {
         ...data,
-        // items: data.items.length > 0 ? data.items : [{ item_name: "", quantity: 1, unit_price: 0, discount: "", discount_percent: "", tax_rate: "" }]
       };
-
+  
       console.log(data);
       const response = await createSalesQuotation(payload);
       console.log("req sent");
       console.log(response);
-      if (response.error) {
+  
+      if ("error" in response) {
         throw new Error("creation failed");
       }
-      router.push(`/dashboard/sales?tab=${t("sales")}`)
+  
+      router.push(`/dashboard/sales?tab=${t("sales")}`);
     } catch (error) {
       setIsModalOpen(true);
-      console.log(error);
-      console.log("error in creation");
+      console.error("error in creation", error);
     }
   };
+  
   return (
     <main className="mx-7 my-5">
       <div className="flex">

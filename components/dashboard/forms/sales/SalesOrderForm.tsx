@@ -6,15 +6,15 @@ import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
 import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
-import { salesQuotationSchema } from "@/lib/validations/dashboard/sales/salesQuotationSchema";
+import { salesOrderSchema } from "@/lib/validations/dashboard/sales/salesOrderSchema";
 
-interface SalesQuotationFormProps {
+interface SalesOrderFormProps {
   
-  onSubmit: (data: SalesQuotationFormValues) => Promise<void>;
-  defaultValues?: SalesQuotationFormValues;
+  onSubmit: (data: SalesOrderFormValues) => Promise<void>;
+  defaultValues?: SalesOrderFormValues;
 }
 
-export interface SalesQuotationFormValues {
+export interface SalesOrderFormValues {
   date: string;
   customer: string;
   validity_period: string;
@@ -29,9 +29,9 @@ export interface SalesQuotationFormValues {
   }[];
 }
 
-const SalesQuotationForm = ({ onSubmit, defaultValues }: SalesQuotationFormProps) => {
-    const form = useForm<SalesQuotationFormValues>({
-        resolver: zodResolver(salesQuotationSchema),
+const SalesOrderForm = ({ onSubmit, defaultValues }: SalesOrderFormProps) => {
+    const form = useForm<SalesOrderFormValues>({
+        resolver: zodResolver(salesOrderSchema),
         defaultValues: defaultValues || {
           date: "",
           customer: "",
@@ -51,31 +51,31 @@ const SalesQuotationForm = ({ onSubmit, defaultValues }: SalesQuotationFormProps
             <TextInput
               control={form.control}
               name="date"
-              label={t("SalesQuotation.date")}
-              placeholder={t("SalesQuotation.date")}
+              label={t("SalesOrder.date")}
+              placeholder={t("SalesOrder.date")}
             />
             <TextInput
               control={form.control}
               name="customer"
-              label={t("SalesQuotation.customer")}
-              placeholder={t("SalesQuotation.customer")}
+              label={t("SalesOrder.customer")}
+              placeholder={t("SalesOrder.customer")}
             />
             <TextInput
               control={form.control}
               name="validity_period"
-              label={t("SalesQuotation.validityPeriod")}
-              placeholder={t("SalesQuotation.validityPeriod")}
+              label={t("SalesOrder.validityPeriod")}
+              placeholder={t("SalesOrder.validityPeriod")}
             />
             <TextInput
               control={form.control}
               name="quotation_number"
-              label={t("SalesQuotation.quotationNumber")}
-              placeholder={t("SalesQuotation.quotationNumber")}
+              label={t("SalesOrder.quotationNumber")}
+              placeholder={t("SalesOrder.quotationNumber")}
             />
           </div>
         </section>
         <div className="flex justify-end gap-2 mt-5">
-          <Link href={`/dashboard/sales?tab=${t("salesQuotation")}`} passHref>
+          <Link href={`/dashboard/sales?tab=${t("salesOrder")}`} passHref>
             <CustomButton
             text={t("cancel")}
               className="text-white rounded-lg bg-secondary min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
@@ -92,4 +92,4 @@ const SalesQuotationForm = ({ onSubmit, defaultValues }: SalesQuotationFormProps
   );
 };
 
-export default SalesQuotationForm;
+export default SalesOrderForm;
