@@ -40,8 +40,6 @@ export default function Items() {
     router.push("/dashboard/inventory/items/create");
   };
 
-  if (error) return <div>Error loading items</div>;
-
   return (
     <>
       {isLoading ? (
