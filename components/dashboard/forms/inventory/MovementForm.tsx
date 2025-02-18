@@ -31,7 +31,7 @@ const MovementForm = ({
   defaultValues,
   isView,
 }: MovementFormProps) => {
-  const t = useTranslations("Inventory");
+  const t = useTranslations();
 
   const form = useForm({
     resolver: zodResolver(movementSchema),
@@ -64,16 +64,16 @@ const MovementForm = ({
             <CustomSelect
               control={form.control}
               name="item"
-              label={t("InventoryMovement.item")}
-              placeholder={t("InventoryMovement.item")}
+              label={t("Inventory.InventoryMovement.item")}
+              placeholder={t("Inventory.InventoryMovement.item")}
               options={itemsOptions}
               readonly={isView}
             />
             <TextInput
               control={form.control}
               name="quantity"
-              label={t("InventoryMovement.quantity")}
-              placeholder={t("InventoryMovement.quantity")}
+              label={t("Inventory.InventoryMovement.quantity")}
+              placeholder={t("Inventory.InventoryMovement.quantity")}
               type="number"
               readonly={isView}
             />
@@ -81,38 +81,41 @@ const MovementForm = ({
             <CustomSelect
               control={form.control}
               name="movement_type"
-              label={t("InventoryMovement.movementType")}
-              placeholder={t("InventoryMovement.movementType")}
+              label={t("Inventory.InventoryMovement.movementType")}
+              placeholder={t("Inventory.InventoryMovement.movementType")}
               options={typeOptions}
               readonly={isView}
             />
             <DatePicker
               control={form.control}
               name="movement_date"
-              label={t("InventoryMovement.date")}
-              placeholder={t("InventoryMovement.date")}
+              label={t("Inventory.InventoryMovement.date")}
+              placeholder={t("Inventory.InventoryMovement.date")}
               readonly={isView}
             />
           </div>
           <CustomTextArea
             control={form.control}
             name="description"
-            label={t("InventoryMovement.description")}
-            placeholder={t("InventoryMovement.description")}
+            label={t("Inventory.InventoryMovement.description")}
+            placeholder={t("Inventory.InventoryMovement.description")}
             className="mt-2 xl:mt-5"
             readonly={isView}
           />
         </section>
         {!isView && (
           <div className="flex justify-end gap-2 mt-5">
-            <Link href={`/dashboard/inventory?tab=${t("movement")}`} passHref>
+            <Link
+              href={`/dashboard/inventory?tab=${t("Inventory.movement")}`}
+              passHref
+            >
               <CustomButton
-                text="Cancel"
+                text={t("cancel")}
                 className="text-white rounded-lg bg-secondary min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
               />
             </Link>
             <CustomButton
-              text="Save"
+              text={t("save")}
               className="text-white rounded-lg min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
             />
           </div>

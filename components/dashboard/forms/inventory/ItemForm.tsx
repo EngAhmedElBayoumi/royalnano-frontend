@@ -50,6 +50,7 @@ const ItemForm = ({ onSubmit, defaultValues }: ItemFormProps) => {
     },
   });
 
+  const globalTranslate = useTranslations();
   const t = useTranslations("Inventory.InventoryItem");
   const { data: categories } = useGetItemCategoryQuery({});
 
@@ -152,12 +153,12 @@ const ItemForm = ({ onSubmit, defaultValues }: ItemFormProps) => {
         <div className="flex justify-end gap-2 mt-5">
           <Link href="/dashboard/inventory" passHref>
             <CustomButton
-              text="Cancel"
+              text={globalTranslate("cancel")}
               className="text-white rounded-lg bg-secondary min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
             />
           </Link>
           <CustomButton
-            text="Save"
+            text={globalTranslate("save")}
             className="text-white rounded-lg min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
           />
         </div>

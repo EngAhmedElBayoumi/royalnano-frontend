@@ -25,7 +25,7 @@ export interface PreorderFormValues {
 }
 
 const PreorderForm = ({ onSubmit, defaultValues }: PreorderFormProps) => {
-  const t = useTranslations("Inventory");
+  const t = useTranslations();
 
   const { data: items } = useGetItemsQuery({});
 
@@ -52,35 +52,38 @@ const PreorderForm = ({ onSubmit, defaultValues }: PreorderFormProps) => {
             <CustomSelect
               control={form.control}
               name="item"
-              label={t("InventoryPreorder.item")}
-              placeholder={t("InventoryPreorder.item")}
+              label={t("Inventory.InventoryPreorder.item")}
+              placeholder={t("Inventory.InventoryPreorder.item")}
               options={itemsOptions}
             />
             <TextInput
               control={form.control}
               name="preorder_level"
-              label={t("InventoryPreorder.preorderLevel")}
-              placeholder={t("InventoryPreorder.preorderLevel")}
+              label={t("Inventory.InventoryPreorder.preorderLevel")}
+              placeholder={t("Inventory.InventoryPreorder.preorderLevel")}
               type="number"
             />
           </div>
           <TextArea
             control={form.control}
             name="description"
-            label={t("InventoryPreorder.description")}
-            placeholder={t("InventoryPreorder.description")}
+            label={t("Inventory.InventoryPreorder.description")}
+            placeholder={t("Inventory.InventoryPreorder.description")}
             className="mt-2 xl:mt-5"
           />
         </section>
         <div className="flex justify-end gap-2 mt-5">
-          <Link href={`/dashboard/inventory?tab=${t("preorder")}`} passHref>
+          <Link
+            href={`/dashboard/inventory?tab=${t("Inventory.preorder")}`}
+            passHref
+          >
             <CustomButton
-              text="Cancel"
+              text={t("cancel")}
               className="text-white rounded-lg bg-secondary min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
             />
           </Link>
           <CustomButton
-            text="Save"
+            text={t("save")}
             className="text-white rounded-lg min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
           />
         </div>

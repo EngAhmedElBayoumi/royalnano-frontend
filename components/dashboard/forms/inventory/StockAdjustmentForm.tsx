@@ -44,7 +44,7 @@ const StockAdjustmentForm = ({
     },
   });
   const { data: items } = useGetItemsQuery({});
-  const t = useTranslations("Inventory");
+  const t = useTranslations();
 
   const itemsOptions =
     items?.results?.map((item: { id: number; item_name: string }) => ({
@@ -65,47 +65,51 @@ const StockAdjustmentForm = ({
             <CustomSelect
               control={form.control}
               name="item"
-              label={t("InventoryStockAdjustment.item")}
-              placeholder={t("InventoryStockAdjustment.item")}
+              label={t("Inventory.InventoryStockAdjustment.item")}
+              placeholder={t("Inventory.InventoryStockAdjustment.item")}
               options={itemsOptions}
               readonly={isView}
             />
             <TextInput
               control={form.control}
               name="reason"
-              label={t("InventoryStockAdjustment.reason")}
-              placeholder={t("InventoryStockAdjustment.reason")}
+              label={t("Inventory.InventoryStockAdjustment.reason")}
+              placeholder={t("Inventory.InventoryStockAdjustment.reason")}
               readonly={isView}
             />
             <TextInput
               control={form.control}
               name="quantity_adjusted"
-              label={t("InventoryStockAdjustment.quantityAdjusted")}
-              placeholder={t("InventoryStockAdjustment.quantityAdjusted")}
+              label={t("Inventory.InventoryStockAdjustment.quantityAdjusted")}
+              placeholder={t(
+                "Inventory.InventoryStockAdjustment.quantityAdjusted"
+              )}
               type="number"
               readonly={isView}
             />
             <CustomSelect
               control={form.control}
               name="adjustment_type"
-              label={t("InventoryStockAdjustment.adjustmentType")}
-              placeholder={t("InventoryStockAdjustment.adjustmentType")}
+              label={t("Inventory.InventoryStockAdjustment.adjustmentType")}
+              placeholder={t(
+                "Inventory.InventoryStockAdjustment.adjustmentType"
+              )}
               options={typeOptions}
               readonly={isView}
             />
             <DatePicker
               control={form.control}
               name="adjustment_date"
-              label={t("InventoryStockAdjustment.date")}
-              placeholder={t("InventoryStockAdjustment.date")}
+              label={t("Inventory.InventoryStockAdjustment.date")}
+              placeholder={t("Inventory.InventoryStockAdjustment.date")}
               readonly={isView}
             />
           </div>
           <CustomTextArea
             control={form.control}
             name="description"
-            label={t("InventoryStockAdjustment.description")}
-            placeholder={t("InventoryStockAdjustment.description")}
+            label={t("Inventory.InventoryStockAdjustment.description")}
+            placeholder={t("Inventory.InventoryStockAdjustment.description")}
             className="mt-2 xl:mt-5"
             readonly={isView}
           />
@@ -113,16 +117,18 @@ const StockAdjustmentForm = ({
         {!isView && (
           <div className="flex justify-end gap-2 mt-5">
             <Link
-              href={`/dashboard/inventory?tab=${t("stockAdjustment")}`}
+              href={`/dashboard/inventory?tab=${t(
+                "Inventory.stockAdjustment"
+              )}`}
               passHref
             >
               <CustomButton
-                text="Cancel"
+                text={t("cancel")}
                 className="text-white rounded-lg bg-secondary min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
               />
             </Link>
             <CustomButton
-              text="Save"
+              text={t("save")}
               className="text-white rounded-lg min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
             />
           </div>
