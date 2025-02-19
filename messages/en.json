@@ -97,5 +97,88 @@
       "save": "Save",
       "cancel": "Cancel"
     }
+  },
+  "website": {
+    "OurSolutions": {
+      "heading": "Our Solutions",
+      "description": "Royal Nano Ceramic provides advanced protection services for cars, aircraft, boats, and motorcycles in Egypt. Using the best international materials and modern nanoceramic technologies, the company guarantees the highest levels of protection and quality, offering a unique experience that makes it the first choice in the market."
+    },
+    "CustomerReviews": {
+      "heading": "Customers",
+      "reviews": [
+        {
+          "name": "Emma Watson",
+          "comment": "Their Service is absolutely amazing. My car looks brand new again."
+        },
+        {
+          "name": "John Doe",
+          "comment": "Absolutely fantastic! Exceeded my expectations. Overall, a decent experience."
+        },
+        {
+          "name": "Sarah Connor",
+          "comment": "Great service, but a bit slow. Overall, a decent experience."
+        },
+        {
+          "name": "Bruce Wayne",
+          "comment": "Best service I've ever had! Overall, a decent experience."
+        },
+        {
+          "name": "Alice Johnson",
+          "comment": "Fantastic service! Highly recommend. Overall, a decent experience."
+        },
+        {
+          "name": "Bob Smith",
+          "comment": "Very good experience, will come back again for sure. Overall, a decent experience."
+        },
+        {
+          "name": "Charlie Brown",
+          "comment": "Decent service, but could be improved in many ways. Overall, a decent experience."
+        },
+        {
+          "name": "Diana Prince",
+          "comment": "Absolutely loved it! Best in town. Overall, a decent experience."
+        }
+      ]
+    },
+    "OurSolutions": {
+      "heading": "Our Solutions",
+      "description": "Royal Nano Ceramic offers advanced protection services for vehicles, aircraft, boats, and motorcycles in Egypt. Using the best international materials and modern nano-ceramic technologies, the company ensures top-level protection and quality, delivering a unique experience that makes them the leading choice in the market.",
+      "solutions": [
+        {
+          "title": "Luxury Car Protection",
+          "paragraph": "Our ceramic coating ensures long-lasting protection for luxury vehicles, preserving their shine and guarding against scratches and environmental damage."
+        },
+        {
+          "title": "Aircraft Protection",
+          "paragraph": "We provide nano technology coatings that protect aircraft from UV damage and corrosion, keeping them in excellent condition over time."
+        },
+        {
+          "title": "Yacht Protection",
+          "paragraph": "Our nano coatings offer protection against saltwater and UV rays, helping to maintain the yacht's appearance and durability."
+        },
+        {
+          "title": "Motorcycle Protection",
+          "paragraph": "Specialized nano coatings protect motorcycles from scratches and wear, ensuring they remain in great condition across various environments."
+        }
+      ]
+    },
+    "About": {
+      "heading": "About",
+      "whyRoyalNano": "Why Royal Nano",
+      "aboutData": [
+        {
+          "title": "Fast and efficient solutions for your car needs.",
+          "paragraph": "We provide cutting-edge technology that ensures speed and reliability, helping your business stay ahead in a competitive market."
+        },
+        {
+          "title": "Innovative leadership that inspires progress and growth.",
+          "paragraph": "Our forward-thinking leadership drives innovation, fostering a culture of continuous improvement and development."
+        },
+        {
+          "title": "24/7 customer support to assist you whenever needed.",
+          "paragraph": "Our dedicated team is always available, providing expert guidance and support to ensure your satisfaction around the clock."
+        }
+      ]
+    }
   }
 }

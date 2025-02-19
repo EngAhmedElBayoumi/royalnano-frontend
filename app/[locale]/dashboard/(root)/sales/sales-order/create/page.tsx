@@ -7,7 +7,7 @@ import { useCreateSalesQuotationMutation } from "@/redux/services/dashboard/sale
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 
-export default function CreateSalesQuotation() {
+export default function CreateSalesOrder() {
 
   const router = useRouter();
   const t = useTranslations("Sales");
@@ -51,7 +51,7 @@ export default function CreateSalesQuotation() {
         />
         <IconWithTitle
           imageSrc="/assets/icons/add.svg"
-          title="Add Quotation"
+          title="Add Sales Order"
           backgroundColor="#F8F7F7"
           textColor="primary"
         />

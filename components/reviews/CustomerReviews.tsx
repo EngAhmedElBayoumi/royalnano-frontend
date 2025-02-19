@@ -6,15 +6,15 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { reviews } from "@/data/customerReviewsData";
 import ReviewCard from "@/components/cards/ReviewCard";
-import { useGetAllReviewsQuery } from "@/redux/services/customerReviewApi";
+import { useTranslations } from "next-intl";
 
 const CustomerReviews: React.FC = () => {
-  const { data, isLoading, error } = useGetAllReviewsQuery();
+  const t = useTranslations("website.CustomerReviews");
 
   return (
     <section className="py-4 lg:py-6 xl:py-8 bg-white">
       <h2 className="text-center text-md lg:text-lg xl:text-xl font-bold text-primary mb-6">
-        Customers
+        {t("heading")}
       </h2>
       <div className="flex justify-center">
         <Swiper
@@ -46,9 +46,9 @@ const CustomerReviews: React.FC = () => {
           {reviews.map((review, index) => (
             <SwiperSlide key={index}>
               <ReviewCard
-                name={review.name}
+                name={t(`reviews.${index}.name`)} 
                 rating={review.rating}
-                comment={review.comment}
+                comment={t(`reviews.${index}.comment`)} 
                 image={review.image}
               />
             </SwiperSlide>

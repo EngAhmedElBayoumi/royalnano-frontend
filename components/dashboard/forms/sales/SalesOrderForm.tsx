@@ -92,7 +92,6 @@ const SalesOrderForm = ({ onSubmit, defaultValues }: SalesOrderFormProps) => {
               label={t("SalesOrder.description")}
               placeholder={t("SalesOrder.description")}
             />
-            {/* Render items dynamically */}
             {form.watch("items").map((item, index) => (
               <div key={index} className="col-span-2">
                 <TextInput

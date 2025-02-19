@@ -66,7 +66,6 @@ const SalesInvoiceForm = ({ onSubmit, defaultValues }: SalesInvoiceFormProps) =>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <section className="min-h-[60vh]">
           <div className="grid sm:grid-cols-2 gap-x-4 gap-y-2 xl:gap-y-5 lg:gap-x-10">
-            {/* Main Fields */}
             <TextInput
               control={form.control}
               name="invoice_date"
