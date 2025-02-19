@@ -99,10 +99,6 @@
     }
   },
   "website": {
-    "OurSolutions": {
-      "heading": "Our Solutions",
-      "description": "Royal Nano Ceramic provides advanced protection services for cars, aircraft, boats, and motorcycles in Egypt. Using the best international materials and modern nanoceramic technologies, the company guarantees the highest levels of protection and quality, offering a unique experience that makes it the first choice in the market."
-    },
     "CustomerReviews": {
       "heading": "Customers",
       "reviews": [
@@ -211,6 +207,39 @@
         "description": "Royal Nano Ceramic is a leading car protection company in Egypt, offering advanced nano ceramic coatings to protect and enhance vehicle exteriors. They specialize in paint protection, scratch resistance, and hydrophobic coatings, ensuring cars remain in top condition."
       },
       "buttonText": "Protect Your Car"
+    },
+    "services": {
+      "title": "Our Services",
+      "maxPro": {
+        "name": "Max Pro",
+        "type": "Paint Protection"
+      },
+      "grapheneHybridPlus": {
+        "name": "Graphene Hybrid Plus",
+        "type": "Nano Graphene"
+      },
+      "diamondHybridPlus": {
+        "name": "Diamond Hybrid Plus",
+        "type": "Nano Ceramic"
+      },
+      "shieldUltraCool": {
+        "name": "Shield UltraCool",
+        "type": "Thermal Insulation"
+      }
+    },
+    "flexibleServices": {
+      "title": "Flexible Services",
+      "description": "Smart solutions for all your charter requirements",
+      "buttonText": "All Solutions"
+    },
+    "subscription": {
+      "title": "Subscribe to get the latest car maintenance updates",
+      "emailPlaceholder": "Enter your email address",
+      "buttonText": "Subscribe",
+      "errors": {
+        "required": "Email is required",
+        "invalid": "Invalid email"
+      }
     }
   }
 }
