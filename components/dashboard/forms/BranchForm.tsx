@@ -6,8 +6,15 @@ import { branchSchema } from "@/lib/validations/dashboard/branchSchema";
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
 import PhoneInputField from "@/components/formFields/PhoneInputField";
-import {Link} from '@/i18n/routing';
+import { Link } from "@/i18n/routing";
 import CustomTextArea from "@/components/formFields/TextArea";
+import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
+import Image from "next/image";
+import CustomModal from "@/components/modals/CustomModal";
+import { useState } from "react";
+import config from "@/lib/config";
+
+/// <reference types="google.maps" />
 
 interface BranchFormProps {
   onSubmit: (data: BranchFormValues) => Promise<void>;
@@ -25,7 +32,19 @@ export interface BranchFormValues {
   manager?: number;
 }
 
+const containerStyle = {
+  width: "100%",
+  height: "400px",
+};
+
+const center = {
+  lat: 30,
+  lng: 30,
+};
+
 const BranchForm = ({ onSubmit, defaultValues }: BranchFormProps) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const form = useForm({
     resolver: zodResolver(branchSchema),
     defaultValues: defaultValues || {
@@ -39,6 +58,18 @@ const BranchForm = ({ onSubmit, defaultValues }: BranchFormProps) => {
       manager: undefined,
     },
   });
+
+  const { isLoaded } = useJsApiLoader({
+    googleMapsApiKey: config.mapKey, // Ensure you have your API key stored in environment variables
+  });
+
+  const handleMapClick = (event: google.maps.MapMouseEvent) => {
+    if (event.latLng) {
+      const lat = event.latLng.lat();
+      const lng = event.latLng.lng();
+      form.setValue("location", `lat: ${lat}, long: ${lng}`);
+    }
+  };
 
   return (
     <Form {...form}>
@@ -69,12 +100,42 @@ const BranchForm = ({ onSubmit, defaultValues }: BranchFormProps) => {
               label="Email"
               placeholder="Email"
             />
-            <TextInput
-              control={form.control}
-              name="location"
-              label="Location"
-              placeholder="Location"
-            />
+            <div className="relative">
+              <TextInput
+                control={form.control}
+                name="location"
+                label="Location"
+                placeholder="Location"
+                readonly={true}
+              />
+              <Image
+                src="/assets/icons/dashboard/branches/mdi_add-location.svg"
+                alt="location"
+                width="24"
+                height="24"
+                className="absolute top-0 left-0 cursor-pointer"
+                onClick={() => setIsModalOpen(true)}
+              />
+            </div>
+            {/* Google Map for selecting location */}
+            <CustomModal
+              isOpen={isModalOpen}
+              onChange={() => setIsModalOpen(false)}
+              title="Set location"
+              description="Select branch location"
+            >
+              {isLoaded && (
+                <GoogleMap
+                  mapContainerStyle={containerStyle}
+                  center={center}
+                  zoom={10}
+                  onClick={handleMapClick}
+                >
+                  {/* Marker can be added here if needed */}
+                </GoogleMap>
+              )}
+            </CustomModal>
+
             <TextInput
               control={form.control}
               name="address"

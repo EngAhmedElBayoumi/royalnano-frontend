@@ -13,6 +13,7 @@ interface CustomModalProps {
   onChange: (open: boolean) => void;
   title: string;
   description: string;
+  children?: React.ReactNode;
 }
 
 function CustomModal({
@@ -20,6 +21,7 @@ function CustomModal({
   onChange,
   title,
   description,
+  children,
 }: CustomModalProps) {
   return (
     <Dialog open={isOpen} onOpenChange={onChange}>
@@ -31,6 +33,7 @@ function CustomModal({
             {description}
           </DialogDescription>
         </DialogHeader>
+        {children}
       </DialogContent>
     </Dialog>
   );
