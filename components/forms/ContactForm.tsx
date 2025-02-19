@@ -14,15 +14,15 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "../ui/textarea";
 import { usePostContactMutation } from "@/redux/services/contactApi";
-
 import { useState } from "react";
 import CustomModal from "../modals/CustomModal";
+import { useTranslations } from "next-intl";
 
 export default function ContactForm() {
   const [isOpen, setIsOpen] = useState(false);
-
   const [postContact, { isLoading }] = usePostContactMutation();
-  
+  const t = useTranslations("website.ContactForm");
+
   const form = useForm({
     resolver: zodResolver(aboutValidation),
     defaultValues: {
@@ -32,6 +32,7 @@ export default function ContactForm() {
       message: "",
     },
   });
+
   const onSubmit = async (data: {
     full_name: string;
     email: string;
@@ -42,6 +43,7 @@ export default function ContactForm() {
     form.reset();
     setIsOpen(true);
   };
+
   return (
     <Form {...form}>
       <form
@@ -51,8 +53,8 @@ export default function ContactForm() {
         <CustomModal
           isOpen={isOpen}
           onChange={(isOpen) => setIsOpen(isOpen)}
-          title="Thank you!"
-          description="We have received your message. we will get back to you as soon as possible."
+          title={t("thankYou")}
+          description={t("thankYouMessage")}
         />
 
         <FormField
@@ -61,11 +63,11 @@ export default function ContactForm() {
           render={({ field }) => (
             <FormItem className="flex flex-col gap-0 w-full">
               <FormLabel className="text-subtitle font-[500] text-sm xl:text-[20px] ">
-                Full Name
+                {t("fullName")}
               </FormLabel>
               <FormControl className="flex-1 text-gray-200 ">
                 <Input
-                  placeholder="Full Name"
+                  placeholder={t("fullName")}
                   type="text"
                   className="bg-white p-3 border-[0.5] border-primary"
                   {...field}
@@ -81,11 +83,11 @@ export default function ContactForm() {
           render={({ field }) => (
             <FormItem className="flex flex-col gap-0 w-full">
               <FormLabel className="text-subtitle font-[500] text-sm xl:text-[20px] ">
-                Email
+                {t("email")}
               </FormLabel>
               <FormControl className="flex-1 text-gray-200 ">
                 <Input
-                  placeholder="Email"
+                  placeholder={t("email")}
                   type="email"
                   className="p-3 bg-white border-[0.5] border-primary"
                   {...field}
@@ -101,11 +103,11 @@ export default function ContactForm() {
           render={({ field }) => (
             <FormItem className="flex flex-col gap-0 w-full">
               <FormLabel className="text-subtitle font-[500] text-sm xl:text-[20px] ">
-                Phone Number
+                {t("phoneNumber")}
               </FormLabel>
               <FormControl className="flex-1 text-gray-200 ">
                 <Input
-                  placeholder="Phone Number"
+                  placeholder={t("phoneNumber")}
                   type="text"
                   className="p-3 border-[0.5] border-primary bg-white"
                   {...field}
@@ -121,11 +123,11 @@ export default function ContactForm() {
           render={({ field }) => (
             <FormItem className="flex flex-col gap-0 w-full ">
               <FormLabel className="text-subtitle font-[500] text-sm xl:text-[20px]  ">
-                Message
+                {t("message")}
               </FormLabel>
               <FormControl className="flex-1 text-gray-200 ">
                 <Textarea
-                  placeholder="Message"
+                  placeholder={t("message")}
                   className="p-3 bg-white border-[0.5] border-primary"
                   {...field}
                 />
@@ -138,7 +140,7 @@ export default function ContactForm() {
           className="bg-[#BD9D28] text-white py-1.5 px-[71px] md:text-sm xl:text-md w-[197px] m-auto"
           type="submit"
         >
-          {isLoading ? "Sending..." : "Send"}
+          {isLoading ? t("sending") : t("send")}
         </Button>
       </form>
     </Form>
