@@ -1,20 +1,21 @@
 "use client";
-import { Form } from "@/components/ui/form";
+import { useState } from "react";
+import Image from "next/image";
+import { Link } from "@/i18n/routing";
+import MapGL, { Marker } from "react-map-gl/maplibre";
+import { MapLayerMouseEvent } from "react-map-gl/maplibre";
+import "maplibre-gl/dist/maplibre-gl.css";
+
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { branchSchema } from "@/lib/validations/dashboard/branchSchema";
+
+import { Form } from "@/components/ui/form";
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
 import PhoneInputField from "@/components/formFields/PhoneInputField";
-import { Link } from "@/i18n/routing";
 import CustomTextArea from "@/components/formFields/TextArea";
-import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
-import Image from "next/image";
 import CustomModal from "@/components/modals/CustomModal";
-import { useState } from "react";
-import config from "@/lib/config";
-
-/// <reference types="google.maps" />
 
 interface BranchFormProps {
   onSubmit: (data: BranchFormValues) => Promise<void>;
@@ -32,15 +33,19 @@ export interface BranchFormValues {
   manager?: number;
 }
 
-const containerStyle = {
-  width: "100%",
-  height: "400px",
-};
+interface Viewport {
+  latitude: number;
+  longitude: number;
+  zoom: number;
+  width: string;
+  height: string;
+}
 
-const center = {
-  lat: 30,
-  lng: 30,
-};
+interface ExtendedMapGLProps extends React.ComponentProps<typeof MapGL> {
+  onViewportChange?: (viewport: Viewport) => void;
+}
+
+const ExtendedMapGL = MapGL as React.ComponentType<ExtendedMapGLProps>;
 
 const BranchForm = ({ onSubmit, defaultValues }: BranchFormProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -58,17 +63,20 @@ const BranchForm = ({ onSubmit, defaultValues }: BranchFormProps) => {
       manager: undefined,
     },
   });
-
-  const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: config.mapKey, // Ensure you have your API key stored in environment variables
+  const [viewport, setViewport] = useState({
+    latitude: 30,
+    longitude: 30,
+    zoom: 10,
+    width: "100%",
+    height: "400px",
   });
 
-  const handleMapClick = (event: google.maps.MapMouseEvent) => {
-    if (event.latLng) {
-      const lat = event.latLng.lat();
-      const lng = event.latLng.lng();
-      form.setValue("location", `lat: ${lat}, long: ${lng}`);
-    }
+  const [marker, setMarker] = useState({ latitude: 30, longitude: 30 });
+
+  const handleMapClick = (event: MapLayerMouseEvent) => {
+    const { lng, lat } = event.lngLat;
+    setMarker({ latitude: lat, longitude: lng });
+    form.setValue("location", `lat: ${lat}, long: ${lng}`);
   };
 
   return (
@@ -124,16 +132,18 @@ const BranchForm = ({ onSubmit, defaultValues }: BranchFormProps) => {
               title="Set location"
               description="Select branch location"
             >
-              {isLoaded && (
-                <GoogleMap
-                  mapContainerStyle={containerStyle}
-                  center={center}
-                  zoom={10}
-                  onClick={handleMapClick}
-                >
-                  {/* Marker can be added here if needed */}
-                </GoogleMap>
-              )}
+              <ExtendedMapGL
+                initialViewState={viewport}
+                style={{ height: 400 }}
+                mapStyle="https://api.maptiler.com/maps/streets/style.json?key=5jmaQWxsSn2zFDJSXmK4"
+                onViewportChange={(nextViewport) => setViewport(nextViewport)}
+                onClick={handleMapClick}
+              >
+                <Marker
+                  latitude={marker.latitude}
+                  longitude={marker.longitude}
+                />
+              </ExtendedMapGL>
             </CustomModal>
 
             <TextInput
