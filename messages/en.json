@@ -200,6 +200,17 @@
       "LogIn": "Log In",
       "Register": "Register",
       "Logout": "Logout"
+    },
+    "hero": {
+      "slide1": {
+        "title": "How can we help you?",
+        "description": "We’re here to help and answer any questions you might have. We look forward to hearing from you!"
+      },
+      "slide2": {
+        "title": "Royal Nano Ceramic",
+        "description": "Royal Nano Ceramic is a leading car protection company in Egypt, offering advanced nano ceramic coatings to protect and enhance vehicle exteriors. They specialize in paint protection, scratch resistance, and hydrophobic coatings, ensuring cars remain in top condition."
+      },
+      "buttonText": "Protect Your Car"
     }
   }
 }
