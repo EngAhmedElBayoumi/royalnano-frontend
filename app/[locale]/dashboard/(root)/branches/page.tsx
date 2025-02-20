@@ -40,9 +40,9 @@ export default function Branches() {
 
   return (
     <>
-      <div className="px-6 pt-7 pb-25  ">
+      <div className="px-6 pt-7 pb-25">
         <CustomTable
-        emptyMessage="you have no branches"
+          emptyMessage="you have no branches"
           editRoute="/dashboard/branches/edit/"
           headerBG="#F8F7F7"
           headerTextColor="#C8AE50"

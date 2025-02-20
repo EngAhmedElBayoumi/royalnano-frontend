@@ -10,7 +10,7 @@ function EmptyMessage({
   onClick: MouseEventHandler<HTMLButtonElement>;
 }) {
   return (
-    <div className="bg-dashboardBg pt-20 px-4 pt-4 pb-1 rounded-t-[20px] rounded-bl-[20px] flex-col rounded-br-[20px] flex justify-center items-center w-full    card gap-15">
+    <div className="bg-dashboardBg pt-20 px-4 pt-4 pb-1 ltr:rounded-tr-[20px] rtl:rounded-tl-[20px] rounded-b-[20px] flex flex-col justify-center items-center w-full card gap-15">
       <Image
         height={100}
         width={400}

@@ -65,7 +65,7 @@ const BranchForm = ({ onSubmit, defaultValues }: BranchFormProps) => {
   });
   const [viewport, setViewport] = useState({
     latitude: 30,
-    longitude: 30,
+    longitude: 31,
     zoom: 10,
     width: "100%",
     height: "400px",
