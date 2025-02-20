@@ -26,8 +26,10 @@ function CustomModal({
     <Dialog open={isOpen} onOpenChange={onChange}>
       <DialogContent className="custom-modal">
         <DialogHeader>
-          <DialogTitle>{title}</DialogTitle>
-          <DialogDescription>{description}</DialogDescription>
+          <DialogTitle className="text-start">{title}</DialogTitle>
+          <DialogDescription className="text-start !mt-0">
+            {description}
+          </DialogDescription>
         </DialogHeader>
         {children}
       </DialogContent>

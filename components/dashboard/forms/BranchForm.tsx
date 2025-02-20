@@ -121,7 +121,7 @@ const BranchForm = ({ onSubmit, defaultValues }: BranchFormProps) => {
                 alt="location"
                 width="24"
                 height="24"
-                className="absolute top-0 left-0 cursor-pointer"
+                className="absolute top-0 ltr:right-0 rtl:left-0 cursor-pointer"
                 onClick={() => setIsModalOpen(true)}
               />
             </div>

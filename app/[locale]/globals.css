@@ -18,7 +18,15 @@
   border-radius: 0.5rem;
 }
 .custom-modal .close-btn {
+  top: 1.8rem;
+  right: 1.2rem;
+}
+.custom-modal .close-btn svg {
   color: var(--secondary);
+}
+[dir="rtl"] .custom-modal .close-btn {
+  left: 1.2rem;
+  right: unset;
 }
 
 .data-\[state\=active\]\:bg-dashboardBg[data-state="active"] img {
