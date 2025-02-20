@@ -1,7 +1,6 @@
 import React from "react";
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
   DialogHeader,
@@ -25,13 +24,10 @@ function CustomModal({
 }: CustomModalProps) {
   return (
     <Dialog open={isOpen} onOpenChange={onChange}>
-      <DialogClose />
-      <DialogContent>
+      <DialogContent className="custom-modal">
         <DialogHeader>
-          <DialogTitle className="text-center">{title}</DialogTitle>
-          <DialogDescription className="text-center">
-            {description}
-          </DialogDescription>
+          <DialogTitle>{title}</DialogTitle>
+          <DialogDescription>{description}</DialogDescription>
         </DialogHeader>
         {children}
       </DialogContent>

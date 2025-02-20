@@ -17,6 +17,9 @@
   width: 0.5rem;
   border-radius: 0.5rem;
 }
+.custom-modal .close-btn {
+  color: var(--secondary);
+}
 
 .data-\[state\=active\]\:bg-dashboardBg[data-state="active"] img {
   filter: brightness(0) saturate(100%) invert(68%) sepia(42%) saturate(528%)
