@@ -17,6 +17,7 @@
     "logout": "تسجيل الخروج"
   },
   "branches": {
+    "branches": "الفروع",
     "addBranch": "إضافة فرع",
     "noBranchesDataFound": "لا توجد بيانات للفروع",
     "name": "الاسم",

@@ -17,6 +17,7 @@
     "logout": "Logout"
   },
   "branches": {
+    "branches": "Branches",
     "addBranch": "Add Branch",
     "noBranchesDataFound": "No branches data found",
     "name": "Name",
@@ -115,10 +116,6 @@
     }
   },
   "website": {
-    "OurSolutions": {
-      "heading": "Our Solutions",
-      "description": "Royal Nano Ceramic provides advanced protection services for cars, aircraft, boats, and motorcycles in Egypt. Using the best international materials and modern nanoceramic technologies, the company guarantees the highest levels of protection and quality, offering a unique experience that makes it the first choice in the market."
-    },
     "CustomerReviews": {
       "heading": "Customers",
       "reviews": [
