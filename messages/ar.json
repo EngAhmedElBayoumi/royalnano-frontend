@@ -3,6 +3,8 @@
   "view": "عرض",
   "save": "حفظ",
   "cancel": "إلغاء",
+  "search": "بحث",
+  "create": "إنشاء",
   "loadingError": "خطأ في تحميل البيانات",
   "Sidebar": {
     "home": "الرئيسية",

@@ -3,6 +3,8 @@
   "view": "view",
   "save": "save",
   "cancel": "cancel",
+  "search": "search",
+  "create": "create",
   "loadingError": "Error loading data",
   "Sidebar": {
     "home": "Home",

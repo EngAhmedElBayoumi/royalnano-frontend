@@ -110,7 +110,7 @@ export default function CustomTable({
           className="border bg-transparent border-[#474747] px-2 w-[25%] py-2 rounded-[10px]"
           value={globalFilterValue}
           onChange={onGlobalFilterChange}
-          placeholder="Search"
+          placeholder={t("search")}
         />
         {buttonText && (
           <Button
@@ -193,7 +193,7 @@ export default function CustomTable({
                 const fieldValue = rowData[col.field];
                 if (Array.isArray(fieldValue)) {
                   return fieldValue
-                    .map((item: any) => {
+                    .map((item) => {
                       return (
                         item.item_name || item.name || JSON.stringify(item)
                       );
