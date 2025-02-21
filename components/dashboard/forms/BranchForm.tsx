@@ -16,6 +16,7 @@ import TextInput from "@/components/formFields/TextInput";
 import PhoneInputField from "@/components/formFields/PhoneInputField";
 import CustomTextArea from "@/components/formFields/TextArea";
 import CustomModal from "@/components/modals/CustomModal";
+import { useTranslations } from "next-intl";
 
 interface BranchFormProps {
   onSubmit: (data: BranchFormValues) => Promise<void>;
@@ -48,6 +49,7 @@ interface ExtendedMapGLProps extends React.ComponentProps<typeof MapGL> {
 const ExtendedMapGL = MapGL as React.ComponentType<ExtendedMapGLProps>;
 
 const BranchForm = ({ onSubmit, defaultValues }: BranchFormProps) => {
+  const t = useTranslations("branches");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const form = useForm({
@@ -87,33 +89,33 @@ const BranchForm = ({ onSubmit, defaultValues }: BranchFormProps) => {
             <TextInput
               control={form.control}
               name="name"
-              label="Name"
-              placeholder="Name"
+              label={t("name")}
+              placeholder={t("name")}
             />
             <PhoneInputField
               control={form.control}
               name="phone_number"
-              label="Phone Number"
+              label={t("phoneNumber")}
             />
 
             <TextInput
               control={form.control}
               name="branch_code"
-              label="Branch Code"
-              placeholder="Branch Code"
+              label={t("branchCode")}
+              placeholder={t("branchCode")}
             />
             <TextInput
               control={form.control}
               name="email"
-              label="Email"
-              placeholder="Email"
+              label={t("email")}
+              placeholder={t("email")}
             />
             <div className="relative">
               <TextInput
                 control={form.control}
                 name="location"
-                label="Location"
-                placeholder="Location"
+                label={t("location")}
+                placeholder={t("location")}
                 readonly={true}
               />
               <Image
@@ -125,12 +127,11 @@ const BranchForm = ({ onSubmit, defaultValues }: BranchFormProps) => {
                 onClick={() => setIsModalOpen(true)}
               />
             </div>
-            {/* Google Map for selecting location */}
             <CustomModal
               isOpen={isModalOpen}
               onChange={() => setIsModalOpen(false)}
-              title="Set location"
-              description="Select branch location"
+              title={t("setLocation")}
+              description={t("selectBranchLocation")}
             >
               <ExtendedMapGL
                 initialViewState={viewport}
@@ -149,34 +150,34 @@ const BranchForm = ({ onSubmit, defaultValues }: BranchFormProps) => {
             <TextInput
               control={form.control}
               name="address"
-              label="Address"
-              placeholder="Address"
+              label={t("address")}
+              placeholder={t("address")}
             />
             <TextInput
               control={form.control}
               name="manager"
-              label="Manager"
-              placeholder="Manager ID"
+              label={t("manager")}
+              placeholder={t("manager")}
             />
           </div>
           <CustomTextArea
             control={form.control}
             name="description"
-            label="Description"
-            placeholder="Description"
+            label={t("description")}
+            placeholder={t("description")}
             className="mt-2 xl:mt-5"
           />
         </section>
         <div className="flex justify-end gap-2 mt-5">
           <Link href="/dashboard/branches" passHref>
             <CustomButton
-              text="Cancel"
+              text={t("cancel")}
               className="text-white rounded-lg bg-secondary min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
             />
           </Link>
 
           <CustomButton
-            text="Save"
+            text={t("save")}
             className="text-white rounded-lg min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
           />
         </div>
