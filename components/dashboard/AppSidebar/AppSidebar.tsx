@@ -24,7 +24,14 @@ export function AppSidebar() {
   return (
     <Sidebar collapsible="icon" side={locale === "ar" ? "right" : "left"}>
       <SidebarHeader className="items-center">
-        <Image src="/assets/icons/logo.svg" alt="logo" width={50} height={80} />
+        <Link href="/" passHref target="blank">
+          <Image
+            src="/assets/icons/logo.svg"
+            alt="logo"
+            width={50}
+            height={80}
+          />
+        </Link>
       </SidebarHeader>
       <SidebarContent className="mt-6">
         <SidebarGroup>
