@@ -92,6 +92,27 @@
       "viewStockAdjustment": "عرض المخزون"
     }
   },
+  "hr": {
+    "tabs": {
+      "attendance": "الحضور",
+      "vacation": "الإجازات",
+      "bonuses": "المكافآت",
+      "salary": "الرواتب",
+      "employees": "الموظفون"
+    },
+    "employees": {
+      "name": "الاسم",
+      "emailAddress": "البريد الإلكتروني",
+      "phone": "الهاتف",
+      "jobTitle": "المسمى الوظيفي",
+      "salary": "الراتب",
+      "address": "العنوان",
+      "branch": "الفرع",
+      "isUser": "مستخدم",
+      "noEmployeesDataFound": "لا توجد بيانات للموظفين",
+      "addEmployees": "إضافة موظف"
+    }
+  },
   "Sales": {
     "cancel": "إلغاء",
     "save": "حفظ",

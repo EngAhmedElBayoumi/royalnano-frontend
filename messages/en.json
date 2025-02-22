@@ -92,6 +92,27 @@
       "viewStockAdjustment": "View Stock Adjustment"
     }
   },
+  "hr": {
+    "tabs": {
+      "attendance": "Attendance",
+      "vacation": "Vacation",
+      "bonuses": "Bonuses",
+      "salary": "Salaries",
+      "employees": "Employees"
+    },
+    "employees": {
+      "name": "Name",
+      "emailAddress": "Email Address",
+      "phone": "Phone",
+      "jobTitle": "Job Title",
+      "salary": "Salary",
+      "address": "Address",
+      "branch": "Branch",
+      "isUser": "Is User",
+      "noEmployeesDataFound": "No employees data found",
+      "addEmployees": "Add Employee"
+    }
+  },
   "Sales": {
     "cancel": "Cancel",
     "save": "save",
