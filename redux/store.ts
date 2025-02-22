@@ -25,6 +25,7 @@ import { salesQuotationApi } from "./services/dashboard/salesQuotationsApi";
 import { salesCustomerApi } from "./services/dashboard/salesCustomerApi";
 import { salesInvoiceApi } from "./services/dashboard/salesInvoiceApi";
 import { salesOrderApi } from "./services/dashboard/salesOrderApi";
+import { employeeApi } from "./services/dashboard/hr/employeeApi";
 
 const persistConfig = {
   key: "root",
@@ -57,8 +58,7 @@ export const store = configureStore({
     [salesCustomerApi.reducerPath]: salesCustomerApi.reducer,
     [salesInvoiceApi.reducerPath]: salesInvoiceApi.reducer,
     [salesOrderApi.reducerPath]: salesOrderApi.reducer,
-    
-    
+    [employeeApi.reducerPath]: employeeApi.reducer,
     auth: persistedAuthReducer,
   },
   middleware: (getDefaultMiddleware) => {
@@ -88,9 +88,8 @@ export const store = configureStore({
       .concat(salesQuotationApi.middleware)
       .concat(salesCustomerApi.middleware)
       .concat(salesInvoiceApi.middleware)
-      .concat(salesOrderApi.middleware);
-      
-      
+      .concat(salesOrderApi.middleware)
+      .concat(employeeApi.middleware);
   },
 });
 

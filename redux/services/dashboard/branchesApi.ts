@@ -28,12 +28,6 @@ export const branchApi = createApi({
         body: data,
       }),
     }),
-    deleteBranch: builder.mutation({
-      query: (id) => ({
-        url: `inventory/branch/${id}/`,
-        method: "DELETE",
-      }),
-    }),
   }),
 });
 
@@ -42,5 +36,4 @@ export const {
   useGetBranchByIdQuery,
   useCreateBranchMutation,
   useUpdateBranchMutation,
-  useDeleteBranchMutation,
 } = branchApi;
