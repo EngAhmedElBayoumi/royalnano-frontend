@@ -86,7 +86,7 @@ function SalesPage() {
     },
   ];
 
-  return <CustomTabs tabs={tabs} defaultTab="Employees" />;
+  return <CustomTabs tabs={tabs} defaultTab={t("sales")} />;
 }
 
 export default SalesPage;

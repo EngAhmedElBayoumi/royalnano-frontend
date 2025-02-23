@@ -31,7 +31,7 @@ function SalesPage() {
           src="/assets/icons/dashboard/sales/customer.svg"
         />
       ),
-      label:  t("customer"),
+      label: t("customer"),
       content: <Salaries />,
     },
     {
@@ -82,12 +82,11 @@ function SalesPage() {
     //   label: t("receipt"),
     //   content: <Attendance />,
     // },
-    
   ];
 
   return (
     <>
-      <CustomTabs tabs={tabs} defaultTab="Employees" />
+      <CustomTabs tabs={tabs} defaultTab={t("sales")} />
     </>
   );
 }
