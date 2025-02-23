@@ -3,19 +3,20 @@ import CustomButton from "./formFields/CustomButton";
 import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
+import { useTranslations } from 'next-intl';
 
 const Hero = () => {
+  const t = useTranslations('website.hero'); 
+
   const slides = [
     {
-      title: "How can we help you?",
-      description:
-        "We’re here to help and answer any questions you might have. We look forward to hearing from you!",
+      title: t('slide1.title'), 
+      description: t('slide1.description'), 
       image: "/assets/images/hero/multiple-car.png",
     },
     {
-      title: "Royal Nano Ceramic",
-      description:
-        "Royal Nano Ceramic is a leading car protection company in Egypt, offering advanced nano ceramic coatings to protect and enhance vehicle exteriors. They specialize in paint protection, scratch resistance, and hydrophobic coatings, ensuring cars remain in top condition.",
+      title: t('slide2.title'), 
+      description: t('slide2.description'), 
       image: "/assets/images/hero/race-car.png",
     },
   ];
@@ -45,7 +46,7 @@ const Hero = () => {
                 {slide.description}
               </p>
               <CustomButton
-                text="Protect Your Car"
+                text={t('buttonText')} 
                 className="text-white mt-4 rounded-xl xl:rounded-2xl text-[14px] md:text-sm xl:text-md py-1 xl:py-2 px-4 xl:px-6"
               />
             </main>

@@ -3,14 +3,16 @@ import React from "react";
 import ServiceItem from "./ServiceItem";
 import useActiveService from "./useActiveService";
 import { services } from "../../data/servicesData";
+import { useTranslations } from 'next-intl';
 
 const OurServices = () => {
+  const t = useTranslations('website.services'); // Access translations
   const { activeService, handleMouseEnter } = useActiveService(services[0]);
 
   return (
     <section className="pb-8 bg-white relative top-[-100px] animate-on-scroll">
       <h2 className="text-center text-md lg:text-lg xl:text-xl font-bold text-primary">
-        Our Services
+        {t('title')} {/* Translated title */}
       </h2>
       <div className="flex justify-center">
         <main className="main-container grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-[10%] items-center">
@@ -18,7 +20,11 @@ const OurServices = () => {
             {services.map((service, index) => (
               <ServiceItem
                 key={index}
-                service={service}
+                service={{
+                  ...service,
+                  name: t(`${service.key}.name`), // Translated name
+                  type: t(`${service.key}.type`), // Translated type
+                }}
                 isActive={activeService.name === service.name}
                 onMouseEnter={() => handleMouseEnter(service)}
               />

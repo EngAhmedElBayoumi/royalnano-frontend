@@ -10,7 +10,7 @@ import { logout } from "@/redux/slices/authSlice";
 import { useTranslations } from 'next-intl';
 
 const Nav = () => {
-  const t = useTranslations('website.nav'); // Access the nested translations
+  const t = useTranslations('website.nav'); 
   const [isClicked, setIsClicked] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
@@ -40,7 +40,7 @@ const Nav = () => {
     try {
       dispatch(logout());
       deleteCookie("accessToken");
-      router.push("/login");
+      router.refresh();
     } catch (error) {
       console.error("Logout failed:", error);
     }
