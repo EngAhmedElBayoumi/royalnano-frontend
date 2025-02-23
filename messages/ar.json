@@ -3,6 +3,8 @@
   "view": "عرض",
   "save": "حفظ",
   "cancel": "إلغاء",
+  "search": "بحث",
+  "create": "إنشاء",
   "loadingError": "خطأ في تحميل البيانات",
   "Sidebar": {
     "home": "الرئيسية",
@@ -15,6 +17,23 @@
     "sales": "المبيعات",
     "settings": "الإعدادات",
     "logout": "تسجيل الخروج"
+  },
+  "branches": {
+    "branches": "الفروع",
+    "addBranch": "إضافة فرع",
+    "noBranchesDataFound": "لا توجد بيانات للفروع",
+    "name": "الاسم",
+    "phoneNumber": "رقم الهاتف",
+    "branchCode": "رمز الفرع",
+    "location": "الموقع",
+    "manager": "المدير",
+    "address": "العنوان",
+    "description": "الوصف",
+    "email": "البريد الإلكتروني",
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "setLocation": "تعيين الموقع",
+    "selectBranchLocation": "اختر موقع الفرع"
   },
   "Inventory": {
     "stockAdjustment": "تعديل المخزون",
@@ -71,6 +90,27 @@
       "noStockAdjustmentsDataFound": "لا توجد بيانات تعديل المخزون",
       "addStockAdjustment": "إضافة تعديل المخزون",
       "viewStockAdjustment": "عرض المخزون"
+    }
+  },
+  "hr": {
+    "tabs": {
+      "attendance": "الحضور",
+      "vacation": "الإجازات",
+      "bonuses": "المكافآت",
+      "salary": "الرواتب",
+      "employees": "الموظفون"
+    },
+    "employees": {
+      "name": "الاسم",
+      "emailAddress": "البريد الإلكتروني",
+      "phone": "الهاتف",
+      "jobTitle": "المسمى الوظيفي",
+      "salary": "الراتب",
+      "address": "العنوان",
+      "branch": "الفرع",
+      "isUser": "مستخدم",
+      "noEmployeesDataFound": "لا توجد بيانات للموظفين",
+      "addEmployees": "إضافة موظف"
     }
   },
   "Sales": {

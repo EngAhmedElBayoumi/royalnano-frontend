@@ -1,20 +1,24 @@
+import React from "react";
+import Image from "next/image";
+import { useTranslations } from "next-intl";
 import CustomTabs from "@/components/dashboard/CustomTabs";
 import Attendance from "@/components/dashboard/hr/attendance";
 import Bonuses from "@/components/dashboard/hr/Bonuses";
 import Employees from "@/components/dashboard/hr/employees";
 import Salaries from "@/components/dashboard/hr/salaries";
 import Vacations from "@/components/dashboard/hr/vacations";
-import Image from "next/image";
-import React from "react";
+
 function HrPage() {
+  const t = useTranslations("hr.tabs");
+
   const tabs = [
     {
-      label: "Employees",
+      label: t("employees"),
       icon: (
         <Image
           width="24"
           height="24"
-          alt="employees"
+          alt={t("employees")}
           src="/assets/icons/dashboard/hr/employees.svg"
         />
       ),

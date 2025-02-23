@@ -110,7 +110,7 @@ export default function CustomTable({
           className="border bg-transparent border-[#474747] px-2 w-[25%] py-2 rounded-[10px]"
           value={globalFilterValue}
           onChange={onGlobalFilterChange}
-          placeholder="Search"
+          placeholder={t("search")}
         />
         {buttonText && (
           <Button
@@ -182,40 +182,39 @@ export default function CustomTable({
           }}
         >
           {columns.map((col) => (
-           <Column
-           key={col.field}
-           headerStyle={headerStyle}
-           field={col.field}
-           header={col.header}
-           className="m-auto py-[13px] px-[38px] text-[14px] font-[500] border-r border-white border-[2px]"
-           headerClassName="text-center capitalize text-white text-[16px] font-[500] py-[13px] px-[38px] border-r border-white border-[2px]"
-           body={(rowData: DataInTable) => {
-            const fieldValue = rowData[col.field]; 
-            if (Array.isArray(fieldValue)) {
-              return fieldValue
-                .map((item: any) => {
-                  return item.item_name || item.name || JSON.stringify(item);
-                })
-                .join(", ");
-            }
-            
-          
-          
-             if (col.field === "verified") {
-               return (
-                 <i
-                   className={`pi ${
-                     rowData[col.field]
-                       ? "pi-check-circle hover-bg-primary"
-                       : "pi-times-circle hover-bg-primary"
-                   }`}
-                 ></i>
-               );
-             }
-             return rowData[col.field as keyof DataInTable];
-           }}
-         />
-         
+            <Column
+              key={col.field}
+              headerStyle={headerStyle}
+              field={col.field}
+              header={col.header}
+              className="m-auto py-[13px] px-[38px] text-[14px] font-[500] border-r border-white border-[2px]"
+              headerClassName="text-center capitalize text-white text-[16px] font-[500] py-[13px] px-[38px] border-r border-white border-[2px]"
+              body={(rowData: DataInTable) => {
+                const fieldValue = rowData[col.field];
+                if (Array.isArray(fieldValue)) {
+                  return fieldValue
+                    .map((item) => {
+                      return (
+                        item.item_name || item.name || JSON.stringify(item)
+                      );
+                    })
+                    .join(", ");
+                }
+
+                if (col.field === "verified") {
+                  return (
+                    <i
+                      className={`pi ${
+                        rowData[col.field]
+                          ? "pi-check-circle hover-bg-primary"
+                          : "pi-times-circle hover-bg-primary"
+                      }`}
+                    ></i>
+                  );
+                }
+                return rowData[col.field as keyof DataInTable];
+              }}
+            />
           ))}
 
           {(viewRoute || editRoute) && (

@@ -1,20 +1,22 @@
 "use client";
-import { Form } from "@/components/ui/form";
+import { useState } from "react";
+import Image from "next/image";
+import { Link } from "@/i18n/routing";
+import MapGL, { Marker } from "react-map-gl/maplibre";
+import { MapLayerMouseEvent } from "react-map-gl/maplibre";
+import "maplibre-gl/dist/maplibre-gl.css";
+
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { branchSchema } from "@/lib/validations/dashboard/branchSchema";
+
+import { Form } from "@/components/ui/form";
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
 import PhoneInputField from "@/components/formFields/PhoneInputField";
-import { Link } from "@/i18n/routing";
 import CustomTextArea from "@/components/formFields/TextArea";
-import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
-import Image from "next/image";
 import CustomModal from "@/components/modals/CustomModal";
-import { useState } from "react";
-import config from "@/lib/config";
-
-/// <reference types="google.maps" />
+import { useTranslations } from "next-intl";
 
 interface BranchFormProps {
   onSubmit: (data: BranchFormValues) => Promise<void>;
@@ -32,17 +34,22 @@ export interface BranchFormValues {
   manager?: number;
 }
 
-const containerStyle = {
-  width: "100%",
-  height: "400px",
-};
+interface Viewport {
+  latitude: number;
+  longitude: number;
+  zoom: number;
+  width: string;
+  height: string;
+}
 
-const center = {
-  lat: 30,
-  lng: 30,
-};
+interface ExtendedMapGLProps extends React.ComponentProps<typeof MapGL> {
+  onViewportChange?: (viewport: Viewport) => void;
+}
+
+const ExtendedMapGL = MapGL as React.ComponentType<ExtendedMapGLProps>;
 
 const BranchForm = ({ onSubmit, defaultValues }: BranchFormProps) => {
+  const t = useTranslations("branches");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const form = useForm({
@@ -58,17 +65,20 @@ const BranchForm = ({ onSubmit, defaultValues }: BranchFormProps) => {
       manager: undefined,
     },
   });
-
-  const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: config.mapKey, // Ensure you have your API key stored in environment variables
+  const [viewport, setViewport] = useState({
+    latitude: 30,
+    longitude: 31,
+    zoom: 10,
+    width: "100%",
+    height: "400px",
   });
 
-  const handleMapClick = (event: google.maps.MapMouseEvent) => {
-    if (event.latLng) {
-      const lat = event.latLng.lat();
-      const lng = event.latLng.lng();
-      form.setValue("location", `lat: ${lat}, long: ${lng}`);
-    }
+  const [marker, setMarker] = useState({ latitude: 30, longitude: 30 });
+
+  const handleMapClick = (event: MapLayerMouseEvent) => {
+    const { lng, lat } = event.lngLat;
+    setMarker({ latitude: lat, longitude: lng });
+    form.setValue("location", `lat: ${lat}, long: ${lng}`);
   };
 
   return (
@@ -79,33 +89,33 @@ const BranchForm = ({ onSubmit, defaultValues }: BranchFormProps) => {
             <TextInput
               control={form.control}
               name="name"
-              label="Name"
-              placeholder="Name"
+              label={t("name")}
+              placeholder={t("name")}
             />
             <PhoneInputField
               control={form.control}
               name="phone_number"
-              label="Phone Number"
+              label={t("phoneNumber")}
             />
 
             <TextInput
               control={form.control}
               name="branch_code"
-              label="Branch Code"
-              placeholder="Branch Code"
+              label={t("branchCode")}
+              placeholder={t("branchCode")}
             />
             <TextInput
               control={form.control}
               name="email"
-              label="Email"
-              placeholder="Email"
+              label={t("email")}
+              placeholder={t("email")}
             />
             <div className="relative">
               <TextInput
                 control={form.control}
                 name="location"
-                label="Location"
-                placeholder="Location"
+                label={t("location")}
+                placeholder={t("location")}
                 readonly={true}
               />
               <Image
@@ -113,60 +123,61 @@ const BranchForm = ({ onSubmit, defaultValues }: BranchFormProps) => {
                 alt="location"
                 width="24"
                 height="24"
-                className="absolute top-0 left-0 cursor-pointer"
+                className="absolute top-0 ltr:right-0 rtl:left-0 cursor-pointer"
                 onClick={() => setIsModalOpen(true)}
               />
             </div>
-            {/* Google Map for selecting location */}
             <CustomModal
               isOpen={isModalOpen}
               onChange={() => setIsModalOpen(false)}
-              title="Set location"
-              description="Select branch location"
+              title={t("setLocation")}
+              description={t("selectBranchLocation")}
             >
-              {isLoaded && (
-                <GoogleMap
-                  mapContainerStyle={containerStyle}
-                  center={center}
-                  zoom={10}
-                  onClick={handleMapClick}
-                >
-                  {/* Marker can be added here if needed */}
-                </GoogleMap>
-              )}
+              <ExtendedMapGL
+                initialViewState={viewport}
+                style={{ height: 400 }}
+                mapStyle="https://api.maptiler.com/maps/streets/style.json?key=5jmaQWxsSn2zFDJSXmK4"
+                onViewportChange={(nextViewport) => setViewport(nextViewport)}
+                onClick={handleMapClick}
+              >
+                <Marker
+                  latitude={marker.latitude}
+                  longitude={marker.longitude}
+                />
+              </ExtendedMapGL>
             </CustomModal>
 
             <TextInput
               control={form.control}
               name="address"
-              label="Address"
-              placeholder="Address"
+              label={t("address")}
+              placeholder={t("address")}
             />
             <TextInput
               control={form.control}
               name="manager"
-              label="Manager"
-              placeholder="Manager ID"
+              label={t("manager")}
+              placeholder={t("manager")}
             />
           </div>
           <CustomTextArea
             control={form.control}
             name="description"
-            label="Description"
-            placeholder="Description"
+            label={t("description")}
+            placeholder={t("description")}
             className="mt-2 xl:mt-5"
           />
         </section>
         <div className="flex justify-end gap-2 mt-5">
           <Link href="/dashboard/branches" passHref>
             <CustomButton
-              text="Cancel"
+              text={t("cancel")}
               className="text-white rounded-lg bg-secondary min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
             />
           </Link>
 
           <CustomButton
-            text="Save"
+            text={t("save")}
             className="text-white rounded-lg min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
           />
         </div>

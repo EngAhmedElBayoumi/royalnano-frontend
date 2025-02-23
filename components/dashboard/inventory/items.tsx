@@ -40,27 +40,23 @@ export default function Items() {
     router.push("/dashboard/inventory/items/create");
   };
 
-  return (
+  return isLoading ? (
     <>
-      {isLoading ? (
-        <>
-          <CardsSkelton />
-          <TableSkelton />
-        </>
-      ) : error ? (
-        <LoadingError />
-      ) : (
-        <CustomTable
-          emptyMessage={t("noItemsDataFound") || "No items data found"}
-          editRoute="/dashboard/inventory/items/edit/"
-          data={data.results}
-          rows={10}
-          columns={columns}
-          cardData={cardsData}
-          buttonText={t("addItem")}
-          ButtonEvent={handleClick}
-        />
-      )}
+      <CardsSkelton />
+      <TableSkelton />
     </>
+  ) : error ? (
+    <LoadingError />
+  ) : (
+    <CustomTable
+      emptyMessage={t("noItemsDataFound") || "No items data found"}
+      editRoute="/dashboard/inventory/items/edit/"
+      data={data.results}
+      rows={10}
+      columns={columns}
+      cardData={cardsData}
+      buttonText={t("addItem")}
+      ButtonEvent={handleClick}
+    />
   );
 }

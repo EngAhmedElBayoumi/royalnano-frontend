@@ -1,6 +1,7 @@
 import Image from "next/image";
 import React, { MouseEventHandler } from "react";
 import CustomButton from "../formFields/CustomButton";
+import { useTranslations } from "next-intl";
 
 function EmptyMessage({
   emptyMessage,
@@ -9,8 +10,9 @@ function EmptyMessage({
   emptyMessage: string;
   onClick: MouseEventHandler<HTMLButtonElement>;
 }) {
+  const t = useTranslations();
   return (
-    <div className="bg-dashboardBg pt-20 px-4 pt-4 pb-1 rounded-t-[20px] rounded-bl-[20px] flex-col rounded-br-[20px] flex justify-center items-center w-full    card gap-15">
+    <div className="bg-dashboardBg pt-20 px-4 pt-4 pb-1 ltr:rounded-tr-[20px] rtl:rounded-tl-[20px] rounded-b-[20px] flex flex-col justify-center items-center w-full card gap-15">
       <Image
         height={100}
         width={400}
@@ -20,8 +22,8 @@ function EmptyMessage({
       <p className="text-[30px] text-[#7F7F7F] font-[500]">{emptyMessage}</p>
       <CustomButton
         onClick={onClick}
-        text="Create"
-        className="text-white w-[25%] my-2"
+        text={t("create")}
+        className="text-white w-[25%] my-2 capitalize"
       />
     </div>
   );

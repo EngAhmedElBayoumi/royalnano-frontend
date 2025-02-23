@@ -3,6 +3,8 @@
   "view": "view",
   "save": "save",
   "cancel": "cancel",
+  "search": "search",
+  "create": "create",
   "loadingError": "Error loading data",
   "Sidebar": {
     "home": "Home",
@@ -15,6 +17,23 @@
     "sales": "Sales",
     "settings": "Settings",
     "logout": "Logout"
+  },
+  "branches": {
+    "branches": "Branches",
+    "addBranch": "Add Branch",
+    "noBranchesDataFound": "No branches data found",
+    "name": "Name",
+    "phoneNumber": "Phone Number",
+    "branchCode": "Branch Code",
+    "location": "Location",
+    "manager": "Manager",
+    "address": "Address",
+    "description": "Description",
+    "email": "Email",
+    "save": "Save",
+    "cancel": "Cancel",
+    "setLocation": "Set Location",
+    "selectBranchLocation": "Select Branch Location"
   },
   "Inventory": {
     "stockAdjustment": "Stock Adjustment",
@@ -71,6 +90,27 @@
       "noStockAdjustmentsDataFound": "No stock adjustments data found",
       "addStockAdjustment": "Add Stock Adjustment",
       "viewStockAdjustment": "View Stock Adjustment"
+    }
+  },
+  "hr": {
+    "tabs": {
+      "attendance": "Attendance",
+      "vacation": "Vacation",
+      "bonuses": "Bonuses",
+      "salary": "Salaries",
+      "employees": "Employees"
+    },
+    "employees": {
+      "name": "Name",
+      "emailAddress": "Email Address",
+      "phone": "Phone",
+      "jobTitle": "Job Title",
+      "salary": "Salary",
+      "address": "Address",
+      "branch": "Branch",
+      "isUser": "Is User",
+      "noEmployeesDataFound": "No employees data found",
+      "addEmployees": "Add Employee"
     }
   },
   "Sales": {
