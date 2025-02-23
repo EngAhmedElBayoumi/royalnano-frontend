@@ -1,12 +1,13 @@
+import React from "react";
+import Image from "next/image";
+import { useTranslations } from "next-intl";
 import CustomTabs from "@/components/dashboard/CustomTabs";
 import Employees from "@/components/dashboard/hr/employees";
 import Salaries from "@/components/dashboard/hr/salaries";
 import SalesInvoice from "@/components/dashboard/sales/salesInvoice";
 import SalesOrder from "@/components/dashboard/sales/salesOrder";
 import SalesQuotation from "@/components/dashboard/sales/salesQuotation";
-import { useTranslations } from "next-intl";
-import Image from "next/image";
-import React from "react";
+
 function SalesPage() {
   const t = useTranslations("Sales");
   const tabs = [
