@@ -74,18 +74,11 @@ export default function EditCategory() {
 
       <div className="bg-dashboardBg px-6 pt-5 pb-8 ltr:rounded-r-[20px] ltr:rounded-bl-[20px] rtl:rounded-l-[20px] rtl:rounded-br-[20px] ltr:lg:pr-[200px] rtl:lg:pl-[200px]">
         {isLoading ? (
-          <div className="ltr:lg:pr-[200px] rtl:lg:pl-[200px]">
-            <FormSkelton />
-          </div>
+          <FormSkelton />
         ) : error ? (
           <LoadingError />
         ) : (
-          <div className="ltr:lg:pr-[200px] rtl:lg:pl-[200px]">
-            <CategoryForm
-              onSubmit={handleSubmit}
-              defaultValues={defaultValues}
-            />
-          </div>
+          <CategoryForm onSubmit={handleSubmit} defaultValues={defaultValues} />
         )}
       </div>
     </main>
