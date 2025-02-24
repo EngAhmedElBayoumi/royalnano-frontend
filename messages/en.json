@@ -138,6 +138,8 @@
       "cancel": "Cancel"
     },
     "SalesOrder": {
+      "itemId": "Item Id",
+      "selectItem": "Select Item",
       "orderDate": "Order Date",
       "customer": "Customer",
       "branch": "Branch",

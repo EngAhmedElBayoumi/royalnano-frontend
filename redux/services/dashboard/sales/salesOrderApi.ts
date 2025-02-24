@@ -1,5 +1,5 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
-import { baseQuery } from "../common";
+import { baseQuery } from "../../common";
 
 export const salesOrderApi = createApi({
   reducerPath: "salesOrderApi",

@@ -21,11 +21,12 @@ import { refreshTokenApi } from "./services/refreshTokenApi";
 import { itemsApi } from "./services/dashboard/itemsApi";
 import { itemCategoryApi } from "./services/dashboard/itemCategoryApi";
 import { stockApi } from "./services/dashboard/stockApi";
-import { salesQuotationApi } from "./services/dashboard/salesQuotationsApi";
-import { salesCustomerApi } from "./services/dashboard/salesCustomerApi";
-import { salesInvoiceApi } from "./services/dashboard/salesInvoiceApi";
-import { salesOrderApi } from "./services/dashboard/salesOrderApi";
+
 import { employeeApi } from "./services/dashboard/hr/employeeApi";
+import { salesQuotationApi } from "./services/dashboard/sales/salesQuotationsApi";
+import { salesCustomerApi } from "./services/dashboard/sales/salesCustomerApi";
+import { salesInvoiceApi } from "./services/dashboard/sales/salesInvoiceApi";
+import { salesOrderApi } from "./services/dashboard/sales/salesOrderApi";
 
 const persistConfig = {
   key: "root",
