@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { deleteCookie, setCookie } from "cookies-next";
 
 interface Permission {
   id: number;
@@ -35,6 +36,17 @@ const profileSlice = createSlice({
       state.role = action.payload.role;
       state.profilePicture = action.payload.profilePicture;
       state.permissions = action.payload.permissions;
+      // Store permissions in a cookie for middleware access
+      const permissionCodes = action.payload.permissions.map(
+        (p: { codename: string }) => p.codename
+      );
+
+      console.log("codes", permissionCodes);
+
+      setCookie("userPermissions", permissionCodes, {
+        secure: process.env.NODE_ENV === "production", // Secure in production
+        maxAge: 60 * 60 * 24,
+      });
     },
     clearProfile: (state) => {
       state.name = null;
@@ -43,6 +55,7 @@ const profileSlice = createSlice({
       state.role = null;
       state.profilePicture = null;
       state.permissions = [];
+      deleteCookie("userPermissions");
     },
   },
 });
