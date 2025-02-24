@@ -29,8 +29,6 @@ export async function middleware(req: NextRequest) {
 
   // Check if the user is authenticated using the access token
   if (accessToken) {
-    console.log(req.nextUrl.pathname);
-
     // Redirect to home page if trying to access public routes while logged in
     if (publicRoutes.some((route) => req.nextUrl.pathname.includes(route))) {
       return NextResponse.redirect(new URL("/", req.url));
