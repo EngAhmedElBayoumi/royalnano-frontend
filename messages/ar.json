@@ -136,6 +136,22 @@
       "taxRate": "معدل الضريبة",
       "save": "حفظ",
       "cancel": "إلغاء"
+    },
+    "SalesOrder": {
+      "orderDate": "تاريخ الطلب",
+      "customer": "العميل",
+      "branch": "الفرع",
+      "salesRepresentative": "منسق المبيعات",
+      "description": "الوصف",
+      "quantity": "الكمية",
+      "item": "العنصر",
+      "customItemName": "اسم العنصر المخصص",
+      "customPrice": "السعر المخصص",
+      "discount": "الخصم",
+      "discountPercent": "نسبة الخصم",
+      "status": "الحالة",
+      "save": "حفظ",
+      "cancel": "إلغاء"
     }
   },
   "website": {

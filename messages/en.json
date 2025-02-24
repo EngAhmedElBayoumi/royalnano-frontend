@@ -136,6 +136,22 @@
       "taxRate": "Tax Rate",
       "save": "Save",
       "cancel": "Cancel"
+    },
+    "SalesOrder": {
+      "orderDate": "Order Date",
+      "customer": "Customer",
+      "branch": "Branch",
+      "salesRepresentative": "Sales Representative",
+      "description": "Description",
+      "quantity": "Quantity",
+      "item": "Item",
+      "customItemName": "Custom Item Name",
+      "customPrice": "Custom Price",
+      "discount": "Discount",
+      "discountPercent": "Discount Percent",
+      "status": "Status",
+      "save": "Save",
+      "cancel": "Cancel"
     }
   },
   "website": {

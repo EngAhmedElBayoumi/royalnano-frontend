@@ -1,9 +1,9 @@
 "use client";
-import SalesQuotationForm, { SalesQuotationFormValues } from "@/components/dashboard/forms/sales/SalesQuotationForm";
+import SalesOrderForm, { SalesOrderFormValues } from "@/components/dashboard/forms/sales/SalesOrderForm";
 import IconWithTitle from "@/components/dashboard/IconWithTitle";
 import CustomModal from "@/components/modals/CustomModal";
 import { useRouter } from "@/i18n/routing";
-import { useCreateSalesQuotationMutation } from "@/redux/services/dashboard/salesQuotationsApi";
+import { useCreateSalesOrderMutation } from "@/redux/services/dashboard/salesOrderApi";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 
@@ -12,12 +12,12 @@ export default function CreateSalesOrder() {
   const router = useRouter();
   const t = useTranslations("Sales");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [createSalesQuotation] = useCreateSalesQuotationMutation();
+  const [createSalesOrder] = useCreateSalesOrderMutation();
   const handleModalChange = (isOpen: boolean) => {
     setIsModalOpen(isOpen);
   };
 
-  const handleSubmit = async (data: SalesQuotationFormValues): Promise<void> => {
+  const handleSubmit = async (data: SalesOrderFormValues): Promise<void> => {
     try {
       console.log("submit btn clicked");
       const payload = {
@@ -25,7 +25,7 @@ export default function CreateSalesOrder() {
       };
   
       console.log(data);
-      const response = await createSalesQuotation(payload);
+      const response = await createSalesOrder(payload);
       console.log("req sent");
       console.log(response);
   
@@ -57,7 +57,7 @@ export default function CreateSalesOrder() {
         />
       </div>
       <div className="bg-dashboardBg px-6 pt-5 pb-8 ltr:rounded-r-[20px] ltr:rounded-bl-[20px] rtl:rounded-l-[20px] rtl:rounded-br-[20px] ltr:lg:pr-[200px] rtl:lg:pl-[200px]">
-        <SalesQuotationForm onSubmit={handleSubmit} />
+        <SalesOrderForm onSubmit={handleSubmit} />
         
 
 
