@@ -67,8 +67,8 @@ export default function LoginForm() {
           permissions: profileData.permissions,
         })
       );
-
-      router.push("/");
+      if (profileData.role !== "client") router.push("/dashboard");
+      else router.push("/");
     } catch (error) {
       console.log(error);
     }
