@@ -14,7 +14,23 @@ export default function SalesInvoice() {
   } = useGetSalesInvoiceQuery({});
  
   const router = useRouter();
-
+console.log(salesInvoices)
+const transformedData = salesInvoices?.results.map((invoice: { id: string; customer: { customer_name: string; }; due_date: string; status: string; total_amount: string; items: { custom_item_name: string; item: string; quantity: string; unit_price: string; discount: string; total: string; }[]; }) => ({
+  id: invoice.id,
+  quotation_number: invoice.id, 
+  customer_name: invoice.customer.customer_name,
+  date: invoice.due_date,
+  status: invoice.status,
+  validity_period: "N/A", 
+  total_amount: invoice.total_amount,
+  items: invoice.items.map((item: { custom_item_name: string; item: string; quantity: string; unit_price: string; discount: string; total: string; }) => ({
+    item_name: item.custom_item_name || `Item ${item.item}`,
+    quantity: item.quantity,
+    unit_price: item.unit_price,
+    discount: item.discount,
+    total: item.total,
+  })),
+})) || "N/A";
   const columns = [
     { field: "quotation_number", header: "Invoice Number" },
     
@@ -25,6 +41,7 @@ export default function SalesInvoice() {
     { field: "total_amount", header: "Total Amount" },
     
     { field: "items", header: "Items" },
+    
 //     items
 // : 
 // Array(1)
@@ -83,15 +100,15 @@ export default function SalesInvoice() {
         </div>
       ) : (
         <CustomTable
-          emptyMessage="no sales Invoices data found"
-          editRoute="/dashboard/inventory/category-models/edit/"
-          data={salesInvoices?.results}
-          rows={10}
-          columns={columns}
-          cardData={cardsData}
-          buttonText="Add Category model"
-          ButtonEvent={handleClick}
-        />
+  emptyMessage="no sales Invoices data found"
+  editRoute="/dashboard/inventory/sales-invoice/edit/"
+  data={transformedData} 
+  rows={10}
+  columns={columns}
+  cardData={cardsData}
+  buttonText="Add Sales Invoice"
+  ButtonEvent={handleClick}
+/>
       )}
     </>
   );
