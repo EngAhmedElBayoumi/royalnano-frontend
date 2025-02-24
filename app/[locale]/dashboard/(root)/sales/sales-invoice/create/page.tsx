@@ -3,7 +3,7 @@ import SalesInvoiceForm, { SalesInvoiceFormValues } from "@/components/dashboard
 import IconWithTitle from "@/components/dashboard/IconWithTitle";
 import CustomModal from "@/components/modals/CustomModal";
 import { useRouter } from "@/i18n/routing";
-import { useCreateSalesInvoiceMutation } from "@/redux/services/dashboard/salesInvoicesApi";
+import { useCreateSalesInvoiceMutation } from "@/redux/services/dashboard/sales/salesInvoiceApi";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 

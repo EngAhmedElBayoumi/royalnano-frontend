@@ -4,7 +4,7 @@ import TableSkelton from "../skelton/TableSkelton";
 import CardsSkelton from "../skelton/CardsSkelton";
 import Image from "next/image";
 import { useRouter } from "@/i18n/routing";
-import { useGetSalesInvoiceQuery } from "@/redux/services/dashboard/salesInvoiceApi";
+import { useGetSalesInvoiceQuery } from "@/redux/services/dashboard/sales/salesInvoiceApi";
 
 export default function SalesInvoice() {
   const {

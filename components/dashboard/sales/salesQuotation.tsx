@@ -4,8 +4,8 @@ import CustomTable from "@/components/dashboard/tables/CustomTable";
 import TableSkelton from "../skelton/TableSkelton";
 import CardsSkelton from "../skelton/CardsSkelton";
 import Image from "next/image";
-import { useGetSalesQuotationQuery } from "@/redux/services/dashboard/salesQuotationsApi";
 import { useRouter } from "@/i18n/routing";
+import { useGetSalesQuotationQuery } from "@/redux/services/dashboard/sales/salesQuotationsApi";
 
 export default function SalesQuotation() {
   const {
