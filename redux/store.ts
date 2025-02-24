@@ -14,6 +14,7 @@ import { resendOTPApi } from "./services/resendOTP";
 import { verifyOTPApi } from "./services/verifyOTP";
 import { resetPasswordPApi } from "./services/resetPassword";
 import authReducer from "./slices/authSlice";
+import profileReducer from "./slices/profileSlice";
 import { branchApi } from "./services/dashboard/branchesApi";
 import { movementApi } from "./services/dashboard/movementApi";
 import { preorderApi } from "./services/dashboard/preorderApi";
@@ -33,6 +34,7 @@ const persistConfig = {
 };
 
 const persistedAuthReducer = persistReducer(persistConfig, authReducer);
+const persistedProfileReducer = persistReducer(persistConfig, profileReducer);
 
 export const store = configureStore({
   reducer: {
@@ -60,6 +62,7 @@ export const store = configureStore({
     [salesOrderApi.reducerPath]: salesOrderApi.reducer,
     [employeeApi.reducerPath]: employeeApi.reducer,
     auth: persistedAuthReducer,
+    profile: persistedProfileReducer,
   },
   middleware: (getDefaultMiddleware) => {
     return getDefaultMiddleware({
