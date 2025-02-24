@@ -7,6 +7,7 @@ import TextInput from "@/components/formFields/TextInput";
 import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
 import { salesOrderSchema } from "@/lib/validations/dashboard/sales/salesOrderSchema";
+import DatePicker from "@/components/formFields/DatePicker";
 
 interface SalesOrderFormProps {
   onSubmit: (data: SalesOrderFormValues) => Promise<void>;
@@ -60,12 +61,13 @@ const SalesOrderForm = ({ onSubmit, defaultValues }: SalesOrderFormProps) => {
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <section className="min-h-[60vh]">
           <div className="grid sm:grid-cols-2 gap-x-4 gap-y-2 xl:gap-y-5 lg:gap-x-10">
-            <TextInput
+          <DatePicker
               control={form.control}
-              name="order_date"
-              label={t("SalesOrder.orderDate")}
-              placeholder={t("SalesOrder.orderDate")}
+             name="order_date"
+             label={t("SalesOrder.orderDate")}
+             placeholder={t("SalesOrder.orderDate")}
             />
+            
             <TextInput
               control={form.control}
               name="customer"
@@ -137,7 +139,7 @@ const SalesOrderForm = ({ onSubmit, defaultValues }: SalesOrderFormProps) => {
           </div>
         </section>
         <div className="flex justify-end gap-2 mt-5">
-          <Link href={`/dashboard/sales?tab=${t("salesOrder")}`} passHref>
+          <Link href={`/dashboard/sales?tab=${t("order")}`} passHref>
             <CustomButton
               text={t("cancel")}
               className="text-white rounded-lg bg-secondary min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"

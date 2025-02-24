@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import CustomTabs from "@/components/dashboard/CustomTabs";
-import Employees from "@/components/dashboard/hr/employees";
+// import Employees from "@/components/dashboard/hr/employees";
 import Salaries from "@/components/dashboard/hr/salaries";
 import SalesInvoice from "@/components/dashboard/sales/salesInvoice";
 import SalesOrder from "@/components/dashboard/sales/salesOrder";
@@ -10,6 +10,9 @@ import SalesQuotation from "@/components/dashboard/sales/salesQuotation";
 
 function SalesPage() {
   const t = useTranslations("Sales");
+  console.log("here is saless")
+  console.log(t("sales"));
+
   const tabs = [
     {
       label: t("sales"),
@@ -21,7 +24,7 @@ function SalesPage() {
           src="/assets/icons/dashboard/sales/sales.svg"
         />
       ),
-      content: <Employees />,
+      content: <div>dd</div>,
     },
     {
       icon: (
