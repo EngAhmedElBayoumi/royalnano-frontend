@@ -53,7 +53,7 @@ export default function Branches() {
         <LoadingError />
       ) : (
         <CustomTable
-          cardsData={cardsData}
+          cardData={cardsData}
           emptyMessage={t("noBranchesDataFound")}
           editRoute="/dashboard/branches/edit/"
           headerBG="#F8F7F7"
