@@ -23,6 +23,7 @@ import {
 import "./CustomTable.css";
 import InfoCardsComponent, { InfoCardInterface } from "../cards/InfoCard";
 import { useTranslations } from "next-intl";
+import { Paginator } from "primereact/paginator";
 
 export interface DataInTable {
   id: number;
@@ -53,6 +54,8 @@ interface CustomTableProps {
   viewRoute?: string;
   detailsRoute?: string;
   emptyMessage: string;
+  onPageChange?: (page: number) => void;
+  totalRecords?: number;
 }
 
 export default function CustomTable({
@@ -74,6 +77,8 @@ export default function CustomTable({
   secondHeaderTextColor,
   secondHeaderTitle,
   emptyMessage,
+  onPageChange,
+  totalRecords,
 }: CustomTableProps) {
   const router = useRouter();
   const t = useTranslations();
@@ -82,6 +87,7 @@ export default function CustomTable({
     global: { value: null, matchMode: FilterMatchMode.CONTAINS },
   });
   const [globalFilterValue, setGlobalFilterValue] = useState<string>("");
+  const [page, setPage] = useState(2);
 
   useEffect(() => {
     setCustomers(data);
@@ -162,7 +168,7 @@ export default function CustomTable({
         <div className="mb-5 bg-dashboardBg px-4 pt-4 ltr:rounded-tr-[20px] rtl:rounded-tl-[20px] rounded-b-[20px]">
           <DataTable
             value={customers}
-            paginator
+            // paginator
             rows={rows}
             filters={filters}
             globalFilterFields={columns.map((col) => col.field)}
@@ -267,6 +273,15 @@ export default function CustomTable({
               />
             )}
           </DataTable>
+          <Paginator
+            first={page}
+            rows={rows}
+            totalRecords={totalRecords}
+            onPageChange={(e) => {
+              setPage(e.page);
+              if (onPageChange) onPageChange(e.page + 1);
+            }}
+          />
         </div>
       ) : (
         <EmptyMessage onClick={ButtonEvent} emptyMessage={emptyMessage} />

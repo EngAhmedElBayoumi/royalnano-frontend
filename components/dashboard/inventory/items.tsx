@@ -6,17 +6,24 @@ import CustomTable from "@/components/dashboard/tables/CustomTable";
 import TableSkelton from "@/components/dashboard/skelton/TableSkelton";
 import CardsSkelton from "@/components/dashboard/skelton/CardsSkelton";
 import LoadingError from "@/components/dashboard/LoadingError";
+import { useState } from "react";
 
 export default function Items() {
   const router = useRouter();
   const t = useTranslations("Inventory.InventoryItem");
 
+  const [page, setPage] = useState(1);
+
   const { data, isLoading, error } = useGetItemsQuery({
     search: "",
     ordering: "id",
-    page: 1,
+    page,
     page_size: 10,
   });
+
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage);
+  };
 
   const columns = [
     { field: "item_code", header: t("itemCode") },
@@ -57,6 +64,8 @@ export default function Items() {
       cardData={cardsData}
       buttonText={t("addItem")}
       ButtonEvent={handleClick}
+      onPageChange={handlePageChange}
+      totalRecords={data.count}
     />
   );
 }
