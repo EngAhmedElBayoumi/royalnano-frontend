@@ -61,7 +61,7 @@ export async function middleware(req: NextRequest) {
         // Check if user has at least one of the required permissions
         const hasPermission = userPermissions.includes(requiredPermissions);
 
-        if (hasPermission) {
+        if (!hasPermission) {
           // Redirect to unauthorized page or dashboard
           return NextResponse.redirect(new URL("/en/forbidden", req.url));
         }

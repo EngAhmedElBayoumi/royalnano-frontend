@@ -2,15 +2,16 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { navLinks } from "@/data/FooterData";
-import { Link } from '@/i18n/routing';
+import { Link } from "@/i18n/routing";
 import { usePathname, useRouter } from "next/navigation";
-import { getCookie, deleteCookie } from "cookies-next";
+import { getCookie } from "cookies-next";
 import { useDispatch } from "react-redux";
 import { logout } from "@/redux/slices/authSlice";
-import { useTranslations } from 'next-intl';
+import { useTranslations } from "next-intl";
+import { clearProfile } from "@/redux/slices/profileSlice";
 
 const Nav = () => {
-  const t = useTranslations('website.nav'); 
+  const t = useTranslations("website.nav");
   const [isClicked, setIsClicked] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
@@ -39,7 +40,7 @@ const Nav = () => {
   const handleLogout = () => {
     try {
       dispatch(logout());
-      deleteCookie("accessToken");
+      dispatch(clearProfile());
       router.refresh();
     } catch (error) {
       console.error("Logout failed:", error);
@@ -60,9 +61,7 @@ const Nav = () => {
           {navLinks.map((link) => (
             <Link
               className={`${
-                pathname === link.href
-                  ? "text-primary" 
-                  : "text-white"
+                pathname === link.href ? "text-primary" : "text-white"
               } hover:text-primary active:text-primary md:text-sm xl:text-md text-nowrap`}
               key={link.href}
               href={link.href}
@@ -81,14 +80,14 @@ const Nav = () => {
               href={"/login"}
               passHref
             >
-              {t('LogIn')} 
+              {t("LogIn")}
             </Link>
             <Link
               className="md:text-sm xl:text-md hover:text-white text-primary"
               href={"/register"}
               passHref
             >
-              {t('Register')} 
+              {t("Register")}
             </Link>
           </div>
         ) : (
@@ -97,7 +96,7 @@ const Nav = () => {
               className="md:text-sm xl:text-md hover:text-white text-nowrap text-primary"
               onClick={handleLogout}
             >
-              {t('Logout')} {/* Use translations */}
+              {t("Logout")} {/* Use translations */}
             </button>
           </div>
         )}
@@ -182,14 +181,14 @@ const Nav = () => {
                     href={"/login"}
                     passHref
                   >
-                    {t('LogIn')}
+                    {t("LogIn")}
                   </Link>
                   <Link
                     className="hover:text-primary xl:text-sm block text-black"
                     href={"/register"}
                     passHref
                   >
-                    {t('Register')}
+                    {t("Register")}
                   </Link>
                 </>
               ) : (
@@ -197,7 +196,7 @@ const Nav = () => {
                   className="hover:text-primary xl:text-sm block text-black text-left"
                   onClick={handleLogout}
                 >
-                  {t('Logout')} 
+                  {t("Logout")}
                 </button>
               )}
             </div>

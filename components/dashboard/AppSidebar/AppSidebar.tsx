@@ -13,14 +13,28 @@ import {
 import Image from "next/image";
 import { sidebarLinks } from "@/data/dashboard/sidebarData";
 import { Link } from "@/i18n/routing";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
+import { useDispatch } from "react-redux";
+import { logout } from "@/redux/slices/authSlice";
+import { clearProfile } from "@/redux/slices/profileSlice";
 
 export function AppSidebar() {
   const currentPath = usePathname();
   const locale = useLocale();
   const t = useTranslations("Sidebar");
+  const dispatch = useDispatch();
+  const router = useRouter();
 
+  const handleLogout = () => {
+    try {
+      dispatch(logout());
+      dispatch(clearProfile());
+      router.push("/login");
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  };
   return (
     <Sidebar collapsible="icon" side={locale === "ar" ? "right" : "left"}>
       <SidebarHeader className="items-center">
@@ -90,7 +104,10 @@ export function AppSidebar() {
                 <span className="text-primary">{t("settings")}</span>
               </Link>
             </SidebarMenuButton>
-            <SidebarMenuButton className="py-6 !rounded-10 !bg-transparent">
+            <SidebarMenuButton
+              className="py-6 !rounded-10 !bg-transparent"
+              onClick={handleLogout}
+            >
               <Image
                 src={`/assets/icons/sidebar/logout.svg`}
                 alt={t("logout")}
