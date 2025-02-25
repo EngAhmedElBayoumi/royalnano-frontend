@@ -54,7 +54,7 @@ function CustomTabs({ tabs, defaultTab = tabs[0]?.label }: CustomTabsProps) {
         <TabsContent key={index} value={tab.label}>
           <div className="px-6 pb-25">
             <div
-              className={`bg-dashboardBg px-4 pt-4 pb-1 card mb-5 ${
+              className={`bg-dashboardBg pt-4 mb-5 ${
                 activeTab === defaultTab
                   ? "rounded-b-[20px] ltr:rounded-tr-[20px] rtl:rounded-tl-[20px]"
                   : "rounded-[20px]"
