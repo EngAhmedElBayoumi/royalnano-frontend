@@ -60,7 +60,7 @@ export default function Branches() {
           headerTextColor="#C8AE50"
           headerTitle={t("branches")}
           headerIcon="/assets/icons/branches.svg"
-          data={branchesData}
+          data={branchesData.results}
           rows={10}
           columns={columns}
           buttonText={t("addBranch")}
