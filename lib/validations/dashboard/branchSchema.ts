@@ -8,6 +8,8 @@ export const branchSchema = z.object({
     .min(1)
     .max(10, "Branch code must be at most 10 characters"),
   location: z.string().max(100).optional(),
+  longitude: z.number().optional(),
+  latitude: z.number().optional(),
   description: z.string().optional(),
   phone_number: z
     .string()
