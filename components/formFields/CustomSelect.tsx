@@ -21,8 +21,9 @@ interface CustomSelectProps<T extends FieldValues> {
   className?: string;
   options: { value: string; label: string }[];
   readonly?: boolean;
-  value?: string;
-  onChange?: (value: string) => void;
+  value?: string | number;
+  onChange?: (value: string | number) => void;
+  valueType?: "string" | "number"; 
 }
 
 const CustomSelect = <T extends FieldValues>({
@@ -35,15 +36,21 @@ const CustomSelect = <T extends FieldValues>({
   value,
   onChange,
   className,
+  valueType = "string", 
 }: CustomSelectProps<T>) => {
   return control ? (
     <FormField
       control={control}
       name={name}
       render={({ field }) => {
+        const fieldValueString = field.value?.toString();
+
         const selectedLabel =
-          options.find((opt) => opt.value === field.value)?.label ||
+          options.find((opt) => opt.value === fieldValueString)?.label ||
           placeholder;
+
+        // console.log("Field value:", field.value); // Debugging
+        // console.log("Selected label:", selectedLabel); // Debugging
 
         return (
           <FormItem>
@@ -54,8 +61,12 @@ const CustomSelect = <T extends FieldValues>({
             )}
             <FormControl>
               <Select
-                onValueChange={field.onChange}
-                value={field.value}
+                onValueChange={(value) => {
+                  const newValue =
+                    valueType === "number" ? parseFloat(value) : value;
+                  field.onChange(newValue);
+                }}
+                value={fieldValueString} 
                 disabled={readonly}
               >
                 <SelectTrigger
@@ -85,13 +96,21 @@ const CustomSelect = <T extends FieldValues>({
         <FormLabel className="text-darkGray xl:text-sm">{label}</FormLabel>
       )}
       <FormControl>
-        <Select onValueChange={onChange} value={value} disabled={readonly}>
+        <Select
+          onValueChange={(value) => {
+            const newValue = valueType === "number" ? parseFloat(value) : value;
+            onChange?.(newValue);
+          }}
+          value={value?.toString()} 
+          disabled={readonly}
+        >
           <SelectTrigger
             className={` bg-[#F4F4F4] border-gray rounded-10   xl:py-7 min-w-[80px]  ${
               !value ? "text-gray" : ""
             } ${className}`}
           >
-            {options.find((opt) => opt.value === value)?.label || placeholder}
+            {options.find((opt) => opt.value === value?.toString())?.label ||
+              placeholder}
           </SelectTrigger>
           <SelectContent>
             {options.map((option) => (

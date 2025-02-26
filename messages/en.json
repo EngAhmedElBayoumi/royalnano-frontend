@@ -138,6 +138,7 @@
       "cancel": "Cancel"
     },
     "SalesOrder": {
+      "editSalesOrder": "Edit Sales Order",
       "itemId": "Item Id",
       "selectItem": "Select Item",
       "orderDate": "Order Date",

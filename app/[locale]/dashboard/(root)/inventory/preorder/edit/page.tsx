@@ -37,6 +37,7 @@ export default function EditPreorder() {
   };
 
   const handleSubmit = async (data: PreorderFormValues) => {
+    console.log(data)
     try {
       const payload = {
         ...data,

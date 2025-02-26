@@ -39,11 +39,11 @@ const profileSlice = createSlice({
 
       // Store only permissions with codename starting with "view" in a cookie for middleware access
       const permissionCodes = action.payload.permissions
-        .filter((p: { codename: string }) => p.codename.startsWith("view"))
-        .map((p: { codename: string }) => p.codename);
-
+        // .filter((p: { codename: string }) => p.codename.startsWith("view"))
+        // .map((p: { codename: string }) => p.codename);
+console.log(permissionCodes)
       setCookie("userPermissions", permissionCodes, {
-        secure: process.env.NODE_ENV === "production", // Secure in production
+        secure: process.env.NODE_ENV === "production", 
         maxAge: 60 * 60 * 24,
       });
     },

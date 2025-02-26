@@ -5,8 +5,8 @@ import { useGetItemsQuery } from "@/redux/services/dashboard/itemsApi";
 import CustomTable from "@/components/dashboard/tables/CustomTable";
 import TableSkelton from "@/components/dashboard/skelton/TableSkelton";
 import CardsSkelton from "@/components/dashboard/skelton/CardsSkelton";
-import LoadingError from "@/components/dashboard/LoadingError";
 import { useState } from "react";
+import Image from "next/image";
 
 export default function Items() {
   const router = useRouter();
@@ -53,7 +53,15 @@ export default function Items() {
       <TableSkelton />
     </>
   ) : error ? (
-    <LoadingError />
+   <div className="flex justify-center flex-col items-center pb-10">
+             <Image
+               src="/assets/icons/dashboard/loading-error.svg"
+               alt="loading error"
+               width="400"
+               height="300"
+             />
+             Error loading data
+           </div>
   ) : (
     <CustomTable
       emptyMessage={t("noItemsDataFound") || "No items data found"}

@@ -28,8 +28,15 @@ export const salesOrderApi = createApi({
     //       body: data,
     //     }),
     //   }),
-    updateSalesOrder: builder.mutation({
-        query: ({ id, ...data }) => ({
+    // updateSalesOrder: builder.mutation({
+    //     query: ({ id, ...data }) => ({
+    //       url: `sales/sales-order/${id}/`,
+    //       method: "PATCH",
+    //       body: data,
+    //     }),
+    //   }),
+      updateSalesOrder: builder.mutation({
+        query: ({ id, data }) => ({
           url: `sales/sales-order/${id}/`,
           method: "PATCH",
           body: data,

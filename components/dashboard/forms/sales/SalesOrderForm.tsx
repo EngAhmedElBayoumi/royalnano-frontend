@@ -8,10 +8,11 @@ import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
 import { salesOrderSchema } from "@/lib/validations/dashboard/sales/salesOrderSchema";
 import DatePicker from "@/components/formFields/DatePicker";
-
 import { useGetItemsQuery } from "@/redux/services/dashboard/itemsApi";
 import { useGetMiniSalesCustomerQuery } from "@/redux/services/dashboard/sales/salesCustomerApi";
 import CustomSelect from "@/components/formFields/CustomSelect";
+import { useState } from "react";
+import { useGetBranchesQuery } from "@/redux/services/dashboard/branchesApi";
 
 interface SalesOrderFormProps {
   onSubmit: (data: SalesOrderFormValues) => Promise<void>;
@@ -24,10 +25,9 @@ export interface SalesOrderFormValues {
   branch: number;
   sales_representative: string;
   description: string;
-  
   items: {
     quantity: number;
-    item: number | null; 
+    item: number | null;
     custom_item_name: string;
     custom_price: string;
     discount: string;
@@ -35,10 +35,17 @@ export interface SalesOrderFormValues {
   }[];
   status: string;
 }
+  
 
 const SalesOrderForm = ({ onSubmit, defaultValues }: SalesOrderFormProps) => {
-  const {data:customers}=useGetMiniSalesCustomerQuery({});
-  console.log(customers)
+  const { data: customers } = useGetMiniSalesCustomerQuery({});
+  const {
+    data: branchesData,
+   
+  } = useGetBranchesQuery({
+
+  });
+  // console.log(branchesData.results)
   const form = useForm<SalesOrderFormValues>({
     resolver: zodResolver(salesOrderSchema),
     defaultValues: defaultValues || {
@@ -47,16 +54,7 @@ const SalesOrderForm = ({ onSubmit, defaultValues }: SalesOrderFormProps) => {
       branch: 1,
       sales_representative: "1",
       description: "random nnnnnn",
-      items: [
-        {
-          quantity: 2,
-          item: null, 
-          custom_item_name: "name random",
-          custom_price: "333",
-          discount: "33",
-          discount_percent: "33",
-        },
-      ],
+      items: [],
       status: "pending",
     },
   });
@@ -77,11 +75,46 @@ const SalesOrderForm = ({ onSubmit, defaultValues }: SalesOrderFormProps) => {
 
   const t = useTranslations("Sales");
   const customerOptions = customers
-    ? customers.map((customer) => ({
-        value: customer.id, 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ? customers.map((customer: { id: { toString: () => any; }; customer_name: any; }) => ({
+        value: customer.id.toString(),
         label: customer.customer_name,
       }))
     : [];
+
+  const [itemTypes, setItemTypes] = useState<("existing" | "custom")[]>([]);
+
+  const handleItemTypeChange = (index: number, type: "existing" | "custom") => {
+    setItemTypes((prev) => {
+      const newItemTypes = [...prev];
+      newItemTypes[index] = type;
+      return newItemTypes;
+    });
+
+    if (type === "existing") {
+      form.setValue(`items.${index}.custom_item_name`, "");
+      form.setValue(`items.${index}.custom_price`, "");
+    } else {
+      form.setValue(`items.${index}.item`, null);
+    }
+  };
+
+  const handleAddItem = () => {
+    append({
+      quantity: 1,
+      item: null,
+      custom_item_name: "",
+      custom_price: "",
+      discount: "",
+      discount_percent: "",
+    });
+    setItemTypes((prev) => [...prev, "existing"]);
+  };
+  const branchesOptions =
+  branchesData?.results?.map((branch: { id: number; name: string }) => ({
+      value: branch.id.toString(),
+      label: branch.name,
+    })) || [];
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -93,26 +126,27 @@ const SalesOrderForm = ({ onSubmit, defaultValues }: SalesOrderFormProps) => {
               label={t("SalesOrder.orderDate")}
               placeholder={t("SalesOrder.orderDate")}
             />
-           <CustomSelect
+            <CustomSelect
+            valueType="number"
               control={form.control}
               name="customer"
               label={t("SalesOrder.customer")}
               placeholder={t("SalesOrder.customer")}
               options={customerOptions}
               onChange={(value) => {
-                console.log("select value")
-                console.log(value)
                 const customerId = parseInt(value, 10);
-                form.setValue("customer", customerId); 
+                form.setValue("customer", customerId);
               }}
             />
-            <TextInput
-              control={form.control}
-              name="branch"
-              label={t("SalesOrder.branch")}
-              placeholder={t("SalesOrder.branch")}
-              type="number"
-            />
+                <CustomSelect
+                            valueType="number"
+
+            control={form.control}
+            name="branch"
+            label="Choose Branch"
+            placeholder="Choose Branch"
+            options={branchesOptions}
+          />
             <TextInput
               control={form.control}
               name="sales_representative"
@@ -125,114 +159,113 @@ const SalesOrderForm = ({ onSubmit, defaultValues }: SalesOrderFormProps) => {
               label={t("SalesOrder.description")}
               placeholder={t("SalesOrder.description")}
             />
-          {fields.map((field, index) => (
-  <div key={field.id} className="col-span-2">
-    {/* Dropdown for selecting existing items */}
-    <CustomSelect
-      control={form.control}
-      name={`items.${index}.item`}
-      label={t("SalesOrder.selectItem")}
-      options={existingItems.map((item: { id: number; item_name: string }) => ({
-        value: item.id,
-        label: item.item_name,
-      }))}
-      placeholder={t("SalesOrder.selectItem")}
-      onChange={(value) => {
-        if (value) {
-          const selectedItemId = parseInt(value, 10);
-          form.setValue(`items.${index}.item`, selectedItemId);
-          // Clear custom fields when an item is selected
-          form.setValue(`items.${index}.custom_item_name`, "");
-          form.setValue(`items.${index}.custom_price`, "");
-        }
-      }}
-      isDisabled={!!form.watch(`items.${index}.custom_item_name`) || !!form.watch(`items.${index}.custom_price`)} // Disable if custom fields are filled
-      isLoading={isItemsLoading}
-    />
+            {fields.map((field, index) => {
+              const itemType = itemTypes[index];
 
-    {/* Custom Item Name */}
-    <TextInput
-      control={form.control}
-      name={`items.${index}.custom_item_name`}
-      label={t("SalesOrder.customItemName")}
-      placeholder={t("SalesOrder.customItemName")}
-      disabled={!!form.watch(`items.${index}.item`)} // Disable if an item is selected
-      onChange={(e) => {
-        // Clear the selected item if the user starts typing in the custom field
-        if (e.target.value) {
-          form.setValue(`items.${index}.item`, null);
-        }
-      }}
-    />
+              return (
+                <div key={field.id} className="col-span-2 border p-4 rounded-lg mb-4">
+                  <div className="flex gap-2 mb-2">
+                    <button
+                      type="button"
+                      onClick={() => handleItemTypeChange(index, "existing")}
+                      className={`p-2 rounded ${
+                        itemType === "existing" ? "bg-primary text-white" : "bg-gray-200"
+                      }`}
+                    >
+                      Add Existing Item
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => handleItemTypeChange(index, "custom")}
+                      className={`p-2 rounded ${
+                        itemType === "custom" ? "bg-primary text-white" : "bg-gray-200"
+                      }`}
+                    >
+                      Add Custom Item
+                    </button>
+                  </div>
 
-    {/* Custom Price */}
-    <TextInput
-      control={form.control}
-      name={`items.${index}.custom_price`}
-      label={t("SalesOrder.customPrice")}
-      placeholder={t("SalesOrder.customPrice")}
-      disabled={!!form.watch(`items.${index}.item`)} // Disable if an item is selected
-      onChange={(e) => {
-        // Clear the selected item if the user starts typing in the custom field
-        if (e.target.value) {
-          form.setValue(`items.${index}.item`, null);
-        }
-      }}
-    />
+                  {itemType === "existing" && (
+                    <CustomSelect
+                    valueType="number" 
+                      control={form.control}
+                      name={`items.${index}.item`}
+                      label={t("SalesOrder.selectItem")}
+                      options={existingItems.map((item: { id: number; item_name: string }) => ({
+                        value: item.id.toString(),
+                        label: item.item_name,
+                      }))}
+                      placeholder={t("SalesOrder.selectItem")}
+                      onChange={(value) => {
+                        if (value) {
+                          const selectedItemId = parseInt(value, 10);
+                          form.setValue(`items.${index}.item`, selectedItemId);
+                        }
+                      }}
+                      isLoading={isItemsLoading}
+                    />
+                  )}
 
-    {/* Quantity */}
-    <TextInput
-      control={form.control}
-      name={`items.${index}.quantity`}
-      label={t("SalesOrder.quantity")}
-      placeholder={t("SalesOrder.quantity")}
-      type="number"
-    />
+                  {itemType === "custom" && (
+                    <>
+                      <TextInput
+                        control={form.control}
+                        name={`items.${index}.custom_item_name`}
+                        label={t("SalesOrder.customItemName")}
+                        placeholder={t("SalesOrder.customItemName")}
+                      />
+                      <TextInput
+                        control={form.control}
+                        name={`items.${index}.custom_price`}
+                        label={t("SalesOrder.customPrice")}
+                        placeholder={t("SalesOrder.customPrice")}
+                      />
+                    </>
+                  )}
 
-    {/* Discount */}
-    <TextInput
-      control={form.control}
-      name={`items.${index}.discount`}
-      label={t("SalesOrder.discount")}
-      placeholder={t("SalesOrder.discount")}
-    />
+                  <TextInput
+                    control={form.control}
+                    name={`items.${index}.quantity`}
+                    label={t("SalesOrder.quantity")}
+                    placeholder={t("SalesOrder.quantity")}
+                    type="number"
+                  />
 
-    {/* Discount Percent */}
-    <TextInput
-      control={form.control}
-      name={`items.${index}.discount_percent`}
-      label={t("SalesOrder.discountPercent")}
-      placeholder={t("SalesOrder.discountPercent")}
-    />
+                  <TextInput
+                    control={form.control}
+                    name={`items.${index}.discount`}
+                    label={t("SalesOrder.discount")}
+                    placeholder={t("SalesOrder.discount")}
+                  />
 
-    {/* Remove Item Button */}
-    <button
-      type="button"
-      onClick={() => remove(index)}
-      className="text-red-500"
-    >
-      Remove Item
-    </button>
-  </div>
-))}
-         <button
-  type="button"
-  onClick={() =>
-    append({
-      quantity: 0,
-      item: null, 
-      custom_item_name: "", 
-      custom_price: "",
-      discount: "",
-      discount_percent: "",
-    })
-  }
-  className="col-span-2 bg-blue-500 text-white p-2 rounded"
->
-  Add Item
-</button>
+                  <TextInput
+                    control={form.control}
+                    name={`items.${index}.discount_percent`}
+                    label={t("SalesOrder.discountPercent")}
+                    placeholder={t("SalesOrder.discountPercent")}
+                  />
+
+                  {fields.length > 1 && (
+                    <button
+                      type="button"
+                      onClick={() => remove(index)}
+                      className="text-red-500 mt-2"
+                    >
+                      Remove Item
+                    </button>
+                  )}
+                </div>
+              );
+            })}
+           
           </div>
-          
+          <button
+            type="button"
+            onClick={handleAddItem}
+            className="bg-primary text-white p-2 rounded-lg mt-4"
+          >
+            Add Item
+          </button>
         </section>
         <div className="flex justify-end gap-2 mt-5">
           <Link href={`/dashboard/sales?tab=${t("order")}`} passHref>
