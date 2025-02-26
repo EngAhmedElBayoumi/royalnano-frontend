@@ -15,9 +15,10 @@ import { sidebarLinks } from "@/data/dashboard/sidebarData";
 import { Link } from "@/i18n/routing";
 import { usePathname, useRouter } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "@/redux/slices/authSlice";
 import { clearProfile } from "@/redux/slices/profileSlice";
+import { RootState } from "@/redux/store";
 
 export function AppSidebar() {
   const currentPath = usePathname();
@@ -25,6 +26,11 @@ export function AppSidebar() {
   const t = useTranslations("Sidebar");
   const dispatch = useDispatch();
   const router = useRouter();
+  debugger;
+
+  const permissions = useSelector(
+    (state: RootState) => state.profile.permissions
+  );
 
   const handleLogout = () => {
     try {
@@ -57,29 +63,34 @@ export function AppSidebar() {
                     ? currentPath === "/dashboard"
                     : currentPath.includes(link.path);
 
+                const hasPermission =
+                  permissions[link.permission]?.view || link.name === "home";
+
                 return (
-                  <SidebarMenuItem
-                    key={link.path}
-                    className="flex justify-center"
-                  >
-                    <SidebarMenuButton
-                      asChild
-                      isActive={isActive}
-                      className="py-6 !rounded-10"
+                  hasPermission && (
+                    <SidebarMenuItem
+                      key={link.path}
+                      className="flex justify-center"
                     >
-                      <Link href={`/dashboard${link.path}`} passHref>
-                        <Image
-                          src={`/assets/icons/sidebar/${link.icon}`}
-                          alt={t(link.name)}
-                          width={30}
-                          height={30}
-                        />
-                        <span className="text-primary capitalize">
-                          {t(link.name)}
-                        </span>
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
+                      <SidebarMenuButton
+                        asChild
+                        isActive={isActive}
+                        className="py-6 !rounded-10"
+                      >
+                        <Link href={`/dashboard${link.path}`} passHref>
+                          <Image
+                            src={`/assets/icons/sidebar/${link.icon}`}
+                            alt={t(link.name)}
+                            width={30}
+                            height={30}
+                          />
+                          <span className="text-primary capitalize">
+                            {t(link.name)}
+                          </span>
+                        </Link>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  )
                 );
               })}
             </SidebarMenu>
