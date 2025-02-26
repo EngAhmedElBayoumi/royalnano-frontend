@@ -52,7 +52,6 @@ interface CustomTableProps {
   secondHeaderTextColor?: string;
   editRoute?: string;
   viewRoute?: string;
-  detailsRoute?: string;
   emptyMessage: string;
   onPageChange?: (page: number) => void;
   totalRecords?: number;
@@ -61,7 +60,6 @@ interface CustomTableProps {
 export default function CustomTable({
   viewRoute,
   editRoute,
-  detailsRoute,
   data,
   rows,
   columns,
