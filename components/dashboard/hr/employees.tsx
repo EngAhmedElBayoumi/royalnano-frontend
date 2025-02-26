@@ -17,7 +17,6 @@ export default function Employees() {
     page: 1,
     page_size: 10,
   });
-
   const columns = [
     { field: "name", header: t("name") },
     { field: "email_address", header: t("emailAddress") },

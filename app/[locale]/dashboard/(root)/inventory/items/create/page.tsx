@@ -28,7 +28,7 @@ export default function CreateItem() {
       };
 
       const response = await createItem(payload);
-
+console.log("response",response)
       if (response.error) throw new Error("creation failed");
       else router.push("/dashboard/inventory");
     } catch (error) {

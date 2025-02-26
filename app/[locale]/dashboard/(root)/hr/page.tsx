@@ -76,7 +76,7 @@ function HrPage() {
 
   return (
     <>
-      <CustomTabs tabs={tabs} defaultTab="Employees" />
+      <CustomTabs tabs={tabs} defaultTab={t("employees")} />
     </>
   );
 }
