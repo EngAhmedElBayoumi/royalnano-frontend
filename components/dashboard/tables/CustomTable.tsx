@@ -268,15 +268,18 @@ export default function CustomTable({
               />
             )}
           </DataTable>
-          <Paginator
-            first={page}
-            rows={rows}
-            totalRecords={totalRecords}
-            onPageChange={(e) => {
-              setPage(e.first);
-              if (onPageChange) onPageChange(e.page + 1);
-            }}
-          />
+
+          {totalRecords && totalRecords > rows && (
+            <Paginator
+              first={page}
+              rows={rows}
+              totalRecords={totalRecords}
+              onPageChange={(e) => {
+                setPage(e.first);
+                if (onPageChange) onPageChange(e.page + 1);
+              }}
+            />
+          )}
         </div>
       ) : (
         <EmptyMessage onClick={ButtonEvent} emptyMessage={emptyMessage} />
