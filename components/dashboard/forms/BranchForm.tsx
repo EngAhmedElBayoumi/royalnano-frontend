@@ -30,6 +30,8 @@ export interface BranchFormValues {
   branch_code: string;
   email: string;
   location?: string;
+  longitude?: number;
+  latitude?: number;
   description?: string;
   manager?: number;
 }
@@ -61,19 +63,24 @@ const BranchForm = ({ onSubmit, defaultValues }: BranchFormProps) => {
       branch_code: "",
       email: "",
       location: "",
+      longitude: 31,
+      latitude: 30,
       description: "",
       manager: undefined,
     },
   });
   const [viewport, setViewport] = useState({
-    latitude: 30,
-    longitude: 31,
+    latitude: defaultValues?.latitude ?? 30,
+    longitude: defaultValues?.longitude ?? 31,
     zoom: 10,
     width: "100%",
     height: "400px",
   });
 
-  const [marker, setMarker] = useState({ latitude: 30, longitude: 30 });
+  const [marker, setMarker] = useState({
+    latitude: defaultValues?.latitude ?? 30,
+    longitude: defaultValues?.longitude ?? 31,
+  });
 
   const handleMapClick = async (event: MapLayerMouseEvent) => {
     const { lng, lat } = event.lngLat;
@@ -84,11 +91,11 @@ const BranchForm = ({ onSubmit, defaultValues }: BranchFormProps) => {
       `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`
     );
     const data = await response.json();
-    console.log(data);
-
     // Set the location name if available
     const locationName = data.display_name || `lat: ${lat}, long: ${lng}`;
     form.setValue("location", locationName);
+    form.setValue("latitude", lat);
+    form.setValue("longitude", lng);
   };
 
   return (

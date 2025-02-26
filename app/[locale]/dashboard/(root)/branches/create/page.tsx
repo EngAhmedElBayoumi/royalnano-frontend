@@ -21,18 +21,7 @@ export default function CreateBranchs() {
 
   const handleSubmit = async (data: BranchFormValues) => {
     try {
-      const locationMatch = data?.location?.match(
-        /lat:\s*([\d.-]+),\s*long:\s*([\d.-]+)/
-      );
-      const latitude = locationMatch ? Number(locationMatch[1]) : 0; // Default to 0 if not found
-      const longitude = locationMatch ? Number(locationMatch[2]) : 0; // Default to 0 if not found
-
-      const payload = {
-        ...data,
-        latitude,
-        longitude,
-      };
-      const response = await createBranch(payload);
+      const response = await createBranch(data);
       if (response.error) throw new Error("creation failed");
       else router.push("/dashboard/branches");
     } catch (error) {
