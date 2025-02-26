@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { useCreateBranchMutation } from "@/redux/services/dashboard/branchesApi";
 import IconWithTitle from "@/components/dashboard/IconWithTitle";
 import CustomModal from "@/components/modals/CustomModal";
@@ -10,6 +11,7 @@ import BranchForm, {
 
 export default function CreateBranchs() {
   const router = useRouter();
+  const t = useTranslations("branches");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [createBranch] = useCreateBranchMutation();
 
@@ -19,7 +21,18 @@ export default function CreateBranchs() {
 
   const handleSubmit = async (data: BranchFormValues) => {
     try {
-      const response = await createBranch(data);
+      const locationMatch = data?.location?.match(
+        /lat:\s*([\d.-]+),\s*long:\s*([\d.-]+)/
+      );
+      const latitude = locationMatch ? Number(locationMatch[1]) : 0; // Default to 0 if not found
+      const longitude = locationMatch ? Number(locationMatch[2]) : 0; // Default to 0 if not found
+
+      const payload = {
+        ...data,
+        latitude,
+        longitude,
+      };
+      const response = await createBranch(payload);
       if (response.error) throw new Error("creation failed");
       else router.push("/dashboard/branches");
     } catch (error) {
@@ -39,7 +52,7 @@ export default function CreateBranchs() {
       <div className="flex">
         <IconWithTitle
           imageSrc="/assets/icons/add.svg"
-          title="Add Branch"
+          title={t("addBranch")}
           backgroundColor="#F8F7F7"
           textColor="primary"
         />
