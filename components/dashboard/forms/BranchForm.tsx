@@ -75,10 +75,20 @@ const BranchForm = ({ onSubmit, defaultValues }: BranchFormProps) => {
 
   const [marker, setMarker] = useState({ latitude: 30, longitude: 30 });
 
-  const handleMapClick = (event: MapLayerMouseEvent) => {
+  const handleMapClick = async (event: MapLayerMouseEvent) => {
     const { lng, lat } = event.lngLat;
     setMarker({ latitude: lat, longitude: lng });
-    form.setValue("location", `lat: ${lat}, long: ${lng}`);
+
+    // Fetch location name from a reverse geocoding service
+    const response = await fetch(
+      `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`
+    );
+    const data = await response.json();
+    console.log(data);
+
+    // Set the location name if available
+    const locationName = data.display_name || `lat: ${lat}, long: ${lng}`;
+    form.setValue("location", locationName);
   };
 
   return (
