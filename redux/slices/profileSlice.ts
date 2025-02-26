@@ -36,12 +36,11 @@ const profileSlice = createSlice({
       state.role = action.payload.role;
       state.profilePicture = action.payload.profilePicture;
       state.permissions = action.payload.permissions;
-      // Store permissions in a cookie for middleware access
-      const permissionCodes = action.payload.permissions.map(
-        (p: { codename: string }) => p.codename
-      );
 
-      console.log("codes", permissionCodes);
+      // Store only permissions with codename starting with "view" in a cookie for middleware access
+      const permissionCodes = action.payload.permissions
+        .filter((p: { codename: string }) => p.codename.startsWith("view"))
+        .map((p: { codename: string }) => p.codename);
 
       setCookie("userPermissions", permissionCodes, {
         secure: process.env.NODE_ENV === "production", // Secure in production

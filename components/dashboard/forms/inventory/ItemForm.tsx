@@ -10,6 +10,7 @@ import TextInput from "@/components/formFields/TextInput";
 import CustomSelect from "@/components/formFields/CustomSelect";
 import CustomTextArea from "@/components/formFields/TextArea";
 import { useTranslations } from "next-intl";
+import { useGetBranchesQuery } from "@/redux/services/dashboard/branchesApi";
 
 interface ItemFormProps {
   onSubmit: (data: ItemFormValues) => Promise<void>;
@@ -53,6 +54,7 @@ const ItemForm = ({ onSubmit, defaultValues }: ItemFormProps) => {
   const globalTranslate = useTranslations();
   const t = useTranslations("Inventory.InventoryItem");
   const { data: categories } = useGetItemCategoryQuery({});
+  const { data: branches } = useGetBranchesQuery({});
 
   const categoriesOptions =
     categories?.map((category: Category) => ({
@@ -65,10 +67,11 @@ const ItemForm = ({ onSubmit, defaultValues }: ItemFormProps) => {
     { value: "Usd", label: "Usd" },
   ];
 
-  const branchesOptions = [
-    { value: "1", label: "October" },
-    { value: "2", label: "Zagazig" },
-  ];
+  const branchesOptions =
+    branches?.results?.map((branch: { id: number; name: string }) => ({
+      value: String(branch.id),
+      label: branch.name,
+    })) || [];
 
   const suppliersOptions = [
     { value: "1", label: "October" },

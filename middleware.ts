@@ -7,6 +7,15 @@ const intlMiddleware = createMiddleware({
   locales: routing.locales, // Supported locales
   defaultLocale: routing.defaultLocale, // Default locale
 });
+// Define permission requirements for specific routes
+const permissionRoutes = {
+  "/dashboard/inventory": "view_inventoryitem",
+  "/dashboard/sales": "view_salesinvoice",
+  "/dashboard/hr": "view_employee",
+  "/dashboard/clients": "view_customer",
+  "/dashboard/branches": "view_branch",
+  "/dashboard/website": "view_service",
+};
 
 export async function middleware(req: NextRequest) {
   // Apply the next-intl middleware first
@@ -15,6 +24,17 @@ export async function middleware(req: NextRequest) {
   // Your custom authentication logic
   const accessToken = req.cookies.get("accessToken")?.value;
 
+  // Get user permissions from cookie (stored during login)
+  const permissionsCookie = req.cookies.get("userPermissions")?.value;
+  let userPermissions: string[] = [];
+
+  if (permissionsCookie) {
+    try {
+      userPermissions = JSON.parse(decodeURIComponent(permissionsCookie));
+    } catch (e) {
+      console.error("Failed to parse permissions cookie:", e);
+    }
+  }
   // Define the public routes
   const publicRoutes = [
     "/change-password",
@@ -32,6 +52,20 @@ export async function middleware(req: NextRequest) {
     // Redirect to home page if trying to access public routes while logged in
     if (publicRoutes.some((route) => req.nextUrl.pathname.includes(route))) {
       return NextResponse.redirect(new URL("/", req.url));
+    }
+    // Check permissions for specific routes
+    for (const [route, requiredPermissions] of Object.entries(
+      permissionRoutes
+    )) {
+      if (req.nextUrl.pathname.includes(route)) {
+        // Check if user has at least one of the required permissions
+        const hasPermission = userPermissions.includes(requiredPermissions);
+
+        if (!hasPermission) {
+          // Redirect to unauthorized page or dashboard
+          return NextResponse.redirect(new URL("/en/forbidden", req.url));
+        }
+      }
     }
   } else {
     // Redirect to login page if trying to access protected routes while not authenticated

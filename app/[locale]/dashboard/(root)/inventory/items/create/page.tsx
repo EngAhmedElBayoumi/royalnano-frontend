@@ -1,19 +1,19 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { useCreateItemMutation } from "@/redux/services/dashboard/itemsApi";
 import IconWithTitle from "@/components/dashboard/IconWithTitle";
 import ItemForm, {
   ItemFormValues,
 } from "@/components/dashboard/forms/inventory/ItemForm";
 import CustomModal from "@/components/modals/CustomModal";
-import { useTranslations } from "next-intl";
 
 export default function CreateItem() {
   const router = useRouter();
+  const t = useTranslations("Inventory.InventoryItem");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [createItem] = useCreateItemMutation();
-  const t = useTranslations("Inventory.InventoryItem");
 
   const handleModalChange = (isOpen: boolean) => {
     setIsModalOpen(isOpen);

@@ -1,9 +1,10 @@
 import { fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RootState } from "@/redux/store";
+import { logout, setCredentials } from "@/redux/slices/authSlice";
+import { setProfile } from "@/redux/slices/profileSlice";
+import { refreshTokenApi } from "./refreshTokenApi";
 import config from "@/lib/config";
 import { checkToken } from "@/lib/utils/checkToken";
-import { logout, setCredentials } from "@/redux/slices/authSlice";
-import { refreshTokenApi } from "./refreshTokenApi";
 
 const baseUrl = config.apiUrl;
 
@@ -44,6 +45,25 @@ export const baseQuery = async (
           refreshToken: refreshResult.data.refresh,
           userId: state.auth.userId,
           emailAddress: state.auth.emailAddress,
+        })
+      );
+
+      const profileResponse = await fetch(`${config.apiUrl}core/profile`, {
+        headers: {
+          Authorization: `Bearer ${refreshResult.data.access}`,
+          "Content-Type": "application/json",
+        },
+      });
+      const profileData = await profileResponse.json();
+
+      api.dispatch(
+        setProfile({
+          name: profileData.name,
+          emailAddress: profileData.email_address,
+          phoneNumber: profileData.phone_number,
+          role: profileData.role,
+          profilePicture: profileData.profile_picture,
+          permissions: profileData.permissions,
         })
       );
 

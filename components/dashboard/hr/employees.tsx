@@ -7,21 +7,42 @@ import CardsSkelton from "@/components/dashboard/skelton/CardsSkelton";
 import LoadingError from "@/components/dashboard/LoadingError";
 import { useTranslations } from "next-intl";
 
+// Define the type for employee
+interface Employee {
+  name: string;
+  branch: {
+    name: string;
+  };
+  email_address: string;
+  phone: string;
+  address: string;
+}
 export default function Employees() {
   const router = useRouter();
   const t = useTranslations("hr.employees");
 
-  const { data, isLoading, error } = useGetEmployeesQuery({
+  const {
+    data = { results: [] },
+    isLoading,
+    error,
+  } = useGetEmployeesQuery({
     search: "",
     ordering: "id",
     page: 1,
     page_size: 10,
   });
+
+
+  // Transform employeestData to only include item_name
+  const transformedData = data.results.map((employee: Employee) => ({
+    ...employee,
+    branch: employee.branch.name,
+  }));
+
   const columns = [
     { field: "name", header: t("name") },
     { field: "email_address", header: t("emailAddress") },
     { field: "phone", header: t("phone") },
-    { field: "job_title", header: t("jobTitle") },
     { field: "address", header: t("address") },
     { field: "branch", header: t("branch") },
   ];
@@ -46,7 +67,7 @@ export default function Employees() {
     <CustomTable
       emptyMessage={t("noEmployeesDataFound")}
       editRoute="/dashboard/hr/employees/edit/"
-      data={data.results}
+      data={transformedData}
       rows={10}
       columns={columns}
       cardData={cardsData}

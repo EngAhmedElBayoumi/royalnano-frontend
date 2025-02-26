@@ -41,14 +41,7 @@ export default function LoginForm() {
   }) => {
     try {
       const response = await Login(data).unwrap();
-      dispatch(
-        setCredentials({
-          userId: response.user_id,
-          emailAddress: response.email_address,
-          accessToken: response.access,
-          refreshToken: response.refresh,
-        })
-      );
+
       const profileResponse = await fetch(`${config.apiUrl}core/profile`, {
         headers: {
           Authorization: `Bearer ${response.access}`,
@@ -57,6 +50,14 @@ export default function LoginForm() {
       });
       const profileData = await profileResponse.json();
 
+      dispatch(
+        setCredentials({
+          userId: response.user_id,
+          emailAddress: response.email_address,
+          accessToken: response.access,
+          refreshToken: response.refresh,
+        })
+      );
       dispatch(
         setProfile({
           name: profileData.name,

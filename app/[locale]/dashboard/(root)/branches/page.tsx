@@ -53,14 +53,14 @@ export default function Branches() {
         <LoadingError />
       ) : (
         <CustomTable
-          cardsData={cardsData}
+          cardData={cardsData}
           emptyMessage={t("noBranchesDataFound")}
           editRoute="/dashboard/branches/edit/"
           headerBG="#F8F7F7"
           headerTextColor="#C8AE50"
           headerTitle={t("branches")}
           headerIcon="/assets/icons/branches.svg"
-          data={branchesData}
+          data={branchesData.results}
           rows={10}
           columns={columns}
           buttonText={t("addBranch")}

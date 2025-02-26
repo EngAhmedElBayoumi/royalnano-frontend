@@ -29,14 +29,25 @@ import { salesCustomerApi } from "./services/dashboard/sales/salesCustomerApi";
 import { salesInvoiceApi } from "./services/dashboard/sales/salesInvoiceApi";
 import { salesOrderApi } from "./services/dashboard/sales/salesOrderApi";
 
-const persistConfig = {
-  key: "root",
+// Create separate configs for each reducer
+const authPersistConfig = {
+  key: "auth",
   storage,
+  // other config options
 };
 
-const persistedAuthReducer = persistReducer(persistConfig, authReducer);
-const persistedProfileReducer = persistReducer(persistConfig, profileReducer);
+const profilePersistConfig = {
+  key: "profile",
+  storage,
+  // other config options
+};
 
+// Use the separate configs when creating the persisted reducers
+const persistedAuthReducer = persistReducer(authPersistConfig, authReducer);
+const persistedProfileReducer = persistReducer(
+  profilePersistConfig,
+  profileReducer
+);
 export const store = configureStore({
   reducer: {
     [contactApi.reducerPath]: contactApi.reducer,
