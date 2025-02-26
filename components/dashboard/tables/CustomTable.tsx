@@ -87,7 +87,7 @@ export default function CustomTable({
     global: { value: null, matchMode: FilterMatchMode.CONTAINS },
   });
   const [globalFilterValue, setGlobalFilterValue] = useState<string>("");
-  const [page, setPage] = useState(2);
+  const [page, setPage] = useState(0);
 
   useEffect(() => {
     setCustomers(data);
@@ -177,9 +177,6 @@ export default function CustomTable({
               <EmptyMessage onClick={ButtonEvent} emptyMessage={emptyMessage} />
             }
             dataKey="id"
-            onRowClick={(e) => {
-              router.push(`${detailsRoute}${e.data.id}`);
-            }}
             className="custom-header"
             rowClassName={(data) => {
               const rowIndex = customers.findIndex(
@@ -278,7 +275,7 @@ export default function CustomTable({
             rows={rows}
             totalRecords={totalRecords}
             onPageChange={(e) => {
-              setPage(e.page);
+              setPage(e.first);
               if (onPageChange) onPageChange(e.page + 1);
             }}
           />

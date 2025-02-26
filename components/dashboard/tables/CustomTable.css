@@ -28,7 +28,7 @@
   background-color: #a57a2a;
 }
 
-.p-paginator-current {
+.p-highlight {
   background-color: #6a582b;
   color: white;
   font-weight: bold;
@@ -80,7 +80,7 @@ html[dir="rtl"] .p-paginator-next {
   border-right: none;
 }
 
-.p-datatable .p-datatable-tbody>tr {
+.p-datatable .p-datatable-tbody > tr {
   border-bottom: 4px solid #ffffff;
 }
 
@@ -89,7 +89,7 @@ html[dir="rtl"] .p-paginator-next {
     border: 1px solid #ffffff;
 } */
 
-.p-datatable .p-datatable-thead>tr>th {
+.p-datatable .p-datatable-thead > tr > th {
   border-bottom: 4px solid #ffffff;
 }
 
