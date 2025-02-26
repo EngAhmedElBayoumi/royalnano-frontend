@@ -9,12 +9,12 @@ const intlMiddleware = createMiddleware({
 });
 // Define permission requirements for specific routes
 const permissionRoutes = {
-  "/dashboard/inventory": "view_inventoryitem",
-  "/dashboard/sales": "view_salesinvoice",
-  "/dashboard/hr": "view_employee",
-  "/dashboard/clients": "view_customer",
-  "/dashboard/branches": "view_branch",
-  "/dashboard/website": "view_service",
+  "/dashboard/inventory": "inventoryitem",
+  "/dashboard/sales": "salesinvoice",
+  "/dashboard/hr": "employee",
+  "/dashboard/clients": "customer",
+  "/dashboard/branches": "branch",
+  "/dashboard/website": "service",
 };
 
 export async function middleware(req: NextRequest) {
@@ -26,7 +26,7 @@ export async function middleware(req: NextRequest) {
 
   // Get user permissions from cookie (stored during login)
   const permissionsCookie = req.cookies.get("userPermissions")?.value;
-  let userPermissions: string[] = [];
+  let userPermissions: { [key: string]: { view: boolean } } = {};
 
   if (permissionsCookie) {
     try {
@@ -58,8 +58,8 @@ export async function middleware(req: NextRequest) {
       permissionRoutes
     )) {
       if (req.nextUrl.pathname.includes(route)) {
-        // Check if user has at least one of the required permissions
-        const hasPermission = userPermissions.includes(requiredPermissions);
+        // Check if user has the required permission
+        const hasPermission = userPermissions[requiredPermissions]?.view;
 
         if (!hasPermission) {
           // Redirect to unauthorized page or dashboard
