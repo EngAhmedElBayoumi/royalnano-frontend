@@ -26,7 +26,6 @@ export function AppSidebar() {
   const t = useTranslations("Sidebar");
   const dispatch = useDispatch();
   const router = useRouter();
-  debugger;
 
   const permissions = useSelector(
     (state: RootState) => state.profile.permissions
