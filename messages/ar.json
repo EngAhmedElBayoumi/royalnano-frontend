@@ -97,7 +97,7 @@
     "tabs": {
       "attendance": "الحضور",
       "vacation": "الإجازات",
-      "bonuses": "المكافآت",
+      "bonuses": "المكافآت والخصومات",
       "salary": "الرواتب",
       "employees": "الموظفون"
     },
@@ -112,6 +112,13 @@
       "isUser": "مستخدم",
       "noEmployeesDataFound": "لا توجد بيانات للموظفين",
       "addEmployees": "إضافة موظف"
+    },
+    "bonuses": {
+      "employee": "الموظف",
+      "amount": "المبلغ",
+      "reason": "السبب",
+      "type": "النوع",
+      "date": "التاريخ"
     }
   },
   "Sales": {
