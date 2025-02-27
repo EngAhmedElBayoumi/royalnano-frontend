@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import CustomButton from "@/components/formFields/CustomButton";
-import Link from "next/link";
+import {Link} from '@/i18n/routing';
 
 interface ServiceCardProps {
   title: string;

@@ -7,8 +7,11 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
+import { useTranslations } from "next-intl";
 
 const About = ({ showTitle }: { showTitle: boolean }) => {
+  const t = useTranslations("website.About");
+
   return (
     <section
       className={` ${
@@ -22,7 +25,7 @@ const About = ({ showTitle }: { showTitle: boolean }) => {
             : "hidden"
         } `}
       >
-        About
+        {t("heading")}
       </h2>
       <div className="flex justify-center">
         <main className="main-container grid grid-cols-1 lg:grid-cols-2 items-center gap-10">
@@ -84,14 +87,14 @@ const About = ({ showTitle }: { showTitle: boolean }) => {
 
           <div>
             <p className="text-md lg:text-lg xl:text-xl text-secondary">
-              Why Royal Nano
+              {t("whyRoyalNano")}
             </p>
-            {AboutData.map((data) => (
+            {AboutData.map((data, index) => (
               <IconWithTitle
-                key={data.title}
-                paragraph={data.paragraph}
+                key={t(`aboutData.${index}.title`)} // Use title as key
+                paragraph={t(`aboutData.${index}.paragraph`)} // Fetch translated paragraph
                 src={data.src}
-                title={data.title}
+                title={t(`aboutData.${index}.title`)} // Fetch translated title
               />
             ))}
           </div>

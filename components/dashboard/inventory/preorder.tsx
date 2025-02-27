@@ -1,36 +1,33 @@
 "use client";
-import CustomTable from "@/components/dashboard/tables/CustomTable";
-import { useGetPreorderQuery } from "@/redux/services/dashboard/preorderApi";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
-import TableSkelton from "../skelton/TableSkelton";
-import CardsSkelton from "../skelton/CardsSkelton";
+import { useTranslations } from "next-intl";
+import { useGetPreorderQuery } from "@/redux/services/dashboard/preorderApi";
+import CustomTable from "@/components/dashboard/tables/CustomTable";
+import TableSkelton from "@/components/dashboard/skelton/TableSkelton";
+import CardsSkelton from "@/components/dashboard/skelton/CardsSkelton";
+import LoadingError from "@/components/dashboard/LoadingError";
 
 export interface Item {
   item: {
+    id: number;
     item_code: string;
-    item_name:string
+    item_name: string;
   };
   preorder_level: number;
   description: string;
-  id:string;
+  id: string;
 }
-
 
 export default function Preorder() {
   const { isLoading, error, data: inventoryItems } = useGetPreorderQuery({});
-  if (inventoryItems) {
-    console.log("successful...");
-    console.log(inventoryItems);
-  }
 
   const router = useRouter();
+  const t = useTranslations("Inventory.InventoryPreorder");
 
   const columns = [
-    { field: "itemCode", header: "Item Code" },
-    { field: "preorderLevel", header: "Preorder Level" },
-    { field: "description", header: "Description" },
-    // { field: "date", header: "Date" },
+    { field: "itemCode", header: t("item") },
+    { field: "preorderLevel", header: t("preorderLevel") },
+    { field: "description", header: t("description") },
   ];
 
   const cardsData = [
@@ -41,48 +38,38 @@ export default function Preorder() {
     { title: "Paid", num: 48 },
   ];
 
-  const formattedData = inventoryItems?.results?.map((item: Item) => ({
-    id: item.id, 
-    itemCode: item.item.item_code,
-    preorderLevel: item.preorder_level,
-    description: item.description,
-  })) || [];
+  const formattedData =
+    inventoryItems?.results?.map((item: Item) => ({
+      id: item.id,
+      itemCode: item.item.item_code,
+      preorderLevel: item.preorder_level,
+      description: item.description,
+    })) || [];
   const handleClick = () => {
     router.push("/dashboard/inventory/preorder/create");
   };
 
-
   return (
-    <div className="px-6 pb-25">
+    <>
       {isLoading ? (
-        <div className="bg-dashboardBg px-4 pt-4 pb-1 rounded-tr-[20px] rounded-bl-[20px] rounded-br-[20px] card mb-5 ">
+        <>
           <CardsSkelton />
           <TableSkelton />
-        </div>
+        </>
       ) : error ? (
-        <div className="flex justify-center flex-col items-center bg-dashboardBg pb-10 rounded-tr-[20px] rounded-bl-[20px] rounded-br-[20px] card mb-5">
-          <Image
-            src="/assets/icons/dashboard/loading-error.svg"
-            alt="loading error"
-            width="400"
-            height="300"
-          />
-          Error loading data
-        </div>
+        <LoadingError />
       ) : (
-      <CustomTable
-      emptyMessage="no preorder data found"
-
-        editRoute="/dashboard/inventory/preorder/edit/"
-        data={formattedData}
-        rows={10}
-        detailsRoute="/dashboard/inventory/preorder/"
-        columns={columns}
-        cardData={cardsData}
-        buttonText="Add Preorder"
-        ButtonEvent={handleClick}
-      />
+        <CustomTable
+          emptyMessage={t("noPreorderDataFound")}
+          editRoute="/dashboard/inventory/preorder/edit/"
+          data={formattedData}
+          rows={10}
+          columns={columns}
+          cardData={cardsData}
+          buttonText={t("addPreorder")}
+          ButtonEvent={handleClick}
+        />
       )}
-    </div>
+    </>
   );
 }

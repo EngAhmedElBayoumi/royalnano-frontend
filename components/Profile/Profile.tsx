@@ -3,7 +3,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ProfileSidebar from "./ProfileSidebar";
 import ServiceCard from "@/components/cards/ServiceCard";
 import ProfileForm from "./ProfileForm";
-import Link from "next/link";
+import {Link} from '@/i18n/routing';
 import { services } from "@/data/profileServices";
 // import { useGetProfileQuery } from "@/redux/services/profileApi";
 

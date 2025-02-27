@@ -1,0 +1,304 @@
+{
+  "edit": "edit",
+  "view": "view",
+  "save": "save",
+  "cancel": "cancel",
+  "search": "search",
+  "create": "create",
+  "loadingError": "Error loading data",
+  "Sidebar": {
+    "home": "Home",
+    "clients": "Clients",
+    "customerRequests": "Customer Requests",
+    "branches": "Branches",
+    "hr": "HR",
+    "inventory": "Inventory",
+    "website": "Website",
+    "sales": "Sales",
+    "settings": "Settings",
+    "logout": "Logout"
+  },
+  "branches": {
+    "branches": "Branches",
+    "addBranch": "Add Branch",
+    "noBranchesDataFound": "No branches data found",
+    "name": "Name",
+    "phoneNumber": "Phone Number",
+    "branchCode": "Branch Code",
+    "location": "Location",
+    "manager": "Manager",
+    "address": "Address",
+    "description": "Description",
+    "email": "Email",
+    "save": "Save",
+    "cancel": "Cancel",
+    "setLocation": "Set Location",
+    "selectBranchLocation": "Select Branch Location"
+  },
+  "Inventory": {
+    "stockAdjustment": "Stock Adjustment",
+    "movement": "Movement",
+    "preorder": "Preorder",
+    "categoryModel": "Category Model",
+    "items": "Items",
+    "InventoryItem": {
+      "itemCode": "Item Code",
+      "itemName": "Item Name",
+      "category": "Category",
+      "quantity": "Quantity",
+      "purchasePrice": "Purchase Price",
+      "unit": "Unit",
+      "branch": "Branch",
+      "sellingPrice": "Selling Price",
+      "supplier": "Supplier",
+      "description": "Description",
+      "addItem": "Add Item",
+      "editItem": "Edit Item",
+      "noItemsDataFound": "No items data found"
+    },
+    "InventoryCategory": {
+      "categoryName": "Category Name",
+      "noCategoriesDataFound": "No categories data found",
+      "addCategory": "Add Category Model",
+      "editCategory": "Edit Category Model"
+    },
+    "InventoryPreorder": {
+      "item": "Item",
+      "preorderLevel": "Preorder Level",
+      "description": "Description",
+      "noPreorderDataFound": "No Preorder data found",
+      "addPreorder": "Add Preorder",
+      "editPreorder": "Edit Preorder"
+    },
+    "InventoryMovement": {
+      "item": "Item",
+      "quantity": "Quantity",
+      "date": "Date",
+      "movementType": "Movement Type",
+      "description": "Description",
+      "noMovementsDataFound": "No movements data found",
+      "addMovement": "Add Movement",
+      "viewMovement": "View Movement"
+    },
+    "InventoryStockAdjustment": {
+      "item": "Item",
+      "reason": "Reason",
+      "adjustmentType": "Adjustment Type",
+      "quantityAdjusted": "Quantity Adjusted",
+      "date": "Date",
+      "description": "Description",
+      "noStockAdjustmentsDataFound": "No stock adjustments data found",
+      "addStockAdjustment": "Add Stock Adjustment",
+      "viewStockAdjustment": "View Stock Adjustment"
+    }
+  },
+  "hr": {
+    "tabs": {
+      "attendance": "Attendance",
+      "vacation": "Vacation",
+      "bonuses": "Bonuses",
+      "salary": "Salaries",
+      "employees": "Employees"
+    },
+    "employees": {
+      "name": "Name",
+      "emailAddress": "Email Address",
+      "phone": "Phone",
+      "jobTitle": "Job Title",
+      "salary": "Salary",
+      "address": "Address",
+      "branch": "Branch",
+      "isUser": "Is User",
+      "noEmployeesDataFound": "No employees data found",
+      "addEmployees": "Add Employee"
+    }
+  },
+  "Sales": {
+    "cancel": "Cancel",
+    "save": "save",
+    "sales": "Sales",
+    "customer": "Customer",
+    "salesQuotation": "Sales Quotation",
+    "order": "Sales Order",
+    "invoice": "Sales Invoice",
+    "receipt": "Sales Receipt",
+    "SalesQuotation": {
+      "date": "Date",
+      "customer": "Customer",
+      "validityPeriod": "Validity Period",
+      "quotationNumber": "Quotation Number",
+      "items": "Items",
+      "itemName": "Item Name",
+      "quantity": "Quantity",
+      "unitPrice": "Unit Price",
+      "discount": "Discount",
+      "discountPercent": "Discount Percent",
+      "taxRate": "Tax Rate",
+      "save": "Save",
+      "cancel": "Cancel"
+    },
+    "SalesOrder": {
+      "editSalesOrder": "Edit Sales Order",
+      "itemId": "Item Id",
+      "selectItem": "Select Item",
+      "orderDate": "Order Date",
+      "customer": "Customer",
+      "branch": "Branch",
+      "salesRepresentative": "Sales Representative",
+      "description": "Description",
+      "quantity": "Quantity",
+      "item": "Item",
+      "customItemName": "Custom Item Name",
+      "customPrice": "Custom Price",
+      "discount": "Discount",
+      "discountPercent": "Discount Percent",
+      "status": "Status",
+      "save": "Save",
+      "cancel": "Cancel"
+    }
+  },
+  "website": {
+    "CustomerReviews": {
+      "heading": "Customers",
+      "reviews": [
+        {
+          "name": "Emma Watson",
+          "comment": "Their Service is absolutely amazing. My car looks brand new again."
+        },
+        {
+          "name": "John Doe",
+          "comment": "Absolutely fantastic! Exceeded my expectations. Overall, a decent experience."
+        },
+        {
+          "name": "Sarah Connor",
+          "comment": "Great service, but a bit slow. Overall, a decent experience."
+        },
+        {
+          "name": "Bruce Wayne",
+          "comment": "Best service I've ever had! Overall, a decent experience."
+        },
+        {
+          "name": "Alice Johnson",
+          "comment": "Fantastic service! Highly recommend. Overall, a decent experience."
+        },
+        {
+          "name": "Bob Smith",
+          "comment": "Very good experience, will come back again for sure. Overall, a decent experience."
+        },
+        {
+          "name": "Charlie Brown",
+          "comment": "Decent service, but could be improved in many ways. Overall, a decent experience."
+        },
+        {
+          "name": "Diana Prince",
+          "comment": "Absolutely loved it! Best in town. Overall, a decent experience."
+        }
+      ]
+    },
+    "OurSolutions": {
+      "heading": "Our Solutions",
+      "description": "Royal Nano Ceramic offers advanced protection services for vehicles, aircraft, boats, and motorcycles in Egypt. Using the best international materials and modern nano-ceramic technologies, the company ensures top-level protection and quality, delivering a unique experience that makes them the leading choice in the market.",
+      "solutions": [
+        {
+          "title": "Luxury Car Protection",
+          "paragraph": "Our ceramic coating ensures long-lasting protection for luxury vehicles, preserving their shine and guarding against scratches and environmental damage."
+        },
+        {
+          "title": "Aircraft Protection",
+          "paragraph": "We provide nano technology coatings that protect aircraft from UV damage and corrosion, keeping them in excellent condition over time."
+        },
+        {
+          "title": "Yacht Protection",
+          "paragraph": "Our nano coatings offer protection against saltwater and UV rays, helping to maintain the yacht's appearance and durability."
+        },
+        {
+          "title": "Motorcycle Protection",
+          "paragraph": "Specialized nano coatings protect motorcycles from scratches and wear, ensuring they remain in great condition across various environments."
+        }
+      ]
+    },
+    "About": {
+      "heading": "About",
+      "whyRoyalNano": "Why Royal Nano",
+      "aboutData": [
+        {
+          "title": "Fast and efficient solutions for your car needs.",
+          "paragraph": "We provide cutting-edge technology that ensures speed and reliability, helping your business stay ahead in a competitive market."
+        },
+        {
+          "title": "Innovative leadership that inspires progress and growth.",
+          "paragraph": "Our forward-thinking leadership drives innovation, fostering a culture of continuous improvement and development."
+        },
+        {
+          "title": "24/7 customer support to assist you whenever needed.",
+          "paragraph": "Our dedicated team is always available, providing expert guidance and support to ensure your satisfaction around the clock."
+        }
+      ]
+    },
+    "ContactForm": {
+      "contactUs": "Contact Us",
+      "fullName": "Full Name",
+      "email": "Email",
+      "phoneNumber": "Phone Number",
+      "message": "Message",
+      "send": "Send",
+      "sending": "Sending...",
+      "thankYou": "Thank you!",
+      "thankYouMessage": "We have received your message. We will get back to you as soon as possible."
+    },
+    "nav": {
+      "Home": "Home",
+      "Services": "Services",
+      "About": "About",
+      "Gallery": "Gallery",
+      "ContactUs": "Contact Us",
+      "LogIn": "Log In",
+      "Register": "Register",
+      "Logout": "Logout"
+    },
+    "hero": {
+      "slide1": {
+        "title": "How can we help you?",
+        "description": "We’re here to help and answer any questions you might have. We look forward to hearing from you!"
+      },
+      "slide2": {
+        "title": "Royal Nano Ceramic",
+        "description": "Royal Nano Ceramic is a leading car protection company in Egypt, offering advanced nano ceramic coatings to protect and enhance vehicle exteriors. They specialize in paint protection, scratch resistance, and hydrophobic coatings, ensuring cars remain in top condition."
+      },
+      "buttonText": "Protect Your Car"
+    },
+    "services": {
+      "title": "Our Services",
+      "maxPro": {
+        "name": "Max Pro",
+        "type": "Paint Protection"
+      },
+      "grapheneHybridPlus": {
+        "name": "Graphene Hybrid Plus",
+        "type": "Nano Graphene"
+      },
+      "diamondHybridPlus": {
+        "name": "Diamond Hybrid Plus",
+        "type": "Nano Ceramic"
+      },
+      "shieldUltraCool": {
+        "name": "Shield UltraCool",
+        "type": "Thermal Insulation"
+      }
+    },
+    "flexibleServices": {
+      "title": "Flexible Services",
+      "description": "Smart solutions for all your charter requirements",
+      "buttonText": "All Solutions"
+    },
+    "subscription": {
+      "title": "Subscribe to get the latest car maintenance updates",
+      "emailPlaceholder": "Enter your email address",
+      "buttonText": "Subscribe",
+      "errors": {
+        "required": "Email is required",
+        "invalid": "Invalid email"
+      }
+    }
+  }
+}

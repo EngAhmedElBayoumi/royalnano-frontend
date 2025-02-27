@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { registerValidation } from "@/lib/validations/register";
-import Link from "next/link";
+import {Link} from '@/i18n/routing';
 import Image from "next/image";
 import { useRegisterMutation } from "@/redux/services/registerApi";
 

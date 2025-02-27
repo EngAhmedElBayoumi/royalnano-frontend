@@ -14,6 +14,7 @@ import { resendOTPApi } from "./services/resendOTP";
 import { verifyOTPApi } from "./services/verifyOTP";
 import { resetPasswordPApi } from "./services/resetPassword";
 import authReducer from "./slices/authSlice";
+import profileReducer from "./slices/profileSlice";
 import { branchApi } from "./services/dashboard/branchesApi";
 import { movementApi } from "./services/dashboard/movementApi";
 import { preorderApi } from "./services/dashboard/preorderApi";
@@ -22,13 +23,31 @@ import { itemsApi } from "./services/dashboard/itemsApi";
 import { itemCategoryApi } from "./services/dashboard/itemCategoryApi";
 import { stockApi } from "./services/dashboard/stockApi";
 
-const persistConfig = {
-  key: "root",
+import { employeeApi } from "./services/dashboard/hr/employeeApi";
+import { salesQuotationApi } from "./services/dashboard/sales/salesQuotationsApi";
+import { salesCustomerApi } from "./services/dashboard/sales/salesCustomerApi";
+import { salesInvoiceApi } from "./services/dashboard/sales/salesInvoiceApi";
+import { salesOrderApi } from "./services/dashboard/sales/salesOrderApi";
+
+// Create separate configs for each reducer
+const authPersistConfig = {
+  key: "auth",
   storage,
+  // other config options
 };
 
-const persistedAuthReducer = persistReducer(persistConfig, authReducer);
+const profilePersistConfig = {
+  key: "profile",
+  storage,
+  // other config options
+};
 
+// Use the separate configs when creating the persisted reducers
+const persistedAuthReducer = persistReducer(authPersistConfig, authReducer);
+const persistedProfileReducer = persistReducer(
+  profilePersistConfig,
+  profileReducer
+);
 export const store = configureStore({
   reducer: {
     [contactApi.reducerPath]: contactApi.reducer,
@@ -49,7 +68,13 @@ export const store = configureStore({
     [itemsApi.reducerPath]: itemsApi.reducer,
     [itemCategoryApi.reducerPath]: itemCategoryApi.reducer,
     [stockApi.reducerPath]: stockApi.reducer,
+    [salesQuotationApi.reducerPath]: salesQuotationApi.reducer,
+    [salesCustomerApi.reducerPath]: salesCustomerApi.reducer,
+    [salesInvoiceApi.reducerPath]: salesInvoiceApi.reducer,
+    [salesOrderApi.reducerPath]: salesOrderApi.reducer,
+    [employeeApi.reducerPath]: employeeApi.reducer,
     auth: persistedAuthReducer,
+    profile: persistedProfileReducer,
   },
   middleware: (getDefaultMiddleware) => {
     return getDefaultMiddleware({
@@ -74,7 +99,12 @@ export const store = configureStore({
       .concat(refreshTokenApi.middleware)
       .concat(itemsApi.middleware)
       .concat(itemCategoryApi.middleware)
-      .concat(stockApi.middleware);
+      .concat(stockApi.middleware)
+      .concat(salesQuotationApi.middleware)
+      .concat(salesCustomerApi.middleware)
+      .concat(salesInvoiceApi.middleware)
+      .concat(salesOrderApi.middleware)
+      .concat(employeeApi.middleware);
   },
 });
 

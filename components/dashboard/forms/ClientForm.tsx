@@ -6,7 +6,7 @@ import { clientSchema } from "@/lib/validations/dashboard/clientSchema";
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
 import PhoneInputField from "@/components/formFields/PhoneInputField";
-import Link from "next/link";
+import {Link} from '@/i18n/routing';
 
 interface ClientFormProps {
   onSubmit: (data: ClientFormValues) => Promise<void>;

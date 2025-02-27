@@ -2,20 +2,22 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { navLinks } from "@/data/FooterData";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { usePathname, useRouter } from "next/navigation";
-import { getCookie, deleteCookie } from "cookies-next";
+import { getCookie } from "cookies-next";
 import { useDispatch } from "react-redux";
 import { logout } from "@/redux/slices/authSlice";
-// import { useLogoutMutation } from "@/redux/services/logoutApi";
+import { useTranslations } from "next-intl";
+import { clearProfile } from "@/redux/slices/profileSlice";
 
 const Nav = () => {
+  const t = useTranslations("website.nav");
   const [isClicked, setIsClicked] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
   const accessToken = getCookie("accessToken");
-  // const [logout, { isLoading }] = useLogoutMutation();
+  const dispatch = useDispatch();
 
   const toggleNavbar = () => {
     setIsClicked(!isClicked);
@@ -34,14 +36,12 @@ const Nav = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-const dispatch = useDispatch()
+
   const handleLogout = () => {
     try {
       dispatch(logout());
-
-      deleteCookie("accessToken");
-
-      router.push("/login");
+      dispatch(clearProfile());
+      router.refresh();
     } catch (error) {
       console.error("Logout failed:", error);
     }
@@ -61,15 +61,13 @@ const dispatch = useDispatch()
           {navLinks.map((link) => (
             <Link
               className={`${
-                pathname === link.href
-                  ? "text-primary" 
-                  : "text-white"
+                pathname === link.href ? "text-primary" : "text-white"
               } hover:text-primary active:text-primary md:text-sm xl:text-md text-nowrap`}
               key={link.href}
               href={link.href}
               passHref
             >
-              {link.label}
+              {t(link.label)}
             </Link>
           ))}
         </div>
@@ -82,26 +80,24 @@ const dispatch = useDispatch()
               href={"/login"}
               passHref
             >
-              Log In
+              {t("LogIn")}
             </Link>
             <Link
               className="md:text-sm xl:text-md hover:text-white text-primary"
               href={"/register"}
               passHref
             >
-              Register
+              {t("Register")}
             </Link>
           </div>
         ) : (
           <div className="hidden md:flex gap-5 items-center">
             <button
-            className="md:text-sm xl:text-md hover:text-white text-nowrap text-primary"
-            onClick={handleLogout}
-            // disabled={isLoading}
-          >
-            logout
-            {/* {isLoading ? "Logging out..." : "Logout"} */}
-          </button>
+              className="md:text-sm xl:text-md hover:text-white text-nowrap text-primary"
+              onClick={handleLogout}
+            >
+              {t("Logout")} {/* Use translations */}
+            </button>
           </div>
         )}
 
@@ -175,7 +171,7 @@ const dispatch = useDispatch()
                   href={link.href}
                   passHref
                 >
-                  {link.label}
+                  {t(link.label)} {/* Use translations */}
                 </Link>
               ))}
               {!accessToken ? (
@@ -185,25 +181,23 @@ const dispatch = useDispatch()
                     href={"/login"}
                     passHref
                   >
-                    Log In
+                    {t("LogIn")}
                   </Link>
                   <Link
                     className="hover:text-primary xl:text-sm block text-black"
                     href={"/register"}
                     passHref
                   >
-                    Register
+                    {t("Register")}
                   </Link>
                 </>
               ) : (
                 <button
-                className="hover:text-primary xl:text-sm block text-black text-left"
-                onClick={handleLogout}
-                // disabled={isLoading}
-              >
-                {/* {isLoading ? "Logging out..." : "Logout"} */}
-              logout
-              </button>
+                  className="hover:text-primary xl:text-sm block text-black text-left"
+                  onClick={handleLogout}
+                >
+                  {t("Logout")}
+                </button>
               )}
             </div>
           </div>

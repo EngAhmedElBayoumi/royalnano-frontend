@@ -1,7 +1,6 @@
 import React from "react";
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
   DialogHeader,
@@ -13,6 +12,7 @@ interface CustomModalProps {
   onChange: (open: boolean) => void;
   title: string;
   description: string;
+  children?: React.ReactNode;
 }
 
 function CustomModal({
@@ -20,17 +20,18 @@ function CustomModal({
   onChange,
   title,
   description,
+  children,
 }: CustomModalProps) {
   return (
     <Dialog open={isOpen} onOpenChange={onChange}>
-      <DialogClose />
-      <DialogContent>
+      <DialogContent className="custom-modal">
         <DialogHeader>
-          <DialogTitle className="text-center">{title}</DialogTitle>
-          <DialogDescription className="text-center">
+          <DialogTitle className="text-start">{title}</DialogTitle>
+          <DialogDescription className="text-start !mt-0">
             {description}
           </DialogDescription>
         </DialogHeader>
+        {children}
       </DialogContent>
     </Dialog>
   );

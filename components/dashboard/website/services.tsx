@@ -107,10 +107,9 @@ export default function Services() {
     router.push("/dashboard/website/services/create");
   };
   return (
-    <div className="px-6 pb-25">
+    <>
       <CustomTable
-                      emptyMessage="no services data found"
-
+        emptyMessage="no services data found"
         editRoute="/dashboard/website/services/edit/"
         data={data}
         rows={10}
@@ -119,6 +118,6 @@ export default function Services() {
         buttonText="Add Service"
         ButtonEvent={handleClick}
       />
-    </div>
+    </>
   );
 }

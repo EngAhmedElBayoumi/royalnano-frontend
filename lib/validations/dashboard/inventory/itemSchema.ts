@@ -5,6 +5,7 @@ export const itemSchema = z.object({
   item_code: z.string().nonempty("Item Code is required"),
   quantity: z.number().min(0, "Quantity must be a non-negative number"),
   unit: z.string().nonempty("Unit is required"),
+  branch: z.coerce.number().min(1, "Branch must be selected"),
   purchase_price: z
     .number()
     .min(0, "Purchase price must be a non-negative number"),

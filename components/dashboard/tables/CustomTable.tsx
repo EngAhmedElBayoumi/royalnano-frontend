@@ -22,6 +22,8 @@ import {
 } from "@radix-ui/react-dropdown-menu";
 import "./CustomTable.css";
 import InfoCardsComponent, { InfoCardInterface } from "../cards/InfoCard";
+import { useTranslations } from "next-intl";
+import { Paginator } from "primereact/paginator";
 
 export interface DataInTable {
   id: number;
@@ -39,7 +41,7 @@ interface CustomTableProps {
   columns: ColumnConfig[];
   cardData: InfoCardInterface[];
   buttonText?: string;
-  ButtonEvent?: MouseEventHandler<HTMLButtonElement>;
+  ButtonEvent: MouseEventHandler<HTMLButtonElement>;
   headerIcon?: string;
   headerTitle?: string;
   headerBG?: string;
@@ -50,14 +52,14 @@ interface CustomTableProps {
   secondHeaderTextColor?: string;
   editRoute?: string;
   viewRoute?: string;
-  detailsRoute?: string;
   emptyMessage: string;
+  onPageChange?: (page: number) => void;
+  totalRecords?: number;
 }
 
 export default function CustomTable({
   viewRoute,
   editRoute,
-  detailsRoute,
   data,
   rows,
   columns,
@@ -73,13 +75,17 @@ export default function CustomTable({
   secondHeaderTextColor,
   secondHeaderTitle,
   emptyMessage,
+  onPageChange,
+  totalRecords,
 }: CustomTableProps) {
   const router = useRouter();
+  const t = useTranslations();
   const [customers, setCustomers] = useState<DataInTable[]>(data);
   const [filters, setFilters] = useState<DataTableFilterMeta>({
     global: { value: null, matchMode: FilterMatchMode.CONTAINS },
   });
   const [globalFilterValue, setGlobalFilterValue] = useState<string>("");
+  const [page, setPage] = useState(0);
 
   useEffect(() => {
     setCustomers(data);
@@ -105,10 +111,10 @@ export default function CustomTable({
       <InfoCardsComponent data={cardData} />
       <div className="flex mb-4 justify-between self-center">
         <InputText
-          className="border bg-transparent border-[#474747] pl-2 w-[25%] py-2 rounded-[10px]"
+          className="border bg-transparent border-[#474747] px-2 w-[25%] py-2 rounded-[10px]"
           value={globalFilterValue}
           onChange={onGlobalFilterChange}
-          placeholder="Search"
+          placeholder={t("search")}
         />
         {buttonText && (
           <Button
@@ -156,21 +162,20 @@ export default function CustomTable({
             )}
         </div>
       )}
-      <div className="bg-dashboardBg px-4 pt-4 pb-1 rounded-tr-[20px] rounded-bl-[20px] rounded-br-[20px] card mb-5 ">
-        {data && data.length > 0 ? (
+      {data && data.length > 0 ? (
+        <div className="mb-5 bg-dashboardBg px-4 pt-4 ltr:rounded-tr-[20px] rtl:rounded-tl-[20px] rounded-b-[20px]">
           <DataTable
             value={customers}
-            paginator
+            // paginator
             rows={rows}
             filters={filters}
             globalFilterFields={columns.map((col) => col.field)}
             header={header}
-            emptyMessage={<EmptyMessage emptyMessage={emptyMessage} />}
+            emptyMessage={
+              <EmptyMessage onClick={ButtonEvent} emptyMessage={emptyMessage} />
+            }
             dataKey="id"
-            onRowClick={(e) => {
-              router.push(`${detailsRoute}${e.data.id}`);
-            }}
-            className="rounded-tl-[10px] rounded-tr-[10px] custom-header"
+            className="custom-header"
             rowClassName={(data) => {
               const rowIndex = customers.findIndex(
                 (item) => item.id === data.id
@@ -180,21 +185,26 @@ export default function CustomTable({
               }`;
             }}
           >
-            {columns.map((col, index) => (
+            {columns.map((col) => (
               <Column
                 key={col.field}
                 headerStyle={headerStyle}
                 field={col.field}
                 header={col.header}
-                className={`m-auto py-[13px] px-[38px] text-[14px] font-[500] border-r border-white border-[2px]`}
-                headerClassName={`text-center capitalize text-white text-[16px] font-[500] py-[13px] px-[38px] border-r border-white border-[2px] ${
-                  index === 0
-                    ? "first-column-header"
-                    : index === columns.length - 1
-                    ? ""
-                    : ""
-                }`}
+                className="m-auto py-[13px] px-[38px] text-[14px] font-[500] border-r border-white border-[2px]"
+                headerClassName="text-center capitalize text-white text-[16px] font-[500] py-[13px] px-[38px] border-r border-white border-[2px]"
                 body={(rowData: DataInTable) => {
+                  const fieldValue = rowData[col.field];
+                  if (Array.isArray(fieldValue)) {
+                    return fieldValue
+                      .map((item) => {
+                        return (
+                          item.item_name || item.name || JSON.stringify(item)
+                        );
+                      })
+                      .join(", ");
+                  }
+
                   if (col.field === "verified") {
                     return (
                       <i
@@ -229,24 +239,24 @@ export default function CustomTable({
                     <DropdownMenuContent className="w-40">
                       {viewRoute && (
                         <DropdownMenuItem
-                          className="bg-dashboardBg shadow-md py-1 cursor-pointer"
+                          className="bg-dashboardBg shadow-md py-1 cursor-pointer capitalize"
                           onClick={(e) => {
                             e.stopPropagation();
                             handleViewClick(rowData.id, e);
                           }}
                         >
-                          View
+                          {t("view")}
                         </DropdownMenuItem>
                       )}
                       {editRoute && (
                         <DropdownMenuItem
-                          className="bg-dashboardBg shadow-md py-1 cursor-pointer  "
+                          className="bg-dashboardBg shadow-md py-1 cursor-pointer capitalize"
                           onClick={(e) => {
                             e.stopPropagation();
                             handleEditClick(rowData.id, e);
                           }}
                         >
-                          Edit
+                          {t("edit")}
                         </DropdownMenuItem>
                       )}
                     </DropdownMenuContent>
@@ -258,10 +268,22 @@ export default function CustomTable({
               />
             )}
           </DataTable>
-        ) : (
-          <EmptyMessage emptyMessage={emptyMessage} />
-        )}
-      </div>
+
+          {totalRecords && totalRecords > rows && (
+            <Paginator
+              first={page}
+              rows={rows}
+              totalRecords={totalRecords}
+              onPageChange={(e) => {
+                setPage(e.first);
+                if (onPageChange) onPageChange(e.page + 1);
+              }}
+            />
+          )}
+        </div>
+      ) : (
+        <EmptyMessage onClick={ButtonEvent} emptyMessage={emptyMessage} />
+      )}
     </>
   );
 }

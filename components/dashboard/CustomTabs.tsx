@@ -1,6 +1,8 @@
-"use client"
+"use client";
 import React, { useEffect, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useLocale } from "next-intl";
 
 interface CustomTabsProps {
   tabs: Array<{
@@ -12,26 +14,33 @@ interface CustomTabsProps {
 }
 
 function CustomTabs({ tabs, defaultTab = tabs[0]?.label }: CustomTabsProps) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const locale = useLocale();
+
   const [activeTab, setActiveTab] = useState<string>(() => {
-    return localStorage.getItem("activeTab") || defaultTab;
+    return searchParams.get("tab") || defaultTab;
   });
 
   useEffect(() => {
-    localStorage.setItem("activeTab", activeTab);
-  }, [activeTab]);
+    const url = new URL(window.location.href);
+    url.searchParams.set("tab", activeTab);
+    router.replace(url.toString(), { scroll: false });
+  }, [activeTab, router]);
   return (
     <Tabs
-    value={activeTab}
-    onValueChange={setActiveTab} 
+      value={activeTab}
+      onValueChange={setActiveTab}
       defaultValue={defaultTab}
-      className="bg-white mr-auto pt-4 mb-0 rounded-tr-[20px] rounded-bl-[20px] rounded-br-[20px]  "
+      className="bg-white mr-auto pt-4 mb-0"
+      dir={locale === "ar" ? "rtl" : "ltr"}
     >
       <TabsList className="bg-transparent flex gap-2 justify-start mx-5">
         {tabs.map((tab, index) => (
           <TabsTrigger
             key={index}
             value={tab.label}
-            className="capitalize data-[state=active]:bg-dashboardBg data-[state=active]:text-primary transition-colors duration-200 p-2 rounded-lg flex items-center gap-2"
+            className="capitalize data-[state=active]:bg-dashboardBg data-[state=active]:text-primary transition-colors duration-200 p-2 flex items-center gap-2 rounded-t-md"
           >
             <div className="group-data-[state=active]:[&>svg]:fill-primary group-data-[state=active]:[&>svg]:stroke-primary">
               {tab.icon}
@@ -43,7 +52,17 @@ function CustomTabs({ tabs, defaultTab = tabs[0]?.label }: CustomTabsProps) {
 
       {tabs.map((tab, index) => (
         <TabsContent key={index} value={tab.label}>
-          {tab.content}
+          <div className="px-6 pb-25">
+            <div
+              className={`bg-dashboardBg pt-4 mb-5 ${
+                activeTab === defaultTab
+                  ? "rounded-b-[20px] ltr:rounded-tr-[20px] rtl:rounded-tl-[20px]"
+                  : "rounded-[20px]"
+              } `}
+            >
+              {tab.content}
+            </div>
+          </div>
         </TabsContent>
       ))}
     </Tabs>

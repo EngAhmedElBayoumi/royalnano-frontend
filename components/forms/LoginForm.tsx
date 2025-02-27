@@ -13,12 +13,14 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { loginValidation } from "@/lib/validations/login";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import Image from "next/image";
 import { useLoginMutation } from "@/redux/services/loginApi";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "@/redux/slices/authSlice";
+import config from "@/lib/config";
+import { setProfile } from "@/redux/slices/profileSlice";
 
 export default function LoginForm() {
   const dispatch = useDispatch();
@@ -39,6 +41,15 @@ export default function LoginForm() {
   }) => {
     try {
       const response = await Login(data).unwrap();
+
+      const profileResponse = await fetch(`${config.apiUrl}core/profile`, {
+        headers: {
+          Authorization: `Bearer ${response.access}`,
+          "Content-Type": "application/json",
+        },
+      });
+      const profileData = await profileResponse.json();
+
       dispatch(
         setCredentials({
           userId: response.user_id,
@@ -47,7 +58,18 @@ export default function LoginForm() {
           refreshToken: response.refresh,
         })
       );
-      router.push("/");
+      dispatch(
+        setProfile({
+          name: profileData.name,
+          emailAddress: profileData.email_address,
+          phoneNumber: profileData.phone_number,
+          role: profileData.role,
+          profilePicture: profileData.profile_picture,
+          permissions: profileData.permissions,
+        })
+      );
+      if (profileData.role !== "client") router.push("/dashboard");
+      else router.push("/");
     } catch (error) {
       console.log(error);
     }

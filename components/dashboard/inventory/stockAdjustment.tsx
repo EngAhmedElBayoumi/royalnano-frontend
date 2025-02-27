@@ -1,10 +1,11 @@
 "use client";
-import CustomTable from "@/components/dashboard/tables/CustomTable";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { useGetStockAdjustmentsQuery } from "@/redux/services/dashboard/stockApi";
-import Image from "next/image";
+import CustomTable from "@/components/dashboard/tables/CustomTable";
 import TableSkelton from "@/components/dashboard/skelton/TableSkelton";
 import CardsSkelton from "@/components/dashboard/skelton/CardsSkelton";
+import LoadingError from "@/components/dashboard/LoadingError";
 
 // Define the type for stock adjustment
 interface StockAdjustment {
@@ -21,6 +22,7 @@ interface StockAdjustment {
 
 export default function StockAdjustment() {
   const router = useRouter();
+  const t = useTranslations("Inventory.InventoryStockAdjustment");
 
   const {
     data: stockAdjustmentData = { results: [] },
@@ -45,11 +47,11 @@ export default function StockAdjustment() {
   );
 
   const columns = [
-    { field: "itemName", header: "Item Name" },
-    { field: "quantity", header: "Quantity" },
-    { field: "reason", header: "Reason" },
-    { field: "type", header: "Type" },
-    { field: "date", header: "Adjustment Date" },
+    { field: "itemName", header: t("item") },
+    { field: "quantity", header: t("quantityAdjusted") },
+    { field: "reason", header: t("reason") },
+    { field: "type", header: t("adjustmentType") },
+    { field: "date", header: t("date") },
   ];
 
   const cardsData = [
@@ -64,35 +66,23 @@ export default function StockAdjustment() {
     router.push("/dashboard/inventory/stock-adjustment/create");
   };
 
-  return (
-    <div className="px-6 pb-25">
-      {isLoading ? (
-        <div className="bg-dashboardBg px-4 pt-4 pb-1 rounded-tr-[20px] rounded-bl-[20px] rounded-br-[20px] card mb-5">
-          <CardsSkelton />
-          <TableSkelton />
-        </div>
-      ) : error ? (
-        <div className="flex justify-center flex-col items-center bg-dashboardBg pb-10 rounded-tr-[20px] rounded-bl-[20px] rounded-br-[20px] card mb-5">
-          <Image
-            src="/assets/icons/dashboard/loading-error.svg"
-            alt="loading error"
-            width="400"
-            height="300"
-          />
-          Error loading data
-        </div>
-      ) : (
-        <CustomTable
-          emptyMessage="no stock adjustment data found"
-          viewRoute="/dashboard/inventory/stock-adjustment/view/"
-          data={transformedData}
-          cardData={cardsData}
-          rows={10}
-          columns={columns}
-          buttonText="Add Stock Adjustment"
-          ButtonEvent={handleClick}
-        />
-      )}
-    </div>
+  return isLoading ? (
+    <>
+      <CardsSkelton />
+      <TableSkelton />
+    </>
+  ) : error ? (
+    <LoadingError />
+  ) : (
+    <CustomTable
+      emptyMessage="no stock adjustment data found"
+      viewRoute="/dashboard/inventory/stock-adjustment/view/"
+      data={transformedData}
+      cardData={cardsData}
+      rows={10}
+      columns={columns}
+      buttonText={t("addStockAdjustment")}
+      ButtonEvent={handleClick}
+    />
   );
 }

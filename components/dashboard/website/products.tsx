@@ -53,10 +53,9 @@ export default function Products() {
   };
 
   return (
-    <div className="px-6 pb-25">
+    <>
       <CustomTable
-                      emptyMessage="no products data found"
-
+        emptyMessage="no products data found"
         editRoute="/dashboard/website/products/edit/"
         data={data}
         rows={10}
@@ -65,6 +64,6 @@ export default function Products() {
         buttonText="Add Product"
         ButtonEvent={handleClick}
       />
-    </div>
+    </>
   );
 }

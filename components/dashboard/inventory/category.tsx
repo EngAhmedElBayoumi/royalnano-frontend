@@ -1,25 +1,26 @@
 "use client";
-import CustomTable from "@/components/dashboard/tables/CustomTable";
-import { useGetItemCategoryQuery } from "@/redux/services/dashboard/itemCategoryApi";
 import { useRouter } from "next/navigation";
-import TableSkelton from "../skelton/TableSkelton";
-import CardsSkelton from "../skelton/CardsSkelton";
-import Image from "next/image";
+import { useTranslations } from "next-intl";
+import { useGetItemCategoryQuery } from "@/redux/services/dashboard/itemCategoryApi";
+import TableSkelton from "@/components/dashboard/skelton/TableSkelton";
+import CardsSkelton from "@/components/dashboard/skelton/CardsSkelton";
+import LoadingError from "@/components/dashboard/LoadingError";
+import CustomTable from "@/components/dashboard/tables/CustomTable";
 
 export default function Category() {
-    const {  isLoading, error,data: itemCategories } = useGetItemCategoryQuery({});
-    if (itemCategories){
+  const {
+    isLoading,
+    error,
+    data: itemCategories,
+  } = useGetItemCategoryQuery({});
 
-      console.log(itemCategories);
-    }
   const router = useRouter();
+  const t = useTranslations("Inventory.InventoryCategory");
 
   const columns = [
     { field: "id", header: "ID" },
-    { field: "name", header: "Name" },
+    { field: "name", header: t("categoryName") },
   ];
-
- 
 
   const cardsData = [
     { title: "New requests", num: 145 },
@@ -32,35 +33,26 @@ export default function Category() {
     router.push("/dashboard/inventory/category-models/create");
   };
   return (
-    <div className="px-6 pb-25">
+    <>
       {isLoading ? (
-        <div className="bg-dashboardBg px-4 pt-4 pb-1 rounded-tr-[20px] rounded-bl-[20px] rounded-br-[20px] card mb-5 ">
+        <>
           <CardsSkelton />
           <TableSkelton />
-        </div>
+        </>
       ) : error ? (
-        <div className="flex justify-center flex-col items-center bg-dashboardBg pb-10 rounded-tr-[20px] rounded-bl-[20px] rounded-br-[20px] card mb-5">
-          <Image
-            src="/assets/icons/dashboard/loading-error.svg"
-            alt="loading error"
-            width="400"
-            height="300"
-          />
-          Error loading data
-        </div>
+        <LoadingError />
       ) : (
-      <CustomTable
-      emptyMessage="no customer requests data found"
-
-        editRoute="/dashboard/inventory/category-models/edit/"
-        data={itemCategories}
-        rows={10}
-        columns={columns}
-        cardData={cardsData}
-        buttonText="Add Category model"
-        ButtonEvent={handleClick}
-      />
+        <CustomTable
+          emptyMessage="no customer requests data found"
+          editRoute="/dashboard/inventory/category-models/edit/"
+          data={itemCategories}
+          rows={10}
+          columns={columns}
+          cardData={cardsData}
+          buttonText={t("addCategory")}
+          ButtonEvent={handleClick}
+        />
       )}
-    </div>
+    </>
   );
 }

@@ -1,5 +1,5 @@
 "use client";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { movementSchema } from "@/lib/validations/dashboard/inventory/movementSchema";
@@ -10,6 +10,7 @@ import TextInput from "@/components/formFields/TextInput";
 import CustomSelect from "@/components/formFields/CustomSelect";
 import CustomTextArea from "@/components/formFields/TextArea";
 import DatePicker from "@/components/formFields/DatePicker";
+import { useTranslations } from "next-intl";
 
 interface MovementFormProps {
   onSubmit: (data: MovementFormValues) => Promise<void>;
@@ -30,6 +31,8 @@ const MovementForm = ({
   defaultValues,
   isView,
 }: MovementFormProps) => {
+  const t = useTranslations();
+
   const form = useForm({
     resolver: zodResolver(movementSchema),
     defaultValues: defaultValues || {
@@ -61,16 +64,16 @@ const MovementForm = ({
             <CustomSelect
               control={form.control}
               name="item"
-              label="Item"
-              placeholder="Item"
+              label={t("Inventory.InventoryMovement.item")}
+              placeholder={t("Inventory.InventoryMovement.item")}
               options={itemsOptions}
               readonly={isView}
             />
             <TextInput
               control={form.control}
               name="quantity"
-              label="Quantity"
-              placeholder="Quantity"
+              label={t("Inventory.InventoryMovement.quantity")}
+              placeholder={t("Inventory.InventoryMovement.quantity")}
               type="number"
               readonly={isView}
             />
@@ -78,38 +81,41 @@ const MovementForm = ({
             <CustomSelect
               control={form.control}
               name="movement_type"
-              label="Movement Type"
-              placeholder="Movement Type"
+              label={t("Inventory.InventoryMovement.movementType")}
+              placeholder={t("Inventory.InventoryMovement.movementType")}
               options={typeOptions}
               readonly={isView}
             />
             <DatePicker
               control={form.control}
               name="movement_date"
-              label="Date"
-              placeholder="Date"
+              label={t("Inventory.InventoryMovement.date")}
+              placeholder={t("Inventory.InventoryMovement.date")}
               readonly={isView}
             />
           </div>
           <CustomTextArea
             control={form.control}
             name="description"
-            label="Description"
-            placeholder="Description"
+            label={t("Inventory.InventoryMovement.description")}
+            placeholder={t("Inventory.InventoryMovement.description")}
             className="mt-2 xl:mt-5"
             readonly={isView}
           />
         </section>
         {!isView && (
           <div className="flex justify-end gap-2 mt-5">
-            <Link href="/dashboard/inventory" passHref>
+            <Link
+              href={`/dashboard/inventory?tab=${t("Inventory.movement")}`}
+              passHref
+            >
               <CustomButton
-                text="Cancel"
+                text={t("cancel")}
                 className="text-white rounded-lg bg-secondary min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
               />
             </Link>
             <CustomButton
-              text="Save"
+              text={t("save")}
               className="text-white rounded-lg min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
             />
           </div>

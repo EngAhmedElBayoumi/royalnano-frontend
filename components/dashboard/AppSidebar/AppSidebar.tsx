@@ -12,16 +12,45 @@ import {
 } from "@/components/ui/sidebar";
 import Image from "next/image";
 import { sidebarLinks } from "@/data/dashboard/sidebarData";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { Link } from "@/i18n/routing";
+import { usePathname, useRouter } from "next/navigation";
+import { useLocale, useTranslations } from "next-intl";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "@/redux/slices/authSlice";
+import { clearProfile } from "@/redux/slices/profileSlice";
+import { RootState } from "@/redux/store";
 
 export function AppSidebar() {
   const currentPath = usePathname();
+  const locale = useLocale();
+  const t = useTranslations("Sidebar");
+  const dispatch = useDispatch();
+  const router = useRouter();
 
+  const permissions = useSelector(
+    (state: RootState) => state.profile.permissions
+  );
+
+  const handleLogout = () => {
+    try {
+      dispatch(logout());
+      dispatch(clearProfile());
+      router.push("/login");
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  };
   return (
-    <Sidebar collapsible="icon">
+    <Sidebar collapsible="icon" side={locale === "ar" ? "right" : "left"}>
       <SidebarHeader className="items-center">
-        <Image src="/assets/icons/logo.svg" alt="logo" width={50} height={80} />
+        <Link href="/" passHref target="blank">
+          <Image
+            src="/assets/icons/logo.svg"
+            alt="logo"
+            width={50}
+            height={80}
+          />
+        </Link>
       </SidebarHeader>
       <SidebarContent className="mt-6">
         <SidebarGroup>
@@ -33,29 +62,34 @@ export function AppSidebar() {
                     ? currentPath === "/dashboard"
                     : currentPath.includes(link.path);
 
+                const hasPermission =
+                  permissions[link.permission]?.view || link.name === "home";
+
                 return (
-                  <SidebarMenuItem
-                    key={link.path}
-                    className="flex justify-center"
-                  >
-                    <SidebarMenuButton
-                      asChild
-                      isActive={isActive}
-                      className="py-6 !rounded-10"
+                  hasPermission && (
+                    <SidebarMenuItem
+                      key={link.path}
+                      className="flex justify-center"
                     >
-                      <Link href={`/dashboard${link.path}`} passHref>
-                        <Image
-                          src={`/assets/icons/sidebar/${link.icon}`}
-                          alt={link.name}
-                          width={30}
-                          height={30}
-                        />
-                        <span className="text-primary capitalize">
-                          {link.name}
-                        </span>
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
+                      <SidebarMenuButton
+                        asChild
+                        isActive={isActive}
+                        className="py-6 !rounded-10"
+                      >
+                        <Link href={`/dashboard${link.path}`} passHref>
+                          <Image
+                            src={`/assets/icons/sidebar/${link.icon}`}
+                            alt={t(link.name)}
+                            width={30}
+                            height={30}
+                          />
+                          <span className="text-primary capitalize">
+                            {t(link.name)}
+                          </span>
+                        </Link>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  )
                 );
               })}
             </SidebarMenu>
@@ -73,21 +107,24 @@ export function AppSidebar() {
               <Link href="/dashboard/settings" passHref>
                 <Image
                   src={`/assets/icons/sidebar/setting.svg`}
-                  alt="settings"
+                  alt={t("settings")}
                   width={30}
                   height={30}
                 />
-                <span className="text-primary">settings</span>
+                <span className="text-primary">{t("settings")}</span>
               </Link>
             </SidebarMenuButton>
-            <SidebarMenuButton className="py-6 !rounded-10 !bg-transparent">
+            <SidebarMenuButton
+              className="py-6 !rounded-10 !bg-transparent"
+              onClick={handleLogout}
+            >
               <Image
                 src={`/assets/icons/sidebar/logout.svg`}
-                alt="settings"
+                alt={t("logout")}
                 width={30}
                 height={30}
               />
-              <span className="text-primary">logout</span>
+              <span className="text-primary">{t("logout")}</span>
             </SidebarMenuButton>
           </SidebarGroupContent>
         </SidebarGroup>

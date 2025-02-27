@@ -1,10 +1,11 @@
 "use client";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useGetMovementsQuery } from "@/redux/services/dashboard/movementApi";
 import CustomTable from "@/components/dashboard/tables/CustomTable";
 import TableSkelton from "@/components/dashboard/skelton/TableSkelton";
 import CardsSkelton from "@/components/dashboard/skelton/CardsSkelton";
+import LoadingError from "@/components/dashboard/LoadingError";
+import { useTranslations } from "next-intl";
 
 // Define the type for movement
 interface Movement {
@@ -22,6 +23,7 @@ interface Movement {
 
 export default function Movement() {
   const router = useRouter();
+  const t = useTranslations("Inventory.InventoryMovement");
 
   const {
     data: movementData = { results: [] },
@@ -42,11 +44,11 @@ export default function Movement() {
 
   const columns = [
     { field: "id", header: "ID" },
-    { field: "item", header: "Item" },
-    { field: "movement_date", header: "Movement Date" },
-    { field: "quantity", header: "Quantity" },
-    { field: "movement_type", header: "Movement Type" },
-    { field: "description", header: "Description" },
+    { field: "item", header: t("item") },
+    { field: "quantity", header: t("quantity") },
+    { field: "movement_date", header: t("date") },
+    { field: "movement_type", header: t("movementType") },
+    { field: "description", header: t("description") },
   ];
 
   const cardsData = [
@@ -62,34 +64,26 @@ export default function Movement() {
   };
 
   return (
-    <div className="px-6 pb-25">
+    <>
       {isLoading ? (
-        <div className="bg-dashboardBg px-4 pt-4 pb-1 rounded-tr-[20px] rounded-bl-[20px] rounded-br-[20px] card mb-5 ">
+        <>
           <CardsSkelton />
           <TableSkelton />
-        </div>
+        </>
       ) : error ? (
-        <div className="flex justify-center flex-col items-center bg-dashboardBg pb-10 rounded-tr-[20px] rounded-bl-[20px] rounded-br-[20px] card mb-5">
-          <Image
-            src="/assets/icons/dashboard/loading-error.svg"
-            alt="loading error"
-            width="400"
-            height="300"
-          />
-          Error loading data
-        </div>
+        <LoadingError />
       ) : (
         <CustomTable
-          emptyMessage="no movements data found"
           viewRoute="/dashboard/inventory/movement/view/"
           data={transformedData}
           rows={10}
           columns={columns}
           cardData={cardsData}
-          buttonText="Add Movement"
+          buttonText={t("addMovement")}
           ButtonEvent={handleClick}
+          emptyMessage={t("noMovementsDataFound") || "No movements data found"}
         />
       )}
-    </div>
+    </>
   );
 }

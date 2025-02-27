@@ -1,9 +1,6 @@
-.first-column-header {
-  border-top-left-radius: 10px;
-}
-
-.last-column-header {
-  border-top-right-radius: 10px;
+.p-datatable-wrapper {
+  border-radius: 1.5rem;
+  overflow: hidden;
 }
 
 .p-paginator {
@@ -31,7 +28,7 @@
   background-color: #a57a2a;
 }
 
-.p-paginator-current {
+.p-highlight {
   background-color: #6a582b;
   color: white;
   font-weight: bold;
@@ -47,6 +44,16 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
+}
+
+.p-paginator-first,
+.p-paginator-last {
+  display: none;
+}
+
+html[dir="rtl"] .p-paginator-prev,
+html[dir="rtl"] .p-paginator-next {
+  transform: scaleX(-1);
 }
 
 .p-paginator-prev:hover,
@@ -84,4 +91,16 @@
 
 .p-datatable .p-datatable-thead > tr > th {
   border-bottom: 4px solid #ffffff;
+}
+
+.item-details {
+  padding: 5px;
+  background: #f1f1f1;
+  margin-bottom: 5px;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.item-details div {
+  margin: 2px 0;
 }

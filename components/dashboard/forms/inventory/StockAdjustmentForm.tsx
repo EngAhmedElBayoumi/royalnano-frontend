@@ -1,5 +1,5 @@
 "use client";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { stockAdjustmentSchema } from "@/lib/validations/dashboard/inventory/stockAdjustmentSchema";
@@ -10,6 +10,7 @@ import TextInput from "@/components/formFields/TextInput";
 import CustomSelect from "@/components/formFields/CustomSelect";
 import CustomTextArea from "@/components/formFields/TextArea";
 import DatePicker from "@/components/formFields/DatePicker";
+import { useTranslations } from "next-intl";
 
 interface StockAdjustmentFormProps {
   onSubmit: (data: StockAdjustmentFormValues) => Promise<void>;
@@ -43,6 +44,7 @@ const StockAdjustmentForm = ({
     },
   });
   const { data: items } = useGetItemsQuery({});
+  const t = useTranslations();
 
   const itemsOptions =
     items?.results?.map((item: { id: number; item_name: string }) => ({
@@ -63,63 +65,70 @@ const StockAdjustmentForm = ({
             <CustomSelect
               control={form.control}
               name="item"
-              label="Item"
-              placeholder="Item"
+              label={t("Inventory.InventoryStockAdjustment.item")}
+              placeholder={t("Inventory.InventoryStockAdjustment.item")}
               options={itemsOptions}
               readonly={isView}
             />
             <TextInput
               control={form.control}
               name="reason"
-              label="Reason"
-              placeholder="Reason"
+              label={t("Inventory.InventoryStockAdjustment.reason")}
+              placeholder={t("Inventory.InventoryStockAdjustment.reason")}
               readonly={isView}
             />
-
             <TextInput
               control={form.control}
               name="quantity_adjusted"
-              label="quantity_adjusted"
-              placeholder="quantity_adjusted"
+              label={t("Inventory.InventoryStockAdjustment.quantityAdjusted")}
+              placeholder={t(
+                "Inventory.InventoryStockAdjustment.quantityAdjusted"
+              )}
               type="number"
               readonly={isView}
             />
             <CustomSelect
               control={form.control}
               name="adjustment_type"
-              label="Adjustment Type"
-              placeholder="Adjustment Type"
+              label={t("Inventory.InventoryStockAdjustment.adjustmentType")}
+              placeholder={t(
+                "Inventory.InventoryStockAdjustment.adjustmentType"
+              )}
               options={typeOptions}
               readonly={isView}
             />
-
             <DatePicker
               control={form.control}
               name="adjustment_date"
-              label="Date"
-              placeholder="Date"
+              label={t("Inventory.InventoryStockAdjustment.date")}
+              placeholder={t("Inventory.InventoryStockAdjustment.date")}
               readonly={isView}
             />
           </div>
           <CustomTextArea
             control={form.control}
             name="description"
-            label="Description"
-            placeholder="Description"
+            label={t("Inventory.InventoryStockAdjustment.description")}
+            placeholder={t("Inventory.InventoryStockAdjustment.description")}
             className="mt-2 xl:mt-5"
             readonly={isView}
           />
         </section>
         {!isView && (
           <div className="flex justify-end gap-2 mt-5">
-            <Link href="/dashboard/inventory" passHref>
+            <Link
+              href={`/dashboard/inventory?tab=${t(
+                "Inventory.stockAdjustment"
+              )}`}
+              passHref
+            >
               <CustomButton
-                text="Cancel"
+                text={t("cancel")}
                 className="text-white rounded-lg bg-secondary min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
               />
             </Link>
             <CustomButton
-              text="Save"
+              text={t("save")}
               className="text-white rounded-lg min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
             />
           </div>

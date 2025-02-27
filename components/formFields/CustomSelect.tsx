@@ -14,12 +14,16 @@ import {
 import { Control, FieldValues, Path } from "react-hook-form";
 
 interface CustomSelectProps<T extends FieldValues> {
-  control: Control<T>;
+  control?: Control<T>;
   name: Path<T>;
   label?: string;
   placeholder: string;
+  className?: string;
   options: { value: string; label: string }[];
   readonly?: boolean;
+  value?: string | number;
+  onChange?: (value: string | number) => void;
+  valueType?: "string" | "number"; 
 }
 
 const CustomSelect = <T extends FieldValues>({
@@ -29,15 +33,24 @@ const CustomSelect = <T extends FieldValues>({
   placeholder,
   options,
   readonly,
+  value,
+  onChange,
+  className,
+  valueType = "string", 
 }: CustomSelectProps<T>) => {
-  return (
+  return control ? (
     <FormField
       control={control}
       name={name}
       render={({ field }) => {
+        const fieldValueString = field.value?.toString();
+
         const selectedLabel =
-          options.find((opt) => opt.value === field.value)?.label ||
+          options.find((opt) => opt.value === fieldValueString)?.label ||
           placeholder;
+
+        // console.log("Field value:", field.value); // Debugging
+        // console.log("Selected label:", selectedLabel); // Debugging
 
         return (
           <FormItem>
@@ -48,12 +61,16 @@ const CustomSelect = <T extends FieldValues>({
             )}
             <FormControl>
               <Select
-                onValueChange={field.onChange}
-                value={field.value}
+                onValueChange={(value) => {
+                  const newValue =
+                    valueType === "number" ? parseFloat(value) : value;
+                  field.onChange(newValue);
+                }}
+                value={fieldValueString} 
                 disabled={readonly}
               >
                 <SelectTrigger
-                  className={`mt-1 bg-[#F4F4F4] border-gray rounded-10 px-2 py-5 xl:py-7 min-w-[270px] md:min-w-[400px] ${
+                  className={`mt-1 bg-[#F4F4F4] border-gray rounded-10 px-2 py-5 xl:py-7 rtl:flex-row-reverse  ${
                     !field.value ? "text-gray" : ""
                   }`}
                 >
@@ -73,6 +90,38 @@ const CustomSelect = <T extends FieldValues>({
         );
       }}
     />
+  ) : (
+    <FormItem>
+      {label && (
+        <FormLabel className="text-darkGray xl:text-sm">{label}</FormLabel>
+      )}
+      <FormControl>
+        <Select
+          onValueChange={(value) => {
+            const newValue = valueType === "number" ? parseFloat(value) : value;
+            onChange?.(newValue);
+          }}
+          value={value?.toString()} 
+          disabled={readonly}
+        >
+          <SelectTrigger
+            className={` bg-[#F4F4F4] border-gray rounded-10   xl:py-7 min-w-[80px]  ${
+              !value ? "text-gray" : ""
+            } ${className}`}
+          >
+            {options.find((opt) => opt.value === value?.toString())?.label ||
+              placeholder}
+          </SelectTrigger>
+          <SelectContent>
+            {options.map((option) => (
+              <SelectItem key={option.value} value={option.value}>
+                {option.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </FormControl>
+    </FormItem>
   );
 };
 

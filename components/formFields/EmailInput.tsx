@@ -20,7 +20,7 @@ const EmailInput: React.FC<EmailInputProps> = ({
       {label && <label>{label}</label>}
       <Input
         type="email"
-        placeholder="Enter your email address"
+        placeholder={label}
         className="px-3 py-2 h-fit border border-primary rounded-lg bg-white xl:text-sm"
         {...register("email")}
       />

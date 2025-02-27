@@ -1,4 +1,4 @@
-import React from "react";
+import React, { MouseEventHandler } from "react";
 import { Button } from "@/components/ui/button";
 
 interface CustomButtonProps {
@@ -12,6 +12,7 @@ interface CustomButtonProps {
     | "link";
   text: string;
   type?: "button" | "submit" | "reset";
+  onClick?: MouseEventHandler<HTMLButtonElement>;
 }
 
 const CustomButton: React.FC<CustomButtonProps> = ({
@@ -19,11 +20,13 @@ const CustomButton: React.FC<CustomButtonProps> = ({
   variant = "default",
   text,
   type = "submit",
+  onClick
 }) => {
   return (
     <Button
       variant={variant}
       type={type}
+      onClick={onClick}
       className={`h-fit rounded-lg ${className}`}
     >
       {text}
