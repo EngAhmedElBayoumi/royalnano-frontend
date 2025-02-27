@@ -21,7 +21,6 @@ interface Employee {
 export default function Employees() {
   const router = useRouter();
   const t = useTranslations("hr.employees");
-
   const [page, setPage] = useState(1);
 
   const {
@@ -35,15 +34,11 @@ export default function Employees() {
     page_size: 10,
   });
 
-  // Transform employeestData to only include item_name
+  // Transform employeesData to only include branch name
   const transformedData = data.results.map((employee: Employee) => ({
     ...employee,
     branch: employee.branch.name,
   }));
-
-  const handlePageChange = (newPage: number) => {
-    setPage(newPage);
-  };
 
   const columns = [
     { field: "name", header: t("name") },
@@ -59,6 +54,9 @@ export default function Employees() {
     { title: "Failed", num: 48 },
     { title: "Paid", num: 48 },
   ];
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage);
+  };
   const handleClick = () => {
     router.push("/dashboard/hr/employees/create");
   };

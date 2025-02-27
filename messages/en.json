@@ -118,7 +118,9 @@
       "amount": "Amount",
       "reason": "Reason",
       "type": "Type",
-      "date": "Date"
+      "date": "Date",
+      "addBonus": "Add Bonus or Deduction",
+      "noBonusesDataFound": "No Bonuses or Deductions data found"
     }
   },
   "Sales": {
