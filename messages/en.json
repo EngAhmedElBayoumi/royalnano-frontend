@@ -21,6 +21,7 @@
   "branches": {
     "branches": "Branches",
     "addBranch": "Add Branch",
+    "editBranch": "Edit Branch",
     "noBranchesDataFound": "No branches data found",
     "name": "Name",
     "phoneNumber": "Phone Number",
