@@ -21,6 +21,7 @@
   "branches": {
     "branches": "الفروع",
     "addBranch": "إضافة فرع",
+    "editBranch": "تعديل فرع",
     "noBranchesDataFound": "لا توجد بيانات للفروع",
     "name": "الاسم",
     "phoneNumber": "رقم الهاتف",

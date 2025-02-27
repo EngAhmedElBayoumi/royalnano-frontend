@@ -1,38 +1,69 @@
 "use client";
-import BranchForm from "@/components/dashboard/forms/BranchForm";
-import { BranchFormValues } from "@/components/dashboard/forms/BranchForm";
+import { useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
+import {
+  useGetBranchByIdQuery,
+  useUpdateBranchMutation,
+} from "@/redux/services/dashboard/branchesApi";
 import IconWithTitle from "@/components/dashboard/IconWithTitle";
-// import { useUpdateBranchMutation } from "@/redux/services/BranchApi";
+import { BranchFormValues } from "@/components/dashboard/forms/BranchForm";
+import BranchForm from "@/components/dashboard/forms/BranchForm";
+import CustomModal from "@/components/modals/CustomModal";
+import FormSkelton from "@/components/dashboard/skelton/FormSkelton";
+import LoadingError from "@/components/dashboard/LoadingError";
 
 export default function EditBranchs() {
-  //   const [updateBranch] = useUpdateBranchMutation();
-  const defaultValues: BranchFormValues = {
-    branch_name: "Cairo",
-    address: "new cairo",
-    branch_code: "874824",
-    email: "cairo_branch@gmail.com",
-    branch_manager: "Mr. Hamada",
-    phone_number: "0123456789",
-  }; // Fetch existing Branch data and set as default values
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const id = searchParams.get("id");
+  const t = useTranslations("branches");
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [updateBranch] = useUpdateBranchMutation();
+  const { data, isLoading, error } = useGetBranchByIdQuery(id);
+  const defaultValues: BranchFormValues = data;
+
+  const handleModalChange = (isOpen: boolean) => {
+    setIsModalOpen(isOpen);
+  };
 
   const handleSubmit = async (data: BranchFormValues) => {
-    console.log(data);
-    // await updateBranch(data);
+    try {
+      const response = await updateBranch({ id, data });
+      if (response.error) throw new Error("creation failed");
+      else router.push("/dashboard/branches");
+    } catch (error) {
+      setIsModalOpen(true);
+      console.log(error);
+    }
   };
 
   return (
     <main className="mx-7 my-5">
+      <CustomModal
+        isOpen={isModalOpen}
+        onChange={handleModalChange}
+        title="Error!"
+        description="Your Request wasn't processed successfully.."
+      />
       <div className="flex">
         <IconWithTitle
           imageSrc="/assets/icons/edit.svg"
-          title="Edit Branch"
+          title={t("editBranch")}
           backgroundColor="#F8F7F7"
           textColor="primary"
         />
       </div>
 
       <div className="bg-dashboardBg px-6 pt-5 pb-8 ltr:rounded-r-[20px] ltr:rounded-bl-[20px] rtl:rounded-l-[20px] rtl:rounded-br-[20px] ltr:lg:pr-[200px] rtl:lg:pl-[200px]">
-        <BranchForm onSubmit={handleSubmit} defaultValues={defaultValues} />
+        {isLoading ? (
+          <FormSkelton />
+        ) : error ? (
+          <LoadingError />
+        ) : (
+          <BranchForm onSubmit={handleSubmit} defaultValues={defaultValues} />
+        )}
       </div>
     </main>
   );
