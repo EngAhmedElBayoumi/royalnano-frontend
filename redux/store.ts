@@ -22,7 +22,7 @@ import { refreshTokenApi } from "./services/refreshTokenApi";
 import { itemsApi } from "./services/dashboard/itemsApi";
 import { itemCategoryApi } from "./services/dashboard/itemCategoryApi";
 import { stockApi } from "./services/dashboard/stockApi";
-
+import { bonusesApi } from "./services/dashboard/hr/bonusesApi";
 import { employeeApi } from "./services/dashboard/hr/employeeApi";
 import { salesQuotationApi } from "./services/dashboard/sales/salesQuotationsApi";
 import { salesCustomerApi } from "./services/dashboard/sales/salesCustomerApi";
@@ -33,13 +33,11 @@ import { salesOrderApi } from "./services/dashboard/sales/salesOrderApi";
 const authPersistConfig = {
   key: "auth",
   storage,
-  // other config options
 };
 
 const profilePersistConfig = {
   key: "profile",
   storage,
-  // other config options
 };
 
 // Use the separate configs when creating the persisted reducers
@@ -73,6 +71,7 @@ export const store = configureStore({
     [salesInvoiceApi.reducerPath]: salesInvoiceApi.reducer,
     [salesOrderApi.reducerPath]: salesOrderApi.reducer,
     [employeeApi.reducerPath]: employeeApi.reducer,
+    [bonusesApi.reducerPath]: bonusesApi.reducer,
     auth: persistedAuthReducer,
     profile: persistedProfileReducer,
   },
@@ -104,7 +103,8 @@ export const store = configureStore({
       .concat(salesCustomerApi.middleware)
       .concat(salesInvoiceApi.middleware)
       .concat(salesOrderApi.middleware)
-      .concat(employeeApi.middleware);
+      .concat(employeeApi.middleware)
+      .concat(bonusesApi.middleware);
   },
 });
 

@@ -1,4 +1,5 @@
 "use client";
+import { Link } from "@/i18n/routing";
 import { Form } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -8,7 +9,6 @@ import TextInput from "@/components/formFields/TextInput";
 import PhoneInputField from "@/components/formFields/PhoneInputField";
 import DatePicker from "@/components/formFields/DatePicker";
 import SwitchField from "@/components/formFields/Switch";
-import {Link} from '@/i18n/routing';
 
 interface EmployeeFormProps {
   onSubmit: (data: EmployeeFormValues) => Promise<void>;

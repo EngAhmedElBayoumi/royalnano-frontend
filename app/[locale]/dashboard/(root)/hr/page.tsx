@@ -41,11 +41,11 @@ function HrPage() {
         <Image
           width="24"
           height="24"
-          alt="bonuses"
+          alt={t("bonuses")}
           src="/assets/icons/dashboard/hr/bonuses.svg"
         />
       ),
-      label: "Bonuses",
+      label: t("bonuses"),
       content: <Bonuses />,
     },
     {

@@ -163,7 +163,7 @@ export default function CustomTable({
         </div>
       )}
       {data && data.length > 0 ? (
-        <div className="mb-5 bg-dashboardBg px-4 pt-4 ltr:rounded-tr-[20px] rtl:rounded-tl-[20px] rounded-b-[20px]">
+        <div className="mb-5 bg-dashboardBg p-4 ltr:rounded-tr-[20px] rtl:rounded-tl-[20px] rounded-b-[20px]">
           <DataTable
             value={customers}
             // paginator
