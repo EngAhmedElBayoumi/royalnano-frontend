@@ -1,11 +1,12 @@
 "use client";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { useGetEmployeesQuery } from "@/redux/services/dashboard/hr/employeeApi";
 import CustomTable from "@/components/dashboard/tables/CustomTable";
 import TableSkelton from "@/components/dashboard/skelton/TableSkelton";
 import CardsSkelton from "@/components/dashboard/skelton/CardsSkelton";
 import LoadingError from "@/components/dashboard/LoadingError";
-import { useTranslations } from "next-intl";
 
 // Define the type for employee
 interface Employee {
@@ -21,6 +22,8 @@ export default function Employees() {
   const router = useRouter();
   const t = useTranslations("hr.employees");
 
+  const [page, setPage] = useState(1);
+
   const {
     data = { results: [] },
     isLoading,
@@ -28,16 +31,19 @@ export default function Employees() {
   } = useGetEmployeesQuery({
     search: "",
     ordering: "id",
-    page: 1,
+    page,
     page_size: 10,
   });
-
 
   // Transform employeestData to only include item_name
   const transformedData = data.results.map((employee: Employee) => ({
     ...employee,
     branch: employee.branch.name,
   }));
+
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage);
+  };
 
   const columns = [
     { field: "name", header: t("name") },
@@ -73,6 +79,8 @@ export default function Employees() {
       cardData={cardsData}
       buttonText={t("addEmployees")}
       ButtonEvent={handleClick}
+      onPageChange={handlePageChange}
+      totalRecords={data.count}
     />
   );
 }
