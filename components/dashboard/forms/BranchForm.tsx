@@ -96,6 +96,12 @@ const BranchForm = ({ onSubmit, defaultValues }: BranchFormProps) => {
     form.setValue("location", locationName);
     form.setValue("latitude", lat);
     form.setValue("longitude", lng);
+
+    setViewport((prev) => ({
+      ...prev,
+      latitude: lat,
+      longitude: lng,
+    }));
   };
 
   return (
