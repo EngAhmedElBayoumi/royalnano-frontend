@@ -12,6 +12,7 @@ export const employeeSchema = z.object({
   salary: z.string().nonempty("Salary is required"),
   address: z.string().nonempty("Address is required"),
   branch: z.coerce.number().min(1, "Branch must be selected"),
+  department: z.coerce.number().min(1, "Department must be selected"),
   password: z.string().nonempty("Password is required"),
-  permissions: z.array(z.string()).optional(),
+  // permissions: z.array(z.string()).optional(),
 });

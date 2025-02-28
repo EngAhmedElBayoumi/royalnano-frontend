@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { employeeSchema } from "@/lib/validations/dashboard/hr/employeeSchema";
 import { useGetBranchesQuery } from "@/redux/services/dashboard/branchesApi";
+import { useGetDepartmentsQuery } from "@/redux/services/dashboard/hr/departmentApi";
 import { Form } from "@/components/ui/form";
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
@@ -25,6 +26,7 @@ export interface EmployeeFormValues {
   salary: string;
   address: string;
   branch: number;
+  department: number;
   permissions: Record<string, boolean>;
 }
 
@@ -39,24 +41,33 @@ const EmployeeForm = ({ onSubmit, defaultValues }: EmployeeFormProps) => {
       salary: "",
       address: "",
       branch: 1,
+      department: 1,
       permissions: {},
     },
   });
 
   const t = useTranslations("hr.employees");
   const { data: branches } = useGetBranchesQuery({});
-  const permissionOptions = [
-    "Add service",
-    "Edit service",
-    "Delete service",
-    "View service",
-  ];
+  const { data: departments } = useGetDepartmentsQuery({});
 
   const branchesOptions =
     branches?.results?.map((branch: { id: number; name: string }) => ({
       value: String(branch.id),
       label: branch.name,
     })) || [];
+
+  const departmentsOptions =
+    departments?.results?.map((department: { id: number; name: string }) => ({
+      value: String(department.id),
+      label: department.name,
+    })) || [];
+
+  const permissionOptions = [
+    "Add service",
+    "Edit service",
+    "Delete service",
+    "View service",
+  ];
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -102,6 +113,13 @@ const EmployeeForm = ({ onSubmit, defaultValues }: EmployeeFormProps) => {
             label={t("branch")}
             placeholder={t("branch")}
             options={branchesOptions}
+          />
+          <CustomSelect
+            control={form.control}
+            name="branch"
+            label={t("department")}
+            placeholder={t("department")}
+            options={departmentsOptions}
           />
         </section>
         <section className="mt-5">
