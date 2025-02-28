@@ -4,16 +4,16 @@ import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useCreateMovementMutation } from "@/redux/services/dashboard/movementApi";
 import IconWithTitle from "@/components/dashboard/IconWithTitle";
+import CustomModal from "@/components/modals/CustomModal";
 import MovementForm, {
   MovementFormValues,
 } from "@/components/dashboard/forms/inventory/MovementForm";
-import CustomModal from "@/components/modals/CustomModal";
 
 export default function CreateMovement() {
   const router = useRouter();
+  const t = useTranslations("Inventory");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [createMovement] = useCreateMovementMutation();
-  const t = useTranslations("Inventory");
 
   const handleModalChange = (isOpen: boolean) => {
     setIsModalOpen(isOpen);

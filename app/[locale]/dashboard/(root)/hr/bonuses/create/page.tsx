@@ -3,25 +3,48 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useCreateBonusMutation } from "@/redux/services/dashboard/hr/bonusesApi";
+import IconWithTitle from "@/components/dashboard/IconWithTitle";
+import CustomModal from "@/components/modals/CustomModal";
 import BonusesForm, {
   BonusesFormValues,
 } from "@/components/dashboard/forms/hr/BonusesForm";
-import IconWithTitle from "@/components/dashboard/IconWithTitle";
 
 export default function CreateBonus() {
-  // const [createBonus] = useCreateBonusMutation();
+  const router = useRouter();
+  const t = useTranslations("hr");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [createBonus] = useCreateBonusMutation();
 
+  const handleModalChange = (isOpen: boolean) => {
+    setIsModalOpen(isOpen);
+  };
   const handleSubmit = async (data: BonusesFormValues) => {
-    console.log(data);
-    // await createBonus(data);
+    try {
+      const payload = {
+        ...data,
+        employee: Number(data.employee),
+      };
+      const response = await createBonus(payload);
+      if (response.error) throw new Error("creation failed");
+      else router.push(`/dashboard/hr?tab=${t("tabs.bonuses")}`);
+    } catch (error) {
+      setIsModalOpen(true);
+      console.log(error);
+    }
   };
 
   return (
     <main className="mx-7 my-5">
+      <CustomModal
+        isOpen={isModalOpen}
+        onChange={handleModalChange}
+        title="Error!"
+        description="Your Request wasn't processed successfully.."
+      />
       <div className="flex">
         <IconWithTitle
           imageSrc="/assets/icons/add.svg"
-          title="Add Bonuses"
+          title={t("bonuses.addBonus")}
           backgroundColor="#F8F7F7"
           textColor="primary"
         />

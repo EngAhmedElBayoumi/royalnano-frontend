@@ -11,12 +11,7 @@ export const employeeApi = createApi({
         params: { search, ordering, page, page_size },
       }),
     }),
-    getEmployeesMini: builder.query({
-      query: ({ search, ordering, page, page_size }) => ({
-        url: `hr/employee/mini`,
-        params: { search, ordering, page, page_size },
-      }),
-    }),
+
     getEmployeeById: builder.query({
       query: (id) => `hr/employee/${id}/`,
     }),
@@ -39,7 +34,6 @@ export const employeeApi = createApi({
 
 export const {
   useGetEmployeesQuery,
-  useGetEmployeesMiniQuery,
   useGetEmployeeByIdQuery,
   useCreateEmployeeMutation,
   useUpdateEmployeeMutation,

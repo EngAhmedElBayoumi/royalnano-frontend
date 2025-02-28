@@ -5,5 +5,5 @@ export const bonusSchema = z.object({
   amount: z.string().nonempty("Amount is required"),
   reason: z.string().nonempty("Reason is required"),
   type: z.enum(["bonus", "deduction"]),
-  date: z.date({ required_error: "Date is required" }),
+  date: z.string().nonempty("Date is required"),
 });

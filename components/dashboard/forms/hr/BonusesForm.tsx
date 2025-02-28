@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { bonusSchema } from "@/lib/validations/dashboard/hr/bonusSchema";
-import { useGetEmployeesMiniQuery } from "@/redux/services/dashboard/hr/employeeApi";
+import { useGetEmployeesQuery } from "@/redux/services/dashboard/hr/employeeApi";
 import { Form } from "@/components/ui/form";
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
@@ -21,7 +21,7 @@ export interface BonusesFormValues {
   amount: string;
   reason: string;
   type: string;
-  date: Date;
+  date: string;
 }
 
 const BonusesForm = ({ onSubmit, defaultValues }: BonusesFormProps) => {
@@ -32,13 +32,13 @@ const BonusesForm = ({ onSubmit, defaultValues }: BonusesFormProps) => {
       amount: "",
       reason: "",
       type: "bonus",
-      date: new Date(),
+      date: "",
     },
   });
 
   const globalTranslate = useTranslations();
   const t = useTranslations("hr.bonuses");
-  const { data: employees } = useGetEmployeesMiniQuery({});
+  const { data: employees } = useGetEmployeesQuery({});
 
   const employeesOptions =
     employees?.results?.map((employee: { id: number; name: string }) => ({
@@ -91,7 +91,10 @@ const BonusesForm = ({ onSubmit, defaultValues }: BonusesFormProps) => {
           </div>
         </section>
         <div className="flex justify-end gap-2 mt-5">
-          <Link href={`/dashboard/hr?tab=${t("hr.tabs.bonuses")}`} passHref>
+          <Link
+            href={`/dashboard/hr?tab=${globalTranslate("hr.tabs.bonuses")}`}
+            passHref
+          >
             <CustomButton
               text={globalTranslate("cancel")}
               className="text-white rounded-lg bg-secondary min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
