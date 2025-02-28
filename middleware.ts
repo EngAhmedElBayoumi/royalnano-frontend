@@ -7,11 +7,13 @@ const intlMiddleware = createMiddleware({
   locales: routing.locales, // Supported locales
   defaultLocale: routing.defaultLocale, // Default locale
 });
+
 // Define permission requirements for specific routes
 const permissionRoutes = {
   "/dashboard/inventory": "view_inventoryitem",
   "/dashboard/sales": "view_salesinvoice",
   "/dashboard/hr": "view_employee",
+  
   "/dashboard/clients": "view_customer",
   "/dashboard/branches": "view_branch",
   "/dashboard/website": "view_service",
@@ -82,13 +84,15 @@ export async function middleware(req: NextRequest) {
 export const config = {
   matcher: [
     "/",
-    "/(ar|en)/:path*", // Matches locale-specific routes
+    "/(ar|en)/:path*", 
+    // Matches locale-specific routes
     "/change-password",
     "/forget-password",
     "/login",
     "/otp-verification",
     "/register",
-    "/dashboard/:path*", // Matches "/dashboard" and everything inside it
+    "/dashboard/:path*", 
+    // Matches "/dashboard" and everything inside it
     "/profile",
     "/book-now",
   ],
