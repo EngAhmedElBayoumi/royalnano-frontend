@@ -1,13 +1,15 @@
 "use client";
-import { Form } from "@/components/ui/form";
+import { Link } from "@/i18n/routing";
+import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { bonusSchema } from "@/lib/validations/dashboard/hr/bonusSchema";
+import { useGetEmployeesMiniQuery } from "@/redux/services/dashboard/hr/employeeApi";
+import { Form } from "@/components/ui/form";
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
 import DatePicker from "@/components/formFields/DatePicker";
 import CustomSelect from "@/components/formFields/CustomSelect";
-import {Link} from '@/i18n/routing';
 
 interface BonusesFormProps {
   onSubmit: (data: BonusesFormValues) => Promise<void>;
@@ -15,11 +17,10 @@ interface BonusesFormProps {
 }
 
 export interface BonusesFormValues {
-  name: string;
-  branch_name: string;
-  rewards: string;
-  start: Date;
-  end: Date;
+  employee: number;
+  amount: string;
+  reason: string;
+  type: string;
   date: Date;
 }
 
@@ -27,19 +28,27 @@ const BonusesForm = ({ onSubmit, defaultValues }: BonusesFormProps) => {
   const form = useForm({
     resolver: zodResolver(bonusSchema),
     defaultValues: defaultValues || {
-      name: "",
-      branch_name: "",
-      rewards: "",
-      start: new Date(),
-      end: new Date(new Date().setDate(new Date().getDate() + 1)),
+      employee: 1,
+      amount: "",
+      reason: "",
+      type: "bonus",
       date: new Date(),
     },
   });
 
-  const branchOptions = [
-    { value: "Branch 1", label: "Branch 1" },
-    { value: "Branch 2", label: "Branch 2" },
-    { value: "Branch 3", label: "Branch 3" },
+  const globalTranslate = useTranslations();
+  const t = useTranslations("hr.bonuses");
+  const { data: employees } = useGetEmployeesMiniQuery({});
+
+  const employeesOptions =
+    employees?.results?.map((employee: { id: number; name: string }) => ({
+      value: String(employee.id),
+      label: employee.name,
+    })) || [];
+
+  const typeOptions = [
+    { value: "bonus", label: "Bonus" },
+    { value: "deduction", label: "Deduction" },
   ];
 
   return (
@@ -47,57 +56,49 @@ const BonusesForm = ({ onSubmit, defaultValues }: BonusesFormProps) => {
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <section className="min-h-[60vh]">
           <div className="grid sm:grid-cols-2 gap-x-4 gap-y-2 xl:gap-y-5 lg:gap-x-10">
+            <CustomSelect
+              control={form.control}
+              name="employee"
+              label={t("employee")}
+              placeholder={t("employee")}
+              options={employeesOptions}
+            />
             <TextInput
               control={form.control}
-              name="name"
-              label="Name"
-              placeholder="Name"
+              name="amount"
+              label={t("amount")}
+              placeholder={t("amount")}
+            />
+            <TextInput
+              control={form.control}
+              name="reason"
+              label={t("reason")}
+              placeholder={t("reason")}
             />
             <CustomSelect
               control={form.control}
-              name="branch_name"
-              label="Branch Name"
-              placeholder="Select Branch"
-              options={branchOptions}
-            />
-            <TextInput
-              control={form.control}
-              name="rewards"
-              label="Rewards"
-              placeholder="Rewards"
+              name="type"
+              label={t("type")}
+              placeholder={t("type")}
+              options={typeOptions}
             />
             <DatePicker
               control={form.control}
               name="date"
-              label="Date"
-              placeholder="Select Date"
-            />
-            <DatePicker
-              control={form.control}
-              name="start"
-              label="Start"
-              placeholder="Select Start Date"
-              disabledEndDate={form.watch("end")}
-            />
-            <DatePicker
-              control={form.control}
-              name="end"
-              label="End"
-              placeholder="Select End Date"
-              disabledStartDate={form.watch("start")}
+              label={t("date")}
+              placeholder={t("date")}
             />
           </div>
         </section>
         <div className="flex justify-end gap-2 mt-5">
-          <Link href="/dashboard/hr" passHref>
+          <Link href={`/dashboard/hr?tab=${t("hr.tabs.bonuses")}`} passHref>
             <CustomButton
-              text="Cancel"
+              text={globalTranslate("cancel")}
               className="text-white rounded-lg bg-secondary min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
             />
           </Link>
-
           <CustomButton
-            text="Save"
+            text={globalTranslate("save")}
             className="text-white rounded-lg min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
           />
         </div>
