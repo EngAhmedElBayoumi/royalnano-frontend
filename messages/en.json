@@ -109,6 +109,7 @@
       "salary": "Salary",
       "address": "Address",
       "branch": "Branch",
+      "department": "Department",
       "password": "Password",
       "isUser": "User",
       "noEmployeesDataFound": "No employees data found",

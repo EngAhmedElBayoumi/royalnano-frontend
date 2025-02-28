@@ -27,7 +27,9 @@ export interface EmployeeFormValues {
   address: string;
   branch: number;
   department: number;
-  permissions: Record<string, boolean>;
+  password: string;
+  is_user: boolean;
+  // permissions: Record<string, boolean>;
 }
 
 const EmployeeForm = ({ onSubmit, defaultValues }: EmployeeFormProps) => {
@@ -42,10 +44,13 @@ const EmployeeForm = ({ onSubmit, defaultValues }: EmployeeFormProps) => {
       address: "",
       branch: 1,
       department: 1,
-      permissions: {},
+      password: "",
+      is_user: false,
+      // permissions: {},
     },
   });
 
+  const globalTranslate = useTranslations();
   const t = useTranslations("hr.employees");
   const { data: branches } = useGetBranchesQuery({});
   const { data: departments } = useGetDepartmentsQuery({});
@@ -62,12 +67,12 @@ const EmployeeForm = ({ onSubmit, defaultValues }: EmployeeFormProps) => {
       label: department.name,
     })) || [];
 
-  const permissionOptions = [
-    "Add service",
-    "Edit service",
-    "Delete service",
-    "View service",
-  ];
+  // const permissionOptions = [
+  //   "Add service",
+  //   "Edit service",
+  //   "Delete service",
+  //   "View service",
+  // ];
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -75,37 +80,37 @@ const EmployeeForm = ({ onSubmit, defaultValues }: EmployeeFormProps) => {
           <TextInput
             control={form.control}
             name="name"
-            label="Name"
-            placeholder="Name"
+            label={t("name")}
+            placeholder={t("name")}
           />
           <TextInput
             control={form.control}
             name="email_address"
-            label="Email"
-            placeholder="Email"
+            label={t("emailAddress")}
+            placeholder={t("emailAddress")}
           />
           <PhoneInputField
             control={form.control}
             name="phone"
-            label="Phone Number"
+            label={t("phone")}
           />
           <TextInput
             control={form.control}
             name="job_title"
-            label="Job Title"
-            placeholder="Job Title"
+            label={t("jobTitle")}
+            placeholder={t("jobTitle")}
           />
           <TextInput
             control={form.control}
             name="salary"
-            label="Salary"
-            placeholder="Salary"
+            label={t("salary")}
+            placeholder={t("salary")}
           />
           <TextInput
             control={form.control}
             name="address"
-            label="Address"
-            placeholder="Address"
+            label={t("address")}
+            placeholder={t("address")}
           />
           <CustomSelect
             control={form.control}
@@ -121,8 +126,20 @@ const EmployeeForm = ({ onSubmit, defaultValues }: EmployeeFormProps) => {
             placeholder={t("department")}
             options={departmentsOptions}
           />
+          <TextInput
+            control={form.control}
+            name="password"
+            label={t("password")}
+            placeholder={t("password")}
+            type="password"
+          />
+          <SwitchField
+            control={form.control}
+            name="is_user"
+            label={t("isUser")}
+          />
         </section>
-        <section className="mt-5">
+        {/* <section className="mt-5">
           <h3 className="font-bold text-primary">Permission</h3>
           <div className="grid grid-cols-2 gap-4 mt-2 border border-gray rounded-md xl:rounded-10 p-5 xl:px-6 xl:py-5">
             {permissionOptions.map((permission) => (
@@ -134,17 +151,17 @@ const EmployeeForm = ({ onSubmit, defaultValues }: EmployeeFormProps) => {
               />
             ))}
           </div>
-        </section>
+        </section> */}
         <section className="flex justify-end gap-2 mt-5">
           <Link href="/dashboard/hr" passHref>
             <CustomButton
-              text="Cancel"
+              text={globalTranslate("cancel")}
               className="text-white rounded-lg bg-secondary min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
             />
           </Link>
 
           <CustomButton
-            text="Save"
+            text={globalTranslate("save")}
             className="text-white rounded-lg min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
           />
         </section>
