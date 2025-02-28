@@ -11,7 +11,6 @@ export const employeeApi = createApi({
         params: { search, ordering, page, page_size },
       }),
     }),
-
     getEmployeeById: builder.query({
       query: (id) => `hr/employee/${id}/`,
     }),

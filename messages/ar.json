@@ -110,6 +110,7 @@
       "address": "العنوان",
       "branch": "الفرع",
       "isUser": "مستخدم",
+      "password": "كلمة المرور",
       "noEmployeesDataFound": "لا توجد بيانات للموظفين",
       "addEmployees": "إضافة موظف"
     },

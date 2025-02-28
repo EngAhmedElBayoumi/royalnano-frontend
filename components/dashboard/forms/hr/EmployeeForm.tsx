@@ -1,13 +1,15 @@
 "use client";
 import { Link } from "@/i18n/routing";
-import { Form } from "@/components/ui/form";
+import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { employeeSchema } from "@/lib/validations/dashboard/hr/employeeSchema";
+import { useGetBranchesQuery } from "@/redux/services/dashboard/branchesApi";
+import { Form } from "@/components/ui/form";
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
 import PhoneInputField from "@/components/formFields/PhoneInputField";
-import DatePicker from "@/components/formFields/DatePicker";
+import CustomSelect from "@/components/formFields/CustomSelect";
 import SwitchField from "@/components/formFields/Switch";
 
 interface EmployeeFormProps {
@@ -17,12 +19,12 @@ interface EmployeeFormProps {
 
 export interface EmployeeFormValues {
   name: string;
-  phone_number: string;
-  address: string;
+  email_address: string;
+  phone: string;
   job_title: string;
-  email: string;
-  date: Date;
   salary: string;
+  address: string;
+  branch: number;
   permissions: Record<string, boolean>;
 }
 
@@ -31,16 +33,18 @@ const EmployeeForm = ({ onSubmit, defaultValues }: EmployeeFormProps) => {
     resolver: zodResolver(employeeSchema),
     defaultValues: defaultValues || {
       name: "",
-      phone_number: "",
-      address: "",
+      email_address: "",
+      phone: "",
       job_title: "",
-      email: "",
-      date: new Date(),
       salary: "",
+      address: "",
+      branch: 1,
       permissions: {},
     },
   });
 
+  const t = useTranslations("hr.employees");
+  const { data: branches } = useGetBranchesQuery({});
   const permissionOptions = [
     "Add service",
     "Edit service",
@@ -48,6 +52,11 @@ const EmployeeForm = ({ onSubmit, defaultValues }: EmployeeFormProps) => {
     "View service",
   ];
 
+  const branchesOptions =
+    branches?.results?.map((branch: { id: number; name: string }) => ({
+      value: String(branch.id),
+      label: branch.name,
+    })) || [];
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -58,16 +67,16 @@ const EmployeeForm = ({ onSubmit, defaultValues }: EmployeeFormProps) => {
             label="Name"
             placeholder="Name"
           />
-          <PhoneInputField
-            control={form.control}
-            name="phone_number"
-            label="Phone Number"
-          />
           <TextInput
             control={form.control}
-            name="address"
-            label="Address"
-            placeholder="Address"
+            name="email_address"
+            label="Email"
+            placeholder="Email"
+          />
+          <PhoneInputField
+            control={form.control}
+            name="phone"
+            label="Phone Number"
           />
           <TextInput
             control={form.control}
@@ -75,23 +84,24 @@ const EmployeeForm = ({ onSubmit, defaultValues }: EmployeeFormProps) => {
             label="Job Title"
             placeholder="Job Title"
           />
-          <DatePicker
-            control={form.control}
-            name="date"
-            label="Date"
-            placeholder="Select Date"
-          />
-          <TextInput
-            control={form.control}
-            name="email"
-            label="Email"
-            placeholder="Email"
-          />
           <TextInput
             control={form.control}
             name="salary"
             label="Salary"
             placeholder="Salary"
+          />
+          <TextInput
+            control={form.control}
+            name="address"
+            label="Address"
+            placeholder="Address"
+          />
+          <CustomSelect
+            control={form.control}
+            name="branch"
+            label={t("branch")}
+            placeholder={t("branch")}
+            options={branchesOptions}
           />
         </section>
         <section className="mt-5">
