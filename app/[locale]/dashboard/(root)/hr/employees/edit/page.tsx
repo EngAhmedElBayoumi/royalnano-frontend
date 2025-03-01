@@ -27,8 +27,8 @@ export default function EditEmployee() {
   const defaultValues: EmployeeFormValues = data && {
     ...data,
     salary: Number(data.salary),
-    branch: data?.branch?.id,
-    department: data?.department?.id || 1,
+    branch: String(data?.branch?.id),
+    department: String(data?.department?.id) || "",
     password: "",
   };
 

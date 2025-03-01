@@ -122,7 +122,7 @@ const EmployeeForm = ({ onSubmit, defaultValues }: EmployeeFormProps) => {
           />
           <CustomSelect
             control={form.control}
-            name="branch"
+            name="department"
             label={t("department")}
             placeholder={t("department")}
             options={departmentsOptions}
