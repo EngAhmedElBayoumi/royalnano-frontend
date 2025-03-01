@@ -1,24 +1,53 @@
 "use client";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
+import { useCreateEmployeeMutation } from "@/redux/services/dashboard/hr/employeeApi";
+import IconWithTitle from "@/components/dashboard/IconWithTitle";
+import CustomModal from "@/components/modals/CustomModal";
 import EmployeeForm, {
   EmployeeFormValues,
 } from "@/components/dashboard/forms/hr/EmployeeForm";
-import IconWithTitle from "@/components/dashboard/IconWithTitle";
-// import { useCreateEmployeeMutation } from "@/redux/services/EmployeeApi";
 
 export default function CreateEmployee() {
-  // const [createEmployee] = useCreateEmployeeMutation();
+  const router = useRouter();
+  const t = useTranslations("hr.employees");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [createEmployee] = useCreateEmployeeMutation();
 
+  const handleModalChange = (isOpen: boolean) => {
+    setIsModalOpen(isOpen);
+  };
   const handleSubmit = async (data: EmployeeFormValues) => {
-    console.log(data);
-    // await createEmployee(data);
+    try {
+      const payload = {
+        ...data,
+        branch: Number(data.branch),
+        department: Number(data.department),
+      };
+
+      const response = await createEmployee(payload);
+
+      if (response.error) throw new Error("creation failed");
+      else router.push("/dashboard/hr");
+    } catch (error) {
+      setIsModalOpen(true);
+      console.log(error);
+    }
   };
 
   return (
     <main className="mx-7 my-5">
+      <CustomModal
+        isOpen={isModalOpen}
+        onChange={handleModalChange}
+        title="Error!"
+        description="Your Request wasn't processed successfully.."
+      />
       <div className="flex">
         <IconWithTitle
           imageSrc="/assets/icons/add.svg"
-          title="Add Employee"
+          title={t("addEmployees")}
           backgroundColor="#F8F7F7"
           textColor="primary"
         />

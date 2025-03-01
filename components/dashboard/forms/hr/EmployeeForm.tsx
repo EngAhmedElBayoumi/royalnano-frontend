@@ -23,7 +23,7 @@ export interface EmployeeFormValues {
   email_address: string;
   phone: string;
   job_title: string;
-  salary: string;
+  salary: number;
   address: string;
   branch: number;
   department: number;
@@ -40,7 +40,7 @@ const EmployeeForm = ({ onSubmit, defaultValues }: EmployeeFormProps) => {
       email_address: "",
       phone: "",
       job_title: "",
-      salary: "",
+      salary: 0,
       address: "",
       branch: 1,
       department: 1,
@@ -105,6 +105,7 @@ const EmployeeForm = ({ onSubmit, defaultValues }: EmployeeFormProps) => {
             name="salary"
             label={t("salary")}
             placeholder={t("salary")}
+            type="number"
           />
           <TextInput
             control={form.control}

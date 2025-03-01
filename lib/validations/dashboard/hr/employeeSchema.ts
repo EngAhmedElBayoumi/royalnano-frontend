@@ -9,7 +9,7 @@ export const employeeSchema = z.object({
     .nonempty("Phone number is required")
     .regex(phoneRegex, "Invalid phone number"),
   job_title: z.string().nonempty("Job title is required"),
-  salary: z.string().nonempty("Salary is required"),
+  salary: z.number().min(1, "Salary must be a positive number"),
   address: z.string().nonempty("Address is required"),
   branch: z.coerce.number().min(1, "Branch must be selected"),
   department: z.coerce.number().min(1, "Department must be selected"),
