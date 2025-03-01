@@ -36,7 +36,7 @@ export default function EditBranchs() {
       };
 
       const response = await updateBranch({ id, data: payload });
-      if (response.error) throw new Error("creation failed");
+      if (response.error) throw new Error("edit failed");
       else router.push("/dashboard/branches");
     } catch (error) {
       setIsModalOpen(true);

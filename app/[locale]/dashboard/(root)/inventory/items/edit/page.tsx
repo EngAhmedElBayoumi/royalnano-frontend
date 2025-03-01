@@ -7,26 +7,27 @@ import {
   useUpdateItemMutation,
 } from "@/redux/services/dashboard/itemsApi";
 import IconWithTitle from "@/components/dashboard/IconWithTitle";
-import ItemForm, {
-  ItemFormValues,
-} from "@/components/dashboard/forms/inventory/ItemForm";
 import CustomModal from "@/components/modals/CustomModal";
 import FormSkelton from "@/components/dashboard/skelton/FormSkelton";
 import LoadingError from "@/components/dashboard/LoadingError";
+import ItemForm, {
+  ItemFormValues,
+} from "@/components/dashboard/forms/inventory/ItemForm";
 
 export default function EditItem() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
 
+  const { data, isLoading, error } = useGetItemByIdQuery(id);
   const [updateItem] = useUpdateItemMutation();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const t = useTranslations("Inventory.InventoryItem");
 
-  const { data, isLoading, error } = useGetItemByIdQuery(id);
-
   const defaultValues: ItemFormValues = data && {
     ...data,
+    branch: data.branch.id,
+    supplier: data.supplier.id,
     purchase_price: Number(data.purchase_price),
     selling_price: Number(data.selling_price),
   };
@@ -45,7 +46,7 @@ export default function EditItem() {
 
       const response = await updateItem({ id, data: payload });
 
-      if (response.error) throw new Error("creation failed");
+      if (response.error) throw new Error("edit failed");
       else router.push("/dashboard/inventory");
     } catch (error) {
       setIsModalOpen(true);
