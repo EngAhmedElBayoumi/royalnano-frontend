@@ -26,6 +26,8 @@ export default function EditItem() {
 
   const defaultValues: ItemFormValues = data && {
     ...data,
+    branch: data.branch.id,
+    supplier: data.supplier.id,
     purchase_price: Number(data.purchase_price),
     selling_price: Number(data.selling_price),
   };
