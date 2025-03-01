@@ -109,7 +109,9 @@
       "salary": "الراتب",
       "address": "العنوان",
       "branch": "الفرع",
+      "department": "القسم",
       "isUser": "مستخدم",
+      "password": "كلمة المرور",
       "noEmployeesDataFound": "لا توجد بيانات للموظفين",
       "addEmployees": "إضافة موظف"
     },

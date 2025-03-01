@@ -3,14 +3,17 @@ import { phoneRegex } from "@/lib/utils/phoneRegex";
 
 export const employeeSchema = z.object({
   name: z.string().nonempty("Name is required"),
-  phone_number: z
+  email_address: z.string().email("Invalid email address"),
+  phone: z
     .string()
     .nonempty("Phone number is required")
     .regex(phoneRegex, "Invalid phone number"),
-  address: z.string().nonempty("Address is required"),
   job_title: z.string().nonempty("Job title is required"),
-  email: z.string().email("Invalid email address"),
-  date: z.date({ required_error: "Date is required" }),
-  salary: z.string().nonempty("Salary is required"),
-  permissions: z.array(z.string()).optional(),
+  salary: z.number().min(1, "Salary must be a positive number"),
+  address: z.string().nonempty("Address is required"),
+  branch: z.coerce.number().min(1, "Branch must be selected"),
+  department: z.coerce.number().min(1, "Department must be selected"),
+  password: z.string().nonempty("Password is required"),
+  is_user: z.boolean(),
+  // permissions: z.array(z.string()).optional(),
 });
