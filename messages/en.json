@@ -113,7 +113,8 @@
       "password": "Password",
       "isUser": "User",
       "noEmployeesDataFound": "No employees data found",
-      "addEmployees": "Add Employee"
+      "addEmployee": "Add Employee",
+      "editEmployee": "Edit Employee"
     },
     "bonuses": {
       "employee": "Employee",

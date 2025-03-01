@@ -25,8 +25,8 @@ export interface EmployeeFormValues {
   job_title: string;
   salary: number;
   address: string;
-  branch: number;
-  department: number;
+  branch: string;
+  department: string;
   password: string;
   is_user: boolean;
   // permissions: Record<string, boolean>;
@@ -42,8 +42,8 @@ const EmployeeForm = ({ onSubmit, defaultValues }: EmployeeFormProps) => {
       job_title: "",
       salary: 0,
       address: "",
-      branch: 1,
-      department: 1,
+      branch: "",
+      department: "",
       password: "",
       is_user: false,
       // permissions: {},

@@ -75,7 +75,7 @@ export default function Employees() {
       rows={10}
       columns={columns}
       cardData={cardsData}
-      buttonText={t("addEmployees")}
+      buttonText={t("addEmployee")}
       ButtonEvent={handleClick}
       onPageChange={handlePageChange}
       totalRecords={data.count}

@@ -47,7 +47,7 @@ export default function CreateEmployee() {
       <div className="flex">
         <IconWithTitle
           imageSrc="/assets/icons/add.svg"
-          title={t("addEmployees")}
+          title={t("addEmployee")}
           backgroundColor="#F8F7F7"
           textColor="primary"
         />

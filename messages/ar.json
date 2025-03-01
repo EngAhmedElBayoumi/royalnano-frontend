@@ -113,7 +113,8 @@
       "isUser": "مستخدم",
       "password": "كلمة المرور",
       "noEmployeesDataFound": "لا توجد بيانات للموظفين",
-      "addEmployees": "إضافة موظف"
+      "addEmployee": "إضافة موظف",
+      "editEmployee": "تعديل الموظف"
     },
     "bonuses": {
       "employee": "الموظف",
