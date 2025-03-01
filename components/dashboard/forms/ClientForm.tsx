@@ -55,65 +55,76 @@ const ClientForm = ({ onSubmit, defaultValues }: ClientFormProps) => {
             label="Client Name"
             placeholder="Client Name"
           />
+
           <TextInput
             control={form.control}
             name="email"
             label="Email"
             placeholder="Email"
           />
+
           <PhoneInputField
             control={form.control}
             name="phone_number"
             label="Phone Number"
           />
+
           <TextInput
             control={form.control}
             name="facility_name"
             label="Facility Name"
             placeholder="Facility Name"
           />
+
           <TextInput
             control={form.control}
             name="tax_number"
             label="Tax Number"
             placeholder="Tax Number"
           />
+
           <TextInput
             control={form.control}
             name="address"
             label="Address"
             placeholder="Address"
           />
+
           <TextInput
             control={form.control}
             name="city"
             label="City"
             placeholder="City"
           />
+
           <TextInput
             control={form.control}
             name="area"
             label="Area"
             placeholder="Area"
           />
+
           <TextInput
             control={form.control}
             name="building_number"
             label="Building Number"
             placeholder="Building Number"
           />
+
           <TextInput
             control={form.control}
             name="website"
             label="Website"
             placeholder="Website"
           />
+
           <TextInput
             control={form.control}
             name="condition"
             label="Condition"
             placeholder="Condition"
           />
+
         </div>
         <div className="flex justify-end gap-2">
           <Link href="/dashboard/clients" passHref>
@@ -121,6 +132,7 @@ const ClientForm = ({ onSubmit, defaultValues }: ClientFormProps) => {
               text="Cancel"
               className="text-white rounded-lg bg-secondary min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
             />
+            
           </Link>
 
           <CustomButton

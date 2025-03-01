@@ -22,17 +22,20 @@ const permissionRoutes = {
 export async function middleware(req: NextRequest) {
   // Apply the next-intl middleware first
   const intlResponse = intlMiddleware(req);
-
+  
   // Your custom authentication logic
   const accessToken = req.cookies.get("accessToken")?.value;
-
+  
   // Get user permissions from cookie (stored during login)
   const permissionsCookie = req.cookies.get("userPermissions")?.value;
   let userPermissions: string[] = [];
-
+  
   if (permissionsCookie) {
     try {
       userPermissions = JSON.parse(decodeURIComponent(permissionsCookie));
+      console.log("User Permissions:", userPermissions);
+      console.log("User Permissions Cookie:", userPermissions);
+
     } catch (e) {
       console.error("Failed to parse permissions cookie:", e);
     }
@@ -45,10 +48,10 @@ export async function middleware(req: NextRequest) {
     "/otp-verification",
     "/register",
   ];
-
+  
   // Define the protected routes
   const protectedRoutes = ["/dashboard", "/profile", "/book-now"];
-
+  
   // Check if the user is authenticated using the access token
   if (accessToken) {
     // Redirect to home page if trying to access public routes while logged in
@@ -62,7 +65,7 @@ export async function middleware(req: NextRequest) {
       if (req.nextUrl.pathname.includes(route)) {
         // Check if user has at least one of the required permissions
         const hasPermission = userPermissions.includes(requiredPermissions);
-
+        
         if (!hasPermission) {
           // Redirect to unauthorized page or dashboard
           return NextResponse.redirect(new URL("/en/forbidden", req.url));
@@ -75,7 +78,7 @@ export async function middleware(req: NextRequest) {
       return NextResponse.redirect(new URL("/login", req.url));
     }
   }
-
+  
   // Allow the request to proceed if authenticated and accessing other routes
   return intlResponse || NextResponse.next();
 }
@@ -97,3 +100,4 @@ export const config = {
     "/book-now",
   ],
 };
+
