@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 import {
   useGetBranchByIdQuery,
   useUpdateBranchMutation,
-} from "@/redux/services/dashboard/branchesApi";
+} from "@/redux/services/dashboard/inventory/branchesApi";
 import IconWithTitle from "@/components/dashboard/IconWithTitle";
 import { BranchFormValues } from "@/components/dashboard/forms/BranchForm";
 import BranchForm from "@/components/dashboard/forms/BranchForm";

@@ -4,7 +4,7 @@ import CategoryForm, {
 } from "@/components/dashboard/forms/inventory/CategoryForm";
 import IconWithTitle from "@/components/dashboard/IconWithTitle";
 import CustomModal from "@/components/modals/CustomModal";
-import { useCreateCategoryMutation } from "@/redux/services/dashboard/itemCategoryApi";
+import { useCreateCategoryMutation } from "@/redux/services/dashboard/inventory/itemCategoryApi";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useTranslations } from "next-intl";

@@ -1,5 +1,5 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
-import { baseQuery } from "../common";
+import { baseQuery } from "../../common";
 
 export const itemCategoryApi = createApi({
   reducerPath: "itemCategoryApi",
@@ -10,7 +10,6 @@ export const itemCategoryApi = createApi({
         url: "inventory/item-category",
         method: "GET",
         params: { search, ordering, page, page_size },
-
       }),
     }),
 
@@ -31,9 +30,12 @@ export const itemCategoryApi = createApi({
         body: data,
       }),
     }),
-
-    
   }),
 });
 
-export const { useGetItemCategoryQuery,useCreateCategoryMutation, useGetCategoryByIdQuery, useUpdateCategoryMutation } = itemCategoryApi;
+export const {
+  useGetItemCategoryQuery,
+  useCreateCategoryMutation,
+  useGetCategoryByIdQuery,
+  useUpdateCategoryMutation,
+} = itemCategoryApi;

@@ -1,7 +1,7 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { useGetMovementByIdQuery } from "@/redux/services/dashboard/movementApi";
+import { useGetMovementByIdQuery } from "@/redux/services/dashboard/inventory/movementApi";
 import MovementForm, {
   MovementFormValues,
 } from "@/components/dashboard/forms/inventory/MovementForm";

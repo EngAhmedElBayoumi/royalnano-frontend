@@ -4,7 +4,7 @@ import PreorderForm, {
 } from "@/components/dashboard/forms/inventory/PreorderForm";
 import IconWithTitle from "@/components/dashboard/IconWithTitle";
 import CustomModal from "@/components/modals/CustomModal";
-import { useCreatePreorderMutation } from "@/redux/services/dashboard/preorderApi";
+import { useCreatePreorderMutation } from "@/redux/services/dashboard/inventory/preorderApi";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useTranslations } from "next-intl";

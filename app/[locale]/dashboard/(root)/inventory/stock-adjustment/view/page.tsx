@@ -1,7 +1,7 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { useGetStockAdjustmentByIdQuery } from "@/redux/services/dashboard/stockApi";
+import { useGetStockAdjustmentByIdQuery } from "@/redux/services/dashboard/inventory/stockApi";
 import StockAdjustmentForm, {
   StockAdjustmentFormValues,
 } from "@/components/dashboard/forms/inventory/StockAdjustmentForm";

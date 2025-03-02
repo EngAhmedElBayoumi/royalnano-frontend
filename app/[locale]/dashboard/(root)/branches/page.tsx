@@ -1,7 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import CustomTable from "@/components/dashboard/tables/CustomTable";
-import { useGetBranchesQuery } from "@/redux/services/dashboard/branchesApi";
+import { useGetBranchesQuery } from "@/redux/services/dashboard/inventory/branchesApi";
 import { useTranslations } from "next-intl";
 import TableSkelton from "@/components/dashboard/skelton/TableSkelton";
 import CardsSkelton from "@/components/dashboard/skelton/CardsSkelton";

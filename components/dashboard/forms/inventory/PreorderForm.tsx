@@ -5,7 +5,7 @@ import { Form } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { preorderSchema } from "@/lib/validations/dashboard/inventory/preorderSchema";
-import { useGetItemsQuery } from "@/redux/services/dashboard/itemsApi";
+import { useGetItemsQuery } from "@/redux/services/dashboard/inventory/itemsApi";
 
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";

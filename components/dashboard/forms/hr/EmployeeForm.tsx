@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { employeeSchema } from "@/lib/validations/dashboard/hr/employeeSchema";
-import { useGetBranchesQuery } from "@/redux/services/dashboard/branchesApi";
+import { useGetBranchesQuery } from "@/redux/services/dashboard/inventory/branchesApi";
 import { useGetDepartmentsQuery } from "@/redux/services/dashboard/hr/departmentApi";
 import { Form } from "@/components/ui/form";
 import CustomButton from "@/components/formFields/CustomButton";

@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 import {
   useGetItemByIdQuery,
   useUpdateItemMutation,
-} from "@/redux/services/dashboard/itemsApi";
+} from "@/redux/services/dashboard/inventory/itemsApi";
 import IconWithTitle from "@/components/dashboard/IconWithTitle";
 import CustomModal from "@/components/modals/CustomModal";
 import FormSkelton from "@/components/dashboard/skelton/FormSkelton";
