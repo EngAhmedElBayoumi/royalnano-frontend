@@ -7,7 +7,6 @@ import { useRouter } from "@/i18n/routing";
 import { useState } from "react";
 import { useGetSalesCustomerQuery } from "@/redux/services/dashboard/sales/salesCustomerApi";
 
-// Define the interface for the API response
 interface Customer {
   id: number;
   customer_name: string;
@@ -60,7 +59,6 @@ export default function SalesCustomer() {
 
   console.log(salesCustomers);
 
-  // Safely transform data, handling cases where `results` is undefined
   const transformedData =
     salesCustomers?.results?.map((customer: Customer) => ({
       id: customer.id,
@@ -103,7 +101,7 @@ export default function SalesCustomer() {
   ];
 
   const handleClick = () => {
-    router.push("/dashboard/sales/sales-invoices/create");
+    router.push("/dashboard/sales/sales-customer/create");
   };
 
   return (
@@ -126,7 +124,7 @@ export default function SalesCustomer() {
       ) : (
         <CustomTable
           emptyMessage="No sales customers data found"
-          editRoute="/dashboard/inventory/sales-customer/edit/"
+          editRoute="/dashboard/sales/sales-customer/edit/"
           data={transformedData}
           rows={10}
           columns={columns}
