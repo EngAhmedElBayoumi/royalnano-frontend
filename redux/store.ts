@@ -29,6 +29,7 @@ import { salesCustomerApi } from "./services/dashboard/sales/salesCustomerApi";
 import { salesInvoiceApi } from "./services/dashboard/sales/salesInvoiceApi";
 import { salesOrderApi } from "./services/dashboard/sales/salesOrderApi";
 import { departmentApi } from "./services/dashboard/hr/departmentApi";
+import { supplierApi } from "./services/dashboard/purchase/supplierApi";
 
 // Create separate configs for each reducer
 const authPersistConfig = {
@@ -74,6 +75,7 @@ export const store = configureStore({
     [employeeApi.reducerPath]: employeeApi.reducer,
     [bonusesApi.reducerPath]: bonusesApi.reducer,
     [departmentApi.reducerPath]: departmentApi.reducer,
+    [supplierApi.reducerPath]: supplierApi.reducer,
     auth: persistedAuthReducer,
     profile: persistedProfileReducer,
   },
@@ -107,7 +109,8 @@ export const store = configureStore({
       .concat(salesOrderApi.middleware)
       .concat(employeeApi.middleware)
       .concat(bonusesApi.middleware)
-      .concat(departmentApi.middleware);
+      .concat(departmentApi.middleware)
+      .concat(supplierApi.middleware);
   },
 });
 

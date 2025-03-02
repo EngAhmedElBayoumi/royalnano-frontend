@@ -45,6 +45,7 @@ export const supplierApi = createApi({
 
 export const {
   useGetSuppliersQuery,
+  useGetSuppliersMiniQuery,
   useGetSupplierByIdQuery,
   useCreateSupplierMutation,
   useUpdateSupplierMutation,

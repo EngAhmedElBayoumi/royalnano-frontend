@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { itemSchema } from "@/lib/validations/dashboard/inventory/itemSchema";
 import { useGetItemCategoryQuery } from "@/redux/services/dashboard/inventory/itemCategoryApi";
 import { useGetBranchesQuery } from "@/redux/services/dashboard/inventory/branchesApi";
+import { useGetSuppliersMiniQuery } from "@/redux/services/dashboard/purchase/supplierApi";
 import { Form } from "@/components/ui/form";
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
@@ -55,6 +56,7 @@ const ItemForm = ({ onSubmit, defaultValues }: ItemFormProps) => {
   const t = useTranslations("Inventory.InventoryItem");
   const { data: categories } = useGetItemCategoryQuery({});
   const { data: branches } = useGetBranchesQuery({});
+  const { data: suppliers } = useGetSuppliersMiniQuery({});
 
   const categoriesOptions =
     categories?.map((category: Category) => ({
@@ -73,10 +75,13 @@ const ItemForm = ({ onSubmit, defaultValues }: ItemFormProps) => {
       label: branch.name,
     })) || [];
 
-  const suppliersOptions = [
-    { value: "1", label: "October" },
-    { value: "2", label: "Zagazig" },
-  ];
+  const suppliersOptions =
+    suppliers?.results?.map(
+      (supplier: { id: number; supplier_name: string }) => ({
+        value: String(supplier.id),
+        label: supplier.supplier_name,
+      })
+    ) || [];
 
   return (
     <Form {...form}>
