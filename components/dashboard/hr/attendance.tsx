@@ -1,184 +1,53 @@
 "use client";
-import CustomTable from "@/components/dashboard/tables/CustomTable";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
+import { useGetAttendanceQuery } from "@/redux/services/dashboard/hr/attendanceApi";
+import CustomTable from "@/components/dashboard/tables/CustomTable";
+import TableSkelton from "@/components/dashboard/skelton/TableSkelton";
+import CardsSkelton from "@/components/dashboard/skelton/CardsSkelton";
+import LoadingError from "@/components/dashboard/LoadingError";
+
+interface Attendance {
+  employee: {
+    name: string;
+  };
+  branch: {
+    name: string;
+  };
+  date: string;
+  check_in: string;
+  check_out: string;
+}
 
 export default function Attendance() {
-    const [page, setPage] = useState(1);
-    const handlePageChange = (newPage: number) => {
-      setPage(newPage);
-    };
   const router = useRouter();
+  const t = useTranslations("hr.attendance");
+  const [page, setPage] = useState(1);
 
+  const {
+    data = { results: [] },
+    isLoading,
+    error,
+  } = useGetAttendanceQuery({
+    search: "",
+    ordering: "id",
+    page,
+    page_size: 10,
+  });
+
+  // Transform attendanceData to only include employee, branch name
+  const transformedData = data.results.map((attendance: Attendance) => ({
+    ...attendance,
+    employee: attendance.employee.name,
+    branch: attendance.branch.name,
+  }));
   const columns = [
-    { field: "name", header: "Name" },
-    { field: "country", header: "Country" },
-    { field: "representative", header: "Representative" },
-    { field: "status", header: "Status" },
-    { field: "verified", header: "Verified" },
-  ];
-
-  const yourCustomerData = [
-    {
-      id: 1,
-      name: "John Doe",
-      country: "USA",
-      status: "qualified",
-      verified: true,
-      representative: "Amy Elsner",
-    },
-    {
-      id: 2,
-      name: "Jane Smith",
-      country: "Canada",
-      status: "unqualified",
-      verified: false,
-      representative: "Anna Fali",
-    },
-    {
-      id: 3,
-      name: "Robert Brown",
-      country: "USA",
-      status: "qualified",
-      verified: true,
-      representative: "James Smith",
-    },
-    {
-      id: 4,
-      name: "Emily Davis",
-      country: "Canada",
-      status: "unqualified",
-      verified: true,
-      representative: "Sarah Johnson",
-    },
-    {
-      id: 5,
-      name: "Michael Johnson",
-      country: "USA",
-      status: "qualified",
-      verified: false,
-      representative: "Chris Lee",
-    },
-    {
-      id: 6,
-      name: "Lisa Williams",
-      country: "Australia",
-      status: "unqualified",
-      verified: true,
-      representative: "Laura Taylor",
-    },
-    {
-      id: 7,
-      name: "David Miller",
-      country: "UK",
-      status: "qualified",
-      verified: true,
-      representative: "Rebecca Green",
-    },
-    {
-      id: 8,
-      name: "Sarah Wilson",
-      country: "USA",
-      status: "unqualified",
-      verified: false,
-      representative: "John Walker",
-    },
-    {
-      id: 9,
-      name: "James Moore",
-      country: "Canada",
-      status: "qualified",
-      verified: false,
-      representative: "Grace Harris",
-    },
-    {
-      id: 10,
-      name: "Karen Thomas",
-      country: "Australia",
-      status: "unqualified",
-      verified: true,
-      representative: "Danielle Brown",
-    },
-    {
-      id: 11,
-      name: "Steven Taylor",
-      country: "USA",
-      status: "qualified",
-      verified: true,
-      representative: "Michael King",
-    },
-    {
-      id: 12,
-      name: "Mary Anderson",
-      country: "UK",
-      status: "unqualified",
-      verified: true,
-      representative: "Sophia Scott",
-    },
-    {
-      id: 13,
-      name: "Paul Jackson",
-      country: "USA",
-      status: "qualified",
-      verified: false,
-      representative: "David Adams",
-    },
-    {
-      id: 14,
-      name: "Anna Harris",
-      country: "Canada",
-      status: "unqualified",
-      verified: true,
-      representative: "Jennifer Clark",
-    },
-    {
-      id: 15,
-      name: "George Lee",
-      country: "USA",
-      status: "qualified",
-      verified: true,
-      representative: "Ethan Martin",
-    },
-    {
-      id: 16,
-      name: "Deborah Robinson",
-      country: "Australia",
-      status: "unqualified",
-      verified: false,
-      representative: "Andrew Lewis",
-    },
-    {
-      id: 17,
-      name: "Christopher Walker",
-      country: "Canada",
-      status: "qualified",
-      verified: true,
-      representative: "Jessica Young",
-    },
-    {
-      id: 18,
-      name: "Patricia Hall",
-      country: "UK",
-      status: "unqualified",
-      verified: true,
-      representative: "William King",
-    },
-    {
-      id: 19,
-      name: "Daniel Allen",
-      country: "USA",
-      status: "qualified",
-      verified: false,
-      representative: "Megan Scott",
-    },
-    {
-      id: 20,
-      name: "Joshua Clark",
-      country: "Canada",
-      status: "unqualified",
-      verified: true,
-      representative: "Henry Walker",
-    },
+    { field: "employee", header: t("employee") },
+    { field: "branch", header: t("branch") },
+    { field: "date", header: t("date") },
+    { field: "check_in", header: t("attendance") },
+    { field: "check_out", header: t("departure") },
   ];
 
   const cardsData = [
@@ -188,26 +57,33 @@ export default function Attendance() {
     { title: "Failed", num: 48 },
     { title: "Paid", num: 48 },
   ];
+
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage);
+  };
   const handleClick = () => {
     router.push("/dashboard/hr/attendance/create");
   };
-  return (
-    <>
-      <div className="px-6 pb-25  ">
-        <CustomTable
-                emptyMessage="no attendance data found"
 
-          editRoute="/dashboard/hr/attendance/edit/"
-          data={yourCustomerData}
-          rows={10}
-          columns={columns}
-          cardData={cardsData}
-          buttonText="Add Attendance"
-          ButtonEvent={handleClick}
-          onPageChange={handlePageChange}
-          totalRecords={yourCustomerData?.length || 0} 
-        />
-      </div>
+  return isLoading ? (
+    <>
+      <CardsSkelton />
+      <TableSkelton />
     </>
+  ) : error ? (
+    <LoadingError />
+  ) : (
+    <CustomTable
+      emptyMessage={t("noAttendanceDataFound")}
+      editRoute="/dashboard/hr/attendance/edit/"
+      data={transformedData}
+      rows={10}
+      columns={columns}
+      cardData={cardsData}
+      buttonText={t("addAttendance")}
+      ButtonEvent={handleClick}
+      onPageChange={handlePageChange}
+      totalRecords={data.count}
+    />
   );
 }
