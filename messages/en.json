@@ -123,7 +123,18 @@
       "type": "Type",
       "date": "Date",
       "addBonus": "Add Bonus or Deduction",
+      "editBonus": "Edit Bonus or Deduction",
       "noBonusesDataFound": "No Bonuses or Deductions data found"
+    },
+    "attendance": {
+      "employee": "Employee",
+      "branch": "Branch",
+      "location": "Location",
+      "attendance": "Attendance",
+      "departure": "Departure",
+      "addAttendance": "Add Attendance",
+      "editAttendance": "Edit Attendance",
+      "noAttendanceDataFound": "No Attendance data found"
     }
   },
   "Sales": {

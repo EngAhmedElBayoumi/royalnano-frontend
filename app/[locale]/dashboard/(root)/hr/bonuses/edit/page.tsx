@@ -59,7 +59,7 @@ export default function EditBonus() {
       <div className="flex">
         <IconWithTitle
           imageSrc="/assets/icons/edit.svg"
-          title="Edit Bonuses"
+          title={t("bonuses.editBonus")}
           backgroundColor="#F8F7F7"
           textColor="primary"
         />
