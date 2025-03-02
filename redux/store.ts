@@ -29,6 +29,7 @@ import { salesCustomerApi } from "./services/dashboard/sales/salesCustomerApi";
 import { salesInvoiceApi } from "./services/dashboard/sales/salesInvoiceApi";
 import { salesOrderApi } from "./services/dashboard/sales/salesOrderApi";
 import { departmentApi } from "./services/dashboard/hr/departmentApi";
+import { attendanceApi } from "./services/dashboard/hr/attendanceApi";
 import { supplierApi } from "./services/dashboard/purchase/supplierApi";
 import { salesReturnApi } from "./services/dashboard/sales/salesReturnApi";
 
@@ -76,6 +77,7 @@ export const store = configureStore({
     [employeeApi.reducerPath]: employeeApi.reducer,
     [bonusesApi.reducerPath]: bonusesApi.reducer,
     [departmentApi.reducerPath]: departmentApi.reducer,
+    [attendanceApi.reducerPath]: attendanceApi.reducer,
     [supplierApi.reducerPath]: supplierApi.reducer,
     [salesReturnApi.reducerPath]: salesReturnApi.reducer,
     auth: persistedAuthReducer,
@@ -112,6 +114,7 @@ export const store = configureStore({
       .concat(employeeApi.middleware)
       .concat(bonusesApi.middleware)
       .concat(departmentApi.middleware)
+      .concat(attendanceApi.middleware)
       .concat(supplierApi.middleware)
       .concat(salesReturnApi.middleware);
   },
