@@ -87,12 +87,12 @@ const transformedData = SalesReturn?.results.map((invoice: { id: string; custome
       ) : (
         <CustomTable
   emptyMessage="no sales Invoices data found"
-  editRoute="/dashboard/inventory/sales-invoice/edit/"
+  editRoute="/dashboard/inventory/sales-return/edit/"
   data={transformedData} 
   rows={10}
   columns={columns}
   cardData={cardsData}
-  buttonText="Add Sales Invoice"
+  buttonText="Add Sales Return"
   ButtonEvent={handleClick}
   onPageChange={handlePageChange}
   totalRecords={SalesReturn?.count || 0} 
