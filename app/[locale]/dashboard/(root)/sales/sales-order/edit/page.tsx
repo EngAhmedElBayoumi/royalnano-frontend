@@ -8,6 +8,7 @@ import FormSkelton from "@/components/dashboard/skelton/FormSkelton";
 import LoadingError from "@/components/dashboard/LoadingError";
 import SalesOrderForm from "@/components/dashboard/forms/sales/SalesOrderForm";
 import { useGetSalesOrderByIdQuery } from "@/redux/services/dashboard/sales/salesOrderApi";
+import EditSalesOrderForm from "@/components/dashboard/forms/sales/EditSalesOrderForm";
 
 export default function EditSalesOrder() {
   const router = useRouter();
@@ -71,10 +72,10 @@ export default function EditSalesOrder() {
           <LoadingError />
         ) : (
           <div className="ltr:lg:pr-[200px] rtl:lg:pl-[200px]">
-            <SalesOrderForm
-              defaultValues={defaultValues}
-              onSuccess={handleSuccess}
-            />
+  <EditSalesOrderForm
+    defaultValues={defaultValues}
+    onSuccess={handleSuccess}
+  />
           </div>
         )}
       </div>

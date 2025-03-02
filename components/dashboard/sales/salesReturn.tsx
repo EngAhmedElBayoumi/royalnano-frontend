@@ -7,7 +7,7 @@ import { useRouter } from "@/i18n/routing";
 import { useGetSalesInvoiceQuery } from "@/redux/services/dashboard/sales/salesInvoiceApi";
 import { useState } from "react";
 
-export default function SalesInvoice() {
+export default function SalesReturn() {
   const [page, setPage] = useState(1);
  
   const handlePageChange = (newPage: number) => {
