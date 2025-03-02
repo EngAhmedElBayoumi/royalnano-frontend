@@ -17,6 +17,7 @@ export interface SalesInvoiceFormValues {
   invoice_date: string;
   due_date: string;
   sales_representative: string;
+  total_amount: string;
   status: string;
   description: string;
   sales_order: number;
@@ -27,8 +28,10 @@ export interface SalesInvoiceFormValues {
     sales_invoice: number;
     custom_item_name: string;
     custom_price: string;
+    unit_price: string;
     discount: string;
     discount_percent: string;
+    total: string;
     item: number;
   }[];
 }
@@ -40,6 +43,7 @@ const SalesInvoiceForm = ({ onSubmit, defaultValues }: SalesInvoiceFormProps) =>
       invoice_date: "",
       due_date: "",
       sales_representative: "",
+      total_amount: "",
       status: "",
       description: "",
       sales_order: 0,
@@ -51,8 +55,10 @@ const SalesInvoiceForm = ({ onSubmit, defaultValues }: SalesInvoiceFormProps) =>
           sales_invoice: 0,
           custom_item_name: "",
           custom_price: "",
+          unit_price: "",
           discount: "",
           discount_percent: "",
+          total: "",
           item: 0,
         },
       ],
@@ -85,6 +91,13 @@ const SalesInvoiceForm = ({ onSubmit, defaultValues }: SalesInvoiceFormProps) =>
               name="sales_representative"
               label={t("SalesInvoice.salesRepresentative")}
               placeholder={t("SalesInvoice.salesRepresentative")}
+            />
+            <TextInput
+              control={form.control}
+              name="total_amount"
+              label={t("SalesInvoice.totalAmount")}
+              placeholder={t("SalesInvoice.totalAmount")}
+              type="number"
             />
             <TextInput
               control={form.control}
@@ -151,6 +164,12 @@ const SalesInvoiceForm = ({ onSubmit, defaultValues }: SalesInvoiceFormProps) =>
                 />
                 <TextInput
                   control={form.control}
+                  name={`items.${index}.unit_price`}
+                  label={t("SalesInvoice.unitPrice")}
+                  placeholder={t("SalesInvoice.unitPrice")}
+                />
+                <TextInput
+                  control={form.control}
                   name={`items.${index}.discount`}
                   label={t("SalesInvoice.discount")}
                   placeholder={t("SalesInvoice.discount")}
@@ -160,6 +179,12 @@ const SalesInvoiceForm = ({ onSubmit, defaultValues }: SalesInvoiceFormProps) =>
                   name={`items.${index}.discount_percent`}
                   label={t("SalesInvoice.discountPercent")}
                   placeholder={t("SalesInvoice.discountPercent")}
+                />
+                <TextInput
+                  control={form.control}
+                  name={`items.${index}.total`}
+                  label={t("SalesInvoice.total")}
+                  placeholder={t("SalesInvoice.total")}
                 />
                 <TextInput
                   control={form.control}
