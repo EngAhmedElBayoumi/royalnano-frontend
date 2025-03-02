@@ -8,6 +8,7 @@ import SalesInvoice from "@/components/dashboard/sales/salesInvoice";
 import SalesOrder from "@/components/dashboard/sales/salesOrder";
 import SalesQuotation from "@/components/dashboard/sales/salesQuotation";
 import SalesReturn from "@/components/dashboard/sales/salesReturn";
+import SalesCustomer from "@/components/dashboard/sales/customer";
 
 function SalesPage() {
   const t = useTranslations("Sales");
@@ -37,7 +38,7 @@ function SalesPage() {
         />
       ),
       label: t("customer"),
-      content: <Salaries />,
+      content: <SalesCustomer />,
     },
     {
       icon: (

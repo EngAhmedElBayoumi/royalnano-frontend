@@ -7,12 +7,44 @@ import { useRouter } from "@/i18n/routing";
 import { useState } from "react";
 import { useGetSalesCustomerQuery } from "@/redux/services/dashboard/sales/salesCustomerApi";
 
+// Define the interface for the API response
+interface Customer {
+  id: number;
+  customer_name: string;
+  contact_person: string;
+  phone_number: string;
+  email: string;
+  address: string;
+  city: string;
+  country: string;
+  notes: string;
+  branch: {
+    id: number;
+    name: string;
+    branch_code: string;
+    location: string;
+    description: string;
+    phone_number: string;
+    email: string;
+    address: string;
+    latitude: number | null;
+    longitude: number | null;
+    balance: string;
+    extra_fields: Record<string, unknown>;
+    manager: null | any;
+  };
+  customer_type: string;
+  tax_number: string | null;
+  national_id: string;
+}
+
 export default function SalesCustomer() {
-   const [page, setPage] = useState(1);
-   
-    const handlePageChange = (newPage: number) => {
-      setPage(newPage);
-    };
+  const [page, setPage] = useState(1);
+
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage);
+  };
+
   const {
     isLoading,
     error,
@@ -23,64 +55,44 @@ export default function SalesCustomer() {
     page,
     page_size: 10,
   });
- 
+
   const router = useRouter();
-console.log(salesCustomers)
-const transformedData = salesCustomers?.results.map((invoice: { id: string; customer: { customer_name: string; }; due_date: string; status: string; total_amount: string; items: { custom_item_name: string; item: string; quantity: string; unit_price: string; discount: string; total: string; }[]; }) => ({
-  id: invoice.id,
-  quotation_number: invoice.id, 
-  customer_name: invoice.customer.customer_name,
-  date: invoice.due_date,
-  status: invoice.status,
-  validity_period: "N/A", 
-  total_amount: invoice.total_amount,
-  items: invoice.items.map((item: { custom_item_name: string; item: string; quantity: string; unit_price: string; discount: string; total: string; }) => ({
-    item_name: item.custom_item_name || `Item ${item.item}`,
-    quantity: item.quantity,
-    unit_price: item.unit_price,
-    discount: item.discount,
-    total: item.total,
-  })),
-})) || "N/A";
+
+  console.log(salesCustomers);
+
+  // Safely transform data, handling cases where `results` is undefined
+  const transformedData =
+    salesCustomers?.results?.map((customer: Customer) => ({
+      id: customer.id,
+      customer_name: customer.customer_name,
+      contact_person: customer.contact_person,
+      phone_number: customer.phone_number,
+      email: customer.email,
+      address: customer.address,
+      city: customer.city,
+      country: customer.country,
+      notes: customer.notes,
+      branch_name: customer.branch.name,
+      customer_type: customer.customer_type,
+      tax_number: customer.tax_number || "N/A",
+      national_id: customer.national_id,
+    })) || [];
+
   const columns = [
-    { field: "quotation_number", header: "Invoice Number" },
-    
+    { field: "id", header: "ID" },
     { field: "customer_name", header: "Customer Name" },
-    { field: "date", header: "Date" },
-    { field: "status", header: "Status" },
-    { field: "validity_period", header: "Validity Period" },
-    { field: "total_amount", header: "Total Amount" },
-    
-    { field: "items", header: "Items" },
-    
-//     items
-// : 
-// Array(1)
-// 0
-// : 
-// discount
-// : 
-// "1.00"
-// discount_percent
-// : 
-// "1.00"
-// item_name
-// : 
-// "1"
-// quantity
-// : 
-// 1
-// tax_rate
-// : 
-// "1.00"
-// total
-// : 
-// "0.00"
-// unit_price
-// : 
-// "1.00"
+    { field: "contact_person", header: "Contact Person" },
+    { field: "phone_number", header: "Phone Number" },
+    { field: "email", header: "Email" },
+    { field: "address", header: "Address" },
+    { field: "city", header: "City" },
+    { field: "country", header: "Country" },
+    { field: "notes", header: "Notes" },
+    { field: "branch_name", header: "Branch Name" },
+    { field: "customer_type", header: "Customer Type" },
+    { field: "tax_number", header: "Tax Number" },
+    { field: "national_id", header: "National ID" },
   ];
- 
 
   const cardsData = [
     { title: "New requests", num: 145 },
@@ -89,9 +101,11 @@ const transformedData = salesCustomers?.results.map((invoice: { id: string; cust
     { title: "Failed", num: 48 },
     { title: "Paid", num: 48 },
   ];
+
   const handleClick = () => {
     router.push("/dashboard/sales/sales-invoices/create");
   };
+
   return (
     <>
       {isLoading ? (
@@ -111,18 +125,17 @@ const transformedData = salesCustomers?.results.map((invoice: { id: string; cust
         </div>
       ) : (
         <CustomTable
-  emptyMessage="no sales Invoices data found"
-  editRoute="/dashboard/inventory/sales-invoice/edit/"
-  data={transformedData} 
-  rows={10}
-  columns={columns}
-  cardData={cardsData}
-  buttonText="Add Sales Invoice"
-  ButtonEvent={handleClick}
-  onPageChange={handlePageChange}
-  totalRecords={salesCustomers?.count || 0} 
-
-/>
+          emptyMessage="No sales customers data found"
+          editRoute="/dashboard/inventory/sales-customer/edit/"
+          data={transformedData}
+          rows={10}
+          columns={columns}
+          cardData={cardsData}
+          buttonText="Add Sales Customer"
+          ButtonEvent={handleClick}
+          onPageChange={handlePageChange}
+          totalRecords={salesCustomers?.count || 0}
+        />
       )}
     </>
   );
