@@ -3,6 +3,8 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useGetEmployeesQuery } from "@/redux/services/dashboard/hr/employeeApi";
+import { RootState } from "@/redux/store";
+import { useSelector } from "react-redux";
 import CustomTable from "@/components/dashboard/tables/CustomTable";
 import TableSkelton from "@/components/dashboard/skelton/TableSkelton";
 import CardsSkelton from "@/components/dashboard/skelton/CardsSkelton";
@@ -22,6 +24,12 @@ export default function Employees() {
   const router = useRouter();
   const t = useTranslations("hr.employees");
   const [page, setPage] = useState(1);
+
+  const permissions = useSelector(
+    (state: RootState) => state.profile.permissions
+  );
+  const canAdd = permissions["employee"].add;
+  const canUpdate = permissions["employee"].change;
 
   const {
     data = { results: [] },
@@ -60,6 +68,7 @@ export default function Employees() {
   const handleClick = () => {
     router.push("/dashboard/hr/employees/create");
   };
+
   return isLoading ? (
     <>
       <CardsSkelton />
@@ -70,12 +79,12 @@ export default function Employees() {
   ) : (
     <CustomTable
       emptyMessage={t("noEmployeesDataFound")}
-      editRoute="/dashboard/hr/employees/edit/"
+      editRoute={canUpdate ? "/dashboard/hr/employees/edit/" : undefined}
       data={transformedData}
       rows={10}
       columns={columns}
       cardData={cardsData}
-      buttonText={t("addEmployee")}
+      buttonText={canAdd ? t("addEmployee") : undefined}
       ButtonEvent={handleClick}
       onPageChange={handlePageChange}
       totalRecords={data.count}
