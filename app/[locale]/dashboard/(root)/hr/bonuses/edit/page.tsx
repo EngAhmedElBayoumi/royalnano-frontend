@@ -25,7 +25,7 @@ export default function EditBonus() {
 
   const defaultValues: BonusesFormValues = data && {
     ...data,
-    employee: Number(data.employee),
+    employee: Number(data.employee.id),
   };
 
   const handleModalChange = (isOpen: boolean) => {
