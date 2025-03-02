@@ -1,30 +1,29 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseQuery } from "../../common";
 
-export const employeeApi = createApi({
-  reducerPath: "employeeApi",
+export const bonusesApi = createApi({
+  reducerPath: "bonusesApi",
   baseQuery,
   endpoints: (builder) => ({
-    getEmployees: builder.query({
+    getBonuses: builder.query({
       query: ({ search, ordering, page, page_size }) => ({
-        url: `hr/employee`,
+        url: `hr/bonus-deduction`,
         params: { search, ordering, page, page_size },
       }),
     }),
-
-    getEmployeeById: builder.query({
-      query: (id) => `hr/employee/${id}/`,
+    getBonusById: builder.query({
+      query: (id) => `hr/bonus-deduction/${id}/`,
     }),
-    createEmployee: builder.mutation({
+    createBonus: builder.mutation({
       query: (data) => ({
-        url: `hr/employee/`,
+        url: `hr/bonus-deduction/`,
         method: "POST",
         body: data,
       }),
     }),
-    updateEmployee: builder.mutation({
+    updateBonus: builder.mutation({
       query: ({ id, data }) => ({
-        url: `hr/employee/${id}/`,
+        url: `hr/bonus-deduction/${id}/`,
         method: "PATCH",
         body: data,
       }),
@@ -33,8 +32,8 @@ export const employeeApi = createApi({
 });
 
 export const {
-  useGetEmployeesQuery,
-  useGetEmployeeByIdQuery,
-  useCreateEmployeeMutation,
-  useUpdateEmployeeMutation,
-} = employeeApi;
+  useGetBonusesQuery,
+  useGetBonusByIdQuery,
+  useCreateBonusMutation,
+  useUpdateBonusMutation,
+} = bonusesApi;

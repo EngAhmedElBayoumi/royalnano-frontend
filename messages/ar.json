@@ -21,6 +21,7 @@
   "branches": {
     "branches": "الفروع",
     "addBranch": "إضافة فرع",
+    "editBranch": "تعديل فرع",
     "noBranchesDataFound": "لا توجد بيانات للفروع",
     "name": "الاسم",
     "phoneNumber": "رقم الهاتف",
@@ -96,7 +97,7 @@
     "tabs": {
       "attendance": "الحضور",
       "vacation": "الإجازات",
-      "bonuses": "المكافآت",
+      "bonuses": "المكافآت والخصومات",
       "salary": "الرواتب",
       "employees": "الموظفون"
     },
@@ -111,6 +112,15 @@
       "isUser": "مستخدم",
       "noEmployeesDataFound": "لا توجد بيانات للموظفين",
       "addEmployees": "إضافة موظف"
+    },
+    "bonuses": {
+      "employee": "الموظف",
+      "amount": "المبلغ",
+      "reason": "السبب",
+      "type": "النوع",
+      "date": "التاريخ",
+      "addBonus": "إضافة مكافئة أو خصم",
+      "noBonusesDataFound": "لا توجد بيانات للمكافئات و الخصومات"
     }
   },
   "Sales": {

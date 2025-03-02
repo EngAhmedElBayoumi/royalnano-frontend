@@ -1,8 +1,13 @@
 "use client";
 import CustomTable from "@/components/dashboard/tables/CustomTable";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function Attendance() {
+    const [page, setPage] = useState(1);
+    const handlePageChange = (newPage: number) => {
+      setPage(newPage);
+    };
   const router = useRouter();
 
   const columns = [
@@ -199,6 +204,8 @@ export default function Attendance() {
           cardData={cardsData}
           buttonText="Add Attendance"
           ButtonEvent={handleClick}
+          onPageChange={handlePageChange}
+          totalRecords={yourCustomerData?.length || 0} 
         />
       </div>
     </>

@@ -1,3 +1,293 @@
+// "use client";
+// import { Form } from "@/components/ui/form";
+// import { useForm, useFieldArray } from "react-hook-form";
+// import { zodResolver } from "@hookform/resolvers/zod";
+// import CustomButton from "@/components/formFields/CustomButton";
+// import TextInput from "@/components/formFields/TextInput";
+// import { Link } from "@/i18n/routing";
+// import { useTranslations } from "next-intl";
+// import { salesOrderSchema } from "@/lib/validations/dashboard/sales/salesOrderSchema";
+// import DatePicker from "@/components/formFields/DatePicker";
+// import { useGetItemsQuery } from "@/redux/services/dashboard/itemsApi";
+// import { useGetMiniSalesCustomerQuery } from "@/redux/services/dashboard/sales/salesCustomerApi";
+// import CustomSelect from "@/components/formFields/CustomSelect";
+// import { useState } from "react";
+// import { useGetBranchesQuery } from "@/redux/services/dashboard/branchesApi";
+
+// interface SalesOrderFormProps {
+//   onSubmit: (data: SalesOrderFormValues) => Promise<void>;
+//   defaultValues?: SalesOrderFormValues;
+// }
+
+// export interface SalesOrderFormValues {
+//   order_date: string;
+//   customer: number;
+//   branch: number;
+//   sales_representative: string;
+//   description: string;
+//   items: {
+//     quantity: number;
+//     item: number | null;
+//     custom_item_name: string;
+//     custom_price: string;
+//     discount: string;
+//     discount_percent: string;
+//   }[];
+//   status: string;
+// }
+  
+
+// const SalesOrderForm = ({ onSubmit, defaultValues }: SalesOrderFormProps) => {
+//   const { data: customers } = useGetMiniSalesCustomerQuery({});
+//   const {
+//     data: branchesData,
+   
+//   } = useGetBranchesQuery({
+
+//   });
+//   // console.log(branchesData.results)
+//   const form = useForm<SalesOrderFormValues>({
+//     resolver: zodResolver(salesOrderSchema),
+//     defaultValues: defaultValues || {
+//       order_date: "",
+//       customer: 1,
+//       branch: 1,
+//       sales_representative: "1",
+//       description: "random nnnnnn",
+//       items: [],
+//       status: "pending",
+//     },
+//   });
+
+//   const { fields, append, remove } = useFieldArray({
+//     control: form.control,
+//     name: "items",
+//   });
+
+//   const { data: itemsData, isLoading: isItemsLoading, error: itemsError } = useGetItemsQuery({
+//     search: "",
+//     ordering: "id",
+//     page: 1,
+//     page_size: 10,
+//   });
+
+//   const existingItems = itemsData?.results || [];
+
+//   const t = useTranslations("Sales");
+//   const customerOptions = customers
+//     // eslint-disable-next-line @typescript-eslint/no-explicit-any
+//     ? customers.map((customer: { id: { toString: () => any; }; customer_name: any; }) => ({
+//         value: customer.id.toString(),
+//         label: customer.customer_name,
+//       }))
+//     : [];
+
+//   const [itemTypes, setItemTypes] = useState<("existing" | "custom")[]>([]);
+
+//   const handleItemTypeChange = (index: number, type: "existing" | "custom") => {
+//     setItemTypes((prev) => {
+//       const newItemTypes = [...prev];
+//       newItemTypes[index] = type;
+//       return newItemTypes;
+//     });
+
+//     if (type === "existing") {
+//       form.setValue(`items.${index}.custom_item_name`, "");
+//       form.setValue(`items.${index}.custom_price`, "");
+//     } else {
+//       form.setValue(`items.${index}.item`, null);
+//     }
+//   };
+
+//   const handleAddItem = () => {
+//     append({
+//       quantity: 1,
+//       item: null,
+//       custom_item_name: "",
+//       custom_price: "",
+//       discount: "",
+//       discount_percent: "",
+//     });
+//     setItemTypes((prev) => [...prev, "existing"]);
+//   };
+//   const branchesOptions =
+//   branchesData?.results?.map((branch: { id: number; name: string }) => ({
+//       value: branch.id.toString(),
+//       label: branch.name,
+//     })) || [];
+//   return (
+//     <Form {...form}>
+//       <form onSubmit={form.handleSubmit(onSubmit)}>
+//         <section className="min-h-[60vh]">
+//           <div className="grid sm:grid-cols-2 gap-x-4 gap-y-2 xl:gap-y-5 lg:gap-x-10">
+//             <DatePicker
+//               control={form.control}
+//               name="order_date"
+//               label={t("SalesOrder.orderDate")}
+//               placeholder={t("SalesOrder.orderDate")}
+//             />
+//             <CustomSelect
+//             valueType="number"
+//               control={form.control}
+//               name="customer"
+//               label={t("SalesOrder.customer")}
+//               placeholder={t("SalesOrder.customer")}
+//               options={customerOptions}
+//               onChange={(value) => {
+//                 const customerId = parseInt(value, 10);
+//                 form.setValue("customer", customerId);
+//               }}
+//             />
+//                 <CustomSelect
+//                             valueType="number"
+
+//             control={form.control}
+//             name="branch"
+//             label="Choose Branch"
+//             placeholder="Choose Branch"
+//             options={branchesOptions}
+//           />
+//             <TextInput
+//               control={form.control}
+//               name="sales_representative"
+//               label={t("SalesOrder.salesRepresentative")}
+//               placeholder={t("SalesOrder.salesRepresentative")}
+//             />
+//             <TextInput
+//               control={form.control}
+//               name="description"
+//               label={t("SalesOrder.description")}
+//               placeholder={t("SalesOrder.description")}
+//             />
+//             {fields.map((field, index) => {
+//               const itemType = itemTypes[index];
+
+//               return (
+//                 <div key={field.id} className="col-span-2 border p-4 rounded-lg mb-4">
+//                   <div className="flex gap-2 mb-2">
+//                     <button
+//                       type="button"
+//                       onClick={() => handleItemTypeChange(index, "existing")}
+//                       className={`p-2 rounded ${
+//                         itemType === "existing" ? "bg-primary text-white" : "bg-gray-200"
+//                       }`}
+//                     >
+//                       Add Existing Item
+//                     </button>
+//                     <button
+//                       type="button"
+//                       onClick={() => handleItemTypeChange(index, "custom")}
+//                       className={`p-2 rounded ${
+//                         itemType === "custom" ? "bg-primary text-white" : "bg-gray-200"
+//                       }`}
+//                     >
+//                       Add Custom Item
+//                     </button>
+//                   </div>
+
+//                   {itemType === "existing" && (
+//                     <CustomSelect
+//                     valueType="number" 
+//                       control={form.control}
+//                       name={`items.${index}.item`}
+//                       label={t("SalesOrder.selectItem")}
+//                       options={existingItems.map((item: { id: number; item_name: string }) => ({
+//                         value: item.id.toString(),
+//                         label: item.item_name,
+//                       }))}
+//                       placeholder={t("SalesOrder.selectItem")}
+//                       onChange={(value) => {
+//                         if (value) {
+//                           const selectedItemId = parseInt(value, 10);
+//                           form.setValue(`items.${index}.item`, selectedItemId);
+//                         }
+//                       }}
+//                       isLoading={isItemsLoading}
+//                     />
+//                   )}
+
+//                   {itemType === "custom" && (
+//                     <>
+//                       <TextInput
+//                         control={form.control}
+//                         name={`items.${index}.custom_item_name`}
+//                         label={t("SalesOrder.customItemName")}
+//                         placeholder={t("SalesOrder.customItemName")}
+//                       />
+//                       <TextInput
+//                         control={form.control}
+//                         name={`items.${index}.custom_price`}
+//                         label={t("SalesOrder.customPrice")}
+//                         placeholder={t("SalesOrder.customPrice")}
+//                       />
+//                     </>
+//                   )}
+
+//                   <TextInput
+//                     control={form.control}
+//                     name={`items.${index}.quantity`}
+//                     label={t("SalesOrder.quantity")}
+//                     placeholder={t("SalesOrder.quantity")}
+//                     type="number"
+//                   />
+
+//                   <TextInput
+//                     control={form.control}
+//                     name={`items.${index}.discount`}
+//                     label={t("SalesOrder.discount")}
+//                     placeholder={t("SalesOrder.discount")}
+//                   />
+
+//                   <TextInput
+//                     control={form.control}
+//                     name={`items.${index}.discount_percent`}
+//                     label={t("SalesOrder.discountPercent")}
+//                     placeholder={t("SalesOrder.discountPercent")}
+//                   />
+
+//                   {fields.length > 1 && (
+//                     <button
+//                       type="button"
+//                       onClick={() => remove(index)}
+//                       className="text-red-500 mt-2"
+//                     >
+//                       Remove Item
+//                     </button>
+//                   )}
+//                 </div>
+//               );
+//             })}
+           
+//           </div>
+//           <button
+//             type="button"
+//             onClick={handleAddItem}
+//             className="bg-primary text-white p-2 rounded-lg mt-4"
+//           >
+//             Add Item
+//           </button>
+//         </section>
+//         <div className="flex justify-end gap-2 mt-5">
+//           <Link href={`/dashboard/sales?tab=${t("order")}`} passHref>
+//             <CustomButton
+//               text={t("cancel")}
+//               className="text-white rounded-lg bg-secondary min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
+//             />
+//           </Link>
+//           <CustomButton
+//             text={t("save")}
+//             type="submit"
+//             className="text-white rounded-lg min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
+//           />
+//         </div>
+//       </form>
+//     </Form>
+//   );
+// };
+
+// export default SalesOrderForm;
+
+
 "use client";
 import { Form } from "@/components/ui/form";
 import { useForm, useFieldArray } from "react-hook-form";
@@ -13,10 +303,12 @@ import { useGetMiniSalesCustomerQuery } from "@/redux/services/dashboard/sales/s
 import CustomSelect from "@/components/formFields/CustomSelect";
 import { useState } from "react";
 import { useGetBranchesQuery } from "@/redux/services/dashboard/branchesApi";
+import { useRouter } from "next/navigation";
+import { useUpdateSalesOrderMutation } from "@/redux/services/dashboard/sales/salesOrderApi";
 
 interface SalesOrderFormProps {
-  onSubmit: (data: SalesOrderFormValues) => Promise<void>;
   defaultValues?: SalesOrderFormValues;
+  onSuccess?: () => void;
 }
 
 export interface SalesOrderFormValues {
@@ -35,17 +327,14 @@ export interface SalesOrderFormValues {
   }[];
   status: string;
 }
-  
 
-const SalesOrderForm = ({ onSubmit, defaultValues }: SalesOrderFormProps) => {
+const SalesOrderForm = ({ defaultValues, onSuccess }: SalesOrderFormProps) => {
+  const router = useRouter();
   const { data: customers } = useGetMiniSalesCustomerQuery({});
-  const {
-    data: branchesData,
-   
-  } = useGetBranchesQuery({
+  const { data: branchesData } = useGetBranchesQuery({});
+  const [updateSalesOrder] = useUpdateSalesOrderMutation();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  });
-  // console.log(branchesData.results)
   const form = useForm<SalesOrderFormValues>({
     resolver: zodResolver(salesOrderSchema),
     defaultValues: defaultValues || {
@@ -64,7 +353,7 @@ const SalesOrderForm = ({ onSubmit, defaultValues }: SalesOrderFormProps) => {
     name: "items",
   });
 
-  const { data: itemsData, isLoading: isItemsLoading, error: itemsError } = useGetItemsQuery({
+  const { data: itemsData, isLoading: isItemsLoading } = useGetItemsQuery({
     search: "",
     ordering: "id",
     page: 1,
@@ -75,7 +364,6 @@ const SalesOrderForm = ({ onSubmit, defaultValues }: SalesOrderFormProps) => {
 
   const t = useTranslations("Sales");
   const customerOptions = customers
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     ? customers.map((customer: { id: { toString: () => any; }; customer_name: any; }) => ({
         value: customer.id.toString(),
         label: customer.customer_name,
@@ -110,14 +398,54 @@ const SalesOrderForm = ({ onSubmit, defaultValues }: SalesOrderFormProps) => {
     });
     setItemTypes((prev) => [...prev, "existing"]);
   };
+
   const branchesOptions =
-  branchesData?.results?.map((branch: { id: number; name: string }) => ({
+    branchesData?.results?.map((branch: { id: number; name: string }) => ({
       value: branch.id.toString(),
       label: branch.name,
     })) || [];
+
+  const handleSubmit = async (formData: SalesOrderFormValues) => {
+    console.log("Form submitted with data:", formData);
+
+    try {
+      const payload = {
+        ...formData,
+        items: formData.items.map((item) => ({
+          quantity: item.quantity,
+          item: item.item || null,
+          custom_item_name: item.custom_item_name || "",
+          custom_price: item.custom_price || "",
+          discount: item.discount,
+          discount_percent: item.discount_percent,
+        })),
+        total_amount: formData.items.reduce((total, item) => {
+          const itemTotal = parseFloat(item.custom_price) * item.quantity;
+          return total + itemTotal;
+        }, 0).toFixed(2),
+      };
+
+      console.log("Payload:", payload);
+
+      const response = await updateSalesOrder({ id: defaultValues?.id, data: payload });
+
+      if (response.error) {
+        console.error("API Error Details:", response.error);
+        setIsModalOpen(true);
+        throw new Error(response.error.data?.message || "Update failed");
+      } else {
+        onSuccess?.();
+        router.push(`/dashboard/sales?tab=${t("order")}`);
+      }
+    } catch (error) {
+      setIsModalOpen(true);
+      console.error("Submission Error:", error);
+    }
+  };
+
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
+      <form onSubmit={form.handleSubmit(handleSubmit)}>
         <section className="min-h-[60vh]">
           <div className="grid sm:grid-cols-2 gap-x-4 gap-y-2 xl:gap-y-5 lg:gap-x-10">
             <DatePicker
@@ -127,7 +455,7 @@ const SalesOrderForm = ({ onSubmit, defaultValues }: SalesOrderFormProps) => {
               placeholder={t("SalesOrder.orderDate")}
             />
             <CustomSelect
-            valueType="number"
+              valueType="number"
               control={form.control}
               name="customer"
               label={t("SalesOrder.customer")}
@@ -138,15 +466,14 @@ const SalesOrderForm = ({ onSubmit, defaultValues }: SalesOrderFormProps) => {
                 form.setValue("customer", customerId);
               }}
             />
-                <CustomSelect
-                            valueType="number"
-
-            control={form.control}
-            name="branch"
-            label="Choose Branch"
-            placeholder="Choose Branch"
-            options={branchesOptions}
-          />
+            <CustomSelect
+              valueType="number"
+              control={form.control}
+              name="branch"
+              label="Choose Branch"
+              placeholder="Choose Branch"
+              options={branchesOptions}
+            />
             <TextInput
               control={form.control}
               name="sales_representative"
@@ -187,7 +514,7 @@ const SalesOrderForm = ({ onSubmit, defaultValues }: SalesOrderFormProps) => {
 
                   {itemType === "existing" && (
                     <CustomSelect
-                    valueType="number" 
+                      valueType="number"
                       control={form.control}
                       name={`items.${index}.item`}
                       label={t("SalesOrder.selectItem")}
@@ -257,7 +584,6 @@ const SalesOrderForm = ({ onSubmit, defaultValues }: SalesOrderFormProps) => {
                 </div>
               );
             })}
-           
           </div>
           <button
             type="button"

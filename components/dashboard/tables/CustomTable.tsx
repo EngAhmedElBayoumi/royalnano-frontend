@@ -163,7 +163,7 @@ export default function CustomTable({
         </div>
       )}
       {data && data.length > 0 ? (
-        <div className="mb-5 bg-dashboardBg px-4 pt-4 ltr:rounded-tr-[20px] rtl:rounded-tl-[20px] rounded-b-[20px]">
+        <div className="mb-5 bg-dashboardBg p-4 ltr:rounded-tr-[20px] rtl:rounded-tl-[20px] rounded-b-[20px]">
           <DataTable
             value={customers}
             // paginator
@@ -196,13 +196,12 @@ export default function CustomTable({
                 body={(rowData: DataInTable) => {
                   const fieldValue = rowData[col.field];
                   if (Array.isArray(fieldValue)) {
-                    return fieldValue
-                      .map((item) => {
-                        return (
-                          item.item_name || item.name || JSON.stringify(item)
-                        );
-                      })
-                      .join(", ");
+                    return fieldValue.map((item, index) => (
+                      <div key={index}>
+                        {item.item_name || item.name || JSON.stringify(item)}
+                       {index===fieldValue.length-1 ? "": <hr className="border-black border-2 my-2" />}
+                      </div>
+                    ));
                   }
 
                   if (col.field === "verified") {

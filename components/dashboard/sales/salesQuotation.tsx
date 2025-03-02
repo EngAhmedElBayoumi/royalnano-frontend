@@ -6,13 +6,24 @@ import CardsSkelton from "../skelton/CardsSkelton";
 import Image from "next/image";
 import { useRouter } from "@/i18n/routing";
 import { useGetSalesQuotationQuery } from "@/redux/services/dashboard/sales/salesQuotationsApi";
+import { useState } from "react";
 
 export default function SalesQuotation() {
+    const [page, setPage] = useState(1);
+   
+    const handlePageChange = (newPage: number) => {
+      setPage(newPage);
+    };
   const {
     isLoading,
     error,
     data: salesQuotations,
-  } = useGetSalesQuotationQuery({});
+  } = useGetSalesQuotationQuery({
+    search: "",
+    ordering: "id",
+    page,
+    page_size: 10,
+  });
 
   const router = useRouter();
 
@@ -92,6 +103,8 @@ export default function SalesQuotation() {
           cardData={cardsData}
           buttonText="Add Category model"
           ButtonEvent={handleClick}
+          onPageChange={handlePageChange}
+          totalRecords={salesQuotations?.count || 0} 
         />
       )}
     </>

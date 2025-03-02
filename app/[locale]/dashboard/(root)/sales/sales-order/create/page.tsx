@@ -52,7 +52,7 @@ export default function CreateSalesOrder() {
         />
       </div>
       <div className="bg-dashboardBg px-6 pt-5 pb-8 ltr:rounded-r-[20px] ltr:rounded-bl-[20px] rtl:rounded-l-[20px] rtl:rounded-br-[20px] ltr:lg:pr-[200px] rtl:lg:pl-[200px]">
-        <SalesOrderForm onSubmit={handleSubmit} />
+        <SalesOrderForm />
 
       </div>
     </main>

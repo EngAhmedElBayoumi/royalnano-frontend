@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { Link } from "@/i18n/routing";
+import { useTranslations } from "next-intl";
 import MapGL, { Marker } from "react-map-gl/maplibre";
 import { MapLayerMouseEvent } from "react-map-gl/maplibre";
 import "maplibre-gl/dist/maplibre-gl.css";
@@ -16,7 +17,7 @@ import TextInput from "@/components/formFields/TextInput";
 import PhoneInputField from "@/components/formFields/PhoneInputField";
 import CustomTextArea from "@/components/formFields/TextArea";
 import CustomModal from "@/components/modals/CustomModal";
-import { useTranslations } from "next-intl";
+import CustomSelect from "@/components/formFields/CustomSelect";
 
 interface BranchFormProps {
   onSubmit: (data: BranchFormValues) => Promise<void>;
@@ -54,6 +55,11 @@ const BranchForm = ({ onSubmit, defaultValues }: BranchFormProps) => {
   const t = useTranslations("branches");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const managersOption = [
+    { value: "1", label: "Yasmine" },
+    { value: "2", label: "Nermine" },
+  ];
+
   const form = useForm({
     resolver: zodResolver(branchSchema),
     defaultValues: defaultValues || {
@@ -66,7 +72,7 @@ const BranchForm = ({ onSubmit, defaultValues }: BranchFormProps) => {
       longitude: 31,
       latitude: 30,
       description: "",
-      manager: undefined,
+      manager: 1,
     },
   });
   const [viewport, setViewport] = useState({
@@ -96,6 +102,12 @@ const BranchForm = ({ onSubmit, defaultValues }: BranchFormProps) => {
     form.setValue("location", locationName);
     form.setValue("latitude", lat);
     form.setValue("longitude", lng);
+
+    setViewport((prev) => ({
+      ...prev,
+      latitude: lat,
+      longitude: lng,
+    }));
   };
 
   return (
@@ -170,11 +182,13 @@ const BranchForm = ({ onSubmit, defaultValues }: BranchFormProps) => {
               label={t("address")}
               placeholder={t("address")}
             />
-            <TextInput
+
+            <CustomSelect
               control={form.control}
               name="manager"
               label={t("manager")}
               placeholder={t("manager")}
+              options={managersOption}
             />
           </div>
           <CustomTextArea

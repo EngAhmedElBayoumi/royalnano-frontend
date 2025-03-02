@@ -5,13 +5,25 @@ import CardsSkelton from "../skelton/CardsSkelton";
 import Image from "next/image";
 import { useRouter } from "@/i18n/routing";
 import { useGetSalesInvoiceQuery } from "@/redux/services/dashboard/sales/salesInvoiceApi";
+import { useState } from "react";
 
 export default function SalesInvoice() {
+  const [page, setPage] = useState(1);
+ 
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage);
+  };
   const {
     isLoading,
     error,
+
     data: salesInvoices,
-  } = useGetSalesInvoiceQuery({});
+  } = useGetSalesInvoiceQuery({
+    search: "",
+    ordering: "id",
+    page,
+    page_size: 10,
+  });
  
   const router = useRouter();
 console.log(salesInvoices)
@@ -69,7 +81,6 @@ const transformedData = salesInvoices?.results.map((invoice: { id: string; custo
 // : 
 // "1.00"
   ];
- 
 
   const cardsData = [
     { title: "New requests", num: 145 },
@@ -108,6 +119,8 @@ const transformedData = salesInvoices?.results.map((invoice: { id: string; custo
   cardData={cardsData}
   buttonText="Add Sales Invoice"
   ButtonEvent={handleClick}
+  onPageChange={handlePageChange}
+  totalRecords={salesInvoices?.count || 0} 
 />
       )}
     </>

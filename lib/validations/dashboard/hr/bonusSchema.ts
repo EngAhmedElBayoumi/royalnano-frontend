@@ -1,15 +1,9 @@
 import * as z from "zod";
 
-export const bonusSchema = z
-  .object({
-    name: z.string().nonempty("Name is required"),
-    branch_name: z.string().nonempty("Branch name is required"),
-    rewards: z.string().nonempty("Rewards are required"),
-    start: z.date({ required_error: "Start date is required" }),
-    end: z.date({ required_error: "End date is required" }),
-    date: z.date({ required_error: "Date is required" }),
-  })
-  .refine((data) => data.start < data.end, {
-    message: "start date must be before end date",
-    path: ["start"],
-  });
+export const bonusSchema = z.object({
+  employee: z.coerce.number().min(1, "Employee must be selected"),
+  amount: z.string().nonempty("Amount is required"),
+  reason: z.string().nonempty("Reason is required"),
+  type: z.enum(["bonus", "deduction"]),
+  date: z.string().nonempty("Date is required"),
+});

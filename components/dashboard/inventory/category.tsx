@@ -6,13 +6,21 @@ import TableSkelton from "@/components/dashboard/skelton/TableSkelton";
 import CardsSkelton from "@/components/dashboard/skelton/CardsSkelton";
 import LoadingError from "@/components/dashboard/LoadingError";
 import CustomTable from "@/components/dashboard/tables/CustomTable";
+import { useState } from "react";
 
 export default function Category() {
+      const [page, setPage] = useState(1);
+      const handlePageChange = (newPage: number) => {
+        setPage(newPage);
+      };
   const {
     isLoading,
     error,
     data: itemCategories,
-  } = useGetItemCategoryQuery({});
+  } = useGetItemCategoryQuery({search: "",
+    ordering: "id",
+    page,
+    page_size: 10,});
 
   const router = useRouter();
   const t = useTranslations("Inventory.InventoryCategory");
@@ -51,6 +59,8 @@ export default function Category() {
           cardData={cardsData}
           buttonText={t("addCategory")}
           ButtonEvent={handleClick}
+          onPageChange={handlePageChange}
+          totalRecords={itemCategories?.count || 0} 
         />
       )}
     </>

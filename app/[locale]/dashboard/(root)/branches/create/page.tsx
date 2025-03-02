@@ -21,7 +21,11 @@ export default function CreateBranchs() {
 
   const handleSubmit = async (data: BranchFormValues) => {
     try {
-      const response = await createBranch(data);
+      const payload = {
+        ...data,
+        manager: Number(data.manager),
+      };
+      const response = await createBranch(payload);
       if (response.error) throw new Error("creation failed");
       else router.push("/dashboard/branches");
     } catch (error) {

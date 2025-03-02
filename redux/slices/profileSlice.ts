@@ -1,10 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { deleteCookie, setCookie } from "cookies-next";
 
-interface Permission {
-  id: number;
-  name: string;
-  codename: string;
+interface Permissions {
+  [key: string]: {
+    view: boolean;
+    add: boolean;
+    change: boolean;
+    delete: boolean;
+  };
 }
 
 interface ProfileState {
@@ -13,7 +16,7 @@ interface ProfileState {
   phoneNumber: string | null;
   role: string | null;
   profilePicture: string | null;
-  permissions: Permission[];
+  permissions: Permissions;
 }
 
 const initialState: ProfileState = {
@@ -22,7 +25,7 @@ const initialState: ProfileState = {
   phoneNumber: null,
   role: null,
   profilePicture: null,
-  permissions: [],
+  permissions: {},
 };
 
 const profileSlice = createSlice({
@@ -37,13 +40,19 @@ const profileSlice = createSlice({
       state.profilePicture = action.payload.profilePicture;
       state.permissions = action.payload.permissions;
 
-      // Store only permissions with codename starting with "view" in a cookie for middleware access
-      const permissionCodes = action.payload.permissions
-        // .filter((p: { codename: string }) => p.codename.startsWith("view"))
-        // .map((p: { codename: string }) => p.codename);
-console.log(permissionCodes)
-      setCookie("userPermissions", permissionCodes, {
-        secure: process.env.NODE_ENV === "production", 
+      // Extract only the specified permissions
+      const { permissions } = action.payload;
+
+      const extractedPermissions = {
+        inventoryitem: permissions.inventoryitem,
+        salesinvoice: permissions.salesinvoice,
+        employee: permissions.employee,
+        customer: permissions.customer,
+        branch: permissions.branch,
+        service: permissions.service,
+      };
+      setCookie("userPermissions", JSON.stringify(extractedPermissions), {
+        secure: process.env.NODE_ENV === "production",
         maxAge: 60 * 60 * 24,
       });
     },
@@ -53,7 +62,7 @@ console.log(permissionCodes)
       state.phoneNumber = null;
       state.role = null;
       state.profilePicture = null;
-      state.permissions = [];
+      state.permissions = {};
       deleteCookie("userPermissions");
     },
   },

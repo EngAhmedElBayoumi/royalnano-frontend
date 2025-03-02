@@ -6,6 +6,7 @@ import CustomTable from "@/components/dashboard/tables/CustomTable";
 import TableSkelton from "@/components/dashboard/skelton/TableSkelton";
 import CardsSkelton from "@/components/dashboard/skelton/CardsSkelton";
 import LoadingError from "@/components/dashboard/LoadingError";
+import { useState } from "react";
 
 // Define the type for stock adjustment
 interface StockAdjustment {
@@ -23,7 +24,11 @@ interface StockAdjustment {
 export default function StockAdjustment() {
   const router = useRouter();
   const t = useTranslations("Inventory.InventoryStockAdjustment");
-
+   const [page, setPage] = useState(1);
+   
+    const handlePageChange = (newPage: number) => {
+      setPage(newPage);
+    };
   const {
     data: stockAdjustmentData = { results: [] },
     isLoading,
@@ -31,7 +36,7 @@ export default function StockAdjustment() {
   } = useGetStockAdjustmentsQuery({
     search: "",
     ordering: "id",
-    page: 1,
+    page,
     page_size: 10,
   });
 
@@ -83,6 +88,8 @@ export default function StockAdjustment() {
       columns={columns}
       buttonText={t("addStockAdjustment")}
       ButtonEvent={handleClick}
+      onPageChange={handlePageChange}
+      totalRecords={stockAdjustmentData?.count || 0} 
     />
   );
 }

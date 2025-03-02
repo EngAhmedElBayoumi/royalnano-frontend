@@ -11,6 +11,9 @@ import { useGetItemsQuery } from "@/redux/services/dashboard/itemsApi";
 
 export default function SalesOrder() {
   const [page, setPage] = useState(1);
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage);
+  };
   // const t = useTranslations("Sales.SalesOrder");
 
   const {
@@ -87,9 +90,7 @@ console.log(salesOrders)
     router.push("/dashboard/sales/sales-order/create");
   };
 
-  const handlePageChange = (newPage: number) => {
-    setPage(newPage);
-  };
+
 
   return (
     <>

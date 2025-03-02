@@ -1,17 +1,17 @@
 "use client";
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 import {
   useGetItemByIdQuery,
   useUpdateItemMutation,
 } from "@/redux/services/dashboard/itemsApi";
+import IconWithTitle from "@/components/dashboard/IconWithTitle";
 import ItemForm, {
   ItemFormValues,
 } from "@/components/dashboard/forms/inventory/ItemForm";
-import IconWithTitle from "@/components/dashboard/IconWithTitle";
 import CustomModal from "@/components/modals/CustomModal";
 import FormSkelton from "@/components/dashboard/skelton/FormSkelton";
-import { useTranslations } from "next-intl";
 import LoadingError from "@/components/dashboard/LoadingError";
 
 export default function EditItem() {
@@ -70,17 +70,13 @@ export default function EditItem() {
         />
       </div>
 
-      <div className="bg-dashboardBg px-6 pt-5 pb-8 ltr:rounded-r-[20px] ltr:rounded-bl-[20px] rtl:rounded-l-[20px] rtl:rounded-br-[20px]">
+      <div className="bg-dashboardBg px-6 pt-5 pb-8 ltr:rounded-r-[20px] ltr:rounded-bl-[20px] rtl:rounded-l-[20px] rtl:rounded-br-[20px] ltr:lg:pr-[200px] rtl:lg:pl-[200px]">
         {isLoading ? (
-          <div className="ltr:lg:pr-[200px] rtl:lg:pl-[200px]">
-            <FormSkelton />
-          </div>
+          <FormSkelton />
         ) : error ? (
           <LoadingError />
         ) : (
-          <div className="ltr:lg:pr-[200px] rtl:lg:pl-[200px]">
-            <ItemForm onSubmit={handleSubmit} defaultValues={defaultValues} />
-          </div>
+          <ItemForm onSubmit={handleSubmit} defaultValues={defaultValues} />
         )}
       </div>
     </main>

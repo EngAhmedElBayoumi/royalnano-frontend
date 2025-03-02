@@ -6,6 +6,7 @@ import TableSkelton from "@/components/dashboard/skelton/TableSkelton";
 import CardsSkelton from "@/components/dashboard/skelton/CardsSkelton";
 import LoadingError from "@/components/dashboard/LoadingError";
 import { useTranslations } from "next-intl";
+import { useState } from "react";
 
 // Define the type for movement
 interface Movement {
@@ -22,6 +23,11 @@ interface Movement {
 }
 
 export default function Movement() {
+    const [page, setPage] = useState(1);
+    const handlePageChange = (newPage: number) => {
+      setPage(newPage);
+    };
+  
   const router = useRouter();
   const t = useTranslations("Inventory.InventoryMovement");
 
@@ -32,7 +38,7 @@ export default function Movement() {
   } = useGetMovementsQuery({
     search: "",
     ordering: "id",
-    page: 1,
+    page,
     page_size: 10,
   });
 
@@ -82,6 +88,8 @@ export default function Movement() {
           buttonText={t("addMovement")}
           ButtonEvent={handleClick}
           emptyMessage={t("noMovementsDataFound") || "No movements data found"}
+          onPageChange={handlePageChange}
+          totalRecords={movementData?.count || 0} 
         />
       )}
     </>
