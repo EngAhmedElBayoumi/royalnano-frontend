@@ -1,4 +1,13 @@
 "use client";
+import Image from "next/image";
+import { Link } from "@/i18n/routing";
+import { usePathname, useRouter } from "next/navigation";
+import { useLocale, useTranslations } from "next-intl";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
+import { logout } from "@/redux/slices/authSlice";
+import { clearProfile } from "@/redux/slices/profileSlice";
+import { sidebarLinks } from "@/data/dashboard/sidebarData";
 import {
   Sidebar,
   SidebarContent,
@@ -10,15 +19,6 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import Image from "next/image";
-import { sidebarLinks } from "@/data/dashboard/sidebarData";
-import { Link } from "@/i18n/routing";
-import { usePathname, useRouter } from "next/navigation";
-import { useLocale, useTranslations } from "next-intl";
-import { useDispatch, useSelector } from "react-redux";
-import { logout } from "@/redux/slices/authSlice";
-import { clearProfile } from "@/redux/slices/profileSlice";
-import { RootState } from "@/redux/store";
 
 export function AppSidebar() {
   const currentPath = usePathname();

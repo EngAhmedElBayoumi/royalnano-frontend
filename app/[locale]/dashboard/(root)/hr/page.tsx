@@ -65,11 +65,11 @@ function HrPage() {
         <Image
           width="24"
           height="24"
-          alt="vacations"
+          alt={t("attendance")}
           src="/assets/icons/dashboard/hr/attendance.svg"
         />
       ),
-      label: "Attendance",
+      label: t("attendance"),
       content: <Attendance />,
     },
   ];

@@ -15,19 +15,21 @@ import { verifyOTPApi } from "./services/verifyOTP";
 import { resetPasswordPApi } from "./services/resetPassword";
 import authReducer from "./slices/authSlice";
 import profileReducer from "./slices/profileSlice";
-import { branchApi } from "./services/dashboard/branchesApi";
-import { movementApi } from "./services/dashboard/movementApi";
-import { preorderApi } from "./services/dashboard/preorderApi";
+import { branchApi } from "./services/dashboard/inventory/branchesApi";
+import { movementApi } from "./services/dashboard/inventory/movementApi";
+import { preorderApi } from "./services/dashboard/inventory/preorderApi";
 import { refreshTokenApi } from "./services/refreshTokenApi";
-import { itemsApi } from "./services/dashboard/itemsApi";
-import { itemCategoryApi } from "./services/dashboard/itemCategoryApi";
-import { stockApi } from "./services/dashboard/stockApi";
+import { itemsApi } from "./services/dashboard/inventory/itemsApi";
+import { itemCategoryApi } from "./services/dashboard/inventory/itemCategoryApi";
+import { stockApi } from "./services/dashboard/inventory/stockApi";
 import { bonusesApi } from "./services/dashboard/hr/bonusesApi";
 import { employeeApi } from "./services/dashboard/hr/employeeApi";
 import { salesQuotationApi } from "./services/dashboard/sales/salesQuotationsApi";
 import { salesCustomerApi } from "./services/dashboard/sales/salesCustomerApi";
 import { salesInvoiceApi } from "./services/dashboard/sales/salesInvoiceApi";
 import { salesOrderApi } from "./services/dashboard/sales/salesOrderApi";
+import { departmentApi } from "./services/dashboard/hr/departmentApi";
+import { supplierApi } from "./services/dashboard/purchase/supplierApi";
 
 // Create separate configs for each reducer
 const authPersistConfig = {
@@ -72,6 +74,8 @@ export const store = configureStore({
     [salesOrderApi.reducerPath]: salesOrderApi.reducer,
     [employeeApi.reducerPath]: employeeApi.reducer,
     [bonusesApi.reducerPath]: bonusesApi.reducer,
+    [departmentApi.reducerPath]: departmentApi.reducer,
+    [supplierApi.reducerPath]: supplierApi.reducer,
     auth: persistedAuthReducer,
     profile: persistedProfileReducer,
   },
@@ -104,7 +108,9 @@ export const store = configureStore({
       .concat(salesInvoiceApi.middleware)
       .concat(salesOrderApi.middleware)
       .concat(employeeApi.middleware)
-      .concat(bonusesApi.middleware);
+      .concat(bonusesApi.middleware)
+      .concat(departmentApi.middleware)
+      .concat(supplierApi.middleware);
   },
 });
 

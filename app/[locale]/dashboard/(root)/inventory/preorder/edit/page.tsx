@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 import {
   useGetPreorderByIdQuery,
   useUpdatePreorderMutation,
-} from "@/redux/services/dashboard/preorderApi";
+} from "@/redux/services/dashboard/inventory/preorderApi";
 
 import PreorderForm, {
   PreorderFormValues,
@@ -37,7 +37,7 @@ export default function EditPreorder() {
   };
 
   const handleSubmit = async (data: PreorderFormValues) => {
-    console.log(data)
+    console.log(data);
     try {
       const payload = {
         ...data,

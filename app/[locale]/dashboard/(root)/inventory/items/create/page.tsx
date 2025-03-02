@@ -2,12 +2,12 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { useCreateItemMutation } from "@/redux/services/dashboard/itemsApi";
+import { useCreateItemMutation } from "@/redux/services/dashboard/inventory/itemsApi";
 import IconWithTitle from "@/components/dashboard/IconWithTitle";
+import CustomModal from "@/components/modals/CustomModal";
 import ItemForm, {
   ItemFormValues,
 } from "@/components/dashboard/forms/inventory/ItemForm";
-import CustomModal from "@/components/modals/CustomModal";
 
 export default function CreateItem() {
   const router = useRouter();

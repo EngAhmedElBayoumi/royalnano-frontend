@@ -298,13 +298,15 @@ import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
 import { salesOrderSchema } from "@/lib/validations/dashboard/sales/salesOrderSchema";
 import DatePicker from "@/components/formFields/DatePicker";
-import { useGetItemsQuery } from "@/redux/services/dashboard/itemsApi";
+import { useGetItemsQuery } from "@/redux/services/dashboard/inventory/itemsApi";
 import { useGetMiniSalesCustomerQuery } from "@/redux/services/dashboard/sales/salesCustomerApi";
 import CustomSelect from "@/components/formFields/CustomSelect";
 import { useState } from "react";
-import { useGetBranchesQuery } from "@/redux/services/dashboard/branchesApi";
+// import { useGetBranchesQuery } from "@/redux/services/dashboard/branchesApi";
 import { useRouter } from "next/navigation";
 import { useUpdateSalesOrderMutation } from "@/redux/services/dashboard/sales/salesOrderApi";
+import { useGetBranchesQuery } from "@/redux/services/dashboard/inventory/branchesApi";
+// import { useGetBranchesQuery } from "@/redux/services/dashboard/inventory/branchesApi";
 
 interface SalesOrderFormProps {
   defaultValues?: SalesOrderFormValues;
@@ -335,6 +337,7 @@ const SalesOrderForm = ({ defaultValues, onSuccess }: SalesOrderFormProps) => {
   const [updateSalesOrder] = useUpdateSalesOrderMutation();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  // console.log(branchesData.results)
   const form = useForm<SalesOrderFormValues>({
     resolver: zodResolver(salesOrderSchema),
     defaultValues: defaultValues || {
@@ -353,7 +356,11 @@ const SalesOrderForm = ({ defaultValues, onSuccess }: SalesOrderFormProps) => {
     name: "items",
   });
 
-  const { data: itemsData, isLoading: isItemsLoading } = useGetItemsQuery({
+  const {
+    data: itemsData,
+    isLoading: isItemsLoading,
+    error: itemsError,
+  } = useGetItemsQuery({
     search: "",
     ordering: "id",
     page: 1,
@@ -368,6 +375,13 @@ const SalesOrderForm = ({ defaultValues, onSuccess }: SalesOrderFormProps) => {
         value: customer.id.toString(),
         label: customer.customer_name,
       }))
+    ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      customers.map(
+        (customer: { id: { toString: () => any }; customer_name: any }) => ({
+          value: customer.id.toString(),
+          label: customer.customer_name,
+        })
+      )
     : [];
 
   const [itemTypes, setItemTypes] = useState<("existing" | "custom")[]>([]);
@@ -490,13 +504,18 @@ const SalesOrderForm = ({ defaultValues, onSuccess }: SalesOrderFormProps) => {
               const itemType = itemTypes[index];
 
               return (
-                <div key={field.id} className="col-span-2 border p-4 rounded-lg mb-4">
+                <div
+                  key={field.id}
+                  className="col-span-2 border p-4 rounded-lg mb-4"
+                >
                   <div className="flex gap-2 mb-2">
                     <button
                       type="button"
                       onClick={() => handleItemTypeChange(index, "existing")}
                       className={`p-2 rounded ${
-                        itemType === "existing" ? "bg-primary text-white" : "bg-gray-200"
+                        itemType === "existing"
+                          ? "bg-primary text-white"
+                          : "bg-gray-200"
                       }`}
                     >
                       Add Existing Item
@@ -505,7 +524,9 @@ const SalesOrderForm = ({ defaultValues, onSuccess }: SalesOrderFormProps) => {
                       type="button"
                       onClick={() => handleItemTypeChange(index, "custom")}
                       className={`p-2 rounded ${
-                        itemType === "custom" ? "bg-primary text-white" : "bg-gray-200"
+                        itemType === "custom"
+                          ? "bg-primary text-white"
+                          : "bg-gray-200"
                       }`}
                     >
                       Add Custom Item
@@ -518,10 +539,12 @@ const SalesOrderForm = ({ defaultValues, onSuccess }: SalesOrderFormProps) => {
                       control={form.control}
                       name={`items.${index}.item`}
                       label={t("SalesOrder.selectItem")}
-                      options={existingItems.map((item: { id: number; item_name: string }) => ({
-                        value: item.id.toString(),
-                        label: item.item_name,
-                      }))}
+                      options={existingItems.map(
+                        (item: { id: number; item_name: string }) => ({
+                          value: item.id.toString(),
+                          label: item.item_name,
+                        })
+                      )}
                       placeholder={t("SalesOrder.selectItem")}
                       onChange={(value) => {
                         if (value) {

@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { useCreateMovementMutation } from "@/redux/services/dashboard/movementApi";
+import { useCreateMovementMutation } from "@/redux/services/dashboard/inventory/movementApi";
 import IconWithTitle from "@/components/dashboard/IconWithTitle";
 import CustomModal from "@/components/modals/CustomModal";
 import MovementForm, {

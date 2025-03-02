@@ -1,6 +1,6 @@
-import CustomButton from "@/components/formFields/CustomButton";
-import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
+import CustomButton from "@/components/formFields/CustomButton";
 
 export default function Forbidden() {
   return (

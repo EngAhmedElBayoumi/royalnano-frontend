@@ -32,7 +32,11 @@ const SwitchField = <T extends FieldValues>({
           <FormLabel className="text-base">{label}</FormLabel>
 
           <FormControl>
-            <Switch checked={field.value} onCheckedChange={field.onChange} />
+            <Switch
+              checked={field.value}
+              onCheckedChange={field.onChange}
+              dir="ltr"
+            />
           </FormControl>
         </FormItem>
       )}

@@ -3,7 +3,7 @@ import { Link } from "@/i18n/routing";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { movementSchema } from "@/lib/validations/dashboard/inventory/movementSchema";
-import { useGetItemsQuery } from "@/redux/services/dashboard/itemsApi";
+import { useGetItemsQuery } from "@/redux/services/dashboard/inventory/itemsApi";
 import { Form } from "@/components/ui/form";
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";

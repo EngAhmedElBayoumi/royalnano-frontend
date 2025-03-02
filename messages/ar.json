@@ -109,9 +109,12 @@
       "salary": "الراتب",
       "address": "العنوان",
       "branch": "الفرع",
+      "department": "القسم",
       "isUser": "مستخدم",
+      "password": "كلمة المرور",
       "noEmployeesDataFound": "لا توجد بيانات للموظفين",
-      "addEmployees": "إضافة موظف"
+      "addEmployee": "إضافة موظف",
+      "editEmployee": "تعديل الموظف"
     },
     "bonuses": {
       "employee": "الموظف",
@@ -120,7 +123,19 @@
       "type": "النوع",
       "date": "التاريخ",
       "addBonus": "إضافة مكافئة أو خصم",
+      "editBonus": "تعديل مكافئة أو خصم",
       "noBonusesDataFound": "لا توجد بيانات للمكافئات و الخصومات"
+    },
+    "attendance": {
+      "employee": "الموظف",
+      "branch": "الفرع",
+      "location": "الموقع",
+      "attendance": "الحضور",
+      "departure": "المغادرة",
+      "date": "التاريخ",
+      "addAttendance": "إضافة حضور",
+      "editAttendance": "تعديل الحضور",
+      "noAttendanceDataFound": "لا توجد بيانات للحضور"
     }
   },
   "Sales": {

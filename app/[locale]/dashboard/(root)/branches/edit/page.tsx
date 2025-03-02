@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 import {
   useGetBranchByIdQuery,
   useUpdateBranchMutation,
-} from "@/redux/services/dashboard/branchesApi";
+} from "@/redux/services/dashboard/inventory/branchesApi";
 import IconWithTitle from "@/components/dashboard/IconWithTitle";
 import { BranchFormValues } from "@/components/dashboard/forms/BranchForm";
 import BranchForm from "@/components/dashboard/forms/BranchForm";
@@ -36,7 +36,7 @@ export default function EditBranchs() {
       };
 
       const response = await updateBranch({ id, data: payload });
-      if (response.error) throw new Error("creation failed");
+      if (response.error) throw new Error("edit failed");
       else router.push("/dashboard/branches");
     } catch (error) {
       setIsModalOpen(true);

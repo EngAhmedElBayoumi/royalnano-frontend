@@ -1,5 +1,5 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
-import { baseQuery } from "../common";
+import { baseQuery } from "../../common";
 
 export const preorderApi = createApi({
   reducerPath: "preorderApi",
@@ -10,7 +10,6 @@ export const preorderApi = createApi({
         url: "inventory/preorder",
         method: "GET",
         params: { search, ordering, page, page_size },
-
       }),
     }),
 
@@ -31,9 +30,12 @@ export const preorderApi = createApi({
         body: data,
       }),
     }),
-
-    
   }),
 });
 
-export const { useGetPreorderQuery,useCreatePreorderMutation, useGetPreorderByIdQuery, useUpdatePreorderMutation } = preorderApi;
+export const {
+  useGetPreorderQuery,
+  useCreatePreorderMutation,
+  useGetPreorderByIdQuery,
+  useUpdatePreorderMutation,
+} = preorderApi;

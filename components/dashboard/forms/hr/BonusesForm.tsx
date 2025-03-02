@@ -68,6 +68,7 @@ const BonusesForm = ({ onSubmit, defaultValues }: BonusesFormProps) => {
               name="amount"
               label={t("amount")}
               placeholder={t("amount")}
+              type="number"
             />
             <TextInput
               control={form.control}

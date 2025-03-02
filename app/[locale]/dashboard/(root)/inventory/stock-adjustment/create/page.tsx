@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 
-import { useCreateStockAdjustmentMutation } from "@/redux/services/dashboard/stockApi";
+import { useCreateStockAdjustmentMutation } from "@/redux/services/dashboard/inventory/stockApi";
 import IconWithTitle from "@/components/dashboard/IconWithTitle";
 import StockAdjustmentForm, {
   StockAdjustmentFormValues,

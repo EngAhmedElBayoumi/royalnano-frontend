@@ -6,7 +6,7 @@ import { useTranslations } from "next-intl";
 import {
   useGetCategoryByIdQuery,
   useUpdateCategoryMutation,
-} from "@/redux/services/dashboard/itemCategoryApi";
+} from "@/redux/services/dashboard/inventory/itemCategoryApi";
 
 import CategoryForm, {
   CategoryFormValues,

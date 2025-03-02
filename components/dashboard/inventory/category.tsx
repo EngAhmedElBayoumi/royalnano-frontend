@@ -1,7 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { useGetItemCategoryQuery } from "@/redux/services/dashboard/itemCategoryApi";
+import { useGetItemCategoryQuery } from "@/redux/services/dashboard/inventory/itemCategoryApi";
 import TableSkelton from "@/components/dashboard/skelton/TableSkelton";
 import CardsSkelton from "@/components/dashboard/skelton/CardsSkelton";
 import LoadingError from "@/components/dashboard/LoadingError";
