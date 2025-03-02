@@ -132,6 +132,7 @@
       "location": "الموقع",
       "attendance": "الحضور",
       "departure": "المغادرة",
+      "date": "التاريخ",
       "addAttendance": "إضافة حضور",
       "editAttendance": "تعديل الحضور",
       "noAttendanceDataFound": "لا توجد بيانات للحضور"

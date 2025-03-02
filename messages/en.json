@@ -132,6 +132,7 @@
       "location": "Location",
       "attendance": "Attendance",
       "departure": "Departure",
+      "date": "Date",
       "addAttendance": "Add Attendance",
       "editAttendance": "Edit Attendance",
       "noAttendanceDataFound": "No Attendance data found"
