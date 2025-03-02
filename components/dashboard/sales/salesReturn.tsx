@@ -4,8 +4,8 @@ import TableSkelton from "../skelton/TableSkelton";
 import CardsSkelton from "../skelton/CardsSkelton";
 import Image from "next/image";
 import { useRouter } from "@/i18n/routing";
-import { useGetSalesInvoiceQuery } from "@/redux/services/dashboard/sales/salesInvoiceApi";
 import { useState } from "react";
+import { useGetSalesReturnQuery } from "@/redux/services/dashboard/sales/salesReturnApi";
 
 export default function SalesReturn() {
   const [page, setPage] = useState(1);
@@ -17,8 +17,8 @@ export default function SalesReturn() {
     isLoading,
     error,
 
-    data: salesInvoices,
-  } = useGetSalesInvoiceQuery({
+    data: SalesReturn,
+  } = useGetSalesReturnQuery({
     search: "",
     ordering: "id",
     page,
@@ -26,8 +26,8 @@ export default function SalesReturn() {
   });
  
   const router = useRouter();
-console.log(salesInvoices)
-const transformedData = salesInvoices?.results.map((invoice: { id: string; customer: { customer_name: string; }; due_date: string; status: string; total_amount: string; items: { custom_item_name: string; item: string; quantity: string; unit_price: string; discount: string; total: string; }[]; }) => ({
+console.log(SalesReturn)
+const transformedData = SalesReturn?.results.map((invoice: { id: string; customer: { customer_name: string; }; due_date: string; status: string; total_amount: string; items: { custom_item_name: string; item: string; quantity: string; unit_price: string; discount: string; total: string; }[]; }) => ({
   id: invoice.id,
   quotation_number: invoice.id, 
   customer_name: invoice.customer.customer_name,
@@ -95,7 +95,7 @@ const transformedData = salesInvoices?.results.map((invoice: { id: string; custo
   buttonText="Add Sales Invoice"
   ButtonEvent={handleClick}
   onPageChange={handlePageChange}
-  totalRecords={salesInvoices?.count || 0} 
+  totalRecords={SalesReturn?.count || 0} 
 />
       )}
     </>

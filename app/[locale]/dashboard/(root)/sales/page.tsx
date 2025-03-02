@@ -7,6 +7,7 @@ import Salaries from "@/components/dashboard/hr/salaries";
 import SalesInvoice from "@/components/dashboard/sales/salesInvoice";
 import SalesOrder from "@/components/dashboard/sales/salesOrder";
 import SalesQuotation from "@/components/dashboard/sales/salesQuotation";
+import SalesReturn from "@/components/dashboard/sales/salesReturn";
 
 function SalesPage() {
   const t = useTranslations("Sales");
@@ -24,7 +25,7 @@ function SalesPage() {
           src="/assets/icons/dashboard/sales/sales.svg"
         />
       ),
-      content: <div>dd</div>,
+      content: <SalesReturn/>,
     },
     {
       icon: (
