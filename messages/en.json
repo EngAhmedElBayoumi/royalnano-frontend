@@ -136,6 +136,16 @@
       "addAttendance": "Add Attendance",
       "editAttendance": "Edit Attendance",
       "noAttendanceDataFound": "No Attendance data found"
+    },
+    "vacation": {
+      "employee": "Employee",
+      "start_date": "From",
+      "end_date": "To",
+      "status": "Status",
+      "reason": "Reason",
+      "addVacation": "Add Vacation",
+      "editVacation": "Edit Vacation",
+      "noVacationDataFound": "No Vacation data found"
     }
   },
   "Sales": {

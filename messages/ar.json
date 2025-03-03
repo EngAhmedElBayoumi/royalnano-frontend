@@ -136,6 +136,16 @@
       "addAttendance": "إضافة حضور",
       "editAttendance": "تعديل الحضور",
       "noAttendanceDataFound": "لا توجد بيانات للحضور"
+    },
+    "vacation": {
+      "employee": "الموظف",
+      "start_date": "من",
+      "end_date": "إلى",
+      "status": "الحالة",
+      "reason": "السبب",
+      "addVacation": "إضافة إجازة",
+      "editVacation": "تعديل الإجازة",
+      "noVacationDataFound": "لا توجد بيانات للإجازات"
     }
   },
   "Sales": {
