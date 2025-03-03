@@ -1,8 +1,8 @@
 "use client";
 import { useState } from "react";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 import { useGetAttendanceQuery } from "@/redux/services/dashboard/hr/attendanceApi";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
