@@ -75,12 +75,12 @@ export default function Attendance() {
   ) : (
     <CustomTable
       emptyMessage={t("noAttendanceDataFound")}
-      editRoute="/dashboard/hr/attendance/edit/"
+      // editRoute="/dashboard/hr/attendance/edit/"
       data={transformedData}
       rows={10}
       columns={columns}
       cardData={cardsData}
-      buttonText={t("addAttendance")}
+      // buttonText={t("addAttendance")}
       ButtonEvent={handleClick}
       onPageChange={handlePageChange}
       totalRecords={data.count}

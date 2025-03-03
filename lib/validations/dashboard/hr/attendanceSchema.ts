@@ -10,7 +10,8 @@ const isSameDay = (date1: Date, date2: Date): boolean => {
 };
 export const attendanceSchema = z
   .object({
-    name: z.string().nonempty("Name is required"),
+    employee: z.coerce.number().min(1, "Employee must be selected"),
+    branch: z.coerce.number().min(1, "Branch must be selected"),
     attendance: z.date({ required_error: "Attendance time is required" }),
     departure: z.date({ required_error: "Departure time is required" }),
     working_hours: z.number().min(0, "Working hours must be a positive number"),
