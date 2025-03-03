@@ -1,10 +1,5 @@
 "use client";
-import React, {
-  useState,
-  useEffect,
-  MouseEventHandler,
-  ReactNode,
-} from "react";
+import React, { useState, useEffect, MouseEventHandler, ReactNode } from "react";
 import { DataTable, DataTableFilterMeta } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { InputText } from "primereact/inputtext";
@@ -86,6 +81,7 @@ export default function CustomTable({
   });
   const [globalFilterValue, setGlobalFilterValue] = useState<string>("");
   const [page, setPage] = useState(0);
+  const [expandedRows, setExpandedRows] = useState<{ [key: number]: boolean }>({});
 
   useEffect(() => {
     setCustomers(data);
@@ -101,9 +97,17 @@ export default function CustomTable({
     e.stopPropagation();
     router.push(`${viewRoute}?id=${id}`);
   };
+
   const handleEditClick = (id: number, e: React.MouseEvent) => {
     e.stopPropagation();
     router.push(`${editRoute}?id=${id}`);
+  };
+
+  const toggleExpand = (id: number) => {
+    setExpandedRows((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }));
   };
 
   const renderHeader = () => (
@@ -166,7 +170,6 @@ export default function CustomTable({
         <div className="mb-5 bg-dashboardBg p-4 ltr:rounded-tr-[20px] rtl:rounded-tl-[20px] rounded-b-[20px]">
           <DataTable
             value={customers}
-            // paginator
             rows={rows}
             filters={filters}
             globalFilterFields={columns.map((col) => col.field)}
@@ -196,12 +199,29 @@ export default function CustomTable({
                 body={(rowData: DataInTable) => {
                   const fieldValue = rowData[col.field];
                   if (Array.isArray(fieldValue)) {
-                    return fieldValue.map((item, index) => (
-                      <div key={index}>
-                        {item.item_name || item.name || JSON.stringify(item)}
-                       {index===fieldValue.length-1 ? "": <hr className="border-black border-2 my-2" />}
+                    const isExpanded = expandedRows[rowData.id] || false;
+                    const itemsToShow = isExpanded ? fieldValue : fieldValue.slice(0, 3);
+
+                    return (
+                      <div>
+                        {itemsToShow.map((item, index) => (
+                          <div key={index}>
+                            {item.item_name || item.name || JSON.stringify(item)}
+                            {index < itemsToShow.length - 1 && (
+                              <hr className="border-black border-2 my-2" />
+                            )}
+                          </div>
+                        ))}
+                        {fieldValue.length > 3 && (
+                          <Button
+                            className="text-white mt-2 border border-white"
+                            onClick={() => toggleExpand(rowData.id)}
+                          >
+                            {isExpanded ? "View Less" : "View More"}
+                          </Button>
+                        )}
                       </div>
-                    ));
+                    );
                   }
 
                   if (col.field === "verified") {

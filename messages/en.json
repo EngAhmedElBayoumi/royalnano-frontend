@@ -149,8 +149,9 @@
     }
   },
   "Sales": {
+    "salesInvoice": "Sales Invoice",
     "cancel": "Cancel",
-    "save": "save",
+    "save": "Save",
     "sales": "Sales",
     "customer": "Customer",
     "salesQuotation": "Sales Quotation",
@@ -190,6 +191,27 @@
       "status": "Status",
       "save": "Save",
       "cancel": "Cancel"
+    },
+    "SalesInvoice": {
+      "selectItem": "Select Item",
+      "invoiceDate": "Invoice Date",
+      "dueDate": "Due Date",
+      "salesRepresentative": "Sales Representative",
+      "totalAmount": "Total Amount",
+      "status": "Status",
+      "description": "Description",
+      "salesOrder": "Sales Order",
+      "customer": "Customer",
+      "branch": "Branch",
+      "quantity": "Quantity",
+      "salesInvoice": "Sales Invoice",
+      "customItemName": "Custom Item Name",
+      "customPrice": "Custom Price",
+      "unitPrice": "Unit Price",
+      "discount": "Discount",
+      "discountPercent": "Discount Percent",
+      "total": "Total",
+      "item": "Item"
     }
   },
   "website": {

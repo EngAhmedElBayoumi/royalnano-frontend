@@ -8,47 +8,56 @@ import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 export default function CreateSalesInvoice() {
-
   const router = useRouter();
   const t = useTranslations("Sales");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [createSalesInvoice] = useCreateSalesInvoiceMutation();
+
+  // Handle modal open/close
   const handleModalChange = (isOpen: boolean) => {
     setIsModalOpen(isOpen);
   };
 
+  // Handle form submission
   const handleSubmit = async (data: SalesInvoiceFormValues): Promise<void> => {
     try {
-      console.log("submit btn clicked");
+      console.log("Submit button clicked");
       const payload = {
         ...data,
       };
-  
-      console.log(data);
+
+      console.log("Form data:", data);
+
+      // Send the request to create a sales invoice
       const response = await createSalesInvoice(payload);
-      console.log("req sent");
-      console.log(response);
-  
+      console.log("Request sent");
+
       if ("error" in response) {
-        throw new Error("creation failed");
+        // Handle API error
+        throw new Error("Creation failed");
       }
-  
+
+      // Redirect to the sales page on success
       router.push(`/dashboard/sales?tab=${t("sales")}`);
     } catch (error) {
+      // Show error modal and log the error
       setIsModalOpen(true);
-      console.error("error in creation", error);
+      console.error("Error in creation:", error);
     }
   };
-  
+
   return (
     <main className="mx-7 my-5">
       <div className="flex">
+        {/* Error Modal */}
         <CustomModal
           isOpen={isModalOpen}
           onChange={handleModalChange}
           title="Error!"
-          description="Your Request wasn't processed successfully.."
+          description="Your request wasn't processed successfully. Please try again."
         />
+
+        {/* Page Title */}
         <IconWithTitle
           imageSrc="/assets/icons/add.svg"
           title="Add Invoice"
@@ -56,11 +65,10 @@ export default function CreateSalesInvoice() {
           textColor="primary"
         />
       </div>
+
+      {/* Form Container */}
       <div className="bg-dashboardBg px-6 pt-5 pb-8 ltr:rounded-r-[20px] ltr:rounded-bl-[20px] rtl:rounded-l-[20px] rtl:rounded-br-[20px] ltr:lg:pr-[200px] rtl:lg:pl-[200px]">
         <SalesInvoiceForm onSubmit={handleSubmit} />
-        
-
-
       </div>
     </main>
   );
