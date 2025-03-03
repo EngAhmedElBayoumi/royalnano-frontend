@@ -65,7 +65,7 @@ const transformedData = salesInvoices?.results.map((invoice: { id: string; custo
     { title: "Paid", num: 48 },
   ];
   const handleClick = () => {
-    router.push("/dashboard/sales/sales-invoices/create");
+    router.push("/dashboard/sales/sales-invoice/create");
   };
   return (
     <>
@@ -87,7 +87,7 @@ const transformedData = salesInvoices?.results.map((invoice: { id: string; custo
       ) : (
         <CustomTable
   emptyMessage="no sales Invoices data found"
-  editRoute="/dashboard/inventory/sales-invoice/edit/"
+  editRoute="/dashboard/sales/sales-invoice/edit/"
   data={transformedData} 
   rows={10}
   columns={columns}

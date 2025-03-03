@@ -83,13 +83,13 @@ export default function SalesCustomer() {
     { field: "phone_number", header: "Phone Number" },
     { field: "email", header: "Email" },
     { field: "address", header: "Address" },
-    { field: "city", header: "City" },
-    { field: "country", header: "Country" },
-    { field: "notes", header: "Notes" },
+    // { field: "city", header: "City" },
+    // { field: "country", header: "Country" },
+    // { field: "notes", header: "Notes" },
     { field: "branch_name", header: "Branch Name" },
-    { field: "customer_type", header: "Customer Type" },
-    { field: "tax_number", header: "Tax Number" },
-    { field: "national_id", header: "National ID" },
+    // { field: "customer_type", header: "Customer Type" },
+    // { field: "tax_number", header: "Tax Number" },
+    // { field: "national_id", header: "National ID" },
   ];
 
   const cardsData = [

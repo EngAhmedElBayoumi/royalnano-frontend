@@ -6,7 +6,7 @@ import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
 import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
-import { salesOrderSchema } from "@/lib/validations/dashboard/sales/salesOrderSchema";
+import { salesInvoiceSchema } from "@/lib/validations/dashboard/sales/salesInvoiceSchema";
 import DatePicker from "@/components/formFields/DatePicker";
 import { useGetMiniSalesCustomerQuery } from "@/redux/services/dashboard/sales/salesCustomerApi";
 import CustomSelect from "@/components/formFields/CustomSelect";
@@ -14,48 +14,54 @@ import { useState } from "react";
 import { useGetItemsQuery } from "@/redux/services/dashboard/inventory/itemsApi";
 import { useGetBranchesQuery } from "@/redux/services/dashboard/inventory/branchesApi";
 
-interface SalesOrderFormProps {
-  onSubmit: (data: SalesOrderFormValues) => Promise<void>;
-  defaultValues?: SalesOrderFormValues;
+interface SalesInvoiceFormProps {
+  onSubmit: (data: SalesInvoiceFormValues) => Promise<void>;
+  defaultValues?: SalesInvoiceFormValues;
 }
 
-export interface SalesOrderFormValues {
-  order_date: string;
+export interface SalesInvoiceFormValues {
+  invoice_date: string;
+  due_date: string;
+  sales_representative: string;
+  total_amount: string;
+  status: string;
+  description: string;
+  sales_order: number;
   customer: number;
   branch: number;
-  sales_representative: string;
-  description: string;
   items: {
     quantity: number;
-    item: number | null;
-    custom_item_name: string;
-    custom_price: string;
+    item: number | null; // Existing item ID (null if custom item is used)
+    custom_item_name: string; // Custom item name (empty if existing item is used)
+    custom_price: string; // Custom item price (empty if existing item is used)
     discount: string;
     discount_percent: string;
   }[];
-  status: string;
 }
-  
 
-const SalesOrderForm = ({ onSubmit, defaultValues }: SalesOrderFormProps) => {
+const SalesInvoiceForm = ({ onSubmit, defaultValues }: SalesInvoiceFormProps) => {
   const { data: customers } = useGetMiniSalesCustomerQuery({});
-  const {
-    data: branchesData,
-   
-  } = useGetBranchesQuery({
-
+  const { data: branchesData } = useGetBranchesQuery({});
+  const { data: itemsData, isLoading: isItemsLoading } = useGetItemsQuery({
+    search: "",
+    ordering: "id",
+    page: 1,
+    page_size: 10,
   });
-  // console.log(branchesData.results)
-  const form = useForm<SalesOrderFormValues>({
-    resolver: zodResolver(salesOrderSchema),
+
+  const form = useForm<SalesInvoiceFormValues>({
+    resolver: zodResolver(salesInvoiceSchema),
     defaultValues: defaultValues || {
-      order_date: "",
-      customer: 1,
-      branch: 1,
-      sales_representative: "1",
-      description: "random nnnnnn",
+      invoice_date: "",
+      due_date: "",
+      sales_representative: "",
+      total_amount: "",
+      status: "",
+      description: "",
+      sales_order: 0,
+      customer: 0,
+      branch: 0,
       items: [],
-      status: "pending",
     },
   });
 
@@ -64,26 +70,10 @@ const SalesOrderForm = ({ onSubmit, defaultValues }: SalesOrderFormProps) => {
     name: "items",
   });
 
-  const { data: itemsData, isLoading: isItemsLoading, error: itemsError } = useGetItemsQuery({
-    search: "",
-    ordering: "id",
-    page: 1,
-    page_size: 10,
-  });
-
-  const existingItems = itemsData?.results || [];
-
-  const t = useTranslations("Sales");
-  const customerOptions = customers
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    ? customers.map((customer: { id: { toString: () => any; }; customer_name: any; }) => ({
-        value: customer.id.toString(),
-        label: customer.customer_name,
-      }))
-    : [];
-
+  // State to track whether each item is "existing" or "custom"
   const [itemTypes, setItemTypes] = useState<("existing" | "custom")[]>([]);
 
+  // Function to handle switching between "existing" and "custom" item types
   const handleItemTypeChange = (index: number, type: "existing" | "custom") => {
     setItemTypes((prev) => {
       const newItemTypes = [...prev];
@@ -91,14 +81,16 @@ const SalesOrderForm = ({ onSubmit, defaultValues }: SalesOrderFormProps) => {
       return newItemTypes;
     });
 
+    // Reset fields when switching between existing and custom items
     if (type === "existing") {
-      form.setValue(`items.${index}.custom_item_name`, "");
-      form.setValue(`items.${index}.custom_price`, "");
+      form.setValue(`items.${index}.custom_item_name`, ""); // Clear custom item name
+      form.setValue(`items.${index}.custom_price`, ""); // Clear custom item price
     } else {
-      form.setValue(`items.${index}.item`, null);
+      form.setValue(`items.${index}.item`, null); // Clear existing item ID
     }
   };
 
+  // Function to add a new item to the form
   const handleAddItem = () => {
     append({
       quantity: 1,
@@ -108,62 +100,103 @@ const SalesOrderForm = ({ onSubmit, defaultValues }: SalesOrderFormProps) => {
       discount: "",
       discount_percent: "",
     });
-    setItemTypes((prev) => [...prev, "existing"]);
+    setItemTypes((prev) => [...prev, "existing"]); // Default to "existing" type
   };
-  const branchesOptions =
-  branchesData?.results?.map((branch: { id: number; name: string }) => ({
-      value: branch.id.toString(),
-      label: branch.name,
-    })) || [];
+
+  const t = useTranslations("Sales");
+
+  const customerOptions = customers
+    ? customers.map((customer: { id: number; customer_name: string }) => ({
+        value: customer.id.toString(),
+        label: customer.customer_name,
+      }))
+    : [];
+
+  const branchesOptions = branchesData?.results?.map((branch: { id: number; name: string }) => ({
+    value: branch.id.toString(),
+    label: branch.name,
+  })) || [];
+
+  const existingItems = itemsData?.results || [];
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <section className="min-h-[60vh]">
           <div className="grid sm:grid-cols-2 gap-x-4 gap-y-2 xl:gap-y-5 lg:gap-x-10">
+            {/* Main Form Fields */}
             <DatePicker
               control={form.control}
-              name="order_date"
-              label={t("SalesOrder.orderDate")}
-              placeholder={t("SalesOrder.orderDate")}
+              name="invoice_date"
+              label={t("SalesInvoice.invoiceDate")}
+              placeholder={t("SalesInvoice.invoiceDate")}
+            />
+            <DatePicker
+              control={form.control}
+              name="due_date"
+              label={t("SalesInvoice.dueDate")}
+              placeholder={t("SalesInvoice.dueDate")}
+            />
+            <TextInput
+              control={form.control}
+              name="sales_representative"
+              label={t("SalesInvoice.salesRepresentative")}
+              placeholder={t("SalesInvoice.salesRepresentative")}
+            />
+            <TextInput
+              control={form.control}
+              name="total_amount"
+              label={t("SalesInvoice.totalAmount")}
+              placeholder={t("SalesInvoice.totalAmount")}
+              type="number"
+            />
+            <TextInput
+              control={form.control}
+              name="status"
+              label={t("SalesInvoice.status")}
+              placeholder={t("SalesInvoice.status")}
+            />
+            <TextInput
+              control={form.control}
+              name="description"
+              label={t("SalesInvoice.description")}
+              placeholder={t("SalesInvoice.description")}
+            />
+            <TextInput
+              control={form.control}
+              name="sales_order"
+              label={t("SalesInvoice.salesOrder")}
+              placeholder={t("SalesInvoice.salesOrder")}
+              type="number"
             />
             <CustomSelect
-            valueType="number"
+              valueType="number"
               control={form.control}
               name="customer"
-              label={t("SalesOrder.customer")}
-              placeholder={t("SalesOrder.customer")}
+              label={t("SalesInvoice.customer")}
+              placeholder={t("SalesInvoice.customer")}
               options={customerOptions}
               onChange={(value) => {
                 const customerId = parseInt(value, 10);
                 form.setValue("customer", customerId);
               }}
             />
-                <CustomSelect
-                            valueType="number"
+            <CustomSelect
+              valueType="number"
+              control={form.control}
+              name="branch"
+              label={t("SalesInvoice.branch")}
+              placeholder={t("SalesInvoice.branch")}
+              options={branchesOptions}
+            />
 
-            control={form.control}
-            name="branch"
-            label="Choose Branch"
-            placeholder="Choose Branch"
-            options={branchesOptions}
-          />
-            <TextInput
-              control={form.control}
-              name="sales_representative"
-              label={t("SalesOrder.salesRepresentative")}
-              placeholder={t("SalesOrder.salesRepresentative")}
-            />
-            <TextInput
-              control={form.control}
-              name="description"
-              label={t("SalesOrder.description")}
-              placeholder={t("SalesOrder.description")}
-            />
+            {/* Dynamic Items Section */}
             {fields.map((field, index) => {
               const itemType = itemTypes[index];
 
               return (
                 <div key={field.id} className="col-span-2 border p-4 rounded-lg mb-4">
+                  {/* Toggle Between Existing and Custom Items */}
                   <div className="flex gap-2 mb-2">
                     <button
                       type="button"
@@ -185,17 +218,18 @@ const SalesOrderForm = ({ onSubmit, defaultValues }: SalesOrderFormProps) => {
                     </button>
                   </div>
 
+                  {/* Existing Item Fields */}
                   {itemType === "existing" && (
                     <CustomSelect
-                    valueType="number" 
+                      valueType="number"
                       control={form.control}
                       name={`items.${index}.item`}
-                      label={t("SalesOrder.selectItem")}
+                      label={t("SalesInvoice.selectItem")}
                       options={existingItems.map((item: { id: number; item_name: string }) => ({
                         value: item.id.toString(),
                         label: item.item_name,
                       }))}
-                      placeholder={t("SalesOrder.selectItem")}
+                      placeholder={t("SalesInvoice.selectItem")}
                       onChange={(value) => {
                         if (value) {
                           const selectedItemId = parseInt(value, 10);
@@ -206,45 +240,46 @@ const SalesOrderForm = ({ onSubmit, defaultValues }: SalesOrderFormProps) => {
                     />
                   )}
 
+                  {/* Custom Item Fields */}
                   {itemType === "custom" && (
                     <>
                       <TextInput
                         control={form.control}
                         name={`items.${index}.custom_item_name`}
-                        label={t("SalesOrder.customItemName")}
-                        placeholder={t("SalesOrder.customItemName")}
+                        label={t("SalesInvoice.customItemName")}
+                        placeholder={t("SalesInvoice.customItemName")}
                       />
                       <TextInput
                         control={form.control}
                         name={`items.${index}.custom_price`}
-                        label={t("SalesOrder.customPrice")}
-                        placeholder={t("SalesOrder.customPrice")}
+                        label={t("SalesInvoice.customPrice")}
+                        placeholder={t("SalesInvoice.customPrice")}
                       />
                     </>
                   )}
 
+                  {/* Common Fields */}
                   <TextInput
                     control={form.control}
                     name={`items.${index}.quantity`}
-                    label={t("SalesOrder.quantity")}
-                    placeholder={t("SalesOrder.quantity")}
+                    label={t("SalesInvoice.quantity")}
+                    placeholder={t("SalesInvoice.quantity")}
                     type="number"
                   />
-
                   <TextInput
                     control={form.control}
                     name={`items.${index}.discount`}
-                    label={t("SalesOrder.discount")}
-                    placeholder={t("SalesOrder.discount")}
+                    label={t("SalesInvoice.discount")}
+                    placeholder={t("SalesInvoice.discount")}
                   />
-
                   <TextInput
                     control={form.control}
                     name={`items.${index}.discount_percent`}
-                    label={t("SalesOrder.discountPercent")}
-                    placeholder={t("SalesOrder.discountPercent")}
+                    label={t("SalesInvoice.discountPercent")}
+                    placeholder={t("SalesInvoice.discountPercent")}
                   />
 
+                  {/* Remove Item Button */}
                   {fields.length > 1 && (
                     <button
                       type="button"
@@ -257,18 +292,19 @@ const SalesOrderForm = ({ onSubmit, defaultValues }: SalesOrderFormProps) => {
                 </div>
               );
             })}
-           
+
+            {/* Add Item Button */}
+            <button
+              type="button"
+              onClick={handleAddItem}
+              className="bg-primary text-white p-2 rounded-lg mt-4"
+            >
+              Add Item
+            </button>
           </div>
-          <button
-            type="button"
-            onClick={handleAddItem}
-            className="bg-primary text-white p-2 rounded-lg mt-4"
-          >
-            Add Item
-          </button>
         </section>
         <div className="flex justify-end gap-2 mt-5">
-          <Link href={`/dashboard/sales?tab=${t("order")}`} passHref>
+          <Link href={`/dashboard/sales?tab=${t("invoice")}`} passHref>
             <CustomButton
               text={t("cancel")}
               className="text-white rounded-lg bg-secondary min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
@@ -285,4 +321,4 @@ const SalesOrderForm = ({ onSubmit, defaultValues }: SalesOrderFormProps) => {
   );
 };
 
-export default SalesOrderForm;
+export default SalesInvoiceForm;
