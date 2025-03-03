@@ -1,8 +1,11 @@
 "use client";
 import { useState } from "react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useGetAttendanceQuery } from "@/redux/services/dashboard/hr/attendanceApi";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
 import CustomTable from "@/components/dashboard/tables/CustomTable";
 import TableSkelton from "@/components/dashboard/skelton/TableSkelton";
 import CardsSkelton from "@/components/dashboard/skelton/CardsSkelton";
@@ -24,6 +27,11 @@ export default function Attendance() {
   const router = useRouter();
   const t = useTranslations("hr.attendance");
   const [page, setPage] = useState(1);
+
+  const permissions = useSelector(
+    (state: RootState) => state.profile.permissions
+  );
+  const canView = permissions["attendance"].view;
 
   const {
     data = { results: [] },
@@ -65,7 +73,16 @@ export default function Attendance() {
     router.push("/dashboard/hr/attendance/create");
   };
 
-  return isLoading ? (
+  return !canView ? (
+    <div className="flex items-center flex-col">
+      <Image
+        alt="not authorized"
+        src="/assets/icons/403.svg"
+        width="400"
+        height="400"
+      />
+    </div>
+  ) : isLoading ? (
     <>
       <CardsSkelton />
       <TableSkelton />
