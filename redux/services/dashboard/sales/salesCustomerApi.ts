@@ -10,28 +10,22 @@ export const salesCustomerApi = createApi({
         url: "sales/customer/",
         method: "GET",
         params: { search, ordering, page, page_size },
-
       }),
     }),
-
     createSalesCustomer: builder.mutation({
       query: (data) => ({
         url: "sales/customer/",
         method: "POST",
         body: data,
       }),
-    }),
+    }),   
     getMiniSalesCustomer: builder.query({
         query: ({ search, ordering, page, page_size }) => ({
           url: "sales/customer/mini/",
           method: "GET",
           params: { search, ordering, page, page_size },
-  
         }),
       }),
-
-
-    
     getSalesCustomerById: builder.query({
       query: (id) => `sales/customer/${id}/`,
     }),
@@ -42,8 +36,6 @@ export const salesCustomerApi = createApi({
         body: data,
       }),
     }),
-
-    
   }),
 });
 

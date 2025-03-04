@@ -1,6 +1,5 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import {
@@ -28,17 +27,15 @@ export default function LoginForm() {
   const router = useRouter();
 
   const form = useForm({
-    resolver: zodResolver(loginValidation),
+    resolver: zodResolver(loginValidation), // Ensure zodResolver is correctly set
     defaultValues: {
       email_address: "",
       password: "",
     },
+    mode: "onChange", // Validate on every change
   });
 
-  const onSubmit = async (data: {
-    email_address: string;
-    password: string;
-  }) => {
+  const onSubmit = async (data: { email_address: string; password: string }) => {
     try {
       const response = await Login(data).unwrap();
 
@@ -79,89 +76,106 @@ export default function LoginForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className=" gap-5 flex flex-col pt-[35px] pr-10 pl-7"
+        className="gap-5 flex flex-col pt-[35px] pr-10 pl-7"
       >
-        <p className="text-center  font-[600] text-[25px]"> Log in</p>
+        <p className="text-center font-[600] text-[25px]">Log in</p>
+
         <FormField
           control={form.control}
           name="email_address"
           render={({ field }) => (
             <FormItem className="flex flex-col gap-0 w-full">
-              <FormLabel className="text-subtitle font-[500] text-sm xl:text-[20px] ">
+              <FormLabel className="text-subtitle font-[500] text-sm xl:text-[20px]">
                 Email
               </FormLabel>
-              <FormControl className="flex-1 text-gray-200 ">
+              <FormControl className="flex-1 text-gray-200">
                 <Input
                   placeholder="Email"
                   type="email"
-                  className="p-1 bg-white border-[0.5] border-primary"
+                  className="p-1 bg-white border-[0.5px] border-primary"
                   {...field}
                 />
               </FormControl>
-              <FormMessage />
+              <FormMessage className="text-red-500 text-sm">
+                {form.formState.errors.email_address?.message}
+              </FormMessage>
             </FormItem>
           )}
         />
+
         <FormField
           control={form.control}
           name="password"
           render={({ field }) => (
-            <FormItem className="flex flex-col gap-0 w-full ">
-              <FormLabel className="text-subtitle font-[500] text-sm xl:text-[20px]  ">
+            <FormItem className="flex flex-col gap-0 w-full">
+              <FormLabel className="text-subtitle font-[500] text-sm xl:text-[20px]">
                 Password
               </FormLabel>
-              <FormControl className="flex-1 text-gray-200 ">
+              <FormControl className="flex-1 text-gray-200">
                 <Input
                   type="password"
                   placeholder="Password"
-                  className="p-1 bg-white border-[0.5] border-primary"
+                  className="p-1 bg-white border-[0.5px] border-primary"
                   {...field}
                 />
               </FormControl>
-              <FormMessage />
+              <FormMessage className="text-red-500 text-sm">
+                {form.formState.errors.password?.message}
+              </FormMessage>
             </FormItem>
           )}
         />
+
+        {/* Forget Password Link */}
         <Link
           className="ml-auto text-[#969696] text-sm xl:text-[20px] font-[600]"
-          href={"/forget-password"}
+          href="/forget-password"
           passHref
         >
           Forget Password?
         </Link>
+
+        {/* Submit Button */}
         <button
           className="bg-[#BD9D28] text-white py-1.5 rounded-xl px-[71px] md:text-sm xl:text-md w-[100%] m-auto"
           type="submit"
+          disabled={isLoading}
         >
-          Log in
+          {isLoading ? "Submitting..." : "Log in"}
         </button>
 
+        {/* Register Link */}
         <div className="flex font-[600] text-sm xl:text-[20px] justify-center">
-          <p className="mr-1  text-[#8B8B8B] ">Don`t have account ? </p>{" "}
+          <p className="mr-1 text-[#8B8B8B]">Dont have an account?</p>
           <Link href="/register" className="text-primary" passHref>
-            {isLoading ? "Submitting..." : "Login"}
+            Register
           </Link>
         </div>
+
+        {/* Divider with OR */}
         <div className="flex items-center">
           <div className="w-[203px] h-[2px] bg-subtitle"></div>
           <p className="mx-[27px] text-[25px] font-[500] text-[#5A5A5A]">OR</p>
           <div className="w-[203px] h-[2px] bg-subtitle"></div>
         </div>
 
+        {/* Google Login Button */}
         <Button className="bg-white border text-[#EC0000] font-[600] text-[25px] h-11 border-subtitle">
           <Image
             src="/assets/icons/btnGoogle.svg"
-            alt="fb"
+            alt="Google"
             width={30}
             height={30}
             className="me-2"
           />
           Google
         </Button>
+
+        {/* Facebook Login Button */}
         <Button className="bg-white border text-[#0047B2] font-[600] text-[25px] h-11 border-subtitle">
           <Image
             src="/assets/icons/btnFB.svg"
-            alt="fb"
+            alt="Facebook"
             width={30}
             height={30}
             className="me-2"

@@ -73,6 +73,7 @@ export default function CustomTable({
   onPageChange,
   totalRecords,
 }: CustomTableProps) {
+  
   const router = useRouter();
   const t = useTranslations();
   const [customers, setCustomers] = useState<DataInTable[]>(data);

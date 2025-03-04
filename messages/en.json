@@ -139,6 +139,7 @@
     }
   },
   "Sales": {
+    "editCustomer": "Edit Customer Data",
     "salesInvoice": "Sales Invoice",
     "cancel": "Cancel",
     "save": "Save",
@@ -202,6 +203,23 @@
       "discountPercent": "Discount Percent",
       "total": "Total",
       "item": "Item"
+    },
+    "errorTitle": "Error!",
+    "errorDescription": "Your request wasn't processed successfully. Please try again.",
+    "addCustomer": "Add Customer",
+    "SalesCustomer": {
+      "customerName": "Customer Name",
+      "contactPerson": "Contact Person",
+      "phoneNumber": "Phone Number",
+      "email": "Email",
+      "address": "Address",
+      "city": "City",
+      "country": "Country",
+      "notes": "Notes",
+      "branch": "Branch",
+      "customerType": "Customer Type",
+      "taxNumber": "Tax Number",
+      "nationalId": "National ID"
     }
   },
   "website": {

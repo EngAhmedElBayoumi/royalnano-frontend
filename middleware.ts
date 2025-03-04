@@ -90,6 +90,6 @@ export const config = {
     "/register",
     "/dashboard/:path*", // Matches "/dashboard" and everything inside it
     "/profile",
-    "/book-now",
+    // "/book-now",
   ],
 };

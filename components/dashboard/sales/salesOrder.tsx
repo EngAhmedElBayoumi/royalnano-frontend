@@ -26,6 +26,7 @@ export default function SalesOrder() {
     page,
     page_size: 10,
   });
+  console.log("page",page)
   console.log(salesOrders);
   const router = useRouter();
   const {
@@ -85,7 +86,7 @@ export default function SalesOrder() {
             discount: string;
             total: string;
           }) => ({
-            item_name: item.custom_item_name || getItemNameById(item.item), // Use the helper function here
+            item_name: item.custom_item_name || getItemNameById(item.item),
             quantity: item.quantity,
             unit_price: item.unit_price,
             discount: item.discount,
@@ -139,6 +140,7 @@ export default function SalesOrder() {
           Error loading data
         </div>
       ) : (
+        
         <CustomTable
           emptyMessage="no sales Orders data found"
           editRoute="/dashboard/sales/sales-order/edit/"
