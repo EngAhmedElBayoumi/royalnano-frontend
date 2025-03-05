@@ -1,12 +1,15 @@
 "use client";
-import { Form } from "@/components/ui/form";
+import { Link } from "@/i18n/routing";
+import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { vacationSchema } from "@/lib/validations/dashboard/hr/vacationSchema";
+import { Form } from "@/components/ui/form";
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
 import DatePicker from "@/components/formFields/DatePicker";
-import {Link} from '@/i18n/routing';
+import CustomSelect from "@/components/formFields/CustomSelect";
+import CustomTextArea from "@/components/formFields/TextArea";
 
 interface VacationsFormProps {
   onSubmit: (data: VacationsFormValues) => Promise<void>;
@@ -14,27 +17,32 @@ interface VacationsFormProps {
 }
 
 export interface VacationsFormValues {
-  name: string;
-  job_title: string;
-  vacation_period: string;
-  from: Date;
-  to: Date;
-  date: Date;
+  employee: string;
+  status: string;
+  start_date: Date;
+  end_date: Date;
+  reason: string;
 }
 
 const VacationsForm = ({ onSubmit, defaultValues }: VacationsFormProps) => {
   const form = useForm({
     resolver: zodResolver(vacationSchema),
     defaultValues: defaultValues || {
-      name: "",
-      job_title: "",
-      vacation_period: "",
-      from: new Date(),
-      to: new Date(new Date().setDate(new Date().getDate() + 1)),
-      date: new Date(),
+      employee: "",
+      status: "pending",
+      start_date: new Date(),
+      end_date: new Date(new Date().setDate(new Date().getDate() + 1)),
+      reason: "",
     },
   });
 
+  const globalTranslate = useTranslations();
+  const t = useTranslations("hr.bonuses");
+  const unitsOptions = [
+    { value: "pending", label: "pending" },
+    { value: "approved", label: "approved" },
+    { value: "rejected", label: "rejected" },
+  ];
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -42,59 +50,61 @@ const VacationsForm = ({ onSubmit, defaultValues }: VacationsFormProps) => {
           <div className="grid sm:grid-cols-2 gap-x-4 gap-y-2 xl:gap-y-5 lg:gap-x-10">
             <TextInput
               control={form.control}
-              name="name"
-              label="Name"
-              placeholder="Name"
+              name="employee"
+              label={t("employee")}
+              placeholder={t("employee")}
+              readonly={true}
             />
-            <TextInput
+            <CustomSelect
               control={form.control}
-              name="job_title"
-              label="Job Title"
-              placeholder="Job Title"
-            />
-            <TextInput
-              control={form.control}
-              name="vacation_period"
-              label="Vacation Period"
-              placeholder="Vacation Period"
+              name="status"
+              label={t("status")}
+              placeholder={t("status")}
+              options={unitsOptions}
             />
             <DatePicker
               control={form.control}
-              name="date"
-              label="Date"
-              placeholder="Select Date"
+              name="start_date"
+              label={t("start_date")}
+              placeholder={t("start_date")}
+              disabledEndDate={form.watch("end_date")}
+              readonly={true}
             />
             <DatePicker
               control={form.control}
-              name="from"
-              label="From"
-              placeholder="Select From Date"
-              disabledEndDate={form.watch("to")}
-            />
-            <DatePicker
-              control={form.control}
-              name="to"
-              label="To"
-              placeholder="Select To Date"
-              disabledStartDate={form.watch("from")}
+              name="end_date"
+              label={t("end_date")}
+              placeholder={t("end_date")}
+              disabledStartDate={form.watch("start_date")}
               disabledEndDate={
                 new Date(
-                  form.watch("from").getTime() + 30 * 24 * 60 * 60 * 1000
+                  form.watch("start_date").getTime() + 30 * 24 * 60 * 60 * 1000
                 )
-              } // 30 days after 'from'
+              } // 30 days after 'start_date'
+              readonly={true}
             />
           </div>
+          <CustomTextArea
+            control={form.control}
+            name="reason"
+            label={t("reason")}
+            placeholder={t("reason")}
+            className="mt-2 xl:mt-5"
+          />
         </section>
         <div className="flex justify-end gap-2 mt-5">
-          <Link href="/dashboard/hr" passHref>
+          <Link
+            href={`/dashboard/hr?tab=${globalTranslate("hr.tabs.vacation")}`}
+            passHref
+          >
             <CustomButton
-              text="Cancel"
+              text={globalTranslate("cancel")}
               className="text-white rounded-lg bg-secondary min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
             />
           </Link>
 
           <CustomButton
-            text="Save"
+            text={globalTranslate("save")}
             className="text-white rounded-lg min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
           />
         </div>
