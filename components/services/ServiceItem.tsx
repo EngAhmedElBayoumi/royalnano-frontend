@@ -19,7 +19,7 @@ const ServiceItem: React.FC<ServiceItemProps> = ({
     }`}
   >
     <span>{service.name}</span>
-    <span>{service.type}</span>
+    <span>{service.alias}</span>
   </li>
 );
 
