@@ -5,7 +5,6 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import ScrollAnimation from "@/components/provider";
-// import ScrollAnimation from "@/components/ScrollAnimation"; // Import the client-side component
 
 const cairo = Cairo({ subsets: ["latin"] });
 
@@ -30,7 +29,7 @@ export default async function LocaleLayout({
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ReduxProvider>
             {children}
-            <ScrollAnimation /> {/* Include the ScrollAnimation component */}
+            <ScrollAnimation /> 
           </ReduxProvider>
         </NextIntlClientProvider>
       </body>
