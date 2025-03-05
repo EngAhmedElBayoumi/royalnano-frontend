@@ -34,6 +34,7 @@ import { vacationApi } from "./services/dashboard/hr/vacationApi";
 import { supplierApi } from "./services/dashboard/purchase/supplierApi";
 import { salesReturnApi } from "./services/dashboard/sales/salesReturnApi";
 import { servicesAPi } from "./services/website/servicesApi";
+import { customerReviewAPi } from "./services/website/customerReviewApi";
 
 // Create separate configs for each reducer
 const authPersistConfig = {
@@ -84,6 +85,7 @@ export const store = configureStore({
     [supplierApi.reducerPath]: supplierApi.reducer,
     [salesReturnApi.reducerPath]: salesReturnApi.reducer,
     [servicesAPi.reducerPath]: servicesAPi.reducer,
+    [customerReviewAPi.reducerPath]: customerReviewAPi.reducer,
     auth: persistedAuthReducer,
     profile: persistedProfileReducer,
   },
@@ -122,7 +124,9 @@ export const store = configureStore({
       .concat(attendanceApi.middleware)
       .concat(supplierApi.middleware)
       .concat(salesReturnApi.middleware)
-      .concat(servicesAPi.middleware);
+      .concat(servicesAPi.middleware)
+      .concat(customerReviewAPi.middleware);
+      
   },
 });
 
