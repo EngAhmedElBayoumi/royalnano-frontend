@@ -1,39 +1,79 @@
 "use client";
+import { useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
+import {
+  useGetVacationByIdQuery,
+  useUpdateVacationMutation,
+} from "@/redux/services/dashboard/hr/vacationApi";
+import IconWithTitle from "@/components/dashboard/IconWithTitle";
+import CustomModal from "@/components/modals/CustomModal";
+import FormSkelton from "@/components/dashboard/skelton/FormSkelton";
+import LoadingError from "@/components/dashboard/LoadingError";
 import VacationsForm, {
   VacationsFormValues,
 } from "@/components/dashboard/forms/hr/VacationsForm";
-import IconWithTitle from "@/components/dashboard/IconWithTitle";
-// import { useUpdateVacationMutation } from "@/redux/services/VacationApi";
 
 export default function EditVacation() {
-  // const [updateVacation] = useUpdateVacationMutation();
-  const defaultValues: VacationsFormValues = {
-    name: "Jane Doe",
-    job_title: "Developer",
-    vacation_period: "2 weeks",
-    from: new Date(),
-    to: new Date(new Date().setDate(new Date().getDate() + 1)),
-    date: new Date(),
-  }; // Fetch existing vacation data and set as default values
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const id = searchParams.get("id");
+  const t = useTranslations("hr");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { data, isLoading, error } = useGetVacationByIdQuery(id);
+  const [updateVacation] = useUpdateVacationMutation();
 
+  const defaultValues: VacationsFormValues = data && {
+    ...data,
+    employee: String(data.employee.name),
+  };
+  const handleModalChange = (isOpen: boolean) => {
+    setIsModalOpen(isOpen);
+  };
   const handleSubmit = async (data: VacationsFormValues) => {
-    console.log(data);
-    // await updateVacation(data);
+    try {
+      const payload = {
+        status: data.status,
+      };
+
+      const response = await updateVacation({ id, data: payload });
+
+      if (response.error) throw new Error("edit failed");
+      else router.push(`/dashboard/hr?tab=${t("tabs.vacation")}`);
+    } catch (error) {
+      setIsModalOpen(true);
+      console.log(error);
+    }
   };
 
   return (
     <main className="mx-7 my-5">
+      <CustomModal
+        isOpen={isModalOpen}
+        onChange={handleModalChange}
+        title="Error!"
+        description="Your Request wasn't processed successfully.."
+      />
       <div className="flex">
         <IconWithTitle
           imageSrc="/assets/icons/edit.svg"
-          title="Edit Vacation"
+          title={t("vacation.editVacation")}
           backgroundColor="#F8F7F7"
           textColor="primary"
         />
       </div>
 
       <div className="bg-dashboardBg px-6 pt-5 pb-8 ltr:rounded-r-[20px] ltr:rounded-bl-[20px] rtl:rounded-l-[20px] rtl:rounded-br-[20px] ltr:lg:pr-[200px] rtl:lg:pl-[200px]">
-        <VacationsForm onSubmit={handleSubmit} defaultValues={defaultValues} />
+        {isLoading ? (
+          <FormSkelton />
+        ) : error ? (
+          <LoadingError />
+        ) : (
+          <VacationsForm
+            onSubmit={handleSubmit}
+            defaultValues={defaultValues}
+          />
+        )}
       </div>
     </main>
   );

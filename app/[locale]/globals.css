@@ -8,6 +8,9 @@
   --secondary: #000000;
   --gray: #969696;
 }
+/* .focus-visible\:ring-ring:focus-visible {
+  color: transparent;
+} */
 ::-webkit-scrollbar {
   width: 0.2rem;
 }
