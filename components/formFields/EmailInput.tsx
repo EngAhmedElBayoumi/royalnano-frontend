@@ -17,7 +17,7 @@ const EmailInput: React.FC<EmailInputProps> = ({
 }) => {
   return (
     <div className={className}>
-      {label && <label>{label}</label>}
+      {/* {label && <label>{label}</label>} */}
       <Input
         type="email"
         placeholder={label}

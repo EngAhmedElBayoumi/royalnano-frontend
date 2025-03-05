@@ -36,11 +36,13 @@ const Subscription = () => {
         <h2 className="text-md lg:text-lg xl:text-xl mb-4 max-w-[530px] lg:w-2/3">
           {t('title')} 
         </h2>
-        <form onSubmit={handleSubmit(onSubmit)} className="flex gap-2">
+        <form onSubmit={handleSubmit(onSubmit)} className="flex gap-2 items-center">
+          
           <EmailInput
             register={register}
             errors={errors}
             className="flex-1"
+            
             label={t('emailPlaceholder')}
           />
           <CustomButton text={t('buttonText')} className="text-white px-2" /> 
