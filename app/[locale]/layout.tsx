@@ -4,6 +4,8 @@ import ReduxProvider from "@/components/ReduxProvider";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { routing } from "@/i18n/routing";
+import ScrollAnimation from "@/components/provider";
+// import ScrollAnimation from "@/components/ScrollAnimation"; // Import the client-side component
 
 const cairo = Cairo({ subsets: ["latin"] });
 
@@ -12,7 +14,7 @@ export default async function LocaleLayout({
   params,
 }: {
   children: React.ReactNode;
-  params: { locale?: string }; 
+  params: { locale?: string };
 }) {
   const { locale } = await Promise.resolve(params);
 
@@ -26,7 +28,10 @@ export default async function LocaleLayout({
     <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
       <body className={cairo.className}>
         <NextIntlClientProvider locale={locale} messages={messages}>
-          <ReduxProvider>{children}</ReduxProvider>
+          <ReduxProvider>
+            {children}
+            <ScrollAnimation /> {/* Include the ScrollAnimation component */}
+          </ReduxProvider>
         </NextIntlClientProvider>
       </body>
     </html>
