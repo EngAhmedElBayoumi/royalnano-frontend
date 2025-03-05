@@ -76,6 +76,18 @@ function SalesPage() {
       label: t("invoice"),
       content: <SalesInvoice />,
     },
+    {
+      icon: (
+        <Image
+          width="24"
+          height="24"
+          alt="invoice"
+          src="/assets/icons/dashboard/sales/invoice.svg"
+        />
+      ),
+      label: t("cliet"),
+      content: <ClientRequest />,
+    }
     // {
     //   icon: (
     //     <Image
