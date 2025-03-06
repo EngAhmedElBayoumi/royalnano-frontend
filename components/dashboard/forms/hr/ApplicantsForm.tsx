@@ -8,6 +8,7 @@ import { Form } from "@/components/ui/form";
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
 import DatePicker from "@/components/formFields/DatePicker";
+import PhoneInputField from "@/components/formFields/PhoneInputField";
 
 interface ApplicantsFormProps {
   onSubmit: (data: ApplicantsFormValues) => Promise<void>;
@@ -61,12 +62,10 @@ const ApplicantsForm = ({ onSubmit, defaultValues }: ApplicantsFormProps) => {
               placeholder={t("email")}
               type="email"
             />
-            <TextInput
+            <PhoneInputField
               control={form.control}
               name="phone"
               label={t("phone")}
-              placeholder={t("phone")}
-              type="tel"
             />
             <TextInput
               control={form.control}
