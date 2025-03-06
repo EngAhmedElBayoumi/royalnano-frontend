@@ -2,7 +2,10 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 import { useGetBonusesQuery } from "@/redux/services/dashboard/hr/bonusesApi";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
 import CustomTable from "@/components/dashboard/tables/CustomTable";
 import TableSkelton from "@/components/dashboard/skelton/TableSkelton";
 import CardsSkelton from "@/components/dashboard/skelton/CardsSkelton";
@@ -21,6 +24,13 @@ export default function Bonuses() {
   const router = useRouter();
   const t = useTranslations("hr.bonuses");
   const [page, setPage] = useState(1);
+
+  const permissions = useSelector(
+    (state: RootState) => state.profile.permissions
+  );
+  const canView = permissions["bonusdeduction"].view;
+  const canAdd = permissions["bonusdeduction"].add;
+  const canUpdate = permissions["bonusdeduction"].change;
 
   const {
     data = { results: [] },
@@ -61,7 +71,16 @@ export default function Bonuses() {
     router.push("/dashboard/hr/bonuses/create");
   };
 
-  return isLoading ? (
+  return !canView ? (
+    <div className="flex items-center flex-col">
+      <Image
+        alt="not authorized"
+        src="/assets/icons/403.svg"
+        width="400"
+        height="400"
+      />
+    </div>
+  ) : isLoading ? (
     <>
       <CardsSkelton />
       <TableSkelton />
@@ -71,12 +90,12 @@ export default function Bonuses() {
   ) : (
     <CustomTable
       emptyMessage={t("noBonusesDataFound")}
-      editRoute="/dashboard/hr/bonuses/edit/"
+      editRoute={canUpdate ? "/dashboard/hr/bonuses/edit/" : undefined}
       data={transformedData}
       rows={10}
       columns={columns}
       cardData={cardsData}
-      buttonText={t("addBonus")}
+      buttonText={canAdd ? t("addBonus") : undefined}
       ButtonEvent={handleClick}
       onPageChange={handlePageChange}
       totalRecords={data.count}
