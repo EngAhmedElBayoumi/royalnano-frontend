@@ -149,6 +149,7 @@
     }
   },
   "Sales": {
+    "client": "Client Requests",
     "editCustomer": "Edit Customer Data",
     "salesInvoice": "Sales Invoice",
     "cancel": "Cancel",
