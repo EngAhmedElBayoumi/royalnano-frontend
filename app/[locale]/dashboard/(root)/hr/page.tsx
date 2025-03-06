@@ -33,7 +33,7 @@ function HrPage() {
       content: <Employees />,
     },
     {
-      label: "applicants",
+      label: t("applicants"),
       permissionKey: "applicant",
       icon: (
         <Image
