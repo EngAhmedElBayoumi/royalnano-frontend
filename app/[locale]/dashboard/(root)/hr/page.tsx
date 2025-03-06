@@ -8,8 +8,8 @@ import CustomTabs from "@/components/dashboard/CustomTabs";
 import Attendance from "@/components/dashboard/hr/attendance";
 import Bonuses from "@/components/dashboard/hr/Bonuses";
 import Employees from "@/components/dashboard/hr/employees";
-import Salaries from "@/components/dashboard/hr/salaries";
 import Vacations from "@/components/dashboard/hr/vacations";
+import Applicants from "@/components/dashboard/hr/Applicants";
 
 function HrPage() {
   const t = useTranslations("hr.tabs");
@@ -33,17 +33,17 @@ function HrPage() {
       content: <Employees />,
     },
     {
-      label: "salaries",
-      permissionKey: "salary",
+      label: "applicants",
+      permissionKey: "applicant",
       icon: (
         <Image
           width="24"
           height="24"
-          alt="salaries"
-          src="/assets/icons/dashboard/hr/salaries.svg"
+          alt={t("applicants")}
+          src="/assets/icons/dashboard/hr/applicants.svg"
         />
       ),
-      content: <Salaries />,
+      content: <Applicants />,
     },
     {
       label: t("bonuses"),

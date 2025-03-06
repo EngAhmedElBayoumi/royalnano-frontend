@@ -2,6 +2,8 @@ import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import authReducer from "./slices/authSlice";
+import profileReducer from "./slices/profileSlice";
 import { contactApi } from "./services/contactApi";
 import { customerReviewApi } from "./services/customerReviewApi";
 import { galleryAPi } from "./services/galleryApi";
@@ -13,8 +15,6 @@ import { forgotPasswordApi } from "./services/forgotPasswordApi";
 import { resendOTPApi } from "./services/resendOTP";
 import { verifyOTPApi } from "./services/verifyOTP";
 import { resetPasswordPApi } from "./services/resetPassword";
-import authReducer from "./slices/authSlice";
-import profileReducer from "./slices/profileSlice";
 import { branchApi } from "./services/dashboard/inventory/branchesApi";
 import { movementApi } from "./services/dashboard/inventory/movementApi";
 import { preorderApi } from "./services/dashboard/inventory/preorderApi";
@@ -31,6 +31,7 @@ import { salesOrderApi } from "./services/dashboard/sales/salesOrderApi";
 import { departmentApi } from "./services/dashboard/hr/departmentApi";
 import { attendanceApi } from "./services/dashboard/hr/attendanceApi";
 import { vacationApi } from "./services/dashboard/hr/vacationApi";
+import { applicantsApi } from "./services/dashboard/hr/applicantsApi";
 import { supplierApi } from "./services/dashboard/purchase/supplierApi";
 import { salesReturnApi } from "./services/dashboard/sales/salesReturnApi";
 import { servicesAPi } from "./services/website/servicesApi";
@@ -83,12 +84,12 @@ export const store = configureStore({
     [departmentApi.reducerPath]: departmentApi.reducer,
     [attendanceApi.reducerPath]: attendanceApi.reducer,
     [vacationApi.reducerPath]: vacationApi.reducer,
+    [applicantsApi.reducerPath]: applicantsApi.reducer,
     [supplierApi.reducerPath]: supplierApi.reducer,
     [salesReturnApi.reducerPath]: salesReturnApi.reducer,
     [servicesAPi.reducerPath]: servicesAPi.reducer,
     [customerReviewAPi.reducerPath]: customerReviewAPi.reducer,
     [clientRequestAPi.reducerPath]: clientRequestAPi.reducer,
-    
     auth: persistedAuthReducer,
     profile: persistedProfileReducer,
   },
@@ -125,12 +126,12 @@ export const store = configureStore({
       .concat(departmentApi.middleware)
       .concat(vacationApi.middleware)
       .concat(attendanceApi.middleware)
+      .concat(applicantsApi.middleware)
       .concat(supplierApi.middleware)
       .concat(salesReturnApi.middleware)
       .concat(servicesAPi.middleware)
       .concat(customerReviewAPi.middleware)
       .concat(clientRequestAPi.middleware);
-      
   },
 });
 
