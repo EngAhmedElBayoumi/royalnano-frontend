@@ -13,8 +13,8 @@ import { useGetBranchesQuery } from "@/redux/services/dashboard/inventory/branch
 import { clientRequestSchema } from "@/lib/validations/dashboard/sales/clientRequestSchema";
 
 interface ClientRequestFormProps {
-  defaultValues?: ClientRequestFormValues; // Optional default values
-  onSubmit?: (data: ClientRequestFormValues) => Promise<void>; // Optional onSubmit handler
+  defaultValues?: ClientRequestFormValues; 
+  onSubmit?: (data: ClientRequestFormValues) => Promise<void>; 
 }
 
 export interface ClientRequestFormValues {

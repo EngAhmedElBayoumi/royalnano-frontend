@@ -20,7 +20,7 @@ export default function EditClientRequest() {
   
   const id = searchParams.get("id");
 
-  const [updateClientRequest, { isLoading }] = useUpdateClientRequestMutation();
+  const [updateClientRequest] = useUpdateClientRequestMutation();
   const router = useRouter();
 
   const { data: clientRequest, isLoading: isFetching } = useGetClientRequestByIdQuery(id);

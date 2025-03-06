@@ -41,13 +41,13 @@ const OurServices = () => {
           </ul>
           {/* eslint-disable */}
           {
-            
-          }
-          <Image
-            src={activeService?.image || ""}
-            alt={activeService?.name || "sample image alt"}
+            activeService?.image ?
+            <Image
+            src={activeService?.image }
+            alt={activeService?.name }
             className="rounded-lg h-[350px] xl:h-[400px] w-full object-cover"
-          />
+            /> : ""
+          }
         </main>
       </div>
     </section>

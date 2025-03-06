@@ -13,7 +13,7 @@ export default function CreateClientRequest() {
   const handleModalChange = (isOpen: boolean) => {
     setIsModalOpen(isOpen);
   };
-  const [createClientRequest, { isLoading }] = useCreateClientRequestMutation();
+  const [createClientRequest] = useCreateClientRequestMutation();
   const router = useRouter();
 
   const handleSubmit = async (data: ClientRequestFormValues) => {
