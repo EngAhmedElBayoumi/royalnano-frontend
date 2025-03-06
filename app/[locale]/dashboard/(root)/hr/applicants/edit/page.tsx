@@ -23,6 +23,11 @@ export default function EditApplicant() {
   const { data, isLoading, error } = useGetApplicantByIdQuery(id);
   const [updateApplicant] = useUpdateApplicantMutation();
 
+  const defaultValues = data && {
+    ...data,
+    expected_salary: Number(data.expected_salary),
+    current_salary: Number(data.current_salary),
+  };
   const handleModalChange = (isOpen: boolean) => {
     setIsModalOpen(isOpen);
   };
@@ -62,7 +67,10 @@ export default function EditApplicant() {
         ) : error ? (
           <LoadingError />
         ) : (
-          <ApplicantsForm onSubmit={handleSubmit} defaultValues={data} />
+          <ApplicantsForm
+            onSubmit={handleSubmit}
+            defaultValues={defaultValues}
+          />
         )}
       </div>
     </main>
