@@ -98,7 +98,7 @@
       "attendance": "الحضور",
       "vacation": "الإجازات",
       "bonuses": "المكافآت والخصومات",
-      "salary": "الرواتب",
+      "applicants": "المتقدمين",
       "employees": "الموظفون"
     },
     "employees": {
@@ -146,6 +146,19 @@
       "addVacation": "إضافة إجازة",
       "editVacation": "تعديل الإجازة",
       "noVacationDataFound": "لا توجد بيانات للإجازات"
+    },
+    "applicants": {
+      "name": "الاسم",
+      "email": "البريد الإلكتروني",
+      "phone": "الهاتف",
+      "address": "العنوان",
+      "birthdate": "تاريخ الميلاد",
+      "expected_salary": "الراتب المتوقع",
+      "current_job_title": "المسمى الوظيفي الحالي",
+      "current_salary": "الراتب الحالي",
+      "addApplicant": "إضافة متقدم",
+      "editApplicant": "تعديل المتقدم",
+      "noApplicantDataFound": "لا توجد بيانات للمتقدمين"
     }
   },
   "Sales": {

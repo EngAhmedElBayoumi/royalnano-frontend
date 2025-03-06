@@ -98,7 +98,7 @@
       "attendance": "Attendance",
       "vacation": "Vacation",
       "bonuses": "Bonuses and Deductions",
-      "salary": "Salaries",
+      "applicants": "Applicants",
       "employees": "Employees"
     },
     "employees": {
@@ -146,6 +146,19 @@
       "addVacation": "Add Vacation",
       "editVacation": "Edit Vacation",
       "noVacationDataFound": "No Vacation data found"
+    },
+    "applicants": {
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "address": "Address",
+      "birthdate": "Birthdate",
+      "expected_salary": "Expected Salary",
+      "current_job_title": "Current Job Title",
+      "current_salary": "Current Salary",
+      "addApplicant": "Add Applicant",
+      "editApplicant": "Edit Applicant",
+      "noApplicantDataFound": "No Applicant data found"
     }
   },
   "Sales": {
