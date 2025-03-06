@@ -6,7 +6,6 @@ import IconWithTitle from "@/components/dashboard/IconWithTitle";
 import CustomModal from "@/components/modals/CustomModal";
 import FormSkelton from "@/components/dashboard/skelton/FormSkelton";
 import LoadingError from "@/components/dashboard/LoadingError";
-import SalesOrderForm from "@/components/dashboard/forms/sales/SalesOrderForm";
 import { useGetSalesOrderByIdQuery } from "@/redux/services/dashboard/sales/salesOrderApi";
 import EditSalesOrderForm from "@/components/dashboard/forms/sales/EditSalesOrderForm";
 
@@ -28,7 +27,7 @@ export default function EditSalesOrder() {
     branch: data.branch,
     sales_representative: data.sales_representative,
     description: data.description,
-    items: data.items.map((item) => ({
+    items: data.items.map((item: { quantity: any; item: { id: any; }; custom_item_name: any; custom_price: any; discount: any; discount_percent: any; }) => ({
       quantity: item.quantity,
       item: item.item?.id || null,
       custom_item_name: item.custom_item_name || "",

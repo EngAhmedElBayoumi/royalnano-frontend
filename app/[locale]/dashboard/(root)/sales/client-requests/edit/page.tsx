@@ -1,78 +1,68 @@
 "use client";
-import AddSalesCustomerForm from "@/components/dashboard/forms/sales/AddSalesCustomerForm";
+import ClientRequestForm, { ClientRequestFormValues } from "@/components/dashboard/forms/sales/ClientRequestForm";
 import IconWithTitle from "@/components/dashboard/IconWithTitle";
 import { useTranslations } from "next-intl";
+import { useState } from "react";
+import CustomModal from "@/components/modals/CustomModal";
+import { useRouter } from "@/i18n/routing";
+import { useGetClientRequestByIdQuery, useUpdateClientRequestMutation } from "@/redux/services/clientRequestApi"; // Import the query to fetch existing data
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
-import { useGetSalesCustomerByIdQuery, useUpdateSalesCustomerMutation } from "@/redux/services/dashboard/sales/salesCustomerApi";
-import { SalesCustomerFormValues } from "@/lib/validations/dashboard/sales/salesCustomerSchema";
 
-export default function EditSalesCustomer() {
+
+
+export default function EditClientRequest() {
   const t = useTranslations("Sales");
-  const searchParams = useSearchParams();
-  const id = searchParams.get("id"); 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const handleModalChange = (isOpen: boolean) => {
+    setIsModalOpen(isOpen);
+  };
+    const searchParams = useSearchParams();
+  
+  const id = searchParams.get("id");
 
-  const [defaultValues, setDefaultValues] = useState<Partial<SalesCustomerFormValues>>({});
-  const [updateSalesCustomer] = useUpdateSalesCustomerMutation(); 
+  const [updateClientRequest, { isLoading }] = useUpdateClientRequestMutation();
+  const router = useRouter();
 
-  const { data: customerData, isLoading, isError } = useGetSalesCustomerByIdQuery(id || "", {
-    skip: !id, 
-  });
+  const { data: clientRequest, isLoading: isFetching } = useGetClientRequestByIdQuery(id);
 
-  useEffect(() => {
-    if (customerData) {
-      setDefaultValues({
-        customer_name: customerData.customer_name,
-        contact_person: customerData.contact_person,
-        id: customerData.id,
-        phone_number: customerData.phone_number,
-        email: customerData.email,
-        address: customerData.address,
-        city: customerData.city,
-        country: customerData.country,
-        notes: customerData.notes,
-        branch: customerData.branch,
-        customer_type: customerData.customer_type,
-        tax_number: customerData.tax_number,
-        national_id: customerData.national_id,
-      });
-    }
-  }, [customerData]);
-
-  const handleFormSubmit = async (data: SalesCustomerFormValues) => {
+  const handleSubmit = async (data: ClientRequestFormValues) => {
+    console.log("Form data submitted:", data);
     try {
-      console.log("Form data submitted:", data);
-      const response = await updateSalesCustomer(data); 
-      if ("error" in response) {
-        throw new Error("Update failed");
-      }
-      console.log("Customer updated successfully");
+      const result = await updateClientRequest({ id: id, ...data }).unwrap();
+      console.log("Client request updated successfully!", result);
+      router.push(`/dashboard/sales?tab=${t("client")}`);
     } catch (error) {
-      console.error("Error in update:", error);
+      console.error("Failed to update client request:", error);
+      setIsModalOpen(true);
     }
   };
 
-  if (isLoading) {
+  if (isFetching) {
     return <div>Loading...</div>;
-  }
-
-  if (isError) {
-    return <div>Error loading customer data.</div>;
   }
 
   return (
     <main className="mx-7 my-5">
       <div className="flex">
+        <CustomModal
+          isOpen={isModalOpen}
+          onChange={handleModalChange}
+          title="Error!"
+          description="Your Request wasn't processed successfully.."
+        />
         <IconWithTitle
-          imageSrc="/assets/icons/edit.svg" 
+          imageSrc="/assets/icons/edit.svg"
           title={t("editCustomer")}
           backgroundColor="#F8F7F7"
           textColor="primary"
         />
       </div>
 
-=      <div className="bg-dashboardBg px-6 pt-5 pb-8 ltr:rounded-r-[20px] ltr:rounded-bl-[20px] rtl:rounded-l-[20px] rtl:rounded-br-[20px] ltr:lg:pr-[200px] rtl:lg:pl-[200px]">
-        {defaultValues && <AddSalesCustomerForm defaultValues={defaultValues}/>}
+      <div className="bg-dashboardBg px-6 pt-5 pb-8 ltr:rounded-r-[20px] ltr:rounded-bl-[20px] rtl:rounded-l-[20px] rtl:rounded-br-[20px] ltr:lg:pr-[200px] rtl:lg:pl-[200px]">
+        <ClientRequestForm
+          defaultValues={clientRequest} 
+          onSubmit={handleSubmit}
+        />
       </div>
     </main>
   );

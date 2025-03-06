@@ -46,7 +46,7 @@ const CustomSelect = <T extends FieldValues>({
         const fieldValueString = field.value?.toString();
 
         const selectedLabel =
-          options.find((opt) => opt.value === fieldValueString)?.label ||
+          options?.find((opt) => opt.value === fieldValueString)?.label ||
           placeholder;
 
         // console.log("Field value:", field.value); // Debugging
@@ -77,7 +77,7 @@ const CustomSelect = <T extends FieldValues>({
                   {selectedLabel}
                 </SelectTrigger>
                 <SelectContent>
-                  {options.map((option) => (
+                  {options?.map((option) => (
                     <SelectItem key={option.value} value={option.value}>
                       {option.label}
                     </SelectItem>

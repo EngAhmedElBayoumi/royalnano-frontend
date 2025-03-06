@@ -16,7 +16,21 @@ export const clientRequestAPi = createApi({
         body: data,
       }),
     }),
+
+    updateClientRequest: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `sales/client-request/${id}/`,
+        method: "PATCH",
+        body: data,
+      }),
+    }),
+
+        
+    getClientRequestById: builder.query({
+      query: (id) => `sales/client-request/${id}/`,
+    }),
+
   }),
 });
 
-export const { useGetClientRequestQuery, useCreateClientRequestMutation } = clientRequestAPi;
+export const { useGetClientRequestQuery,useGetClientRequestByIdQuery, useCreateClientRequestMutation,useUpdateClientRequestMutation } = clientRequestAPi;

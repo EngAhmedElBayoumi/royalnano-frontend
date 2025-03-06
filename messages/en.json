@@ -160,6 +160,7 @@
     "order": "Sales Order",
     "invoice": "Sales Invoice",
     "receipt": "Sales Receipt",
+    "addCustomer": "Add Client Request",
     "SalesQuotation": {
       "date": "Date",
       "customer": "Customer",
@@ -217,7 +218,6 @@
     },
     "errorTitle": "Error!",
     "errorDescription": "Your request wasn't processed successfully. Please try again.",
-    "addCustomer": "Add Customer",
     "SalesCustomer": {
       "customerName": "Customer Name",
       "contactPerson": "Contact Person",
@@ -231,6 +231,17 @@
       "customerType": "Customer Type",
       "taxNumber": "Tax Number",
       "nationalId": "National ID"
+    },
+    "ClientRequest": {
+      "fullName": "Full Name",
+      "phoneNumber": "Phone Number",
+      "carType": "Car Type",
+      "carModel": "Car Model",
+      "status": "Status",
+      "description": "Description",
+      "orderNote": "Order Note",
+      "service": "Service",
+      "branch": "Branch"
     }
   },
   "website": {

@@ -10,7 +10,7 @@ import { useGetBranchesQuery } from "@/redux/services/dashboard/inventory/branch
 
 export default function ClientRequest() {
   const [page, setPage] = useState(1);
-  const [branchNames, setBranchNames] = useState<{ [key: number]: string }>({}); // Store branch names by ID
+  const [branchNames, setBranchNames] = useState<{ [key: number]: string }>({}); 
 
   const handlePageChange = (newPage: number) => {
     setPage(newPage);
@@ -31,12 +31,12 @@ export default function ClientRequest() {
     data: branchesData,
     isLoading: isBranchesLoading,
     error: branchesError,
-  } = useGetBranchesQuery({}); // Fetch all branches
+  } = useGetBranchesQuery({});
 
   const router = useRouter();
   console.log("Client Requests API Response:", clientRequests);
 
-  // Map branch IDs to branch names
+
   useEffect(() => {
     if (branchesData?.results) {
       const branchMap = branchesData.results.reduce((acc, branch) => {
@@ -48,7 +48,7 @@ export default function ClientRequest() {
   }, [branchesData]);
 
   const transformedData =
-    clientRequests?.results?.map((request) => ({
+    clientRequests?.results?.map((request: { id: any; full_name: any; phone_number: any; car_type: any; car_model: any; status: any; description: any; order_note: any; service: any; branch: string | number; }) => ({
       id: request.id,
       full_name: request.full_name,
       phone_number: request.phone_number,
@@ -58,7 +58,7 @@ export default function ClientRequest() {
       description: request.description,
       order_note: request.order_note,
       service: request.service,
-      branch_name: branchNames[request.branch] || "Loading...", // Use branch name from state
+      branch_name: branchNames[request.branch] || "Loading...", 
     })) || [];
 
   console.log("Transformed Data:", transformedData);
@@ -81,7 +81,7 @@ export default function ClientRequest() {
   ];
 
   const handleClick = () => {
-    router.push("/dashboard/sales/client/client-request/create");
+    router.push("/dashboard/sales/client-requests/create");
   };
 
   console.log("CustomTable Props in ClientRequest:", {
@@ -115,7 +115,7 @@ export default function ClientRequest() {
       ) : (
         <CustomTable
           emptyMessage="No client requests data found"
-          editRoute="/dashboard/client/client-request/edit/"
+          editRoute="/dashboard/sales/client-requests/edit/"
           data={transformedData}
           rows={10}
           columns={columns}
