@@ -6,6 +6,11 @@
   "search": "search",
   "create": "create",
   "loadingError": "Error loading data",
+  "extraFields": "Extra Fields",
+  "addField": "Add field",
+  "fieldName": "Field Name",
+  "fieldValue": "Field Value",
+  "removeField": "Remove Field",
   "Sidebar": {
     "home": "Home",
     "clients": "Clients",

@@ -6,6 +6,11 @@
   "search": "بحث",
   "create": "إنشاء",
   "loadingError": "خطأ في تحميل البيانات",
+  "extraFields": "حقول إضافية",
+  "addField": "إضافة حقل",
+  "fieldName": "اسم الحقل",
+  "fieldValue": "قيمة الحقل",
+  "removeField": "إزالة الحقل",
   "Sidebar": {
     "home": "الرئيسية",
     "clients": "العملاء",

@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
@@ -11,6 +12,7 @@ import CustomButton from "@/components/formFields/CustomButton";
 import DateTimePicker from "@/components/formFields/DateTimePicker";
 import CustomSelect from "@/components/formFields/CustomSelect";
 import MultiSelect from "@/components/formFields/MultiSelect";
+import TextInput from "@/components/formFields/TextInput";
 
 interface InterviewFormProps {
   onSubmit: (data: InterviewFormValues) => Promise<void>;
@@ -22,10 +24,20 @@ export interface InterviewFormValues {
   interview_date: Date;
   status: string;
   applicant: number;
-  // extra_fields?: Record<string, string> | null;
+  extra_fields?: Record<string, string> | null;
 }
 
 const InterviewForm = ({ onSubmit, defaultValues }: InterviewFormProps) => {
+  const [extraFields, setExtraFields] = useState<
+    { key: string; value: string }[]
+  >(
+    defaultValues?.extra_fields
+      ? Object.entries(defaultValues.extra_fields).map(([key, value]) => ({
+          key,
+          value: String(value),
+        }))
+      : []
+  );
   const form = useForm({
     resolver: zodResolver(interviewSchema),
     defaultValues: defaultValues || {
@@ -33,7 +45,7 @@ const InterviewForm = ({ onSubmit, defaultValues }: InterviewFormProps) => {
       interview_date: new Date(),
       status: "scheduled",
       applicant: 0,
-      // extra_fields: {},
+      extra_fields: {},
     },
   });
 
@@ -59,6 +71,43 @@ const InterviewForm = ({ onSubmit, defaultValues }: InterviewFormProps) => {
     { value: "completed", label: t("statuses.completed") },
     { value: "rejected", label: t("statuses.rejected") },
   ];
+
+  const handleAddExtraField = () => {
+    setExtraFields([...extraFields, { key: "", value: "" }]);
+  };
+
+  const handleRemoveExtraField = (index: number) => {
+    const newFields = extraFields.filter((_, i) => i !== index);
+    setExtraFields(newFields);
+
+    // Update form value
+    const extraFieldsObject = newFields.reduce((acc, field) => {
+      if (field.key) acc[field.key] = field.value;
+      return acc;
+    }, {} as Record<string, string>);
+    form.setValue("extra_fields", extraFieldsObject);
+  };
+
+  const handleExtraFieldChange = (
+    index: number,
+    type: "key" | "value",
+    newValue: string
+  ) => {
+    const newFields = extraFields.map((field, i) => {
+      if (i === index) {
+        return { ...field, [type]: newValue };
+      }
+      return field;
+    });
+    setExtraFields(newFields);
+
+    // Update form value
+    const extraFieldsObject = newFields.reduce((acc, field) => {
+      if (field.key) acc[field.key] = field.value;
+      return acc;
+    }, {} as Record<string, string>);
+    form.setValue("extra_fields", extraFieldsObject);
+  };
 
   return (
     <Form {...form}>
@@ -93,6 +142,52 @@ const InterviewForm = ({ onSubmit, defaultValues }: InterviewFormProps) => {
               placeholder={t("status")}
               options={statusOptions}
             />
+          </div>
+          <div className="mt-8">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-lg font-medium">
+                {globalTranslate("extraFields")}
+              </h3>
+              <CustomButton
+                type="button"
+                onClick={handleAddExtraField}
+                text={globalTranslate("addField")}
+                className="text-white rounded-lg bg-primary px-4 py-2"
+              />
+            </div>
+
+            {extraFields.map((field, index) => (
+              <div
+                key={index}
+                className="grid grid-cols-2 gap-4 mb-4 items-start"
+              >
+                <TextInput
+                  value={field.key}
+                  onChange={(e) =>
+                    handleExtraFieldChange(index, "key", e.target.value)
+                  }
+                  placeholder={globalTranslate("fieldName")}
+                  className="w-full"
+                />
+                <div className="flex gap-2">
+                  <TextInput
+                    value={field.value}
+                    onChange={(e) =>
+                      handleExtraFieldChange(index, "value", e.target.value)
+                    }
+                    placeholder={globalTranslate("fieldValue")}
+                    className="w-full"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => handleRemoveExtraField(index)}
+                    className="p-2 text-red-500 hover:text-red-700"
+                  >
+                    {globalTranslate("removeField")}
+                  </button>
+                </div>
+              </div>
+            ))}
           </div>
         </section>
         <div className="flex justify-end gap-2 mt-5">
