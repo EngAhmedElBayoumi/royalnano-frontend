@@ -60,13 +60,11 @@ const MultiSelect = <T extends FieldValues>({
               className="mt-1"
               classNames={{
                 control: () =>
-                  "bg-[#F4F4F4] border-gray rounded-10 px-2 py-1 xl:py-2",
+                  "!bg-[#F4F4F4] !border-gray !rounded-[6px] py-[2px] !shadow-none",
                 placeholder: () => "text-gray",
-                menu: () => "bg-[#F4F4F4] mt-1 rounded-10 border border-gray",
+                menu: () => "mt-1 rounded-10 border border-gray",
                 option: (state) =>
-                  `px-2 py-1 ${state.isFocused ? "bg-primary/10" : ""} ${
-                    state.isSelected ? "bg-primary text-white" : ""
-                  }`,
+                  `px-2 py-1 ${state.isFocused ? "!bg-[#F4F4F4]" : ""} }`,
               }}
             />
           </FormControl>

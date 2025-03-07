@@ -23,7 +23,7 @@ interface CustomSelectProps<T extends FieldValues> {
   readonly?: boolean;
   value?: string | number;
   onChange?: (value: string | number) => void;
-  valueType?: "string" | "number"; 
+  valueType?: "string" | "number";
 }
 
 const CustomSelect = <T extends FieldValues>({
@@ -36,7 +36,7 @@ const CustomSelect = <T extends FieldValues>({
   value,
   onChange,
   className,
-  valueType = "string", 
+  valueType = "string",
 }: CustomSelectProps<T>) => {
   return control ? (
     <FormField
@@ -48,9 +48,6 @@ const CustomSelect = <T extends FieldValues>({
         const selectedLabel =
           options?.find((opt) => opt.value === fieldValueString)?.label ||
           placeholder;
-
-        // console.log("Field value:", field.value); // Debugging
-        // console.log("Selected label:", selectedLabel); // Debugging
 
         return (
           <FormItem>
@@ -66,11 +63,11 @@ const CustomSelect = <T extends FieldValues>({
                     valueType === "number" ? parseFloat(value) : value;
                   field.onChange(newValue);
                 }}
-                value={fieldValueString} 
+                value={fieldValueString}
                 disabled={readonly}
               >
                 <SelectTrigger
-                  className={`mt-1 bg-[#F4F4F4] border-gray rounded-10 px-2 py-5 xl:py-7 rtl:flex-row-reverse  ${
+                  className={`mt-1 bg-[#F4F4F4] border-gray rounded-10 px-2 py-5 xl:py-7 rtl:flex-row-reverse ${
                     !field.value ? "text-gray" : ""
                   }`}
                 >
@@ -101,7 +98,7 @@ const CustomSelect = <T extends FieldValues>({
             const newValue = valueType === "number" ? parseFloat(value) : value;
             onChange?.(newValue);
           }}
-          value={value?.toString()} 
+          value={value?.toString()}
           disabled={readonly}
         >
           <SelectTrigger
