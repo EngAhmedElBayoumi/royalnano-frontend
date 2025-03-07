@@ -52,6 +52,7 @@ const MultiSelect = <T extends FieldValues>({
                 const values = selectedOptions
                   ? (selectedOptions as Option[]).map((option) => option.value)
                   : [];
+
                 field.onChange(values);
               }}
               placeholder={placeholder}
@@ -63,7 +64,9 @@ const MultiSelect = <T extends FieldValues>({
                 placeholder: () => "text-gray",
                 menu: () => "bg-[#F4F4F4] mt-1 rounded-10 border border-gray",
                 option: (state) =>
-                  `px-2 py-1 ${state.isFocused ? "bg-primary/10" : ""} ${state.isSelected ? "bg-primary text-white" : ""}`
+                  `px-2 py-1 ${state.isFocused ? "bg-primary/10" : ""} ${
+                    state.isSelected ? "bg-primary text-white" : ""
+                  }`,
               }}
             />
           </FormControl>

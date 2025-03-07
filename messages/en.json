@@ -99,7 +99,22 @@
       "vacation": "Vacation",
       "bonuses": "Bonuses and Deductions",
       "applicants": "Applicants",
-      "employees": "Employees"
+      "employees": "Employees",
+      "interviews": "Interviews"
+    },
+    "interviews": {
+      "interviewers": "Interviewers",
+      "interview_date": "Interview Date",
+      "status": "Status",
+      "applicant": "Applicant",
+      "noInterviewDataFound": "No interviews data found",
+      "addInterview": "Add Interview",
+      "editInterview": "Edit Interview",
+      "statuses": {
+        "scheduled": "Scheduled",
+        "completed": "Completed",
+        "rejected": "Rejected"
+      }
     },
     "employees": {
       "name": "Name",

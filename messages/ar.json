@@ -99,7 +99,8 @@
       "vacation": "الإجازات",
       "bonuses": "المكافآت والخصومات",
       "applicants": "المتقدمين",
-      "employees": "الموظفون"
+      "employees": "الموظفون",
+      "interviews": "المقابلات"
     },
     "employees": {
       "name": "الاسم",
@@ -159,6 +160,20 @@
       "addApplicant": "إضافة متقدم",
       "editApplicant": "تعديل المتقدم",
       "noApplicantDataFound": "لا توجد بيانات للمتقدمين"
+    },
+    "interviews": {
+      "interviewers": "المقابلون",
+      "interview_date": "تاريخ المقابلة",
+      "status": "الحالة",
+      "applicant": "المتقدم",
+      "noInterviewDataFound": "لا توجد بيانات للمقابلات",
+      "addInterview": "إضافة مقابلة",
+      "editInterview": "تعديل المقابلة",
+      "statuses": {
+        "scheduled": "مجدولة",
+        "completed": "مكتملة",
+        "rejected": "مرفوضة"
+      }
     }
   },
   "Sales": {
