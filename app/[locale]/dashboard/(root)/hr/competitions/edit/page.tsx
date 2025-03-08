@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import CompetitionForm, {
   CompetitionFormValues,
@@ -14,14 +14,10 @@ import CustomModal from "@/components/modals/CustomModal";
 import LoadingError from "@/components/dashboard/LoadingError";
 import FormSkelton from "@/components/dashboard/skelton/FormSkelton";
 
-interface EditCompetitionProps {
-  params: {
-    id: string;
-  };
-}
-
-const EditCompetition = ({ params: { id } }: EditCompetitionProps) => {
+export default function EditCompetition() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const id = searchParams.get("id");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [updateCompetition] = useUpdateCompetitionMutation();
   const {
@@ -83,6 +79,4 @@ const EditCompetition = ({ params: { id } }: EditCompetitionProps) => {
       </div>
     </main>
   );
-};
-
-export default EditCompetition;
+}
