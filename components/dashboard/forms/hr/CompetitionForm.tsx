@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { competitionSchema } from "@/lib/validations/dashboard/hr/competitionSchema";
 import { useGetDepartmentsQuery } from "@/redux/services/dashboard/hr/departmentApi";
+import { useGetEmployeesQuery } from "@/redux/services/dashboard/hr/employeeApi";
 import { Form } from "@/components/ui/form";
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
@@ -44,6 +45,13 @@ const CompetitionForm = ({ onSubmit, defaultValues }: CompetitionFormProps) => {
   const globalTranslate = useTranslations();
   const t = useTranslations("hr.competitions");
   const { data: departments } = useGetDepartmentsQuery({});
+  const { data: employees } = useGetEmployeesQuery({});
+
+  const employeesOptions =
+    employees?.results?.map((employee: { id: number; name: string }) => ({
+      value: String(employee.id),
+      label: employee.name,
+    })) || [];
 
   const departmentsOptions =
     departments?.results?.map((department: { id: number; name: string }) => ({
@@ -98,6 +106,14 @@ const CompetitionForm = ({ onSubmit, defaultValues }: CompetitionFormProps) => {
               name="end_date"
               label={t("endDate")}
               placeholder={t("endDate")}
+            />
+            <CustomSelect
+              control={form.control}
+              name="winner"
+              label={t("winner")}
+              placeholder={t("winner")}
+              options={employeesOptions}
+              valueType="number"
             />
           </div>
           <ExtraFields

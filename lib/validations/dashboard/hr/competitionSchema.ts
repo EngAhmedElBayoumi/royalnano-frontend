@@ -1,23 +1,13 @@
-import { z } from "zod";
+import * as z from "zod";
 
 export const competitionSchema = z.object({
-  department: z.number({
-    required_error: "Department is required",
-    invalid_type_error: "Department must be a number",
-  }),
-  winner: z.number().optional(),
-  target: z.number({
-    required_error: "Target is required",
-    invalid_type_error: "Target must be a number",
-  }),
-  reward: z.string({
-    required_error: "Reward is required",
-  }),
-  start_date: z.string({
-    required_error: "Start date is required",
-  }),
-  end_date: z.string({
-    required_error: "End date is required",
-  }),
-  extra_fields: z.record(z.string()).optional(),
+  department: z.coerce.number().min(1, "Department is required"),
+  winner: z.coerce.number().optional(),
+  target: z.number().min(1, "Target is required"),
+  reward: z.string().nonempty("Reward is required"),
+  start_date: z.string().nonempty("Start date is required"),
+  end_date: z.string().nonempty("End date is required"),
+  extra_fields: z.record(z.any()).optional(),
 });
+
+export type CompetitionFormData = z.infer<typeof competitionSchema>;

@@ -47,7 +47,7 @@ export default function CreateCompetition() {
       <div className="flex">
         <IconWithTitle
           imageSrc="/assets/icons/add.svg"
-          title={t("competitions.addCompetition")}
+          title={t("competitions.createCompetition")}
           backgroundColor="#F8F7F7"
           textColor="primary"
         />
