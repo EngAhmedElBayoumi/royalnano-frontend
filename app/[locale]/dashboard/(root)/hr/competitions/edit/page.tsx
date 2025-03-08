@@ -20,13 +20,14 @@ export default function EditCompetition() {
   const id = searchParams.get("id");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [updateCompetition] = useUpdateCompetitionMutation();
-  const {
-    data: competition,
-    isLoading,
-    error,
-  } = useGetCompetitionByIdQuery(id);
+  const { data, isLoading, error } = useGetCompetitionByIdQuery(id);
   const t = useTranslations("hr.competitions");
 
+  const defaultValues = data && {
+    ...data,
+    department: Number(data.department.id),
+    winner: data.winner ? Number(data.winner.id) : undefined,
+  };
   const handleModalChange = (isOpen: boolean) => {
     setIsModalOpen(isOpen);
   };
@@ -36,7 +37,7 @@ export default function EditCompetition() {
       const payload = {
         ...data,
         department: Number(data.department),
-        target: Number(data.target),
+        winner: Number(data.winner),
       };
 
       const response = await updateCompetition({ id, data: payload });
@@ -73,7 +74,7 @@ export default function EditCompetition() {
         ) : (
           <CompetitionForm
             onSubmit={handleSubmit}
-            defaultValues={competition}
+            defaultValues={defaultValues}
           />
         )}
       </div>

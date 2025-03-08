@@ -23,7 +23,7 @@ export const competitionApi = createApi({
     }),
     updateCompetition: builder.mutation({
       query: ({ id, data }) => ({
-        url: `hr/competitions/${id}`,
+        url: `hr/competition/${id}`,
         method: "PATCH",
         body: data,
       }),
