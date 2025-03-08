@@ -105,7 +105,24 @@
       "bonuses": "Bonuses and Deductions",
       "applicants": "Applicants",
       "employees": "Employees",
-      "interviews": "Interviews"
+      "interviews": "Interviews",
+      "competitions": "Competitions"
+    },
+    "competitions": {
+      "department": "Department",
+      "target": "Target",
+      "reward": "Reward",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "winner": "Winner",
+      "createCompetition": "Create Competition",
+      "editCompetition": "Edit Competition",
+      "noCompetitions": "No competitions found",
+      "deleteConfirmation": "Delete Competition",
+      "deleteConfirmationMessage": "Are you sure you want to delete this competition?",
+      "error": "Error",
+      "creationFailed": "Failed to create competition",
+      "editFailed": "Failed to edit competition"
     },
     "interviews": {
       "interviewers": "Interviewers",

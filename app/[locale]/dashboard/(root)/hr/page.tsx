@@ -11,6 +11,7 @@ import Employees from "@/components/dashboard/hr/employees";
 import Vacations from "@/components/dashboard/hr/vacations";
 import Applicants from "@/components/dashboard/hr/Applicants";
 import Interviews from "@/components/dashboard/hr/Interviews";
+import Competitions from "@/components/dashboard/hr/Competitions";
 
 function HrPage() {
   const t = useTranslations("hr.tabs");
@@ -97,6 +98,19 @@ function HrPage() {
         />
       ),
       content: <Interviews />,
+    },
+    {
+      label: t("competitions"),
+      permissionKey: "competition",
+      icon: (
+        <Image
+          width="24"
+          height="24"
+          alt={t("competitions")}
+          src="/assets/icons/dashboard/hr/competitions.svg"
+        />
+      ),
+      content: <Competitions />,
     },
   ].filter((tab) => {
     // Check if the user has view permission for the tab using the permissionKey

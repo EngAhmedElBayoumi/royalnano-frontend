@@ -105,7 +105,24 @@
       "bonuses": "المكافآت والخصومات",
       "applicants": "المتقدمين",
       "employees": "الموظفون",
-      "interviews": "المقابلات"
+      "interviews": "المقابلات",
+      "competitions": "المسابقات"
+    },
+    "competitions": {
+      "department": "القسم",
+      "target": "الهدف",
+      "reward": "المكافأة",
+      "startDate": "تاريخ البدء",
+      "endDate": "تاريخ الانتهاء",
+      "winner": "الفائز",
+      "createCompetition": "إنشاء مسابقة",
+      "editCompetition": "تعديل المسابقة",
+      "noCompetitions": "لا توجد مسابقات",
+      "deleteConfirmation": "حذف المسابقة",
+      "deleteConfirmationMessage": "هل أنت متأكد من حذف هذه المسابقة؟",
+      "error": "خطأ",
+      "creationFailed": "فشل في إنشاء المسابقة",
+      "editFailed": "فشل في تعديل المسابقة"
     },
     "employees": {
       "name": "الاسم",

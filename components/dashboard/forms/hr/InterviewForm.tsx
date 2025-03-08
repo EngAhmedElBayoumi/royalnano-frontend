@@ -1,5 +1,4 @@
 "use client";
-import { useState } from "react";
 import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
@@ -12,7 +11,8 @@ import CustomButton from "@/components/formFields/CustomButton";
 import DateTimePicker from "@/components/formFields/DateTimePicker";
 import CustomSelect from "@/components/formFields/CustomSelect";
 import MultiSelect from "@/components/formFields/MultiSelect";
-import TextInput from "@/components/formFields/TextInput";
+import ExtraFields from "@/components/formFields/ExtraFields";
+import useExtraFields from "@/hooks/useExtraFields";
 
 interface InterviewFormProps {
   onSubmit: (data: InterviewFormValues) => Promise<void>;
@@ -28,16 +28,6 @@ export interface InterviewFormValues {
 }
 
 const InterviewForm = ({ onSubmit, defaultValues }: InterviewFormProps) => {
-  const [extraFields, setExtraFields] = useState<
-    { key: string; value: string }[]
-  >(
-    defaultValues?.extra_fields
-      ? Object.entries(defaultValues.extra_fields).map(([key, value]) => ({
-          key,
-          value: String(value),
-        }))
-      : []
-  );
   const form = useForm({
     resolver: zodResolver(interviewSchema),
     defaultValues: defaultValues || {
@@ -72,42 +62,15 @@ const InterviewForm = ({ onSubmit, defaultValues }: InterviewFormProps) => {
     { value: "rejected", label: t("statuses.rejected") },
   ];
 
-  const handleAddExtraField = () => {
-    setExtraFields([...extraFields, { key: "", value: "" }]);
-  };
-
-  const handleRemoveExtraField = (index: number) => {
-    const newFields = extraFields.filter((_, i) => i !== index);
-    setExtraFields(newFields);
-
-    // Update form value
-    const extraFieldsObject = newFields.reduce((acc, field) => {
-      if (field.key) acc[field.key] = field.value;
-      return acc;
-    }, {} as Record<string, string>);
-    form.setValue("extra_fields", extraFieldsObject);
-  };
-
-  const handleExtraFieldChange = (
-    index: number,
-    type: "key" | "value",
-    newValue: string
-  ) => {
-    const newFields = extraFields.map((field, i) => {
-      if (i === index) {
-        return { ...field, [type]: newValue };
-      }
-      return field;
-    });
-    setExtraFields(newFields);
-
-    // Update form value
-    const extraFieldsObject = newFields.reduce((acc, field) => {
-      if (field.key) acc[field.key] = field.value;
-      return acc;
-    }, {} as Record<string, string>);
-    form.setValue("extra_fields", extraFieldsObject);
-  };
+  const {
+    extraFields,
+    handleAddExtraField,
+    handleRemoveExtraField,
+    handleExtraFieldChange,
+  } = useExtraFields({
+    defaultFields: defaultValues?.extra_fields ?? {},
+    setValue: form.setValue,
+  });
 
   return (
     <Form {...form}>
@@ -143,52 +106,12 @@ const InterviewForm = ({ onSubmit, defaultValues }: InterviewFormProps) => {
               options={statusOptions}
             />
           </div>
-          <div className="mt-8">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-medium">
-                {globalTranslate("extraFields")}
-              </h3>
-              <CustomButton
-                type="button"
-                onClick={handleAddExtraField}
-                text={globalTranslate("addField")}
-                className="text-white rounded-lg bg-primary px-4 py-2"
-              />
-            </div>
-
-            {extraFields.map((field, index) => (
-              <div
-                key={index}
-                className="grid grid-cols-2 gap-4 mb-4 items-start"
-              >
-                <TextInput
-                  value={field.key}
-                  onChange={(e) =>
-                    handleExtraFieldChange(index, "key", e.target.value)
-                  }
-                  placeholder={globalTranslate("fieldName")}
-                  className="w-full"
-                />
-                <div className="flex gap-2">
-                  <TextInput
-                    value={field.value}
-                    onChange={(e) =>
-                      handleExtraFieldChange(index, "value", e.target.value)
-                    }
-                    placeholder={globalTranslate("fieldValue")}
-                    className="w-full"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => handleRemoveExtraField(index)}
-                    className="p-2 text-red-500 hover:text-red-700"
-                  >
-                    {globalTranslate("removeField")}
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
+          <ExtraFields
+            extraFields={extraFields}
+            onAddField={handleAddExtraField}
+            onRemoveField={handleRemoveExtraField}
+            onFieldChange={handleExtraFieldChange}
+          />
         </section>
         <div className="flex justify-end gap-2 mt-5">
           <Link
