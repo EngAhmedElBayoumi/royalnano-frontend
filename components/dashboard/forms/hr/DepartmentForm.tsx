@@ -7,6 +7,8 @@ import { Form } from "@/components/ui/form";
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
 import { Link } from "@/i18n/routing";
+import ExtraFields from "@/components/formFields/ExtraFields";
+import useExtraFields from "@/hooks/useExtraFields";
 
 interface DepartmentFormProps {
   onSubmit: (data: DepartmentFormValues) => Promise<void>;
@@ -32,6 +34,16 @@ const DepartmentForm = ({ onSubmit, defaultValues }: DepartmentFormProps) => {
   const globalTranslate = useTranslations();
   const t = useTranslations("hr.departments");
 
+  const {
+    extraFields,
+    handleAddExtraField,
+    handleRemoveExtraField,
+    handleExtraFieldChange,
+  } = useExtraFields({
+    defaultFields: defaultValues?.extra_fields ?? {},
+    setValue: form.setValue,
+  });
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -51,6 +63,12 @@ const DepartmentForm = ({ onSubmit, defaultValues }: DepartmentFormProps) => {
               type="number"
             />
           </div>
+          <ExtraFields
+            extraFields={extraFields}
+            onAddField={handleAddExtraField}
+            onRemoveField={handleRemoveExtraField}
+            onFieldChange={handleExtraFieldChange}
+          />
         </section>
         <div className="flex justify-end gap-2 mt-5">
           <Link
