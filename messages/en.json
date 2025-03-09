@@ -106,7 +106,8 @@
       "applicants": "Applicants",
       "employees": "Employees",
       "interviews": "Interviews",
-      "competitions": "Competitions"
+      "competitions": "Competitions",
+      "evaluations": "Evaluations"
     },
     "competitions": {
       "department": "Department",
@@ -196,6 +197,20 @@
       "addApplicant": "Add Applicant",
       "editApplicant": "Edit Applicant",
       "noApplicantDataFound": "No Applicant data found"
+    },
+    "evaluations": {
+      "interview": "Interview",
+      "interviewer": "Interviewer",
+      "score": "Score",
+      "comments": "Comments",
+      "noEvaluationsDataFound": "No evaluations found",
+      "addEvaluation": "Add Evaluation",
+      "editEvaluation": "Edit Evaluation",
+      "selectInterview": "Select Interview",
+      "selectInterviewer": "Select Interviewer",
+      "scorePlaceholder": "Enter score",
+      "commentsPlaceholder": "Enter comments",
+      "noEvaluationDataFound": "No evaluation data found"
     }
   },
   "Sales": {

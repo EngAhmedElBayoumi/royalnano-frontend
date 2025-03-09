@@ -34,6 +34,7 @@ import { vacationApi } from "./services/dashboard/hr/vacationApi";
 import { applicantsApi } from "./services/dashboard/hr/applicantsApi";
 import { interviewsApi } from "./services/dashboard/hr/interviewsApi";
 import { competitionApi } from "./services/dashboard/hr/competitionApi";
+import { evaluationApi } from "./services/dashboard/hr/evaluationApi";
 import { supplierApi } from "./services/dashboard/purchase/supplierApi";
 import { salesReturnApi } from "./services/dashboard/sales/salesReturnApi";
 import { servicesAPi } from "./services/website/servicesApi";
@@ -89,6 +90,7 @@ export const store = configureStore({
     [applicantsApi.reducerPath]: applicantsApi.reducer,
     [interviewsApi.reducerPath]: interviewsApi.reducer,
     [competitionApi.reducerPath]: competitionApi.reducer,
+    [evaluationApi.reducerPath]: evaluationApi.reducer,
     [supplierApi.reducerPath]: supplierApi.reducer,
     [salesReturnApi.reducerPath]: salesReturnApi.reducer,
     [servicesAPi.reducerPath]: servicesAPi.reducer,
@@ -133,6 +135,7 @@ export const store = configureStore({
       .concat(applicantsApi.middleware)
       .concat(interviewsApi.middleware)
       .concat(competitionApi.middleware)
+      .concat(evaluationApi.middleware)
       .concat(supplierApi.middleware)
       .concat(salesReturnApi.middleware)
       .concat(servicesAPi.middleware)

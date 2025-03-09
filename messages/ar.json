@@ -106,7 +106,8 @@
       "applicants": "المتقدمين",
       "employees": "الموظفون",
       "interviews": "المقابلات",
-      "competitions": "المسابقات"
+      "competitions": "المسابقات",
+      "evaluations": "التقييمات"
     },
     "competitions": {
       "department": "القسم",
@@ -196,6 +197,19 @@
         "completed": "مكتملة",
         "rejected": "مرفوضة"
       }
+    },
+    "evaluations": {
+      "interview": "المقابلة",
+      "interviewer": "المقابل",
+      "score": "الدرجة",
+      "comments": "التعليقات",
+      "noEvaluationsDataFound": "لا توجد بيانات للتقييمات",
+      "addEvaluation": "إضافة تقييم",
+      "editEvaluation": "تعديل التقييم",
+      "selectInterview": "اختر مقابلة",
+      "selectInterviewer": "اختر مقابل",
+      "scorePlaceholder": "ادخل الدرجة",
+      "commentsPlaceholder": "ادخل تعليقات"
     }
   },
   "Sales": {
