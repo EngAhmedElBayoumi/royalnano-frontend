@@ -13,6 +13,7 @@ import Applicants from "@/components/dashboard/hr/Applicants";
 import Interviews from "@/components/dashboard/hr/Interviews";
 import Competitions from "@/components/dashboard/hr/Competitions";
 import Evaluations from "@/components/dashboard/hr/Evaluations";
+import Departments from "@/components/dashboard/hr/Departments";
 
 function HrPage() {
   const t = useTranslations("hr.tabs");
@@ -22,6 +23,19 @@ function HrPage() {
   );
 
   const tabs = [
+    {
+      label: t("departments"),
+      permissionKey: "department",
+      icon: (
+        <Image
+          width="24"
+          height="24"
+          alt={t("departments")}
+          src="/assets/icons/dashboard/hr/departments.svg"
+        />
+      ),
+      content: <Departments />,
+    },
     {
       label: t("employees"),
       permissionKey: "employee",

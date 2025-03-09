@@ -100,6 +100,7 @@
   },
   "hr": {
     "tabs": {
+      "departments": "الأقسام",
       "attendance": "الحضور",
       "vacation": "الإجازات",
       "bonuses": "المكافآت والخصومات",
@@ -108,6 +109,13 @@
       "interviews": "المقابلات",
       "competitions": "المسابقات",
       "evaluations": "التقييمات"
+    },
+    "departments": {
+      "name": "اسم القسم",
+      "maxLeavePercentage": "النسبة القصوى للإجازة",
+      "noDepartmentsDataFound": "لا توجد بيانات للأقسام",
+      "addDepartment": "إضافة قسم",
+      "editDepartment": "تعديل القسم"
     },
     "competitions": {
       "department": "القسم",
