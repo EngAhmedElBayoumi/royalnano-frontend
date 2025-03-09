@@ -50,30 +50,17 @@ function HrPage() {
       content: <Employees />,
     },
     {
-      label: t("applicants"),
-      permissionKey: "applicant",
+      label: t("attendance"),
+      permissionKey: "attendance",
       icon: (
         <Image
           width="24"
           height="24"
-          alt={t("applicants")}
-          src="/assets/icons/dashboard/hr/applicants.svg"
+          alt={t("attendance")}
+          src="/assets/icons/dashboard/hr/attendance.svg"
         />
       ),
-      content: <Applicants />,
-    },
-    {
-      label: t("bonuses"),
-      permissionKey: "bonusdeduction",
-      icon: (
-        <Image
-          width="24"
-          height="24"
-          alt={t("bonuses")}
-          src="/assets/icons/dashboard/hr/bonuses.svg"
-        />
-      ),
-      content: <Bonuses />,
+      content: <Attendance />,
     },
     {
       label: t("vacation"),
@@ -89,17 +76,31 @@ function HrPage() {
       content: <Vacations />,
     },
     {
-      label: t("attendance"),
-      permissionKey: "attendance",
+      label: t("bonuses"),
+      permissionKey: "bonusdeduction",
       icon: (
         <Image
           width="24"
           height="24"
-          alt={t("attendance")}
-          src="/assets/icons/dashboard/hr/attendance.svg"
+          alt={t("bonuses")}
+          src="/assets/icons/dashboard/hr/bonuses.svg"
         />
       ),
-      content: <Attendance />,
+      content: <Bonuses />,
+    },
+
+    {
+      label: t("applicants"),
+      permissionKey: "applicant",
+      icon: (
+        <Image
+          width="24"
+          height="24"
+          alt={t("applicants")}
+          src="/assets/icons/dashboard/hr/applicants.svg"
+        />
+      ),
+      content: <Applicants />,
     },
     {
       label: t("interviews"),
