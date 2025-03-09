@@ -21,7 +21,7 @@ export default function EditEvaluation() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [updateEvaluation] = useUpdateEvaluationMutation();
   const { data, isLoading, error } = useGetEvaluationByIdQuery(id);
-  const t = useTranslations("hr.evaluations");
+  const t = useTranslations("hr");
 
   const defaultValues = data && {
     ...data,

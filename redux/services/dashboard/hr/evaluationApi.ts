@@ -7,14 +7,14 @@ export const evaluationApi = createApi({
   endpoints: (builder) => ({
     createEvaluation: builder.mutation({
       query: (data) => ({
-        url: "/hr/evaluation",
+        url: "/hr/evaluation/",
         method: "POST",
         body: data,
       }),
     }),
     updateEvaluation: builder.mutation({
       query: ({ id, data }) => ({
-        url: `/hr/evaluation/${id}`,
+        url: `/hr/evaluation/${id}/`,
         method: "PATCH",
         body: data,
       }),

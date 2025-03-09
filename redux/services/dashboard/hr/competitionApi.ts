@@ -16,14 +16,14 @@ export const competitionApi = createApi({
     }),
     createCompetition: builder.mutation({
       query: (data) => ({
-        url: "hr/competition",
+        url: "hr/competition/",
         method: "POST",
         body: data,
       }),
     }),
     updateCompetition: builder.mutation({
       query: ({ id, data }) => ({
-        url: `hr/competition/${id}`,
+        url: `hr/competition/${id}/`,
         method: "PATCH",
         body: data,
       }),
