@@ -13,6 +13,7 @@ import { useCreateSalesCustomerMutation } from "@/redux/services/dashboard/sales
 import { useRouter } from "@/i18n/routing";
 import { useState } from "react";
 import CustomModal from "@/components/modals/CustomModal";
+import PhoneInputField from "@/components/formFields/PhoneInputField";
 
 
 interface SalesCustomerFormProps {
@@ -93,12 +94,13 @@ const AddSalesCustomerForm = ({ defaultValues }: SalesCustomerFormProps) => {
               label={t("SalesCustomer.contactPerson")}
               placeholder={t("SalesCustomer.contactPerson")}
             />
-            <TextInput
-              control={form.control}
-              name="phone_number"
-              label={t("SalesCustomer.phoneNumber")}
-              placeholder={t("SalesCustomer.phoneNumber")}
-            />
+             <PhoneInputField
+            control={form.control}
+            name="phone_number"
+            label={t("SalesCustomer.phoneNumber")}
+            // placeholder={t("SalesCustomer.phoneNumber")}
+          />
+           
             <TextInput
               control={form.control}
               name="email"

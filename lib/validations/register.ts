@@ -1,4 +1,5 @@
 import * as z from "zod";
+import { phoneRegex } from "../utils/phoneRegex";
 
 export const registerValidation = z.object({
   email_address: z
@@ -24,10 +25,10 @@ export const registerValidation = z.object({
   //   .nonempty("Last name is required")
   //   .min(2, "Last name must be at least 2 characters long"),
 
-  phone_number: z
-    .string()
-    .nonempty("Phone number is required")
-    .regex(/^01[0125]\d{8}$/, "Invalid Egyptian phone number"),
+ phone_number: z
+         .string()
+         .nonempty("Phone number is required")
+         .regex(phoneRegex, "Invalid phone number"),
 });
 // .refine((data) => data.password === data.confirmPassword, {
 //   message: "Passwords must match",

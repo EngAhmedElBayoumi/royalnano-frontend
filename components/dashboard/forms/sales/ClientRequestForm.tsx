@@ -11,6 +11,7 @@ import CustomSelect from "@/components/formFields/CustomSelect";
 import { useGetServicesQuery } from "@/redux/services/website/servicesApi";
 import { useGetBranchesQuery } from "@/redux/services/dashboard/inventory/branchesApi";
 import { clientRequestSchema } from "@/lib/validations/dashboard/sales/clientRequestSchema";
+import PhoneInputField from "@/components/formFields/PhoneInputField";
 
 interface ClientRequestFormProps {
   defaultValues?: ClientRequestFormValues; 
@@ -96,13 +97,13 @@ const ClientRequestForm = ({ defaultValues, onSubmit }: ClientRequestFormProps) 
               placeholder={t("ClientRequest.fullName")}
             />
 
-          
-            <TextInput
-              control={form.control}
-              name="phone_number"
-              label={t("ClientRequest.phoneNumber")}
-              placeholder={t("ClientRequest.phoneNumber")}
-            />
+<PhoneInputField
+            control={form.control}
+           name="phone_number"
+           label={t("ClientRequest.phoneNumber")}
+          //  placeholder={t("ClientRequest.phoneNumber")}
+          />
+            
 
         
             <TextInput

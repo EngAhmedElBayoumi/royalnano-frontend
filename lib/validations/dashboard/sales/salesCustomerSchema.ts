@@ -1,15 +1,15 @@
+import { phoneRegex } from "@/lib/utils/phoneRegex";
 import { z } from "zod";
 
 export const SalesCustomerFormValuesSchema = z.object({
   customer_name: z.string().min(1, "Customer name is required"),
   contact_person: z.string().min(1, "Contact person is required"),
   id: z.number().int().positive("ID must be a positive integer"),
+
   phone_number: z
-    .string()
-    .regex(
-      /^\+[0-9]{1,15}$/, 
-      "Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed."
-    ),
+        .string()
+        .nonempty("Phone number is required")
+        .regex(phoneRegex, "Invalid phone number"),
   email: z.string().email("Invalid email address"),
   address: z.string().min(1, "Address is required"),
   city: z.string().min(1, "City is required"),
