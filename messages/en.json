@@ -214,6 +214,7 @@
     }
   },
   "Sales": {
+    "quotation": "Sales Quotation",
     "client": "Client Requests",
     "editCustomer": "Edit Customer Data",
     "salesInvoice": "Sales Invoice",
@@ -227,6 +228,7 @@
     "receipt": "Sales Receipt",
     "addCustomer": "Add Client Request",
     "SalesQuotation": {
+      "selectItem": "Select Item",
       "date": "Date",
       "customer": "Customer",
       "validityPeriod": "Validity Period",

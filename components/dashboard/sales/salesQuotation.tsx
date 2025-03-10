@@ -101,7 +101,7 @@ export default function SalesQuotation() {
           rows={10}
           columns={columns}
           cardData={cardsData}
-          buttonText="Add Category model"
+          buttonText="Add Sales Quotation"
           ButtonEvent={handleClick}
           onPageChange={handlePageChange}
           totalRecords={salesQuotations?.count || 0} 

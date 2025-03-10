@@ -6,8 +6,9 @@ import IconWithTitle from "@/components/dashboard/IconWithTitle";
 import CustomModal from "@/components/modals/CustomModal";
 import FormSkelton from "@/components/dashboard/skelton/FormSkelton";
 import LoadingError from "@/components/dashboard/LoadingError";
-import { useGetSalesInvoiceByIdQuery, useUpdateSalesInvoiceMutation } from "@/redux/services/dashboard/salesInvoiceApi";
-import SalesInvoiceForm, { SalesInvoiceFormValues } from "@/components/dashboard/forms/sales/SalesInvoiceForm";
+import SalesInvoiceForm from "@/components/dashboard/forms/sales/SalesInvoiceForm";
+import { useGetSalesInvoiceByIdQuery, useUpdateSalesInvoiceMutation } from "@/redux/services/dashboard/sales/salesInvoiceApi";
+import { SalesInvoiceFormValues } from "@/lib/validations/dashboard/sales/salesInvoiceSchema";
 
 export default function EditSalesInvoice() {
   const router = useRouter();

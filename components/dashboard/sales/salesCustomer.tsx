@@ -51,12 +51,12 @@ export default function SalesCustomer() {
   const columns = [
     { field: "id", header: "ID" },
     { field: "customer_name", header: "Customer Name" },
-    { field: "contact_person", header: "Contact Person" },
+    // { field: "contact_person", header: "Contact Person" },
     { field: "phone_number", header: "Phone Number" },
     { field: "email", header: "Email" },
-    { field: "address", header: "Address" },
+    // { field: "address", header: "Address" },
     { field: "branch_name", header: "Branch Name" },
-    { field: "tax_number", header: "taxxx" },
+    // { field: "tax_number", header: "taxxx" },
   ];
 
   const cardsData = [

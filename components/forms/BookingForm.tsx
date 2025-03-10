@@ -12,6 +12,7 @@ import { useGetBranchesQuery } from "@/redux/services/dashboard/inventory/branch
 import { useGetServicesQuery } from "@/redux/services/website/servicesApi";
 import { useEffect } from "react";
 import { useRouter } from "@/i18n/routing";
+import PhoneInputField from "../formFields/PhoneInputField";
 
 type FormData = {
   full_name: string;
@@ -59,7 +60,8 @@ const router = useRouter()
     };
 
     try {
-      await createClientRequest(payload).unwrap();
+    const res=  await createClientRequest(payload).unwrap();
+    console.log(res)
       console.log("Request created successfully!");
       router.push("/")
       form.reset(); 
@@ -127,12 +129,17 @@ const router = useRouter()
             )}
           </div>
           <div className="flex flex-col gap-4">
-            
-            <TextInput
+            {/* <TextInput
               name="phone_number"
               placeholder="Phone Number"
               label="Phone Number"
               control={form.control}
+            /> */}
+              <PhoneInputField
+               name="phone_number"
+              //  placeholder="Phone Number"
+               label="Phone Number"
+               control={form.control}
             />
             {errors.phone_number && (
               <p className="text-red-500 text-sm">{errors.phone_number.message}</p>

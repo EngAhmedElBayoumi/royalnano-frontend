@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const salesQuotationSchema = z.object({
   date: z.string().min(1, "Date is required"),
-  customer: z.string().min(1, "Customer is required"),
+  customer: z.number().min(1, "Customer is required"),
   validity_period: z.string().min(1, "Validity period is required"),
   quotation_number: z.string().min(1, "Quotation number is required"),
   items: z
