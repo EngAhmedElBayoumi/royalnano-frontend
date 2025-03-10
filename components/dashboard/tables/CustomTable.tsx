@@ -205,7 +205,6 @@ export default function CustomTable({
                 headerClassName="text-center capitalize text-white text-[16px] font-[500] py-[13px] px-[38px] border-r border-white border-[2px]"
                 body={(rowData: DataInTable) => {
                   const fieldValue = rowData[col.field];
-
                   if (Array.isArray(fieldValue)) {
                     const isExpanded = expandedRows[rowData.id] || false;
                     const itemsToShow = isExpanded
@@ -238,8 +237,9 @@ export default function CustomTable({
 
                   if (col.field === "image" && fieldValue !== null) {
                     return (
-                      <Image
-                        src={rowData[col.field] as string}
+                      // eslint-disable-next-line
+                      <img
+                        src={fieldValue as string}
                         alt={`${col.header} image`}
                         width={50}
                         height={50}

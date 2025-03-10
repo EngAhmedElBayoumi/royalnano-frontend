@@ -19,11 +19,13 @@ export const baseQuery = async (
   let accessToken = state.auth.accessToken;
   const refreshToken = state.auth.refreshToken;
 
-  // Check if the request is for a public API
+  // Check if the request is for a public API and not on dashboard page
   const isPublicRequest = PUBLIC_ENDPOINTS.some((endpoint) =>
     typeof args === "string"
-      ? args.startsWith(endpoint)
-      : args.url.startsWith(endpoint)
+      ? args.startsWith(endpoint) &&
+        !window.location.pathname.includes("dashboard")
+      : args.url.startsWith(endpoint) &&
+        !window.location.pathname.includes("dashboard")
   );
 
   // If the request is public, no token is needed
@@ -76,8 +78,16 @@ export const baseQuery = async (
 
   const baseQuery = fetchBaseQuery({
     baseUrl,
-    prepareHeaders: (headers) => {
-      headers.set("content-type", "application/json");
+    prepareHeaders: (headers, {}) => {
+      // Don't set content-type for FormData, browser will set it automatically
+      if (
+        typeof args === "object" &&
+        args.body &&
+        !(args.body instanceof FormData)
+      ) {
+        headers.set("content-type", "application/json");
+      }
+
       if (accessToken) {
         headers.set("Authorization", `Bearer ${accessToken}`);
       }

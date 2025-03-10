@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 
@@ -24,7 +24,7 @@ export const useTableData = ({
   const canAdd = permissions[permissionKey]?.add || false;
   const canUpdate = permissions[permissionKey]?.change || false;
 
-  const { data, isLoading, error } = useQueryHook({
+  const { data, isLoading, error, refetch } = useQueryHook({
     search: "",
     ordering: "id",
     page,
@@ -34,6 +34,10 @@ export const useTableData = ({
   const handlePageChange = (newPage: number) => {
     setPage(newPage);
   };
+
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
 
   return {
     page,

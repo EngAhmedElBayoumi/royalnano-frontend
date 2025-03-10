@@ -7,7 +7,8 @@ import { serviceSchema } from "@/lib/validations/dashboard/website/serviceSchema
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
 import FileInput from "@/components/formFields/FileInput";
-import {Link} from '@/i18n/routing';
+import { Link } from "@/i18n/routing";
+import TextArea from "@/components/formFields/TextArea";
 
 interface ServiceFormProps {
   onSubmit: (data: ServiceFormValues) => Promise<void>;
@@ -49,14 +50,14 @@ const ServiceForm = ({ onSubmit, defaultValues }: ServiceFormProps) => {
               label="Alias"
               placeholder="Service Alias"
             />
-            <TextInput
-              control={form.control}
-              name="description"
-              label="Description"
-              placeholder="Service Description"
-              className="sm:col-span-2"
-            />
           </div>
+          <TextArea
+            control={form.control}
+            name="description"
+            label="Description"
+            placeholder="Service Description"
+            className="mt-2 xl:mt-5"
+          />
           <FileInput
             control={form.control}
             name="image"

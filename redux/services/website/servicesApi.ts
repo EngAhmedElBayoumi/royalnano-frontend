@@ -16,6 +16,7 @@ export const servicesAPi = createApi({
         url: "website/services/",
         method: "POST",
         body: data,
+        formData: true,
       }),
     }),
     updateService: builder.mutation({

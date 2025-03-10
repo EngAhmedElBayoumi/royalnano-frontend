@@ -1,6 +1,7 @@
 import { NextResponse, NextRequest } from "next/server";
 import createMiddleware from "next-intl/middleware";
 import { routing } from "./i18n/routing";
+import { checkToken } from "./lib/utils/checkToken";
 
 // Create the next-intl middleware
 const intlMiddleware = createMiddleware({
@@ -45,10 +46,10 @@ export async function middleware(req: NextRequest) {
   ];
 
   // Define the protected routes
-  const protectedRoutes = ["/dashboard", "/profile", "/book-now"];
+  const protectedRoutes = ["/dashboard", "/profile"];
 
   // Check if the user is authenticated using the access token
-  if (accessToken) {
+  if (accessToken && checkToken(accessToken)) {
     // Redirect to home page if trying to access public routes while logged in
     if (publicRoutes.some((route) => req.nextUrl.pathname.includes(route))) {
       return NextResponse.redirect(new URL("/", req.url));
@@ -90,6 +91,5 @@ export const config = {
     "/register",
     "/dashboard/:path*", // Matches "/dashboard" and everything inside it
     "/profile",
-    // "/book-now",
   ],
 };
