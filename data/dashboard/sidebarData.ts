@@ -1,17 +1,17 @@
 export const sidebarLinks = [
   { path: "/", name: "home", icon: "home.svg", permission: "home" },
-  {
-    path: "/clients",
-    name: "clients",
-    icon: "clients.svg",
-    permission: "customer",
-  },
-  {
-    path: "/customer-requests",
-    name: "customerRequests",
-    icon: "customer_requests.svg",
-    permission: "clientrequest",
-  },
+  // {
+  //   path: "/clients",
+  //   name: "clients",
+  //   icon: "clients.svg",
+  //   permission: "customer",
+  // },
+  // {
+  //   path: "/customer-requests",
+  //   name: "customerRequests",
+  //   icon: "customer_requests.svg",
+  //   permission: "clientrequest",
+  // },
   {
     path: "/branches",
     name: "branches",

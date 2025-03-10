@@ -3,14 +3,22 @@ import ServiceForm, {
   ServiceFormValues,
 } from "@/components/dashboard/forms/website/ServiceForm";
 import IconWithTitle from "@/components/dashboard/IconWithTitle";
-// import { useCreateServiceMutation } from "@/redux/services/WebsiteApi";
+import { useCreateServiceMutation } from "@/redux/services/website/servicesApi";
+import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 export default function CreateService() {
-  // const [createService] = useCreateServiceMutation();
+  const [createService] = useCreateServiceMutation();
+  const router = useRouter();
+  const t = useTranslations("website.Services");
 
   const handleSubmit = async (data: ServiceFormValues) => {
-    console.log(data);
-    // await createService(data);
+    try {
+      await createService(data);
+      router.push("/dashboard/website/services");
+    } catch (error) {
+      console.error("Error creating service:", error);
+    }
   };
 
   return (

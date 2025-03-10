@@ -261,6 +261,23 @@
       "cancel": "إلغاء"
     }
   },
+  "dashboardWebsite": {
+    "tabs": {
+      "services": "الخدمات",
+      "contact": "التواصل",
+      "gallery": "معرض الصور"
+    },
+    "Services": {
+      "services": "الخدمات",
+      "addService": "إضافة خدمة",
+      "editService": "تعديل الخدمة",
+      "noServicesDataFound": "لا توجد بيانات للخدمات",
+      "name": "الاسم",
+      "alias": "الاسم المستعار",
+      "description": "الوصف",
+      "image": "الصورة"
+    }
+  },
   "website": {
     "CustomerReviews": {
       "heading": "العملاء",

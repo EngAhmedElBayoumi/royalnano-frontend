@@ -317,6 +317,23 @@
       "branch": "Branch"
     }
   },
+  "dashboardWebsite": {
+    "tabs": {
+      "services": "Services",
+      "contact": "Contact",
+      "gallery": "Gallery"
+    },
+    "Services": {
+      "services": "Services",
+      "addService": "Add Service",
+      "editService": "Edit Service",
+      "noServicesDataFound": "No services data found",
+      "name": "Name",
+      "alias": "Alias",
+      "description": "Description",
+      "image": "Image"
+    }
+  },
   "website": {
     "CustomerReviews": {
       "heading": "Customers",

@@ -15,20 +15,20 @@ interface ServiceFormProps {
 }
 
 export interface ServiceFormValues {
-  serviceName: string;
-  type: string;
-  price: number;
-  image: File;
+  name: string;
+  alias: string;
+  description: string;
+  image: File | null;
 }
 
 const ServiceForm = ({ onSubmit, defaultValues }: ServiceFormProps) => {
   const form = useForm({
     resolver: zodResolver(serviceSchema),
     defaultValues: defaultValues || {
-      serviceName: "",
-      type: "",
-      price: 0,
-      image: undefined,
+      name: "",
+      alias: "",
+      description: "",
+      image: null,
     },
   });
 
@@ -39,22 +39,22 @@ const ServiceForm = ({ onSubmit, defaultValues }: ServiceFormProps) => {
           <div className="grid sm:grid-cols-2 gap-x-4 gap-y-2 xl:gap-y-5 lg:gap-x-10">
             <TextInput
               control={form.control}
-              name="serviceName"
+              name="name"
               label="Service Name"
               placeholder="Service Name"
             />
             <TextInput
               control={form.control}
-              name="type"
-              label="Type"
-              placeholder="Type"
+              name="alias"
+              label="Alias"
+              placeholder="Service Alias"
             />
             <TextInput
               control={form.control}
-              name="price"
-              label="Price"
-              placeholder="Price"
-              type="number"
+              name="description"
+              label="Description"
+              placeholder="Service Description"
+              className="sm:col-span-2"
             />
           </div>
           <FileInput
