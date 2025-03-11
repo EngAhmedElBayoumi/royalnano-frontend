@@ -1,5 +1,5 @@
 "use client";
-import SalesOrderForm, { SalesOrderFormValues } from "@/components/dashboard/forms/sales/SalesOrderForm";
+import AddSalesOrderForm, { SalesOrderFormValues } from "@/components/dashboard/forms/sales/AddSalesOrderForm";
 import IconWithTitle from "@/components/dashboard/IconWithTitle";
 import CustomModal from "@/components/modals/CustomModal";
 import { useRouter } from "@/i18n/routing";
@@ -23,12 +23,13 @@ export default function CreateSalesOrder() {
       const payload = {
         ...data,
       };
+      console.log("Payload being sent to API:", payload);
       const response = await createSalesOrder(payload);
       console.log("Response from API:", response);
       if ("error" in response) {
+        console.error("API error:", response.error);
         throw new Error("Creation failed");
       }
-      http://localhost:3000/en/dashboard/sales?tab=Sales+Order
       router.push(`/dashboard/sales?tab=${t("order")}`);
     } catch (error) {
       console.error("Error in creation:", error);
@@ -52,7 +53,7 @@ export default function CreateSalesOrder() {
         />
       </div>
       <div className="bg-dashboardBg px-6 pt-5 pb-8 ltr:rounded-r-[20px] ltr:rounded-bl-[20px] rtl:rounded-l-[20px] rtl:rounded-br-[20px] ltr:lg:pr-[200px] rtl:lg:pl-[200px]">
-        <SalesOrderForm onSubmit={handleSubmit}/>
+        <AddSalesOrderForm onSubmit={handleSubmit}/>
 
       </div>
     </main>

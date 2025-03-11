@@ -1,49 +1,26 @@
 "use client";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import IconWithTitle from "@/components/dashboard/IconWithTitle";
 import CustomModal from "@/components/modals/CustomModal";
 import FormSkelton from "@/components/dashboard/skelton/FormSkelton";
 import LoadingError from "@/components/dashboard/LoadingError";
-import { useGetSalesOrderByIdQuery } from "@/redux/services/dashboard/sales/salesOrderApi";
 import EditSalesOrderForm from "@/components/dashboard/forms/sales/EditSalesOrderForm";
+import { useGetSalesOrderByIdQuery } from "@/redux/services/dashboard/sales/salesOrderApi";
 
 export default function EditSalesOrder() {
-  const router = useRouter();
   const searchParams = useSearchParams();
-  const id = searchParams.get("id");
+  const idParam = searchParams.get("id");
+  const id = idParam ? parseInt(idParam, 10) : null; 
 
   const t = useTranslations("Sales.SalesOrder");
-  const tabTranslate = useTranslations("Sales");
 
-  const { data, isLoading, error } = useGetSalesOrderByIdQuery(id);
+  const { data: salesOrderData, isLoading, isError } = useGetSalesOrderByIdQuery(id);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const defaultValues = data && {
-    id: data.id,
-    order_date: data.order_date,
-    customer: data.customer.id,
-    branch: data.branch,
-    sales_representative: data.sales_representative,
-    description: data.description,
-    items: data.items.map((item: { quantity: any; item: { id: any; }; custom_item_name: any; custom_price: any; discount: any; discount_percent: any; }) => ({
-      quantity: item.quantity,
-      item: item.item?.id || null,
-      custom_item_name: item.custom_item_name || "",
-      custom_price: item.custom_price || "",
-      discount: item.discount,
-      discount_percent: item.discount_percent,
-    })),
-    status: data.status,
-  };
 
   const handleModalChange = (isOpen: boolean) => {
     setIsModalOpen(isOpen);
-  };
-
-  const handleSuccess = () => {
-    router.push(`/dashboard/sales?tab=${tabTranslate("order")}`);
   };
 
   return (
@@ -52,7 +29,7 @@ export default function EditSalesOrder() {
         isOpen={isModalOpen}
         onChange={handleModalChange}
         title="Error!"
-        description="Your request wasn't processed successfully."
+        description="Your Request wasn't processed successfully.."
       />
       <div className="flex">
         <IconWithTitle
@@ -62,19 +39,17 @@ export default function EditSalesOrder() {
           textColor="primary"
         />
       </div>
+
       <div className="bg-dashboardBg px-6 pt-5 pb-8 ltr:rounded-r-[20px] ltr:rounded-bl-[20px] rtl:rounded-l-[20px] rtl:rounded-br-[20px]">
         {isLoading ? (
           <div className="ltr:lg:pr-[200px] rtl:lg:pl-[200px]">
             <FormSkelton />
           </div>
-        ) : error ? (
+        ) : isError ? (
           <LoadingError />
         ) : (
           <div className="ltr:lg:pr-[200px] rtl:lg:pl-[200px]">
-  <EditSalesOrderForm
-    defaultValues={defaultValues}
-    onSuccess={handleSuccess}
-  />
+            {id !== null && <EditSalesOrderForm salesOrderId={id} defaultValues={salesOrderData} />}
           </div>
         )}
       </div>

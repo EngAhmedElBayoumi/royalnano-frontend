@@ -9,9 +9,9 @@ export const salesOrderSchema = z.object({
   items: z.array(
     z.object({
       quantity: z.number(),
-      item: z.number().nullable().optional(), // Optional field
-      custom_item_name: z.string().optional(), // Optional field
-      custom_price: z.string().optional(), // Optional field
+      item: z.number().nullable().optional(), 
+      custom_item_name: z.string().optional(),
+      custom_price: z.string().optional(), 
       discount: z.string(),
       discount_percent: z.string(),
     })

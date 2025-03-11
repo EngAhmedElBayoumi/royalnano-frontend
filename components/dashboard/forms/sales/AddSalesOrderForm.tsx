@@ -37,7 +37,7 @@ export interface SalesOrderFormValues {
 }
   
 
-const SalesOrderForm = ({ onSubmit, defaultValues }: SalesOrderFormProps) => {
+const AddSalesOrderForm = ({ onSubmit, defaultValues }: SalesOrderFormProps) => {
   const { data: customers } = useGetMiniSalesCustomerQuery({});
   const {
     data: branchesData,
@@ -284,4 +284,4 @@ const SalesOrderForm = ({ onSubmit, defaultValues }: SalesOrderFormProps) => {
   );
 };
 
-export default SalesOrderForm;
+export default AddSalesOrderForm;

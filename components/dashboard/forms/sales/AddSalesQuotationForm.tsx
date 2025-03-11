@@ -73,7 +73,6 @@ const AddSalesQuotationForm = ({ defaultValues }: AddSalesQuotationFormProps) =>
     try {
       console.log("Form data submitted:", data);
 
-      // Calculate total for each item
       const itemsWithTotal = data.items.map((item) => {
         const unitPrice = parseFloat(item.unit_price || "0");
         const quantity = item.quantity;
@@ -106,7 +105,7 @@ const AddSalesQuotationForm = ({ defaultValues }: AddSalesQuotationFormProps) =>
       }
 
       console.log("Quotation created successfully");
-      router.push(`/dashboard/sales?tab=Quotation`);
+      router.push(`/dashboard/sales?tab=Sales+Quotation`);
     } catch (error) {
       console.error("Error in creation:", error);
     }
