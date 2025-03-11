@@ -96,7 +96,7 @@ export default function SalesQuotation() {
       ) : (
         <CustomTable
           emptyMessage="no sales Quotations data found"
-          editRoute="/dashboard/inventory/category-models/edit/"
+          editRoute="/dashboard/sales/sales-quotation/edit/"
           data={salesQuotations?.results}
           rows={10}
           columns={columns}

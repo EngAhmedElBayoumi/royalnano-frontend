@@ -86,7 +86,7 @@ const transformedData = SalesReturn?.results.map((invoice: { id: string; custome
         </div>
       ) : (
         <CustomTable
-  emptyMessage="no sales Invoices data found"
+  emptyMessage="no Sales Return data found"
   editRoute="/dashboard/inventory/sales-return/edit/"
   data={transformedData} 
   rows={10}

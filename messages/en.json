@@ -228,6 +228,7 @@
     "receipt": "Sales Receipt",
     "addCustomer": "Add Client Request",
     "SalesQuotation": {
+      "quotation": "Sales Quotation",
       "selectItem": "Select Item",
       "date": "Date",
       "customer": "Customer",
