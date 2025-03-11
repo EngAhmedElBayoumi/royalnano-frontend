@@ -1,32 +1,29 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { useGetServicesQuery } from "@/redux/services/website/servicesApi";
+import { useGetDepartmentsQuery } from "@/redux/services/dashboard/hr/departmentApi";
 import { useTableData } from "@/hooks/useTableData";
 import TableWrapper from "@/components/dashboard/tables/TableWrapper";
 
-export default function Services() {
+export default function Departments() {
   const router = useRouter();
-  const t = useTranslations("dashboardWebsite.Services");
+  const t = useTranslations("hr.departments");
 
   const { data, isLoading, error, permissions, handlePageChange } =
     useTableData({
-      permissionKey: "service",
-      // eslint-disable-next-line
-      useQueryHook: useGetServicesQuery,
+      permissionKey: "department",
+      useQueryHook: useGetDepartmentsQuery,
     });
 
   const columns = [
     { field: "name", header: t("name") },
-    { field: "alias", header: t("alias") },
-    { field: "description", header: t("description") },
-    { field: "image", header: t("image") },
+    { field: "max_leave_percentage", header: t("maxLeavePercentage") },
   ];
 
-  const cardsData = [{ title: "newRequests", num: 145 }];
+  const cardsData = [{ title: "Total Departments", num: data.count || 0 }];
 
   const handleClick = () => {
-    router.push("/dashboard/website/services/create");
+    router.push("/dashboard/hr/departments/create");
   };
 
   return (
@@ -36,9 +33,9 @@ export default function Services() {
       data={data}
       columns={columns}
       cardData={cardsData}
-      emptyMessage={t("noServicesDataFound")}
-      editRoute="/dashboard/website/services/edit/"
-      buttonText={t("addService")}
+      emptyMessage={t("noDepartmentsDataFound")}
+      editRoute="/dashboard/hr/departments/edit/"
+      buttonText={t("addDepartment")}
       ButtonEvent={handleClick}
       onPageChange={handlePageChange}
       permissions={permissions}

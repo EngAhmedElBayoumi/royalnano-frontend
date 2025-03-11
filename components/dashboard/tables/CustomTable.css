@@ -104,3 +104,8 @@ html[dir="rtl"] .p-paginator-next {
 .item-details div {
   margin: 2px 0;
 }
+
+.tablist::-webkit-scrollbar,
+.p-datatable-wrapper::-webkit-scrollbar {
+  height: 4px !important;
+}

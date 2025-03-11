@@ -12,7 +12,7 @@ export const interviewsApi = createApi({
       }),
     }),
     getInterviewById: builder.query({
-      query: (id) => `hr/interview/${id}/`,
+      query: (id) => `hr/interview/${id}`,
     }),
     createInterview: builder.mutation({
       query: (data) => ({

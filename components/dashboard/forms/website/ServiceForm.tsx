@@ -7,7 +7,8 @@ import { serviceSchema } from "@/lib/validations/dashboard/website/serviceSchema
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
 import FileInput from "@/components/formFields/FileInput";
-import {Link} from '@/i18n/routing';
+import { Link } from "@/i18n/routing";
+import TextArea from "@/components/formFields/TextArea";
 
 interface ServiceFormProps {
   onSubmit: (data: ServiceFormValues) => Promise<void>;
@@ -15,20 +16,20 @@ interface ServiceFormProps {
 }
 
 export interface ServiceFormValues {
-  serviceName: string;
-  type: string;
-  price: number;
-  image: File;
+  name: string;
+  alias: string;
+  description: string;
+  image: File | null;
 }
 
 const ServiceForm = ({ onSubmit, defaultValues }: ServiceFormProps) => {
   const form = useForm({
     resolver: zodResolver(serviceSchema),
     defaultValues: defaultValues || {
-      serviceName: "",
-      type: "",
-      price: 0,
-      image: undefined,
+      name: "",
+      alias: "",
+      description: "",
+      image: null,
     },
   });
 
@@ -39,24 +40,24 @@ const ServiceForm = ({ onSubmit, defaultValues }: ServiceFormProps) => {
           <div className="grid sm:grid-cols-2 gap-x-4 gap-y-2 xl:gap-y-5 lg:gap-x-10">
             <TextInput
               control={form.control}
-              name="serviceName"
+              name="name"
               label="Service Name"
               placeholder="Service Name"
             />
             <TextInput
               control={form.control}
-              name="type"
-              label="Type"
-              placeholder="Type"
-            />
-            <TextInput
-              control={form.control}
-              name="price"
-              label="Price"
-              placeholder="Price"
-              type="number"
+              name="alias"
+              label="Alias"
+              placeholder="Service Alias"
             />
           </div>
+          <TextArea
+            control={form.control}
+            name="description"
+            label="Description"
+            placeholder="Service Description"
+            className="mt-2 xl:mt-5"
+          />
           <FileInput
             control={form.control}
             name="image"

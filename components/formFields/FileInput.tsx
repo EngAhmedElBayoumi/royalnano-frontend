@@ -27,12 +27,15 @@ const FileInput = <T extends FieldValues>({
   accepted,
 }: FileInputProps<T>) => {
   const [file, setFile] = React.useState<File | null>(null);
+  const [previewUrl, setPreviewUrl] = React.useState<string | null>(null);
 
-  // Initialize the file state with the value from the form field
   useEffect(() => {
     const initialFile = control._formValues[name];
     if (initialFile instanceof File) {
       setFile(initialFile);
+      setPreviewUrl(URL.createObjectURL(initialFile));
+    } else if (typeof initialFile === 'string' && initialFile) {
+      setPreviewUrl(initialFile);
     }
   }, [control, name]);
 
@@ -65,20 +68,20 @@ const FileInput = <T extends FieldValues>({
             width="24"
             height="24"
             alt="icon"
-            className="absolute top-9 right-2"
+            className="absolute top-9 ltr:right-2 rtl:left-2"
           />
           <FormMessage />
-          {file && (
+          {(file || previewUrl) && (
             <div className="mt-2 flex justify-center relative">
-              {file.type.startsWith("image/") ? (
+              {(file?.type.startsWith("image/") || (!file && previewUrl)) ? (
                 <Image
-                  src={URL.createObjectURL(file)}
+                  src={file ? URL.createObjectURL(file) : previewUrl!}
                   alt="Preview"
                   className="mt-2 h-[200px] object-contain"
                   width="200"
                   height="200"
                 />
-              ) : file.type.startsWith("video/") ? (
+              ) : file?.type.startsWith("video/") ? (
                 <video controls className="mt-2" width="200" height="200">
                   <source src={URL.createObjectURL(file)} type={file.type} />
                   Your browser does not support the video tag.
@@ -88,6 +91,7 @@ const FileInput = <T extends FieldValues>({
                 type="button"
                 onClick={() => {
                   setFile(null);
+                  setPreviewUrl(null);
                   field.onChange(null);
                   (
                     document.querySelector(

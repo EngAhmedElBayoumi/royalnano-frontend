@@ -13,6 +13,7 @@ import Applicants from "@/components/dashboard/hr/Applicants";
 import Interviews from "@/components/dashboard/hr/Interviews";
 import Competitions from "@/components/dashboard/hr/Competitions";
 import Evaluations from "@/components/dashboard/hr/Evaluations";
+import Departments from "@/components/dashboard/hr/Departments";
 
 function HrPage() {
   const t = useTranslations("hr.tabs");
@@ -22,6 +23,19 @@ function HrPage() {
   );
 
   const tabs = [
+    {
+      label: t("departments"),
+      permissionKey: "department",
+      icon: (
+        <Image
+          width="24"
+          height="24"
+          alt={t("departments")}
+          src="/assets/icons/dashboard/hr/departments.svg"
+        />
+      ),
+      content: <Departments />,
+    },
     {
       label: t("employees"),
       permissionKey: "employee",
@@ -36,30 +50,17 @@ function HrPage() {
       content: <Employees />,
     },
     {
-      label: t("applicants"),
-      permissionKey: "applicant",
+      label: t("attendance"),
+      permissionKey: "attendance",
       icon: (
         <Image
           width="24"
           height="24"
-          alt={t("applicants")}
-          src="/assets/icons/dashboard/hr/applicants.svg"
+          alt={t("attendance")}
+          src="/assets/icons/dashboard/hr/attendance.svg"
         />
       ),
-      content: <Applicants />,
-    },
-    {
-      label: t("bonuses"),
-      permissionKey: "bonusdeduction",
-      icon: (
-        <Image
-          width="24"
-          height="24"
-          alt={t("bonuses")}
-          src="/assets/icons/dashboard/hr/bonuses.svg"
-        />
-      ),
-      content: <Bonuses />,
+      content: <Attendance />,
     },
     {
       label: t("vacation"),
@@ -75,17 +76,31 @@ function HrPage() {
       content: <Vacations />,
     },
     {
-      label: t("attendance"),
-      permissionKey: "attendance",
+      label: t("bonuses"),
+      permissionKey: "bonusdeduction",
       icon: (
         <Image
           width="24"
           height="24"
-          alt={t("attendance")}
-          src="/assets/icons/dashboard/hr/attendance.svg"
+          alt={t("bonuses")}
+          src="/assets/icons/dashboard/hr/bonuses.svg"
         />
       ),
-      content: <Attendance />,
+      content: <Bonuses />,
+    },
+
+    {
+      label: t("applicants"),
+      permissionKey: "applicant",
+      icon: (
+        <Image
+          width="24"
+          height="24"
+          alt={t("applicants")}
+          src="/assets/icons/dashboard/hr/applicants.svg"
+        />
+      ),
+      content: <Applicants />,
     },
     {
       label: t("interviews"),
@@ -133,7 +148,7 @@ function HrPage() {
 
   return (
     <>
-      <CustomTabs tabs={tabs} defaultTab={t("employees")} />
+      <CustomTabs tabs={tabs} defaultTab={t("departments")} />
     </>
   );
 }

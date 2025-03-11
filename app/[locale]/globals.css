@@ -13,6 +13,7 @@
 } */
 ::-webkit-scrollbar {
   width: 0.2rem;
+  height: 4px !important;
 }
 
 ::-webkit-scrollbar-thumb {

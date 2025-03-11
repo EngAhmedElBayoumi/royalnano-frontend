@@ -1,32 +1,46 @@
 "use client";
+import { useCreateServiceMutation } from "@/redux/services/website/servicesApi";
+import { useTranslations } from "next-intl";
 import ServiceForm, {
   ServiceFormValues,
 } from "@/components/dashboard/forms/website/ServiceForm";
-import IconWithTitle from "@/components/dashboard/IconWithTitle";
-// import { useCreateServiceMutation } from "@/redux/services/WebsiteApi";
+import CreatePage from "@/components/dashboard/CreatePage";
 
 export default function CreateService() {
-  // const [createService] = useCreateServiceMutation();
+  const [createService] = useCreateServiceMutation();
+  const t = useTranslations("dashboardWebsite.Services");
 
   const handleSubmit = async (data: ServiceFormValues) => {
-    console.log(data);
-    // await createService(data);
+    try {
+      // Create FormData instance to handle file upload
+      const formData = new FormData();
+
+      // Append text fields
+      formData.append("name", data.name);
+      formData.append("alias", data.alias);
+      formData.append("description", data.description);
+
+      // Append image file if it exists
+      if (data.image && data.image instanceof File) {
+        formData.append("image", data.image);
+      }
+
+      const response = await createService(formData);
+      if ("error" in response) {
+        throw new Error("Creation failed");
+      }
+    } catch (error) {
+      console.log("Service creation error:", error);
+      throw error;
+    }
   };
 
   return (
-    <main className="mx-7 my-5">
-      <div className="flex">
-        <IconWithTitle
-          imageSrc="/assets/icons/add.svg"
-          title="Add Service"
-          backgroundColor="#F8F7F7"
-          textColor="primary"
-        />
-      </div>
-
-      <div className="bg-[#F8F7F7] px-6 pt-5 pb-8 ltr:rounded-r-[20px] ltr:rounded-bl-[20px] rtl:rounded-l-[20px] rtl:rounded-br-[20px] ltr:lg:pr-[200px] rtl:lg:pl-[200px]">
-        <ServiceForm onSubmit={handleSubmit} />
-      </div>
-    </main>
+    <CreatePage
+      title={t("addService")}
+      onSubmit={handleSubmit}
+      Form={ServiceForm}
+      redirectPath="/dashboard/website"
+    />
   );
 }

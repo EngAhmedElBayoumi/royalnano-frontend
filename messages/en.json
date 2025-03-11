@@ -100,6 +100,7 @@
   },
   "hr": {
     "tabs": {
+      "departments": "Departments",
       "attendance": "Attendance",
       "vacation": "Vacation",
       "bonuses": "Bonuses and Deductions",
@@ -108,6 +109,13 @@
       "interviews": "Interviews",
       "competitions": "Competitions",
       "evaluations": "Evaluations"
+    },
+    "departments": {
+      "name": "Department Name",
+      "maxLeavePercentage": "Max Leave Percentage",
+      "noDepartmentsDataFound": "No departments data found",
+      "addDepartment": "Add Department",
+      "editDepartment": "Edit Department"
     },
     "competitions": {
       "department": "Department",
@@ -310,6 +318,23 @@
       "orderNote": "Order Note",
       "service": "Service",
       "branch": "Branch"
+    }
+  },
+  "dashboardWebsite": {
+    "tabs": {
+      "services": "Services",
+      "contact": "Contact",
+      "gallery": "Gallery"
+    },
+    "Services": {
+      "services": "Services",
+      "addService": "Add Service",
+      "editService": "Edit Service",
+      "noServicesDataFound": "No services data found",
+      "name": "Name",
+      "alias": "Alias",
+      "description": "Description",
+      "image": "Image"
     }
   },
   "website": {

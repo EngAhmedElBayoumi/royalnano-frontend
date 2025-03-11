@@ -1,38 +1,56 @@
 "use client";
+import { useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 import ServiceForm, {
   ServiceFormValues,
 } from "@/components/dashboard/forms/website/ServiceForm";
-import IconWithTitle from "@/components/dashboard/IconWithTitle";
-// import { useUpdateServiceMutation } from "@/redux/services/WebsiteApi";
+import EditPage from "@/components/dashboard/EditPage";
+import {
+  useGetServiceByIdQuery,
+  useUpdateServiceMutation,
+} from "@/redux/services/website/servicesApi";
 
 export default function EditService() {
-  // const [updateService] = useUpdateServiceMutation();
-  const defaultValues: ServiceFormValues = {
-    serviceName: "Sample Service",
-    type: "Sample Type",
-    price: 100,
-    image: new File([], "sample.png"),
-  };
+  const searchParams = useSearchParams();
+  const id = searchParams.get("id");
+  const t = useTranslations("dashboardWebsite.Services");
+  const { data, isLoading, error } = useGetServiceByIdQuery(id);
+  const [updateService] = useUpdateServiceMutation();
 
   const handleSubmit = async (data: ServiceFormValues) => {
-    console.log(data);
-    // await updateService(data);
+    try {
+      // Create FormData instance to handle file upload
+      const formData = new FormData();
+
+      // Append text fields
+      formData.append("name", data.name);
+      formData.append("alias", data.alias);
+      formData.append("description", data.description);
+
+      // Append image file if it exists
+      if (data.image && data.image instanceof File) {
+        formData.append("image", data.image);
+      }
+
+      const response = await updateService({ id, data: formData });
+      if ("error" in response) {
+        throw new Error("Edit failed");
+      }
+    } catch (error) {
+      console.log("Service edit error:", error);
+      throw error;
+    }
   };
 
   return (
-    <main className="mx-7 my-5">
-      <div className="flex">
-        <IconWithTitle
-          imageSrc="/assets/icons/edit.svg"
-          title="Edit Service"
-          backgroundColor="#F8F7F7"
-          textColor="primary"
-        />
-      </div>
-
-      <div className="bg-[#F8F7F7] px-6 pt-5 pb-8 ltr:rounded-r-[20px] ltr:rounded-bl-[20px] rtl:rounded-l-[20px] rtl:rounded-br-[20px] ltr:lg:pr-[200px] rtl:lg:pl-[200px]">
-        <ServiceForm onSubmit={handleSubmit} defaultValues={defaultValues} />
-      </div>
-    </main>
+    <EditPage
+      title={t("editService")}
+      data={data}
+      isLoading={isLoading}
+      error={error}
+      onSubmit={handleSubmit}
+      Form={ServiceForm}
+      redirectPath="/dashboard/website/"
+    />
   );
 }

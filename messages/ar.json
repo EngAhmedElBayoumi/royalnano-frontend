@@ -100,6 +100,7 @@
   },
   "hr": {
     "tabs": {
+      "departments": "الأقسام",
       "attendance": "الحضور",
       "vacation": "الإجازات",
       "bonuses": "المكافآت والخصومات",
@@ -108,6 +109,13 @@
       "interviews": "المقابلات",
       "competitions": "المسابقات",
       "evaluations": "التقييمات"
+    },
+    "departments": {
+      "name": "اسم القسم",
+      "maxLeavePercentage": "النسبة القصوى للإجازة",
+      "noDepartmentsDataFound": "لا توجد بيانات للأقسام",
+      "addDepartment": "إضافة قسم",
+      "editDepartment": "تعديل القسم"
     },
     "competitions": {
       "department": "القسم",
@@ -251,6 +259,23 @@
       "status": "الحالة",
       "save": "حفظ",
       "cancel": "إلغاء"
+    }
+  },
+  "dashboardWebsite": {
+    "tabs": {
+      "services": "الخدمات",
+      "contact": "التواصل",
+      "gallery": "معرض الصور"
+    },
+    "Services": {
+      "services": "الخدمات",
+      "addService": "إضافة خدمة",
+      "editService": "تعديل الخدمة",
+      "noServicesDataFound": "لا توجد بيانات للخدمات",
+      "name": "الاسم",
+      "alias": "الاسم المستعار",
+      "description": "الوصف",
+      "image": "الصورة"
     }
   },
   "website": {

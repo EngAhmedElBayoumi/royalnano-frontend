@@ -1,5 +1,10 @@
 "use client";
-import React, { useState, useEffect, MouseEventHandler, ReactNode } from "react";
+import React, {
+  useState,
+  useEffect,
+  MouseEventHandler,
+  ReactNode,
+} from "react";
 import { DataTable, DataTableFilterMeta } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { InputText } from "primereact/inputtext";
@@ -73,7 +78,6 @@ export default function CustomTable({
   onPageChange,
   totalRecords,
 }: CustomTableProps) {
-  
   const router = useRouter();
   const t = useTranslations();
   const [customers, setCustomers] = useState<DataInTable[]>(data);
@@ -82,7 +86,9 @@ export default function CustomTable({
   });
   const [globalFilterValue, setGlobalFilterValue] = useState<string>("");
   const [page, setPage] = useState(0);
-  const [expandedRows, setExpandedRows] = useState<{ [key: number]: boolean }>({});
+  const [expandedRows, setExpandedRows] = useState<{ [key: number]: boolean }>(
+    {}
+  );
 
   useEffect(() => {
     setCustomers(data);
@@ -201,13 +207,17 @@ export default function CustomTable({
                   const fieldValue = rowData[col.field];
                   if (Array.isArray(fieldValue)) {
                     const isExpanded = expandedRows[rowData.id] || false;
-                    const itemsToShow = isExpanded ? fieldValue : fieldValue.slice(0, 3);
+                    const itemsToShow = isExpanded
+                      ? fieldValue
+                      : fieldValue.slice(0, 3);
 
                     return (
                       <div>
                         {itemsToShow.map((item, index) => (
                           <div key={index}>
-                            {item.item_name || item.name || JSON.stringify(item)}
+                            {item.item_name ||
+                              item.name ||
+                              JSON.stringify(item)}
                             {index < itemsToShow.length - 1 && (
                               <hr className="border-black border-2 my-2" />
                             )}
@@ -222,6 +232,19 @@ export default function CustomTable({
                           </Button>
                         )}
                       </div>
+                    );
+                  }
+
+                  if (col.field === "image" && fieldValue !== null) {
+                    return (
+                      // eslint-disable-next-line
+                      <img
+                        src={fieldValue as string}
+                        alt={`${col.header} image`}
+                        width={50}
+                        height={50}
+                        className="rounded-md object-cover"
+                      />
                     );
                   }
 
