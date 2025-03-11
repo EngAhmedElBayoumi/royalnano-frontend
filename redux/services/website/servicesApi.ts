@@ -11,6 +11,9 @@ export const servicesAPi = createApi({
         params: { search, ordering, page, page_size },
       }),
     }),
+    getServiceById: builder.query({
+      query: (id) => `website/services/${id}/`,
+    }),
     createService: builder.mutation({
       query: (data) => ({
         url: "website/services/",
@@ -22,14 +25,8 @@ export const servicesAPi = createApi({
     updateService: builder.mutation({
       query: ({ id, ...data }) => ({
         url: `website/services/${id}/`,
-        method: "PUT",
+        method: "PATCH",
         body: data,
-      }),
-    }),
-    deleteService: builder.mutation({
-      query: (id) => ({
-        url: `website/services/${id}/`,
-        method: "DELETE",
       }),
     }),
   }),
@@ -37,7 +34,7 @@ export const servicesAPi = createApi({
 
 export const {
   useGetServicesQuery,
+  useGetServiceByIdQuery,
   useCreateServiceMutation,
   useUpdateServiceMutation,
-  useDeleteServiceMutation,
 } = servicesAPi;

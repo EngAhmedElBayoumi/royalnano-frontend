@@ -11,7 +11,6 @@ export const departmentApi = createApi({
         params: { search, ordering, page, page_size },
       }),
     }),
-
     getDepartmentById: builder.query({
       query: (id) => `hr/department/${id}/`,
     }),
