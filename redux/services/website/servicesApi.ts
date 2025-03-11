@@ -27,6 +27,7 @@ export const servicesAPi = createApi({
         url: `website/services/${id}/`,
         method: "PATCH",
         body: data,
+        formData: true,
       }),
     }),
   }),
