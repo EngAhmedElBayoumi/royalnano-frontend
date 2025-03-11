@@ -1,26 +1,19 @@
 "use client";
 import { useRouter } from "next/navigation";
-import CustomTable from "@/components/dashboard/tables/CustomTable";
-import { useGetBranchesQuery } from "@/redux/services/dashboard/inventory/branchesApi";
 import { useTranslations } from "next-intl";
-import TableSkelton from "@/components/dashboard/skelton/TableSkelton";
-import CardsSkelton from "@/components/dashboard/skelton/CardsSkelton";
-import LoadingError from "@/components/dashboard/LoadingError";
+import { useGetBranchesQuery } from "@/redux/services/dashboard/inventory/branchesApi";
+import { useTableData } from "@/hooks/useTableData";
+import TableWrapper from "@/components/dashboard/tables/TableWrapper";
 
 export default function Branches() {
   const router = useRouter();
   const t = useTranslations("branches");
 
-  const {
-    data: branchesData,
-    isLoading,
-    error,
-  } = useGetBranchesQuery({
-    search: "",
-    ordering: "id",
-    page: 1,
-    page_size: 10,
-  });
+  const { data, isLoading, error, permissions, handlePageChange } =
+    useTableData({
+      permissionKey: "branch",
+      useQueryHook: useGetBranchesQuery,
+    });
 
   const columns = [
     { field: "name", header: t("name") },
@@ -31,7 +24,7 @@ export default function Branches() {
   ];
 
   const cardsData = [
-    { title: "New requests", num: 145 },
+    { title: "Total Branches", num: data.count || 0 },
     { title: "Complete", num: 87 },
     { title: "Pending", num: 3200 },
     { title: "Failed", num: 48 },
@@ -43,30 +36,18 @@ export default function Branches() {
   };
 
   return (
-    <div className="px-6 pt-7 pb-25">
-      {isLoading ? (
-        <>
-          <CardsSkelton />
-          <TableSkelton />
-        </>
-      ) : error ? (
-        <LoadingError />
-      ) : (
-        <CustomTable
-          cardData={cardsData}
-          emptyMessage={t("noBranchesDataFound")}
-          editRoute="/dashboard/branches/edit/"
-          headerBG="#F8F7F7"
-          headerTextColor="#C8AE50"
-          headerTitle={t("branches")}
-          headerIcon="/assets/icons/branches.svg"
-          data={branchesData.results}
-          rows={10}
-          columns={columns}
-          buttonText={t("addBranch")}
-          ButtonEvent={handleClick}
-        />
-      )}
-    </div>
+    <TableWrapper
+      isLoading={isLoading}
+      error={error}
+      data={data}
+      columns={columns}
+      cardData={cardsData}
+      emptyMessage={t("noBranchesDataFound")}
+      editRoute="/dashboard/branches/edit/"
+      buttonText={t("addBranch")}
+      ButtonEvent={handleClick}
+      onPageChange={handlePageChange}
+      permissions={permissions}
+    />
   );
 }

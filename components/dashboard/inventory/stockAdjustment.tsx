@@ -2,11 +2,8 @@
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useGetStockAdjustmentsQuery } from "@/redux/services/dashboard/inventory/stockApi";
-import CustomTable from "@/components/dashboard/tables/CustomTable";
-import TableSkelton from "@/components/dashboard/skelton/TableSkelton";
-import CardsSkelton from "@/components/dashboard/skelton/CardsSkelton";
-import LoadingError from "@/components/dashboard/LoadingError";
-import { useState } from "react";
+import TableWrapper from "@/components/dashboard/tables/TableWrapper";
+import { useTableData } from "@/hooks/useTableData";
 
 // Define the type for stock adjustment
 interface StockAdjustment {
@@ -24,20 +21,16 @@ interface StockAdjustment {
 export default function StockAdjustment() {
   const router = useRouter();
   const t = useTranslations("Inventory.InventoryStockAdjustment");
-   const [page, setPage] = useState(1);
-   
-    const handlePageChange = (newPage: number) => {
-      setPage(newPage);
-    };
+
   const {
     data: stockAdjustmentData = { results: [] },
     isLoading,
     error,
-  } = useGetStockAdjustmentsQuery({
-    search: "",
-    ordering: "id",
-    page,
-    page_size: 10,
+    permissions,
+    handlePageChange,
+  } = useTableData({
+    permissionKey: "stockadjustment",
+    useQueryHook: useGetStockAdjustmentsQuery,
   });
 
   const transformedData = stockAdjustmentData.results.map(
@@ -71,25 +64,25 @@ export default function StockAdjustment() {
     router.push("/dashboard/inventory/stock-adjustment/create");
   };
 
-  return isLoading ? (
-    <>
-      <CardsSkelton />
-      <TableSkelton />
-    </>
-  ) : error ? (
-    <LoadingError />
-  ) : (
-    <CustomTable
-      emptyMessage="no stock adjustment data found"
-      viewRoute="/dashboard/inventory/stock-adjustment/view/"
-      data={transformedData}
-      cardData={cardsData}
-      rows={10}
+  return (
+    <TableWrapper
+      isLoading={isLoading}
+      error={error}
+      data={{
+        results: transformedData,
+        count: stockAdjustmentData?.count || 0,
+      }}
       columns={columns}
+      cardData={cardsData}
+      emptyMessage={
+        t("noStockAdjustmentsDataFound") || "No stock adjustment data found"
+      }
+      editRoute="/dashboard/inventory/stock-adjustment/edit/"
+      viewRoute="/dashboard/inventory/stock-adjustment/view/"
       buttonText={t("addStockAdjustment")}
       ButtonEvent={handleClick}
       onPageChange={handlePageChange}
-      totalRecords={stockAdjustmentData?.count || 0} 
+      permissions={permissions}
     />
   );
 }

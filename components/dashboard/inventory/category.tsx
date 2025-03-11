@@ -2,25 +2,15 @@
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useGetItemCategoryQuery } from "@/redux/services/dashboard/inventory/itemCategoryApi";
-import TableSkelton from "@/components/dashboard/skelton/TableSkelton";
-import CardsSkelton from "@/components/dashboard/skelton/CardsSkelton";
-import LoadingError from "@/components/dashboard/LoadingError";
-import CustomTable from "@/components/dashboard/tables/CustomTable";
-import { useState } from "react";
+import TableWrapper from "@/components/dashboard/tables/TableWrapper";
+import { useTableData } from "@/hooks/useTableData";
 
 export default function Category() {
-      const [page, setPage] = useState(1);
-      const handlePageChange = (newPage: number) => {
-        setPage(newPage);
-      };
-  const {
-    isLoading,
-    error,
-    data: itemCategories,
-  } = useGetItemCategoryQuery({search: "",
-    ordering: "id",
-    page,
-    page_size: 10,});
+  const { data, isLoading, error, permissions, handlePageChange } =
+    useTableData({
+      permissionKey: "expensecategory",
+      useQueryHook: useGetItemCategoryQuery,
+    });
 
   const router = useRouter();
   const t = useTranslations("Inventory.InventoryCategory");
@@ -41,28 +31,19 @@ export default function Category() {
     router.push("/dashboard/inventory/category-models/create");
   };
   return (
-    <>
-      {isLoading ? (
-        <>
-          <CardsSkelton />
-          <TableSkelton />
-        </>
-      ) : error ? (
-        <LoadingError />
-      ) : (
-        <CustomTable
-          emptyMessage="no customer requests data found"
-          editRoute="/dashboard/inventory/category-models/edit/"
-          data={itemCategories}
-          rows={10}
-          columns={columns}
-          cardData={cardsData}
-          buttonText={t("addCategory")}
-          ButtonEvent={handleClick}
-          onPageChange={handlePageChange}
-          totalRecords={itemCategories?.count || 0} 
-        />
-      )}
-    </>
+    <TableWrapper
+      isLoading={isLoading}
+      error={error}
+      data={data}
+      columns={columns}
+      cardData={cardsData}
+      emptyMessage={t("noCategoriesDataFound") || "No categories data found"}
+      editRoute="/dashboard/inventory/category-models/edit/"
+      viewRoute="/dashboard/inventory/category-models/view/"
+      buttonText={t("addCategory")}
+      ButtonEvent={handleClick}
+      onPageChange={handlePageChange}
+      permissions={permissions}
+    />
   );
 }

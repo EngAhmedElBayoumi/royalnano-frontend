@@ -1,12 +1,9 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useGetMovementsQuery } from "@/redux/services/dashboard/inventory/movementApi";
-import CustomTable from "@/components/dashboard/tables/CustomTable";
-import TableSkelton from "@/components/dashboard/skelton/TableSkelton";
-import CardsSkelton from "@/components/dashboard/skelton/CardsSkelton";
-import LoadingError from "@/components/dashboard/LoadingError";
 import { useTranslations } from "next-intl";
-import { useState } from "react";
+import TableWrapper from "@/components/dashboard/tables/TableWrapper";
+import { useTableData } from "@/hooks/useTableData";
 
 // Define the type for movement
 interface Movement {
@@ -23,23 +20,12 @@ interface Movement {
 }
 
 export default function Movement() {
-    const [page, setPage] = useState(1);
-    const handlePageChange = (newPage: number) => {
-      setPage(newPage);
-    };
-  
   const router = useRouter();
   const t = useTranslations("Inventory.InventoryMovement");
 
-  const {
-    data: movementData = { results: [] },
-    isLoading,
-    error,
-  } = useGetMovementsQuery({
-    search: "",
-    ordering: "id",
-    page,
-    page_size: 10,
+  const { data: movementData = { results: [] }, isLoading, error, permissions, handlePageChange } = useTableData({
+    permissionKey: "movement",
+    useQueryHook: useGetMovementsQuery,
   });
 
   // Transform movementData to only include item_name
@@ -70,28 +56,19 @@ export default function Movement() {
   };
 
   return (
-    <>
-      {isLoading ? (
-        <>
-          <CardsSkelton />
-          <TableSkelton />
-        </>
-      ) : error ? (
-        <LoadingError />
-      ) : (
-        <CustomTable
-          viewRoute="/dashboard/inventory/movement/view/"
-          data={transformedData}
-          rows={10}
-          columns={columns}
-          cardData={cardsData}
-          buttonText={t("addMovement")}
-          ButtonEvent={handleClick}
-          emptyMessage={t("noMovementsDataFound") || "No movements data found"}
-          onPageChange={handlePageChange}
-          totalRecords={movementData?.count || 0} 
-        />
-      )}
-    </>
+    <TableWrapper
+      isLoading={isLoading}
+      error={error}
+      data={{ results: transformedData, count: movementData?.count || 0 }}
+      columns={columns}
+      cardData={cardsData}
+      emptyMessage={t("noMovementsDataFound") || "No movements data found"}
+      editRoute="/dashboard/inventory/movement/edit/"
+      viewRoute="/dashboard/inventory/movement/view/"
+      buttonText={t("addMovement")}
+      ButtonEvent={handleClick}
+      onPageChange={handlePageChange}
+      permissions={permissions}
+    />
   );
 }

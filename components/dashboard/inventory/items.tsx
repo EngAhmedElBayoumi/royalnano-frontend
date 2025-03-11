@@ -1,29 +1,19 @@
 "use client";
-import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useGetItemsQuery } from "@/redux/services/dashboard/inventory/itemsApi";
-import CustomTable from "@/components/dashboard/tables/CustomTable";
-import TableSkelton from "@/components/dashboard/skelton/TableSkelton";
-import CardsSkelton from "@/components/dashboard/skelton/CardsSkelton";
-import LoadingError from "@/components/dashboard/LoadingError";
+import TableWrapper from "@/components/dashboard/tables/TableWrapper";
+import { useTableData } from "@/hooks/useTableData";
 
 export default function Items() {
   const router = useRouter();
   const t = useTranslations("Inventory.InventoryItem");
 
-  const [page, setPage] = useState(1);
-
-  const { data, isLoading, error } = useGetItemsQuery({
-    search: "",
-    ordering: "id",
-    page,
-    page_size: 10,
-  });
-
-  const handlePageChange = (newPage: number) => {
-    setPage(newPage);
-  };
+  const { data, isLoading, error, permissions, handlePageChange } =
+    useTableData({
+      permissionKey: "inventoryitem",
+      useQueryHook: useGetItemsQuery,
+    });
 
   const columns = [
     { field: "item_code", header: t("itemCode") },
@@ -47,25 +37,19 @@ export default function Items() {
     router.push("/dashboard/inventory/items/create");
   };
 
-  return isLoading ? (
-    <>
-      <CardsSkelton />
-      <TableSkelton />
-    </>
-  ) : error ? (
-    <LoadingError />
-  ) : (
-    <CustomTable
+  return (
+    <TableWrapper
+      isLoading={isLoading}
+      error={error}
       emptyMessage={t("noItemsDataFound") || "No items data found"}
       editRoute="/dashboard/inventory/items/edit/"
-      data={data.results}
-      rows={10}
+      data={data}
       columns={columns}
       cardData={cardsData}
       buttonText={t("addItem")}
       ButtonEvent={handleClick}
       onPageChange={handlePageChange}
-      totalRecords={data.count}
+      permissions={permissions}
     />
   );
 }

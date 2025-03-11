@@ -2,11 +2,8 @@
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useGetPreorderQuery } from "@/redux/services/dashboard/inventory/preorderApi";
-import CustomTable from "@/components/dashboard/tables/CustomTable";
-import TableSkelton from "@/components/dashboard/skelton/TableSkelton";
-import CardsSkelton from "@/components/dashboard/skelton/CardsSkelton";
-import LoadingError from "@/components/dashboard/LoadingError";
-import { useState } from "react";
+import TableWrapper from "@/components/dashboard/tables/TableWrapper";
+import { useTableData } from "@/hooks/useTableData";
 
 export interface Item {
   item: {
@@ -20,14 +17,10 @@ export interface Item {
 }
 
 export default function Preorder() {
-    const [page, setPage] = useState(1);
-    const handlePageChange = (newPage: number) => {
-      setPage(newPage);
-    };
-  const { isLoading, error, data: inventoryItems } = useGetPreorderQuery({ search: "",
-    ordering: "id",
-    page,
-    page_size: 10,});
+  const { data: inventoryItems, isLoading, error, permissions, handlePageChange } = useTableData({
+    permissionKey: "preorder",
+    useQueryHook: useGetPreorderQuery,
+  });
 
   const router = useRouter();
   const t = useTranslations("Inventory.InventoryPreorder");
@@ -58,28 +51,19 @@ export default function Preorder() {
   };
 
   return (
-    <>
-      {isLoading ? (
-        <>
-          <CardsSkelton />
-          <TableSkelton />
-        </>
-      ) : error ? (
-        <LoadingError />
-      ) : (
-        <CustomTable
-          emptyMessage={t("noPreorderDataFound")}
-          editRoute="/dashboard/inventory/preorder/edit/"
-          data={formattedData}
-          rows={10}
-          columns={columns}
-          cardData={cardsData}
-          buttonText={t("addPreorder")}
-          ButtonEvent={handleClick}
-          onPageChange={handlePageChange}
-          totalRecords={inventoryItems?.count || 0} 
-        />
-      )}
-    </>
+    <TableWrapper
+      isLoading={isLoading}
+      error={error}
+      data={{ results: formattedData, count: inventoryItems?.count || 0 }}
+      columns={columns}
+      cardData={cardsData}
+      emptyMessage={t("noPreorderDataFound")}
+      editRoute="/dashboard/inventory/preorder/edit/"
+      viewRoute="/dashboard/inventory/preorder/view/"
+      buttonText={t("addPreorder")}
+      ButtonEvent={handleClick}
+      onPageChange={handlePageChange}
+      permissions={permissions}
+    />
   );
 }

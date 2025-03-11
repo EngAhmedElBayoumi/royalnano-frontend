@@ -27,6 +27,7 @@ interface TableWrapperProps {
   cardData: CardData[];
   emptyMessage: string;
   editRoute?: string;
+  viewRoute?: string;
   buttonText?: string;
   ButtonEvent: () => void;
   onPageChange: (page: number) => void;
@@ -45,6 +46,7 @@ export default function TableWrapper({
   cardData,
   emptyMessage,
   editRoute,
+  viewRoute,
   buttonText,
   ButtonEvent,
   onPageChange,
@@ -70,7 +72,8 @@ export default function TableWrapper({
     <CustomTable
       emptyMessage={emptyMessage}
       editRoute={permissions.canUpdate ? editRoute : undefined}
-      data={data.results}
+      viewRoute={viewRoute}
+      data={data.results ?? data}
       rows={10}
       columns={columns}
       cardData={cardData}
