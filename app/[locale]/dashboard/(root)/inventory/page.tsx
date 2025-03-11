@@ -1,6 +1,9 @@
+"use client";
 import React from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
 import CustomTabs from "@/components/dashboard/CustomTabs";
 import Items from "@/components/dashboard/inventory/items";
 import Category from "@/components/dashboard/inventory/category";
@@ -11,9 +14,14 @@ import StockAdjustment from "@/components/dashboard/inventory/stockAdjustment";
 function InventoryPage() {
   const t = useTranslations("Inventory");
 
+  const permissions = useSelector(
+    (state: RootState) => state.profile.permissions
+  );
+
   const tabs = [
     {
       label: t("items"),
+      permissionKey: "inventoryitem",
       icon: (
         <Image
           src="/assets/icons/dashboard/inventory/items.svg"
@@ -26,6 +34,7 @@ function InventoryPage() {
     },
     {
       label: t("categoryModel"),
+      permissionKey: "expensecategory",
       icon: (
         <Image
           src="/assets/icons/dashboard/inventory/category.svg"
@@ -38,6 +47,7 @@ function InventoryPage() {
     },
     {
       label: t("preorder"),
+      permissionKey: "preorder",
       icon: (
         <Image
           src="/assets/icons/dashboard/inventory/preorder.svg"
@@ -50,6 +60,7 @@ function InventoryPage() {
     },
     {
       label: t("movement"),
+      permissionKey: "movement",
       icon: (
         <Image
           src="/assets/icons/dashboard/inventory/movement.svg"
@@ -62,6 +73,7 @@ function InventoryPage() {
     },
     {
       label: t("stockAdjustment"),
+      permissionKey: "stockadjustment",
       icon: (
         <Image
           src="/assets/icons/dashboard/inventory/stock.svg"
@@ -74,7 +86,11 @@ function InventoryPage() {
     },
   ];
 
-  return <CustomTabs tabs={tabs} defaultTab={t("items")} />;
+  const filteredTabs = tabs.filter((tab) => {
+    return permissions[tab.permissionKey]?.view;
+  });
+
+  return <CustomTabs tabs={filteredTabs} defaultTab={filteredTabs[0]?.label} />;
 }
 
 export default InventoryPage;

@@ -88,7 +88,7 @@ function WebsitePage() {
     return permissions[tab.permissionKey]?.view;
   });
 
-  return <CustomTabs tabs={filteredTabs} defaultTab={t("services")} />;
+  return <CustomTabs tabs={filteredTabs} defaultTab={filteredTabs[0]?.label} />;
 }
 
 export default WebsitePage;

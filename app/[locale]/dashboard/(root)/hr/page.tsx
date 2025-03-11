@@ -141,14 +141,15 @@ function HrPage() {
       ),
       content: <Evaluations />,
     },
-  ].filter((tab) => {
-    // Check if the user has view permission for the tab using the permissionKey
+  ];
+
+  const filteredTabs = tabs.filter((tab) => {
     return permissions[tab.permissionKey]?.view;
   });
 
   return (
     <>
-      <CustomTabs tabs={tabs} defaultTab={t("departments")} />
+      <CustomTabs tabs={filteredTabs} defaultTab={filteredTabs[0]?.label} />
     </>
   );
 }
