@@ -1,15 +1,9 @@
 "use client";
-import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
-import Image from "next/image";
 import { useGetAttendanceQuery } from "@/redux/services/dashboard/hr/attendanceApi";
-import { useSelector } from "react-redux";
-import { RootState } from "@/redux/store";
-import CustomTable from "@/components/dashboard/tables/CustomTable";
-import TableSkelton from "@/components/dashboard/skelton/TableSkelton";
-import CardsSkelton from "@/components/dashboard/skelton/CardsSkelton";
-import LoadingError from "@/components/dashboard/LoadingError";
+import { useTableData } from "@/hooks/useTableData";
+import TableWrapper from "@/components/dashboard/tables/TableWrapper";
 
 interface Attendance {
   employee: {
@@ -26,30 +20,19 @@ interface Attendance {
 export default function Attendance() {
   const router = useRouter();
   const t = useTranslations("hr.attendance");
-  const [page, setPage] = useState(1);
 
-  const permissions = useSelector(
-    (state: RootState) => state.profile.permissions
-  );
-  const canView = permissions["attendance"].view;
-
-  const {
-    data = { results: [] },
-    isLoading,
-    error,
-  } = useGetAttendanceQuery({
-    search: "",
-    ordering: "id",
-    page,
-    page_size: 10,
+  const { data, isLoading, error, permissions, handlePageChange } = useTableData({
+    permissionKey: "attendance",
+    useQueryHook: useGetAttendanceQuery,
   });
 
   // Transform attendanceData to only include employee, branch name
-  const transformedData = data.results.map((attendance: Attendance) => ({
+  const transformedData = data?.results?.map((attendance: Attendance) => ({
     ...attendance,
     employee: attendance.employee.name,
     branch: attendance.branch.name,
-  }));
+  })) || [];
+
   const columns = [
     { field: "employee", header: t("employee") },
     { field: "branch", header: t("branch") },
@@ -66,41 +49,23 @@ export default function Attendance() {
     { title: "Paid", num: 48 },
   ];
 
-  const handlePageChange = (newPage: number) => {
-    setPage(newPage);
-  };
   const handleClick = () => {
     router.push("/dashboard/hr/attendance/create");
   };
 
-  return !canView ? (
-    <div className="flex items-center flex-col">
-      <Image
-        alt="not authorized"
-        src="/assets/icons/403.svg"
-        width="400"
-        height="400"
-      />
-    </div>
-  ) : isLoading ? (
-    <>
-      <CardsSkelton />
-      <TableSkelton />
-    </>
-  ) : error ? (
-    <LoadingError />
-  ) : (
-    <CustomTable
-      emptyMessage={t("noAttendanceDataFound")}
-      // editRoute="/dashboard/hr/attendance/edit/"
-      data={transformedData}
-      rows={10}
+  return (
+    <TableWrapper
+      isLoading={isLoading}
+      error={error}
+      data={{ results: transformedData, count: data?.count || 0 }}
       columns={columns}
       cardData={cardsData}
-      // buttonText={t("addAttendance")}
+      emptyMessage={t("noAttendanceDataFound")}
+      editRoute="/dashboard/hr/attendance/edit/"
+      buttonText={t("addAttendance")}
       ButtonEvent={handleClick}
       onPageChange={handlePageChange}
-      totalRecords={data.count}
+      permissions={permissions}
     />
   );
 }

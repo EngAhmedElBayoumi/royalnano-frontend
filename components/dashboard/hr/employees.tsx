@@ -1,16 +1,10 @@
 "use client";
-import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useGetEmployeesQuery } from "@/redux/services/dashboard/hr/employeeApi";
-import { useSelector } from "react-redux";
-import { RootState } from "@/redux/store";
-import CustomTable from "@/components/dashboard/tables/CustomTable";
-import TableSkelton from "@/components/dashboard/skelton/TableSkelton";
-import CardsSkelton from "@/components/dashboard/skelton/CardsSkelton";
-import LoadingError from "@/components/dashboard/LoadingError";
+import { useTableData } from "@/hooks/useTableData";
+import TableWrapper from "@/components/dashboard/tables/TableWrapper";
 
-// Define the type for employee
 interface Employee {
   name: string;
   branch: {
@@ -20,33 +14,23 @@ interface Employee {
   phone: string;
   address: string;
 }
+
 export default function Employees() {
   const router = useRouter();
   const t = useTranslations("hr.employees");
-  const [page, setPage] = useState(1);
 
-  const permissions = useSelector(
-    (state: RootState) => state.profile.permissions
-  );
-  const canAdd = permissions["employee"].add;
-  const canUpdate = permissions["employee"].change;
-
-  const {
-    data = { results: [] },
-    isLoading,
-    error,
-  } = useGetEmployeesQuery({
-    search: "",
-    ordering: "id",
-    page,
-    page_size: 10,
-  });
+  const { data, isLoading, error, permissions, handlePageChange } =
+    useTableData({
+      permissionKey: "employee",
+      useQueryHook: useGetEmployeesQuery,
+    });
 
   // Transform employeesData to only include branch name
-  const transformedData = data.results.map((employee: Employee) => ({
-    ...employee,
-    branch: employee.branch.name,
-  }));
+  const transformedData =
+    data?.results?.map((employee: Employee) => ({
+      ...employee,
+      branch: employee.branch.name,
+    })) || [];
 
   const columns = [
     { field: "name", header: t("name") },
@@ -55,6 +39,7 @@ export default function Employees() {
     { field: "address", header: t("address") },
     { field: "branch", header: t("branch") },
   ];
+
   const cardsData = [
     { title: "New requests", num: 145 },
     { title: "Complete", num: 87 },
@@ -62,32 +47,24 @@ export default function Employees() {
     { title: "Failed", num: 48 },
     { title: "Paid", num: 48 },
   ];
-  const handlePageChange = (newPage: number) => {
-    setPage(newPage);
-  };
+
   const handleClick = () => {
     router.push("/dashboard/hr/employees/create");
   };
 
-  return isLoading ? (
-    <>
-      <CardsSkelton />
-      <TableSkelton />
-    </>
-  ) : error ? (
-    <LoadingError />
-  ) : (
-    <CustomTable
-      emptyMessage={t("noEmployeesDataFound")}
-      editRoute={canUpdate ? "/dashboard/hr/employees/edit/" : undefined}
-      data={transformedData}
-      rows={10}
+  return (
+    <TableWrapper
+      isLoading={isLoading}
+      error={error}
+      data={{ results: transformedData, count: data?.count || 0 }}
       columns={columns}
       cardData={cardsData}
-      buttonText={canAdd ? t("addEmployee") : undefined}
+      emptyMessage={t("noEmployeesDataFound")}
+      editRoute="/dashboard/hr/employees/edit/"
+      buttonText={t("addEmployee")}
       ButtonEvent={handleClick}
       onPageChange={handlePageChange}
-      totalRecords={data.count}
+      permissions={permissions}
     />
   );
 }
