@@ -276,6 +276,13 @@
       "alias": "الاسم المستعار",
       "description": "الوصف",
       "image": "الصورة"
+    },
+    "contacts": {
+      "full_name": "الاسم بالكامل",
+      "email": "البريد الإلكتروني",
+      "phone_number": "رقم الهاتف",
+      "message": "الرسالة",
+      "noContactDataFound": "لا توجد بيانات للتواصل"
     }
   },
   "website": {

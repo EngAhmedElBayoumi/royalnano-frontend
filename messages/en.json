@@ -335,6 +335,13 @@
       "alias": "Alias",
       "description": "Description",
       "image": "Image"
+    },
+    "contacts": {
+      "full_name": "Full Name",
+      "email": "Email",
+      "phone_number": "Phone Number",
+      "message": "Message",
+      "noContactDataFound": "No contact data found"
     }
   },
   "website": {

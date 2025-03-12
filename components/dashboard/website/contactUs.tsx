@@ -1,69 +1,41 @@
-"use client";
-import CustomTable from "@/components/dashboard/tables/CustomTable";
+import { useTranslations } from "next-intl";
+import { useGetContactsQuery } from "@/redux/services/contactApi";
+import { useTableData } from "@/hooks/useTableData";
+import TableWrapper from "@/components/dashboard/tables/TableWrapper";
 
 export default function ContactUs() {
+  const t = useTranslations("dashboardWebsite.contacts");
+
   const columns = [
-    { field: "Name", header: "Name" },
-    { field: "Email", header: "Email" },
-    { field: "Message", header: "Message" },
-    { field: "Date", header: "Date" },
+    { field: "full_name", header: t("full_name") },
+    { field: "email", header: t("email") },
+    { field: "phone_number", header: t("phone_number") },
+    { field: "message", header: t("message") },
   ];
 
-  const data = [
-    {
-      id: 1,
-      Name: "Ahmed Omar",
-      Email: "Cairo2@gmail.com",
-      Message: "Lorem Ipsum is simply dummy.....",
-      Date: "Dec. 3, 2024",
-    },
-    {
-      id: 2,
-      Name: "Ahmed Omar",
-      Email: "Cairo2@gmail.com",
-      Message: "Lorem Ipsum is simply dummy.....",
-      Date: "Dec. 3, 2024",
-    },
-    {
-      id: 3,
-      Name: "Ahmed Omar",
-      Email: "Cairo2@gmail.com",
-      Message: "Lorem Ipsum is simply dummy.....",
-      Date: "Dec. 3, 2024",
-    },
-    {
-      id: 4,
-      Name: "Ahmed Omar",
-      Email: "Cairo2@gmail.com",
-      Message: "Lorem Ipsum is simply dummy.....",
-      Date: "Dec. 3, 2024",
-    },
-    {
-      id: 5,
-      Name: "Ahmed Omar",
-      Email: "Cairo2@gmail.com",
-      Message: "Lorem Ipsum is simply dummy.....",
-      Date: "Dec. 3, 2024",
-    },
-    // Add more entries as needed
-  ];
-
+  const { data, isLoading, error, permissions, handlePageChange } =
+    useTableData({
+      permissionKey: "contact",
+      // eslint-disable-next-line
+      useQueryHook: useGetContactsQuery,
+    });
   const cardsData = [
     { title: "Total Messages", num: data.length },
-    { title: "Unread", num: 3 }, // Example data
-    { title: "Responded", num: 2 }, // Example data
+    { title: "Unread", num: 3 },
+    { title: "Responded", num: 2 },
   ];
 
   return (
-    <>
-      <CustomTable
-        emptyMessage="no contact data found"
-        data={data}
-        rows={10}
-        columns={columns}
-        cardData={cardsData}
-        buttonText={undefined} // No button for adding entries
-      />
-    </>
+    <TableWrapper
+      isLoading={isLoading}
+      error={error}
+      data={data}
+      columns={columns}
+      cardData={cardsData}
+      emptyMessage={t("noContactDataFound")}
+      ButtonEvent={() => console.log("")}
+      onPageChange={handlePageChange}
+      permissions={{ contact: { view: permissions.contact.view } }}
+    />
   );
 }
