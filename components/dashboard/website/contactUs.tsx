@@ -35,7 +35,11 @@ export default function ContactUs() {
       emptyMessage={t("noContactDataFound")}
       ButtonEvent={() => console.log("")}
       onPageChange={handlePageChange}
-      permissions={{ contact: { view: permissions.contact.view } }}
+      permissions={{
+        canView: permissions.canView,
+        canAdd: false,
+        canUpdate: false,
+      }}
     />
   );
 }
