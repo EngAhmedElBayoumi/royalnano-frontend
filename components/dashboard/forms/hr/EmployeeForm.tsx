@@ -154,7 +154,10 @@ const EmployeeForm = ({ onSubmit, defaultValues }: EmployeeFormProps) => {
           </div>
         </section> */}
         <section className="flex justify-end gap-2 mt-5">
-          <Link href="/dashboard/hr" passHref>
+          <Link
+            href={`/dashboard/hr?tab=${globalTranslate("hr.tabs.employees")}`}
+            passHref
+          >
             <CustomButton
               text={globalTranslate("cancel")}
               className="text-white rounded-lg bg-secondary min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
