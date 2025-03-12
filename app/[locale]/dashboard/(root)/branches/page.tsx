@@ -36,18 +36,22 @@ export default function Branches() {
   };
 
   return (
-    <TableWrapper
-      isLoading={isLoading}
-      error={error}
-      data={data}
-      columns={columns}
-      cardData={cardsData}
-      emptyMessage={t("noBranchesDataFound")}
-      editRoute="/dashboard/branches/edit/"
-      buttonText={t("addBranch")}
-      ButtonEvent={handleClick}
-      onPageChange={handlePageChange}
-      permissions={permissions}
-    />
+    <div className="px-6">
+      <TableWrapper
+        isLoading={isLoading}
+        error={error}
+        data={data}
+        columns={columns}
+        cardData={cardsData}
+        emptyMessage={t("noBranchesDataFound")}
+        editRoute="/dashboard/branches/edit/"
+        buttonText={t("addBranch")}
+        ButtonEvent={handleClick}
+        onPageChange={handlePageChange}
+        permissions={permissions}
+        headerTitle={t("branches")}
+        headerIcon="/assets/icons/branches.svg"
+      />
+    </div>
   );
 }

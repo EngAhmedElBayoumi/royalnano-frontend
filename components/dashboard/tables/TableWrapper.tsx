@@ -29,6 +29,8 @@ interface TableWrapperProps {
   editRoute?: string;
   viewRoute?: string;
   buttonText?: string;
+  headerTitle?: string;
+  headerIcon?: string;
   ButtonEvent: () => void;
   onPageChange: (page: number) => void;
   permissions: {
@@ -48,6 +50,8 @@ export default function TableWrapper({
   editRoute,
   viewRoute,
   buttonText,
+  headerTitle,
+  headerIcon,
   ButtonEvent,
   onPageChange,
   permissions,
@@ -81,6 +85,10 @@ export default function TableWrapper({
       ButtonEvent={ButtonEvent}
       onPageChange={onPageChange}
       totalRecords={data.count}
+      headerTitle={headerTitle}
+      headerIcon={headerIcon}
+      headerBG="#F8F7F7"
+      headerTextColor="#C8AE50"
     />
   );
 }
