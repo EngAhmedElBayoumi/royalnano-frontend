@@ -18,7 +18,7 @@ interface BonusesFormProps {
 
 export interface BonusesFormValues {
   employee: number;
-  amount: string;
+  amount: number;
   reason: string;
   type: string;
   date: string;
@@ -29,7 +29,7 @@ const BonusesForm = ({ onSubmit, defaultValues }: BonusesFormProps) => {
     resolver: zodResolver(bonusSchema),
     defaultValues: defaultValues || {
       employee: 1,
-      amount: "",
+      amount: 0,
       reason: "",
       type: "bonus",
       date: "",

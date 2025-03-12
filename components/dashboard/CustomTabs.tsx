@@ -43,7 +43,7 @@ function CustomTabs({ tabs, defaultTab = tabs[0]?.label }: CustomTabsProps) {
           <TabsTrigger
             key={index}
             value={tab.label}
-            className="capitalize data-[state=active]:bg-dashboardBg data-[state=active]:text-primary transition-colors duration-200 p-2 flex items-center gap-2 rounded-t-md"
+            className="capitalize data-[state=active]:bg-dashboardBg data-[state=active]:text-primary transition-colors duration-200 p-2 flex items-center gap-2 rounded-t-[20px]"
           >
             <div className="group-data-[state=active]:[&>svg]:fill-primary group-data-[state=active]:[&>svg]:stroke-primary w-5">
               {tab.icon}
