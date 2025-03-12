@@ -342,6 +342,14 @@
       "phone_number": "Phone Number",
       "message": "Message",
       "noContactDataFound": "No contact data found"
+    },
+    "gallery": {
+      "title": "Title",
+      "item_type": "Type",
+      "file": "File",
+      "addGallery": "Add Gallery Item",
+      "editGallery": "Edit Gallery Item",
+      "noGalleryDataFound": "No Gallery data found"
     }
   },
   "website": {

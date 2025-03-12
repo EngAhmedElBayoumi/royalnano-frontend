@@ -6,9 +6,36 @@ export const galleryAPi = createApi({
   baseQuery,
   endpoints: (builder) => ({
     getGallery: builder.query({
-      query: () => "website/gallery/",
+      query: ({ search, ordering, page, page_size }) => ({
+        url: "website/gallery/",
+        params: { search, ordering, page, page_size },
+      }),
+    }),
+    getGalleryById: builder.query({
+      query: (id) => `website/gallery/${id}/`,
+    }),
+    createGallery: builder.mutation({
+      query: (data) => ({
+        url: "website/gallery/",
+        method: "POST",
+        body: data,
+        formData: true,
+      }),
+    }),
+    updateGallery: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `website/gallery/${id}/`,
+        method: "PATCH",
+        body: data,
+        formData: true,
+      }),
     }),
   }),
 });
 
-export const { useGetGalleryQuery } = galleryAPi;
+export const {
+  useGetGalleryQuery,
+  useGetGalleryByIdQuery,
+  useCreateGalleryMutation,
+  useUpdateGalleryMutation,
+} = galleryAPi;
