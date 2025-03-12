@@ -1,5 +1,5 @@
 "use client";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import {
   useUpdateEmployeeMutation,
@@ -11,10 +11,9 @@ import EmployeeForm, {
 } from "@/components/dashboard/forms/hr/EmployeeForm";
 
 export default function EditEmployee() {
-  const router = useRouter();
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
-  const t = useTranslations("hr.employees");
+  const t = useTranslations("hr");
   const { data, isLoading, error } = useGetEmployeeByIdQuery(id);
   const [updateEmployee] = useUpdateEmployeeMutation();
 
@@ -35,18 +34,17 @@ export default function EditEmployee() {
 
     const response = await updateEmployee({ id, data: payload });
     if (response.error) throw new Error("edit failed");
-    router.push("/dashboard/hr");
   };
 
   return (
     <EditPage
-      title={t("editEmployee")}
+      title={t("employees.editEmployee")}
       data={defaultValues}
       isLoading={isLoading}
       error={error}
       onSubmit={handleSubmit}
       Form={EmployeeForm}
-      redirectPath="/dashboard/hr"
+      redirectPath={`/dashboard/hr?tab=${t("tabs.employees")}`}
     />
   );
 }

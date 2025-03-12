@@ -1,5 +1,5 @@
 "use client";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import {
   useUpdateDepartmentMutation,
@@ -11,10 +11,9 @@ import DepartmentForm, {
 } from "@/components/dashboard/forms/hr/DepartmentForm";
 
 export default function EditDepartment() {
-  const router = useRouter();
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
-  const t = useTranslations("hr");
+  const t = useTranslations("hr.departments");
   const { data, isLoading, error } = useGetDepartmentByIdQuery(id);
   const [updateDepartment] = useUpdateDepartmentMutation();
 
@@ -25,17 +24,17 @@ export default function EditDepartment() {
   const handleSubmit = async (data: DepartmentFormValues) => {
     const response = await updateDepartment({ id, data });
     if (response.error) throw new Error("edit failed");
-    router.push(`/dashboard/hr?tab=${t("tabs.departments")}`);
   };
 
   return (
     <EditPage
-      title={t("departments.editDepartment")}
+      title={t("editDepartment")}
       data={defaultValues}
       isLoading={isLoading}
       error={error}
       onSubmit={handleSubmit}
       Form={DepartmentForm}
+      redirectPath="/dashboard/hr"
     />
   );
 }
