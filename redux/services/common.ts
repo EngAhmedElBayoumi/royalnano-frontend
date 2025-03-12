@@ -72,6 +72,7 @@ export const baseQuery = async (
       accessToken = refreshResult.data.access;
     } else {
       api.dispatch(logout());
+      window.location.href = "/";
       return { error: { status: 401, message: "Unauthorized" } };
     }
   }

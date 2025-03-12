@@ -20,6 +20,7 @@ export default function EditBonus() {
   const defaultValues: BonusesFormValues = data && {
     ...data,
     employee: Number(data.employee.id),
+    amount: Number(data.amount),
   };
 
   const handleSubmit = async (data: BonusesFormValues) => {
