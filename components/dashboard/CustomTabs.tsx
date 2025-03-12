@@ -37,7 +37,7 @@ function CustomTabs({ tabs, defaultTab = tabs[0]?.label }: CustomTabsProps) {
     >
       <TabsList
         className="bg-transparent flex gap-2 justify-start mx-5"
-        style={{ overflowX: "auto", overflowY: "hidden", maxWidth: "80vw" }}
+        style={{ overflowX: "auto", overflowY: "hidden", maxWidth: "70vw" }}
       >
         {tabs.map((tab, index) => (
           <TabsTrigger

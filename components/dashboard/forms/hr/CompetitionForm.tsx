@@ -23,7 +23,7 @@ export interface CompetitionFormValues {
   department: number;
   winner?: number;
   target: number;
-  reward: string;
+  reward: number;
   start_date: string;
   end_date: string;
   extra_fields?: Record<string, string>;
@@ -35,7 +35,7 @@ const CompetitionForm = ({ onSubmit, defaultValues }: CompetitionFormProps) => {
     defaultValues: defaultValues || {
       department: 0,
       target: 0,
-      reward: "",
+      reward: 0,
       start_date: "",
       end_date: "",
       extra_fields: {},
@@ -94,6 +94,7 @@ const CompetitionForm = ({ onSubmit, defaultValues }: CompetitionFormProps) => {
               name="reward"
               label={t("reward")}
               placeholder={t("reward")}
+              type="number"
             />
             <DatePicker
               control={form.control}
