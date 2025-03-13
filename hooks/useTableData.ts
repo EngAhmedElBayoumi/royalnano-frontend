@@ -41,7 +41,7 @@ export const useTableData = ({
 
   return {
     page,
-    data: data || { results: [], count: 0 },
+    data,
     isLoading,
     error,
     permissions: {

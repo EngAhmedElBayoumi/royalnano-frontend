@@ -28,7 +28,7 @@ export default function CreateGallery() {
         throw new Error("Creation failed");
       }
     } catch (error) {
-      console.log("Service creation error:", error);
+      console.log("Gallery creation error:", error);
       throw error;
     }
   };

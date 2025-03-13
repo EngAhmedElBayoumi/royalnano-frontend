@@ -1,14 +1,14 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
-import ServiceForm, {
-  ServiceFormValues,
-} from "@/components/dashboard/forms/website/ServiceForm";
-import EditPage from "@/components/dashboard/EditPage";
 import {
   useGetServiceByIdQuery,
   useUpdateServiceMutation,
 } from "@/redux/services/website/servicesApi";
+import ServiceForm, {
+  ServiceFormValues,
+} from "@/components/dashboard/forms/website/ServiceForm";
+import EditPage from "@/components/dashboard/EditPage";
 
 export default function EditService() {
   const searchParams = useSearchParams();

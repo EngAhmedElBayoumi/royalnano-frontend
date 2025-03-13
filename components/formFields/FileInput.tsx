@@ -1,5 +1,8 @@
 "use client";
 import React, { useEffect } from "react";
+import { Control, FieldValues, Path } from "react-hook-form";
+import { isVideoUrl } from "@/lib/utils/isVideoUrl";
+import Image from "next/image";
 import {
   FormField,
   FormItem,
@@ -7,9 +10,7 @@ import {
   FormControl,
   FormMessage,
 } from "@/components/ui/form";
-import { Control, FieldValues, Path } from "react-hook-form";
 import { Input } from "@/components/ui/input";
-import Image from "next/image";
 
 interface FileInputProps<T extends FieldValues> {
   control: Control<T>;
@@ -34,7 +35,7 @@ const FileInput = <T extends FieldValues>({
     if (initialFile instanceof File) {
       setFile(initialFile);
       setPreviewUrl(URL.createObjectURL(initialFile));
-    } else if (typeof initialFile === 'string' && initialFile) {
+    } else if (typeof initialFile === "string" && initialFile) {
       setPreviewUrl(initialFile);
     }
   }, [control, name]);
@@ -73,9 +74,9 @@ const FileInput = <T extends FieldValues>({
           <FormMessage />
           {(file || previewUrl) && (
             <div className="mt-2 flex justify-center relative">
-              {(file?.type.startsWith("image/") || (!file && previewUrl)) ? (
+              {file?.type.startsWith("image/") ? (
                 <Image
-                  src={file ? URL.createObjectURL(file) : previewUrl!}
+                  src={URL.createObjectURL(file)}
                   alt="Preview"
                   className="mt-2 h-[200px] object-contain"
                   width="200"
@@ -86,6 +87,19 @@ const FileInput = <T extends FieldValues>({
                   <source src={URL.createObjectURL(file)} type={file.type} />
                   Your browser does not support the video tag.
                 </video>
+              ) : previewUrl && isVideoUrl(previewUrl) ? (
+                <video controls className="mt-2" width="500" height="300">
+                  <source src={previewUrl} />
+                  Your browser does not support the video tag.
+                </video>
+              ) : previewUrl ? (
+                <Image
+                  src={previewUrl}
+                  alt="Preview"
+                  className="mt-2 h-[200px] object-contain"
+                  width="200"
+                  height="200"
+                />
               ) : null}
               <button
                 type="button"

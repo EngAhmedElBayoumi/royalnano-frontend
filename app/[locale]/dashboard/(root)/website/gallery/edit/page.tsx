@@ -1,37 +1,58 @@
 "use client";
+import { useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
+import {
+  useGetGalleryByIdQuery,
+  useUpdateGalleryMutation,
+} from "@/redux/services/galleryApi";
 import GalleryForm, {
   GalleryFormValues,
 } from "@/components/dashboard/forms/website/GalleryForm";
-import IconWithTitle from "@/components/dashboard/IconWithTitle";
-// import { useUpdateGalleryMutation } from "@/redux/gallery/WebsiteApi";
+import EditPage from "@/components/dashboard/EditPage";
 
 export default function EditGallery() {
-  // const [updateGallery] = useUpdateGalleryMutation();
-  const defaultValues: GalleryFormValues = {
-    title: "Sample Gallery",
-    item_type: "image",
-    file: new File([], "sample.png"),
+  const searchParams = useSearchParams();
+  const id = searchParams.get("id");
+  const t = useTranslations("dashboardWebsite");
+  const [updateGallery] = useUpdateGalleryMutation();
+  const { data, isLoading, error } = useGetGalleryByIdQuery(id);
+
+  const defaultValues: GalleryFormValues = data && {
+    ...data,
+    file: data?.image ?? data?.video,
   };
 
   const handleSubmit = async (data: GalleryFormValues) => {
-    console.log(data);
-    // await updateGallery(data);
+    try {
+      // Create FormData instance to handle file upload
+      const formData = new FormData();
+
+      // Append text fields
+      formData.append("title", data.title);
+      formData.append("item_type", data.item_type);
+      if (data.file && data.file instanceof File && data.item_type === "image")
+        formData.append("image", data.file);
+      if (data.file && data.file instanceof File && data.item_type === "video")
+        formData.append("video", data.file);
+
+      const response = await updateGallery({ id, data: formData });
+      if ("error" in response) {
+        throw new Error("Edit failed");
+      }
+    } catch (error) {
+      console.log("Gallery Edit error:", error);
+      throw error;
+    }
   };
-
   return (
-    <main className="mx-7 my-5">
-      <div className="flex">
-        <IconWithTitle
-          imageSrc="/assets/icons/edit.svg"
-          title="Edit Gallery"
-          backgroundColor="#F8F7F7"
-          textColor="primary"
-        />
-      </div>
-
-      <div className="bg-[#F8F7F7] px-6 pt-5 pb-8 ltr:rounded-r-[20px] ltr:rounded-bl-[20px] rtl:rounded-l-[20px] rtl:rounded-br-[20px] ltr:lg:pr-[200px] rtl:lg:pl-[200px]">
-        <GalleryForm onSubmit={handleSubmit} defaultValues={defaultValues} />
-      </div>
-    </main>
+    <EditPage
+      title={t("gallery.editGallery")}
+      data={defaultValues}
+      isLoading={isLoading}
+      error={error}
+      onSubmit={handleSubmit}
+      Form={GalleryForm}
+      redirectPath={`/dashboard/website?tab=${t("tabs.gallery")}`}
+    />
   );
 }

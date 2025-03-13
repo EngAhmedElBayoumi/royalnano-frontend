@@ -248,6 +248,19 @@ export default function CustomTable({
                     );
                   }
 
+                  if (col.field === "video" && fieldValue !== null) {
+                    return (
+                      <video
+                        controls
+                        className="rounded-md object-cover"
+                        width="200"
+                        height="200"
+                      >
+                        <source src={fieldValue as string} />
+                        Your browser does not support the video tag.
+                      </video>
+                    );
+                  }
                   if (col.field === "verified") {
                     return (
                       <i

@@ -1,7 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
-import {useGetGalleryQuery} from "@/redux/services/galleryApi"
+import { useGetGalleryQuery } from "@/redux/services/galleryApi";
 import { useTableData } from "@/hooks/useTableData";
 import TableWrapper from "@/components/dashboard/tables/TableWrapper";
 
@@ -9,7 +9,7 @@ export default function Gallery() {
   const router = useRouter();
   const t = useTranslations("dashboardWebsite.gallery");
 
-   const { data, isLoading, error, permissions, handlePageChange } =
+  const { data, isLoading, error, permissions, handlePageChange } =
     useTableData({
       permissionKey: "service",
       // eslint-disable-next-line
@@ -17,22 +17,25 @@ export default function Gallery() {
     });
 
   const columns = [
-    { field: "title", header:t("title") },
-    { field: "item_type", header:t("item_type") },
-    { field: "image", header:t("file") },
+    { field: "title", header: t("title") },
+    { field: "item_type", header: t("item_type") },
+    { field: "image", header: t("image") },
+    { field: "video", header: t("video") },
   ];
 
-
-
   const cardsData = [
-    { title: "Total Entries", num: data.length },
+    { title: "Total Entries", num: data?.length },
     {
       title: "Images",
-      num: data?.results?.filter((item) => item.item_type === "image").length,
+      num: data?.filter(
+        (item: { item_type: string }) => item.item_type === "image"
+      ).length,
     },
     {
       title: "Videos",
-      num: data?.results?.filter((item) => item.item_type === "video").length,
+      num: data?.filter(
+        (item: { item_type: string }) => item.item_type === "video"
+      ).length,
     },
   ];
 
@@ -41,7 +44,7 @@ export default function Gallery() {
   };
 
   return (
-     <TableWrapper
+    <TableWrapper
       isLoading={isLoading}
       error={error}
       data={data}
