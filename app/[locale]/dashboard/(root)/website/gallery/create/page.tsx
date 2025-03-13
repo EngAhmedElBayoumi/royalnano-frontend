@@ -1,32 +1,44 @@
 "use client";
+import { useCreateGalleryMutation } from "@/redux/services/galleryApi";
+import { useTranslations } from "next-intl";
 import GalleryForm, {
   GalleryFormValues,
 } from "@/components/dashboard/forms/website/GalleryForm";
-import IconWithTitle from "@/components/dashboard/IconWithTitle";
-// import { useCreateGalleryMutation } from "@/redux/gallery/WebsiteApi";
+import CreatePage from "@/components/dashboard/CreatePage";
 
 export default function CreateGallery() {
-  // const [createGallery] = useCreateGalleryMutation();
+  const [createGallery] = useCreateGalleryMutation();
+  const t = useTranslations("dashboardWebsite");
 
   const handleSubmit = async (data: GalleryFormValues) => {
-    console.log(data);
-    // await createGallery(data);
+    try {
+      // Create FormData instance to handle file upload
+      const formData = new FormData();
+
+      // Append text fields
+      formData.append("title", data.title);
+      formData.append("item_type", data.item_type);
+      if (data.file && data.file instanceof File && data.item_type === "image")
+        formData.append("image", data.file);
+      if (data.file && data.file instanceof File && data.item_type === "video")
+        formData.append("video", data.file);
+
+      const response = await createGallery(formData);
+      if ("error" in response) {
+        throw new Error("Creation failed");
+      }
+    } catch (error) {
+      console.log("Service creation error:", error);
+      throw error;
+    }
   };
 
   return (
-    <main className="mx-7 my-5">
-      <div className="flex">
-        <IconWithTitle
-          imageSrc="/assets/icons/add.svg"
-          title="Add Gallery"
-          backgroundColor="#F8F7F7"
-          textColor="primary"
-        />
-      </div>
-
-      <div className="bg-[#F8F7F7] px-6 pt-5 pb-8 ltr:rounded-r-[20px] ltr:rounded-bl-[20px] rtl:rounded-l-[20px] rtl:rounded-br-[20px] ltr:lg:pr-[200px] rtl:lg:pl-[200px]">
-        <GalleryForm onSubmit={handleSubmit} />
-      </div>
-    </main>
+    <CreatePage
+      title={t("gallery.addGallery")}
+      onSubmit={handleSubmit}
+      Form={GalleryForm}
+      redirectPath={`/dashboard/website?tab=${t("tabs.gallery")}`}
+    />
   );
 }
