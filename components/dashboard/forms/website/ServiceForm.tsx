@@ -1,13 +1,14 @@
 "use client";
-import { Form } from "@/components/ui/form";
+import { Link } from "@/i18n/routing";
+import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ACCEPTED_IMAGE_TYPES } from "@/lib/utils/types";
 import { serviceSchema } from "@/lib/validations/dashboard/website/serviceSchema";
+import { Form } from "@/components/ui/form";
+import { ACCEPTED_IMAGE_TYPES } from "@/lib/utils/types";
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
 import FileInput from "@/components/formFields/FileInput";
-import { Link } from "@/i18n/routing";
 import TextArea from "@/components/formFields/TextArea";
 
 interface ServiceFormProps {
@@ -32,7 +33,8 @@ const ServiceForm = ({ onSubmit, defaultValues }: ServiceFormProps) => {
       image: null,
     },
   });
-
+  const globalTranslate = useTranslations();
+  const t = useTranslations("dashboardWebsite.Services");
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -41,27 +43,27 @@ const ServiceForm = ({ onSubmit, defaultValues }: ServiceFormProps) => {
             <TextInput
               control={form.control}
               name="name"
-              label="Service Name"
-              placeholder="Service Name"
+              label={t("name")}
+              placeholder={t("name")}
             />
             <TextInput
               control={form.control}
               name="alias"
-              label="Alias"
-              placeholder="Service Alias"
+              label={t("alias")}
+              placeholder={t("alias")}
             />
           </div>
           <TextArea
             control={form.control}
             name="description"
-            label="Description"
-            placeholder="Service Description"
+            label={t("description")}
+            placeholder={t("description")}
             className="mt-2 xl:mt-5"
           />
           <FileInput
             control={form.control}
             name="image"
-            label="Image"
+            label={t("image")}
             accepted={ACCEPTED_IMAGE_TYPES.join(",")}
             className="mt-2 xl:mt-5"
           />
@@ -69,12 +71,12 @@ const ServiceForm = ({ onSubmit, defaultValues }: ServiceFormProps) => {
         <div className="flex justify-end gap-2 mt-5">
           <Link href="/dashboard/website" passHref>
             <CustomButton
-              text="Cancel"
+              text={globalTranslate("cancel")}
               className="text-white rounded-lg bg-secondary min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
             />
           </Link>
           <CustomButton
-            text="Save"
+            text={globalTranslate("save")}
             className="text-white rounded-lg min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
           />
         </div>

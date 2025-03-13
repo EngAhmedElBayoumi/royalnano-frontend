@@ -288,6 +288,8 @@
       "title": "العنوان",
       "item_type": "النوع",
       "file": "الملف",
+      "image": "صورة",
+      "video": "فيديو",
       "addGallery": "إضافة عنصر للمعرض",
       "editGallery": "تعديل عنصر المعرض",
       "noGalleryDataFound": "لا توجد بيانات للمعرض"

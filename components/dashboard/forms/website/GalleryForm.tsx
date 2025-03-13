@@ -1,14 +1,15 @@
 "use client";
 import { useState, useEffect } from "react";
-import { Form } from "@/components/ui/form";
+import { Link } from "@/i18n/routing";
+import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { gallerySchema } from "@/lib/validations/dashboard/website/gallerySchema";
+import { Form } from "@/components/ui/form";
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
 import CustomSelect from "@/components/formFields/CustomSelect";
 import FileInput from "@/components/formFields/FileInput";
-import {Link} from '@/i18n/routing';
 
 interface GalleryFormProps {
   onSubmit: (data: GalleryFormValues) => Promise<void>;
@@ -29,9 +30,12 @@ const GalleryForm = ({ onSubmit, defaultValues }: GalleryFormProps) => {
     },
   });
 
+  const globalTranslate = useTranslations();
+  const t = useTranslations("dashboardWebsite.gallery");
+
   const itemTypeOptions = [
-    { value: "image", label: "Image" },
-    { value: "video", label: "Video" },
+    { value: "image", label: t("image") },
+    { value: "video", label: t("video") },
   ];
 
   // State to hold accepted file types
@@ -52,34 +56,39 @@ const GalleryForm = ({ onSubmit, defaultValues }: GalleryFormProps) => {
             <TextInput
               control={form.control}
               name="title"
-              label="Title"
-              placeholder="Enter title"
+              label={t("title")}
+              placeholder={t("title")}
             />
             <CustomSelect
               control={form.control}
               name="item_type"
-              label="Item Type"
-              placeholder="Select item type"
+              label={t("item_type")}
+              placeholder={t("item_type")}
               options={itemTypeOptions}
             />
           </div>
           <FileInput
             control={form.control}
             name="file"
-            label="File"
+            label={t("file")}
             accepted={acceptedFileTypes}
             className="mt-2"
           />
         </div>
         <div className="flex justify-end gap-2 mt-5">
-          <Link href="/dashboard/website" passHref>
+          <Link
+            href={`/dashboard/website?tab=${globalTranslate(
+              "dashboardWebsite.tabs.gallery"
+            )}`}
+            passHref
+          >
             <CustomButton
-              text="Cancel"
+              text={globalTranslate("cancel")}
               className="text-white rounded-lg bg-secondary min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
             />
           </Link>
           <CustomButton
-            text="Submit"
+            text={globalTranslate("save")}
             className="text-white rounded-lg min-w-[160px] font-bold text-sm"
           />
         </div>

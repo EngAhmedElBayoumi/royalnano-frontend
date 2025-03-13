@@ -1,4 +1,5 @@
 "use client";
+import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -6,9 +7,8 @@ import { departmentSchema } from "@/lib/validations/dashboard/hr/departmentSchem
 import { Form } from "@/components/ui/form";
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
-import { Link } from "@/i18n/routing";
-import ExtraFields from "@/components/formFields/ExtraFields";
 import useExtraFields from "@/hooks/useExtraFields";
+import ExtraFields from "@/components/formFields/ExtraFields";
 
 interface DepartmentFormProps {
   onSubmit: (data: DepartmentFormValues) => Promise<void>;
