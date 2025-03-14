@@ -265,7 +265,8 @@
     "tabs": {
       "services": "الخدمات",
       "contact": "التواصل",
-      "gallery": "معرض الصور"
+      "gallery": "معرض الصور",
+      "customerReviews": "تقييمات العملاء"
     },
     "Services": {
       "services": "الخدمات",
@@ -293,6 +294,15 @@
       "addGallery": "إضافة عنصر للمعرض",
       "editGallery": "تعديل عنصر المعرض",
       "noGalleryDataFound": "لا توجد بيانات للمعرض"
+    },
+    "customerReviews": {
+      "name": "الاسم",
+      "review": "التقييم",
+      "rating": "التقدير",
+      "image": "الصورة",
+      "addCustomerReview": "إضافة تقييم",
+      "editCustomerReview": "تعديل التقييم",
+      "noCustomerReviewsFound": "لا توجد بيانات للتقييمات"
     }
   },
   "website": {

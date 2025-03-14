@@ -9,6 +9,7 @@ import GalleryForm, {
   GalleryFormValues,
 } from "@/components/dashboard/forms/website/GalleryForm";
 import EditPage from "@/components/dashboard/EditPage";
+import urlToFile from "@/lib/utils/urlToFile";
 
 export default function EditGallery() {
   const searchParams = useSearchParams();
@@ -17,10 +18,16 @@ export default function EditGallery() {
   const [updateGallery] = useUpdateGalleryMutation();
   const { data, isLoading, error } = useGetGalleryByIdQuery(id);
 
-  const defaultValues: GalleryFormValues = data && {
-    ...data,
-    file: data?.image ?? data?.video,
-  };
+  const defaultValues: GalleryFormValues = data
+    ? {
+        ...data,
+        file: data.image
+          ? urlToFile(data.image, "image.jpg") // Replace 'image.jpg' with the actual file name
+          : data.video
+          ? urlToFile(data.video, "video.mp4") // Replace 'video.mp4' with the actual file name
+          : undefined,
+      }
+    : {};
 
   const handleSubmit = async (data: GalleryFormValues) => {
     try {

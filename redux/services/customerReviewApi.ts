@@ -6,9 +6,34 @@ export const customerReviewApi = createApi({
   baseQuery,
   endpoints: (builder) => ({
     getAllReviews: builder.query({
-      query: () => "website/customer-review/",
+      query: ({ search, ordering, page, page_size }) => ({
+        url: "website/customer-review/",
+        params: { search, ordering, page, page_size },
+      }),
+    }),
+    getReviewById: builder.query({
+      query: (id) => `website/customer-review/${id}/`,
+    }),
+    createReview: builder.mutation({
+      query: (data) => ({
+        url: "website/customer-review/",
+        method: "POST",
+        body: data,
+      }),
+    }),
+    updateReview: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `website/customer-review/${id}/`,
+        method: "PATCH",
+        body: data,
+      }),
     }),
   }),
 });
 
-export const { useGetAllReviewsQuery } = customerReviewApi;
+export const {
+  useGetAllReviewsQuery,
+  useGetReviewByIdQuery,
+  useCreateReviewMutation,
+  useUpdateReviewMutation,
+} = customerReviewApi;
