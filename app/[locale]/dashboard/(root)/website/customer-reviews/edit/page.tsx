@@ -1,6 +1,7 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
+import urlToFile from "@/lib/utils/urlToFile";
 import {
   useGetReviewByIdQuery,
   useUpdateReviewMutation,
@@ -13,13 +14,14 @@ import EditPage from "@/components/dashboard/EditPage";
 export default function EditCustomerReview() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
-  const t = useTranslations("dashboardWebsite.CustomerReviews");
+  const t = useTranslations("dashboardWebsite");
   const { data, isLoading, error } = useGetReviewByIdQuery(id);
   const [updateReview] = useUpdateReviewMutation();
 
   const defaultValues = data && {
     ...data,
     rating: Number(data.rating),
+    image: data.image ? urlToFile(data.image, "image.jpg") : null,
   };
 
   const handleSubmit = async (data: CustomerReviewFormValues) => {
@@ -49,13 +51,13 @@ export default function EditCustomerReview() {
 
   return (
     <EditPage
-      title={t("editCustomerReview")}
+      title={t("CustomerReviews.editCustomerReview")}
       data={defaultValues}
       isLoading={isLoading}
       error={error}
       onSubmit={handleSubmit}
       Form={CustomerReviewForm}
-      redirectPath="/dashboard/website"
+      redirectPath={`/dashboard/website?tab=${t("tabs.customerReviews")}`}
     />
   );
 }

@@ -8,7 +8,7 @@ import CreatePage from "@/components/dashboard/CreatePage";
 
 export default function CreateCustomerReview() {
   const [createReview] = useCreateReviewMutation();
-  const t = useTranslations("dashboardWebsite.CustomerReviews");
+  const t = useTranslations("dashboardWebsite");
 
   const handleSubmit = async (data: CustomerReviewFormValues) => {
     try {
@@ -37,10 +37,10 @@ export default function CreateCustomerReview() {
 
   return (
     <CreatePage
-      title={t("addCustomerReview")}
+      title={t("CustomerReviews.addCustomerReview")}
       onSubmit={handleSubmit}
       Form={CustomerReviewForm}
-      redirectPath="/dashboard/website"
+      redirectPath={`/dashboard/website?tab=${t("tabs.customerReviews")}`}
     />
   );
 }

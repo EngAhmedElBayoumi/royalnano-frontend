@@ -57,14 +57,14 @@ const CustomerReviewForm = ({
               label={t("rating")}
               placeholder={t("rating")}
             />
-            <FileInput
-              control={form.control}
-              name="image"
-              label={t("image")}
-              accepted={ACCEPTED_IMAGE_TYPES.join(",")}
-              className="mt-2 xl:mt-5"
-            />
           </div>
+          <FileInput
+            control={form.control}
+            name="image"
+            label={t("image")}
+            accepted={ACCEPTED_IMAGE_TYPES.join(",")}
+            className="mt-2 xl:mt-5"
+          />
           <TextArea
             control={form.control}
             name="review"
@@ -74,7 +74,12 @@ const CustomerReviewForm = ({
           />
         </section>
         <div className="flex justify-end gap-2 mt-5">
-          <Link href="/dashboard/website" passHref>
+          <Link
+            href={`/dashboard/website?tab=${globalTranslate(
+              "dashboardWebsite.tabs.customerReviews"
+            )}`}
+            passHref
+          >
             <CustomButton
               text={globalTranslate("cancel")}
               className="text-white rounded-lg bg-secondary min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"

@@ -1,6 +1,7 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
+import urlToFile from "@/lib/utils/urlToFile";
 import {
   useGetGalleryByIdQuery,
   useUpdateGalleryMutation,
@@ -9,7 +10,6 @@ import GalleryForm, {
   GalleryFormValues,
 } from "@/components/dashboard/forms/website/GalleryForm";
 import EditPage from "@/components/dashboard/EditPage";
-import urlToFile from "@/lib/utils/urlToFile";
 
 export default function EditGallery() {
   const searchParams = useSearchParams();
