@@ -4,10 +4,12 @@ import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { customerReviewSchema } from "@/lib/validations/dashboard/website/customerReviewSchema";
+import { ACCEPTED_IMAGE_TYPES } from "@/lib/utils/types";
 import { Form } from "@/components/ui/form";
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
 import TextArea from "@/components/formFields/TextArea";
+import FileInput from "@/components/formFields/FileInput";
 
 interface CustomerReviewFormProps {
   onSubmit: (data: CustomerReviewFormValues) => Promise<void>;
@@ -18,7 +20,7 @@ export interface CustomerReviewFormValues {
   name: string;
   review: string;
   rating: number;
-  image?: string;
+  image: File | null;
 }
 
 const CustomerReviewForm = ({
@@ -31,6 +33,7 @@ const CustomerReviewForm = ({
       name: "",
       review: "",
       rating: 5,
+      image: null,
     },
   });
   const globalTranslate = useTranslations();
@@ -53,6 +56,13 @@ const CustomerReviewForm = ({
               type="number"
               label={t("rating")}
               placeholder={t("rating")}
+            />
+            <FileInput
+              control={form.control}
+              name="image"
+              label={t("image")}
+              accepted={ACCEPTED_IMAGE_TYPES.join(",")}
+              className="mt-2 xl:mt-5"
             />
           </div>
           <TextArea

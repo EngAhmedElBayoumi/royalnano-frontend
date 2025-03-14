@@ -1,5 +1,5 @@
-import { ACCEPTED_IMAGE_TYPES } from "@/lib/utils/types";
 import * as z from "zod";
+import { ACCEPTED_IMAGE_TYPES } from "@/lib/utils/types";
 
 const MAX_FILE_SIZE = 1024 * 1024 * 5;
 

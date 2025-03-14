@@ -1,4 +1,6 @@
 import * as z from "zod";
+import { ACCEPTED_IMAGE_TYPES } from "@/lib/utils/types";
+const MAX_FILE_SIZE = 1024 * 1024 * 5;
 
 export const customerReviewSchema = z.object({
   name: z
@@ -13,5 +15,18 @@ export const customerReviewSchema = z.object({
     .number()
     .min(1, "Rating must be at least 1")
     .max(5, "Rating must not exceed 5"),
-  image: z.string().optional(),
+  image: z
+    .custom<File | null>()
+    .nullable()
+    .refine((file) => !file || file instanceof File, {
+      message: "Invalid file type",
+    })
+    .refine(
+      (file) => !file || ACCEPTED_IMAGE_TYPES.includes(file?.type),
+      "Only .jpg, .jpeg, .png and .webp formats are supported."
+    )
+    .refine(
+      (file) => !file || file?.size <= MAX_FILE_SIZE,
+      `Max image size is 5MB.`
+    ),
 });
