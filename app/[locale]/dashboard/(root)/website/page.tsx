@@ -10,6 +10,7 @@ import Services from "@/components/dashboard/website/services";
 // import About from "@/components/dashboard/website/about";
 import Gallery from "@/components/dashboard/website/gallery";
 import ContactUs from "@/components/dashboard/website/contactUs";
+import CustomerReviews from "@/components/dashboard/website/customerReviews";
 
 function WebsitePage() {
   const t = useTranslations("dashboardWebsite.tabs");
@@ -81,6 +82,19 @@ function WebsitePage() {
       label: t("contact"),
       permissionKey: "contact",
       content: <ContactUs />,
+    },
+    {
+      icon: (
+        <Image
+          src="/assets/icons/dashboard/website/reviews.svg"
+          alt="icon"
+          width="24"
+          height="24"
+        />
+      ),
+      label: t("customerReviews"),
+      permissionKey: "customerreview",
+      content: <CustomerReviews />,
     },
   ];
 

@@ -295,7 +295,7 @@
       "editGallery": "تعديل عنصر المعرض",
       "noGalleryDataFound": "لا توجد بيانات للمعرض"
     },
-    "customerReviews": {
+    "CustomerReviews": {
       "name": "الاسم",
       "review": "التقييم",
       "rating": "التقدير",
