@@ -272,6 +272,12 @@ export default function CustomTable({
                       ></i>
                     );
                   }
+                  if (col.field === "email")
+                    return (
+                      <a href={`mailto:${rowData[col.field]}`}>
+                        {rowData[col.field]}
+                      </a>
+                    );
                   return rowData[col.field as keyof DataInTable];
                 }}
               />

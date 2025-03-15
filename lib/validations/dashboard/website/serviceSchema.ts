@@ -14,17 +14,26 @@ export const serviceSchema = z.object({
     .max(100, "Alias must be less than 100 characters"),
   description: z.string().min(1, "Description is required"),
   image: z
-    .custom<File | null>()
+    .custom<File | string | null>()
     .nullable()
-    .refine((file) => !file || file instanceof File, {
-      message: "Invalid file type",
-    })
     .refine(
-      (file) => !file || ACCEPTED_IMAGE_TYPES.includes(file?.type),
+      (file) => !file || typeof file === "string" || file instanceof File,
+      {
+        message: "Invalid file type",
+      }
+    )
+    .refine(
+      (file) =>
+        file === null ||
+        typeof file === "string" ||
+        (file instanceof File && ACCEPTED_IMAGE_TYPES.includes(file.type)),
       "Only .jpg, .jpeg, .png and .webp formats are supported."
     )
     .refine(
-      (file) => !file || file?.size <= MAX_FILE_SIZE,
-      `Max image size is 5MB.`
+      (file) =>
+        file === null ||
+        typeof file === "string" ||
+        (file instanceof File && file.size <= MAX_FILE_SIZE),
+      "Max image size is 5MB."
     ),
 });

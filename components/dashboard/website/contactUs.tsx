@@ -20,7 +20,7 @@ export default function ContactUs() {
       useQueryHook: useGetContactsQuery,
     });
   const cardsData = [
-    { title: "Total Messages", num: data.length },
+    { title: "Total Messages", num: data?.length },
     { title: "Unread", num: 3 },
     { title: "Responded", num: 2 },
   ];

@@ -20,7 +20,7 @@ export interface CustomerReviewFormValues {
   name: string;
   review: string;
   rating: number;
-  image: File | null;
+  image: File | string | null;
 }
 
 const CustomerReviewForm = ({

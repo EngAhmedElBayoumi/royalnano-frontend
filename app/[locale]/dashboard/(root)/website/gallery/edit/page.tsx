@@ -1,7 +1,6 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
-import urlToFile from "@/lib/utils/urlToFile";
 import {
   useGetGalleryByIdQuery,
   useUpdateGalleryMutation,
@@ -18,17 +17,10 @@ export default function EditGallery() {
   const [updateGallery] = useUpdateGalleryMutation();
   const { data, isLoading, error } = useGetGalleryByIdQuery(id);
 
-  const defaultValues: GalleryFormValues = data
-    ? {
-        ...data,
-        file: data.image
-          ? urlToFile(data.image, "image.jpg") // Replace 'image.jpg' with the actual file name
-          : data.video
-          ? urlToFile(data.video, "video.mp4") // Replace 'video.mp4' with the actual file name
-          : undefined,
-      }
-    : {};
-
+  const defaultValues: GalleryFormValues = data && {
+    ...data,
+    file: data?.image ?? data?.video,
+  };
   const handleSubmit = async (data: GalleryFormValues) => {
     try {
       // Create FormData instance to handle file upload
@@ -36,7 +28,8 @@ export default function EditGallery() {
 
       // Append text fields
       formData.append("title", data.title);
-      formData.append("item_type", data.item_type);
+      if (data.file instanceof File)
+        formData.append("item_type", data.item_type);
       if (data.file && data.file instanceof File && data.item_type === "image")
         formData.append("image", data.file);
       if (data.file && data.file instanceof File && data.item_type === "video")

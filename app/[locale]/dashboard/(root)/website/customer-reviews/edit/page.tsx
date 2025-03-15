@@ -1,7 +1,6 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
-import urlToFile from "@/lib/utils/urlToFile";
 import {
   useGetReviewByIdQuery,
   useUpdateReviewMutation,
@@ -21,7 +20,7 @@ export default function EditCustomerReview() {
   const defaultValues = data && {
     ...data,
     rating: Number(data.rating),
-    image: data.image ? urlToFile(data.image, "image.jpg") : null,
+    image: data.image,
   };
 
   const handleSubmit = async (data: CustomerReviewFormValues) => {

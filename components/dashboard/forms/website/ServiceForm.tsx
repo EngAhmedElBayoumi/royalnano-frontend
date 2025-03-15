@@ -20,7 +20,7 @@ export interface ServiceFormValues {
   name: string;
   alias: string;
   description: string;
-  image: File | null;
+  image: File | string | null;
 }
 
 const ServiceForm = ({ onSubmit, defaultValues }: ServiceFormProps) => {

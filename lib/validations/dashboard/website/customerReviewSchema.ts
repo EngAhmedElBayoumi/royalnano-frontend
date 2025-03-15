@@ -16,17 +16,23 @@ export const customerReviewSchema = z.object({
     .min(1, "Rating must be at least 1")
     .max(5, "Rating must not exceed 5"),
   image: z
-    .custom<File | null>()
+    .custom<File | string | null>()
     .nullable()
-    .refine((file) => !file || file instanceof File, {
-      message: "Invalid file type",
-    })
     .refine(
-      (file) => !file || ACCEPTED_IMAGE_TYPES.includes(file?.type),
+      (file) => !file || typeof file === "string" || file instanceof File,
+      {
+        message: "Invalid file type",
+      }
+    )
+    .refine(
+      (file) =>
+        !file ||
+        typeof file === "string" ||
+        ACCEPTED_IMAGE_TYPES.includes(file.type),
       "Only .jpg, .jpeg, .png and .webp formats are supported."
     )
     .refine(
-      (file) => !file || file?.size <= MAX_FILE_SIZE,
+      (file) => !file || typeof file === "string" || file.size <= MAX_FILE_SIZE,
       `Max image size is 5MB.`
     ),
 });
