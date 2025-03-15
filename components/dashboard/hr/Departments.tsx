@@ -20,7 +20,7 @@ export default function Departments() {
     { field: "max_leave_percentage", header: t("maxLeavePercentage") },
   ];
 
-  const cardsData = [{ title: "Total Departments", num: data.count || 0 }];
+  const cardsData = [{ title: "Total Departments", num: data?.count || 0 }];
 
   const handleClick = () => {
     router.push("/dashboard/hr/departments/create");
