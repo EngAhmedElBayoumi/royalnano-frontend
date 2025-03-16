@@ -35,7 +35,7 @@ const ServicesSwiper = () => {
       className="main-container"
     >
       {services.map((service, index) => (
-        <SwiperSlide key={index} className=" pb-10">
+        <SwiperSlide key={index} className="pb-10">
           <ServiceCard
             title={service.title}
             warranty={service.warranty}

@@ -1,10 +1,9 @@
 "use client";
 import React from "react";
-import ServiceItem from "./ServiceItem";
-import useActiveService from "./useActiveService";
-// import useGetServicesQuery from "./useGetServicesQuery"; // Import the custom hook
 import { useTranslations } from "next-intl";
 import { useGetServicesQuery } from "@/redux/services/website/servicesApi";
+import useActiveService from "./useActiveService";
+import ServiceItem from "./ServiceItem";
 
 const OurServices = () => {
   const t = useTranslations("website.services");
@@ -27,7 +26,7 @@ const OurServices = () => {
   return (
     <section className="pb-8 bg-white relative top-[-100px] animate-on-scroll">
       <h2 className="text-center text-md lg:text-lg xl:text-xl font-bold text-primary">
-        {t("title")} {/* Translated title */}
+        {t("title")}
       </h2>
       <div className="flex justify-center">
         <main className="main-container grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-[10%] items-center">
