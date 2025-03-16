@@ -24,7 +24,7 @@ export default function Branches() {
   ];
 
   const cardsData = [
-    { title: "Total Branches", num: data.count || 0 },
+    { title: "Total Branches", num: data?.count || 0 },
     { title: "Complete", num: 87 },
     { title: "Pending", num: 3200 },
     { title: "Failed", num: 48 },

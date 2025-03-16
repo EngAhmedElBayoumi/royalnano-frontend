@@ -1,9 +1,9 @@
 import { Cairo } from "next/font/google";
 import "./globals.css";
-import ReduxProvider from "@/components/ReduxProvider";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { routing } from "@/i18n/routing";
+import ReduxProvider from "@/components/ReduxProvider";
 import ScrollAnimation from "@/components/provider";
 
 const cairo = Cairo({ subsets: ["latin"] });
@@ -29,7 +29,7 @@ export default async function LocaleLayout({
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ReduxProvider>
             {children}
-            <ScrollAnimation /> 
+            <ScrollAnimation />
           </ReduxProvider>
         </NextIntlClientProvider>
       </body>

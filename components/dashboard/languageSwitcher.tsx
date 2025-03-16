@@ -15,16 +15,18 @@ const LanguageSwitcher = () => {
 
   return (
     <CustomSelect
-    className="bg-black text-white w-[50%] "
+      className="bg-black text-white w-[50%] "
       name="language"
-    //   label="Language"
+      //   label="Language"
       placeholder="Select Language"
       options={[
         { value: "en", label: "English" },
         { value: "ar", label: "العربية" },
       ]}
       value={locale}
-      onChange={handleLanguageChange}
+      onChange={(value: string | number) =>
+        handleLanguageChange(value.toString())
+      }
     />
   );
 };
