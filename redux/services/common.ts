@@ -11,9 +11,10 @@ const baseUrl = config.apiUrl;
 // Define public API endpoints (No auth required)
 const PUBLIC_ENDPOINTS = ["core", "token", "website"];
 export const baseQuery = async (
-  args: string | { url: string; body?: any },
+  args: string | { url: string; body?: unknown },
+  // eslint-disable-next-line
   api: any,
-  extraOptions: Record<string, any>
+  extraOptions: Record<string, unknown>
 ) => {
   const state: RootState = api.getState();
   let accessToken = state.auth.accessToken;
