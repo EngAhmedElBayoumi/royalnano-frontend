@@ -8,13 +8,21 @@ import { useGetServicesQuery } from "@/redux/services/website/servicesApi";
 
 const OurServices = () => {
   const t = useTranslations("website.services");
-  const { data, loading, error } = useGetServicesQuery({});
-  const services = data?.results || [];
+  const { data, isLoading, error } = useGetServicesQuery({});
+  const services = data?.results.slice(0, 4) || [];
 
   const { activeService, handleMouseEnter } = useActiveService(services[0]);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
+  if (isLoading) return <div>Loading...</div>;
+  if (error) {
+    if ("message" in error) {
+      return <div>Error: {error.message}</div>;
+    }
+    if ("error" in error) {
+      return <div>Error: {error.error}</div>;
+    }
+    return <div>An error occurred</div>;
+  }
 
   return (
     <section className="pb-8 bg-white relative top-[-100px] animate-on-scroll">
@@ -25,21 +33,14 @@ const OurServices = () => {
         <main className="main-container grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-[10%] items-center">
           <ul className="space-y-4">
             {services.map(
-              (
-                service: {
-                  key?: any;
-                  name: any;
-                  id?: number;
-                  alias?: string;
-                  description?: string;
-                  image?: string | null;
-                  created_at?: string;
-                  type?: string | undefined;
-                },
-                index: React.Key | null | undefined
-              ) => (
+              (service: {
+                name: string;
+                id: number;
+                alias: string;
+                image: string | null;
+              }) => (
                 <ServiceItem
-                  key={index}
+                  key={service.id}
                   service={{
                     ...service,
                     name: service.name,
