@@ -6,7 +6,9 @@ import {
   useGetBranchByIdQuery,
 } from "@/redux/services/dashboard/inventory/branchesApi";
 import EditPage from "@/components/dashboard/EditPage";
-import BranchForm, { BranchFormValues } from "@/components/dashboard/forms/BranchForm";
+import BranchForm, {
+  BranchFormValues,
+} from "@/components/dashboard/forms/BranchForm";
 
 export default function EditBranchs() {
   const searchParams = useSearchParams();
@@ -40,5 +42,4 @@ export default function EditBranchs() {
       redirectPath="/dashboard/branches"
     />
   );
-}
 }

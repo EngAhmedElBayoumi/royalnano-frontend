@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { useGetServicesQuery } from "@/redux/services/website/servicesApi";
 import useActiveService from "./useActiveService";
@@ -8,9 +8,19 @@ import ServiceItem from "./ServiceItem";
 const OurServices = () => {
   const t = useTranslations("website.services");
   const { data, isLoading, error } = useGetServicesQuery({});
-  const services = data?.results.slice(0, 4) || [];
+  const services = React.useMemo(
+    () => data?.results.slice(0, 4) || [],
+    [data?.results]
+  );
 
-  const { activeService, handleMouseEnter } = useActiveService(services[0]);
+  const { activeService, setActiveService, handleMouseEnter } =
+    useActiveService(services[0]);
+
+  useEffect(() => {
+    if (services.length > 0) {
+      setActiveService(services[0]);
+    }
+  }, [services, setActiveService]);
 
   if (isLoading) return <div>Loading...</div>;
   if (error) {
