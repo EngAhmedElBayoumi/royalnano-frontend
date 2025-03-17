@@ -23,7 +23,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
   return (
     <div className="border border-primary rounded-10 overflow-hidden max-w-[274px]">
       <Image
-        src={imageSrc}
+        src={imageSrc??"/assets/images/diamond-hybrid.png"}
         alt={title}
         width={270}
         height={200}
