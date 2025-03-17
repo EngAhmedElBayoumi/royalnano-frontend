@@ -18,7 +18,7 @@ const DashboardNavbar = () => {
   );
 
   return (
-    <nav className="absolute ltr:right-0 -top-8 flex justify-end items-center gap-2 pt-10">
+    <nav className="absolute ltr:right-0 rtl:left-0 -top-8 flex justify-end items-center gap-2 pt-10">
       <Avatar>
         <AvatarImage src={baseUrl + profilePicture} />
         <AvatarFallback>{name}</AvatarFallback>
