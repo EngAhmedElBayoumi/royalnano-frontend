@@ -41,6 +41,7 @@ export const sidebarLinks = [
     path: "/purchase",
     name: "purchase",
     icon: "sales.svg",
-    permission: "warehouse",
+    permission: "purchaseorder",
   },
+
 ];
