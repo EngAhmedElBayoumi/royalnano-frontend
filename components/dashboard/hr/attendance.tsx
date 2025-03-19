@@ -52,7 +52,6 @@ export default function Attendance() {
   ];
 
   const handleClick = () => {
-    console.log("clicked");
     router.push("/dashboard/hr/attendance/create");
   };
 

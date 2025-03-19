@@ -16,9 +16,9 @@ export default function CreateAttendance() {
       ...data,
       employee: Number(data.employee),
       branch: Number(data.branch),
-      data: format(data.check_in, "yyyy-MM-dd"),
-      check_in: format(data.check_in, "hh:mm aa"),
-      check_out: format(data.check_out, "hh:mm aa"),
+      date: format(data.check_in, "yyyy-MM-dd"),
+      check_in: format(data.check_in, "HH:mm:ss"),
+      check_out: format(data.check_out, "HH:mm:ss"),
     };
     const response = await createAttendance(payload);
     if (response.error) throw new Error("creation failed");

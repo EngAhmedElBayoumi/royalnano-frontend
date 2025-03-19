@@ -168,15 +168,15 @@ const AttendanceForm = ({ onSubmit, defaultValues }: AttendanceFormProps) => {
             <DateTimePicker
               control={form.control}
               name="check_in"
-              label={t("check_in")}
-              placeholder={t("check_in")}
+              label={t("attendance")}
+              placeholder={t("attendance")}
               disabledEndDate={form.watch("check_out")}
             />
             <DateTimePicker
               control={form.control}
               name="check_out"
-              label={t("check_out")}
-              placeholder={t("check_out")}
+              label={t("departure")}
+              placeholder={t("departure")}
               disabledStartDate={form.watch("check_in")}
             />
 
@@ -201,7 +201,7 @@ const AttendanceForm = ({ onSubmit, defaultValues }: AttendanceFormProps) => {
               isOpen={isModalOpen}
               onChange={() => setIsModalOpen(false)}
               title={t("setLocation")}
-              description={t("selectBranchLocation")}
+              description={t("selectAttendanceLocation")}
             >
               <ExtendedMapGL
                 initialViewState={viewport}

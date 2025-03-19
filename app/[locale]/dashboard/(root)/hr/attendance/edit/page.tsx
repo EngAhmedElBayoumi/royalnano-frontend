@@ -1,38 +1,57 @@
 "use client";
+import { useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
+import { format } from "date-fns";
+import {
+  useUpdateAttendanceMutation,
+  useGetAttendanceByIdQuery,
+} from "@/redux/services/dashboard/hr/attendanceApi";
+import EditPage from "@/components/dashboard/EditPage";
 import AttendanceForm, {
   AttendanceFormValues,
 } from "@/components/dashboard/forms/hr/AttendanceForm";
-import IconWithTitle from "@/components/dashboard/IconWithTitle";
-// import { useUpdateAttendanceMutation } from "@/redux/services/AttendanceApi";
 
 export default function EditAttendance() {
-  // const [updateAttendance] = useUpdateAttendanceMutation();
-  const defaultValues: AttendanceFormValues = {
-    name: "John Doe",
-    attendance: new Date(new Date().setHours(new Date().getHours() - 8)),
-    departure: new Date(),
-    working_hours: 8,
+  const searchParams = useSearchParams();
+  const id = searchParams.get("id");
+  const t = useTranslations("hr");
+  const { data, isLoading, error } = useGetAttendanceByIdQuery(id);
+  const [updateAttendance] = useUpdateAttendanceMutation();
+  console.log(data);
+  const defaultValues: AttendanceFormValues = data && {
+    ...data,
+    employee: String(data?.employee?.id),
+    branch: String(data?.branch?.id),
+    check_in: new Date(data?.check_in),
+    check_out: new Date(data?.check_out),
+    working_hours:
+      (new Date(data?.check_in).getTime() -
+        new Date(data?.check_out).getTime()) /
+      (1000 * 60 * 60),
   };
 
   const handleSubmit = async (data: AttendanceFormValues) => {
-    console.log(data);
-    // await updateAttendance(data);
+    const payload = {
+      ...data,
+      employee: Number(data.employee),
+      branch: Number(data.branch),
+      date: format(data.check_in, "yyyy-MM-dd"),
+      check_in: format(data.check_in, "HH:mm:ss"),
+      check_out: format(data.check_out, "HH:mm:ss"),
+    };
+    const response = await updateAttendance(payload);
+    if (response.error) throw new Error("edit failed");
   };
 
   return (
-    <main className="mx-7 my-5">
-      <div className="flex">
-        <IconWithTitle
-          imageSrc="/assets/icons/edit.svg"
-          title="Edit Attendance"
-          backgroundColor="#F8F7F7"
-          textColor="primary"
-        />
-      </div>
-
-      <div className="bg-dashboardBg px-6 pt-5 pb-8 ltr:rounded-r-[20px] ltr:rounded-bl-[20px] rtl:rounded-l-[20px] rtl:rounded-br-[20px] ltr:lg:pr-[200px] rtl:lg:pl-[200px]">
-        <AttendanceForm onSubmit={handleSubmit} defaultValues={defaultValues} />
-      </div>
-    </main>
+    <EditPage
+      title={t("attendance.editAttendance")}
+      data={defaultValues}
+      isLoading={isLoading}
+      error={error}
+      onSubmit={handleSubmit}
+      Form={AttendanceForm}
+      redirectPath={`/dashboard/hr?tab=${t("tabs.attendance")}`}
+    />
   );
 }

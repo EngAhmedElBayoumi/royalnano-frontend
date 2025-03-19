@@ -182,7 +182,9 @@
       "date": "Date",
       "addAttendance": "Add Attendance",
       "editAttendance": "Edit Attendance",
-      "noAttendanceDataFound": "No Attendance data found"
+      "noAttendanceDataFound": "No Attendance data found",
+      "setLocation": "Set Location",
+      "selectAttendanceLocation": "Select Attendance Location"
     },
     "vacation": {
       "employee": "Employee",

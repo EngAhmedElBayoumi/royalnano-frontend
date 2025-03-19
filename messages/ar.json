@@ -168,7 +168,9 @@
       "date": "التاريخ",
       "addAttendance": "إضافة حضور",
       "editAttendance": "تعديل الحضور",
-      "noAttendanceDataFound": "لا توجد بيانات للحضور"
+      "noAttendanceDataFound": "لا توجد بيانات للحضور",
+      "setLocation": "تعيين الموقع",
+      "selectAttendanceLocation": "اختر موقع الحضور"
     },
     "vacation": {
       "employee": "الموظف",
