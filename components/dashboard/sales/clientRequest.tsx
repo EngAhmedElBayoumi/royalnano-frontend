@@ -13,6 +13,7 @@ export default function ClientRequest() {
   const [branchNames, setBranchNames] = useState<{ [key: number]: string }>({}); 
 
   const handlePageChange = (newPage: number) => {
+    console.log("Page changed to:", newPage); 
     setPage(newPage);
   };
 
@@ -67,9 +68,9 @@ export default function ClientRequest() {
     { field: "id", header: "ID" },
     { field: "full_name", header: "Full Name" },
     { field: "phone_number", header: "Phone Number" },
-    { field: "car_type", header: "Car Type" },
+    // { field: "car_type", header: "Car Type" },
     { field: "car_model", header: "Car Model" },
-    { field: "status", header: "Status" },
+    // { field: "status", header: "Status" },
     { field: "branch_name", header: "Branch Name" },
   ];
 

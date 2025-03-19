@@ -35,11 +35,16 @@ import { applicantsApi } from "./services/dashboard/hr/applicantsApi";
 import { interviewsApi } from "./services/dashboard/hr/interviewsApi";
 import { competitionApi } from "./services/dashboard/hr/competitionApi";
 import { evaluationApi } from "./services/dashboard/hr/evaluationApi";
-import { supplierApi } from "./services/dashboard/purchase/supplierApi";
+import { PurchaseSupplierApi } from "./services/dashboard/purchase/supplierApi";
 import { salesReturnApi } from "./services/dashboard/sales/salesReturnApi";
 import { servicesAPi } from "./services/website/servicesApi";
 import { customerReviewAPi } from "./services/website/customerReviewApi";
 import { clientRequestAPi } from "./services/clientRequestApi";
+import { purchaseOrderApi } from "./services/dashboard/purchase/orderApi";
+import { purchaseExpenseCategoryApi } from "./services/dashboard/purchase/expese-category";
+import { purchaseInvoiceApi } from "./services/dashboard/purchase/invoiceApi";
+import { purchaseRequestApi } from "./services/dashboard/purchase/request";
+import { purchaseWarehouseApi } from "./services/dashboard/purchase/warehouseApi";
 
 // Create separate configs for each reducer
 const authPersistConfig = {
@@ -91,11 +96,17 @@ export const store = configureStore({
     [interviewsApi.reducerPath]: interviewsApi.reducer,
     [competitionApi.reducerPath]: competitionApi.reducer,
     [evaluationApi.reducerPath]: evaluationApi.reducer,
-    [supplierApi.reducerPath]: supplierApi.reducer,
     [salesReturnApi.reducerPath]: salesReturnApi.reducer,
     [servicesAPi.reducerPath]: servicesAPi.reducer,
     [customerReviewAPi.reducerPath]: customerReviewAPi.reducer,
     [clientRequestAPi.reducerPath]: clientRequestAPi.reducer,
+    [PurchaseSupplierApi.reducerPath]: PurchaseSupplierApi.reducer,
+    [purchaseOrderApi.reducerPath]: purchaseOrderApi.reducer,
+    [purchaseExpenseCategoryApi.reducerPath]: purchaseExpenseCategoryApi.reducer,
+    [purchaseInvoiceApi.reducerPath]: purchaseInvoiceApi.reducer,
+    [purchaseRequestApi.reducerPath]: purchaseRequestApi.reducer,
+    [purchaseWarehouseApi.reducerPath]: purchaseWarehouseApi.reducer,
+
     auth: persistedAuthReducer,
     profile: persistedProfileReducer,
   },
@@ -136,11 +147,16 @@ export const store = configureStore({
       .concat(interviewsApi.middleware)
       .concat(competitionApi.middleware)
       .concat(evaluationApi.middleware)
-      .concat(supplierApi.middleware)
+      .concat(PurchaseSupplierApi.middleware)
       .concat(salesReturnApi.middleware)
       .concat(servicesAPi.middleware)
       .concat(customerReviewAPi.middleware)
-      .concat(clientRequestAPi.middleware);
+      .concat(clientRequestAPi.middleware)
+      .concat(purchaseWarehouseApi.middleware)
+      .concat(purchaseRequestApi.middleware)
+      .concat(purchaseInvoiceApi.middleware)
+      .concat(purchaseExpenseCategoryApi.middleware)
+      .concat(purchaseOrderApi.middleware);
   },
 });
 

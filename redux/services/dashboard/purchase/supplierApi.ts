@@ -1,7 +1,7 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseQuery } from "../../common";
 
-export const supplierApi = createApi({
+export const PurchaseSupplierApi = createApi({
   reducerPath: "supplierApi",
   baseQuery,
   endpoints: (builder) => ({
@@ -50,4 +50,4 @@ export const {
   useCreateSupplierMutation,
   useUpdateSupplierMutation,
   useDeleteSupplierMutation,
-} = supplierApi;
+} = PurchaseSupplierApi;

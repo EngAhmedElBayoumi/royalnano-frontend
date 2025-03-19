@@ -21,7 +21,8 @@
     "website": "Website",
     "sales": "Sales",
     "settings": "Settings",
-    "logout": "Logout"
+    "logout": "Logout",
+    "purchase": "Purchase"
   },
   "branches": {
     "branches": "Branches",
@@ -508,6 +509,98 @@
       "errors": {
         "required": "Email is required",
         "invalid": "Invalid email"
+      }
+    }
+  },
+  "Purchase": {
+    "expenseCategory": "Expense Category",
+    "invoice": "Invoice",
+    "order": "Order",
+    "request": "Request",
+    "supplier": "Supplier",
+    "warehouse": "Warehouse",
+    "Supplier": {
+      "itemCode": "Item Code",
+      "purchaseSupplierLevel": "Purchase Supplier Level",
+      "description": "Description",
+      "noDataFound": "No supplier data found.",
+      "addSupplier": "Add Supplier",
+      "cards": {
+        "newRequests": "New Requests",
+        "complete": "Complete",
+        "pending": "Pending",
+        "failed": "Failed",
+        "paid": "Paid"
+      }
+    },
+    "ExpenseCategory": {
+      "itemCode": "Item Code",
+      "purchaseExpenseCategoryLevel": "Purchase Expense Category Level",
+      "description": "Description",
+      "noDataFound": "No expense category data found.",
+      "addExpenseCategory": "Add Expense Category",
+      "cards": {
+        "newRequests": "New Requests",
+        "complete": "Complete",
+        "pending": "Pending",
+        "failed": "Failed",
+        "paid": "Paid"
+      }
+    },
+    "Warehouse": {
+      "itemCode": "Item Code",
+      "purchaseWarehouseLevel": "Purchase Warehouse Level",
+      "description": "Description",
+      "noDataFound": "No warehouse data found.",
+      "addWarehouse": "Add Warehouse",
+      "cards": {
+        "newRequests": "New Requests",
+        "complete": "Complete",
+        "pending": "Pending",
+        "failed": "Failed",
+        "paid": "Paid"
+      }
+    },
+    "Request": {
+      "itemCode": "Item Code",
+      "purchaseRequestLevel": "Purchase Request Level",
+      "description": "Description",
+      "noDataFound": "No request data found.",
+      "addRequest": "Add Request",
+      "cards": {
+        "newRequests": "New Requests",
+        "complete": "Complete",
+        "pending": "Pending",
+        "failed": "Failed",
+        "paid": "Paid"
+      }
+    },
+    "Invoice": {
+      "itemCode": "Item Code",
+      "purchaseInvoiceLevel": "Purchase Invoice Level",
+      "description": "Description",
+      "noDataFound": "No invoice data found.",
+      "addInvoice": "Add Invoice",
+      "cards": {
+        "newRequests": "New Requests",
+        "complete": "Complete",
+        "pending": "Pending",
+        "failed": "Failed",
+        "paid": "Paid"
+      }
+    },
+    "Order": {
+      "itemCode": "Item Code",
+      "purchaseOrderLevel": "Purchase Order Level",
+      "description": "Description",
+      "noDataFound": "No order data found.",
+      "addOrder": "Add Order",
+      "cards": {
+        "newRequests": "New Requests",
+        "complete": "Complete",
+        "pending": "Pending",
+        "failed": "Failed",
+        "paid": "Paid"
       }
     }
   }
