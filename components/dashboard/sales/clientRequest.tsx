@@ -40,7 +40,7 @@ export default function ClientRequest() {
 
   useEffect(() => {
     if (branchesData?.results) {
-      const branchMap = branchesData.results.reduce((acc, branch) => {
+      const branchMap = branchesData.results.reduce((acc: { [x: string]: string; }, branch: { id: string | number; name: string; }) => {
         acc[branch.id] = branch.name;
         return acc;
       }, {} as { [key: number]: string });
@@ -49,7 +49,7 @@ export default function ClientRequest() {
   }, [branchesData]);
 
   const transformedData =
-    clientRequests?.results?.map((request: { id: any; full_name: any; phone_number: any; car_type: any; car_model: any; status: any; description: any; order_note: any; service: any; branch: string | number; }) => ({
+    clientRequests?.results?.map((request: { id: number; full_name: string; phone_number: number; car_type: string; car_model: string; status: string; description: string; order_note: string; service: string; branch:   number; }) => ({
       id: request.id,
       full_name: request.full_name,
       phone_number: request.phone_number,

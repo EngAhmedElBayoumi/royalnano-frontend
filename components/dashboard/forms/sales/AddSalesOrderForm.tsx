@@ -63,7 +63,7 @@ const AddSalesOrderForm = ({ onSubmit, defaultValues }: SalesOrderFormProps) => 
     name: "items",
   });
 
-  const { data: itemsData, isLoading: isItemsLoading, error: itemsError } = useGetItemsQuery({
+  const { data: itemsData } = useGetItemsQuery({
     search: "",
     ordering: "id",
     page: 1,
@@ -74,8 +74,7 @@ const AddSalesOrderForm = ({ onSubmit, defaultValues }: SalesOrderFormProps) => 
 
   const t = useTranslations("Sales");
   const customerOptions = customers
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    ? customers.map((customer: { id: { toString: () => any; }; customer_name: any; }) => ({
+    ? customers.map((customer: { id: { toString: () => string; }; customer_name: string; }) => ({
         value: customer.id.toString(),
         label: customer.customer_name,
       }))
@@ -133,7 +132,7 @@ const AddSalesOrderForm = ({ onSubmit, defaultValues }: SalesOrderFormProps) => 
               placeholder={t("SalesOrder.customer")}
               options={customerOptions}
               onChange={(value) => {
-                const customerId = parseInt(value, 10);
+                const customerId = parseInt(String(value), 10); 
                 form.setValue("customer", customerId);
               }}
             />
@@ -186,23 +185,23 @@ const AddSalesOrderForm = ({ onSubmit, defaultValues }: SalesOrderFormProps) => 
 
                   {itemType === "existing" && (
                     <CustomSelect
-                    valueType="number" 
-                      control={form.control}
-                      name={`items.${index}.item`}
-                      label={t("SalesOrder.selectItem")}
-                      options={existingItems.map((item: { id: number; item_name: string }) => ({
-                        value: item.id.toString(),
-                        label: item.item_name,
-                      }))}
-                      placeholder={t("SalesOrder.selectItem")}
-                      onChange={(value) => {
-                        if (value) {
-                          const selectedItemId = parseInt(value, 10);
-                          form.setValue(`items.${index}.item`, selectedItemId);
-                        }
-                      }}
-                      isLoading={isItemsLoading}
-                    />
+                    valueType="number"
+                    control={form.control}
+                    name={`items.${index}.item`}
+                    label={t("SalesOrder.selectItem")}
+                    options={existingItems.map((item: { id: number; item_name: string }) => ({
+                      value: item.id.toString(),
+                      label: item.item_name,
+                    }))}
+                    placeholder={t("SalesOrder.selectItem")}
+                    onChange={(value) => {
+                      if (value) {
+                        const selectedItemId = parseInt(String(value), 10); 
+                        form.setValue(`items.${index}.item`, selectedItemId);
+                      }
+                    }}
+                    // isLoading={isItemsLoading}
+                  />
                   )}
 
                   {itemType === "custom" && (

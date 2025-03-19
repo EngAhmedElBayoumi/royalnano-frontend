@@ -30,7 +30,7 @@ export default function SalesCustomer() {
   console.log("Sales Customers API Response:", salesCustomers);
 
   const transformedData =
-    salesCustomers?.results?.map((customer: { id: any; customer_name: any; contact_person: any; phone_number: any; email: any; address: any; city: any; country: any; notes: any; branch: { name: any; }; customer_type: any; tax_number: any; national_id: any; }) => ({
+    salesCustomers?.results?.map((customer: { id: number; customer_name: string; contact_person: string; phone_number: number; email: string; address: string; city: string; country: string; notes: string; branch: { name: string; }; customer_type: string; tax_number: number; national_id: number; }) => ({
       id: customer.id,
       customer_name: customer.customer_name,
       contact_person: customer.contact_person,

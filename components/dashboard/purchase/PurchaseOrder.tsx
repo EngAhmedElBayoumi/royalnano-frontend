@@ -54,7 +54,7 @@ export default function PurchaseOrder() {
   
    useEffect(() => {
       if (suppliersData?.results) {
-        const supplierMap = suppliersData.results.reduce((acc, supplier) => {
+        const supplierMap = suppliersData.results.reduce((acc: { [x: string]: string; }, supplier: { id: string | number; supplier_name: string; }) => {
           acc[supplier.id] = supplier.supplier_name;
           return acc;
         }, {} as { [key: number]: string });
