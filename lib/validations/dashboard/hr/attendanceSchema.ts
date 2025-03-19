@@ -15,6 +15,9 @@ export const attendanceSchema = z
     attendance: z.date({ required_error: "Attendance time is required" }),
     departure: z.date({ required_error: "Departure time is required" }),
     working_hours: z.number().min(0, "Working hours must be a positive number"),
+    location: z.string().max(100).optional(),
+    longitude: z.number().optional(),
+    latitude: z.number().optional(),
   })
   .refine((data) => data.attendance < data.departure, {
     message: "Attendance time must be before departure time",

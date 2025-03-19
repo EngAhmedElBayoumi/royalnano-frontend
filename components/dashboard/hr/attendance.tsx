@@ -21,17 +21,19 @@ export default function Attendance() {
   const router = useRouter();
   const t = useTranslations("hr.attendance");
 
-  const { data, isLoading, error, permissions, handlePageChange } = useTableData({
-    permissionKey: "attendance",
-    useQueryHook: useGetAttendanceQuery,
-  });
+  const { data, isLoading, error, permissions, handlePageChange } =
+    useTableData({
+      permissionKey: "attendance",
+      useQueryHook: useGetAttendanceQuery,
+    });
 
   // Transform attendanceData to only include employee, branch name
-  const transformedData = data?.results?.map((attendance: Attendance) => ({
-    ...attendance,
-    employee: attendance.employee.name,
-    branch: attendance.branch.name,
-  })) || [];
+  const transformedData =
+    data?.results?.map((attendance: Attendance) => ({
+      ...attendance,
+      employee: attendance.employee.name,
+      branch: attendance.branch.name,
+    })) || [];
 
   const columns = [
     { field: "employee", header: t("employee") },
@@ -50,6 +52,7 @@ export default function Attendance() {
   ];
 
   const handleClick = () => {
+    console.log("clicked");
     router.push("/dashboard/hr/attendance/create");
   };
 

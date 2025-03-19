@@ -178,6 +178,7 @@
       "location": "Location",
       "attendance": "Attendance",
       "departure": "Departure",
+      "working_hours": "Working Hours",
       "date": "Date",
       "addAttendance": "Add Attendance",
       "editAttendance": "Edit Attendance",

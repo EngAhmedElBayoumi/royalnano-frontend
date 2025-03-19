@@ -164,6 +164,7 @@
       "location": "الموقع",
       "attendance": "الحضور",
       "departure": "المغادرة",
+      "working_hours": "ساعات العمل",
       "date": "التاريخ",
       "addAttendance": "إضافة حضور",
       "editAttendance": "تعديل الحضور",
