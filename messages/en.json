@@ -590,8 +590,11 @@
       }
     },
     "Order": {
+      "cancel": "cancel",
+      "save": "save",
       "order": "Order",
       "itemCode": "Item Code",
+      "purchaseOrderModel": "purchase Order Model",
       "purchaseOrderLevel": "Purchase Order Level",
       "description": "Description",
       "noDataFound": "No order data found.",
