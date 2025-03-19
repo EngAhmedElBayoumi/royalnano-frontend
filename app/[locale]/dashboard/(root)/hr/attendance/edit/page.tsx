@@ -17,18 +17,22 @@ export default function EditAttendance() {
   const t = useTranslations("hr");
   const { data, isLoading, error } = useGetAttendanceByIdQuery(id);
   const [updateAttendance] = useUpdateAttendanceMutation();
-  console.log(data);
+  const checkInDate = data && new Date(`${data.date}T${data.check_in}`);
+  const checkOutDate = data && new Date(`${data.date}T${data.check_out}`);
+
   const defaultValues: AttendanceFormValues = data && {
     ...data,
-    employee: String(data?.employee?.id),
-    branch: String(data?.branch?.id),
-    check_in: new Date(data?.check_in),
-    check_out: new Date(data?.check_out),
+    employee: data.employee.id,
+    branch: data.branch.id,
+    check_in: checkInDate,
+    check_out: checkOutDate,
     working_hours:
-      (new Date(data?.check_in).getTime() -
-        new Date(data?.check_out).getTime()) /
-      (1000 * 60 * 60),
+      (checkOutDate.getTime() - checkInDate.getTime()) / (1000 * 60 * 60),
+    latitude: data.latitude ?? undefined,
+    longitude: data.longitude ?? undefined,
   };
+
+  console.log(defaultValues);
 
   const handleSubmit = async (data: AttendanceFormValues) => {
     const payload = {
