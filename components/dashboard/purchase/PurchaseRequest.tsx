@@ -18,25 +18,25 @@ export interface Item {
 
 export default function PurchaseRequest() {
   const { data: inventoryItems, isLoading, error, permissions, handlePageChange } = useTableData({
-    permissionKey: "PurchaseRequest",
+    permissionKey: "purchaserequest",
     useQueryHook: useGetRequestsQuery,
   });
 
   const router = useRouter();
-  const t = useTranslations("Inventory.InventoryPurchaseRequest");
+  const t = useTranslations("Purchase.Request");
 
   const columns = [
-    { field: "itemCode", header: t("item") },
-    { field: "PurchaseRequestLevel", header: t("PurchaseRequestLevel") },
+    { field: "itemCode", header: t("itemCode") },
+    { field: "PurchaseRequestLevel", header: t("purchaseRequestLevel") },
     { field: "description", header: t("description") },
   ];
 
   const cardsData = [
-    { title: "New requests", num: 145 },
-    { title: "Complete", num: 87 },
-    { title: "Pending", num: 3200 },
-    { title: "Failed", num: 48 },
-    { title: "Paid", num: 48 },
+    { title: t("cards.newRequests"), num: 145 },
+    { title: t("cards.complete"), num: 87 },
+    { title: t("cards.pending"), num: 3200 },
+    { title: t("cards.failed"), num: 48 },
+    { title: t("cards.paid"), num: 48 },
   ];
 
   const formattedData =
@@ -46,6 +46,7 @@ export default function PurchaseRequest() {
       PurchaseRequestLevel: item.PurchaseRequest_level,
       description: item.description,
     })) || [];
+
   const handleClick = () => {
     router.push("/dashboard/purchase/purchase-request/create");
   };
@@ -57,10 +58,10 @@ export default function PurchaseRequest() {
       data={{ results: formattedData, count: inventoryItems?.count || 0 }}
       columns={columns}
       cardData={cardsData}
-      emptyMessage={t("noPurchaseRequestDataFound")}
+      emptyMessage={t("noDataFound")}
       editRoute="/dashboard/purchase/purchase-request/edit/"
       viewRoute="/dashboard/purchase/purchase-request/view/"
-      buttonText={t("addPurchaseRequest")}
+      buttonText={t("addRequest")}
       ButtonEvent={handleClick}
       onPageChange={handlePageChange}
       permissions={permissions}

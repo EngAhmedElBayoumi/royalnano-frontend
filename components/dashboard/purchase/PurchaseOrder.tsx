@@ -17,35 +17,36 @@ export interface Item {
 }
 
 export default function PurchaseOrder() {
-  const { data: inventoryItems, isLoading, error, permissions, handlePageChange } = useTableData({
-    permissionKey: "PurchaseOrder",
+  const { data: purchaseOrders, isLoading, error, permissions, handlePageChange } = useTableData({
+    permissionKey: "purchaseorder",
     useQueryHook: useGetOrdersQuery,
   });
 
   const router = useRouter();
-  const t = useTranslations("Inventory.InventoryPurchaseOrder");
+  const t = useTranslations("Purchase.Order");
 
   const columns = [
-    { field: "itemCode", header: t("item") },
-    { field: "PurchaseOrderLevel", header: t("PurchaseOrderLevel") },
+    { field: "itemCode", header: t("itemCode") },
+    { field: "PurchaseOrderLevel", header: t("purchaseOrderLevel") },
     { field: "description", header: t("description") },
   ];
 
   const cardsData = [
-    { title: "New requests", num: 145 },
-    { title: "Complete", num: 87 },
-    { title: "Pending", num: 3200 },
-    { title: "Failed", num: 48 },
-    { title: "Paid", num: 48 },
+    { title: t("cards.newRequests"), num: 145 },
+    { title: t("cards.complete"), num: 87 },
+    { title: t("cards.pending"), num: 3200 },
+    { title: t("cards.failed"), num: 48 },
+    { title: t("cards.paid"), num: 48 },
   ];
-
+console.log(purchaseOrders?.results)
   const formattedData =
-    inventoryItems?.results?.map((item: Item) => ({
+    purchaseOrders?.results?.map((item: Item) => ({
       id: item.id,
       itemCode: item.item.item_code,
       PurchaseOrderLevel: item.PurchaseOrder_level,
       description: item.description,
     })) || [];
+
   const handleClick = () => {
     router.push("/dashboard/purchase/purchase-order/create");
   };
@@ -54,13 +55,13 @@ export default function PurchaseOrder() {
     <TableWrapper
       isLoading={isLoading}
       error={error}
-      data={{ results: formattedData, count: inventoryItems?.count || 0 }}
+      data={{ results: formattedData, count: purchaseOrders?.count || 0 }}
       columns={columns}
       cardData={cardsData}
-      emptyMessage={t("noPurchaseOrderDataFound")}
+      emptyMessage={t("noDataFound")}
       editRoute="/dashboard/purchase/purchase-order/edit/"
       viewRoute="/dashboard/purchase/purchase-order/view/"
-      buttonText={t("addPurchaseOrder")}
+      buttonText={t("addOrder")}
       ButtonEvent={handleClick}
       onPageChange={handlePageChange}
       permissions={permissions}

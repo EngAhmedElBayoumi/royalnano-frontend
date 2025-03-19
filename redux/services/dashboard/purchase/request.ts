@@ -7,36 +7,36 @@ export const purchaseRequestApi = createApi({
   endpoints: (builder) => ({
     getRequests: builder.query({
       query: ({ search, ordering, page, page_size }) => ({
-        url: `purchase/request`,
+        url: `purchase/purchase-request`,
         params: { search, ordering, page, page_size },
       }),
     }),
     getRequestsMini: builder.query({
       query: ({ search, ordering, page, page_size }) => ({
-        url: `purchase/request/mini`,
+        url: `purchase/purchase-request/mini`,
         params: { search, ordering, page, page_size },
       }),
     }),
     getRequestById: builder.query({
-      query: (id) => `purchase/request/${id}/`,
+      query: (id) => `purchase/purchase-request/${id}/`,
     }),
     createRequest: builder.mutation({
       query: (data) => ({
-        url: `purchase/request/`,
+        url: `purchase/purchase-request/`,
         method: "POST",
         body: data,
       }),
     }),
     updateRequest: builder.mutation({
       query: ({ id, data }) => ({
-        url: `purchase/request/${id}/`,
+        url: `purchase/purchase-request/${id}/`,
         method: "PATCH",
         body: data,
       }),
     }),
     deleteRequest: builder.mutation({
       query: (id) => ({
-        url: `purchase/request/${id}/`,
+        url: `purchase/purchase-request/${id}/`,
         method: "DELETE",
       }),
     }),

@@ -23,20 +23,20 @@ export default function PurchaseWarehouse() {
   });
 
   const router = useRouter();
-  const t = useTranslations("Inventory.InventoryPurchaseWarehouse");
+  const t = useTranslations("Purchase.Warehouse");
 
   const columns = [
-    { field: "itemCode", header: t("item") },
-    { field: "PurchaseWarehouseLevel", header: t("PurchaseWarehouseLevel") },
+    { field: "itemCode", header: t("itemCode") },
+    { field: "PurchaseWarehouseLevel", header: t("purchaseWarehouseLevel") },
     { field: "description", header: t("description") },
   ];
 
   const cardsData = [
-    { title: "New requests", num: 145 },
-    { title: "Complete", num: 87 },
-    { title: "Pending", num: 3200 },
-    { title: "Failed", num: 48 },
-    { title: "Paid", num: 48 },
+    { title: t("cards.newRequests"), num: 145 },
+    { title: t("cards.complete"), num: 87 },
+    { title: t("cards.pending"), num: 3200 },
+    { title: t("cards.failed"), num: 48 },
+    { title: t("cards.paid"), num: 48 },
   ];
 
   const formattedData =
@@ -46,6 +46,7 @@ export default function PurchaseWarehouse() {
       PurchaseWarehouseLevel: item.PurchaseWarehouse_level,
       description: item.description,
     })) || [];
+
   const handleClick = () => {
     router.push("/dashboard/purchase/purchase-warehouse/create");
   };
@@ -57,10 +58,10 @@ export default function PurchaseWarehouse() {
       data={{ results: formattedData, count: inventoryItems?.count || 0 }}
       columns={columns}
       cardData={cardsData}
-      emptyMessage={t("noPurchaseWarehouseDataFound")}
+      emptyMessage={t("noDataFound")}
       editRoute="/dashboard/purchase/purchase-warehouse/edit/"
       viewRoute="/dashboard/purchase/purchase-warehouse/view/"
-      buttonText={t("addPurchaseWarehouse")}
+      buttonText={t("addWarehouse")}
       ButtonEvent={handleClick}
       onPageChange={handlePageChange}
       permissions={permissions}

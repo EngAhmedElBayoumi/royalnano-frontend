@@ -14,11 +14,9 @@ import PurchaseWarehouse from "@/components/dashboard/purchase/PurchaseWarehouse
 
 function PurchasePage() {
   const t = useTranslations("Purchase");
-
   const permissions = useSelector(
     (state: RootState) => state.profile.permissions
   );
-
   const tabs = [
     {
       label: t("expenseCategory"),
@@ -35,7 +33,8 @@ function PurchasePage() {
     },
     {
       label: t("invoice"),
-      permissionKey: "invoice",
+       //to be edited 
+      permissionKey: "invoicedetail",
       icon: (
         <Image
           src="/assets/icons/dashboard/inventory/invoice.svg"
@@ -47,8 +46,9 @@ function PurchasePage() {
       content: <PurchaseInvoice />,
     },
     {
+
       label: t("order"),
-      permissionKey: "order",
+      permissionKey: "purchaseorder",
       icon: (
         <Image
           src="/assets/icons/dashboard/inventory/order.svg"
@@ -61,7 +61,7 @@ function PurchasePage() {
     },
     {
       label: t("request"),
-      permissionKey: "request",
+      permissionKey: "purchaserequest",
       icon: (
         <Image
           src="/assets/icons/dashboard/inventory/request.svg"
@@ -103,7 +103,6 @@ function PurchasePage() {
   const filteredTabs = tabs.filter((tab) => {
     return permissions[tab.permissionKey]?.view;
   });
-
   return <CustomTabs tabs={filteredTabs} defaultTab={filteredTabs[0]?.label} />;
 }
 

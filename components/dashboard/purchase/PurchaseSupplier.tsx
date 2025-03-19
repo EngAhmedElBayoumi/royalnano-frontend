@@ -42,7 +42,7 @@ export default function PurchaseSupplier() {
   const formattedData =
     inventoryItems?.results?.map((item: Item) => ({
       id: item.id,
-      itemCode: item.item.item_code,
+    //   itemCode: item.item.item_code,
       PurchaseSupplierLevel: item.PurchaseSupplier_level,
       description: item.description,
     })) || [];

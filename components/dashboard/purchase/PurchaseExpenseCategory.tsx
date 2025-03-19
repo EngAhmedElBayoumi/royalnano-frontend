@@ -23,20 +23,20 @@ export default function PurchaseExpenseCategory() {
   });
 
   const router = useRouter();
-  const t = useTranslations("Inventory.InventoryPurchaseExpenseCategory");
+  const t = useTranslations("Purchase.ExpenseCategory");
 
   const columns = [
-    { field: "itemCode", header: t("item") },
-    { field: "PurchaseExpenseCategoryLevel", header: t("PurchaseExpenseCategoryLevel") },
+    { field: "itemCode", header: t("itemCode") },
+    { field: "PurchaseExpenseCategoryLevel", header: t("purchaseExpenseCategoryLevel") },
     { field: "description", header: t("description") },
   ];
 
   const cardsData = [
-    { title: "New requests", num: 145 },
-    { title: "Complete", num: 87 },
-    { title: "Pending", num: 3200 },
-    { title: "Failed", num: 48 },
-    { title: "Paid", num: 48 },
+    { title: t("cards.newRequests"), num: 145 },
+    { title: t("cards.complete"), num: 87 },
+    { title: t("cards.pending"), num: 3200 },
+    { title: t("cards.failed"), num: 48 },
+    { title: t("cards.paid"), num: 48 },
   ];
 
   const formattedData =
@@ -46,8 +46,9 @@ export default function PurchaseExpenseCategory() {
       PurchaseExpenseCategoryLevel: item.PurchaseExpenseCategory_level,
       description: item.description,
     })) || [];
+
   const handleClick = () => {
-    router.push("/dashboard/purchase/purchase-expense-catogory/create");
+    router.push("/dashboard/purchase/purchase-expense-category/create");
   };
 
   return (
@@ -57,10 +58,10 @@ export default function PurchaseExpenseCategory() {
       data={{ results: formattedData, count: inventoryItems?.count || 0 }}
       columns={columns}
       cardData={cardsData}
-      emptyMessage={t("noPurchaseExpenseCategoryDataFound")}
-      editRoute="/dashboard/purchase/purchase-expense-catogory/edit/"
-      viewRoute="/dashboard/purchase/purchase-expense-catogory/view/"
-      buttonText={t("addPurchaseExpenseCategory")}
+      emptyMessage={t("noDataFound")}
+      editRoute="/dashboard/purchase/purchase-expense-category/edit/"
+      viewRoute="/dashboard/purchase/purchase-expense-category/view/"
+      buttonText={t("addExpenseCategory")}
       ButtonEvent={handleClick}
       onPageChange={handlePageChange}
       permissions={permissions}

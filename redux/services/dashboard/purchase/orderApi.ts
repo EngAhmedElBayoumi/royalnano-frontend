@@ -7,36 +7,36 @@ export const purchaseOrderApi = createApi({
   endpoints: (builder) => ({
     getOrders: builder.query({
       query: ({ search, ordering, page, page_size }) => ({
-        url: `purchase/order`,
+        url: `purchase/purchase-order`,
         params: { search, ordering, page, page_size },
       }),
     }),
     getOrdersMini: builder.query({
       query: ({ search, ordering, page, page_size }) => ({
-        url: `purchase/order/mini`,
+        url: `purchase/purchase-order/mini`,
         params: { search, ordering, page, page_size },
       }),
     }),
     getOrderById: builder.query({
-      query: (id) => `purchase/order/${id}/`,
+      query: (id) => `purchase/purchase-order/${id}/`,
     }),
     createOrder: builder.mutation({
       query: (data) => ({
-        url: `purchase/order/`,
+        url: `purchase/purchase-order/`,
         method: "POST",
         body: data,
       }),
     }),
     updateOrder: builder.mutation({
       query: ({ id, data }) => ({
-        url: `purchase/order/${id}/`,
+        url: `purchase/purchase-order/${id}/`,
         method: "PATCH",
         body: data,
       }),
     }),
     deleteOrder: builder.mutation({
       query: (id) => ({
-        url: `purchase/order/${id}/`,
+        url: `purchase/purchase-order/${id}/`,
         method: "DELETE",
       }),
     }),
