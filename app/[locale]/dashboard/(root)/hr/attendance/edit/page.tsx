@@ -17,8 +17,14 @@ export default function EditAttendance() {
   const t = useTranslations("hr");
   const { data, isLoading, error } = useGetAttendanceByIdQuery(id);
   const [updateAttendance] = useUpdateAttendanceMutation();
-  const checkInDate = data && new Date(`${data.date}T${data.check_in}`);
-  const checkOutDate = data && new Date(`${data.date}T${data.check_out}`);
+  const checkInDate =
+    data && data?.check_in
+      ? new Date(`${data.date}T${data.check_in}`)
+      : new Date();
+  const checkOutDate =
+    data && data?.check_out
+      ? new Date(`${data.date}T${data.check_out}`)
+      : new Date();
 
   const defaultValues: AttendanceFormValues = data && {
     ...data,
@@ -32,8 +38,6 @@ export default function EditAttendance() {
     longitude: data.longitude ?? undefined,
   };
 
-  console.log(defaultValues);
-
   const handleSubmit = async (data: AttendanceFormValues) => {
     const payload = {
       ...data,
@@ -43,7 +47,7 @@ export default function EditAttendance() {
       check_in: format(data.check_in, "HH:mm:ss"),
       check_out: format(data.check_out, "HH:mm:ss"),
     };
-    const response = await updateAttendance(payload);
+    const response = await updateAttendance({ id, data: payload });
     if (response.error) throw new Error("edit failed");
   };
 

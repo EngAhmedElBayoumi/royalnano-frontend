@@ -30,7 +30,6 @@ export const useTableData = ({
     page,
     page_size: pageSize,
   });
-  console.log(data?.results)
 
   const handlePageChange = (newPage: number) => {
     setPage(newPage);
