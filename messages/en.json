@@ -590,6 +590,7 @@
       }
     },
     "Order": {
+      "order": "Order",
       "itemCode": "Item Code",
       "purchaseOrderLevel": "Purchase Order Level",
       "description": "Description",
@@ -601,7 +602,31 @@
         "pending": "Pending",
         "failed": "Failed",
         "paid": "Paid"
-      }
+      },
+      "orderDate": "Order Date",
+      "offerExpiry": "Offer Expiry",
+      "prefix": "Prefix",
+      "deliveryDate": "Delivery Date",
+      "dueDate": "Due Date",
+      "id": "ID",
+      "branch": "Branch",
+      "supplier": "Supplier",
+      "items": "Items",
+      "kind": "Kind",
+      "name": "Name",
+      "unit": "Unit",
+      "quantity": "Quantity",
+      "unitPrice": "Unit Price",
+      "bonus": "Bonus",
+      "amount": "Amount",
+      "discount": "Discount",
+      "discountPercent": "Discount Percent",
+      "vatKd": "VAT KD",
+      "total": "Total",
+      "invoiceDetail": "Invoice Detail",
+      "subtotal": "Subtotal",
+      "freeQuantity": "Free Quantity",
+      "vat": "VAT"
     }
   }
 }
