@@ -21,7 +21,8 @@
     "website": "Website",
     "sales": "Sales",
     "settings": "Settings",
-    "logout": "Logout"
+    "logout": "Logout",
+    "purchase": "Purchase"
   },
   "branches": {
     "branches": "Branches",
@@ -505,6 +506,28 @@
       "errors": {
         "required": "Email is required",
         "invalid": "Invalid email"
+      }
+    }
+  },
+  "Purchase": {
+    "expenseCategory": "Expense Category",
+    "invoice": "Invoice",
+    "order": "Order",
+    "request": "Request",
+    "supplier": "Supplier",
+    "warehouse": "Warehouse",
+    "Supplier": {
+      "itemCode": "Item Code",
+      "purchaseSupplierLevel": "Purchase Supplier Level",
+      "description": "Description",
+      "noDataFound": "No supplier data found.",
+      "addSupplier": "Add Supplier",
+      "cards": {
+        "newRequests": "New Requests",
+        "complete": "Complete",
+        "pending": "Pending",
+        "failed": "Failed",
+        "paid": "Paid"
       }
     }
   }
