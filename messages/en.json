@@ -520,6 +520,7 @@
     "supplier": "Supplier",
     "warehouse": "Warehouse",
     "Supplier": {
+      "editPurchaseSupplier": "Edit Purchase Supplier",
       "cards": {
         "newRequests": "New Requests",
         "complete": "Complete",
