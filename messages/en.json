@@ -520,9 +520,13 @@
     "supplier": "Supplier",
     "warehouse": "Warehouse",
     "Supplier": {
-      "itemCode": "Item Code",
-      "purchaseSupplierLevel": "Purchase Supplier Level",
-      "description": "Description",
+      "id": "ID",
+      "supplierName": "Supplier Name",
+      "fullName": "Full Name",
+      "phoneNumber": "Phone Number",
+      "city": "City",
+      "country": "Country",
+      "billingRate": "Billing Rate",
       "noDataFound": "No supplier data found.",
       "addSupplier": "Add Supplier",
       "cards": {

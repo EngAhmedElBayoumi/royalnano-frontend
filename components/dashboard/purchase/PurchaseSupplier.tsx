@@ -5,20 +5,32 @@ import TableWrapper from "@/components/dashboard/tables/TableWrapper";
 import { useTableData } from "@/hooks/useTableData";
 import { useGetSuppliersQuery } from "@/redux/services/dashboard/purchase/supplierApi";
 
-export interface Item {
-  item: {
-    id: number;
-    item_code: string;
-    item_name: string;
-  };
-  PurchaseSupplier_level: number;
-  description: string;
-  id: string;
+export interface Supplier {
+  id: number;
+  title: string;
+  full_name: string;
+  supplier_name: string;
+  phone_number: string;
+  suffix: string;
+  street_address: string;
+  city: string;
+  province: string;
+  country: string;
+  postal_code: string;
+  additional_info: string;
+  taxes_business_id: string;
+  expenses_rates_billing_rate: string;
+  payment_terms: string;
+  account_no: string;
+  opening_balance: string;
+  as_of: string;
+  branch: null | { name: string };
+  accounting_expenses_category: null | { name: string };
 }
 
 export default function PurchaseSupplier() {
-  const { data: inventoryItems, isLoading, error, permissions, handlePageChange } = useTableData({
-    permissionKey: "PurchaseSupplier",
+  const { data: suppliers, isLoading, error, permissions, handlePageChange } = useTableData({
+    permissionKey: "supplier",
     useQueryHook: useGetSuppliersQuery,
   });
 
@@ -26,9 +38,13 @@ export default function PurchaseSupplier() {
   const t = useTranslations("Purchase.Supplier");
 
   const columns = [
-    { field: "itemCode", header: t("itemCode") },
-    { field: "PurchaseSupplierLevel", header: t("purchaseSupplierLevel") },
-    { field: "description", header: t("description") },
+    { field: "id", header: t("id") },
+    { field: "supplier_name", header: t("supplierName") },
+    { field: "full_name", header: t("fullName") },
+    { field: "phone_number", header: t("phoneNumber") },
+    { field: "city", header: t("city") },
+    { field: "country", header: t("country") },
+    { field: "expenses_rates_billing_rate", header: t("billingRate") },
   ];
 
   const cardsData = [
@@ -40,11 +56,14 @@ export default function PurchaseSupplier() {
   ];
 
   const formattedData =
-    inventoryItems?.results?.map((item: Item) => ({
-      id: item.id,
-    //   itemCode: item.item.item_code,
-      PurchaseSupplierLevel: item.PurchaseSupplier_level,
-      description: item.description,
+    suppliers?.results?.map((supplier: Supplier) => ({
+      id: supplier.id,
+      supplier_name: supplier.supplier_name,
+      full_name: supplier.full_name,
+      phone_number: supplier.phone_number,
+      city: supplier.city,
+      country: supplier.country,
+      expenses_rates_billing_rate: supplier.expenses_rates_billing_rate,
     })) || [];
 
   const handleClick = () => {
@@ -55,7 +74,7 @@ export default function PurchaseSupplier() {
     <TableWrapper
       isLoading={isLoading}
       error={error}
-      data={{ results: formattedData, count: inventoryItems?.count || 0 }}
+      data={{ results: formattedData, count: suppliers?.count || 0 }}
       columns={columns}
       cardData={cardsData}
       emptyMessage={t("noDataFound")}
