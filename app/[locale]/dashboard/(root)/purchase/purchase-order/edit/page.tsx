@@ -4,38 +4,38 @@ import { useTranslations } from "next-intl";
 
 import EditPage from "@/components/dashboard/EditPage";
 
-import PurchaseOrderForm, { PurchaseOrderFormValues } from "@/components/dashboard/forms/purchase/PurchaseOrderForm";
-import { useGetOrderByIdQuery, useUpdateOrderMutation } from "@/redux/services/dashboard/purchase/orderApi";
+import PurchaseRequestForm, { PurchaseRequestFormValues } from "@/components/dashboard/forms/purchase/PurchaseRequestForm";
+import { useGetRequestByIdQuery, useUpdateRequestMutation } from "@/redux/services/dashboard/purchase/request";
 
-export default function EdirPurchaseOrder() {
+export default function EdirPurchaseRequest() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
-  const t = useTranslations("Purchase.Order");
+  const t = useTranslations("Purchase.Request");
   const tabTranslate = useTranslations("Purchase");
-  const { data, isLoading, error } = useGetOrderByIdQuery(id);
-  const [updatePreorder] = useUpdateOrderMutation();
+  const { data, isLoading, error } = useGetRequestByIdQuery(id);
+  const [updatePrerequest] = useUpdateRequestMutation();
 
-  const defaultValues: PurchaseOrderFormValues = data && {
+  const defaultValues: PurchaseRequestFormValues = data && {
     ...data,
   };
 
-  const handleSubmit = async (data: PurchaseOrderFormValues) => {
+  const handleSubmit = async (data: PurchaseRequestFormValues) => {
     const payload = {
       ...data,
     };
-    const response = await updatePreorder({ id, data: payload });
+    const response = await updatePrerequest({ id, data: payload });
     if (response.error) throw new Error("edit failed");
   };
 
   return (
     <EditPage
-      title={t("editPurchaseOrder")}
+      title={t("editPurchaseRequest")}
       data={defaultValues}
       isLoading={isLoading}
       error={error}
       onSubmit={handleSubmit}
-      Form={PurchaseOrderForm}
-      redirectPath={`/dashboard/purchase?tab=${tabTranslate("order")}`}
+      Form={PurchaseRequestForm}
+      redirectPath={`/dashboard/purchase?tab=${tabTranslate("request")}`}
     />
   );
 }
