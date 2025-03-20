@@ -11,6 +11,8 @@ import { purchaseOrderSchema } from "@/lib/validations/dashboard/purchase/purcha
 interface PurchaseOrderFormProps {
   onSubmit: (data: PurchaseOrderFormValues) => Promise<void>;
   defaultValues?: PurchaseOrderFormValues;
+  isView?: boolean;
+
 }
 
 export interface PurchaseOrderFormValues {
@@ -47,7 +49,7 @@ export interface PurchaseOrderFormValues {
   };
 }
 
-const PurchaseOrderForm = ({ onSubmit, defaultValues }: PurchaseOrderFormProps) => {
+const PurchaseOrderForm = ({ onSubmit, defaultValues,  isView }: PurchaseOrderFormProps) => {
   const form = useForm<PurchaseOrderFormValues>({
     resolver: zodResolver(purchaseOrderSchema),
     defaultValues: defaultValues || 
@@ -150,30 +152,35 @@ const PurchaseOrderForm = ({ onSubmit, defaultValues }: PurchaseOrderFormProps) 
               name="order_date"
               label={t("orderDate")}
               placeholder={t("orderDate")}
+              readonly={isView}
             />
             <TextInput
               control={form.control}
               name="offer_expiry"
               label={t("offerExpiry")}
               placeholder={t("offerExpiry")}
+              readonly={isView}
             />
             <TextInput
               control={form.control}
               name="prefix"
               label={t("prefix")}
               placeholder={t("prefix")}
+              readonly={isView}
             />
             <TextInput
               control={form.control}
               name="delivery_date"
               label={t("deliveryDate")}
               placeholder={t("deliveryDate")}
+              readonly={isView}
             />
             <TextInput
               control={form.control}
               name="due_date"
               label={t("dueDate")}
               placeholder={t("dueDate")}
+              readonly={isView}
             />
             <TextInput
               control={form.control}
@@ -181,6 +188,7 @@ const PurchaseOrderForm = ({ onSubmit, defaultValues }: PurchaseOrderFormProps) 
               label={t("id")}
               placeholder={t("id")}
               type="number"
+              readonly={isView}
             />
             <TextInput
               control={form.control}
@@ -188,6 +196,7 @@ const PurchaseOrderForm = ({ onSubmit, defaultValues }: PurchaseOrderFormProps) 
               label={t("branch")}
               placeholder={t("branch")}
               type="number"
+              readonly={isView}
             />
             <TextInput
               control={form.control}
@@ -195,12 +204,14 @@ const PurchaseOrderForm = ({ onSubmit, defaultValues }: PurchaseOrderFormProps) 
               label={t("supplier")}
               placeholder={t("supplier")}
               type="number"
+              readonly={isView}
             />
             <TextInput
               control={form.control}
               name="description"
               label={t("description")}
               placeholder={t("description")}
+              readonly={isView}
             />
           </div>
 
@@ -214,66 +225,77 @@ const PurchaseOrderForm = ({ onSubmit, defaultValues }: PurchaseOrderFormProps) 
                   name={`items.${index}.kind`}
                   label={t("kind")}
                   placeholder={t("kind")}
+                  readonly={isView}
                 />
                 <TextInput
                   control={form.control}
                   name={`items.${index}.name`}
                   label={t("name")}
                   placeholder={t("name")}
+                  readonly={isView}
                 />
                 <TextInput
                   control={form.control}
                   name={`items.${index}.unit`}
                   label={t("unit")}
                   placeholder={t("unit")}
+                  readonly={isView}
                 />
                 <TextInput
                   control={form.control}
                   name={`items.${index}.quantity`}
                   label={t("quantity")}
                   placeholder={t("quantity")}
+                  readonly={isView}
                 />
                 <TextInput
                   control={form.control}
                   name={`items.${index}.unit_price`}
                   label={t("unitPrice")}
                   placeholder={t("unitPrice")}
+                  readonly={isView}
                 />
                 <TextInput
                   control={form.control}
                   name={`items.${index}.bonus`}
                   label={t("bonus")}
                   placeholder={t("bonus")}
+                  readonly={isView}
                 />
                 <TextInput
                   control={form.control}
                   name={`items.${index}.amount`}
                   label={t("amount")}
                   placeholder={t("amount")}
+                  readonly={isView}
                 />
                 <TextInput
                   control={form.control}
                   name={`items.${index}.discount`}
                   label={t("discount")}
                   placeholder={t("discount")}
+                  readonly={isView}
                 />
                 <TextInput
                   control={form.control}
                   name={`items.${index}.discount_percent`}
                   label={t("discountPercent")}
                   placeholder={t("discountPercent")}
+                  readonly={isView}
                 />
                 <TextInput
                   control={form.control}
                   name={`items.${index}.vat_kd`}
                   label={t("vatKd")}
                   placeholder={t("vatKd")}
+                  readonly={isView}
                 />
                 <TextInput
                   control={form.control}
                   name={`items.${index}.total`}
                   label={t("total")}
                   placeholder={t("total")}
+                     readonly={isView}
                 />
               </div>
             ))}
@@ -288,43 +310,49 @@ const PurchaseOrderForm = ({ onSubmit, defaultValues }: PurchaseOrderFormProps) 
                 name="invoice_detail.discount"
                 label={t("discount")}
                 placeholder={t("discount")}
+                readonly={isView}
               />
               <TextInput
                 control={form.control}
                 name="invoice_detail.vat"
                 label={t("vat")}
                 placeholder={t("vat")}
+                readonly={isView}
               />
               <TextInput
                 control={form.control}
                 name="invoice_detail.subtotal"
                 label={t("subtotal")}
                 placeholder={t("subtotal")}
+                readonly={isView}
               />
               <TextInput
                 control={form.control}
                 name="invoice_detail.quantity"
                 label={t("quantity")}
                 placeholder={t("quantity")}
+                readonly={isView}
               />
               <TextInput
                 control={form.control}
                 name="invoice_detail.free_quantity"
                 label={t("freeQuantity")}
                 placeholder={t("freeQuantity")}
+                readonly={isView}
               />
               <TextInput
                 control={form.control}
                 name="invoice_detail.total"
                 label={t("total")}
                 placeholder={t("total")}
+                readonly={isView}
               />
             </div>
           </div>
         </section>
 
-        {/* Buttons */}
-        <div className="flex justify-end gap-2 mt-5">
+       
+        {!isView && <div className="flex justify-end gap-2 mt-5">
           <Link
             href={`/dashboard/purchase?tab=${t("purchaseOrderModel")}`}
             passHref
@@ -338,7 +366,7 @@ const PurchaseOrderForm = ({ onSubmit, defaultValues }: PurchaseOrderFormProps) 
             text={t("save")}
             className="text-white rounded-lg min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
           />
-        </div>
+        </div>}
       </form>
     </Form>
   );

@@ -590,6 +590,7 @@
       }
     },
     "Order": {
+      "viewPurchaseOrder": "View Purchase Order",
       "cancel": "cancel",
       "save": "save",
       "order": "Order",
