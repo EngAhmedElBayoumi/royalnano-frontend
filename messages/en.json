@@ -562,6 +562,7 @@
       }
     },
     "Request": {
+      "viewPurchaseRequest": "View Purchase Request",
       "cancel": "Cancel",
       "save": "Save",
       "id": "ID",
