@@ -562,18 +562,32 @@
       }
     },
     "Request": {
-      "itemCode": "Item Code",
-      "purchaseRequestLevel": "Purchase Request Level",
+      "cancel": "Cancel",
+      "save": "Save",
+      "id": "ID",
+      "requestDate": "Request Date",
       "description": "Description",
+      "requestBy": "Request By",
+      "branch": "Branch",
+      "items": "Items",
       "noDataFound": "No request data found.",
       "addRequest": "Add Request",
+      "request": "Request",
       "cards": {
         "newRequests": "New Requests",
         "complete": "Complete",
         "pending": "Pending",
         "failed": "Failed",
         "paid": "Paid"
-      }
+      },
+      "kind": "Kind",
+      "itemKind": "Item Kind",
+      "itemName": "Item Name",
+      "unit": "Unit",
+      "quantity": "Quantity",
+      "unitPrice": "Unit Price",
+      "total": "Total",
+      "itemDescription": "Item Description"
     },
     "Invoice": {
       "itemCode": "Item Code",
