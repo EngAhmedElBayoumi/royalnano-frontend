@@ -1,32 +1,27 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
-import {
-  useGetPreorderByIdQuery,
-  useUpdatePreorderMutation,
-} from "@/redux/services/dashboard/inventory/preorderApi";
-import EditPage from "@/components/dashboard/EditPage";
-import PreorderForm, {
-  PreorderFormValues,
-} from "@/components/dashboard/forms/inventory/PreorderForm";
 
-export default function EditPreorder() {
+import EditPage from "@/components/dashboard/EditPage";
+
+import PurchaseOrderForm, { PurchaseOrderFormValues } from "@/components/dashboard/forms/purchase/PurchaseOrderForm";
+import { useGetOrderByIdQuery, useUpdateOrderMutation } from "@/redux/services/dashboard/purchase/orderApi";
+
+export default function EdirPurchaseOrder() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
-  const t = useTranslations("Inventory.InventoryPreorder");
-  const tabTranslate = useTranslations("Inventory");
-  const { data, isLoading, error } = useGetPreorderByIdQuery(id);
-  const [updatePreorder] = useUpdatePreorderMutation();
+  const t = useTranslations("Purchase.Order");
+  const tabTranslate = useTranslations("Purchase");
+  const { data, isLoading, error } = useGetOrderByIdQuery(id);
+  const [updatePreorder] = useUpdateOrderMutation();
 
-  const defaultValues: PreorderFormValues = data && {
+  const defaultValues: PurchaseOrderFormValues = data && {
     ...data,
-    item: String(data.item.id),
   };
 
-  const handleSubmit = async (data: PreorderFormValues) => {
+  const handleSubmit = async (data: PurchaseOrderFormValues) => {
     const payload = {
       ...data,
-      item: Number(data.item),
     };
     const response = await updatePreorder({ id, data: payload });
     if (response.error) throw new Error("edit failed");
@@ -34,13 +29,13 @@ export default function EditPreorder() {
 
   return (
     <EditPage
-      title={t("editPreorder")}
+      title={t("editPurchaseOrder")}
       data={defaultValues}
       isLoading={isLoading}
       error={error}
       onSubmit={handleSubmit}
-      Form={PreorderForm}
-      redirectPath={`/dashboard/inventory?tab=${tabTranslate("preorder")}`}
+      Form={PurchaseOrderForm}
+      redirectPath={`/dashboard/purchase?tab=${tabTranslate("order")}`}
     />
   );
 }
