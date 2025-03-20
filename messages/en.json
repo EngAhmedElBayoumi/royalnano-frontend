@@ -520,6 +520,14 @@
     "supplier": "Supplier",
     "warehouse": "Warehouse",
     "Supplier": {
+      "cards": {
+        "newRequests": "New Requests",
+        "complete": "Complete",
+        "pending": "Pending",
+        "failed": "Failed",
+        "paid": "Paid"
+      },
+      "noDataFound": "No Data Found",
       "supplier": "Supplier",
       "addSupplier": "Add Supplier",
       "title": "Title",
