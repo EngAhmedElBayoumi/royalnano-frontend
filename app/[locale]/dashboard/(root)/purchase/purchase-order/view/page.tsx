@@ -1,14 +1,11 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
-import MovementForm, {
-  MovementFormValues,
-} from "@/components/dashboard/forms/inventory/MovementForm";
 import IconWithTitle from "@/components/dashboard/IconWithTitle";
 import FormSkelton from "@/components/dashboard/skelton/FormSkelton";
 import LoadingError from "@/components/dashboard/LoadingError";
 import { useGetOrderByIdQuery } from "@/redux/services/dashboard/purchase/orderApi";
-import PurchaseOrderForm from "@/components/dashboard/forms/purchase/PurchaseOrderForm";
+import PurchaseOrderForm, { PurchaseOrderFormValues } from "@/components/dashboard/forms/purchase/PurchaseOrderForm";
 
 export default function ViewPurchaseOrder() {
   const searchParams = useSearchParams();
@@ -17,15 +14,12 @@ export default function ViewPurchaseOrder() {
 
   const { data, isLoading, error } = useGetOrderByIdQuery(id);
 console.log(data)
-  // Transform the API data to match the `MovementFormValues` structure
-  const defaultValues: MovementFormValues = data && {
+  const defaultValues: PurchaseOrderFormValues = data && {
     ...data,
-    // item: String(data.item.id), // Ensure `item` is a string
-    // Add other transformations if necessary
+ 
   };
 
-  // Placeholder for submit function (not needed in view mode)
-  const handleSubmit = async (data: MovementFormValues) => {
+  const handleSubmit = async (data: PurchaseOrderFormValues) => {
     console.log(data);
   };
 
@@ -50,9 +44,9 @@ console.log(data)
         ) : (
           <div className="ltr:lg:pr-[200px] rtl:lg:pl-[200px]">
             <PurchaseOrderForm
-              onSubmit={handleSubmit} // Optional, since this is a view-only page
+              onSubmit={handleSubmit} 
               defaultValues={defaultValues}
-              isView={true} // Disable editing
+              isView={true} 
             />
           </div>
         )}
