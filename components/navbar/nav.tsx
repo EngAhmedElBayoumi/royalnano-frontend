@@ -216,6 +216,23 @@ const Nav = () => {
               </svg>
             </button>
             <div className="flex flex-col space-y-4">
+              {accessToken && (
+                <Link
+                  className="flex items-center gap-2"
+                  href="/profile"
+                  passHref
+                >
+                  <Avatar>
+                    <AvatarImage src={baseUrl + profilePicture} />
+                    <AvatarFallback>{name}</AvatarFallback>
+                  </Avatar>
+                  <h3 className="text-primary">
+                    {name ??
+                      emailAddress?.substring(0, emailAddress.indexOf("@"))}
+                  </h3>
+                </Link>
+              )}
+              {accessToken && <DropdownMenuSeparator />}
               {navLinks.map((link) => (
                 <Link
                   className="hover:text-primary xl:text-sm block text-black"
