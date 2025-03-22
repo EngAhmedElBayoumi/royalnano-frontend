@@ -16,6 +16,7 @@ import SwitchField from "@/components/formFields/Switch";
 interface EmployeeFormProps {
   onSubmit: (data: EmployeeFormValues) => Promise<void>;
   defaultValues?: EmployeeFormValues;
+  isLoading?: boolean;
 }
 
 export interface EmployeeFormValues {
@@ -32,7 +33,11 @@ export interface EmployeeFormValues {
   // permissions: Record<string, boolean>;
 }
 
-const EmployeeForm = ({ onSubmit, defaultValues }: EmployeeFormProps) => {
+const EmployeeForm = ({
+  onSubmit,
+  defaultValues,
+  isLoading,
+}: EmployeeFormProps) => {
   const form = useForm({
     resolver: zodResolver(employeeSchema),
     defaultValues: defaultValues || {
@@ -165,7 +170,10 @@ const EmployeeForm = ({ onSubmit, defaultValues }: EmployeeFormProps) => {
           </Link>
 
           <CustomButton
-            text={globalTranslate("save")}
+            text={
+              isLoading ? globalTranslate("saving") : globalTranslate("save")
+            }
+            isDisabled={isLoading}
             className="text-white rounded-lg min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
           />
         </section>

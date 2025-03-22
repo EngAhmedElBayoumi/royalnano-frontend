@@ -8,7 +8,7 @@ import DepartmentForm, {
 
 export default function CreateDepartment() {
   const t = useTranslations("hr");
-  const [createDepartment] = useCreateDepartmentMutation();
+  const [createDepartment, { isLoading }] = useCreateDepartmentMutation();
 
   const handleSubmit = async (data: DepartmentFormValues) => {
     const response = await createDepartment(data);
@@ -21,6 +21,7 @@ export default function CreateDepartment() {
       onSubmit={handleSubmit}
       Form={DepartmentForm}
       redirectPath="/dashboard/hr"
+      isLoading={isLoading}
     />
   );
 }

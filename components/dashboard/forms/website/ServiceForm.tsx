@@ -14,6 +14,7 @@ import TextArea from "@/components/formFields/TextArea";
 interface ServiceFormProps {
   onSubmit: (data: ServiceFormValues) => Promise<void>;
   defaultValues?: ServiceFormValues;
+  isLoading?: boolean;
 }
 
 export interface ServiceFormValues {
@@ -23,7 +24,11 @@ export interface ServiceFormValues {
   image: File | string | null;
 }
 
-const ServiceForm = ({ onSubmit, defaultValues }: ServiceFormProps) => {
+const ServiceForm = ({
+  onSubmit,
+  defaultValues,
+  isLoading,
+}: ServiceFormProps) => {
   const form = useForm({
     resolver: zodResolver(serviceSchema),
     defaultValues: defaultValues || {
@@ -76,7 +81,10 @@ const ServiceForm = ({ onSubmit, defaultValues }: ServiceFormProps) => {
             />
           </Link>
           <CustomButton
-            text={globalTranslate("save")}
+            text={
+              isLoading ? globalTranslate("saving") : globalTranslate("save")
+            }
+            isDisabled={isLoading}
             className="text-white rounded-lg min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
           />
         </div>

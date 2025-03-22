@@ -16,7 +16,8 @@ export default function EditInterview() {
   const id = searchParams.get("id");
   const t = useTranslations("hr");
   const { data, isLoading, error } = useGetInterviewByIdQuery(id);
-  const [updateInterview] = useUpdateInterviewMutation();
+  const [updateInterview, { isLoading: submitting }] =
+    useUpdateInterviewMutation();
 
   const defaultValues = data && {
     ...data,
@@ -32,10 +33,7 @@ export default function EditInterview() {
       id,
       data: {
         ...data,
-        interview_date: format(
-          data.interview_date,
-          "yyyy-MM-dd'T'HH:mm:ss'Z'"
-        ),
+        interview_date: format(data.interview_date, "yyyy-MM-dd'T'HH:mm:ss'Z'"),
       },
     });
     if (response.error) throw new Error("edit failed");
@@ -47,6 +45,7 @@ export default function EditInterview() {
       data={defaultValues}
       isLoading={isLoading}
       error={error}
+      submitting={submitting}
       onSubmit={handleSubmit}
       Form={InterviewsForm}
       redirectPath={`/dashboard/hr?tab=${t("tabs.interviews")}`}

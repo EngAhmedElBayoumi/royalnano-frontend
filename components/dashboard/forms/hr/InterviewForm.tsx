@@ -15,6 +15,7 @@ import MultiSelect from "@/components/formFields/MultiSelect";
 interface InterviewFormProps {
   onSubmit: (data: InterviewFormValues) => Promise<void>;
   defaultValues?: InterviewFormValues;
+  isLoading?: boolean;
 }
 
 export interface InterviewFormValues {
@@ -25,7 +26,11 @@ export interface InterviewFormValues {
   extra_fields?: Record<string, string> | null;
 }
 
-const InterviewForm = ({ onSubmit, defaultValues }: InterviewFormProps) => {
+const InterviewForm = ({
+  onSubmit,
+  defaultValues,
+  isLoading,
+}: InterviewFormProps) => {
   const form = useForm({
     resolver: zodResolver(interviewSchema),
     defaultValues: defaultValues || {
@@ -106,7 +111,10 @@ const InterviewForm = ({ onSubmit, defaultValues }: InterviewFormProps) => {
             />
           </Link>
           <CustomButton
-            text={globalTranslate("save")}
+            text={
+              isLoading ? globalTranslate("saving") : globalTranslate("save")
+            }
+            isDisabled={isLoading}
             className="text-white rounded-lg min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
           />
         </div>

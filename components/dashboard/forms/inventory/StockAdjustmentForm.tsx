@@ -16,6 +16,7 @@ interface StockAdjustmentFormProps {
   onSubmit: (data: StockAdjustmentFormValues) => Promise<void>;
   defaultValues?: StockAdjustmentFormValues;
   isView?: boolean;
+  isLoading?: boolean;
 }
 
 export interface StockAdjustmentFormValues {
@@ -31,6 +32,7 @@ const StockAdjustmentForm = ({
   onSubmit,
   defaultValues,
   isView,
+  isLoading,
 }: StockAdjustmentFormProps) => {
   const form = useForm({
     resolver: zodResolver(stockAdjustmentSchema),
@@ -128,7 +130,8 @@ const StockAdjustmentForm = ({
               />
             </Link>
             <CustomButton
-              text={t("save")}
+              text={isLoading ? t("saving") : t("save")}
+              isDisabled={isLoading}
               className="text-white rounded-lg min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
             />
           </div>

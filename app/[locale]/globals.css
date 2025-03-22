@@ -32,7 +32,9 @@
   left: 1.2rem;
   right: unset;
 }
-
+button.bg-primary:disabled {
+  opacity: 70%;
+}
 .data-\[state\=active\]\:bg-dashboardBg[data-state="active"] img {
   filter: brightness(0) saturate(100%) invert(68%) sepia(42%) saturate(528%)
     hue-rotate(10deg) brightness(96%) contrast(85%);

@@ -13,7 +13,8 @@ import EditPage from "@/components/dashboard/EditPage";
 export default function EditCompetition() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
-  const [updateCompetition] = useUpdateCompetitionMutation();
+  const [updateCompetition, { isLoading: submitting }] =
+    useUpdateCompetitionMutation();
   const { data, isLoading, error } = useGetCompetitionByIdQuery(id);
   const t = useTranslations("hr");
 
@@ -39,6 +40,7 @@ export default function EditCompetition() {
       data={defaultValues}
       isLoading={isLoading}
       error={error}
+      submitting={submitting}
       onSubmit={handleSubmit}
       Form={CompetitionForm}
       redirectPath={`/dashboard/hr?tab=${t("tabs.competitions")}`}

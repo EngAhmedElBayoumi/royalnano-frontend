@@ -13,6 +13,7 @@ import ExtraFields from "@/components/formFields/ExtraFields";
 interface DepartmentFormProps {
   onSubmit: (data: DepartmentFormValues) => Promise<void>;
   defaultValues?: DepartmentFormValues;
+  isLoading?: boolean;
 }
 
 export interface DepartmentFormValues {
@@ -21,7 +22,11 @@ export interface DepartmentFormValues {
   extra_fields?: Record<string, string> | null;
 }
 
-const DepartmentForm = ({ onSubmit, defaultValues }: DepartmentFormProps) => {
+const DepartmentForm = ({
+  onSubmit,
+  defaultValues,
+  isLoading,
+}: DepartmentFormProps) => {
   const form = useForm({
     resolver: zodResolver(departmentSchema),
     defaultValues: defaultValues || {
@@ -81,7 +86,10 @@ const DepartmentForm = ({ onSubmit, defaultValues }: DepartmentFormProps) => {
             />
           </Link>
           <CustomButton
-            text={globalTranslate("save")}
+            text={
+              isLoading ? globalTranslate("saving") : globalTranslate("save")
+            }
+            isDisabled={isLoading}
             className="text-white rounded-lg min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
           />
         </div>

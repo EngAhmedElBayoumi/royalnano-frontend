@@ -13,6 +13,7 @@ import PhoneInputField from "@/components/formFields/PhoneInputField";
 interface ApplicantsFormProps {
   onSubmit: (data: ApplicantsFormValues) => Promise<void>;
   defaultValues?: ApplicantsFormValues;
+  isLoading?: boolean;
 }
 
 export interface ApplicantsFormValues {
@@ -26,7 +27,11 @@ export interface ApplicantsFormValues {
   current_salary: number;
 }
 
-const ApplicantsForm = ({ onSubmit, defaultValues }: ApplicantsFormProps) => {
+const ApplicantsForm = ({
+  onSubmit,
+  defaultValues,
+  isLoading,
+}: ApplicantsFormProps) => {
   const form = useForm({
     resolver: zodResolver(applicantSchema),
     defaultValues: defaultValues || {
@@ -112,7 +117,10 @@ const ApplicantsForm = ({ onSubmit, defaultValues }: ApplicantsFormProps) => {
             />
           </Link>
           <CustomButton
-            text={globalTranslate("save")}
+            text={
+              isLoading ? globalTranslate("saving") : globalTranslate("save")
+            }
+            isDisabled={isLoading}
             className="text-white rounded-lg min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
           />
         </div>

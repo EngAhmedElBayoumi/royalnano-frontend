@@ -22,6 +22,7 @@ import CustomSelect from "@/components/formFields/CustomSelect";
 interface BranchFormProps {
   onSubmit: (data: BranchFormValues) => Promise<void>;
   defaultValues?: BranchFormValues;
+  isLoading?: boolean;
 }
 
 export interface BranchFormValues {
@@ -51,7 +52,11 @@ interface ExtendedMapGLProps extends React.ComponentProps<typeof MapGL> {
 
 const ExtendedMapGL = MapGL as React.ComponentType<ExtendedMapGLProps>;
 
-const BranchForm = ({ onSubmit, defaultValues }: BranchFormProps) => {
+const BranchForm = ({
+  onSubmit,
+  defaultValues,
+  isLoading,
+}: BranchFormProps) => {
   const t = useTranslations("branches");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -208,7 +213,8 @@ const BranchForm = ({ onSubmit, defaultValues }: BranchFormProps) => {
           </Link>
 
           <CustomButton
-            text={t("save")}
+            text={isLoading ? t("saving") : t("save")}
+            isDisabled={isLoading}
             className="text-white rounded-lg min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
           />
         </div>

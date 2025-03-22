@@ -14,6 +14,7 @@ import CustomSelect from "@/components/formFields/CustomSelect";
 interface BonusesFormProps {
   onSubmit: (data: BonusesFormValues) => Promise<void>;
   defaultValues?: BonusesFormValues;
+  isLoading?: boolean;
 }
 
 export interface BonusesFormValues {
@@ -24,7 +25,11 @@ export interface BonusesFormValues {
   date: string;
 }
 
-const BonusesForm = ({ onSubmit, defaultValues }: BonusesFormProps) => {
+const BonusesForm = ({
+  onSubmit,
+  defaultValues,
+  isLoading,
+}: BonusesFormProps) => {
   const form = useForm({
     resolver: zodResolver(bonusSchema),
     defaultValues: defaultValues || {
@@ -102,7 +107,10 @@ const BonusesForm = ({ onSubmit, defaultValues }: BonusesFormProps) => {
             />
           </Link>
           <CustomButton
-            text={globalTranslate("save")}
+            text={
+              isLoading ? globalTranslate("saving") : globalTranslate("save")
+            }
+            isDisabled={isLoading}
             className="text-white rounded-lg min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
           />
         </div>

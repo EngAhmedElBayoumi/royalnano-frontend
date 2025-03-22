@@ -13,7 +13,8 @@ import EditPage from "@/components/dashboard/EditPage";
 export default function EditEvaluation() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
-  const [updateEvaluation] = useUpdateEvaluationMutation();
+  const [updateEvaluation, { isLoading: submitting }] =
+    useUpdateEvaluationMutation();
   const { data, isLoading, error } = useGetEvaluationByIdQuery(id);
   const t = useTranslations("hr");
 
@@ -34,6 +35,7 @@ export default function EditEvaluation() {
       data={defaultValues}
       isLoading={isLoading}
       error={error}
+      submitting={submitting}
       onSubmit={handleSubmit}
       Form={EvaluationForm}
       redirectPath={`/dashboard/hr?tab=${t("tabs.evaluations")}`}

@@ -16,6 +16,7 @@ import CustomTextArea from "@/components/formFields/TextArea";
 interface ItemFormProps {
   onSubmit: (data: ItemFormValues) => Promise<void>;
   defaultValues?: ItemFormValues;
+  isLoading?: boolean;
 }
 
 export interface ItemFormValues {
@@ -35,7 +36,7 @@ export interface Category {
   name: string;
 }
 
-const ItemForm = ({ onSubmit, defaultValues }: ItemFormProps) => {
+const ItemForm = ({ onSubmit, defaultValues, isLoading }: ItemFormProps) => {
   const form = useForm({
     resolver: zodResolver(itemSchema),
     defaultValues: defaultValues || {
@@ -166,7 +167,10 @@ const ItemForm = ({ onSubmit, defaultValues }: ItemFormProps) => {
             />
           </Link>
           <CustomButton
-            text={globalTranslate("save")}
+            text={
+              isLoading ? globalTranslate("saving") : globalTranslate("save")
+            }
+            isDisabled={isLoading}
             className="text-white rounded-lg min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
           />
         </div>

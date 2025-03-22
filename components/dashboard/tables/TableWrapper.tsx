@@ -15,7 +15,7 @@ interface CardData {
 }
 
 interface TableWrapperProps {
-  isLoading: boolean;
+  isLoading?: boolean;
   // eslint-disable-next-line
   error: any;
   data: {

@@ -13,6 +13,7 @@ interface CustomButtonProps {
   text: string;
   type?: "button" | "submit" | "reset";
   onClick?: MouseEventHandler<HTMLButtonElement>;
+  isDisabled?: boolean;
 }
 
 const CustomButton: React.FC<CustomButtonProps> = ({
@@ -20,7 +21,8 @@ const CustomButton: React.FC<CustomButtonProps> = ({
   variant = "default",
   text,
   type = "submit",
-  onClick
+  onClick,
+  isDisabled = false,
 }) => {
   return (
     <Button
@@ -28,6 +30,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
       type={type}
       onClick={onClick}
       className={`h-fit rounded-lg ${className}`}
+      disabled={isDisabled}
     >
       {text}
     </Button>

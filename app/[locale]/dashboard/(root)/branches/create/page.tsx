@@ -8,7 +8,7 @@ import BranchForm, {
 
 export default function CreateBranchs() {
   const t = useTranslations("branches");
-  const [createBranch] = useCreateBranchMutation();
+  const [createBranch, { isLoading }] = useCreateBranchMutation();
 
   const handleSubmit = async (data: BranchFormValues) => {
     const payload = {
@@ -25,6 +25,7 @@ export default function CreateBranchs() {
       onSubmit={handleSubmit}
       Form={BranchForm}
       redirectPath="/dashboard/branches"
+      isLoading={isLoading}
     />
   );
 }

@@ -16,7 +16,8 @@ export default function EditCategory() {
   const t = useTranslations("Inventory.InventoryCategory");
   const tabTranslate = useTranslations("Inventory");
 
-  const [updateCategory] = useUpdateCategoryMutation();
+  const [updateCategory, { isLoading: submitting }] =
+    useUpdateCategoryMutation();
   const { data: category, isLoading, error } = useGetCategoryByIdQuery(id);
 
   const handleSubmit = async (data: CategoryFormValues) => {
@@ -30,6 +31,7 @@ export default function EditCategory() {
       data={category}
       isLoading={isLoading}
       error={error}
+      submitting={submitting}
       onSubmit={handleSubmit}
       Form={CategoryForm}
       redirectPath={`/dashboard/inventory?tab=${tabTranslate("categoryModel")}`}

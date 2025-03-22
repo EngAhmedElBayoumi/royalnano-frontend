@@ -15,7 +15,8 @@ export default function EditEmployee() {
   const id = searchParams.get("id");
   const t = useTranslations("hr");
   const { data, isLoading, error } = useGetEmployeeByIdQuery(id);
-  const [updateEmployee] = useUpdateEmployeeMutation();
+  const [updateEmployee, { isLoading: submitting }] =
+    useUpdateEmployeeMutation();
 
   const defaultValues: EmployeeFormValues = data && {
     ...data,
@@ -42,6 +43,7 @@ export default function EditEmployee() {
       data={defaultValues}
       isLoading={isLoading}
       error={error}
+      submitting={submitting}
       onSubmit={handleSubmit}
       Form={EmployeeForm}
       redirectPath={`/dashboard/hr?tab=${t("tabs.employees")}`}

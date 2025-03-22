@@ -15,7 +15,7 @@ export default function EditItem() {
   const id = searchParams.get("id");
   const t = useTranslations("Inventory.InventoryItem");
 
-  const [updateItem] = useUpdateItemMutation();
+  const [updateItem, { isLoading: submitting }] = useUpdateItemMutation();
   const { data, isLoading, error } = useGetItemByIdQuery(id);
 
   const defaultValues = data && {
@@ -43,6 +43,7 @@ export default function EditItem() {
       data={defaultValues}
       isLoading={isLoading}
       error={error}
+      submitting={submitting}
       onSubmit={handleSubmit}
       Form={ItemForm}
       redirectPath="/dashboard/inventory"

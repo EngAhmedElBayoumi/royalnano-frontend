@@ -15,7 +15,7 @@ export default function EditBranchs() {
   const id = searchParams.get("id");
   const t = useTranslations("branches");
   const { data, isLoading, error } = useGetBranchByIdQuery(id);
-  const [updateBranch] = useUpdateBranchMutation();
+  const [updateBranch, { isLoading: submitting }] = useUpdateBranchMutation();
 
   const defaultValues = data && {
     ...data,
@@ -37,6 +37,7 @@ export default function EditBranchs() {
       data={defaultValues}
       isLoading={isLoading}
       error={error}
+      submitting={submitting}
       onSubmit={handleSubmit}
       Form={BranchForm}
       redirectPath="/dashboard/branches"

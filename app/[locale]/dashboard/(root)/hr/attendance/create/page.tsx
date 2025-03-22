@@ -9,7 +9,7 @@ import CreatePage from "@/components/dashboard/CreatePage";
 
 export default function CreateAttendance() {
   const t = useTranslations("hr");
-  const [createAttendance] = useCreateAttendanceMutation();
+  const [createAttendance, { isLoading }] = useCreateAttendanceMutation();
 
   const handleSubmit = async (data: AttendanceFormValues) => {
     const payload = {
@@ -29,6 +29,7 @@ export default function CreateAttendance() {
       title={t("attendance.addAttendance")}
       onSubmit={handleSubmit}
       Form={AttendanceForm}
+      isLoading={isLoading}
       redirectPath={`/dashboard/hr?tab=${t("tabs.attendance")}`}
     />
   );

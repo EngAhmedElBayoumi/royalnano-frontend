@@ -8,7 +8,7 @@ import CreatePage from "@/components/dashboard/CreatePage";
 
 export default function CreateCompetition() {
   const t = useTranslations("hr");
-  const [createCompetition] = useCreateCompetitionMutation();
+  const [createCompetition, { isLoading }] = useCreateCompetitionMutation();
 
   const handleSubmit = async (data: CompetitionFormValues) => {
     const payload = {
@@ -26,6 +26,7 @@ export default function CreateCompetition() {
       onSubmit={handleSubmit}
       Form={CompetitionForm}
       redirectPath={`/dashboard/hr?tab=${t("tabs.competitions")}`}
+      isLoading={isLoading}
     />
   );
 }

@@ -6,7 +6,7 @@ import { clientSchema } from "@/lib/validations/dashboard/clientSchema";
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
 import PhoneInputField from "@/components/formFields/PhoneInputField";
-import {Link} from '@/i18n/routing';
+import { Link } from "@/i18n/routing";
 
 interface ClientFormProps {
   onSubmit: (data: ClientFormValues) => Promise<void>;
@@ -124,7 +124,6 @@ const ClientForm = ({ onSubmit, defaultValues }: ClientFormProps) => {
             label="Condition"
             placeholder="Condition"
           />
-
         </div>
         <div className="flex justify-end gap-2">
           <Link href="/dashboard/clients" passHref>
@@ -132,7 +131,6 @@ const ClientForm = ({ onSubmit, defaultValues }: ClientFormProps) => {
               text="Cancel"
               className="text-white rounded-lg bg-secondary min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
             />
-            
           </Link>
 
           <CustomButton

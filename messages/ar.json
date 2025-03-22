@@ -2,6 +2,7 @@
   "edit": "تعديل",
   "view": "عرض",
   "save": "حفظ",
+  "saving": "يتم الحفظ...",
   "cancel": "إلغاء",
   "search": "بحث",
   "create": "إنشاء",
@@ -37,6 +38,7 @@
     "description": "الوصف",
     "email": "البريد الإلكتروني",
     "save": "حفظ",
+    "saving": "يتم الحفظ...",
     "cancel": "إلغاء",
     "setLocation": "تعيين الموقع",
     "selectBranchLocation": "اختر موقع الفرع"

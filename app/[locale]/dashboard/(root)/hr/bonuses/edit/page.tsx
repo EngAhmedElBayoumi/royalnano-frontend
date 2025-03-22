@@ -15,7 +15,7 @@ export default function EditBonus() {
   const id = searchParams.get("id");
   const t = useTranslations("hr");
   const { data, isLoading, error } = useGetBonusByIdQuery(id);
-  const [updateBonus] = useUpdateBonusMutation();
+  const [updateBonus, { isLoading: submitting }] = useUpdateBonusMutation();
 
   const defaultValues: BonusesFormValues = data && {
     ...data,
@@ -38,6 +38,7 @@ export default function EditBonus() {
       data={defaultValues}
       isLoading={isLoading}
       error={error}
+      submitting={submitting}
       onSubmit={handleSubmit}
       Form={BonusesForm}
       redirectPath={`/dashboard/hr?tab=${t("tabs.bonuses")}`}

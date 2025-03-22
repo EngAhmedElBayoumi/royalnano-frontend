@@ -4,8 +4,13 @@ import { useTranslations } from "next-intl";
 
 import EditPage from "@/components/dashboard/EditPage";
 
-import PurchaseRequestForm, { PurchaseRequestFormValues } from "@/components/dashboard/forms/purchase/PurchaseRequestForm";
-import { useGetRequestByIdQuery, useUpdateRequestMutation } from "@/redux/services/dashboard/purchase/request";
+import PurchaseRequestForm, {
+  PurchaseRequestFormValues,
+} from "@/components/dashboard/forms/purchase/PurchaseRequestForm";
+import {
+  useGetRequestByIdQuery,
+  useUpdateRequestMutation,
+} from "@/redux/services/dashboard/purchase/request";
 
 export default function EdirPurchaseRequest() {
   const searchParams = useSearchParams();
@@ -13,7 +18,8 @@ export default function EdirPurchaseRequest() {
   const t = useTranslations("Purchase.Request");
   const tabTranslate = useTranslations("Purchase");
   const { data, isLoading, error } = useGetRequestByIdQuery(id);
-  const [updatePrerequest] = useUpdateRequestMutation();
+  const [updatePrerequest, { isLoading: submitting }] =
+    useUpdateRequestMutation();
 
   const defaultValues: PurchaseRequestFormValues = data && {
     ...data,
@@ -35,6 +41,7 @@ export default function EdirPurchaseRequest() {
       error={error}
       onSubmit={handleSubmit}
       Form={PurchaseRequestForm}
+      submitting={submitting}
       redirectPath={`/dashboard/purchase?tab=${tabTranslate("request")}`}
     />
   );

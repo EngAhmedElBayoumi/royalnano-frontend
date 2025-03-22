@@ -14,6 +14,7 @@ import FileInput from "@/components/formFields/FileInput";
 interface CustomerReviewFormProps {
   onSubmit: (data: CustomerReviewFormValues) => Promise<void>;
   defaultValues?: CustomerReviewFormValues;
+  isLoading?: boolean;
 }
 
 export interface CustomerReviewFormValues {
@@ -26,6 +27,7 @@ export interface CustomerReviewFormValues {
 const CustomerReviewForm = ({
   onSubmit,
   defaultValues,
+  isLoading,
 }: CustomerReviewFormProps) => {
   const form = useForm({
     resolver: zodResolver(customerReviewSchema),
@@ -86,7 +88,10 @@ const CustomerReviewForm = ({
             />
           </Link>
           <CustomButton
-            text={globalTranslate("save")}
+            text={
+              isLoading ? globalTranslate("saving") : globalTranslate("save")
+            }
+            isDisabled={isLoading}
             className="text-white rounded-lg min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
           />
         </div>
