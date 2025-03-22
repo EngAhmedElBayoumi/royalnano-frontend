@@ -18,7 +18,7 @@ export interface Item {
 
 export default function PurchaseExpenseCategory() {
   const { data: inventoryItems, isLoading, error, permissions, handlePageChange } = useTableData({
-    permissionKey: "PurchaseExpenseCategory",
+    permissionKey: "expensecategory",
     useQueryHook: useGetExpenseCategorysQuery,
   });
 

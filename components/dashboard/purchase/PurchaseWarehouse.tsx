@@ -18,7 +18,7 @@ export interface Item {
 
 export default function PurchaseWarehouse() {
   const { data: inventoryItems, isLoading, error, permissions, handlePageChange } = useTableData({
-    permissionKey: "PurchaseWarehouse",
+    permissionKey: "warehouse",
     useQueryHook: useGetWarehousesQuery,
   });
 

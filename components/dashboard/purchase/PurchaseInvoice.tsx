@@ -18,7 +18,7 @@ export interface Item {
 
 export default function PurchaseInvoice() {
   const { data: inventoryItems, isLoading, error, permissions, handlePageChange } = useTableData({
-    permissionKey: "PurchaseInvoice",
+    permissionKey: "invoicedetail",
     useQueryHook: useGetInvoicesQuery,
   });
 

@@ -11,16 +11,11 @@ export default function EditPurchaseSupplier() {
   const t = useTranslations("Purchase.Supplier");
   const tabTranslate = useTranslations("Purchase");
 
-  // Fetch supplier data by ID
   const { data, isLoading, error } = useGetSupplierByIdQuery(id);
 
-  // Mutation for updating supplier
   const [updateSupplier] = useUpdateSupplierMutation();
-
-  // Set default values if data is available
   const defaultValues: SupplierFormValues | undefined = data && {
     ...data,
-    // Ensure no null values are passed to the form
     title: data.title || "",
     full_name: data.full_name || "",
     supplier_name: data.supplier_name || "",
@@ -47,26 +42,25 @@ export default function EditPurchaseSupplier() {
     try {
       const payload = {
         ...data,
-        id: Number(data.id), // Ensure ID is a number
-        branch: Number(data.branch), // Ensure branch is a number
-        accounting_expenses_category: Number(data.accounting_expenses_category), // Ensure category is a number
+        id: Number(data.id), 
+        branch: Number(data.branch), 
+        accounting_expenses_category: Number(data.accounting_expenses_category), 
       };
 
-      console.log("Payload being sent to the API:", payload); // Log the payload
+      console.log("Payload being sent to the API:", payload); 
 
       const response = await updateSupplier({ id, data: payload });
 
-      console.log("API Response:", response); // Log the full API response
+      console.log("API Response:", response); 
 
-      // Handle API errors
       if ("error" in response) {
         const errorMessage = response.data.message || "Edit failed";
-        console.error("API Error Details:", response.error); // Log the error details
+        console.error("API Error Details:", response.error); 
         throw new Error(errorMessage);
       }
     } catch (error) {
       console.error("Error updating supplier:", error);
-      throw error; // Re-throw the error to display it in the UI
+      throw error; 
     }
   };
 
