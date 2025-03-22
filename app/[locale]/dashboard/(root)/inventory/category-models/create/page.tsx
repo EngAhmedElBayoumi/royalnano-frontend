@@ -6,7 +6,7 @@ import CategoryForm, { CategoryFormValues } from "@/components/dashboard/forms/i
 
 export default function CreateCategory() {
   const t = useTranslations("Inventory");
-  const [createCategory] = useCreateCategoryMutation();
+  const [createCategory, { isLoading }] = useCreateCategoryMutation();
 
   const handleSubmit = async (data: CategoryFormValues) => {
     const response = await createCategory(data);
@@ -19,6 +19,7 @@ export default function CreateCategory() {
       onSubmit={handleSubmit}
       Form={CategoryForm}
       redirectPath={`/dashboard/inventory?tab=${t("categoryModel")}`}
+      isLoading={isLoading}
     />
   );
 }

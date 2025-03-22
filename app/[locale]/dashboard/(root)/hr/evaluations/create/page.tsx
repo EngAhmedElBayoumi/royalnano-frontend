@@ -8,7 +8,7 @@ import CreatePage from "@/components/dashboard/CreatePage";
 
 export default function CreateEvaluation() {
   const t = useTranslations("hr");
-  const [createEvaluation] = useCreateEvaluationMutation();
+  const [createEvaluation, { isLoading }] = useCreateEvaluationMutation();
 
   const handleSubmit = async (data: EvaluationFormValues) => {
     const response = await createEvaluation(data);
@@ -21,6 +21,7 @@ export default function CreateEvaluation() {
       onSubmit={handleSubmit}
       Form={EvaluationForm}
       redirectPath={`/dashboard/hr?tab=${t("tabs.evaluations")}`}
+      isLoading={isLoading}
     />
   );
 }

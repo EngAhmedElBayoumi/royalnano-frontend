@@ -21,6 +21,7 @@ import CustomModal from "@/components/modals/CustomModal";
 interface AttendanceFormProps {
   onSubmit: (data: AttendanceFormValues) => Promise<void>;
   defaultValues?: AttendanceFormValues;
+  isLoading?: boolean;
 }
 
 export interface AttendanceFormValues {
@@ -47,7 +48,11 @@ interface ExtendedMapGLProps extends React.ComponentProps<typeof MapGL> {
 
 const ExtendedMapGL = MapGL as React.ComponentType<ExtendedMapGLProps>;
 
-const AttendanceForm = ({ onSubmit, defaultValues }: AttendanceFormProps) => {
+const AttendanceForm = ({
+  onSubmit,
+  defaultValues,
+  isLoading,
+}: AttendanceFormProps) => {
   const form = useForm({
     resolver: zodResolver(attendanceSchema),
     defaultValues: defaultValues || {
@@ -230,7 +235,10 @@ const AttendanceForm = ({ onSubmit, defaultValues }: AttendanceFormProps) => {
           </Link>
 
           <CustomButton
-            text={globalTranslate("save")}
+            text={
+              isLoading ? globalTranslate("saving") : globalTranslate("save")
+            }
+            isDisabled={isLoading}
             className="text-white rounded-lg min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
           />
         </div>

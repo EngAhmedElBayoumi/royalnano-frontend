@@ -2,6 +2,7 @@
   "edit": "edit",
   "view": "view",
   "save": "save",
+  "saving": "saving...",
   "cancel": "cancel",
   "search": "search",
   "create": "create",
@@ -38,6 +39,7 @@
     "description": "Description",
     "email": "Email",
     "save": "Save",
+    "saving": "saving...",
     "cancel": "Cancel",
     "setLocation": "Set Location",
     "selectBranchLocation": "Select Branch Location"

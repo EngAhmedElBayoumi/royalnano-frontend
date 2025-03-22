@@ -14,7 +14,7 @@ export default function EditGallery() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
   const t = useTranslations("dashboardWebsite");
-  const [updateGallery] = useUpdateGalleryMutation();
+  const [updateGallery, { isLoading: submitting }] = useUpdateGalleryMutation();
   const { data, isLoading, error } = useGetGalleryByIdQuery(id);
 
   const defaultValues: GalleryFormValues = data && {
@@ -48,6 +48,7 @@ export default function EditGallery() {
     <EditPage
       title={t("gallery.editGallery")}
       data={defaultValues}
+      submitting={submitting}
       isLoading={isLoading}
       error={error}
       onSubmit={handleSubmit}

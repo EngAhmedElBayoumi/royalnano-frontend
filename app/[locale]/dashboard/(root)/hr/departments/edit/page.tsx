@@ -15,7 +15,8 @@ export default function EditDepartment() {
   const id = searchParams.get("id");
   const t = useTranslations("hr.departments");
   const { data, isLoading, error } = useGetDepartmentByIdQuery(id);
-  const [updateDepartment] = useUpdateDepartmentMutation();
+  const [updateDepartment, { isLoading: submitting }] =
+    useUpdateDepartmentMutation();
 
   const defaultValues = data && {
     ...data,
@@ -32,6 +33,7 @@ export default function EditDepartment() {
       data={defaultValues}
       isLoading={isLoading}
       error={error}
+      submitting={submitting}
       onSubmit={handleSubmit}
       Form={DepartmentForm}
       redirectPath="/dashboard/hr"

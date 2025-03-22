@@ -2,11 +2,13 @@
 import { useTranslations } from "next-intl";
 import { useCreatePreorderMutation } from "@/redux/services/dashboard/inventory/preorderApi";
 import CreatePage from "@/components/dashboard/CreatePage";
-import PreorderForm, { PreorderFormValues } from "@/components/dashboard/forms/inventory/PreorderForm";
+import PreorderForm, {
+  PreorderFormValues,
+} from "@/components/dashboard/forms/inventory/PreorderForm";
 
 export default function CreatePreorder() {
   const t = useTranslations("Inventory");
-  const [createPreorder] = useCreatePreorderMutation();
+  const [createPreorder, { isLoading }] = useCreatePreorderMutation();
 
   const handleSubmit = async (data: PreorderFormValues) => {
     const payload = {
@@ -23,6 +25,7 @@ export default function CreatePreorder() {
       onSubmit={handleSubmit}
       Form={PreorderForm}
       redirectPath={`/dashboard/inventory?tab=${t("preorder")}`}
+      isLoading={isLoading}
     />
   );
 }

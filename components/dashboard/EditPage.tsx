@@ -10,11 +10,13 @@ interface EditPageProps<T> {
   title: string;
   data: T | undefined;
   isLoading: boolean;
+  submitting?: boolean;
   // eslint-disable-next-line
   error: any;
   onSubmit: (data: T) => Promise<void>;
   Form: React.ComponentType<{
     onSubmit: (data: T) => Promise<void>;
+    isLoading?: boolean;
     defaultValues?: T;
   }>;
   redirectPath: string;
@@ -24,6 +26,7 @@ export default function EditPage<T>({
   title,
   data,
   isLoading,
+  submitting,
   error,
   onSubmit,
   Form,
@@ -69,7 +72,11 @@ export default function EditPage<T>({
         ) : error ? (
           <LoadingError />
         ) : (
-          <Form onSubmit={handleSubmit} defaultValues={data} />
+          <Form
+            onSubmit={handleSubmit}
+            defaultValues={data}
+            isLoading={submitting}
+          />
         )}
       </div>
     </main>

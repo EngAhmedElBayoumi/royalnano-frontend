@@ -6,7 +6,7 @@ import StockAdjustmentForm, { StockAdjustmentFormValues } from "@/components/das
 
 export default function CreateStockAdjustment() {
   const t = useTranslations("Inventory");
-  const [createStockAdjustment] = useCreateStockAdjustmentMutation();
+  const [createStockAdjustment, { isLoading }] = useCreateStockAdjustmentMutation();
 
   const handleSubmit = async (data: StockAdjustmentFormValues) => {
     const payload = {
@@ -24,6 +24,7 @@ export default function CreateStockAdjustment() {
       onSubmit={handleSubmit}
       Form={StockAdjustmentForm}
       redirectPath={`/dashboard/inventory?tab=${t("stockAdjustment")}`}
+      isLoading={isLoading}
     />
   );
 }

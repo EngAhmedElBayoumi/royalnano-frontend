@@ -8,7 +8,7 @@ import BonusesForm, {
 
 export default function CreateBonus() {
   const t = useTranslations("hr");
-  const [createBonus] = useCreateBonusMutation();
+  const [createBonus, { isLoading }] = useCreateBonusMutation();
 
   const handleSubmit = async (data: BonusesFormValues) => {
     const payload = {
@@ -25,6 +25,7 @@ export default function CreateBonus() {
       onSubmit={handleSubmit}
       Form={BonusesForm}
       redirectPath={`/dashboard/hr?tab=${t("tabs.bonuses")}`}
+      isLoading={isLoading}
     />
   );
 }

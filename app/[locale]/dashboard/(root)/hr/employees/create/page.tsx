@@ -8,7 +8,7 @@ import EmployeeForm, {
 
 export default function CreateEmployee() {
   const t = useTranslations("hr");
-  const [createEmployee] = useCreateEmployeeMutation();
+  const [createEmployee, { isLoading }] = useCreateEmployeeMutation();
 
   const handleSubmit = async (data: EmployeeFormValues) => {
     const payload = {
@@ -27,6 +27,7 @@ export default function CreateEmployee() {
       onSubmit={handleSubmit}
       Form={EmployeeForm}
       redirectPath={`/dashboard/hr?tab=${t("tabs.employees")}`}
+      isLoading={isLoading}
     />
   );
 }

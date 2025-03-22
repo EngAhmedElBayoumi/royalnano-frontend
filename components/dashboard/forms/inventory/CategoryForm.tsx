@@ -11,13 +11,18 @@ import { useTranslations } from "next-intl";
 interface CategoryFormProps {
   onSubmit: (data: CategoryFormValues) => Promise<void>;
   defaultValues?: CategoryFormValues;
+  isLoading?: boolean;
 }
 
 export interface CategoryFormValues {
   name: string;
 }
 
-const CategoryForm = ({ onSubmit, defaultValues }: CategoryFormProps) => {
+const CategoryForm = ({
+  onSubmit,
+  defaultValues,
+  isLoading,
+}: CategoryFormProps) => {
   const form = useForm({
     resolver: zodResolver(categorySchema),
     defaultValues: defaultValues || {
@@ -51,7 +56,10 @@ const CategoryForm = ({ onSubmit, defaultValues }: CategoryFormProps) => {
             />
           </Link>
           <CustomButton
-            text={t("save")}
+            text={
+              isLoading ? globalTranslate("saving") : globalTranslate("save")
+            }
+            isDisabled={isLoading}
             className="text-white rounded-lg min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
           />
         </div>

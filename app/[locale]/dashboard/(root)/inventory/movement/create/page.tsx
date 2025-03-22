@@ -6,7 +6,7 @@ import MovementForm, { MovementFormValues } from "@/components/dashboard/forms/i
 
 export default function CreateMovement() {
   const t = useTranslations("Inventory");
-  const [createMovement] = useCreateMovementMutation();
+  const [createMovement, { isLoading }] = useCreateMovementMutation();
 
   const handleSubmit = async (data: MovementFormValues) => {
     const payload = {
@@ -24,6 +24,7 @@ export default function CreateMovement() {
       onSubmit={handleSubmit}
       Form={MovementForm}
       redirectPath={`/dashboard/inventory?tab=${t("movement")}`}
+      isLoading={isLoading}
     />
   );
 }

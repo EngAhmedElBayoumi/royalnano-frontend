@@ -8,7 +8,7 @@ import ApplicantsForm, {
 
 export default function CreateApplicant() {
   const t = useTranslations("hr");
-  const [createApplicant] = useCreateApplicantMutation();
+  const [createApplicant, { isLoading }] = useCreateApplicantMutation();
 
   const handleSubmit = async (data: ApplicantsFormValues) => {
     const response = await createApplicant(data);
@@ -21,6 +21,7 @@ export default function CreateApplicant() {
       onSubmit={handleSubmit}
       Form={ApplicantsForm}
       redirectPath={`/dashboard/hr?tab=${t("tabs.applicants")}`}
+      isLoading={isLoading}
     />
   );
 }

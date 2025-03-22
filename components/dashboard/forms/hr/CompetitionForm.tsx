@@ -17,6 +17,7 @@ import useExtraFields from "@/hooks/useExtraFields";
 interface CompetitionFormProps {
   onSubmit: (data: CompetitionFormValues) => Promise<void>;
   defaultValues?: CompetitionFormValues;
+  isLoading?: boolean;
 }
 
 export interface CompetitionFormValues {
@@ -29,7 +30,11 @@ export interface CompetitionFormValues {
   extra_fields?: Record<string, string>;
 }
 
-const CompetitionForm = ({ onSubmit, defaultValues }: CompetitionFormProps) => {
+const CompetitionForm = ({
+  onSubmit,
+  defaultValues,
+  isLoading,
+}: CompetitionFormProps) => {
   const form = useForm({
     resolver: zodResolver(competitionSchema),
     defaultValues: defaultValues || {
@@ -137,7 +142,10 @@ const CompetitionForm = ({ onSubmit, defaultValues }: CompetitionFormProps) => {
             />
           </Link>
           <CustomButton
-            text={globalTranslate("save")}
+            text={
+              isLoading ? globalTranslate("saving") : globalTranslate("save")
+            }
+            isDisabled={isLoading}
             className="text-white rounded-lg min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
           />
         </div>

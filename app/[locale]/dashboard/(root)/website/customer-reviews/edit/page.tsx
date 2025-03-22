@@ -15,7 +15,7 @@ export default function EditCustomerReview() {
   const id = searchParams.get("id");
   const t = useTranslations("dashboardWebsite");
   const { data, isLoading, error } = useGetReviewByIdQuery(id);
-  const [updateReview] = useUpdateReviewMutation();
+  const [updateReview, { isLoading: submitting }] = useUpdateReviewMutation();
 
   const defaultValues = data && {
     ...data,
@@ -54,6 +54,7 @@ export default function EditCustomerReview() {
       data={defaultValues}
       isLoading={isLoading}
       error={error}
+      submitting={submitting}
       onSubmit={handleSubmit}
       Form={CustomerReviewForm}
       redirectPath={`/dashboard/website?tab=${t("tabs.customerReviews")}`}

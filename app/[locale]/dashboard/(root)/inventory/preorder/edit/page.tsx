@@ -16,7 +16,8 @@ export default function EditPreorder() {
   const t = useTranslations("Inventory.InventoryPreorder");
   const tabTranslate = useTranslations("Inventory");
   const { data, isLoading, error } = useGetPreorderByIdQuery(id);
-  const [updatePreorder] = useUpdatePreorderMutation();
+  const [updatePreorder, { isLoading: submitting }] =
+    useUpdatePreorderMutation();
 
   const defaultValues: PreorderFormValues = data && {
     ...data,
@@ -40,6 +41,7 @@ export default function EditPreorder() {
       error={error}
       onSubmit={handleSubmit}
       Form={PreorderForm}
+      submitting={submitting}
       redirectPath={`/dashboard/inventory?tab=${tabTranslate("preorder")}`}
     />
   );

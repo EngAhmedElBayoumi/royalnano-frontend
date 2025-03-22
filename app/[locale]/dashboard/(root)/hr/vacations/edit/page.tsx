@@ -15,7 +15,8 @@ export default function EditVacation() {
   const id = searchParams.get("id");
   const t = useTranslations("hr");
   const { data, isLoading, error } = useGetVacationByIdQuery(id);
-  const [updateVacation] = useUpdateVacationMutation();
+  const [updateVacation, { isLoading: submitting }] =
+    useUpdateVacationMutation();
 
   const defaultValues: VacationsFormValues = data && {
     ...data,
@@ -36,6 +37,7 @@ export default function EditVacation() {
       data={defaultValues}
       isLoading={isLoading}
       error={error}
+      submitting={submitting}
       onSubmit={handleSubmit}
       Form={VacationsForm}
       redirectPath={`/dashboard/hr?tab=${t("tabs.vacation")}`}

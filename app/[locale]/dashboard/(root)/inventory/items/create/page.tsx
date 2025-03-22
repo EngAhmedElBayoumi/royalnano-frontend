@@ -6,7 +6,7 @@ import ItemForm, { ItemFormValues } from "@/components/dashboard/forms/inventory
 
 export default function CreateItem() {
   const t = useTranslations("Inventory.InventoryItem");
-  const [createItem] = useCreateItemMutation();
+  const [createItem, { isLoading }] = useCreateItemMutation();
 
   const handleSubmit = async (data: ItemFormValues) => {
     const payload = {
@@ -25,6 +25,7 @@ export default function CreateItem() {
       onSubmit={handleSubmit}
       Form={ItemForm}
       redirectPath="/dashboard/inventory"
+      isLoading={isLoading}
     />
   );
 }

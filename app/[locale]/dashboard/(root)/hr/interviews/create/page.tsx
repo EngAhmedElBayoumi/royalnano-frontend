@@ -9,7 +9,7 @@ import InterviewsForm, {
 
 export default function CreateInterview() {
   const t = useTranslations("hr");
-  const [createInterview] = useCreateInterviewMutation();
+  const [createInterview, { isLoading }] = useCreateInterviewMutation();
 
   const handleSubmit = async (data: InterviewFormValues) => {
     const response = await createInterview({
@@ -25,6 +25,7 @@ export default function CreateInterview() {
       onSubmit={handleSubmit}
       Form={InterviewsForm}
       redirectPath={`/dashboard/hr?tab=${t("tabs.interviews")}`}
+      isLoading={isLoading}
     />
   );
 }

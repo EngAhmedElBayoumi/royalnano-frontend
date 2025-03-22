@@ -5,11 +5,22 @@ import { navLinks } from "@/data/FooterData";
 import { Link } from "@/i18n/routing";
 import { usePathname, useRouter } from "next/navigation";
 import { getCookie } from "cookies-next";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
 import { logout } from "@/redux/slices/authSlice";
 import { useTranslations } from "next-intl";
 import { clearProfile } from "@/redux/slices/profileSlice";
+import config from "@/lib/config";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
+const baseUrl = config.apiUrl;
 const Nav = () => {
   const t = useTranslations("website.nav");
   const [isClicked, setIsClicked] = useState(false);
@@ -18,7 +29,13 @@ const Nav = () => {
   const router = useRouter();
   const accessToken = getCookie("accessToken");
   const dispatch = useDispatch();
-
+  const name = useSelector((state: RootState) => state.profile.name);
+  const emailAddress = useSelector(
+    (state: RootState) => state.profile.emailAddress
+  );
+  const profilePicture = useSelector(
+    (state: RootState) => state.profile.profilePicture
+  );
   const toggleNavbar = () => {
     setIsClicked(!isClicked);
   };
@@ -91,13 +108,48 @@ const Nav = () => {
             </Link>
           </div>
         ) : (
-          <div className="hidden md:flex gap-5 items-center">
-            <button
-              className="md:text-sm xl:text-md hover:text-white text-nowrap text-primary"
-              onClick={handleLogout}
-            >
-              {t("Logout")} {/* Use translations */}
-            </button>
+          <div className="hidden md:flex">
+            <DropdownMenu>
+              <DropdownMenuTrigger className="flex items-center gap-3">
+                <Avatar>
+                  <AvatarImage src={baseUrl + profilePicture} />
+                  <AvatarFallback>{name}</AvatarFallback>
+                </Avatar>
+                <h3 className="text-primary">
+                  {name ??
+                    emailAddress?.substring(0, emailAddress.indexOf("@"))}
+                </h3>
+                <Image
+                  src="/assets/icons/angle-down.svg"
+                  alt="drop icon"
+                  width={15}
+                  height={15}
+                />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuItem>
+                  <Link href="/profile" passHref>
+                    Profile
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>
+                  {" "}
+                  <button
+                    className="md:text-sm xl:text-md text-nowrap flex gap-1"
+                    onClick={handleLogout}
+                  >
+                    <Image
+                      src={`/assets/icons/sidebar/logout.svg`}
+                      alt={t("Logout")}
+                      width={15}
+                      height={15}
+                    />
+                    {t("Logout")}
+                  </button>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         )}
 
@@ -164,6 +216,23 @@ const Nav = () => {
               </svg>
             </button>
             <div className="flex flex-col space-y-4">
+              {accessToken && (
+                <Link
+                  className="flex items-center gap-2"
+                  href="/profile"
+                  passHref
+                >
+                  <Avatar>
+                    <AvatarImage src={baseUrl + profilePicture} />
+                    <AvatarFallback>{name}</AvatarFallback>
+                  </Avatar>
+                  <h3 className="text-primary">
+                    {name ??
+                      emailAddress?.substring(0, emailAddress.indexOf("@"))}
+                  </h3>
+                </Link>
+              )}
+              {accessToken && <DropdownMenuSeparator />}
               {navLinks.map((link) => (
                 <Link
                   className="hover:text-primary xl:text-sm block text-black"

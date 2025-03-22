@@ -14,6 +14,7 @@ import CustomTextArea from "@/components/formFields/TextArea";
 interface VacationsFormProps {
   onSubmit: (data: VacationsFormValues) => Promise<void>;
   defaultValues?: VacationsFormValues;
+  isLoading?: boolean;
 }
 
 export interface VacationsFormValues {
@@ -24,7 +25,11 @@ export interface VacationsFormValues {
   reason: string;
 }
 
-const VacationsForm = ({ onSubmit, defaultValues }: VacationsFormProps) => {
+const VacationsForm = ({
+  onSubmit,
+  defaultValues,
+  isLoading,
+}: VacationsFormProps) => {
   const form = useForm({
     resolver: zodResolver(vacationSchema),
     defaultValues: defaultValues || {
@@ -104,7 +109,10 @@ const VacationsForm = ({ onSubmit, defaultValues }: VacationsFormProps) => {
           </Link>
 
           <CustomButton
-            text={globalTranslate("save")}
+            text={
+              isLoading ? globalTranslate("saving") : globalTranslate("save")
+            }
+            isDisabled={isLoading}
             className="text-white rounded-lg min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
           />
         </div>

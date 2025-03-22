@@ -16,6 +16,7 @@ interface MovementFormProps {
   onSubmit: (data: MovementFormValues) => Promise<void>;
   defaultValues?: MovementFormValues;
   isView?: boolean;
+  isLoading?: boolean;
 }
 
 export interface MovementFormValues {
@@ -30,6 +31,7 @@ const MovementForm = ({
   onSubmit,
   defaultValues,
   isView,
+  isLoading,
 }: MovementFormProps) => {
   const t = useTranslations();
 
@@ -115,7 +117,10 @@ const MovementForm = ({
               />
             </Link>
             <CustomButton
-              text={t("save")}
+              text={
+                isLoading ? globalTranslate("saving") : globalTranslate("save")
+              }
+              isDisabled={isLoading}
               className="text-white rounded-lg min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
             />
           </div>

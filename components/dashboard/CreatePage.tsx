@@ -8,12 +8,18 @@ interface CreatePageProps {
   title: string;
   // eslint-disable-next-line
   onSubmit: (data: any) => Promise<void>;
-  // eslint-disable-next-line
-  Form: React.ComponentType<{ onSubmit: (data: any) => Promise<void> }>;
+  Form: React.ComponentType<{
+    // eslint-disable-next-line
+    onSubmit: (data: any) => Promise<void>;
+    isLoading?: boolean;
+    // eslint-disable-next-line
+    defaultValues?: any;
+  }>;
   redirectPath: string;
   iconSrc?: string;
   backgroundColor?: string;
   textColor?: string;
+  isLoading: boolean;
 }
 
 export default function CreatePage({
@@ -24,6 +30,7 @@ export default function CreatePage({
   iconSrc = "/assets/icons/add.svg",
   backgroundColor = "#F8F7F7",
   textColor = "primary",
+  isLoading = false,
 }: CreatePageProps) {
   const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -61,7 +68,7 @@ export default function CreatePage({
       </div>
 
       <div className="bg-dashboardBg px-6 pt-5 pb-8 ltr:rounded-r-[20px] ltr:rounded-bl-[20px] rtl:rounded-l-[20px] rtl:rounded-br-[20px] ltr:lg:pr-[200px] rtl:lg:pl-[200px]">
-        <Form onSubmit={handleSubmit} />
+        <Form onSubmit={handleSubmit} isLoading={isLoading} />
       </div>
     </main>
   );

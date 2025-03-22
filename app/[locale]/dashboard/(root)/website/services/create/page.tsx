@@ -7,7 +7,7 @@ import ServiceForm, {
 import CreatePage from "@/components/dashboard/CreatePage";
 
 export default function CreateService() {
-  const [createService] = useCreateServiceMutation();
+  const [createService, { isLoading }] = useCreateServiceMutation();
   const t = useTranslations("dashboardWebsite.Services");
 
   const handleSubmit = async (data: ServiceFormValues) => {
@@ -41,6 +41,7 @@ export default function CreateService() {
       onSubmit={handleSubmit}
       Form={ServiceForm}
       redirectPath="/dashboard/website"
+      isLoading={isLoading}
     />
   );
 }

@@ -21,6 +21,13 @@ export const stockApi = createApi({
         body: data,
       }),
     }),
+    updateStockAdjustment: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `inventory/stock-adjustment/${id}/`,
+        method: "PATCH",
+        body: data,
+      }),
+    }),
   }),
 });
 
@@ -28,4 +35,5 @@ export const {
   useGetStockAdjustmentsQuery,
   useGetStockAdjustmentByIdQuery,
   useCreateStockAdjustmentMutation,
+  useUpdateStockAdjustmentMutation,
 } = stockApi;

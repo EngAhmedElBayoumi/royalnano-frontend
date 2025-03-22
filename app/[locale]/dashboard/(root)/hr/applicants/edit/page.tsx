@@ -15,7 +15,8 @@ export default function EditApplicant() {
   const id = searchParams.get("id");
   const t = useTranslations("hr");
   const { data, isLoading, error } = useGetApplicantByIdQuery(id);
-  const [updateApplicant] = useUpdateApplicantMutation();
+  const [updateApplicant, { isLoading: submitting }] =
+    useUpdateApplicantMutation();
 
   const defaultValues = data && {
     ...data,
@@ -34,6 +35,7 @@ export default function EditApplicant() {
       data={defaultValues}
       isLoading={isLoading}
       error={error}
+      submitting={submitting}
       onSubmit={handleSubmit}
       Form={ApplicantsForm}
       redirectPath={`/dashboard/hr?tab=${t("tabs.applicants")}`}

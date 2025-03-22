@@ -16,6 +16,7 @@ import CustomSelect from "@/components/formFields/CustomSelect";
 interface PreorderFormProps {
   onSubmit: (data: PreorderFormValues) => Promise<void>;
   defaultValues?: PreorderFormValues;
+  isLoading?: boolean;
 }
 
 export interface PreorderFormValues {
@@ -24,7 +25,11 @@ export interface PreorderFormValues {
   description?: string;
 }
 
-const PreorderForm = ({ onSubmit, defaultValues }: PreorderFormProps) => {
+const PreorderForm = ({
+  onSubmit,
+  defaultValues,
+  isLoading,
+}: PreorderFormProps) => {
   const t = useTranslations();
 
   const { data: items } = useGetItemsQuery({});
@@ -83,7 +88,8 @@ const PreorderForm = ({ onSubmit, defaultValues }: PreorderFormProps) => {
             />
           </Link>
           <CustomButton
-            text={t("save")}
+            text={isLoading ? t("saving") : t("save")}
+            isDisabled={isLoading}
             className="text-white rounded-lg min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
           />
         </div>

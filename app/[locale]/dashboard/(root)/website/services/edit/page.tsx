@@ -15,7 +15,7 @@ export default function EditService() {
   const id = searchParams.get("id");
   const t = useTranslations("dashboardWebsite.Services");
   const { data, isLoading, error } = useGetServiceByIdQuery(id);
-  const [updateService] = useUpdateServiceMutation();
+  const [updateService, { isLoading: submitting }] = useUpdateServiceMutation();
 
   const handleSubmit = async (data: ServiceFormValues) => {
     try {
@@ -48,6 +48,7 @@ export default function EditService() {
       data={data}
       isLoading={isLoading}
       error={error}
+      submitting={submitting}
       onSubmit={handleSubmit}
       Form={ServiceForm}
       redirectPath="/dashboard/website/"

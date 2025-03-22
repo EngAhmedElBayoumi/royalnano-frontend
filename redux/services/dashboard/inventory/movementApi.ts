@@ -21,6 +21,13 @@ export const movementApi = createApi({
         body: data,
       }),
     }),
+    updateMovement: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `inventory/movement/${id}/`,
+        method: "PATCH",
+        body: data,
+      }),
+    }),
   }),
 });
 
@@ -28,4 +35,5 @@ export const {
   useGetMovementsQuery,
   useGetMovementByIdQuery,
   useCreateMovementMutation,
+  useUpdateMovementMutation,
 } = movementApi;

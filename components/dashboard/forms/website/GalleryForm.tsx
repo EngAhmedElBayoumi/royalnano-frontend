@@ -14,13 +14,18 @@ import FileInput from "@/components/formFields/FileInput";
 interface GalleryFormProps {
   onSubmit: (data: GalleryFormValues) => Promise<void>;
   defaultValues?: GalleryFormValues;
+  isLoading?: boolean;
 }
 export interface GalleryFormValues {
   title: string;
   item_type: "image" | "video";
   file: File;
 }
-const GalleryForm = ({ onSubmit, defaultValues }: GalleryFormProps) => {
+const GalleryForm = ({
+  onSubmit,
+  defaultValues,
+  isLoading,
+}: GalleryFormProps) => {
   const form = useForm<GalleryFormValues>({
     resolver: zodResolver(gallerySchema),
     defaultValues: defaultValues || {
@@ -88,8 +93,11 @@ const GalleryForm = ({ onSubmit, defaultValues }: GalleryFormProps) => {
             />
           </Link>
           <CustomButton
-            text={globalTranslate("save")}
-            className="text-white rounded-lg min-w-[160px] font-bold text-sm"
+            text={
+              isLoading ? globalTranslate("saving") : globalTranslate("save")
+            }
+            isDisabled={isLoading}
+            className="text-white rounded-lg min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
           />
         </div>
       </form>
