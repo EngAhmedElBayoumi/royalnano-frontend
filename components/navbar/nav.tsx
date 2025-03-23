@@ -3,7 +3,7 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { navLinks } from "@/data/FooterData";
 import { Link } from "@/i18n/routing";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useParams } from "next/navigation";
 import { getCookie } from "cookies-next";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
@@ -26,6 +26,7 @@ const Nav = () => {
   const [isClicked, setIsClicked] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
+  const locale = useParams()?.locale as string;
   const router = useRouter();
   const accessToken = getCookie("accessToken");
   const dispatch = useDispatch();
@@ -78,7 +79,9 @@ const Nav = () => {
           {navLinks.map((link) => (
             <Link
               className={`${
-                pathname === link.href ? "text-primary" : "text-white"
+                pathname === `/${locale}${link.href}`
+                  ? "text-primary"
+                  : "text-white"
               } hover:text-primary active:text-primary md:text-sm xl:text-md text-nowrap`}
               key={link.href}
               href={link.href}
@@ -235,7 +238,11 @@ const Nav = () => {
               {accessToken && <DropdownMenuSeparator />}
               {navLinks.map((link) => (
                 <Link
-                  className="hover:text-primary xl:text-sm block text-black"
+                  className={`${
+                    pathname === `/${locale}${link.href}`
+                      ? "text-primary"
+                      : "text-black"
+                  } hover:text-primary xl:text-sm block`}
                   key={link.href}
                   href={link.href}
                   passHref
