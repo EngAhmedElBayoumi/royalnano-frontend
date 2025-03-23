@@ -37,7 +37,9 @@ const profileSlice = createSlice({
       state.emailAddress = action.payload.emailAddress;
       state.phoneNumber = action.payload.phoneNumber;
       state.role = action.payload.role;
-      state.profilePicture = action.payload.profilePicture;
+      state.profilePicture = action.payload.profilePicture?.startsWith('/') 
+        ? action.payload.profilePicture.slice(1) 
+        : action.payload.profilePicture;
       state.permissions = action.payload.permissions;
 
       // Extract only the specified permissions
