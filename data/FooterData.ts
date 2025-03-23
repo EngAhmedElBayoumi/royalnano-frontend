@@ -22,16 +22,13 @@ export const socialLinks = [
   },
 ];
 
-
-
 export const navLinks = [
-  { href: "/", label: "Home" },
+  { href: "", label: "Home" },
   { href: "/services", label: "Services" },
   { href: "/about", label: "About" },
   { href: "/gallery", label: "Gallery" },
   { href: "/contact", label: "ContactUs" },
 ];
-
 
 // export const navLinks = [
 //   { href: "/", label: "Home" },

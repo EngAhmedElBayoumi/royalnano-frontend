@@ -83,8 +83,8 @@ const Nav = () => {
                   ? "text-primary"
                   : "text-white"
               } hover:text-primary active:text-primary md:text-sm xl:text-md text-nowrap`}
-              key={link.href}
-              href={link.href}
+              key={link.href || "/"}
+              href={link.href || "/"}
               passHref
             >
               {t(link.label)}
@@ -243,8 +243,8 @@ const Nav = () => {
                       ? "text-primary"
                       : "text-black"
                   } hover:text-primary xl:text-sm block`}
-                  key={link.href}
-                  href={link.href}
+                  key={link.href || "/"}
+                  href={link.href || "/"}
                   passHref
                 >
                   {t(link.label)} {/* Use translations */}
