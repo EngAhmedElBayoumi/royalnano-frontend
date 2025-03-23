@@ -1,35 +1,38 @@
 "use client";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useParams } from "next/navigation";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/routing";
+import { services } from "@/data/profileServices";
 import ProfileSidebar from "./ProfileSidebar";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ServiceCard from "@/components/cards/ServiceCard";
 import ProfileForm from "./ProfileForm";
-import {Link} from '@/i18n/routing';
-import { services } from "@/data/profileServices";
-// import { useGetProfileQuery } from "@/redux/services/profileApi";
 
 const Profile = () => {
-  // const { data, isLoading, error } = useGetProfileQuery();
+  const t = useTranslations("website.profile");
+  const locale = useParams()?.locale as string;
 
   return (
     <section className="flex justify-center flex-wrap">
       <main className="main-container flex items-center md:items-start gap-5 flex-col md:flex-row">
         <ProfileSidebar />
         <Tabs
+          dir={locale === "ar" ? "rtl" : "ltr"}
           defaultValue="previous-services"
-          className="top-[-75px] relative md:static"
+          className="top-[-75px] relative md:static pt-5"
         >
           <TabsList className="bg-transparent gap-8 flex-wrap p-0">
             <TabsTrigger
               value="previous-services"
               className="p-0 md:text-sm xl:text-md !font-semibold"
             >
-              Previous Services
+              {t("tabs.previousServices")}
             </TabsTrigger>
             <TabsTrigger
               value="edit-profile"
               className="p-0 md:text-sm xl:text-md !font-semibold"
             >
-              Edit Profile
+              {t("tabs.editProfile")}
             </TabsTrigger>
           </TabsList>
 

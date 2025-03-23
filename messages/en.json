@@ -513,6 +513,13 @@
         "required": "Email is required",
         "invalid": "Invalid email"
       }
+    },
+    "profile": {
+      "title": "Profile",
+      "tabs": {
+        "previousServices": "Previous Services",
+        "editProfile": "Edit Profile"
+      }
     }
   },
   "Purchase": {
