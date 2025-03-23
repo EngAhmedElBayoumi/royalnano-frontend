@@ -8,9 +8,10 @@
   --secondary: #000000;
   --gray: #969696;
 }
-/* .focus-visible\:ring-ring:focus-visible {
-  color: transparent;
-} */
+
+*:focus-visible {
+  outline: none !important;
+}
 ::-webkit-scrollbar {
   width: 0.2rem;
   height: 4px !important;

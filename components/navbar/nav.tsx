@@ -112,7 +112,7 @@ const Nav = () => {
           </div>
         ) : (
           <div className="hidden md:flex">
-            <DropdownMenu>
+            <DropdownMenu dir={locale === "ar" ? "rtl" : "ltr"}>
               <DropdownMenuTrigger className="flex items-center gap-3">
                 <Avatar>
                   <AvatarImage src={baseUrl + profilePicture} />
@@ -129,17 +129,26 @@ const Nav = () => {
                   height={15}
                 />
               </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuItem>
-                  <Link href="/profile" passHref>
-                    Profile
+              <DropdownMenuContent align={locale === "ar" ? "end" : "start"}>
+                <DropdownMenuItem className="py-0">
+                  <Link
+                    href="/profile"
+                    passHref
+                    className="md:text-[14px] xl:text-sm text-nowrap flex gap-1"
+                  >
+                    <Image
+                      src={`/assets/icons/user.svg`}
+                      alt={t("Logout")}
+                      width={15}
+                      height={15}
+                    />
+                    {t("profile")}
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>
-                  {" "}
+                <DropdownMenuItem className="py-0">
                   <button
-                    className="md:text-sm xl:text-md text-nowrap flex gap-1"
+                    className="md:text-[14px] xl:text-sm text-nowrap flex gap-1"
                     onClick={handleLogout}
                   >
                     <Image
