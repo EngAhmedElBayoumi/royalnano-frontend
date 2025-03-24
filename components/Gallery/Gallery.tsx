@@ -12,7 +12,7 @@ import GallerySkeleton from "./GallerySkeleton";
 interface GalleryItem {
   id: number;
   title: string;
-  item_type: 'image' | 'video';
+  item_type: "image" | "video";
   image: string | null;
   video: string | null;
   created_at: string;
@@ -25,11 +25,11 @@ const Gallery = () => {
     search: "",
     ordering: "id",
     page,
-    page_size: 12
+    page_size: 12,
   });
   const [isModalOpen, setModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<GalleryItem | null>(null);
-  const [activeTab, setActiveTab] = useState('all');
+  const [activeTab, setActiveTab] = useState("all");
 
   const handleOpenModal = (item: GalleryItem) => {
     setSelectedItem(item);
@@ -43,9 +43,9 @@ const Gallery = () => {
 
   if (isLoading) {
     return (
-      <section className="py-10">
+      <section className="py-10 px-20">
         <h2 className="text-center text-md xl:text-lg font-[600] mb-6 text-primary">
-          {t('title')}
+          {t("title")}
         </h2>
         <GallerySkeleton />
       </section>
@@ -59,29 +59,39 @@ const Gallery = () => {
   const galleryItems = Array.isArray(data) ? data : [];
   const totalRecords = galleryItems.length;
 
-  const filteredItems = activeTab === 'all' 
-    ? galleryItems 
-    : galleryItems.filter(item => item.item_type === activeTab);
+  const filteredItems =
+    activeTab === "all"
+      ? galleryItems
+      : galleryItems.filter((item) => item.item_type === activeTab);
 
   return (
     <section className="py-10">
       <h2 className="text-center text-md xl:text-lg font-[600] mb-6 text-primary">
-        {t('title')}
+        {t("title")}
       </h2>
-      <Tabs 
-        defaultValue="all" 
+      <Tabs
+        defaultValue="all"
         className="w-full"
         onValueChange={(value) => setActiveTab(value)}
       >
         <TabsList className="text-center w-full bg-transparent mb-5">
-          <TabsTrigger value="all" className="mx-2 text-md xl:text-lg font-[600]">
-            {t('tabs.all')}
+          <TabsTrigger
+            value="all"
+            className="mx-2 text-md xl:text-lg font-[600]"
+          >
+            {t("tabs.all")}
           </TabsTrigger>
-          <TabsTrigger value="image" className="mx-2 text-md xl:text-lg font-[600]">
-            {t('tabs.images')}
+          <TabsTrigger
+            value="image"
+            className="mx-2 text-md xl:text-lg font-[600]"
+          >
+            {t("tabs.images")}
           </TabsTrigger>
-          <TabsTrigger value="video" className="mx-2 text-md xl:text-lg font-[600]">
-            {t('tabs.videos')}
+          <TabsTrigger
+            value="video"
+            className="mx-2 text-md xl:text-lg font-[600]"
+          >
+            {t("tabs.videos")}
           </TabsTrigger>
         </TabsList>
 
@@ -95,9 +105,9 @@ const Gallery = () => {
                     className="overflow-hidden rounded-lg shadow-lg cursor-pointer"
                     onClick={() => handleOpenModal(item)}
                   >
-                    {item.item_type === 'video' ? (
+                    {item.item_type === "video" ? (
                       <video
-                        src={item.video || ''}
+                        src={item.video || ""}
                         className="w-full h-auto"
                         controls={false}
                       />
@@ -105,15 +115,15 @@ const Gallery = () => {
                       <Image
                         width={305}
                         height={310}
-                        src={item.image || ''}
+                        src={item.image || ""}
                         alt={item.title}
-                        className="w-full h-auto"
+                        className="w-full h-full"
                       />
                     )}
                   </div>
                 ))
               ) : (
-                <p className="col-span-full text-center">{t('noData')}</p>
+                <p className="col-span-full text-center">{t("noData")}</p>
               )}
             </main>
             {totalRecords > 12 && (
