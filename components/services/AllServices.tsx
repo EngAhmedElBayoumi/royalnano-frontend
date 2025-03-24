@@ -36,7 +36,7 @@ const AllServices = () => {
         ) : isLoading ? (
           <ServicesSkeleton />
         ) : (
-          <main className="main-container grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <main className="main-container grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {services.map((service: Service) => (
               <ServiceCard
                 key={service.id}
