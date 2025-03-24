@@ -2,6 +2,7 @@ import { Form } from "@/components/ui/form";
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
 import useProfileForm from "@/components/Profile/useProfileForm";
+import PhoneInputField from "../formFields/PhoneInputField";
 
 const ProfileForm = () => {
   const { form, onSubmit } = useProfileForm();
@@ -12,17 +13,16 @@ const ProfileForm = () => {
         <div className="grid sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-10 mb-5 w-[90vw] md:w-fit">
           <TextInput
             control={form.control}
-            name="full_name"
+            name="name"
             label="Full Name"
             placeholder="Full Name"
             className="md:min-w-[40vw] lg:min-w-[25vw]"
           />
-          <TextInput
+
+          <PhoneInputField
             control={form.control}
-            name="phone_number"
+            name="phoneNumber"
             label="Phone Number"
-            placeholder="Phone Number"
-            className="md:min-w-[40vw] lg:min-w-[25vw]"
           />
         </div>
         <CustomButton

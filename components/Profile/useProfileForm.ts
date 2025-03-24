@@ -7,15 +7,15 @@ const useProfileForm = () => {
   const [updateProfile] = useUpdateProfileMutation();
 
   interface FormValues {
-    full_name: string;
-    phone_number: string;
+    name: string;
+    phoneNumber: string;
   }
 
   const form = useForm<FormValues>({
     resolver: zodResolver(profileSchema),
     defaultValues: {
-      full_name: "",
-      phone_number: "",
+      name: "",
+      phoneNumber: "",
     },
   });
 
