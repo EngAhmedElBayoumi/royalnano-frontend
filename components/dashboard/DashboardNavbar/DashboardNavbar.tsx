@@ -20,7 +20,13 @@ const DashboardNavbar = () => {
   return (
     <nav className="absolute ltr:right-0 rtl:left-0 -top-8 flex justify-end items-center gap-2 pt-10">
       <Avatar>
-        <AvatarImage src={baseUrl + profile_picture} />
+        <AvatarImage
+          src={
+            profile_picture
+              ? baseUrl + profile_picture
+              : "/assets/images/user-placeholder.jpg"
+          }
+        />
         <AvatarFallback>{name}</AvatarFallback>
       </Avatar>
       <h3>{name ?? email_address?.substring(0, email_address.indexOf("@"))}</h3>

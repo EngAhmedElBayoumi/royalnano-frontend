@@ -115,7 +115,13 @@ const Nav = () => {
             <DropdownMenu dir={locale === "ar" ? "rtl" : "ltr"}>
               <DropdownMenuTrigger className="flex items-center gap-3">
                 <Avatar>
-                  <AvatarImage src={baseUrl + profile_picture} />
+                  <AvatarImage
+                    src={
+                      profile_picture
+                        ? baseUrl + profile_picture
+                        : "/assets/images/user-placeholder.jpg"
+                    }
+                  />
                   <AvatarFallback>{name}</AvatarFallback>
                 </Avatar>
                 <h3 className="text-primary">

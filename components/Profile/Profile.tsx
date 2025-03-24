@@ -19,7 +19,7 @@ const Profile = () => {
         <Tabs
           dir={locale === "ar" ? "rtl" : "ltr"}
           defaultValue="previous-services"
-          className="top-[-45px] relative md:static pt-5"
+          className="md:static pt-5"
         >
           <TabsList className="bg-transparent gap-8 flex-wrap p-0">
             <TabsTrigger
