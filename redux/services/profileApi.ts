@@ -13,6 +13,7 @@ export const profileApi = createApi({
         url: "core/profile/",
         method: "PUT",
         body: data,
+        formData: true,
       }),
     }),
   }),

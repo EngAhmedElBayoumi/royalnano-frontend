@@ -8,7 +8,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'http',
-        hostname: '92.113.26.84',
+        hostname: 'royalnano.coderash.online',
         port: '',
         pathname: '/media/**',
       },
