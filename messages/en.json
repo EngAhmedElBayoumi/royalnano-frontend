@@ -519,6 +519,10 @@
       "tabs": {
         "previousServices": "Previous Services",
         "editProfile": "Edit Profile"
+      },
+      "form": {
+        "fullName": "Full Name",
+        "phoneNumber": "Phone Number"
       }
     }
   },

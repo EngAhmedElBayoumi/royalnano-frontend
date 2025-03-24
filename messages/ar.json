@@ -459,6 +459,10 @@
       "tabs": {
         "previousServices": "الخدمات السابقة",
         "editProfile": "تعديل الملف الشخصي"
+      },
+      "form": {
+        "fullName": "الاسم الكامل",
+        "phoneNumber": "رقم الهاتف"
       }
     }
   }

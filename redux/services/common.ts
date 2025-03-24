@@ -9,7 +9,18 @@ import { checkToken } from "@/lib/utils/checkToken";
 const baseUrl = config.apiUrl;
 
 // Define public API endpoints (No auth required)
-const PUBLIC_ENDPOINTS = ["core", "token", "website"];
+const PUBLIC_ENDPOINTS = [
+  "core/register",
+  "core/login",
+  "core/contact",
+  "core/forgot-password",
+  "core/logout",
+  "core/resend-otp",
+  "core/reset-password",
+  "core/verify-otp",
+  "token",
+  "website",
+];
 export const baseQuery = async (
   args: string | { url: string; body?: unknown },
   // eslint-disable-next-line
