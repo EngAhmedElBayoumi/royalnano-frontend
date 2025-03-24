@@ -3,14 +3,14 @@ import { deleteCookie, setCookie } from "cookies-next";
 
 interface AuthState {
   userId: number | null;
-  emailAddress: string | null;
+  email_address: string | null;
   accessToken: string | null;
   refreshToken: string | null;
 }
 
 const initialState: AuthState = {
   userId: null,
-  emailAddress: null,
+  email_address: null,
   accessToken: null,
   refreshToken: null,
 };
@@ -20,10 +20,10 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     setCredentials: (state, action: PayloadAction<AuthState>) => {
-      const { userId, emailAddress, accessToken, refreshToken } =
+      const { userId, email_address, accessToken, refreshToken } =
         action.payload;
       state.userId = userId;
-      state.emailAddress = emailAddress;
+      state.email_address = email_address;
       state.accessToken = accessToken;
       state.refreshToken = refreshToken;
       setCookie("accessToken", accessToken, {
@@ -33,7 +33,7 @@ const authSlice = createSlice({
     },
     logout: (state) => {
       state.userId = null;
-      state.emailAddress = null;
+      state.email_address = null;
       state.accessToken = null;
       state.refreshToken = null;
       deleteCookie("accessToken");

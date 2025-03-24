@@ -58,7 +58,7 @@ export const baseQuery = async (
           accessToken: refreshResult.data.access,
           refreshToken: refreshResult.data.refresh,
           userId: state.auth.userId,
-          emailAddress: state.auth.emailAddress,
+          email_address: state.auth.email_address,
         })
       );
 
@@ -70,16 +70,7 @@ export const baseQuery = async (
       });
       const profileData = await profileResponse.json();
 
-      api.dispatch(
-        setProfile({
-          name: profileData.name,
-          emailAddress: profileData.email_address,
-          phoneNumber: profileData.phone_number,
-          role: profileData.role,
-          profilePicture: profileData.profile_picture,
-          permissions: profileData.permissions,
-        })
-      );
+      api.dispatch(setProfile(profileData));
 
       accessToken = refreshResult.data.access;
     } else {

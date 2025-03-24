@@ -33,7 +33,7 @@ const ProfileForm = () => {
 
             <PhoneInputField
               control={form.control}
-              name="phoneNumber"
+              name="phone_number"
               label={t("phoneNumber")}
             />
           </div>

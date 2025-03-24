@@ -10,20 +10,20 @@ const baseUrl = config.apiUrl;
 const DashboardNavbar = () => {
   const methods = useForm();
   const name = useSelector((state: RootState) => state.profile.name);
-  const emailAddress = useSelector(
-    (state: RootState) => state.profile.emailAddress
+  const email_address = useSelector(
+    (state: RootState) => state.profile.email_address
   );
-  const profilePicture = useSelector(
-    (state: RootState) => state.profile.profilePicture
+  const profile_picture = useSelector(
+    (state: RootState) => state.profile.profile_picture
   );
 
   return (
     <nav className="absolute ltr:right-0 rtl:left-0 -top-8 flex justify-end items-center gap-2 pt-10">
       <Avatar>
-        <AvatarImage src={baseUrl + profilePicture} />
+        <AvatarImage src={baseUrl + profile_picture} />
         <AvatarFallback>{name}</AvatarFallback>
       </Avatar>
-      <h3>{name ?? emailAddress?.substring(0, emailAddress.indexOf("@"))}</h3>
+      <h3>{name ?? email_address?.substring(0, email_address.indexOf("@"))}</h3>
 
       <FormProvider {...methods}>
         <LanguageSwitcher />

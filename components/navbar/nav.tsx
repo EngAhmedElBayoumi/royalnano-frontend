@@ -31,11 +31,11 @@ const Nav = () => {
   const accessToken = getCookie("accessToken");
   const dispatch = useDispatch();
   const name = useSelector((state: RootState) => state.profile.name);
-  const emailAddress = useSelector(
-    (state: RootState) => state.profile.emailAddress
+  const email_address = useSelector(
+    (state: RootState) => state.profile.email_address
   );
-  const profilePicture = useSelector(
-    (state: RootState) => state.profile.profilePicture
+  const profile_picture = useSelector(
+    (state: RootState) => state.profile.profile_picture
   );
   const toggleNavbar = () => {
     setIsClicked(!isClicked);
@@ -115,12 +115,12 @@ const Nav = () => {
             <DropdownMenu dir={locale === "ar" ? "rtl" : "ltr"}>
               <DropdownMenuTrigger className="flex items-center gap-3">
                 <Avatar>
-                  <AvatarImage src={baseUrl + profilePicture} />
+                  <AvatarImage src={baseUrl + profile_picture} />
                   <AvatarFallback>{name}</AvatarFallback>
                 </Avatar>
                 <h3 className="text-primary">
                   {name ??
-                    emailAddress?.substring(0, emailAddress.indexOf("@"))}
+                    email_address?.substring(0, email_address.indexOf("@"))}
                 </h3>
                 <Image
                   src="/assets/icons/angle-down.svg"
@@ -235,12 +235,12 @@ const Nav = () => {
                   passHref
                 >
                   <Avatar>
-                    <AvatarImage src={baseUrl + profilePicture} />
+                    <AvatarImage src={baseUrl + profile_picture} />
                     <AvatarFallback>{name}</AvatarFallback>
                   </Avatar>
                   <h3 className="text-primary">
                     {name ??
-                      emailAddress?.substring(0, emailAddress.indexOf("@"))}
+                      email_address?.substring(0, email_address.indexOf("@"))}
                   </h3>
                 </Link>
               )}

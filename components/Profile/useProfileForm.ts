@@ -9,7 +9,7 @@ import { setProfile } from "@/redux/slices/profileSlice";
 
 const useProfileForm = () => {
   const [updateProfile, { isLoading }] = useUpdateProfileMutation();
-  const { name, phoneNumber } = useSelector(
+  const { name, phone_number } = useSelector(
     (state: RootState) => state.profile
   );
   const dispatch = useDispatch();
@@ -20,14 +20,14 @@ const useProfileForm = () => {
 
   interface FormValues {
     name: string;
-    phoneNumber: string;
+    phone_number: string;
   }
 
   const form = useForm<FormValues>({
     resolver: zodResolver(profileSchema),
     defaultValues: {
       name: name ?? "",
-      phoneNumber: phoneNumber ?? "",
+      phone_number: phone_number ?? "",
     },
   });
 
@@ -37,16 +37,7 @@ const useProfileForm = () => {
       setIsModalOpen(true);
     } else {
       // Update profile in Redux store
-      dispatch(
-        setProfile({
-          name: response?.data?.name,
-          emailAddress: response?.data?.email_address,
-          phoneNumber: response?.data?.phone_number,
-          role: response?.data?.role,
-          profilePicture: response?.data?.profile_picture,
-          permissions: response?.data?.permissions,
-        })
-      );
+      dispatch(setProfile(response?.data));
     }
   };
 

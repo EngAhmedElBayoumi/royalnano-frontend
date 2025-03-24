@@ -4,9 +4,8 @@ import { RootState } from "@/redux/store";
 import config from "@/lib/config";
 
 const ProfileSidebar = () => {
-  const { name, emailAddress, profilePicture, phoneNumber, role } = useSelector(
-    (state: RootState) => state.profile
-  );
+  const { name, email_address, profile_picture, phone_number, role } =
+    useSelector((state: RootState) => state.profile);
   const baseUrl = config.apiUrl;
 
   return (
@@ -15,8 +14,8 @@ const ProfileSidebar = () => {
         <div className="p-2 bg-white rounded-full absolute -top-20">
           <Image
             src={
-              profilePicture
-                ? baseUrl + profilePicture
+              profile_picture
+                ? baseUrl + profile_picture
                 : "/assets/images/user-placeholder.jpg"
             }
             alt="Profile"
@@ -28,8 +27,8 @@ const ProfileSidebar = () => {
 
         <section className="flex flex-col items-center gap-3 relative top-10 text-center text-gray font-[600] text-sm xl:text-[20px] ">
           <h2 className="text-primary">{name}</h2>
-          <p>{emailAddress}</p>
-          <p>{phoneNumber}</p>
+          <p>{email_address}</p>
+          <p>{phone_number}</p>
           <p className="xl:text-sm capitalize">{role}</p>
         </section>
       </div>

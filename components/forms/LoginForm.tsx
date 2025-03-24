@@ -35,7 +35,10 @@ export default function LoginForm() {
     mode: "onChange", // Validate on every change
   });
 
-  const onSubmit = async (data: { email_address: string; password: string }) => {
+  const onSubmit = async (data: {
+    email_address: string;
+    password: string;
+  }) => {
     try {
       const response = await Login(data).unwrap();
 
@@ -50,21 +53,12 @@ export default function LoginForm() {
       dispatch(
         setCredentials({
           userId: response.user_id,
-          emailAddress: response.email_address,
+          email_address: response.email_address,
           accessToken: response.access,
           refreshToken: response.refresh,
         })
       );
-      dispatch(
-        setProfile({
-          name: profileData.name,
-          emailAddress: profileData.email_address,
-          phoneNumber: profileData.phone_number,
-          role: profileData.role,
-          profilePicture: profileData.profile_picture,
-          permissions: profileData.permissions,
-        })
-      );
+      dispatch(setProfile(profileData));
       if (profileData.role !== "client") router.push("/dashboard");
       else router.push("/");
     } catch (error) {
