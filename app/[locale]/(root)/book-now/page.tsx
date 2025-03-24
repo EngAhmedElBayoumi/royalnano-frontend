@@ -6,14 +6,13 @@ export const metadata = {
   title: "Book Now | Royal Nano",
   description: "booking form",
 };
-export default function Page({params}:{params?:{locale:string}}) {
-  const locale = params?.locale ?? "en"; 
-console.log(locale)
+export default function Page() {
+
   return (
     <>
       <PageHeader title="book now" />
       <div className="relative top-[-100px]">
-        <BookingForm locale={locale} />
+        <BookingForm />
       </div>
     </>
   );

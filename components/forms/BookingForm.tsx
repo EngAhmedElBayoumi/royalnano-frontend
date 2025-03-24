@@ -26,7 +26,7 @@ type FormData = {
   status: string;
 };
 
-export default function BookingForm({ locale }: { locale: string }) {
+export default function BookingForm() {
   const form = useForm<FormData>({
     resolver: zodResolver(bookingValidation),
     defaultValues: {
@@ -42,10 +42,13 @@ export default function BookingForm({ locale }: { locale: string }) {
     },
   });
 
-  const [createClientRequest, { isLoading: isCreating }] = useCreateClientRequestMutation();
-  const { data: branchesData, isLoading: isBranchesLoading } = useGetBranchesQuery({});
-  const { data: servicesData, isLoading: isServicesLoading } = useGetServicesQuery({});
-const router = useRouter()
+  const [createClientRequest, { isLoading: isCreating }] =
+    useCreateClientRequestMutation();
+  const { data: branchesData, isLoading: isBranchesLoading } =
+    useGetBranchesQuery({});
+  const { data: servicesData, isLoading: isServicesLoading } =
+    useGetServicesQuery({});
+  const router = useRouter();
   const onSubmit = async (data: FormData) => {
     const payload = {
       full_name: data.full_name,
@@ -60,11 +63,11 @@ const router = useRouter()
     };
 
     try {
-    const res=  await createClientRequest(payload).unwrap();
-    console.log(res)
+      const res = await createClientRequest(payload).unwrap();
+      console.log(res);
       console.log("Request created successfully!");
-      router.push("/")
-      form.reset(); 
+      router.push("/");
+      form.reset();
     } catch (error) {
       console.error("Error creating request:", error);
     }
@@ -77,15 +80,17 @@ const router = useRouter()
     }
   }, [errors]);
 
-  const serviceNames = servicesData?.results?.map((service) => ({
-    value: String(service.id),
-    label: service.name,
-  })) || [];
+  const serviceNames =
+    servicesData?.results?.map((service) => ({
+      value: String(service.id),
+      label: service.name,
+    })) || [];
 
-  const branchesList = branchesData?.results?.map((branch) => ({
-    value: String(branch.id),
-    label: branch.name,
-  })) || [];
+  const branchesList =
+    branchesData?.results?.map((branch) => ({
+      value: String(branch.id),
+      label: branch.name,
+    })) || [];
 
   return (
     <Form {...form}>
@@ -94,7 +99,7 @@ const router = useRouter()
         className="gap-5 flex flex-col pt-[35px] pr-10 pl-7"
       >
         <div className="grid grid-cols-1 lg:grid-cols-2">
-          <div className={`${locale === "ar" ? "ml-4" : "mr-4"} flex flex-col gap-4`}>
+          <div className="rtl:ml-4 ltr:mr-4 flex flex-col gap-4">
             <TextInput
               control={form.control}
               name="full_name"
@@ -135,14 +140,16 @@ const router = useRouter()
               label="Phone Number"
               control={form.control}
             /> */}
-              <PhoneInputField
-               name="phone_number"
+            <PhoneInputField
+              name="phone_number"
               //  placeholder="Phone Number"
-               label="Phone Number"
-               control={form.control}
+              label="Phone Number"
+              control={form.control}
             />
             {errors.phone_number && (
-              <p className="text-red-500 text-sm">{errors.phone_number.message}</p>
+              <p className="text-red-500 text-sm">
+                {errors.phone_number.message}
+              </p>
             )}
             <TextInput
               name="car_model"
