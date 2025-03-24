@@ -2,19 +2,34 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-// import { useGetGalleryQuery } from "@/redux/services/galleryApi";
+import { useGetGalleryQuery } from "@/redux/services/galleryApi";
 import GalleryItemModal from "./GalleryItemModal";
+import { useTranslations } from "next-intl";
+import { Paginator } from "primereact/paginator";
+import LoadingError from "@/components/dashboard/LoadingError";
+import GallerySkeleton from "./GallerySkeleton";
 
 interface GalleryItem {
-  type: string;
-  images: string[];
-  videoSrc: string;
+  id: number;
+  title: string;
+  item_type: 'image' | 'video';
+  image: string | null;
+  video: string | null;
+  created_at: string;
 }
 
 const Gallery = () => {
-  // const { data, isLoading, error } = useGetGalleryQuery();
+  const t = useTranslations("website.gallery");
+  const [page, setPage] = useState(1);
+  const { data, isLoading, error } = useGetGalleryQuery({
+    search: "",
+    ordering: "id",
+    page,
+    page_size: 12
+  });
   const [isModalOpen, setModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<GalleryItem | null>(null);
+  const [activeTab, setActiveTab] = useState('all');
 
   const handleOpenModal = (item: GalleryItem) => {
     setSelectedItem(item);
@@ -26,96 +41,95 @@ const Gallery = () => {
     setSelectedItem(null);
   };
 
-  const images = [
-    "/assets/images/gallery/gallryTop1.png",
-    "/assets/images/gallery/gallryTop2.png",
-    "/assets/images/gallery/gallryTop5.png",
-    "/assets/images/gallery/gallryTop1.png",
-    "/assets/images/gallery/gallryTop2.png",
-    "/assets/images/gallery/gallryTop5.png",
-    "/assets/images/gallery/gallryTop1.png",
-    "/assets/images/gallery/gallryTop2.png",
-    "/assets/images/gallery/gallryTop5.png",
-  ];
+  if (isLoading) {
+    return (
+      <section className="py-10">
+        <h2 className="text-center text-md xl:text-lg font-[600] mb-6 text-primary">
+          {t('title')}
+        </h2>
+        <GallerySkeleton />
+      </section>
+    );
+  }
 
-  const galleryItems = images.map((src) => ({
-    type: "image",
-    images: [src, src],
-    videoSrc: "",
-  }));
+  if (error) {
+    return <LoadingError />;
+  }
+
+  const galleryItems = Array.isArray(data) ? data : [];
+  const totalRecords = galleryItems.length;
+
+  const filteredItems = activeTab === 'all' 
+    ? galleryItems 
+    : galleryItems.filter(item => item.item_type === activeTab);
 
   return (
     <section className="py-10">
       <h2 className="text-center text-md xl:text-lg font-[600] mb-6 text-primary">
-        Latest Shots
+        {t('title')}
       </h2>
-      <Tabs defaultValue="all" className="w-full">
+      <Tabs 
+        defaultValue="all" 
+        className="w-full"
+        onValueChange={(value) => setActiveTab(value)}
+      >
         <TabsList className="text-center w-full bg-transparent mb-5">
-          <TabsTrigger
-            value="all"
-            className="mx-2 text-md xl:text-lg font-[600]"
-          >
-            All
+          <TabsTrigger value="all" className="mx-2 text-md xl:text-lg font-[600]">
+            {t('tabs.all')}
           </TabsTrigger>
-          <TabsTrigger
-            value="images"
-            className="mx-2 text-md xl:text-lg font-[600]"
-          >
-            Images
+          <TabsTrigger value="image" className="mx-2 text-md xl:text-lg font-[600]">
+            {t('tabs.images')}
           </TabsTrigger>
-          <TabsTrigger
-            value="videos"
-            className="mx-2 text-md xl:text-lg font-[600]"
-          >
-            Videos
+          <TabsTrigger value="video" className="mx-2 text-md xl:text-lg font-[600]">
+            {t('tabs.videos')}
           </TabsTrigger>
         </TabsList>
-        <TabsContent value="all">
-          <section className="flex justify-center">
+
+        <TabsContent value={activeTab}>
+          <section className="flex justify-center flex-col items-center">
             <main className="main-container grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {galleryItems.map((item, index) => (
-                <div
-                  key={index}
-                  className="overflow-hidden rounded-lg shadow-lg cursor-pointer"
-                  onClick={() => handleOpenModal(item)}
-                >
-                  <Image
-                    width={305}
-                    height={310}
-                    src={item.images[0]}
-                    alt={`Gallery Image ${index + 1}`}
-                    className="w-full h-auto"
-                  />
-                </div>
-              ))}
+              {filteredItems.length > 0 ? (
+                filteredItems.map((item) => (
+                  <div
+                    key={item.id}
+                    className="overflow-hidden rounded-lg shadow-lg cursor-pointer"
+                    onClick={() => handleOpenModal(item)}
+                  >
+                    {item.item_type === 'video' ? (
+                      <video
+                        src={item.video || ''}
+                        className="w-full h-auto"
+                        controls={false}
+                      />
+                    ) : (
+                      <Image
+                        width={305}
+                        height={310}
+                        src={item.image || ''}
+                        alt={item.title}
+                        className="w-full h-auto"
+                      />
+                    )}
+                  </div>
+                ))
+              ) : (
+                <p className="col-span-full text-center">{t('noData')}</p>
+              )}
             </main>
+            {totalRecords > 12 && (
+              <div className="mt-6">
+                <Paginator
+                  first={(page - 1) * 12}
+                  rows={12}
+                  totalRecords={totalRecords}
+                  onPageChange={(e) => setPage(e.page + 1)}
+                />
+              </div>
+            )}
           </section>
-        </TabsContent>
-        <TabsContent value="images">
-          <section className="flex justify-center">
-            <main className="main-container grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {galleryItems.map((item, index) => (
-                <div
-                  key={index}
-                  className="overflow-hidden rounded-lg shadow-lg cursor-pointer"
-                  onClick={() => handleOpenModal(item)}
-                >
-                  <Image
-                    width={305}
-                    height={310}
-                    src={item.images[0]}
-                    alt={`Gallery Image ${index + 1}`}
-                    className="w-full h-auto"
-                  />
-                </div>
-              ))}
-            </main>
-          </section>
-        </TabsContent>
-        <TabsContent value="videos">
-          <p className="text-center">No videos available.</p>
         </TabsContent>
       </Tabs>
+
       {selectedItem && (
         <GalleryItemModal
           isOpen={isModalOpen}

@@ -524,6 +524,16 @@
         "fullName": "Full Name",
         "phoneNumber": "Phone Number"
       }
+    },
+    "gallery": {
+      "title": "Latest Shots",
+      "tabs": {
+        "all": "All",
+        "images": "Images",
+        "videos": "Videos"
+      },
+      "noData": "No gallery items found",
+      "loadingError": "Error loading gallery data"
     }
   },
   "Purchase": {
