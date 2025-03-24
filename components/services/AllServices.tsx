@@ -1,77 +1,64 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { useTranslations } from "next-intl";
 import { useGetServicesQuery } from "@/redux/services/website/servicesApi";
-import "swiper/css";
-import "swiper/css/pagination";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination } from "swiper/modules";
 import ServiceCard from "@/components/cards/ServiceCard";
+import { Paginator } from "primereact/paginator";
+import LoadingError from "@/components/dashboard/LoadingError";
+import ServicesSkeleton from "./ServicesSkeleton";
+
+interface Service {
+  name: string;
+  id: number;
+  alias: string;
+  image: string;
+}
 
 const AllServices = () => {
   const t = useTranslations("website.services");
-  const { data, isLoading, error } = useGetServicesQuery({});
+  const [page, setPage] = useState(1);
+  const { data, isLoading, error } = useGetServicesQuery({
+    page,
+    page_size: 8,
+  });
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) {
-    if ("message" in error) {
-      return <div>Error: {error.message}</div>;
-    }
-    if ("error" in error) {
-      return <div>Error: {error.error}</div>;
-    }
-    return <div>An error occurred</div>;
-  }
+  const services = data?.results || [];
+  const totalRecords = data?.count || 0;
 
   return (
     <section className="pb-8 bg-white relative top-[-100px] animate-on-scroll">
       <h2 className="text-center text-md lg:text-lg xl:text-xl font-bold text-primary">
         {t("title")}
       </h2>
-      <Swiper
-        spaceBetween={30}
-        breakpoints={{
-          768: {
-            slidesPerView: 2, // 2 slides on medium screens
-          },
-          992: {
-            slidesPerView: 3, // 3 slides on larger screens
-          },
-          1200: {
-            slidesPerView: 4, // 4 slides on extra large screens
-          },
-        }}
-        autoplay={{
-          delay: 2500,
-          disableOnInteraction: false,
-        }}
-        pagination={{
-          clickable: true,
-          renderBullet: (index, className) => {
-            return `<span class="${className} custom-bullet"></span>`;
-          },
-        }}
-        modules={[Autoplay, Pagination]}
-        className="main-container"
-      >
-        {data?.results?.map(
-          (service: {
-            name: string;
-            id: number;
-            alias: string;
-            image: string;
-          }) => (
-            <SwiperSlide key={service?.id} className="pb-10">
+      <div className="flex justify-center flex-col items-center">
+        {error ? (
+          <LoadingError />
+        ) : isLoading ? (
+          <ServicesSkeleton />
+        ) : (
+          <main className="main-container grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {services.map((service: Service) => (
               <ServiceCard
+                key={service.id}
                 title={service.name}
                 alias={service.alias}
                 imageSrc={service.image}
                 book={true}
               />
-            </SwiperSlide>
-          )
+            ))}
+          </main>
         )}
-      </Swiper>
+      </div>
+      {totalRecords > 8 && (
+        <div className="mt-6 flex justify-center">
+          <Paginator
+            first={(page - 1) * 8}
+            rows={8}
+            totalRecords={totalRecords}
+            onPageChange={(e) => setPage(e.page + 1)}
+          />
+        </div>
+      )}
     </section>
   );
 };

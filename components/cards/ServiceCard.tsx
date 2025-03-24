@@ -21,9 +21,9 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
   book,
 }) => {
   return (
-    <div className="border border-primary rounded-10 overflow-hidden max-w-[274px]">
+    <div className="border border-primary rounded-10 overflow-hidden">
       <Image
-        src={imageSrc??"/assets/images/diamond-hybrid.png"}
+        src={imageSrc ?? "/assets/images/diamond-hybrid.png"}
         alt={title}
         width={270}
         height={200}
