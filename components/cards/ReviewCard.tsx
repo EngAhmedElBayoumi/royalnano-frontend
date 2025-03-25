@@ -40,7 +40,6 @@ const ReviewCard: React.FC<ReviewCardProps> = ({
                 width={18}
                 height={18}
                 key={i}
-                layout="responsive"
               />
             ))}
             {Array.from({ length: 5 - Math.round(rating) }, (_, i) => (
