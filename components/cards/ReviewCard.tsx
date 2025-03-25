@@ -16,15 +16,18 @@ const ReviewCard: React.FC<ReviewCardProps> = ({
 }) => {
   return (
     <section className="h-[370px] xl:h-[410px] flex items-center">
-      <div className="flex flex-col items-center pt-6 px-10 rounded-xl xl:rounded-2xl bg-lightGray h-[250px] xl:h-[280px] relative">
-        { image?
-        <Image
-          src={image}
-          alt={image}
-          width={130}
-          height={130}
-          className="rounded-full border-8 border-white absolute -top-20"
-        /> :""}
+      <div className="flex flex-col items-center pt-6 px-10 rounded-xl xl:rounded-2xl bg-lightGray h-[250px] xl:h-[280px] relative top-5">
+        {image ? (
+          <Image
+            src={image}
+            alt={image}
+            width={130}
+            height={130}
+            className="rounded-full border-8 border-white absolute -top-20 h-[130px] object-cover"
+          />
+        ) : (
+          ""
+        )}
         <section className="flex flex-col items-center gap-3 relative top-10">
           <h3 className="font-[500] md:text-sm xl:text-md text-primary">
             {name}
