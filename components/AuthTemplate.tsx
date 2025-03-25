@@ -8,8 +8,8 @@ const AuthTemplate = ({
   Form: React.ComponentType;
 }) => {
   return (
-    <div className="flex justify-center items-center lg:h-screen h-[90%] mt-10 lg:mt-0 bg-gray-100">
-      <main className="bg-[#EBECE4]  pb-11 lg:pb-7 mb-4 lg:mb-0 text-black flex flex-col lg:flex-row justify-start items-start  rounded w-[80%]   h-fit rounded-tl-[100px] rounded-br-[100px]">
+    <div className="flex justify-center items-center py-3 bg-gray-100">
+      <main className="bg-[#EBECE4] pb-11 lg:pb-7 mb-4 lg:mb-0 text-black flex flex-col lg:flex-row justify-start items-start  rounded w-[80%]   h-fit rounded-tl-[100px] rounded-br-[100px]">
         {/* left side */}
         <div className="flex justify-start pt-11 items-center flex-col w-[100%]">
           <Image
