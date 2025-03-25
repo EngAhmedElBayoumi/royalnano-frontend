@@ -32,7 +32,7 @@ export default function LoginForm() {
       email_address: "",
       password: "",
     },
-    mode: "onChange", // Validate on every change
+    // mode: "onChange", // Validate on every change
   });
 
   const onSubmit = async (data: {

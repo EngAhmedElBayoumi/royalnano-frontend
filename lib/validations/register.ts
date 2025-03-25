@@ -10,7 +10,7 @@ export const registerValidation = z.object({
   password: z
     .string()
     .nonempty("Password is required")
-    .min(3, "Password must be at least 3 characters")
+    .min(6, "Password must be at least 6 characters")
     .max(1000, "Password is too long"),
 
   // confirmPassword: z.string().nonempty("Confirm password is required"),
@@ -25,10 +25,10 @@ export const registerValidation = z.object({
   //   .nonempty("Last name is required")
   //   .min(2, "Last name must be at least 2 characters long"),
 
- phone_number: z
-         .string()
-         .nonempty("Phone number is required")
-         .regex(phoneRegex, "Invalid phone number"),
+  phone_number: z
+    .string()
+    .nonempty("Phone number is required")
+    .regex(phoneRegex, "Invalid phone number"),
 });
 // .refine((data) => data.password === data.confirmPassword, {
 //   message: "Passwords must match",

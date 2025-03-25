@@ -27,7 +27,7 @@ export default function RegisterForm() {
       password: "",
       phone_number: "",
     },
-    mode: "onChange",
+    // mode: "onChange",
   });
 
   const onSubmit = async (data: {
