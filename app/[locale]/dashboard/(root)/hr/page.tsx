@@ -88,7 +88,6 @@ function HrPage() {
       ),
       content: <Bonuses />,
     },
-
     {
       label: t("applicants"),
       permissionKey: "applicant",

@@ -10,12 +10,43 @@ const intlMiddleware = createMiddleware({
 });
 // Define permission requirements for specific routes
 const permissionRoutes = {
-  "/dashboard/inventory": "inventoryitem",
-  "/dashboard/sales": "salesinvoice",
-  "/dashboard/hr": "employee",
-  "/dashboard/clients": "customer",
-  "/dashboard/branches": "branch",
-  "/dashboard/website": "service",
+  "/dashboard/inventory": [
+    "inventoryitem",
+    "expensecategory",
+    "preorder",
+    "movement",
+    "stockadjustment",
+  ],
+  "/dashboard/sales": [
+    "salesinvoice",
+    "customer",
+    "quotation",
+    "order",
+    "invoice",
+    "clientrequest",
+  ],
+  "/dashboard/hr": [
+    "employee",
+    "department",
+    "attendance",
+    "leaverequest",
+    "bonusdeduction",
+    "applicant",
+    "interview",
+    "competition",
+    "evaluation",
+  ],
+  "/dashboard/clients": ["customer"],
+  "/dashboard/branches": ["branch"],
+  "/dashboard/website": ["service", "gallery", "contact", "customerreview"],
+  "/dashboard/purchase": [
+    "expensecategory",
+    "invoicedetail",
+    "purchaseorder",
+    "purchaserequest",
+    "supplier",
+    "warehouse",
+  ],
 };
 
 export async function middleware(req: NextRequest) {
@@ -59,10 +90,12 @@ export async function middleware(req: NextRequest) {
       permissionRoutes
     )) {
       if (req.nextUrl.pathname.includes(route)) {
-        // Check if user has the required permission
-        const hasPermission = userPermissions[requiredPermissions]?.view;
+        // Check if user has any of the required permissions
+        const hasAnyPermission = requiredPermissions.some(
+          (permission) => userPermissions[permission]?.view
+        );
 
-        if (!hasPermission) {
+        if (!hasAnyPermission) {
           // Redirect to unauthorized page or dashboard
           return NextResponse.redirect(new URL("/en/forbidden", req.url));
         }

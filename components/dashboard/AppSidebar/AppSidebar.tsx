@@ -63,7 +63,10 @@ export function AppSidebar() {
                     : currentPath.includes(link.path);
 
                 const hasPermission =
-                  permissions[link.permission]?.view || link.name === "home";
+                  link.name === "home" ||
+                  link.permissions.some(
+                    (permission) => permissions[permission]?.view
+                  );
 
                 return (
                   hasPermission && (
