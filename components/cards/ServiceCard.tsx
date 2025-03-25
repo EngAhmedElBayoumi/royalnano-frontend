@@ -1,7 +1,8 @@
 import React from "react";
 import Image from "next/image";
-import CustomButton from "@/components/formFields/CustomButton";
 import { Link } from "@/i18n/routing";
+import { useTranslations } from "next-intl";
+import CustomButton from "@/components/formFields/CustomButton";
 
 interface ServiceCardProps {
   title: string;
@@ -20,6 +21,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
   imageSrc,
   book,
 }) => {
+  const t = useTranslations("website.services");
   return (
     <div className="border border-primary rounded-10 overflow-hidden">
       <Image
@@ -37,7 +39,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
           {book && (
             <Link href="/book-now" passHref>
               <CustomButton
-                text="book now"
+                text={t("bookNow")}
                 variant="outline"
                 className="capitalize h-[35px] border-primary !text-primary"
               />
@@ -46,7 +48,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
         </div>
         {alias && (
           <p>
-            alias: <span className="text-subtitle">{alias}</span>
+            {t("alias")} : <span className="text-subtitle">{alias}</span>
           </p>
         )}
         {warranty && (

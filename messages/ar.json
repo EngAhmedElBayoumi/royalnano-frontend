@@ -423,6 +423,9 @@
     },
     "services": {
       "title": "خدماتنا",
+      "alias": "الاسم المستعار",
+      "bookNow": "احجز الآن",
+      "seeTheDifference": "شاهد الفرق",
       "maxPro": {
         "name": "ماكس برو",
         "type": "حماية الطلاء"

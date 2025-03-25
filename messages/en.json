@@ -483,6 +483,9 @@
     },
     "services": {
       "title": "Our Services",
+      "alias": "Alias",
+      "bookNow": "book now",
+      "seeTheDifference": "see the difference",
       "maxPro": {
         "name": "Max Pro",
         "type": "Paint Protection"
