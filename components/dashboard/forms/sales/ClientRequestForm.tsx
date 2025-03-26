@@ -14,8 +14,8 @@ import { clientRequestSchema } from "@/lib/validations/dashboard/sales/clientReq
 import PhoneInputField from "@/components/formFields/PhoneInputField";
 
 interface ClientRequestFormProps {
-  defaultValues?: ClientRequestFormValues; 
-  onSubmit?: (data: ClientRequestFormValues) => Promise<void>; 
+  defaultValues?: ClientRequestFormValues;
+  onSubmit?: (data: ClientRequestFormValues) => Promise<void>;
 }
 
 export interface ClientRequestFormValues {
@@ -26,29 +26,35 @@ export interface ClientRequestFormValues {
   status: string;
   description: string;
   order_note: string;
-  service: number; 
-  branch: number; 
+  service: number;
+  branch: number;
 }
 
-const ClientRequestForm = ({ defaultValues, onSubmit }: ClientRequestFormProps) => {
+const ClientRequestForm = ({
+  defaultValues,
+  onSubmit,
+}: ClientRequestFormProps) => {
   const t = useTranslations("Sales");
 
-  
-  const { data: branches = [], isLoading: isBranchesLoading } = useGetBranchesQuery({});
-  const { data: services = [], isLoading: isServicesLoading } = useGetServicesQuery({});
+  const { data: branches = [], isLoading: isBranchesLoading } =
+    useGetBranchesQuery({});
+  const { data: services = [], isLoading: isServicesLoading } =
+    useGetServicesQuery({});
 
-  
-  const branchOptions = branches?.results?.map((branch: { id: number; name: string }) => ({
-    value: branch.id.toString(), 
-    label: branch.name, 
-  }));
+  const branchOptions = branches?.results?.map(
+    (branch: { id: number; name: string }) => ({
+      value: branch.id.toString(),
+      label: branch.name,
+    })
+  );
 
-  const serviceOptions = services?.results?.map((service: { id: number; name: string }) => ({
-    value: service.id.toString(), 
-    label: service.name, 
-  }));
+  const serviceOptions = services?.results?.map(
+    (service: { id: number; name: string }) => ({
+      value: service.id.toString(),
+      label: service.name,
+    })
+  );
 
- 
   const form = useForm<ClientRequestFormValues>({
     resolver: zodResolver(clientRequestSchema),
     defaultValues: defaultValues || {
@@ -59,23 +65,19 @@ const ClientRequestForm = ({ defaultValues, onSubmit }: ClientRequestFormProps) 
       status: "pending",
       description: "mmmmmmmmmmmmmmmmm",
       order_note: "mmmmmmmmmmmmmmmmm",
-      service: 1, 
-      branch: 1, 
+      service: 1,
+      branch: 1,
     },
   });
 
- 
   const [createClientRequest, { isLoading }] = useCreateClientRequestMutation();
 
- 
   const handleSubmit = async (data: ClientRequestFormValues) => {
     console.log("Form data submitted:", data);
     try {
       if (onSubmit) {
-        
         await onSubmit(data);
       } else {
-        
         const result = await createClientRequest(data).unwrap();
         console.log("Client request created successfully!", result);
       }
@@ -86,10 +88,13 @@ const ClientRequestForm = ({ defaultValues, onSubmit }: ClientRequestFormProps) 
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(handleSubmit, (errors) => console.error("Validation errors:", errors))}>
+      <form
+        onSubmit={form.handleSubmit(handleSubmit, (errors) =>
+          console.error("Validation errors:", errors)
+        )}
+      >
         <section className="min-h-[60vh]">
           <div className="grid sm:grid-cols-2 gap-x-4 gap-y-2 xl:gap-y-5 lg:gap-x-10">
-           
             <TextInput
               control={form.control}
               name="full_name"
@@ -97,15 +102,13 @@ const ClientRequestForm = ({ defaultValues, onSubmit }: ClientRequestFormProps) 
               placeholder={t("ClientRequest.fullName")}
             />
 
-<PhoneInputField
-            control={form.control}
-           name="phone_number"
-           label={t("ClientRequest.phoneNumber")}
-          //  placeholder={t("ClientRequest.phoneNumber")}
-          />
-            
+            <PhoneInputField
+              control={form.control}
+              name="phone_number"
+              label={t("ClientRequest.phoneNumber")}
+              //  placeholder={t("ClientRequest.phoneNumber")}
+            />
 
-        
             <TextInput
               control={form.control}
               name="car_type"
@@ -113,7 +116,6 @@ const ClientRequestForm = ({ defaultValues, onSubmit }: ClientRequestFormProps) 
               placeholder={t("ClientRequest.carType")}
             />
 
-       
             <TextInput
               control={form.control}
               name="car_model"
@@ -121,7 +123,6 @@ const ClientRequestForm = ({ defaultValues, onSubmit }: ClientRequestFormProps) 
               placeholder={t("ClientRequest.carModel")}
             />
 
-           
             <TextInput
               control={form.control}
               name="status"
@@ -129,7 +130,6 @@ const ClientRequestForm = ({ defaultValues, onSubmit }: ClientRequestFormProps) 
               placeholder={t("ClientRequest.status")}
             />
 
-            
             <TextInput
               control={form.control}
               name="description"
@@ -137,7 +137,6 @@ const ClientRequestForm = ({ defaultValues, onSubmit }: ClientRequestFormProps) 
               placeholder={t("ClientRequest.description")}
             />
 
-           
             <TextInput
               control={form.control}
               name="order_note"
@@ -145,7 +144,6 @@ const ClientRequestForm = ({ defaultValues, onSubmit }: ClientRequestFormProps) 
               placeholder={t("ClientRequest.orderNote")}
             />
 
-            
             <CustomSelect
               control={form.control}
               name="service"
@@ -156,7 +154,6 @@ const ClientRequestForm = ({ defaultValues, onSubmit }: ClientRequestFormProps) 
               readonly={isServicesLoading}
             />
 
-      
             <CustomSelect
               control={form.control}
               name="branch"
@@ -169,9 +166,7 @@ const ClientRequestForm = ({ defaultValues, onSubmit }: ClientRequestFormProps) 
           </div>
         </section>
 
-     
         <div className="flex justify-end gap-2 mt-5">
-         
           <Link href={`/dashboard/sales?tab=${t("salesQuotation")}`} passHref>
             <CustomButton
               text={t("cancel")}
@@ -179,12 +174,11 @@ const ClientRequestForm = ({ defaultValues, onSubmit }: ClientRequestFormProps) 
             />
           </Link>
 
-      
           <CustomButton
             text={t("save")}
             type="submit"
             className="text-white rounded-lg min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
-            disabled={isLoading}
+            isDisabled={isLoading}
           />
         </div>
       </form>
