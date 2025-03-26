@@ -21,12 +21,12 @@ export interface JobsFormValues {
   permissions: number[];
 }
 
-const JobsForm = ({
-  onSubmit,
-  defaultValues,
-  isLoading,
-  permissionsOptions,
-}: JobsFormProps) => {
+const JobsForm: React.FC<JobsFormProps> = ({
+    onSubmit,
+    defaultValues,
+    isLoading,
+    permissionsOptions,
+  }) => {
   const form = useForm<JobsFormValues>({
     resolver: zodResolver(jobsSchema),
     defaultValues: defaultValues || {

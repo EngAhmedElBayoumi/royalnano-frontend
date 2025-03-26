@@ -1,67 +1,84 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { format } from "date-fns";
 import {
-  useUpdateAttendanceMutation,
-  useGetAttendanceByIdQuery,
-} from "@/redux/services/dashboard/hr/attendanceApi";
+  useUpdateJobsMutation,
+  useGetJobsByIdQuery,
+} from "@/redux/services/dashboard/hr/jobsApi";
+import { useGetPermissionsQuery } from "@/redux/services/dashboard/hr/permissionsApi";
 import EditPage from "@/components/dashboard/EditPage";
-import AttendanceForm, {
-  AttendanceFormValues,
-} from "@/components/dashboard/forms/hr/AttendanceForm";
+import JobsForm from "@/components/dashboard/forms/hr/JobsForm";
+import LoadingSpinner from "@/components/shared/LoadingSpinner";
 
-export default function EditAttendance() {
+export default function EditJobs() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
-  const t = useTranslations("hr");
-  const { data, isLoading, error } = useGetAttendanceByIdQuery(id);
-  const [updateAttendance, { isLoading: submitting }] =
-    useUpdateAttendanceMutation();
-  const checkInDate =
-    data && data?.check_in
-      ? new Date(`${data.date}T${data.check_in}`)
-      : new Date();
-  const checkOutDate =
-    data && data?.check_out
-      ? new Date(`${data.date}T${data.check_out}`)
-      : new Date();
+  const globalT = useTranslations();
+  const jobsT = useTranslations("hr.jobs");
+  const errorsT = useTranslations("hr.errors");
 
-  const defaultValues: AttendanceFormValues = data && {
-    ...data,
-    employee: data.employee.id,
-    branch: data.branch.id,
-    check_in: checkInDate,
-    check_out: checkOutDate,
-    working_hours:
-      (checkOutDate.getTime() - checkInDate.getTime()) / (1000 * 60 * 60),
-    latitude: data.latitude ?? undefined,
-    longitude: data.longitude ?? undefined,
+  // Fetch job data
+  const { data: jobData, isLoading, error } = useGetJobsByIdQuery(id);
+  
+  // Fetch permissions data
+  const { 
+    data: permissionsData, 
+    isLoading: isLoadingPermissions,
+    error: permissionsError 
+  } = useGetPermissionsQuery({});
+
+  const [updateJobs, { isLoading: submitting }] = useUpdateJobsMutation();
+
+  // Prepare permissions options for MultiSelect
+  const permissionsOptions = permissionsData?.map((permission) => ({
+    value: permission.id.toString(),
+    label: permission.name
+  })) || [];
+
+  // Prepare default values for the form
+  const defaultValues = jobData ? {
+    name: jobData.name,
+    permissions: jobData.permissions.map(p => p.id.toString())
+  } : undefined;
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleSubmit = async (data: any) => {
+    // try {
+      const response = await updateJobs({ 
+        id: id!, 
+        data: {
+          name: data.name,
+          permissions: data.permissions.map(Number)
+        }
+      });
+      if ('error' in response) throw new Error(errorsT("updateError"));
+    //   return response;
+    // } catch (error) {
+    //   throw error;
+    // }
   };
 
-  const handleSubmit = async (data: AttendanceFormValues) => {
-    const payload = {
-      ...data,
-      employee: Number(data.employee),
-      branch: Number(data.branch),
-      date: format(data.check_in, "yyyy-MM-dd"),
-      check_in: format(data.check_in, "HH:mm:ss"),
-      check_out: format(data.check_out, "HH:mm:ss"),
-    };
-    const response = await updateAttendance({ id, data: payload });
-    if (response.error) throw new Error("edit failed");
-  };
+  if (isLoading || isLoadingPermissions) {
+    return <LoadingSpinner />;
+  }
+
+  if (error || permissionsError) {
+    return <div>{error ? errorsT("fetchError") : errorsT("fetchPermissionsError")}</div>;
+  }
 
   return (
     <EditPage
-      title={t("attendance.editAttendance")}
+      title={jobsT("editJob")}
       data={defaultValues}
       isLoading={isLoading}
       error={error}
       submitting={submitting}
       onSubmit={handleSubmit}
-      Form={AttendanceForm}
-      redirectPath={`/dashboard/hr?tab=${t("tabs.attendance")}`}
+      Form={JobsForm}
+      formProps={{ permissionsOptions }}  // Pass additional props here
+      redirectPath={`/dashboard/hr?tab=${globalT("hr.tabs.jobs")}`}
+      successMessage={jobsT("jobUpdated")}
+      errorMessage={errorsT("updateError")}
     />
   );
 }

@@ -107,7 +107,7 @@
       "vacation": "الإجازات",
       "bonuses": "المكافآت والخصومات",
       "applicants": "المتقدمين",
-      "employees": "الموظفون",
+      "employees": "الموظفين",
       "interviews": "المقابلات",
       "competitions": "المسابقات",
       "evaluations": "التقييمات",
@@ -118,7 +118,7 @@
       "maxLeavePercentage": "النسبة القصوى للإجازة",
       "noDepartmentsDataFound": "لا توجد بيانات للأقسام",
       "addDepartment": "إضافة قسم",
-      "editDepartment": "تعديل القسم"
+      "editDepartment": "تعديل قسم"
     },
     "competitions": {
       "department": "القسم",
@@ -128,13 +128,27 @@
       "endDate": "تاريخ الانتهاء",
       "winner": "الفائز",
       "createCompetition": "إنشاء مسابقة",
-      "editCompetition": "تعديل المسابقة",
+      "editCompetition": "تعديل مسابقة",
       "noCompetitions": "لا توجد مسابقات",
       "deleteConfirmation": "حذف المسابقة",
-      "deleteConfirmationMessage": "هل أنت متأكد من حذف هذه المسابقة؟",
+      "deleteConfirmationMessage": "هل أنت متأكد أنك تريد حذف هذه المسابقة؟",
       "error": "خطأ",
-      "creationFailed": "فشل في إنشاء المسابقة",
-      "editFailed": "فشل في تعديل المسابقة"
+      "creationFailed": "فشل إنشاء المسابقة",
+      "editFailed": "فشل تعديل المسابقة"
+    },
+    "interviews": {
+      "interviewers": "المحاورون",
+      "interview_date": "تاريخ المقابلة",
+      "status": "الحالة",
+      "applicant": "المتقدم",
+      "noInterviewDataFound": "لا توجد بيانات للمقابلات",
+      "addInterview": "إضافة مقابلة",
+      "editInterview": "تعديل مقابلة",
+      "statuses": {
+        "scheduled": "مجدولة",
+        "completed": "مكتملة",
+        "rejected": "مرفوضة"
+      }
     },
     "employees": {
       "name": "الاسم",
@@ -145,11 +159,11 @@
       "address": "العنوان",
       "branch": "الفرع",
       "department": "القسم",
-      "isUser": "مستخدم",
       "password": "كلمة المرور",
+      "isUser": "مستخدم",
       "noEmployeesDataFound": "لا توجد بيانات للموظفين",
       "addEmployee": "إضافة موظف",
-      "editEmployee": "تعديل الموظف"
+      "editEmployee": "تعديل موظف"
     },
     "bonuses": {
       "employee": "الموظف",
@@ -157,9 +171,9 @@
       "reason": "السبب",
       "type": "النوع",
       "date": "التاريخ",
-      "addBonus": "إضافة مكافئة أو خصم",
-      "editBonus": "تعديل مكافئة أو خصم",
-      "noBonusesDataFound": "لا توجد بيانات للمكافئات و الخصومات"
+      "addBonus": "إضافة مكافأة أو خصم",
+      "editBonus": "تعديل مكافأة أو خصم",
+      "noBonusesDataFound": "لا توجد بيانات للمكافآت أو الخصومات"
     },
     "attendance": {
       "employee": "الموظف",
@@ -170,7 +184,7 @@
       "working_hours": "ساعات العمل",
       "date": "التاريخ",
       "addAttendance": "إضافة حضور",
-      "editAttendance": "تعديل الحضور",
+      "editAttendance": "تعديل حضور",
       "noAttendanceDataFound": "لا توجد بيانات للحضور",
       "setLocation": "تعيين الموقع",
       "selectAttendanceLocation": "اختر موقع الحضور"
@@ -182,7 +196,7 @@
       "status": "الحالة",
       "reason": "السبب",
       "addVacation": "إضافة إجازة",
-      "editVacation": "تعديل الإجازة",
+      "editVacation": "تعديل إجازة",
       "noVacationDataFound": "لا توجد بيانات للإجازات"
     },
     "applicants": {
@@ -195,55 +209,27 @@
       "current_job_title": "المسمى الوظيفي الحالي",
       "current_salary": "الراتب الحالي",
       "addApplicant": "إضافة متقدم",
-      "editApplicant": "تعديل المتقدم",
+      "editApplicant": "تعديل متقدم",
       "noApplicantDataFound": "لا توجد بيانات للمتقدمين"
-    },
-    "interviews": {
-      "interviewers": "المقابلون",
-      "interview_date": "تاريخ المقابلة",
-      "status": "الحالة",
-      "applicant": "المتقدم",
-      "noInterviewDataFound": "لا توجد بيانات للمقابلات",
-      "addInterview": "إضافة مقابلة",
-      "editInterview": "تعديل المقابلة",
-      "statuses": {
-        "scheduled": "مجدولة",
-        "completed": "مكتملة",
-        "rejected": "مرفوضة"
-      }
     },
     "evaluations": {
       "interview": "المقابلة",
-      "interviewer": "المقابل",
-      "score": "الدرجة",
+      "interviewer": "المحاور",
+      "score": "النتيجة",
       "comments": "التعليقات",
-      "noEvaluationsDataFound": "لا توجد بيانات للتقييمات",
+      "noEvaluationsDataFound": "لا توجد تقييمات",
       "addEvaluation": "إضافة تقييم",
-      "editEvaluation": "تعديل التقييم",
+      "editEvaluation": "تعديل تقييم",
       "selectInterview": "اختر مقابلة",
-      "selectInterviewer": "اختر مقابل",
-      "scorePlaceholder": "ادخل الدرجة",
-      "commentsPlaceholder": "ادخل تعليقات"
+      "selectInterviewer": "اختر محاور",
+      "scorePlaceholder": "أدخل النتيجة",
+      "commentsPlaceholder": "أدخل التعليقات",
+      "noEvaluationDataFound": "لا توجد بيانات للتقييم"
     },
     "jobs": {
       "name": "الاسم",
-      "createdAt": "تاريخ الإنشاء",
       "permissions": "الصلاحيات",
-      "totalJobs": "إجمالي الوظائف",
-      "noJobsDataFound": "لا توجد وظائف",
-      "addJob": "إضافة وظيفة جديدة",
-      "editJob": "تعديل الوظيفة",
-      "deleteJob": "حذف الوظيفة",
-      "jobCreated": "تم إنشاء الوظيفة بنجاح",
-      "jobUpdated": "تم تحديث الوظيفة بنجاح",
-      "jobDeleted": "تم حذف الوظيفة بنجاح",
-      "createJob": "إنشاء وظيفة",
-      "updateJob": "تحديث الوظيفة",
-      "jobDetails": "تفاصيل الوظيفة",
-      "permissionSelection": "اختيار الصلاحيات",
-      "searchJobs": "ابحث عن وظائف...",
-      "confirmDelete": "هل أنت متأكد أنك تريد حذف هذه الوظيفة؟",
-      "addJobs": "إضافة وظائف",
+      "permissionSelection": "اختر الصلاحيات",
       "validation": {
         "nameRequired": "اسم الوظيفة مطلوب",
         "permissionsRequired": "يجب اختيار صلاحية واحدة على الأقل"
