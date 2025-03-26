@@ -30,7 +30,7 @@ export interface EmployeeFormValues {
   department: string;
   password: string;
   is_user: boolean;
-  // permissions: Record<string, boolean>;
+  permissions: Record<string, boolean>;
 }
 
 const EmployeeForm = ({
@@ -51,7 +51,7 @@ const EmployeeForm = ({
       department: "",
       password: "",
       is_user: false,
-      // permissions: {},
+      permissions: {},
     },
   });
 
@@ -72,12 +72,12 @@ const EmployeeForm = ({
       label: department.name,
     })) || [];
 
-  // const permissionOptions = [
-  //   "Add service",
-  //   "Edit service",
-  //   "Delete service",
-  //   "View service",
-  // ];
+  const permissionOptions = [
+    "Add service",
+    "Edit service",
+    "Delete service",
+    "View service",
+  ];
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -145,7 +145,7 @@ const EmployeeForm = ({
             label={t("isUser")}
           />
         </section>
-        {/* <section className="mt-5">
+        <section className="mt-5">
           <h3 className="font-bold text-primary">Permission</h3>
           <div className="grid grid-cols-2 gap-4 mt-2 border border-gray rounded-md xl:rounded-10 p-5 xl:px-6 xl:py-5">
             {permissionOptions.map((permission) => (
@@ -157,7 +157,7 @@ const EmployeeForm = ({
               />
             ))}
           </div>
-        </section> */}
+        </section>
         <section className="flex justify-end gap-2 mt-5">
           <Link
             href={`/dashboard/hr?tab=${globalTranslate("hr.tabs.employees")}`}
