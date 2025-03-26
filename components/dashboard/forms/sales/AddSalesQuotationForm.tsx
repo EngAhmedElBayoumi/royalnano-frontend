@@ -34,7 +34,9 @@ export interface SalesQuotationFormValues {
   }[];
 }
 
-const AddSalesQuotationForm = ({ defaultValues }: AddSalesQuotationFormProps) => {
+const AddSalesQuotationForm = ({
+  defaultValues,
+}: AddSalesQuotationFormProps) => {
   const router = useRouter();
   const t = useTranslations("Sales");
   const [createSalesQuotation] = useCreateSalesQuotationMutation();
@@ -71,8 +73,6 @@ const AddSalesQuotationForm = ({ defaultValues }: AddSalesQuotationFormProps) =>
 
   const onSubmit = async (data: SalesQuotationFormValues) => {
     try {
-      console.log("Form data submitted:", data);
-
       const itemsWithTotal = data.items.map((item) => {
         const unitPrice = parseFloat(item.unit_price || "0");
         const quantity = item.quantity;
@@ -90,21 +90,21 @@ const AddSalesQuotationForm = ({ defaultValues }: AddSalesQuotationFormProps) =>
       const payload = {
         ...data,
         items: itemsWithTotal,
-        customer_name: customers?.find((c) => c.id === data.customer)?.customer_name || "Default Customer", // Default customer_name
-        total_amount: itemsWithTotal.reduce((sum, item) => sum + parseFloat(item.total || "0"), 0).toFixed(2), // Calculate total_amount
-        is_valid: "No", 
+        customer_name:
+          customers?.find((c: { id: number }) => c.id === data.customer)
+            ?.customer_name || "Default Customer", // Default customer_name
+        total_amount: itemsWithTotal
+          .reduce((sum, item) => sum + parseFloat(item.total || "0"), 0)
+          .toFixed(2), // Calculate total_amount
+        is_valid: "No",
       };
 
-      console.log("Payload:", payload);
-
-      
       const response = await createSalesQuotation(payload);
       if ("error" in response) {
         console.error("API error:", response.error);
         throw new Error("Creation failed");
       }
 
-      console.log("Quotation created successfully");
       router.push(`/dashboard/sales?tab=Sales+Quotation`);
     } catch (error) {
       console.error("Error in creation:", error);
@@ -137,7 +137,7 @@ const AddSalesQuotationForm = ({ defaultValues }: AddSalesQuotationFormProps) =>
               placeholder={t("SalesQuotation.customer")}
               options={customerOptions}
               onChange={(value) => {
-                const customerId = parseInt(value, 10);
+                const customerId = parseInt(String(value), 10);
                 form.setValue("customer", customerId);
               }}
             />
@@ -157,7 +157,10 @@ const AddSalesQuotationForm = ({ defaultValues }: AddSalesQuotationFormProps) =>
 
           <div className="mt-6">
             {fields.map((field, index) => (
-              <div key={field.id} className="col-span-2 border p-4 rounded-lg mb-4">
+              <div
+                key={field.id}
+                className="col-span-2 border p-4 rounded-lg mb-4"
+              >
                 <TextInput
                   control={form.control}
                   name={`items.${index}.item_name`}
