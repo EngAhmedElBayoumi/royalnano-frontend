@@ -26,14 +26,10 @@ export default function SalesOrder() {
     page,
     page_size: 10,
   });
-  console.log("page",page)
+  console.log("page", page);
   console.log(salesOrders);
   const router = useRouter();
-  const {
-    data: itemsData,
-    isLoading: isItemsLoading,
-    error: itemsError,
-  } = useGetItemsQuery({
+  const { data: itemsData } = useGetItemsQuery({
     search: "",
     ordering: "id",
     page: 1,
@@ -44,7 +40,8 @@ export default function SalesOrder() {
 
   const getItemNameById = (itemId: string) => {
     const item = existingItems.find(
-      (existingItem) => existingItem.id === parseInt(itemId)
+      (existingItem: { id: number; item_name: string }) =>
+        existingItem.id === parseInt(itemId)
     );
     return item ? item.item_name : `Item ${itemId}`;
   };
@@ -52,8 +49,10 @@ export default function SalesOrder() {
   const transformedData =
     salesOrders?.results.map(
       (order: {
-        description: any;
-        branch: any;
+        description: string;
+        branch: {
+          name: string;
+        };
         id: string;
         customer: { customer_name: string };
         order_date: string;
@@ -120,8 +119,6 @@ export default function SalesOrder() {
     router.push("/dashboard/sales/sales-order/create");
   };
 
-
-
   return (
     <>
       {isLoading ? (
@@ -140,7 +137,6 @@ export default function SalesOrder() {
           Error loading data
         </div>
       ) : (
-        
         <CustomTable
           emptyMessage="no sales Orders data found"
           editRoute="/dashboard/sales/sales-order/edit/"
