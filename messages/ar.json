@@ -110,7 +110,8 @@
       "employees": "الموظفون",
       "interviews": "المقابلات",
       "competitions": "المسابقات",
-      "evaluations": "التقييمات"
+      "evaluations": "التقييمات",
+      "jobs": "الوظائف"
     },
     "departments": {
       "name": "اسم القسم",
@@ -223,6 +224,30 @@
       "selectInterviewer": "اختر مقابل",
       "scorePlaceholder": "ادخل الدرجة",
       "commentsPlaceholder": "ادخل تعليقات"
+    },
+    "jobs": {
+      "name": "الاسم",
+      "createdAt": "تاريخ الإنشاء",
+      "permissions": "الصلاحيات",
+      "totalJobs": "إجمالي الوظائف",
+      "noJobsDataFound": "لا توجد وظائف",
+      "addJob": "إضافة وظيفة جديدة",
+      "editJob": "تعديل الوظيفة",
+      "deleteJob": "حذف الوظيفة",
+      "jobCreated": "تم إنشاء الوظيفة بنجاح",
+      "jobUpdated": "تم تحديث الوظيفة بنجاح",
+      "jobDeleted": "تم حذف الوظيفة بنجاح",
+      "createJob": "إنشاء وظيفة",
+      "updateJob": "تحديث الوظيفة",
+      "jobDetails": "تفاصيل الوظيفة",
+      "permissionSelection": "اختيار الصلاحيات",
+      "searchJobs": "ابحث عن وظائف...",
+      "confirmDelete": "هل أنت متأكد أنك تريد حذف هذه الوظيفة؟",
+      "addJobs": "إضافة وظائف",
+      "validation": {
+        "nameRequired": "اسم الوظيفة مطلوب",
+        "permissionsRequired": "يجب اختيار صلاحية واحدة على الأقل"
+      }
     }
   },
   "Sales": {

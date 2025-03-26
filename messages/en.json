@@ -111,7 +111,8 @@
       "employees": "Employees",
       "interviews": "Interviews",
       "competitions": "Competitions",
-      "evaluations": "Evaluations"
+      "evaluations": "Evaluations",
+      "jobs": "Jobs"
     },
     "departments": {
       "name": "Department Name",
@@ -225,6 +226,30 @@
       "scorePlaceholder": "Enter score",
       "commentsPlaceholder": "Enter comments",
       "noEvaluationDataFound": "No evaluation data found"
+    },
+    "jobs": {
+      "name": "Name",
+      "createdAt": "Created At",
+      "permissions": "Permissions",
+      "totalJobs": "Total Jobs",
+      "noJobsDataFound": "No jobs found",
+      "addJob": "Add New Job",
+      "editJob": "Edit Job",
+      "deleteJob": "Delete Job",
+      "jobCreated": "Job created successfully",
+      "jobUpdated": "Job updated successfully",
+      "jobDeleted": "Job deleted successfully",
+      "createJob": "Create Job",
+      "updateJob": "Update Job",
+      "jobDetails": "Job Details",
+      "permissionSelection": "Permission Selection",
+      "searchJobs": "Search jobs...",
+      "confirmDelete": "Are you sure you want to delete this job?",
+      "addJobs": "Add Jobs",
+      "validation": {
+        "nameRequired": "Job name is required",
+        "permissionsRequired": "At least one permission is required"
+      }
     }
   },
   "Sales": {
