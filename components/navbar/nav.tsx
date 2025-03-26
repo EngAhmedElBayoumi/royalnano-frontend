@@ -37,6 +37,9 @@ const Nav = () => {
   const profile_picture = useSelector(
     (state: RootState) => state.profile.profile_picture
   );
+  const permissions = useSelector(
+    (state: RootState) => state.profile.permissions
+  );
   const toggleNavbar = () => {
     setIsClicked(!isClicked);
   };
@@ -136,6 +139,27 @@ const Nav = () => {
                 />
               </DropdownMenuTrigger>
               <DropdownMenuContent align={locale === "ar" ? "end" : "start"}>
+                {Object.keys(permissions || {}).length > 0 && (
+                  <>
+                    <DropdownMenuItem className="py-0">
+                      <Link
+                        href="/dashboard"
+                        passHref
+                        className="md:text-[14px] xl:text-sm text-nowrap flex gap-1"
+                        target="blank"
+                      >
+                        <Image
+                          src="/assets/icons/dashboard.svg"
+                          alt={t("dashboard")}
+                          width={15}
+                          height={15}
+                        />
+                        {t("dashboard")}
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                  </>
+                )}
                 <DropdownMenuItem className="py-0">
                   <Link
                     href="/profile"
