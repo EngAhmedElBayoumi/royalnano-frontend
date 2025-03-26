@@ -10,9 +10,12 @@ import { salesQuotationSchema } from "@/lib/validations/dashboard/sales/salesQuo
 import DatePicker from "@/components/formFields/DatePicker";
 import { useGetMiniSalesCustomerQuery } from "@/redux/services/dashboard/sales/salesCustomerApi";
 import CustomSelect from "@/components/formFields/CustomSelect";
-import { useGetSalesQuotationByIdQuery, useUpdateSalesQuotationMutation } from "@/redux/services/dashboard/sales/salesQuotationsApi";
+import {
+  useGetSalesQuotationByIdQuery,
+  useUpdateSalesQuotationMutation,
+} from "@/redux/services/dashboard/sales/salesQuotationsApi";
 import { useRouter } from "@/i18n/routing";
-import { useEffect } from "react"; 
+import { useEffect } from "react";
 
 interface EditSalesQuotationFormProps {
   defaultValues?: SalesQuotationFormValues;
@@ -36,12 +39,19 @@ export interface SalesQuotationFormValues {
   }[];
 }
 
-const EditSalesQuotationForm = ({ defaultValues, quotationId }: EditSalesQuotationFormProps) => {
+const EditSalesQuotationForm = ({
+  defaultValues,
+  quotationId,
+}: EditSalesQuotationFormProps) => {
   const router = useRouter();
   const t = useTranslations("Sales");
   const [updateSalesQuotation] = useUpdateSalesQuotationMutation();
   const { data: customers } = useGetMiniSalesCustomerQuery({});
-  const { data: salesQuotationData, isLoading, isError } = useGetSalesQuotationByIdQuery(quotationId);
+  const {
+    data: salesQuotationData,
+    isLoading,
+    isError,
+  } = useGetSalesQuotationByIdQuery(quotationId);
 
   const form = useForm<SalesQuotationFormValues>({
     resolver: zodResolver(salesQuotationSchema),
@@ -114,7 +124,9 @@ const EditSalesQuotationForm = ({ defaultValues, quotationId }: EditSalesQuotati
         validity_period: data.validity_period,
         items: itemsWithTotal,
         quotation_number: data.quotation_number,
-        customer_name: customers?.find((c) => c.id === data.customer)?.customer_name || "Default Customer",
+        customer_name:
+          customers?.find((c: { id: number }) => c.id === data.customer)
+            ?.customer_name || "Default Customer",
         total_amount: totalAmount,
         status: data.status || "rejected",
         is_valid: "No",
@@ -123,8 +135,11 @@ const EditSalesQuotationForm = ({ defaultValues, quotationId }: EditSalesQuotati
       console.log("Payload:", payload);
 
       if (quotationId) {
-        const response = await updateSalesQuotation({ id: quotationId, body: payload });
-        console.log(response)
+        const response = await updateSalesQuotation({
+          id: quotationId,
+          body: payload,
+        });
+        console.log(response);
         if ("error" in response) {
           console.error("API error:", response.error);
           throw new Error("Update failed");
@@ -173,7 +188,7 @@ const EditSalesQuotationForm = ({ defaultValues, quotationId }: EditSalesQuotati
               placeholder={t("SalesQuotation.customer")}
               options={customerOptions}
               onChange={(value) => {
-                const customerId = parseInt(value, 10);
+                const customerId = parseInt(String(value), 10);
                 form.setValue("customer", customerId);
               }}
             />
@@ -193,7 +208,10 @@ const EditSalesQuotationForm = ({ defaultValues, quotationId }: EditSalesQuotati
 
           <div className="mt-6">
             {fields.map((field, index) => (
-              <div key={field.id} className="col-span-2 border p-4 rounded-lg mb-4">
+              <div
+                key={field.id}
+                className="col-span-2 border p-4 rounded-lg mb-4"
+              >
                 <TextInput
                   control={form.control}
                   name={`items.${index}.item_name`}
