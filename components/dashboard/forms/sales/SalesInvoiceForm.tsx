@@ -17,7 +17,7 @@ export interface SalesInvoiceFormValues {
   invoice_date: string;
   due_date: string;
   sales_representative: string;
-  total_amount: string;
+  total_amount: number;
   status: string;
   description: string;
   sales_order: number;
@@ -46,7 +46,7 @@ const SalesInvoiceForm = ({
       invoice_date: "",
       due_date: "",
       sales_representative: "",
-      total_amount: "",
+      total_amount: 0,
       status: "",
       description: "",
       sales_order: 0,
