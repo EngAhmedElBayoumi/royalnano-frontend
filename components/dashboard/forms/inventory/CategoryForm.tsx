@@ -31,6 +31,7 @@ const CategoryForm = ({
   });
 
   const t = useTranslations();
+  const globalTranslate = useTranslations();
 
   return (
     <Form {...form}>
