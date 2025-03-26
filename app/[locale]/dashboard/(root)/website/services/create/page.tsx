@@ -30,7 +30,6 @@ export default function CreateService() {
         throw new Error("Creation failed");
       }
     } catch (error) {
-      console.log("Service creation error:", error);
       throw error;
     }
   };
