@@ -36,16 +36,10 @@ export interface SalesReturnFormValues {
   }[];
   status: string;
 }
-  
 
 const SalesReturnForm = ({ onSubmit, defaultValues }: SalesReturnFormProps) => {
-//   const { data: customers } = useGetMiniSalesCustomerQuery({});
-  const {
-    data: branchesData,
-   
-  } = useGetBranchesQuery({
-
-  });
+  //   const { data: customers } = useGetMiniSalesCustomerQuery({});
+  const { data: branchesData } = useGetBranchesQuery({});
   // console.log(branchesData.results)
   const form = useForm<SalesReturnFormValues>({
     resolver: zodResolver(salesReturnSchema),
@@ -65,7 +59,7 @@ const SalesReturnForm = ({ onSubmit, defaultValues }: SalesReturnFormProps) => {
     name: "items",
   });
 
-  const { data: itemsData, isLoading: isItemsLoading, error: itemsError } = useGetItemsQuery({
+  const { data: itemsData } = useGetItemsQuery({
     search: "",
     ordering: "id",
     page: 1,
@@ -75,13 +69,13 @@ const SalesReturnForm = ({ onSubmit, defaultValues }: SalesReturnFormProps) => {
   const existingItems = itemsData?.results || [];
 
   const t = useTranslations("Sales");
-//   const customerOptions = customers
-//     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-//     ? customers.map((customer: { id: { toString: () => any; }; customer_name: any; }) => ({
-//         value: customer.id.toString(),
-//         label: customer.customer_name,
-//       }))
-//     : [];
+  //   const customerOptions = customers
+  //     // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  //     ? customers.map((customer: { id: { toString: () => any; }; customer_name: any; }) => ({
+  //         value: customer.id.toString(),
+  //         label: customer.customer_name,
+  //       }))
+  //     : [];
 
   const [itemTypes, setItemTypes] = useState<("existing" | "custom")[]>([]);
 
@@ -112,7 +106,7 @@ const SalesReturnForm = ({ onSubmit, defaultValues }: SalesReturnFormProps) => {
     setItemTypes((prev) => [...prev, "existing"]);
   };
   const branchesOptions =
-  branchesData?.results?.map((branch: { id: number; name: string }) => ({
+    branchesData?.results?.map((branch: { id: number; name: string }) => ({
       value: branch.id.toString(),
       label: branch.name,
     })) || [];
@@ -139,15 +133,14 @@ const SalesReturnForm = ({ onSubmit, defaultValues }: SalesReturnFormProps) => {
                 form.setValue("customer", customerId);
               }}
             /> */}
-                <CustomSelect
-                            valueType="number"
-
-            control={form.control}
-            name="branch"
-            label="Choose Branch"
-            placeholder="Choose Branch"
-            options={branchesOptions}
-          />
+            <CustomSelect
+              valueType="number"
+              control={form.control}
+              name="branch"
+              label="Choose Branch"
+              placeholder="Choose Branch"
+              options={branchesOptions}
+            />
             <TextInput
               control={form.control}
               name="sales_representative"
@@ -164,13 +157,18 @@ const SalesReturnForm = ({ onSubmit, defaultValues }: SalesReturnFormProps) => {
               const itemType = itemTypes[index];
 
               return (
-                <div key={field.id} className="col-span-2 border p-4 rounded-lg mb-4">
+                <div
+                  key={field.id}
+                  className="col-span-2 border p-4 rounded-lg mb-4"
+                >
                   <div className="flex gap-2 mb-2">
                     <button
                       type="button"
                       onClick={() => handleItemTypeChange(index, "existing")}
                       className={`p-2 rounded ${
-                        itemType === "existing" ? "bg-primary text-white" : "bg-gray-200"
+                        itemType === "existing"
+                          ? "bg-primary text-white"
+                          : "bg-gray-200"
                       }`}
                     >
                       Add Existing Item
@@ -179,7 +177,9 @@ const SalesReturnForm = ({ onSubmit, defaultValues }: SalesReturnFormProps) => {
                       type="button"
                       onClick={() => handleItemTypeChange(index, "custom")}
                       className={`p-2 rounded ${
-                        itemType === "custom" ? "bg-primary text-white" : "bg-gray-200"
+                        itemType === "custom"
+                          ? "bg-primary text-white"
+                          : "bg-gray-200"
                       }`}
                     >
                       Add Custom Item
@@ -188,22 +188,24 @@ const SalesReturnForm = ({ onSubmit, defaultValues }: SalesReturnFormProps) => {
 
                   {itemType === "existing" && (
                     <CustomSelect
-                    valueType="number" 
+                      valueType="number"
                       control={form.control}
                       name={`items.${index}.item`}
                       label={t("SalesReturn.selectItem")}
-                      options={existingItems.map((item: { id: number; item_name: string }) => ({
-                        value: item.id.toString(),
-                        label: item.item_name,
-                      }))}
+                      options={existingItems.map(
+                        (item: { id: number; item_name: string }) => ({
+                          value: item.id.toString(),
+                          label: item.item_name,
+                        })
+                      )}
                       placeholder={t("SalesReturn.selectItem")}
                       onChange={(value) => {
                         if (value) {
-                          const selectedItemId = parseInt(value, 10);
+                          const selectedItemId = parseInt(value.toString(), 10);
                           form.setValue(`items.${index}.item`, selectedItemId);
                         }
                       }}
-                      isLoading={isItemsLoading}
+                      // isLoading={isItemsLoading}
                     />
                   )}
 
@@ -258,7 +260,6 @@ const SalesReturnForm = ({ onSubmit, defaultValues }: SalesReturnFormProps) => {
                 </div>
               );
             })}
-           
           </div>
           <button
             type="button"
