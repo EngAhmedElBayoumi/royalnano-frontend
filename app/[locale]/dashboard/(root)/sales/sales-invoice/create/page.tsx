@@ -1,8 +1,9 @@
 "use client";
-import SalesInvoiceForm, { SalesInvoiceFormValues } from "@/components/dashboard/forms/sales/SalesInvoiceForm";
+import SalesInvoiceForm from "@/components/dashboard/forms/sales/SalesInvoiceForm";
 import IconWithTitle from "@/components/dashboard/IconWithTitle";
 import CustomModal from "@/components/modals/CustomModal";
 import { useRouter } from "@/i18n/routing";
+import { SalesInvoiceFormValues } from "@/lib/validations/dashboard/sales/salesInvoiceSchema";
 import { useCreateSalesInvoiceMutation } from "@/redux/services/dashboard/sales/salesInvoiceApi";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
