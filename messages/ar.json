@@ -227,6 +227,8 @@
       "noEvaluationDataFound": "لا توجد بيانات للتقييم"
     },
     "jobs": {
+      "addJob": "إضافة وظيفة",
+      "editJob": " تعديل وظيفة",
       "name": "الاسم",
       "permissions": "الصلاحيات",
       "permissionSelection": "اختر الصلاحيات",

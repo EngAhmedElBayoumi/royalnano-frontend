@@ -8,12 +8,13 @@ import { Form } from "@/components/ui/form";
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
 import CustomSelect from "@/components/formFields/CustomSelect";
+import { useGetPermissionsQuery } from "@/redux/services/dashboard/hr/permissionsApi";
 
 interface JobsFormProps {
   onSubmit: (data: JobsFormValues) => Promise<void>;
   defaultValues?: JobsFormValues;
   isLoading?: boolean;
-  permissionsOptions: { value: string; label: string }[]; 
+//   permissionsOptions: { value: string; label: string }[]; 
 }
 
 export interface JobsFormValues {
@@ -25,7 +26,7 @@ const JobsForm: React.FC<JobsFormProps> = ({
     onSubmit,
     defaultValues,
     isLoading,
-    permissionsOptions,
+    // permissionsOptions,
   }) => {
   const form = useForm<JobsFormValues>({
     resolver: zodResolver(jobsSchema),
@@ -37,7 +38,17 @@ const JobsForm: React.FC<JobsFormProps> = ({
 
   const globalTranslate = useTranslations();
   const t = useTranslations("hr.jobs");
+  const { 
+    data: permissionsData, 
+    // isLoading: isLoadingPermissions,
+    // error: permissionsError 
+  } = useGetPermissionsQuery({});
 
+  // Prepare permissions options for MultiSelect
+  const permissionsOptions = permissionsData?.map((permission: { id: { toString: () => string; }; name: string; }) => ({
+    value: permission.id.toString(),
+    label: permission.name
+  })) || [];
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
