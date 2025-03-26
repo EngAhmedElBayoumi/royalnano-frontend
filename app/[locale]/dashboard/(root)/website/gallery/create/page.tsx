@@ -7,7 +7,7 @@ import GalleryForm, {
 import CreatePage from "@/components/dashboard/CreatePage";
 
 export default function CreateGallery() {
-  const [createGallery] = useCreateGalleryMutation();
+  const [createGallery, { isLoading }] = useCreateGalleryMutation();
   const t = useTranslations("dashboardWebsite");
 
   const handleSubmit = async (data: GalleryFormValues) => {
@@ -39,6 +39,7 @@ export default function CreateGallery() {
       onSubmit={handleSubmit}
       Form={GalleryForm}
       redirectPath={`/dashboard/website?tab=${t("tabs.gallery")}`}
+      isLoading={isLoading}
     />
   );
 }
