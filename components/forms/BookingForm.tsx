@@ -81,13 +81,13 @@ export default function BookingForm() {
   }, [errors]);
 
   const serviceNames =
-    servicesData?.results?.map((service) => ({
+    servicesData?.results?.map((service: { id: number; name: string }) => ({
       value: String(service.id),
       label: service.name,
     })) || [];
 
   const branchesList =
-    branchesData?.results?.map((branch) => ({
+    branchesData?.results?.map((branch: { id: number; name: string }) => ({
       value: String(branch.id),
       label: branch.name,
     })) || [];
@@ -127,7 +127,7 @@ export default function BookingForm() {
               options={serviceNames}
               label="Service"
               placeholder="Choose service"
-              isLoading={isServicesLoading}
+              // isLoading={isServicesLoading}
             />
             {errors.service && (
               <p className="text-red-500 text-sm">{errors.service.message}</p>
@@ -168,7 +168,7 @@ export default function BookingForm() {
               label="Choose Branch"
               placeholder="Choose branch"
               options={branchesList}
-              isLoading={isBranchesLoading}
+              // isLoading={isBranchesLoading}
             />
             {errors.branch && (
               <p className="text-red-500 text-sm">{errors.branch.message}</p>
@@ -199,7 +199,7 @@ export default function BookingForm() {
           className="bg-[#BD9D28] text-white py-1.5 rounded-xl px-[71px] md:text-sm xl:text-md w-fit shadow-[0px_14px_24px_0px_rgba(0,0,0,0.25)]"
           type="submit"
           text="Send"
-          disabled={isCreating || isBranchesLoading || isServicesLoading}
+          isDisabled={isCreating || isBranchesLoading || isServicesLoading}
         />
       </form>
     </Form>
