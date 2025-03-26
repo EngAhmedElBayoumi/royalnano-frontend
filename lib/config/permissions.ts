@@ -1,0 +1,40 @@
+// Define permission requirements for specific routes
+export const permissionRoutes = {
+  "/dashboard/inventory": [
+    "inventoryitem",
+    "expensecategory",
+    "preorder",
+    "movement",
+    "stockadjustment",
+  ],
+  "/dashboard/sales": [
+    "salesinvoice",
+    "customer",
+    "quotation",
+    "order",
+    "invoice",
+    "clientrequest",
+  ],
+  "/dashboard/hr": [
+    "employee",
+    "department",
+    "attendance",
+    "leaverequest",
+    "bonusdeduction",
+    "applicant",
+    "interview",
+    "competition",
+    "evaluation",
+  ],
+  "/dashboard/clients": ["customer"],
+  "/dashboard/branches": ["branch"],
+  "/dashboard/website": ["service", "gallery", "contact", "customerreview"],
+  "/dashboard/purchase": [
+    "expensecategory",
+    "invoicedetail",
+    "purchaseorder",
+    "purchaserequest",
+    "supplier",
+    "warehouse",
+  ],
+};
