@@ -1,77 +1,220 @@
 "use client";
-import SalesInvoiceForm from "@/components/dashboard/forms/sales/SalesInvoiceForm";
-import IconWithTitle from "@/components/dashboard/IconWithTitle";
-import CustomModal from "@/components/modals/CustomModal";
-import { useRouter } from "@/i18n/routing";
-import { SalesInvoiceFormValues } from "@/lib/validations/dashboard/sales/salesInvoiceSchema";
-import { useCreateSalesInvoiceMutation } from "@/redux/services/dashboard/sales/salesInvoiceApi";
+import { Form } from "@/components/ui/form";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import CustomButton from "@/components/formFields/CustomButton";
+import TextInput from "@/components/formFields/TextInput";
+import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
-import { useState } from "react";
+import { salesInvoiceSchema } from "@/lib/validations/dashboard/sales/salesInvoiceSchema";
 
-export default function CreateSalesInvoice() {
-  const router = useRouter();
+interface SalesInvoiceFormProps {
+  onSubmit: (data: SalesInvoiceFormValues) => Promise<void>;
+  defaultValues?: SalesInvoiceFormValues;
+}
+
+export interface SalesInvoiceFormValues {
+  invoice_date: string;
+  due_date: string;
+  sales_representative: string;
+  total_amount: string;
+  status: string;
+  description: string;
+  sales_order: number;
+  customer: number;
+  branch: number;
+  items: {
+    quantity: number;
+    sales_invoice: number;
+    custom_item_name: string;
+    custom_price: string;
+    unit_price: string;
+    discount: string;
+    discount_percent: string;
+    total: string;
+    item: number;
+  }[];
+}
+
+const SalesInvoiceForm = ({
+  onSubmit,
+  defaultValues,
+}: SalesInvoiceFormProps) => {
+  const form = useForm<SalesInvoiceFormValues>({
+    resolver: zodResolver(salesInvoiceSchema),
+    defaultValues: defaultValues || {
+      invoice_date: "",
+      due_date: "",
+      sales_representative: "",
+      total_amount: "",
+      status: "",
+      description: "",
+      sales_order: 0,
+      customer: 0,
+      branch: 0,
+      items: [
+        {
+          quantity: 0,
+          sales_invoice: 0,
+          custom_item_name: "",
+          custom_price: "",
+          unit_price: "",
+          discount: "",
+          discount_percent: "",
+          total: "",
+          item: 0,
+        },
+      ],
+    },
+  });
+
   const t = useTranslations("Sales");
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [createSalesInvoice] = useCreateSalesInvoiceMutation();
-
-  // Handle modal open/close
-  const handleModalChange = (isOpen: boolean) => {
-    setIsModalOpen(isOpen);
-  };
-
-  // Handle form submission
-  const handleSubmit = async (data: SalesInvoiceFormValues): Promise<void> => {
-    try {
-      console.log("Submit button clicked");
-      console.log("Form data:", data);
-
-      const payload = {
-        ...data,
-      };
-
-      console.log("Payload:", payload);
-
-      // Send the request to create a sales invoice
-      const response = await createSalesInvoice(payload);
-      console.log("API response:", response);
-
-      if ("error" in response) {
-        console.error("API error:", response.error);
-        throw new Error("Creation failed");
-      }
-
-      console.log("Invoice created successfully");
-      router.push(`/dashboard/sales?tab=${t("sales")}`);
-    } catch (error) {
-      console.error("Error in creation:", error);
-      setIsModalOpen(true);
-    }
-  };
 
   return (
-    <main className="mx-7 my-5">
-      <div className="flex">
-        {/* Error Modal */}
-        <CustomModal
-          isOpen={isModalOpen}
-          onChange={handleModalChange}
-          title="Error!"
-          description="Your request wasn't processed successfully. Please try again."
-        />
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)}>
+        <section className="min-h-[60vh]">
+          <div className="grid sm:grid-cols-2 gap-x-4 gap-y-2 xl:gap-y-5 lg:gap-x-10">
+            <TextInput
+              control={form.control}
+              name="invoice_date"
+              label={t("SalesInvoice.invoiceDate")}
+              placeholder={t("SalesInvoice.invoiceDate")}
+              type="date"
+            />
+            <TextInput
+              control={form.control}
+              name="due_date"
+              label={t("SalesInvoice.dueDate")}
+              placeholder={t("SalesInvoice.dueDate")}
+              type="date"
+            />
+            <TextInput
+              control={form.control}
+              name="sales_representative"
+              label={t("SalesInvoice.salesRepresentative")}
+              placeholder={t("SalesInvoice.salesRepresentative")}
+            />
+            <TextInput
+              control={form.control}
+              name="total_amount"
+              label={t("SalesInvoice.totalAmount")}
+              placeholder={t("SalesInvoice.totalAmount")}
+              type="number"
+            />
+            <TextInput
+              control={form.control}
+              name="status"
+              label={t("SalesInvoice.status")}
+              placeholder={t("SalesInvoice.status")}
+            />
+            <TextInput
+              control={form.control}
+              name="description"
+              label={t("SalesInvoice.description")}
+              placeholder={t("SalesInvoice.description")}
+            />
+            <TextInput
+              control={form.control}
+              name="sales_order"
+              label={t("SalesInvoice.salesOrder")}
+              placeholder={t("SalesInvoice.salesOrder")}
+              type="number"
+            />
+            <TextInput
+              control={form.control}
+              name="customer"
+              label={t("SalesInvoice.customer")}
+              placeholder={t("SalesInvoice.customer")}
+              type="number"
+            />
+            <TextInput
+              control={form.control}
+              name="branch"
+              label={t("SalesInvoice.branch")}
+              placeholder={t("SalesInvoice.branch")}
+              type="number"
+            />
 
-        {/* Page Title */}
-        <IconWithTitle
-          imageSrc="/assets/icons/add.svg"
-          title="Add Invoice"
-          backgroundColor="#F8F7F7"
-          textColor="primary"
-        />
-      </div>
-
-      {/* Form Container */}
-      <div className="bg-dashboardBg px-6 pt-5 pb-8 ltr:rounded-r-[20px] ltr:rounded-bl-[20px] rtl:rounded-l-[20px] rtl:rounded-br-[20px] ltr:lg:pr-[200px] rtl:lg:pl-[200px]">
-        <SalesInvoiceForm onSubmit={handleSubmit} />
-      </div>
-    </main>
+            {/* Dynamic Items Section */}
+            {form.watch("items").map((item, index) => (
+              <div key={index} className="col-span-2 border p-4 rounded-lg">
+                <TextInput
+                  control={form.control}
+                  name={`items.${index}.quantity`}
+                  label={t("SalesInvoice.quantity")}
+                  placeholder={t("SalesInvoice.quantity")}
+                  type="number"
+                />
+                <TextInput
+                  control={form.control}
+                  name={`items.${index}.sales_invoice`}
+                  label={t("SalesInvoice.salesInvoice")}
+                  placeholder={t("SalesInvoice.salesInvoice")}
+                  type="number"
+                />
+                <TextInput
+                  control={form.control}
+                  name={`items.${index}.custom_item_name`}
+                  label={t("SalesInvoice.customItemName")}
+                  placeholder={t("SalesInvoice.customItemName")}
+                />
+                <TextInput
+                  control={form.control}
+                  name={`items.${index}.custom_price`}
+                  label={t("SalesInvoice.customPrice")}
+                  placeholder={t("SalesInvoice.customPrice")}
+                />
+                <TextInput
+                  control={form.control}
+                  name={`items.${index}.unit_price`}
+                  label={t("SalesInvoice.unitPrice")}
+                  placeholder={t("SalesInvoice.unitPrice")}
+                />
+                <TextInput
+                  control={form.control}
+                  name={`items.${index}.discount`}
+                  label={t("SalesInvoice.discount")}
+                  placeholder={t("SalesInvoice.discount")}
+                />
+                <TextInput
+                  control={form.control}
+                  name={`items.${index}.discount_percent`}
+                  label={t("SalesInvoice.discountPercent")}
+                  placeholder={t("SalesInvoice.discountPercent")}
+                />
+                <TextInput
+                  control={form.control}
+                  name={`items.${index}.total`}
+                  label={t("SalesInvoice.total")}
+                  placeholder={t("SalesInvoice.total")}
+                />
+                <TextInput
+                  control={form.control}
+                  name={`items.${index}.item`}
+                  label={t("SalesInvoice.item")}
+                  placeholder={t("SalesInvoice.item")}
+                  type="number"
+                />
+              </div>
+            ))}
+          </div>
+        </section>
+        <div className="flex justify-end gap-2 mt-5">
+          <Link href={`/dashboard/sales?tab=${t("salesInvoice")}`} passHref>
+            <CustomButton
+              text={t("cancel")}
+              className="text-white rounded-lg bg-secondary min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
+            />
+          </Link>
+          <CustomButton
+            text={t("save")}
+            type="submit"
+            className="text-white rounded-lg min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
+          />
+        </div>
+      </form>
+    </Form>
   );
-}
+};
+export default SalesInvoiceForm;
