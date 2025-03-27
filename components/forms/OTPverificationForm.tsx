@@ -44,7 +44,7 @@ export default function OTPverificationForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="gap-4 h-[100%] flex flex-col pt-[80px] px-7"
+        className="gap-4 h-[100%] flex flex-col pt-[80px] px-4 sm:px-7"
       >
         <p className="text-center text-primary font-[600] text-[25px]">
           OTP Verification

@@ -47,7 +47,7 @@ export default function RegisterForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="gap-4 flex flex-col pt-[35px] px-7"
+        className="gap-4 flex flex-col p-4 sm:px-7"
       >
         <p className="text-center font-[600] text-[25px]">Register</p>
 

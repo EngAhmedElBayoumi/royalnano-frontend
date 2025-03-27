@@ -219,10 +219,10 @@ textarea::-webkit-resizer {
 }
 
 .react-international-phone-input-container {
-  border: 1px solid gray !important;
+  border: 1px solid var(--gray) !important;
   background-color: #f4f4f4 !important;
   border-radius: 6px !important;
-  padding: 3px !important;
+  padding: 2px !important;
 }
 .ql-toolbar.ql-snow {
   border: none !important;

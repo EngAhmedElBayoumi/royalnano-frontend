@@ -39,7 +39,7 @@ export default function ChangePasswordForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="gap-4 flex flex-col pt-[35px] px-7"
+        className="gap-4 flex flex-col p-4 sm:px-7"
       >
         <p className="text-center text-primary font-[600] text-[25px]">
           Change Password
