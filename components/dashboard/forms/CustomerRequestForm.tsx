@@ -7,7 +7,7 @@ import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
 import PhoneInputField from "@/components/formFields/PhoneInputField";
 import CustomSelect from "@/components/formFields/CustomSelect";
-import {Link} from '@/i18n/routing';
+import { Link } from "@/i18n/routing";
 import TextArea from "@/components/formFields/TextArea";
 
 interface CustomerRequestFormProps {
@@ -119,16 +119,10 @@ const CustomerRequestForm = ({
         />
         <div className="flex justify-end gap-2 mt-5">
           <Link href="/dashboard/customer-requests" passHref>
-            <CustomButton
-              text="Cancel"
-              className="text-white rounded-lg bg-secondary min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
-            />
+            <CustomButton text="Cancel" variant="secondary" />
           </Link>
 
-          <CustomButton
-            text="Save"
-            className="text-white rounded-lg min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
-          />
+          <CustomButton text="Save" />
         </div>
       </form>
     </Form>

@@ -6,7 +6,10 @@ import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
 import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
-import { SalesCustomerFormValues, SalesCustomerFormValuesSchema } from "@/lib/validations/dashboard/sales/salesCustomerSchema";
+import {
+  SalesCustomerFormValues,
+  SalesCustomerFormValuesSchema,
+} from "@/lib/validations/dashboard/sales/salesCustomerSchema";
 import CustomSelect from "@/components/formFields/CustomSelect";
 import { useGetBranchesQuery } from "@/redux/services/dashboard/inventory/branchesApi";
 import { useUpdateSalesCustomerMutation } from "@/redux/services/dashboard/sales/salesCustomerApi"; // Use update mutation
@@ -19,11 +22,13 @@ interface EditSalesCustomerFormProps {
   defaultValues?: Partial<SalesCustomerFormValues>;
 }
 
-const EditSalesCustomerForm = ({ defaultValues }: EditSalesCustomerFormProps) => {
+const EditSalesCustomerForm = ({
+  defaultValues,
+}: EditSalesCustomerFormProps) => {
   const router = useRouter();
   const t = useTranslations("Sales");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [updateSalesCustomer] = useUpdateSalesCustomerMutation(); 
+  const [updateSalesCustomer] = useUpdateSalesCustomerMutation();
   const { data: branchesData } = useGetBranchesQuery({});
 
   const form = useForm<SalesCustomerFormValues>({
@@ -166,16 +171,9 @@ const EditSalesCustomerForm = ({ defaultValues }: EditSalesCustomerFormProps) =>
         </section>
         <div className="flex justify-end gap-2 mt-5">
           <Link href={`/dashboard/sales?tab=${t("customer")}`} passHref>
-            <CustomButton
-              text={t("cancel")}
-              className="text-white rounded-lg bg-secondary min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
-            />
+            <CustomButton text={t("cancel")} variant="secondary" />
           </Link>
-          <CustomButton
-            text={t("save")} 
-            type="submit"
-            className="text-white rounded-lg min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
-          />
+          <CustomButton text={t("save")} type="submit" />
         </div>
       </form>
 

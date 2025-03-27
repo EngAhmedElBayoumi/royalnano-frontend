@@ -32,9 +32,13 @@ export interface PurchaseRequestFormValues {
   }[];
 }
 
-const PurchaseRequestForm = ({ onSubmit, defaultValues, isView = false }: PurchaseRequestFormProps) => {
+const PurchaseRequestForm = ({
+  onSubmit,
+  defaultValues,
+  isView = false,
+}: PurchaseRequestFormProps) => {
   const form = useForm<PurchaseRequestFormValues>({
-    resolver: zodResolver(purchaseRequestSchema), 
+    resolver: zodResolver(purchaseRequestSchema),
     defaultValues: defaultValues || {
       request_date: "2023-10-01",
       description: "Sample purchase request",
@@ -51,7 +55,7 @@ const PurchaseRequestForm = ({ onSubmit, defaultValues, isView = false }: Purcha
           unit_price: "2.50",
           id: 1,
           total: "25.00",
-          description: "A4 size notebook"
+          description: "A4 size notebook",
         },
         {
           kind: "Electronics",
@@ -62,9 +66,9 @@ const PurchaseRequestForm = ({ onSubmit, defaultValues, isView = false }: Purcha
           unit_price: "3.00",
           id: 2,
           total: "15.00",
-          description: "USB Type-C cable"
-        }
-      ]
+          description: "USB Type-C cable",
+        },
+      ],
     },
   });
 
@@ -119,7 +123,10 @@ const PurchaseRequestForm = ({ onSubmit, defaultValues, isView = false }: Purcha
           <div className="mt-6">
             <h3 className="text-lg font-semibold mb-4">{t("items")}</h3>
             {form.watch("items")?.map((item, index) => (
-              <div key={item.id} className="grid sm:grid-cols-2 gap-x-4 gap-y-2 xl:gap-y-5 lg:gap-x-10">
+              <div
+                key={item.id}
+                className="grid sm:grid-cols-2 gap-x-4 gap-y-2 xl:gap-y-5 lg:gap-x-10"
+              >
                 <TextInput
                   control={form.control}
                   name={`items.${index}.kind`}
@@ -183,15 +190,8 @@ const PurchaseRequestForm = ({ onSubmit, defaultValues, isView = false }: Purcha
 
         {!isView && (
           <div className="flex justify-end gap-2 mt-5">
-            <CustomButton
-              text={t("cancel")}
-              className="text-white rounded-lg bg-secondary min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
-            />
-            <CustomButton
-              text={t("save")}
-              className="text-white rounded-lg min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
-              type="submit"
-            />
+            <CustomButton text={t("cancel")} variant="secondary" />
+            <CustomButton text={t("save")} type="submit" />
           </div>
         )}
       </form>

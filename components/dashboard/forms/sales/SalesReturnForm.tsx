@@ -271,16 +271,9 @@ const SalesReturnForm = ({ onSubmit, defaultValues }: SalesReturnFormProps) => {
         </section>
         <div className="flex justify-end gap-2 mt-5">
           <Link href={`/dashboard/sales?tab=${t("order")}`} passHref>
-            <CustomButton
-              text={t("cancel")}
-              className="text-white rounded-lg bg-secondary min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
-            />
+            <CustomButton text={t("cancel")} variant="secondary" />
           </Link>
-          <CustomButton
-            text={t("save")}
-            type="submit"
-            className="text-white rounded-lg min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
-          />
+          <CustomButton text={t("save")} type="submit" />
         </div>
       </form>
     </Form>

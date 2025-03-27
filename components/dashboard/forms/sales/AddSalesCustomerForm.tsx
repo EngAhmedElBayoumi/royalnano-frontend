@@ -6,7 +6,10 @@ import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
 import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
-import { SalesCustomerFormValues, SalesCustomerFormValuesSchema } from "@/lib/validations/dashboard/sales/salesCustomerSchema";
+import {
+  SalesCustomerFormValues,
+  SalesCustomerFormValuesSchema,
+} from "@/lib/validations/dashboard/sales/salesCustomerSchema";
 import CustomSelect from "@/components/formFields/CustomSelect";
 import { useGetBranchesQuery } from "@/redux/services/dashboard/inventory/branchesApi";
 import { useCreateSalesCustomerMutation } from "@/redux/services/dashboard/sales/salesCustomerApi";
@@ -14,7 +17,6 @@ import { useRouter } from "@/i18n/routing";
 import { useState } from "react";
 import CustomModal from "@/components/modals/CustomModal";
 import PhoneInputField from "@/components/formFields/PhoneInputField";
-
 
 interface SalesCustomerFormProps {
   defaultValues?: Partial<SalesCustomerFormValues>;
@@ -32,7 +34,7 @@ const AddSalesCustomerForm = ({ defaultValues }: SalesCustomerFormProps) => {
     defaultValues: defaultValues || {
       customer_name: "nermennnnnnnnnnnnnn",
       contact_person: "nermo",
-      phone_number: '+13127598362138', 
+      phone_number: "+13127598362138",
       email: "",
       address: "",
       city: "",
@@ -52,7 +54,7 @@ const AddSalesCustomerForm = ({ defaultValues }: SalesCustomerFormProps) => {
     })) || [];
 
   const handleSubmit = async (data: SalesCustomerFormValues) => {
-    console.log("Form data submitted:", data); 
+    console.log("Form data submitted:", data);
     console.log("Form errors:", form.formState.errors);
     try {
       console.log("Submit button clicked");
@@ -94,13 +96,13 @@ const AddSalesCustomerForm = ({ defaultValues }: SalesCustomerFormProps) => {
               label={t("SalesCustomer.contactPerson")}
               placeholder={t("SalesCustomer.contactPerson")}
             />
-             <PhoneInputField
-            control={form.control}
-            name="phone_number"
-            label={t("SalesCustomer.phoneNumber")}
-            // placeholder={t("SalesCustomer.phoneNumber")}
-          />
-           
+            <PhoneInputField
+              control={form.control}
+              name="phone_number"
+              label={t("SalesCustomer.phoneNumber")}
+              // placeholder={t("SalesCustomer.phoneNumber")}
+            />
+
             <TextInput
               control={form.control}
               name="email"
@@ -167,16 +169,9 @@ const AddSalesCustomerForm = ({ defaultValues }: SalesCustomerFormProps) => {
         </section>
         <div className="flex justify-end gap-2 mt-5">
           <Link href={`/dashboard/sales?tab=${t("customer")}`} passHref>
-            <CustomButton
-              text={t("cancel")}
-              className="text-white rounded-lg bg-secondary min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
-            />
+            <CustomButton text={t("cancel")} variant="secondary" />
           </Link>
-          <CustomButton
-            text={t("save")}
-            type="submit"
-            className="text-white rounded-lg min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
-          />
+          <CustomButton text={t("save")} type="submit" />
         </div>
       </form>
 

@@ -35,16 +35,13 @@ export interface SalesOrderFormValues {
   }[];
   status: string;
 }
-  
 
-const AddSalesOrderForm = ({ onSubmit, defaultValues }: SalesOrderFormProps) => {
+const AddSalesOrderForm = ({
+  onSubmit,
+  defaultValues,
+}: SalesOrderFormProps) => {
   const { data: customers } = useGetMiniSalesCustomerQuery({});
-  const {
-    data: branchesData,
-   
-  } = useGetBranchesQuery({
-
-  });
+  const { data: branchesData } = useGetBranchesQuery({});
   const form = useForm<SalesOrderFormValues>({
     resolver: zodResolver(salesOrderSchema),
     defaultValues: defaultValues || {
@@ -74,10 +71,15 @@ const AddSalesOrderForm = ({ onSubmit, defaultValues }: SalesOrderFormProps) => 
 
   const t = useTranslations("Sales");
   const customerOptions = customers
-    ? customers.map((customer: { id: { toString: () => string; }; customer_name: string; }) => ({
-        value: customer.id.toString(),
-        label: customer.customer_name,
-      }))
+    ? customers.map(
+        (customer: {
+          id: { toString: () => string };
+          customer_name: string;
+        }) => ({
+          value: customer.id.toString(),
+          label: customer.customer_name,
+        })
+      )
     : [];
 
   const [itemTypes, setItemTypes] = useState<("existing" | "custom")[]>([]);
@@ -109,7 +111,7 @@ const AddSalesOrderForm = ({ onSubmit, defaultValues }: SalesOrderFormProps) => 
     setItemTypes((prev) => [...prev, "existing"]);
   };
   const branchesOptions =
-  branchesData?.results?.map((branch: { id: number; name: string }) => ({
+    branchesData?.results?.map((branch: { id: number; name: string }) => ({
       value: branch.id.toString(),
       label: branch.name,
     })) || [];
@@ -125,26 +127,25 @@ const AddSalesOrderForm = ({ onSubmit, defaultValues }: SalesOrderFormProps) => 
               placeholder={t("SalesOrder.orderDate")}
             />
             <CustomSelect
-            valueType="number"
+              valueType="number"
               control={form.control}
               name="customer"
               label={t("SalesOrder.customer")}
               placeholder={t("SalesOrder.customer")}
               options={customerOptions}
               onChange={(value) => {
-                const customerId = parseInt(String(value), 10); 
+                const customerId = parseInt(String(value), 10);
                 form.setValue("customer", customerId);
               }}
             />
-                <CustomSelect
-                            valueType="number"
-
-            control={form.control}
-            name="branch"
-            label="Choose Branch"
-            placeholder="Choose Branch"
-            options={branchesOptions}
-          />
+            <CustomSelect
+              valueType="number"
+              control={form.control}
+              name="branch"
+              label="Choose Branch"
+              placeholder="Choose Branch"
+              options={branchesOptions}
+            />
             <TextInput
               control={form.control}
               name="sales_representative"
@@ -161,13 +162,18 @@ const AddSalesOrderForm = ({ onSubmit, defaultValues }: SalesOrderFormProps) => 
               const itemType = itemTypes[index];
 
               return (
-                <div key={field.id} className="col-span-2 border p-4 rounded-lg mb-4">
+                <div
+                  key={field.id}
+                  className="col-span-2 border p-4 rounded-lg mb-4"
+                >
                   <div className="flex gap-2 mb-2">
                     <button
                       type="button"
                       onClick={() => handleItemTypeChange(index, "existing")}
                       className={`p-2 rounded ${
-                        itemType === "existing" ? "bg-primary text-white" : "bg-gray-200"
+                        itemType === "existing"
+                          ? "bg-primary text-white"
+                          : "bg-gray-200"
                       }`}
                     >
                       Add Existing Item
@@ -176,7 +182,9 @@ const AddSalesOrderForm = ({ onSubmit, defaultValues }: SalesOrderFormProps) => 
                       type="button"
                       onClick={() => handleItemTypeChange(index, "custom")}
                       className={`p-2 rounded ${
-                        itemType === "custom" ? "bg-primary text-white" : "bg-gray-200"
+                        itemType === "custom"
+                          ? "bg-primary text-white"
+                          : "bg-gray-200"
                       }`}
                     >
                       Add Custom Item
@@ -185,23 +193,25 @@ const AddSalesOrderForm = ({ onSubmit, defaultValues }: SalesOrderFormProps) => 
 
                   {itemType === "existing" && (
                     <CustomSelect
-                    valueType="number"
-                    control={form.control}
-                    name={`items.${index}.item`}
-                    label={t("SalesOrder.selectItem")}
-                    options={existingItems.map((item: { id: number; item_name: string }) => ({
-                      value: item.id.toString(),
-                      label: item.item_name,
-                    }))}
-                    placeholder={t("SalesOrder.selectItem")}
-                    onChange={(value) => {
-                      if (value) {
-                        const selectedItemId = parseInt(String(value), 10); 
-                        form.setValue(`items.${index}.item`, selectedItemId);
-                      }
-                    }}
-                    // isLoading={isItemsLoading}
-                  />
+                      valueType="number"
+                      control={form.control}
+                      name={`items.${index}.item`}
+                      label={t("SalesOrder.selectItem")}
+                      options={existingItems.map(
+                        (item: { id: number; item_name: string }) => ({
+                          value: item.id.toString(),
+                          label: item.item_name,
+                        })
+                      )}
+                      placeholder={t("SalesOrder.selectItem")}
+                      onChange={(value) => {
+                        if (value) {
+                          const selectedItemId = parseInt(String(value), 10);
+                          form.setValue(`items.${index}.item`, selectedItemId);
+                        }
+                      }}
+                      // isLoading={isItemsLoading}
+                    />
                   )}
 
                   {itemType === "custom" && (
@@ -255,7 +265,6 @@ const AddSalesOrderForm = ({ onSubmit, defaultValues }: SalesOrderFormProps) => 
                 </div>
               );
             })}
-           
           </div>
           <button
             type="button"
@@ -267,16 +276,9 @@ const AddSalesOrderForm = ({ onSubmit, defaultValues }: SalesOrderFormProps) => 
         </section>
         <div className="flex justify-end gap-2 mt-5">
           <Link href={`/dashboard/sales?tab=${t("order")}`} passHref>
-            <CustomButton
-              text={t("cancel")}
-              className="text-white rounded-lg bg-secondary min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
-            />
+            <CustomButton text={t("cancel")} variant="secondary" />
           </Link>
-          <CustomButton
-            text={t("save")}
-            type="submit"
-            className="text-white rounded-lg min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
-          />
+          <CustomButton text={t("save")} type="submit" />
         </div>
       </form>
     </Form>

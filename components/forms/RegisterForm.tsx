@@ -2,19 +2,15 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 // import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+import { Form } from "@/components/ui/form";
 import { registerValidation } from "@/lib/validations/register";
 import { Link } from "@/i18n/routing";
 // import Image from "next/image";
 import { useRegisterMutation } from "@/redux/services/registerApi";
+import TextInput from "@/components/formFields/TextInput";
+import PhoneInputField from "@/components/formFields/PhoneInputField";
+import PasswordInput from "@/components/formFields/PasswordInput";
+import CustomButton from "@/components/formFields/CustomButton";
 
 export default function RegisterForm() {
   const [register, { isLoading }] = useRegisterMutation();
@@ -22,22 +18,30 @@ export default function RegisterForm() {
   const form = useForm({
     resolver: zodResolver(registerValidation),
     defaultValues: {
-      email_address: "",
-      name: "",
-      password: "",
+      first_name: "",
+      last_name: "",
       phone_number: "",
+      email_address: "",
+      password: "",
+      confirm_password: "",
     },
     // mode: "onChange",
   });
 
   const onSubmit = async (data: {
-    email_address: string;
-    name: string;
-    password: string;
+    first_name: string;
+    last_name: string;
     phone_number: string;
+    email_address: string;
+    password: string;
+    confirm_password: string;
   }) => {
     try {
-      await register({ ...data, role: "client" }).unwrap();
+      await register({
+        ...data,
+        name: data?.first_name + " " + data?.last_name,
+        role: "client",
+      }).unwrap();
     } catch (error) {
       console.error("Registration failed:", error);
     }
@@ -53,111 +57,49 @@ export default function RegisterForm() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           {/* Left Column */}
-          <div className="flex flex-col gap-4">
-            {/* Name Field */}
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem className="flex flex-col gap-0 w-full">
-                  <FormLabel className="text-subtitle font-[500] text-sm xl:text-[20px]">
-                    Name
-                  </FormLabel>
-                  <FormControl className="flex-1 text-gray-200">
-                    <Input
-                      placeholder="Name"
-                      type="text"
-                      className="p-1 bg-white border-[0.5px] border-primary"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage className="text-red-500 text-sm">
-                    {form.formState.errors.name?.message}
-                  </FormMessage>
-                </FormItem>
-              )}
-            />
+          <TextInput
+            control={form.control}
+            name="first_name"
+            label="first Name"
+            placeholder="first Name"
+          />
+          <TextInput
+            control={form.control}
+            name="last_name"
+            label="last Name"
+            placeholder="last Name"
+          />
+          <PhoneInputField
+            control={form.control}
+            name="phone_number"
+            label="Phone Number"
+          />
 
-            <FormField
-              control={form.control}
-              name="phone_number"
-              render={({ field }) => (
-                <FormItem className="flex flex-col gap-0 w-full">
-                  <FormLabel className="text-subtitle font-[500] text-sm xl:text-[20px]">
-                    Phone Number
-                  </FormLabel>
-                  <FormControl className="flex-1 text-gray-200">
-                    <Input
-                      placeholder="Phone Number"
-                      type="tel"
-                      className="p-1 bg-white border-[0.5px] border-primary"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage className="text-red-500 text-sm">
-                    {form.formState.errors.phone_number?.message}
-                  </FormMessage>
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem className="flex flex-col gap-0 w-full">
-                  <FormLabel className="text-subtitle font-[500] text-sm xl:text-[20px]">
-                    Password
-                  </FormLabel>
-                  <FormControl className="flex-1 text-gray-200">
-                    <Input
-                      type="password"
-                      placeholder="Password"
-                      className="p-1 bg-white border-[0.5px] border-primary"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage className="text-red-500 text-sm">
-                    {form.formState.errors.password?.message}
-                  </FormMessage>
-                </FormItem>
-              )}
-            />
-          </div>
-
-          <div className="flex flex-col gap-4">
-            <FormField
-              control={form.control}
-              name="email_address"
-              render={({ field }) => (
-                <FormItem className="flex flex-col gap-0 w-full">
-                  <FormLabel className="text-subtitle font-[500] text-sm xl:text-[20px]">
-                    Email
-                  </FormLabel>
-                  <FormControl className="flex-1 text-gray-200">
-                    <Input
-                      placeholder="Email"
-                      type="email"
-                      className="p-1 bg-white border-[0.5px] border-primary"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage className="text-red-500 text-sm">
-                    {form.formState.errors.email_address?.message}
-                  </FormMessage>
-                </FormItem>
-              )}
-            />
-          </div>
+          <TextInput
+            control={form.control}
+            name="email_address"
+            label="Email"
+            placeholder="Email"
+          />
+          <PasswordInput
+            control={form.control}
+            name="password"
+            label="Password"
+            placeholder="Password"
+          />
+          <PasswordInput
+            control={form.control}
+            name="confirm_password"
+            label="confirm_password"
+            placeholder="confirm_password"
+          />
         </div>
 
-        <button
-          className="bg-[#BD9D28] text-white py-1.5 rounded-xl px-[71px] md:text-sm xl:text-md w-[100%] m-auto"
-          type="submit"
-          disabled={isLoading}
-        >
-          {isLoading ? "Submitting..." : "Register"}
-        </button>
+        <CustomButton
+          text={isLoading ? "Submitting..." : "Register"}
+          isDisabled={isLoading}
+          className="bg-primaryDark"
+        />
 
         <div className="flex font-[600] text-sm xl:text-[20px] justify-center">
           <p className="mr-1 text-[#8B8B8B]">Already have an account?</p>

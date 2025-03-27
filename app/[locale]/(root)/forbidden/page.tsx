@@ -12,10 +12,7 @@ export default function Forbidden() {
         height="400"
       />
       <Link href="/">
-        <CustomButton
-          text="Return Home"
-          className="text-white rounded-lg bg-secondary min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
-        />
+        <CustomButton text="Return Home" variant="secondary" />
       </Link>
     </div>
   );

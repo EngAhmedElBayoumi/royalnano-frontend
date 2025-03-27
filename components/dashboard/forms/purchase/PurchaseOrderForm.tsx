@@ -12,7 +12,6 @@ interface PurchaseOrderFormProps {
   onSubmit: (data: PurchaseOrderFormValues) => Promise<void>;
   defaultValues?: PurchaseOrderFormValues;
   isView?: boolean;
-
 }
 
 export interface PurchaseOrderFormValues {
@@ -49,59 +48,62 @@ export interface PurchaseOrderFormValues {
   };
 }
 
-const PurchaseOrderForm = ({ onSubmit, defaultValues,  isView }: PurchaseOrderFormProps) => {
+const PurchaseOrderForm = ({
+  onSubmit,
+  defaultValues,
+  isView,
+}: PurchaseOrderFormProps) => {
   const form = useForm<PurchaseOrderFormValues>({
     resolver: zodResolver(purchaseOrderSchema),
-    defaultValues: defaultValues || 
-    {
-        "order_date": "2023-10-01",
-        "offer_expiry": "2023-10-15",
-        "prefix": "PO",
-        "delivery_date": "2023-10-10",
-        "due_date": "2023-10-20",
-        "id": 1,
-        "branch": 1,
-        "supplier": 1,
-        "description": "Sample purchase order for office supplies",
-        "items": [
-          {
-            "kind": "Stationery",
-            "name": "Notebook",
-            "unit": "Piece",
-            "quantity": "10",
-            "unit_price": "2.50",
-            "id": 1,
-            "bonus": "1",
-            "amount": "25.00",
-            "discount": "0.00",
-            "discount_percent": "0",
-            "vat_kd": "5",
-            "total": "26.25"
-          },
-          {
-            "kind": "Electronics",
-            "name": "USB Cable",
-            "unit": "Piece",
-            "quantity": "5",
-            "unit_price": "3.00",
-            "id": 2,
-            "bonus": "0",
-            "amount": "15.00",
-            "discount": "1.00",
-            "discount_percent": "5",
-            "vat_kd": "5",
-            "total": "14.70"
-          }
-        ],
-        "invoice_detail": {
-          "discount": "1.00",
-          "vat": "2.00",
-          "subtotal": "40.00",
-          "quantity": "15",
-          "free_quantity": "1",
-          "total": "41.00"
-        }
-      }
+    defaultValues: defaultValues || {
+      order_date: "2023-10-01",
+      offer_expiry: "2023-10-15",
+      prefix: "PO",
+      delivery_date: "2023-10-10",
+      due_date: "2023-10-20",
+      id: 1,
+      branch: 1,
+      supplier: 1,
+      description: "Sample purchase order for office supplies",
+      items: [
+        {
+          kind: "Stationery",
+          name: "Notebook",
+          unit: "Piece",
+          quantity: "10",
+          unit_price: "2.50",
+          id: 1,
+          bonus: "1",
+          amount: "25.00",
+          discount: "0.00",
+          discount_percent: "0",
+          vat_kd: "5",
+          total: "26.25",
+        },
+        {
+          kind: "Electronics",
+          name: "USB Cable",
+          unit: "Piece",
+          quantity: "5",
+          unit_price: "3.00",
+          id: 2,
+          bonus: "0",
+          amount: "15.00",
+          discount: "1.00",
+          discount_percent: "5",
+          vat_kd: "5",
+          total: "14.70",
+        },
+      ],
+      invoice_detail: {
+        discount: "1.00",
+        vat: "2.00",
+        subtotal: "40.00",
+        quantity: "15",
+        free_quantity: "1",
+        total: "41.00",
+      },
+    },
     // {
     //   order_date: "",
     //   offer_expiry: "",
@@ -219,7 +221,10 @@ const PurchaseOrderForm = ({ onSubmit, defaultValues,  isView }: PurchaseOrderFo
           <div className="mt-6">
             <h3 className="text-lg font-semibold mb-4">{t("items")}</h3>
             {form.watch("items")?.map((item, index) => (
-              <div key={index} className="grid sm:grid-cols-2 gap-x-4 gap-y-2 xl:gap-y-5 lg:gap-x-10">
+              <div
+                key={index}
+                className="grid sm:grid-cols-2 gap-x-4 gap-y-2 xl:gap-y-5 lg:gap-x-10"
+              >
                 <TextInput
                   control={form.control}
                   name={`items.${index}.kind`}
@@ -295,7 +300,7 @@ const PurchaseOrderForm = ({ onSubmit, defaultValues,  isView }: PurchaseOrderFo
                   name={`items.${index}.total`}
                   label={t("total")}
                   placeholder={t("total")}
-                     readonly={isView}
+                  readonly={isView}
                 />
               </div>
             ))}
@@ -351,22 +356,17 @@ const PurchaseOrderForm = ({ onSubmit, defaultValues,  isView }: PurchaseOrderFo
           </div>
         </section>
 
-       
-        {!isView && <div className="flex justify-end gap-2 mt-5">
-          <Link
-            href={`/dashboard/purchase?tab=${t("purchaseOrderModel")}`}
-            passHref
-          >
-            <CustomButton
-              text={t("cancel")}
-              className="text-white rounded-lg bg-secondary min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
-            />
-          </Link>
-          <CustomButton
-            text={t("save")}
-            className="text-white rounded-lg min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
-          />
-        </div>}
+        {!isView && (
+          <div className="flex justify-end gap-2 mt-5">
+            <Link
+              href={`/dashboard/purchase?tab=${t("purchaseOrderModel")}`}
+              passHref
+            >
+              <CustomButton text={t("cancel")} variant="secondary" />
+            </Link>
+            <CustomButton text={t("save")} />
+          </div>
+        )}
       </form>
     </Form>
   );

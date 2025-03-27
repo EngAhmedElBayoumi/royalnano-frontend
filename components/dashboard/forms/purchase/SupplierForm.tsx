@@ -230,15 +230,8 @@ const SupplierForm = ({
         {/* Buttons */}
         {!isView && (
           <div className="flex justify-end gap-2 mt-5">
-            <CustomButton
-              text={t("cancel")}
-              className="text-white rounded-lg bg-secondary min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
-            />
-            <CustomButton
-              text={t("save")}
-              className="text-white rounded-lg min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
-              type="submit"
-            />
+            <CustomButton text={t("cancel")} variant="secondary" />
+            <CustomButton text={t("save")} type="submit" />
           </div>
         )}
       </form>

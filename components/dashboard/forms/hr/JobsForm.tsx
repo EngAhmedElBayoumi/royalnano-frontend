@@ -14,7 +14,7 @@ interface JobsFormProps {
   onSubmit: (data: JobsFormValues) => Promise<void>;
   defaultValues?: JobsFormValues;
   isLoading?: boolean;
-//   permissionsOptions: { value: string; label: string }[]; 
+  //   permissionsOptions: { value: string; label: string }[];
 }
 
 export interface JobsFormValues {
@@ -23,11 +23,11 @@ export interface JobsFormValues {
 }
 
 const JobsForm: React.FC<JobsFormProps> = ({
-    onSubmit,
-    defaultValues,
-    isLoading,
-    // permissionsOptions,
-  }) => {
+  onSubmit,
+  defaultValues,
+  isLoading,
+  // permissionsOptions,
+}) => {
   const form = useForm<JobsFormValues>({
     resolver: zodResolver(jobsSchema),
     defaultValues: defaultValues || {
@@ -38,17 +38,20 @@ const JobsForm: React.FC<JobsFormProps> = ({
 
   const globalTranslate = useTranslations();
   const t = useTranslations("hr.jobs");
-  const { 
-    data: permissionsData, 
+  const {
+    data: permissionsData,
     // isLoading: isLoadingPermissions,
-    // error: permissionsError 
+    // error: permissionsError
   } = useGetPermissionsQuery({});
 
   // Prepare permissions options for MultiSelect
-  const permissionsOptions = permissionsData?.map((permission: { id: { toString: () => string; }; name: string; }) => ({
-    value: permission.id.toString(),
-    label: permission.name
-  })) || [];
+  const permissionsOptions =
+    permissionsData?.map(
+      (permission: { id: { toString: () => string }; name: string }) => ({
+        value: permission.id.toString(),
+        label: permission.name,
+      })
+    ) || [];
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -60,7 +63,7 @@ const JobsForm: React.FC<JobsFormProps> = ({
               label={t("name")}
               placeholder={t("name")}
             />
-            
+
             <CustomSelect
               control={form.control}
               name="permissions"
@@ -78,7 +81,7 @@ const JobsForm: React.FC<JobsFormProps> = ({
           >
             <CustomButton
               text={globalTranslate("cancel")}
-              className="text-white rounded-lg bg-secondary min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
+              variant="secondary"
             />
           </Link>
           <CustomButton
@@ -87,7 +90,6 @@ const JobsForm: React.FC<JobsFormProps> = ({
             }
             type="submit"
             isDisabled={isLoading}
-            className="text-white rounded-lg min-w-[160px] xl:min-w-[222px] font-bold text-sm xl:text-[20px]"
           />
         </div>
       </form>
