@@ -2,15 +2,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 // import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+import { Form } from "@/components/ui/form";
 import { loginValidation } from "@/lib/validations/login";
 import { Link } from "@/i18n/routing";
 // import Image from "next/image";
@@ -20,6 +12,8 @@ import { useDispatch } from "react-redux";
 import { setCredentials } from "@/redux/slices/authSlice";
 import config from "@/lib/config";
 import { setProfile } from "@/redux/slices/profileSlice";
+import TextInput from "@/components/formFields/TextInput";
+import PasswordInput from "@/components/formFields/PasswordInput";
 
 export default function LoginForm() {
   const dispatch = useDispatch();
@@ -73,51 +67,17 @@ export default function LoginForm() {
         className="gap-4 flex flex-col p-4 sm:px-7"
       >
         <p className="text-center font-[600] text-[25px]">Log in</p>
-
-        <FormField
+        <TextInput
           control={form.control}
           name="email_address"
-          render={({ field }) => (
-            <FormItem className="flex flex-col gap-0 w-full">
-              <FormLabel className="text-subtitle font-[500] text-sm xl:text-[20px]">
-                Email
-              </FormLabel>
-              <FormControl className="flex-1 text-gray-200">
-                <Input
-                  placeholder="Email"
-                  type="email"
-                  className="p-1 bg-white border-[0.5px] border-primary"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage className="text-red-500 text-sm">
-                {form.formState.errors.email_address?.message}
-              </FormMessage>
-            </FormItem>
-          )}
+          label="Email"
+          placeholder="Email"
         />
-
-        <FormField
+        <PasswordInput
           control={form.control}
           name="password"
-          render={({ field }) => (
-            <FormItem className="flex flex-col gap-0 w-full">
-              <FormLabel className="text-subtitle font-[500] text-sm xl:text-[20px]">
-                Password
-              </FormLabel>
-              <FormControl className="flex-1 text-gray-200">
-                <Input
-                  type="password"
-                  placeholder="Password"
-                  className="p-1 bg-white border-[0.5px] border-primary"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage className="text-red-500 text-sm">
-                {form.formState.errors.password?.message}
-              </FormMessage>
-            </FormItem>
-          )}
+          label="Password"
+          placeholder="Password"
         />
 
         {/* Forget Password Link */}
