@@ -1,7 +1,7 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Button } from "@/components/ui/button";
+// import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -13,7 +13,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { registerValidation } from "@/lib/validations/register";
 import { Link } from "@/i18n/routing";
-import Image from "next/image";
+// import Image from "next/image";
 import { useRegisterMutation } from "@/redux/services/registerApi";
 
 export default function RegisterForm() {
@@ -47,13 +47,13 @@ export default function RegisterForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="gap-4 flex flex-col pt-[35px] pr-10 pl-7"
+        className="gap-4 flex flex-col pt-[35px] px-7"
       >
         <p className="text-center font-[600] text-[25px]">Register</p>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           {/* Left Column */}
-          <div className="mr-4 flex flex-col gap-4">
+          <div className="flex flex-col gap-4">
             {/* Name Field */}
             <FormField
               control={form.control}
@@ -166,7 +166,7 @@ export default function RegisterForm() {
           </Link>
         </div>
 
-        <div className="flex items-center">
+        {/* <div className="flex items-center">
           <div className="w-[203px] h-[2px] bg-subtitle"></div>
           <p className="mx-[27px] text-[25px] font-[500] text-[#5A5A5A]">OR</p>
           <div className="w-[203px] h-[2px] bg-subtitle"></div>
@@ -192,7 +192,7 @@ export default function RegisterForm() {
             className="me-2"
           />
           Facebook
-        </Button>
+        </Button> */}
       </form>
     </Form>
   );

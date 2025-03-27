@@ -2,52 +2,13 @@ import { NextResponse, NextRequest } from "next/server";
 import createMiddleware from "next-intl/middleware";
 import { routing } from "./i18n/routing";
 import { checkToken } from "./lib/utils/checkToken";
+import { permissionRoutes } from "./lib/config/permissions";
 
 // Create the next-intl middleware
 const intlMiddleware = createMiddleware({
   locales: routing.locales, // Supported locales
   defaultLocale: routing.defaultLocale, // Default locale
 });
-// Define permission requirements for specific routes
-const permissionRoutes = {
-  "/dashboard/inventory": [
-    "inventoryitem",
-    "expensecategory",
-    "preorder",
-    "movement",
-    "stockadjustment",
-  ],
-  "/dashboard/sales": [
-    "salesinvoice",
-    "customer",
-    "quotation",
-    "order",
-    "invoice",
-    "clientrequest",
-  ],
-  "/dashboard/hr": [
-    "employee",
-    "department",
-    "attendance",
-    "leaverequest",
-    "bonusdeduction",
-    "applicant",
-    "interview",
-    "competition",
-    "evaluation",
-  ],
-  "/dashboard/clients": ["customer"],
-  "/dashboard/branches": ["branch"],
-  "/dashboard/website": ["service", "gallery", "contact", "customerreview"],
-  "/dashboard/purchase": [
-    "expensecategory",
-    "invoicedetail",
-    "purchaseorder",
-    "purchaserequest",
-    "supplier",
-    "warehouse",
-  ],
-};
 
 export async function middleware(req: NextRequest) {
   // Apply the next-intl middleware first

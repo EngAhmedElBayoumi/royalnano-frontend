@@ -1,3 +1,5 @@
+import { permissionRoutes } from "@/lib/config/permissions";
+
 export const sidebarLinks = [
   { path: "/", name: "home", icon: "home.svg", permissions: ["home"] },
   // {
@@ -16,66 +18,36 @@ export const sidebarLinks = [
     path: "/branches",
     name: "branches",
     icon: "branches.svg",
-    permissions: ["branch"],
+    permissions: permissionRoutes["/dashboard/branches"],
   },
   {
     path: "/hr",
     name: "hr",
     icon: "hr.svg",
-    permissions: [
-      "employee",
-      "department",
-      "attendance",
-      "leaverequest",
-      "bonusdeduction",
-      "applicant",
-      "interview",
-      "competition",
-      "evaluation",
-    ],
+    permissions: permissionRoutes["/dashboard/hr"],
   },
   {
     path: "/inventory",
     name: "inventory",
     icon: "inventory.svg",
-    permissions: [
-      "inventoryitem",
-      "expensecategory",
-      "preorder",
-      "movement",
-      "stockadjustment",
-    ],
+    permissions: permissionRoutes["/dashboard/inventory"],
   },
   {
     path: "/website",
     name: "website",
     icon: "website.svg",
-    permissions: ["service", "gallery", "contact", "customerreview"],
+    permissions: permissionRoutes["/dashboard/website"],
   },
   {
     path: "/sales",
     name: "sales",
     icon: "sales.svg",
-    permissions: [
-      "salesinvoice",
-      "customer",
-      "quotation",
-      "order",
-      "invoice",
-      "clientrequest",
-    ],
+    permissions: permissionRoutes["/dashboard/sales"],
   },
   {
     path: "/purchase",
     name: "purchase",
     icon: "sales.svg",
-    permissions: [
-      "expensecategory",
-      "invoicedetail",
-      "purchaseorder",
-      "purchaserequest",
-      "supplier",
-      "warehouse",
-    ],
+    permissions: permissionRoutes["/dashboard/purchase"],
   },
 ];

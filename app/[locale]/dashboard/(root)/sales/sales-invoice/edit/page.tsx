@@ -6,9 +6,13 @@ import IconWithTitle from "@/components/dashboard/IconWithTitle";
 import CustomModal from "@/components/modals/CustomModal";
 import FormSkelton from "@/components/dashboard/skelton/FormSkelton";
 import LoadingError from "@/components/dashboard/LoadingError";
-import SalesInvoiceForm from "@/components/dashboard/forms/sales/SalesInvoiceForm";
-import { useGetSalesInvoiceByIdQuery, useUpdateSalesInvoiceMutation } from "@/redux/services/dashboard/sales/salesInvoiceApi";
-import { SalesInvoiceFormValues } from "@/lib/validations/dashboard/sales/salesInvoiceSchema";
+import SalesInvoiceForm, {
+  SalesInvoiceFormValues,
+} from "@/components/dashboard/forms/sales/SalesInvoiceForm";
+import {
+  useGetSalesInvoiceByIdQuery,
+  useUpdateSalesInvoiceMutation,
+} from "@/redux/services/dashboard/sales/salesInvoiceApi";
 
 export default function EditSalesInvoice() {
   const router = useRouter();
@@ -22,10 +26,7 @@ export default function EditSalesInvoice() {
   const { data, isLoading, error } = useGetSalesInvoiceByIdQuery(id);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const defaultValues: SalesInvoiceFormValues = data && {
-    ...data,
-    // item: String(data.item.id),
-  };
+  const defaultValues: SalesInvoiceFormValues = data;
 
   const handleModalChange = (isOpen: boolean) => {
     setIsModalOpen(isOpen);

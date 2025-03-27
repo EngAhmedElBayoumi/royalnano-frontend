@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
 import { useTranslations } from "next-intl";
-import { supplierSchema } from "@/lib/validations/dashboard/purchase/supplierSchema"; 
+import { supplierSchema } from "@/lib/validations/dashboard/purchase/supplierSchema";
 
 interface SupplierFormProps {
   onSubmit: (data: SupplierFormValues) => Promise<void>;
@@ -14,8 +14,12 @@ interface SupplierFormProps {
 }
 
 export interface SupplierFormValues {
-  items: any;
-  supplier_by(supplier_by: any): unknown;
+  items: {
+    id: number;
+    item_name: string;
+    item_code: string;
+  };
+  supplier_by(supplier_by: { id: number; name: string }): unknown;
   title: string;
   full_name: string;
   supplier_name: string;
@@ -38,9 +42,13 @@ export interface SupplierFormValues {
   accounting_expenses_category: number;
 }
 
-const SupplierForm = ({ onSubmit, defaultValues, isView = false }: SupplierFormProps) => {
+const SupplierForm = ({
+  onSubmit,
+  defaultValues,
+  isView = false,
+}: SupplierFormProps) => {
   const form = useForm<SupplierFormValues>({
-    resolver: zodResolver(supplierSchema), 
+    resolver: zodResolver(supplierSchema),
     defaultValues: defaultValues || {
       title: "Mr.",
       full_name: "John Doe",

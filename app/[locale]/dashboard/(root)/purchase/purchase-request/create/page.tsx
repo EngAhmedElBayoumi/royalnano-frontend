@@ -1,12 +1,14 @@
 "use client";
 import { useTranslations } from "next-intl";
 import CreatePage from "@/components/dashboard/CreatePage";
-import PurchaseRequestForm, { PurchaseRequestFormValues } from "@/components/dashboard/forms/purchase/PurchaseRequestForm";
+import PurchaseRequestForm, {
+  PurchaseRequestFormValues,
+} from "@/components/dashboard/forms/purchase/PurchaseRequestForm";
 import { useCreateRequestMutation } from "@/redux/services/dashboard/purchase/request";
 
 export default function CreateRequest() {
   const t = useTranslations("Purchase.Request");
-  const [createRequest] = useCreateRequestMutation();
+  const [createRequest, { isLoading }] = useCreateRequestMutation();
 
   const handleSubmit = async (data: PurchaseRequestFormValues) => {
     try {
@@ -31,16 +33,17 @@ export default function CreateRequest() {
       }
     } catch (error) {
       console.error("Error creating request:", error);
-      throw error; 
+      throw error;
     }
   };
 
   return (
     <CreatePage
-      title={t("addRequest")} 
+      title={t("addRequest")}
       onSubmit={handleSubmit}
       Form={PurchaseRequestForm}
       redirectPath={`/dashboard/purchase?tab=${t("request")}`}
+      isLoading={isLoading}
     />
   );
 }

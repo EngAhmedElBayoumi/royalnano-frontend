@@ -34,6 +34,7 @@ const MovementForm = ({
   isLoading,
 }: MovementFormProps) => {
   const t = useTranslations();
+  const globalTranslate = useTranslations();
 
   const form = useForm({
     resolver: zodResolver(movementSchema),

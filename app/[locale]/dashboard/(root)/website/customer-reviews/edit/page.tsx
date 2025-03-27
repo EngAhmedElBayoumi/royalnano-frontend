@@ -43,7 +43,6 @@ export default function EditCustomerReview() {
         throw new Error("Edit failed");
       }
     } catch (error) {
-      console.log("Customer review edit error:", error);
       throw error;
     }
   };

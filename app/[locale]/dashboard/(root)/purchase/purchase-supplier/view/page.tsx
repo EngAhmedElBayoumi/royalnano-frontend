@@ -5,7 +5,9 @@ import IconWithTitle from "@/components/dashboard/IconWithTitle";
 import FormSkelton from "@/components/dashboard/skelton/FormSkelton";
 import LoadingError from "@/components/dashboard/LoadingError";
 // import { useGetRequestByIdQuery } from "@/redux/services/dashboard/purchase/requestApi";
-import PurchaseRequestForm, { PurchaseRequestFormValues } from "@/components/dashboard/forms/purchase/PurchaseRequestForm";
+import PurchaseRequestForm, {
+  PurchaseRequestFormValues,
+} from "@/components/dashboard/forms/purchase/PurchaseRequestForm";
 import { useGetRequestByIdQuery } from "@/redux/services/dashboard/purchase/request";
 
 export default function ViewPurchaseRequest() {
@@ -14,10 +16,8 @@ export default function ViewPurchaseRequest() {
   const t = useTranslations("Purchase.Request");
 
   const { data, isLoading, error } = useGetRequestByIdQuery(id);
-console.log(data)
   const defaultValues: PurchaseRequestFormValues = data && {
     ...data,
- 
   };
 
   const handleSubmit = async (data: PurchaseRequestFormValues) => {
@@ -45,9 +45,9 @@ console.log(data)
         ) : (
           <div className="ltr:lg:pr-[200px] rtl:lg:pl-[200px]">
             <PurchaseRequestForm
-              onSubmit={handleSubmit} 
+              onSubmit={handleSubmit}
               defaultValues={defaultValues}
-              isView={true} 
+              isView={true}
             />
           </div>
         )}

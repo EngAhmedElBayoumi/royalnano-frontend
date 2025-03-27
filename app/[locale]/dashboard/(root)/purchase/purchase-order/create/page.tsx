@@ -1,12 +1,14 @@
 "use client";
 import { useTranslations } from "next-intl";
 import CreatePage from "@/components/dashboard/CreatePage";
-import PurchaseOrderForm, { PurchaseOrderFormValues } from "@/components/dashboard/forms/purchase/PurchaseOrderForm";
+import PurchaseOrderForm, {
+  PurchaseOrderFormValues,
+} from "@/components/dashboard/forms/purchase/PurchaseOrderForm";
 import { useCreateOrderMutation } from "@/redux/services/dashboard/purchase/orderApi";
 
 export default function CreateOrder() {
   const t = useTranslations("Purchase.Order");
-  const [createOrder] = useCreateOrderMutation();
+  const [createOrder, { isLoading }] = useCreateOrderMutation();
 
   const handleSubmit = async (data: PurchaseOrderFormValues) => {
     const payload = {
@@ -46,10 +48,11 @@ export default function CreateOrder() {
 
   return (
     <CreatePage
-      title={t("addOrder")} 
+      title={t("addOrder")}
       onSubmit={handleSubmit}
       Form={PurchaseOrderForm}
       redirectPath={`/dashboard/purchase?tab=${t("order")}`}
+      isLoading={isLoading}
     />
   );
 }

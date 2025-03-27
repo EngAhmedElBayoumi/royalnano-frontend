@@ -2,13 +2,15 @@
 import { useTranslations } from "next-intl";
 import CreatePage from "@/components/dashboard/CreatePage";
 import { useCreateSupplierMutation } from "@/redux/services/dashboard/purchase/supplierApi";
-import SupplierForm, { SupplierFormValues } from "@/components/dashboard/forms/purchase/SupplierForm";
+import SupplierForm, {
+  SupplierFormValues,
+} from "@/components/dashboard/forms/purchase/SupplierForm";
 // import PurchaseSupplierForm, { PurchaseSupplierFormValues } from "@/components/dashboard/forms/purchase/PurchaseSupplierForm";
 // import { useCreateSupplierMutation } from "@/redux/services/dashboard/purchase/supplier";
 
 export default function CreateSupplier() {
   const t = useTranslations("Purchase.Supplier");
-  const [createSupplier] = useCreateSupplierMutation();
+  const [createSupplier, { isLoading }] = useCreateSupplierMutation();
 
   const handleSubmit = async (data: SupplierFormValues) => {
     try {
@@ -33,16 +35,17 @@ export default function CreateSupplier() {
       }
     } catch (error) {
       console.error("Error creating supplier:", error);
-      throw error; 
+      throw error;
     }
   };
 
   return (
     <CreatePage
-      title={t("addSupplier")} 
+      title={t("addSupplier")}
       onSubmit={handleSubmit}
       Form={SupplierForm}
       redirectPath={`/dashboard/purchase?tab=${t("supplier")}`}
+      isLoading={isLoading}
     />
   );
 }

@@ -5,7 +5,9 @@ import IconWithTitle from "@/components/dashboard/IconWithTitle";
 import FormSkelton from "@/components/dashboard/skelton/FormSkelton";
 import LoadingError from "@/components/dashboard/LoadingError";
 import { useGetOrderByIdQuery } from "@/redux/services/dashboard/purchase/orderApi";
-import PurchaseOrderForm, { PurchaseOrderFormValues } from "@/components/dashboard/forms/purchase/PurchaseOrderForm";
+import PurchaseOrderForm, {
+  PurchaseOrderFormValues,
+} from "@/components/dashboard/forms/purchase/PurchaseOrderForm";
 
 export default function ViewPurchaseOrder() {
   const searchParams = useSearchParams();
@@ -13,10 +15,8 @@ export default function ViewPurchaseOrder() {
   const t = useTranslations("Purchase.Order");
 
   const { data, isLoading, error } = useGetOrderByIdQuery(id);
-console.log(data)
   const defaultValues: PurchaseOrderFormValues = data && {
     ...data,
- 
   };
 
   const handleSubmit = async (data: PurchaseOrderFormValues) => {
@@ -44,9 +44,9 @@ console.log(data)
         ) : (
           <div className="ltr:lg:pr-[200px] rtl:lg:pl-[200px]">
             <PurchaseOrderForm
-              onSubmit={handleSubmit} 
+              onSubmit={handleSubmit}
               defaultValues={defaultValues}
-              isView={true} 
+              isView={true}
             />
           </div>
         )}

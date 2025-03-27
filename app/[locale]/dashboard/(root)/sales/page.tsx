@@ -11,8 +11,6 @@ import ClientRequest from "@/components/dashboard/sales/clientRequest";
 
 function SalesPage() {
   const t = useTranslations("Sales");
-  console.log("here is saless")
-  console.log(t("sales"));
 
   const tabs = [
     {
@@ -25,7 +23,7 @@ function SalesPage() {
           src="/assets/icons/dashboard/sales/sales.svg"
         />
       ),
-      content: <SalesReturn/>,
+      content: <SalesReturn />,
     },
     {
       icon: (
@@ -86,7 +84,7 @@ function SalesPage() {
       ),
       label: t("client"),
       content: <ClientRequest />,
-    }
+    },
     // {
     //   icon: (
     //     <Image

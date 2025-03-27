@@ -37,7 +37,7 @@ export default function ForgetPasswordForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="gap-4 h-[100%] flex flex-col pt-[80px] pr-10 pl-7"
+        className="gap-4 h-[100%] flex flex-col pt-[80px] px-7"
       >
         <p className="text-center font-[600] text-[25px]">Forget Password</p>
         <div>

@@ -12,7 +12,10 @@ import CustomSelect from "@/components/formFields/CustomSelect";
 import { useState, useEffect } from "react";
 import { useGetBranchesQuery } from "@/redux/services/dashboard/inventory/branchesApi";
 import { useGetItemsQuery } from "@/redux/services/dashboard/inventory/itemsApi";
-import { useGetSalesOrderByIdQuery, useUpdateSalesOrderMutation } from "@/redux/services/dashboard/sales/salesOrderApi";
+import {
+  useGetSalesOrderByIdQuery,
+  useUpdateSalesOrderMutation,
+} from "@/redux/services/dashboard/sales/salesOrderApi";
 import { EditSalesOrderSchema } from "@/lib/validations/dashboard/sales/editSalesOrderSchema";
 
 interface EditSalesOrderFormProps {
@@ -37,11 +40,14 @@ export interface SalesOrderFormValues {
   status: string;
 }
 
-const EditSalesOrderForm = ({ salesOrderId, defaultValues }: EditSalesOrderFormProps) => {
+const EditSalesOrderForm = ({
+  salesOrderId,
+  defaultValues,
+}: EditSalesOrderFormProps) => {
   const { data: customers } = useGetMiniSalesCustomerQuery({});
   const { data: branchesData } = useGetBranchesQuery({});
   const { data: SalesOrderData } = useGetSalesOrderByIdQuery(salesOrderId);
-  const { data: itemsData, isLoading: isItemsLoading } = useGetItemsQuery({
+  const { data: itemsData } = useGetItemsQuery({
     search: "",
     ordering: "id",
     page: 1,
@@ -54,7 +60,7 @@ const EditSalesOrderForm = ({ salesOrderId, defaultValues }: EditSalesOrderFormP
     resolver: zodResolver(EditSalesOrderSchema),
     defaultValues: defaultValues || {
       order_date: SalesOrderData?.order_date,
-      customer:  SalesOrderData?.customer?.id,
+      customer: SalesOrderData?.customer?.id,
       branch: SalesOrderData?.branch?.id,
       sales_representative: SalesOrderData?.sales_representative,
       description: SalesOrderData?.description,
@@ -69,13 +75,19 @@ const EditSalesOrderForm = ({ salesOrderId, defaultValues }: EditSalesOrderFormP
   });
 
   const [itemTypes, setItemTypes] = useState<("existing" | "custom")[]>(
-    defaultValues?.items.map((item) => (item.item !== null ? "existing" : "custom")) || []
+    defaultValues?.items.map((item) =>
+      item.item !== null ? "existing" : "custom"
+    ) || []
   );
 
   useEffect(() => {
     if (defaultValues) {
       form.reset(defaultValues);
-      setItemTypes(defaultValues.items.map((item) => (item.item !== null ? "existing" : "custom")));
+      setItemTypes(
+        defaultValues.items.map((item) =>
+          item.item !== null ? "existing" : "custom"
+        )
+      );
     }
   }, [defaultValues, form]);
 
@@ -108,7 +120,7 @@ const EditSalesOrderForm = ({ salesOrderId, defaultValues }: EditSalesOrderFormP
 
   const handleRemoveItem = (index: number) => {
     remove(index);
-    setItemTypes((prev) => prev.filter((_, i) => i !== index)); 
+    setItemTypes((prev) => prev.filter((_, i) => i !== index));
   };
 
   const onSubmit = async (data: SalesOrderFormValues) => {
@@ -149,12 +161,14 @@ const EditSalesOrderForm = ({ salesOrderId, defaultValues }: EditSalesOrderFormP
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit((data) => {
-        console.log("Form data before submission:", data);
-        onSubmit(data).catch((error) => {
-          console.error("Form submission error:", error);
-        });
-      })}>
+      <form
+        onSubmit={form.handleSubmit((data) => {
+          console.log("Form data before submission:", data);
+          onSubmit(data).catch((error) => {
+            console.error("Form submission error:", error);
+          });
+        })}
+      >
         <section className="min-h-[60vh]">
           <div className="grid sm:grid-cols-2 gap-x-4 gap-y-2 xl:gap-y-5 lg:gap-x-10">
             <DatePicker
@@ -171,7 +185,7 @@ const EditSalesOrderForm = ({ salesOrderId, defaultValues }: EditSalesOrderFormP
               placeholder={t("SalesOrder.customer")}
               options={customerOptions}
               onChange={(value) => {
-                const customerId = parseInt(value, 10);
+                const customerId = parseInt(String(value), 10);
                 form.setValue("customer", customerId);
               }}
             />
@@ -199,13 +213,18 @@ const EditSalesOrderForm = ({ salesOrderId, defaultValues }: EditSalesOrderFormP
               const itemType = itemTypes[index];
 
               return (
-                <div key={field.id} className="col-span-2 border p-4 rounded-lg mb-4">
+                <div
+                  key={field.id}
+                  className="col-span-2 border p-4 rounded-lg mb-4"
+                >
                   <div className="flex gap-2 mb-2">
                     <button
                       type="button"
                       onClick={() => handleItemTypeChange(index, "existing")}
                       className={`p-2 rounded ${
-                        itemType === "existing" ? "bg-primary text-white" : "bg-gray-200"
+                        itemType === "existing"
+                          ? "bg-primary text-white"
+                          : "bg-gray-200"
                       }`}
                     >
                       Add Existing Item
@@ -214,7 +233,9 @@ const EditSalesOrderForm = ({ salesOrderId, defaultValues }: EditSalesOrderFormP
                       type="button"
                       onClick={() => handleItemTypeChange(index, "custom")}
                       className={`p-2 rounded ${
-                        itemType === "custom" ? "bg-primary text-white" : "bg-gray-200"
+                        itemType === "custom"
+                          ? "bg-primary text-white"
+                          : "bg-gray-200"
                       }`}
                     >
                       Add Custom Item
@@ -227,18 +248,20 @@ const EditSalesOrderForm = ({ salesOrderId, defaultValues }: EditSalesOrderFormP
                       control={form.control}
                       name={`items.${index}.item`}
                       label={t("SalesOrder.selectItem")}
-                      options={existingItems.map((item: { id: number; item_name: string }) => ({
-                        value: item.id.toString(),
-                        label: item.item_name,
-                      }))}
+                      options={existingItems.map(
+                        (item: { id: number; item_name: string }) => ({
+                          value: item.id.toString(),
+                          label: item.item_name,
+                        })
+                      )}
                       placeholder={t("SalesOrder.selectItem")}
                       onChange={(value) => {
                         if (value) {
-                          const selectedItemId = parseInt(value, 10);
+                          const selectedItemId = parseInt(String(value), 10);
                           form.setValue(`items.${index}.item`, selectedItemId);
                         }
                       }}
-                      isLoading={isItemsLoading}
+                      // isLoading={isItemsLoading}
                     />
                   )}
 

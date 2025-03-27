@@ -480,6 +480,7 @@
       "profile": "Profile",
       "LogIn": "Log In",
       "Register": "Register",
+      "dashboard": "Dashboard",
       "Logout": "Logout"
     },
     "hero": {
