@@ -96,7 +96,7 @@ export default function BookingForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="gap-5 flex flex-col pt-[35px] pr-10 pl-7"
+        className="gap-5 flex flex-col pt-[35px] px-7"
       >
         <div className="grid grid-cols-1 lg:grid-cols-2">
           <div className="rtl:ml-4 ltr:mr-4 flex flex-col gap-4">

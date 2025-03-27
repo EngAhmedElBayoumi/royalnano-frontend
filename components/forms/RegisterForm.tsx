@@ -47,13 +47,13 @@ export default function RegisterForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="gap-4 flex flex-col pt-[35px] pr-10 pl-7"
+        className="gap-4 flex flex-col pt-[35px] px-7"
       >
         <p className="text-center font-[600] text-[25px]">Register</p>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           {/* Left Column */}
-          <div className="mr-4 flex flex-col gap-4">
+          <div className="flex flex-col gap-4">
             {/* Name Field */}
             <FormField
               control={form.control}
