@@ -1,7 +1,7 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Button } from "@/components/ui/button";
+// import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -13,7 +13,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { loginValidation } from "@/lib/validations/login";
 import { Link } from "@/i18n/routing";
-import Image from "next/image";
+// import Image from "next/image";
 import { useLoginMutation } from "@/redux/services/loginApi";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
@@ -147,14 +147,14 @@ export default function LoginForm() {
         </div>
 
         {/* Divider with OR */}
-        <div className="flex items-center">
+        {/* <div className="flex items-center">
           <div className="w-[203px] h-[2px] bg-subtitle"></div>
           <p className="mx-[27px] text-[25px] font-[500] text-[#5A5A5A]">OR</p>
           <div className="w-[203px] h-[2px] bg-subtitle"></div>
-        </div>
+        </div> */}
 
         {/* Google Login Button */}
-        <Button className="bg-white border text-[#EC0000] font-[600] text-[25px] h-11 border-subtitle">
+        {/* <Button className="bg-white border text-[#EC0000] font-[600] text-[25px] h-11 border-subtitle">
           <Image
             src="/assets/icons/btnGoogle.svg"
             alt="Google"
@@ -163,10 +163,10 @@ export default function LoginForm() {
             className="me-2"
           />
           Google
-        </Button>
+        </Button> */}
 
         {/* Facebook Login Button */}
-        <Button className="bg-white border text-[#0047B2] font-[600] text-[25px] h-11 border-subtitle">
+        {/* <Button className="bg-white border text-[#0047B2] font-[600] text-[25px] h-11 border-subtitle">
           <Image
             src="/assets/icons/btnFB.svg"
             alt="Facebook"
@@ -175,7 +175,7 @@ export default function LoginForm() {
             className="me-2"
           />
           Facebook
-        </Button>
+        </Button> */}
       </form>
     </Form>
   );

@@ -1,7 +1,7 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Button } from "@/components/ui/button";
+// import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -13,7 +13,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { registerValidation } from "@/lib/validations/register";
 import { Link } from "@/i18n/routing";
-import Image from "next/image";
+// import Image from "next/image";
 import { useRegisterMutation } from "@/redux/services/registerApi";
 
 export default function RegisterForm() {
@@ -166,7 +166,7 @@ export default function RegisterForm() {
           </Link>
         </div>
 
-        <div className="flex items-center">
+        {/* <div className="flex items-center">
           <div className="w-[203px] h-[2px] bg-subtitle"></div>
           <p className="mx-[27px] text-[25px] font-[500] text-[#5A5A5A]">OR</p>
           <div className="w-[203px] h-[2px] bg-subtitle"></div>
@@ -192,7 +192,7 @@ export default function RegisterForm() {
             className="me-2"
           />
           Facebook
-        </Button>
+        </Button> */}
       </form>
     </Form>
   );
