@@ -5,7 +5,7 @@ export interface InfoCardInterface {
 }
 function InfoCardsComponent({ data }: { data: InfoCardInterface[] }) {
   return (
-    <div className="mb-10 grid grid-cols-2 gap-4 md:grid-cols-6">
+    <div className="mb-10 grid xs:grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
       {data &&
         data.map((item, index) => {
           return (
