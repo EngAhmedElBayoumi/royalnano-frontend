@@ -599,6 +599,11 @@
       "save": "Save"
     },
     "ExpenseCategory": {
+      "editExpenseCategory": "Edit Expense Category",
+      "viewExpenseCategory": "View Expense Category",
+      "save": "Save",
+      "cancel": "cancel",
+      "Name": "Name",
       "itemCode": "Item Code",
       "purchaseExpenseCategoryLevel": "Purchase Expense Category Level",
       "description": "Description",
