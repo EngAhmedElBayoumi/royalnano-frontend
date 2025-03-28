@@ -5,7 +5,7 @@ import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import ReviewCard from "@/components/cards/ReviewCard";
-import { useGetCustomerReviewQuery } from "@/redux/services/website/customerReviewApi";
+import { useGetAllReviewsQuery } from "@/redux/services/customerReviewApi";
 import LoadingError from "@/components/dashboard/LoadingError";
 import ReviewsSkeleton from "./ReviewsSkeleton";
 import { useTranslations } from "next-intl";
@@ -20,7 +20,7 @@ interface CustomerReview {
 
 const CustomerReviews: React.FC = () => {
   const t = useTranslations("website.CustomerReviews");
-  const { data: reviews, isLoading, error } = useGetCustomerReviewQuery({});
+  const { data: reviews, isLoading, error } = useGetAllReviewsQuery({});
 
   return (
     <section className="py-4 lg:py-6 xl:py-8 bg-white">

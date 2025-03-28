@@ -59,7 +59,7 @@ export function AppSidebar() {
               {sidebarLinks.map((link) => {
                 const isActive =
                   link.path === "/"
-                    ? currentPath === "/dashboard"
+                    ? currentPath.includes("/dashboard")
                     : currentPath.includes(link.path);
 
                 const hasPermission =

@@ -38,7 +38,6 @@ import { evaluationApi } from "./services/dashboard/hr/evaluationApi";
 import { PurchaseSupplierApi } from "./services/dashboard/purchase/supplierApi";
 import { salesReturnApi } from "./services/dashboard/sales/salesReturnApi";
 import { servicesAPi } from "./services/website/servicesApi";
-import { customerReviewAPi } from "./services/website/customerReviewApi";
 import { clientRequestAPi } from "./services/clientRequestApi";
 import { purchaseOrderApi } from "./services/dashboard/purchase/orderApi";
 import { purchaseExpenseCategoryApi } from "./services/dashboard/purchase/expese-category";
@@ -99,17 +98,17 @@ export const store = configureStore({
     [evaluationApi.reducerPath]: evaluationApi.reducer,
     [salesReturnApi.reducerPath]: salesReturnApi.reducer,
     [servicesAPi.reducerPath]: servicesAPi.reducer,
-    [customerReviewAPi.reducerPath]: customerReviewAPi.reducer,
     [clientRequestAPi.reducerPath]: clientRequestAPi.reducer,
     [PurchaseSupplierApi.reducerPath]: PurchaseSupplierApi.reducer,
     [purchaseOrderApi.reducerPath]: purchaseOrderApi.reducer,
-    [purchaseExpenseCategoryApi.reducerPath]: purchaseExpenseCategoryApi.reducer,
+    [purchaseExpenseCategoryApi.reducerPath]:
+      purchaseExpenseCategoryApi.reducer,
     [purchaseInvoiceApi.reducerPath]: purchaseInvoiceApi.reducer,
     [purchaseRequestApi.reducerPath]: purchaseRequestApi.reducer,
     [purchaseWarehouseApi.reducerPath]: purchaseWarehouseApi.reducer,
     [jobsApi.reducerPath]: jobsApi.reducer,
     [permissionsApi.reducerPath]: permissionsApi.reducer,
-    
+
     auth: persistedAuthReducer,
     profile: persistedProfileReducer,
   },
@@ -153,7 +152,6 @@ export const store = configureStore({
       .concat(PurchaseSupplierApi.middleware)
       .concat(salesReturnApi.middleware)
       .concat(servicesAPi.middleware)
-      .concat(customerReviewAPi.middleware)
       .concat(clientRequestAPi.middleware)
       .concat(purchaseWarehouseApi.middleware)
       .concat(purchaseRequestApi.middleware)
@@ -162,7 +160,6 @@ export const store = configureStore({
       .concat(purchaseOrderApi.middleware)
       .concat(jobsApi.middleware)
       .concat(permissionsApi.middleware);
-      
   },
 });
 
