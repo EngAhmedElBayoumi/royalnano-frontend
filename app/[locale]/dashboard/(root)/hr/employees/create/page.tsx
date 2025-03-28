@@ -11,10 +11,15 @@ export default function CreateEmployee() {
   const [createEmployee, { isLoading }] = useCreateEmployeeMutation();
 
   const handleSubmit = async (data: EmployeeFormValues) => {
+    const selectedPermissionIds = Object.keys(data?.permissions ?? {}).filter(
+      (key) => data.permissions[key]
+    ); // Only include enabled permissions
     const payload = {
       ...data,
       branch: Number(data.branch),
       department: Number(data.department),
+      job_title: Number(data.job_title),
+      custom_permissions: selectedPermissionIds, // Send permission IDs in the request
     };
 
     const response = await createEmployee(payload);

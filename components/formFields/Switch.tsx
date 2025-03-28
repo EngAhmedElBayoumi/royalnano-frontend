@@ -33,8 +33,8 @@ const SwitchField = <T extends FieldValues>({
 
           <FormControl>
             <Switch
-              checked={field.value}
-              onCheckedChange={field.onChange}
+              checked={!!field.value} // Ensure the value is a boolean
+              onCheckedChange={(value) => field.onChange(value)} // Update the value correctly
               dir="ltr"
             />
           </FormControl>

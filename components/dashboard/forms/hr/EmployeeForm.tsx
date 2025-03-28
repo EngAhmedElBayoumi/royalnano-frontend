@@ -6,12 +6,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { employeeSchema } from "@/lib/validations/dashboard/hr/employeeSchema";
 import { useGetBranchesQuery } from "@/redux/services/dashboard/inventory/branchesApi";
 import { useGetDepartmentsQuery } from "@/redux/services/dashboard/hr/departmentApi";
+import { useGetJobsQuery } from "@/redux/services/dashboard/hr/jobsApi";
 import { Form } from "@/components/ui/form";
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
 import PhoneInputField from "@/components/formFields/PhoneInputField";
 import CustomSelect from "@/components/formFields/CustomSelect";
 import SwitchField from "@/components/formFields/Switch";
+import { useEffect, useState } from "react";
 
 interface EmployeeFormProps {
   onSubmit: (data: EmployeeFormValues) => Promise<void>;
@@ -30,7 +32,7 @@ export interface EmployeeFormValues {
   department: string;
   password: string;
   is_user: boolean;
-  permissions: Record<string, boolean>;
+  permissions: Record<string, boolean | undefined>;
 }
 
 const EmployeeForm = ({
@@ -51,14 +53,14 @@ const EmployeeForm = ({
       department: "",
       password: "",
       is_user: false,
-      permissions: {},
+      permissions: {}, // Initialize permissions as an empty object
     },
   });
-
   const globalTranslate = useTranslations();
   const t = useTranslations("hr.employees");
   const { data: branches } = useGetBranchesQuery({});
   const { data: departments } = useGetDepartmentsQuery({});
+  const { data: jobs } = useGetJobsQuery({});
 
   const branchesOptions =
     branches?.results?.map((branch: { id: number; name: string }) => ({
@@ -72,12 +74,42 @@ const EmployeeForm = ({
       label: department.name,
     })) || [];
 
-  const permissionOptions = [
-    "Add service",
-    "Edit service",
-    "Delete service",
-    "View service",
-  ];
+  const jobsOptions =
+    jobs?.results?.map((job: { id: number; name: string }) => ({
+      value: String(job.id),
+      label: job.name,
+    })) || [];
+
+  // Watch the selected job
+  const selectedJobId = form.watch("job_title");
+  const [jobPermissions, setJobPermissions] = useState<
+    { id: string; name: string }[]
+  >([]);
+
+  useEffect(() => {
+    // Find the selected job and update permissions
+    const selectedJob = jobs?.results?.find(
+      (job: { id: number }) => String(job.id) === selectedJobId
+    );
+    if (selectedJob) {
+      setJobPermissions(
+        selectedJob.permissions.map((p: { id: string; name: string }) => ({
+          id: String(p.id),
+          name: p.name,
+        }))
+      );
+    } else {
+      setJobPermissions([]);
+    }
+  }, [selectedJobId, jobs]);
+
+  useEffect(() => {
+    // Register permissions dynamically
+    jobPermissions.forEach((permission) => {
+      form.register(`permissions.${permission.id}`);
+    });
+  }, [jobPermissions, form]);
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -99,11 +131,12 @@ const EmployeeForm = ({
             name="phone"
             label={t("phone")}
           />
-          <TextInput
+          <CustomSelect
             control={form.control}
             name="job_title"
             label={t("jobTitle")}
             placeholder={t("jobTitle")}
+            options={jobsOptions}
           />
           <TextInput
             control={form.control}
@@ -145,19 +178,21 @@ const EmployeeForm = ({
             label={t("isUser")}
           />
         </section>
-        <section className="mt-5">
-          <h3 className="font-bold text-primary">Permission</h3>
-          <div className="grid grid-cols-2 gap-4 mt-2 border border-gray rounded-md xl:rounded-10 p-5 xl:px-6 xl:py-5">
-            {permissionOptions.map((permission) => (
-              <SwitchField
-                key={permission}
-                control={form.control}
-                name={`permissions.${permission}`}
-                label={permission}
-              />
-            ))}
-          </div>
-        </section>
+        {jobPermissions.length > 0 && (
+          <section className="mt-5">
+            <h3 className="font-bold text-primary">Permission</h3>
+            <div className="grid grid-cols-2 gap-4 mt-2 border border-gray rounded-md xl:rounded-10 p-5 xl:px-6 xl:py-5">
+              {jobPermissions.map((permission) => (
+                <SwitchField
+                  key={permission.id}
+                  control={form.control}
+                  name={`permissions.${permission.id}`} // Use permission ID as the key
+                  label={permission.name} // Display permission name
+                />
+              ))}
+            </div>
+          </section>
+        )}
         <section className="flex justify-end gap-2 mt-5">
           <Link
             href={`/dashboard/hr?tab=${globalTranslate("hr.tabs.employees")}`}
