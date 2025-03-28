@@ -161,6 +161,7 @@
       "department": "القسم",
       "password": "كلمة المرور",
       "isUser": "مستخدم",
+      "permissions": "الصلاحيات",
       "noEmployeesDataFound": "لا توجد بيانات للموظفين",
       "addEmployee": "إضافة موظف",
       "editEmployee": "تعديل موظف"

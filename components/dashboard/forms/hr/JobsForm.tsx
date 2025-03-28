@@ -72,6 +72,13 @@ const JobsForm: React.FC<JobsFormProps> = ({
               placeholder={t("permissionSelection")}
               valueType="number"
             />
+            {/* <MultiSelect
+              control={form.control}
+              name="permissions"
+              label={t("permissions")}
+              placeholder={t("permissionSelection")}
+              options={permissionsOptions}
+            /> */}
           </div>
         </section>
         <div className="flex justify-end gap-2 mt-5">

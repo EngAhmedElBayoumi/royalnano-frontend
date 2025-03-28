@@ -162,6 +162,7 @@
       "department": "Department",
       "password": "Password",
       "isUser": "User",
+      "permissions": "Permissions",
       "noEmployeesDataFound": "No employees data found",
       "addEmployee": "Add Employee",
       "editEmployee": "Edit Employee"

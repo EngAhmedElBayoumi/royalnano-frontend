@@ -14,6 +14,7 @@ import PhoneInputField from "@/components/formFields/PhoneInputField";
 import CustomSelect from "@/components/formFields/CustomSelect";
 import SwitchField from "@/components/formFields/Switch";
 import { useEffect, useState } from "react";
+import MultiSelect from "@/components/formFields/MultiSelect";
 
 interface EmployeeFormProps {
   onSubmit: (data: EmployeeFormValues) => Promise<void>;
@@ -32,7 +33,8 @@ export interface EmployeeFormValues {
   department: string;
   password: string;
   is_user: boolean;
-  permissions: Record<string, boolean | undefined>;
+  // permissions: Record<string, boolean | undefined>;
+  permissions: number[];
 }
 
 const EmployeeForm = ({
@@ -53,7 +55,7 @@ const EmployeeForm = ({
       department: "",
       password: "",
       is_user: false,
-      permissions: {}, // Initialize permissions as an empty object
+      permissions: [],
     },
   });
   const globalTranslate = useTranslations();
@@ -83,7 +85,7 @@ const EmployeeForm = ({
   // Watch the selected job
   const selectedJobId = form.watch("job_title");
   const [jobPermissions, setJobPermissions] = useState<
-    { id: string; name: string }[]
+    { value: string; label: string }[]
   >([]);
 
   useEffect(() => {
@@ -94,8 +96,8 @@ const EmployeeForm = ({
     if (selectedJob) {
       setJobPermissions(
         selectedJob.permissions.map((p: { id: string; name: string }) => ({
-          id: String(p.id),
-          name: p.name,
+          value: String(p.id),
+          label: p.name,
         }))
       );
     } else {
@@ -103,12 +105,12 @@ const EmployeeForm = ({
     }
   }, [selectedJobId, jobs]);
 
-  useEffect(() => {
-    // Register permissions dynamically
-    jobPermissions.forEach((permission) => {
-      form.register(`permissions.${permission.id}`);
-    });
-  }, [jobPermissions, form]);
+  // useEffect(() => {
+  //   // Register permissions dynamically
+  //   jobPermissions.forEach((permission) => {
+  //     form.register(`permissions.${permission.id}`);
+  //   });
+  // }, [jobPermissions, form]);
 
   return (
     <Form {...form}>
@@ -179,6 +181,15 @@ const EmployeeForm = ({
           />
         </section>
         {jobPermissions.length > 0 && (
+          <MultiSelect
+            control={form.control}
+            name="permissions"
+            label={t("permissions")}
+            placeholder={t("permissions")}
+            options={jobPermissions}
+          />
+        )}
+        {/* {jobPermissions.length > 0 && (
           <section className="mt-5">
             <h3 className="font-bold text-primary">Permission</h3>
             <div className="grid grid-cols-2 gap-4 mt-2 border border-gray rounded-md xl:rounded-10 p-5 xl:px-6 xl:py-5">
@@ -192,7 +203,7 @@ const EmployeeForm = ({
               ))}
             </div>
           </section>
-        )}
+        )} */}
         <section className="flex justify-end gap-2 mt-5">
           <Link
             href={`/dashboard/hr?tab=${globalTranslate("hr.tabs.employees")}`}
