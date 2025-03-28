@@ -7,36 +7,36 @@ export const purchaseInvoiceApi = createApi({
   endpoints: (builder) => ({
     getInvoices: builder.query({
       query: ({ search, ordering, page, page_size }) => ({
-        url: `purchase/purchase_invoice`,
+        url: `purchase/purchase-invoice`,
         params: { search, ordering, page, page_size },
       }),
     }),
     getInvoicesMini: builder.query({
       query: ({ search, ordering, page, page_size }) => ({
-        url: `purchase/purchase_invoice/mini`,
+        url: `purchase/purchase-invoice/mini`,
         params: { search, ordering, page, page_size },
       }),
     }),
     getInvoiceById: builder.query({
-      query: (id) => `purchase/purchase_invoice/${id}/`,
+      query: (id) => `purchase/purchase-invoice/${id}/`,
     }),
     createInvoice: builder.mutation({
       query: (data) => ({
-        url: `purchase/purchase_invoice/`,
+        url: `purchase/purchase-invoice/`,
         method: "POST",
         body: data,
       }),
     }),
     updateInvoice: builder.mutation({
       query: ({ id, data }) => ({
-        url: `purchase/purchase_invoice/${id}/`,
+        url: `purchase/purchase-invoice/${id}/`,
         method: "PATCH",
         body: data,
       }),
     }),
     deleteInvoice: builder.mutation({
       query: (id) => ({
-        url: `purchase/purchase_invoice/${id}/`,
+        url: `purchase/purchase-invoice/${id}/`,
         method: "DELETE",
       }),
     }),
