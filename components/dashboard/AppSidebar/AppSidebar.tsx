@@ -59,7 +59,7 @@ export function AppSidebar() {
               {sidebarLinks.map((link) => {
                 const isActive =
                   link.path === "/"
-                    ? currentPath.includes("/dashboard")
+                    ? currentPath === `/${locale}/dashboard`
                     : currentPath.includes(link.path);
 
                 const hasPermission =
