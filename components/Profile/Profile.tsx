@@ -18,7 +18,7 @@ const Profile = () => {
   const locale = useParams()?.locale as string;
   const { data } = useGetSalesSalesClientRequestQuery({});
   const [createInitialPrice] = useCreateInitialPriceMutation();
-  const [paymentUrl, setPaymentUrl] = useState<string | null>(null);
+
   const [isProcessingPayment, setIsProcessingPayment] = useState(false);
 
   const handlePayment = async (serviceId: number) => {
@@ -26,11 +26,9 @@ const Profile = () => {
     try {
       const payload = { request_id: serviceId };
       const res = await createInitialPrice(payload).unwrap();
-      
+
       if (res?.payment_url) {
-        console.log("Payment URL:", res.payment_url);
-        setPaymentUrl(res.payment_url);
-        window.location.replace(res.payment_url)
+        window.location.replace(res.payment_url);
       } else {
         // toast.error(t("payment.noUrl"));
         console.error("No payment URL in response");
@@ -42,7 +40,6 @@ const Profile = () => {
       setIsProcessingPayment(false);
     }
   };
-
 
   return (
     <section className="flex justify-center flex-wrap">
@@ -70,31 +67,41 @@ const Profile = () => {
 
           <TabsContent value="previous-services">
             <div className="justify-center grid xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-4 w-[90vw] md:w-fit">
-              {data?.map((service) => (
-                <div key={service.id} className="flex flex-col">
-                  <Link href={`/services/${service.id}`} passHref>
-                    <ServiceCard
-                      title={service.car_type}
-                      warranty={service.car_model}
-                      country={service.description}
-                      imageSrc={service.service.image}
-                    />
-                  </Link>
-                  {service.initial_price && (
-                    <h2 className="text-sm font-medium mt-2">
-                      {t("payment.initialPrice")}: {service.initial_price}
-                    </h2>
-                  )}
-                  {service.status === "approved" && (
-                    <CustomButton 
-                      text={t("payment.payButton")}
-                      onClick={() => handlePayment(service.id)}
-                      disabled={isProcessingPayment}
-                      className="mt-2"
-                    />
-                  )}
-                </div>
-              ))}
+              {data?.map(
+                (service: {
+                  id: number;
+                  car_type: string;
+                  car_model: string;
+                  description: string;
+                  service: { image: string };
+                  initial_price?: number;
+                  status?: string;
+                }) => (
+                  <div key={service.id} className="flex flex-col">
+                    <Link href={`/services/${service.id}`} passHref>
+                      <ServiceCard
+                        title={service.car_type}
+                        warranty={service.car_model}
+                        country={service.description}
+                        imageSrc={service.service.image}
+                      />
+                    </Link>
+                    {service.initial_price && (
+                      <h2 className="text-sm font-medium mt-2">
+                        {t("payment.initialPrice")}: {service.initial_price}
+                      </h2>
+                    )}
+                    {service.status === "approved" && (
+                      <CustomButton
+                        text={t("payment.payButton")}
+                        onClick={() => handlePayment(service.id)}
+                        isDisabled={isProcessingPayment}
+                        className="mt-2"
+                      />
+                    )}
+                  </div>
+                )
+              )}
             </div>
           </TabsContent>
 
@@ -102,8 +109,6 @@ const Profile = () => {
             <ProfileForm />
           </TabsContent>
         </Tabs>
-
-       
       </main>
     </section>
   );
