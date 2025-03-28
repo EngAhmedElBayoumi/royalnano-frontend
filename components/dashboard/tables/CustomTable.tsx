@@ -21,7 +21,7 @@ import {
   DropdownMenuTrigger,
 } from "@radix-ui/react-dropdown-menu";
 import "./CustomTable.css";
-import InfoCardsComponent, { InfoCardInterface } from "../cards/InfoCard";
+import  { InfoCardInterface } from "../cards/InfoCard";
 import { useTranslations } from "next-intl";
 import { Paginator } from "primereact/paginator";
 
@@ -65,7 +65,7 @@ export default function CustomTable({
   data,
   rows,
   columns,
-  cardData,
+
   buttonText,
   ButtonEvent,
   headerBG,
