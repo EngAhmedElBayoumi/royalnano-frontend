@@ -16,7 +16,7 @@ interface TextInputProps<T extends FieldValues> {
   type?: string;
   className?: string;
   readonly?: boolean;
-  value?: string;
+  value?: string | number;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -39,7 +39,9 @@ const TextInput = <T extends FieldValues>({
         render={({ field }) => (
           <FormItem className={className}>
             {label && (
-              <FormLabel className="text-darkGray xl:text-sm">{label}</FormLabel>
+              <FormLabel className="text-darkGray xl:text-sm">
+                {label}
+              </FormLabel>
             )}
             <FormControl>
               <Input
