@@ -40,7 +40,7 @@ import { salesReturnApi } from "./services/dashboard/sales/salesReturnApi";
 import { servicesAPi } from "./services/website/servicesApi";
 import { clientRequestAPi } from "./services/clientRequestApi";
 import { purchaseOrderApi } from "./services/dashboard/purchase/orderApi";
-import { purchaseExpenseCategoryApi } from "./services/dashboard/purchase/expese-category";
+import { purchaseExpenseCategoryApi } from "./services/dashboard/purchase/expenseCategory";
 import { purchaseInvoiceApi } from "./services/dashboard/purchase/invoiceApi";
 import { purchaseRequestApi } from "./services/dashboard/purchase/request";
 import { purchaseWarehouseApi } from "./services/dashboard/purchase/warehouseApi";

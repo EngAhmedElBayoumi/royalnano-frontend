@@ -3,14 +3,13 @@ import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import TableWrapper from "@/components/dashboard/tables/TableWrapper";
 import { useTableData } from "@/hooks/useTableData";
-import { useGetExpenseCategorysQuery } from "@/redux/services/dashboard/purchase/expese-category";
+import { useGetExpenseCategorysQuery } from "@/redux/services/dashboard/purchase/expenseCategory";
 
 export interface Item {
   id: number;
-  item_code: string;
-  item_name: string;
-  PurchaseExpenseCategory_level: number;
+  name: string;  // Matches API response
   description: string;
+  // Note: API doesn't include item_code or PurchaseExpenseCategory_level
 }
 
 export default function PurchaseExpenseCategory() {
@@ -29,12 +28,9 @@ export default function PurchaseExpenseCategory() {
   const t = useTranslations("Purchase.ExpenseCategory");
 
   const columns = [
-    { field: "itemCode", header: t("itemCode") },
-    {
-      field: "PurchaseExpenseCategoryLevel",
-      header: t("purchaseExpenseCategoryLevel"),
-    },
+    { field: "name", header: t("Name") },  // Using "Name" from translations
     { field: "description", header: t("description") },
+    // Removed itemCode and purchaseExpenseCategoryLevel as they're not in API data
   ];
 
   const cardsData = [
@@ -48,8 +44,7 @@ export default function PurchaseExpenseCategory() {
   const formattedData =
     inventoryItems?.results?.map((item: Item) => ({
       id: item.id,
-      itemCode: item.item_code,
-      PurchaseExpenseCategoryLevel: item.PurchaseExpenseCategory_level,
+      name: item.name,  // Using name from API
       description: item.description,
     })) || [];
 
