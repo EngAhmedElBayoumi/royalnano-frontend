@@ -20,6 +20,12 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
+        protocol: "https",
+        hostname: "royalnano.coderash.online",
+        port: "",
+        pathname: "/media/**",
+      },
+      {
         protocol: "http",
         hostname: "royalnano.coderash.online",
         port: "",
