@@ -7,14 +7,13 @@ import { jobsSchema } from "@/lib/validations/dashboard/hr/jobsSchema";
 import { Form } from "@/components/ui/form";
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
-import CustomSelect from "@/components/formFields/CustomSelect";
 import { useGetPermissionsQuery } from "@/redux/services/dashboard/hr/permissionsApi";
+import MultiSelect from "@/components/formFields/MultiSelect";
 
 interface JobsFormProps {
   onSubmit: (data: JobsFormValues) => Promise<void>;
   defaultValues?: JobsFormValues;
   isLoading?: boolean;
-  //   permissionsOptions: { value: string; label: string }[];
 }
 
 export interface JobsFormValues {
@@ -26,7 +25,6 @@ const JobsForm: React.FC<JobsFormProps> = ({
   onSubmit,
   defaultValues,
   isLoading,
-  // permissionsOptions,
 }) => {
   const form = useForm<JobsFormValues>({
     resolver: zodResolver(jobsSchema),
@@ -64,21 +62,13 @@ const JobsForm: React.FC<JobsFormProps> = ({
               placeholder={t("name")}
             />
 
-            <CustomSelect
+            <MultiSelect
               control={form.control}
               name="permissions"
               label={t("permissions")}
-              options={permissionsOptions}
               placeholder={t("permissionSelection")}
-              valueType="number"
+              options={permissionsOptions}
             />
-            {/* <MultiSelect
-              control={form.control}
-              name="permissions"
-              label={t("permissions")}
-              placeholder={t("permissionSelection")}
-              options={permissionsOptions}
-            /> */}
           </div>
         </section>
         <div className="flex justify-end gap-2 mt-5">

@@ -111,7 +111,7 @@ const EmployeeForm = ({
   //     form.register(`permissions.${permission.id}`);
   //   });
   // }, [jobPermissions, form]);
-
+  console.log("form", form.getValues());
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -180,15 +180,15 @@ const EmployeeForm = ({
             label={t("isUser")}
           />
         </section>
-        {jobPermissions.length > 0 && (
-          <MultiSelect
-            control={form.control}
-            name="permissions"
-            label={t("permissions")}
-            placeholder={t("permissions")}
-            options={jobPermissions}
-          />
-        )}
+        {/* {jobPermissions.length > 0 && ( */}
+        <MultiSelect
+          control={form.control}
+          name="permissions"
+          label={t("permissions")}
+          placeholder={t("permissions")}
+          options={jobPermissions}
+        />
+        {/* )} */}
         {/* {jobPermissions.length > 0 && (
           <section className="mt-5">
             <h3 className="font-bold text-primary">Permission</h3>
