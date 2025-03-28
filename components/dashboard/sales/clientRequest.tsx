@@ -36,7 +36,7 @@ export default function ClientRequest() {
       try {
         await postSetPrice({
           request_id: selectedRequestId,
-          data: { price },
+          data: { initial_price: price },
         }).unwrap();
         setIsModalOpen(false);
         setPrice(0);
@@ -114,6 +114,7 @@ export default function ClientRequest() {
     { field: "phone_number", header: "Phone Number" },
     { field: "car_model", header: "Car Model" },
     { field: "branch_name", header: "Branch Name" },
+    { field: "status", header: "Status" },
   ];
 
   const cardsData = [
