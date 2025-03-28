@@ -33,8 +33,7 @@ export interface EmployeeFormValues {
   department: string;
   password: string;
   is_user: boolean;
-  // permissions: Record<string, boolean | undefined>;
-  permissions: number[];
+  custom_permissions: number[];
 }
 
 const EmployeeForm = ({
@@ -55,7 +54,7 @@ const EmployeeForm = ({
       department: "",
       password: "",
       is_user: false,
-      permissions: [],
+      custom_permissions: [],
     },
   });
   const globalTranslate = useTranslations();
@@ -105,13 +104,6 @@ const EmployeeForm = ({
     }
   }, [selectedJobId, jobs]);
 
-  // useEffect(() => {
-  //   // Register permissions dynamically
-  //   jobPermissions.forEach((permission) => {
-  //     form.register(`permissions.${permission.id}`);
-  //   });
-  // }, [jobPermissions, form]);
-  console.log("form", form.getValues());
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -180,30 +172,16 @@ const EmployeeForm = ({
             label={t("isUser")}
           />
         </section>
-        {/* {jobPermissions.length > 0 && ( */}
-        <MultiSelect
-          control={form.control}
-          name="permissions"
-          label={t("permissions")}
-          placeholder={t("permissions")}
-          options={jobPermissions}
-        />
-        {/* )} */}
-        {/* {jobPermissions.length > 0 && (
-          <section className="mt-5">
-            <h3 className="font-bold text-primary">Permission</h3>
-            <div className="grid grid-cols-2 gap-4 mt-2 border border-gray rounded-md xl:rounded-10 p-5 xl:px-6 xl:py-5">
-              {jobPermissions.map((permission) => (
-                <SwitchField
-                  key={permission.id}
-                  control={form.control}
-                  name={`permissions.${permission.id}`} // Use permission ID as the key
-                  label={permission.name} // Display permission name
-                />
-              ))}
-            </div>
-          </section>
-        )} */}
+        {jobPermissions.length > 0 && (
+          <MultiSelect
+            control={form.control}
+            name="custom_permissions"
+            label={t("permissions")}
+            placeholder={t("permissions")}
+            options={jobPermissions}
+          />
+        )}
+
         <section className="flex justify-end gap-2 mt-5">
           <Link
             href={`/dashboard/hr?tab=${globalTranslate("hr.tabs.employees")}`}
