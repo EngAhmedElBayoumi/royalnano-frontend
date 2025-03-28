@@ -32,12 +32,6 @@ export default function ClientRequest() {
   };
 
   const handleSubmitPrice = async () => {
-    console.log(
-      "Submitting price:",
-      price,
-      "for request ID:",
-      selectedRequestId
-    );
     if (selectedRequestId && price) {
       try {
         await postSetPrice({
