@@ -325,7 +325,7 @@ const EditSalesOrderForm = ({
             Add Item
           </button>
         </section>
-        <div className="flex justify-end gap-2 mt-5">
+        <div className="flex justify-end gap-2 mt-5 flex-col-reverse xs:flex-row">
           <Link href={`/dashboard/sales?tab=${t("order")}`} passHref>
             <CustomButton text={t("cancel")} variant="secondary" />
           </Link>

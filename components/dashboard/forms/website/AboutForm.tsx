@@ -44,7 +44,7 @@ const AboutForm = ({ onSubmit, defaultValues }: AboutFormProps) => {
             label="Description"
           />
         </section>
-        <div className="flex justify-end gap-2 mt-5">
+        <div className="flex justify-end gap-2 mt-5 flex-col-reverse xs:flex-row">
           <Link href="/dashboard/website" passHref>
             <CustomButton text="Cancel" variant="secondary" />
           </Link>

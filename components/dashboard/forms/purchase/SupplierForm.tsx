@@ -229,7 +229,7 @@ const SupplierForm = ({
 
         {/* Buttons */}
         {!isView && (
-          <div className="flex justify-end gap-2 mt-5">
+          <div className="flex justify-end gap-2 mt-5 flex-col-reverse xs:flex-row">
             <CustomButton text={t("cancel")} variant="secondary" />
             <CustomButton text={t("save")} type="submit" />
           </div>

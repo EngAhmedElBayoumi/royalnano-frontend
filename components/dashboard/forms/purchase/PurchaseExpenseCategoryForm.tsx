@@ -48,7 +48,7 @@ const ExpenseCategoryForm = ({
             placeholder={t("Name")}
             readonly={isView}
           />
-          
+
           <TextInput
             control={form.control}
             name="description"
@@ -61,11 +61,8 @@ const ExpenseCategoryForm = ({
         </div>
 
         {!isView && (
-          <div className="flex justify-end gap-2 mt-5">
-            <Link
-              href="/dashboard/purchase/purchase-expense-category"
-              passHref
-            >
+          <div className="flex justify-end gap-2 mt-5 flex-col-reverse xs:flex-row">
+            <Link href="/dashboard/purchase/purchase-expense-category" passHref>
               <CustomButton text={t("cancel")} variant="secondary" />
             </Link>
             <CustomButton text={t("save")} type="submit" />

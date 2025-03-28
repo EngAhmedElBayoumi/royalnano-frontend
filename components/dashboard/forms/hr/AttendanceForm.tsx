@@ -223,7 +223,7 @@ const AttendanceForm = ({
             </CustomModal>
           </div>
         </section>
-        <div className="flex justify-end gap-2 mt-5">
+        <div className="flex justify-end gap-2 mt-5 flex-col-reverse xs:flex-row">
           <Link
             href={`/dashboard/hr?tab=${globalTranslate("hr.tabs.attendance")}`}
             passHref
