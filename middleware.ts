@@ -38,7 +38,7 @@ export async function middleware(req: NextRequest) {
   ];
 
   // Define the protected routes
-  const protectedRoutes = ["/dashboard", "/profile"];
+  const protectedRoutes = ["/dashboard", "/profile", "/book-now"];
 
   // Check if the user is authenticated using the access token
   if (accessToken && checkToken(accessToken)) {
@@ -85,5 +85,6 @@ export const config = {
     "/register",
     "/dashboard/:path*", // Matches "/dashboard" and everything inside it
     "/profile",
+    "/book-now",
   ],
 };
