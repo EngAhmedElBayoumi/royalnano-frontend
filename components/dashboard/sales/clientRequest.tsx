@@ -18,7 +18,7 @@ export default function ClientRequest() {
   const [selectedRequestId, setSelectedRequestId] = useState<number | null>(
     null
   );
-  const [price, setPrice] = useState<string>("");
+  const [price, setPrice] = useState<number>(0);
   const [postSetPrice, { isLoading }] = usePostSetPriceMutation();
 
   const handlePageChange = (newPage: number) => {
@@ -39,7 +39,7 @@ export default function ClientRequest() {
           data: { price },
         }).unwrap();
         setIsModalOpen(false);
-        setPrice("");
+        setPrice(0);
       } catch (error) {
         console.error("Failed to set price:", error);
       }
@@ -139,7 +139,7 @@ export default function ClientRequest() {
           <TextInput
             placeholder="Enter price"
             value={price}
-            onChange={(e) => setPrice(e.target.value)}
+            onChange={(e) => setPrice(parseInt(e.target.value))}
             type="number"
           />
           <button

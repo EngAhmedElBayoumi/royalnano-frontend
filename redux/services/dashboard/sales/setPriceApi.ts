@@ -7,7 +7,7 @@ export const setPriceApi = createApi({
   endpoints: (builder) => ({
     postSetPrice: builder.mutation({
       query: ({ request_id, data }) => ({
-        url: `sales/set-price/${request_id}/`,
+        url: `sales/client-request/${request_id}/set-price/`,
         method: "POST",
         body: data,
       }),
