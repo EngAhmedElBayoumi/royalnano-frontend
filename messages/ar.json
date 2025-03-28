@@ -232,6 +232,9 @@
       "name": "الاسم",
       "permissions": "الصلاحيات",
       "permissionSelection": "اختر الصلاحيات",
+      "createdAt": "تاريخ الإنشاء",
+      "totalJobs": "إجمالي الوظائف",
+      "noJobsDataFound": "لا توجد بيانات للوظائف",
       "validation": {
         "nameRequired": "اسم الوظيفة مطلوب",
         "permissionsRequired": "يجب اختيار صلاحية واحدة على الأقل"

@@ -233,6 +233,9 @@
       "name": "Name",
       "permissions": "Permissions",
       "permissionSelection": "Select permissions",
+      "createdAt": "created at",
+      "totalJobs": "Total Jobs",
+      "noJobsDataFound": "No jobs data found",
       "validation": {
         "nameRequired": "Job name is required",
         "permissionsRequired": "At least one permission is required"
