@@ -42,7 +42,7 @@ export default function PurchaseExpenseCategory() {
   const formattedData =
     inventoryItems?.results?.map((item: Item) => ({
       id: item.id,
-      itemCode: item.item.item_code,
+      itemCode: item.item_code,
       PurchaseExpenseCategoryLevel: item.PurchaseExpenseCategory_level,
       description: item.description,
     })) || [];

@@ -68,7 +68,7 @@ export function AreaChartComponent<T extends Record<string, unknown>>({
               tickLine={false}
               axisLine={false}
               tickMargin={8}
-              tickCount={3}
+              tickCount={4}
             />
             <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
             {yKeys.map((key, index) => (

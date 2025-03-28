@@ -53,27 +53,32 @@ export default function Home() {
         ) : (
           <>
             <InfoCardsComponent data={cardsData} />
-            <AreaChartComponent
-              chartData={chartData}
-              title="Sales and Purchases"
-              description={`A comparison of sales and purchases from ${dateRange}`}
-              footerData={{
-                text: "Overview",
-                subText: `Data range: ${dateRange}`,
-              }}
-              config={{
-                sales: { label: "Sales", color: "hsl(var(--chart-1))" },
-                purchases: { label: "Purchases", color: "hsl(var(--chart-2))" },
-              }}
-              xKey="date"
-              yKeys={["sales", "purchases"]}
-              containerStyle={{
-                width: "100%",
-                maxWidth: "600px", // Set a maximum width for the chart container
-                height: "400px", // Set a fixed height for the chart container
-                margin: "0 auto", // Center the chart horizontally
-              }}
-            />
+            <div className="mt-10 flex flex-col items-start justify-center gap-5">
+              <AreaChartComponent
+                chartData={chartData}
+                title="Sales and Purchases"
+                description={`A comparison of sales and purchases from ${dateRange}`}
+                footerData={{
+                  text: "Overview",
+                  subText: `Data range: ${dateRange}`,
+                }}
+                config={{
+                  sales: { label: "Sales", color: "hsl(var(--chart-1))" },
+                  purchases: {
+                    label: "Purchases",
+                    color: "hsl(var(--chart-2))",
+                  },
+                }}
+                xKey="date"
+                yKeys={["sales", "purchases"]}
+                // containerStyle={{
+                //   width: "100%",
+                //   maxWidth: "600px", // Set a maximum width for the chart container
+                //   height: "400px", // Set a fixed height for the chart container
+                //   margin: "0 auto", // Center the chart horizontally
+                // }}
+              />
+            </div>
           </>
         )}
       </div>
