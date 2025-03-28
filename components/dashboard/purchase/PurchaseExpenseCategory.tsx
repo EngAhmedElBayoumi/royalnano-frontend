@@ -6,18 +6,21 @@ import { useTableData } from "@/hooks/useTableData";
 import { useGetExpenseCategorysQuery } from "@/redux/services/dashboard/purchase/expese-category";
 
 export interface Item {
-  item: {
-    id: number;
-    item_code: string;
-    item_name: string;
-  };
+  id: number;
+  item_code: string;
+  item_name: string;
   PurchaseExpenseCategory_level: number;
   description: string;
-  id: string;
 }
 
 export default function PurchaseExpenseCategory() {
-  const { data: inventoryItems, isLoading, error, permissions, handlePageChange } = useTableData({
+  const {
+    data: inventoryItems,
+    isLoading,
+    error,
+    permissions,
+    handlePageChange,
+  } = useTableData({
     permissionKey: "expensecategory",
     useQueryHook: useGetExpenseCategorysQuery,
   });
@@ -27,7 +30,10 @@ export default function PurchaseExpenseCategory() {
 
   const columns = [
     { field: "itemCode", header: t("itemCode") },
-    { field: "PurchaseExpenseCategoryLevel", header: t("purchaseExpenseCategoryLevel") },
+    {
+      field: "PurchaseExpenseCategoryLevel",
+      header: t("purchaseExpenseCategoryLevel"),
+    },
     { field: "description", header: t("description") },
   ];
 
