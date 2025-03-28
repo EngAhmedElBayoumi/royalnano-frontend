@@ -6,9 +6,6 @@ import FormSkelton from "@/components/dashboard/skelton/FormSkelton";
 import LoadingError from "@/components/dashboard/LoadingError";
 import { useGetExpenseCategoryByIdQuery } from "@/redux/services/dashboard/purchase/expenseCategory";
 import ExpenseCategoryForm, { ExpenseCategoryFormValues } from "@/components/dashboard/forms/purchase/PurchaseExpenseCategoryForm";
-// import ExpenseCategoryForm, {
-//   ExpenseCategoryFormValues,
-// } from "@/components/dashboard/forms/purchase/ExpenseCategoryForm";
 
 export default function ViewExpenseCategory() {
   const searchParams = useSearchParams();
@@ -19,11 +16,10 @@ export default function ViewExpenseCategory() {
   const defaultValues: ExpenseCategoryFormValues = data && {
     id: data.id,
     name: data.name,
-    description: data.description || "", // Handle optional description
+    description: data.description || "", 
   };
 
   const handleSubmit = async (data: ExpenseCategoryFormValues) => {
-    // No submission needed for view-only page
     console.log("View mode - no submission", data);
   };
 

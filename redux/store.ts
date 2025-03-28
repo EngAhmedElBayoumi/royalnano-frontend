@@ -47,6 +47,8 @@ import { purchaseWarehouseApi } from "./services/dashboard/purchase/warehouseApi
 import { jobsApi } from "./services/dashboard/hr/jobsApi";
 import { permissionsApi } from "./services/dashboard/hr/permissionsApi";
 import { statisticsAPi } from "./services/dashboard/statisticsApi";
+import { salesSalesClientRequestApi } from "./services/dashboard/sales/salesClientRequests";
+import { initializePaymentApi } from "./services/dashboard/sales/initialPriceApi";
 // Create separate configs for each reducer
 const authPersistConfig = {
   key: "auth",
@@ -110,6 +112,8 @@ export const store = configureStore({
     [jobsApi.reducerPath]: jobsApi.reducer,
     [permissionsApi.reducerPath]: permissionsApi.reducer,
     [statisticsAPi.reducerPath]: statisticsAPi.reducer,
+    [salesSalesClientRequestApi.reducerPath]: salesSalesClientRequestApi.reducer,
+    [initializePaymentApi.reducerPath]: initializePaymentApi.reducer,
 
     auth: persistedAuthReducer,
     profile: persistedProfileReducer,
@@ -162,7 +166,10 @@ export const store = configureStore({
       .concat(purchaseOrderApi.middleware)
       .concat(jobsApi.middleware)
       .concat(permissionsApi.middleware)
-      .concat(statisticsAPi.middleware);
+      .concat(statisticsAPi.middleware)
+      .concat(salesSalesClientRequestApi.middleware)
+      .concat(initializePaymentApi.middleware);
+      
   },
 });
 

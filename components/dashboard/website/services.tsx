@@ -15,6 +15,7 @@ export default function Services() {
       // eslint-disable-next-line
       useQueryHook: useGetServicesQuery,
     });
+    console.log(data)
 
   const columns = [
     { field: "name", header: t("name") },
