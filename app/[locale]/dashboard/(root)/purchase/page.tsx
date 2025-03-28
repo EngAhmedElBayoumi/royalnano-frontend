@@ -33,11 +33,11 @@ function PurchasePage() {
     },
     {
       label: t("invoice"),
-       //to be edited 
+      //to be edited
       permissionKey: "invoicedetail",
       icon: (
         <Image
-          src="/assets/icons/dashboard/inventory/invoice.svg"
+          src="/assets/icons/dashboard/sales/invoice.svg"
           alt="icon"
           width="24"
           height="24"
@@ -46,12 +46,11 @@ function PurchasePage() {
       content: <PurchaseInvoice />,
     },
     {
-
       label: t("order"),
       permissionKey: "purchaseorder",
       icon: (
         <Image
-          src="/assets/icons/dashboard/inventory/order.svg"
+          src="/assets/icons/dashboard/sales/order.svg"
           alt="icon"
           width="24"
           height="24"
@@ -61,11 +60,11 @@ function PurchasePage() {
     },
     {
       label: t("request"),
-      //to be edited 
+      //to be edited
       permissionKey: "purchaserequest",
       icon: (
         <Image
-          src="/assets/icons/dashboard/inventory/request.svg"
+          src="/assets/icons/dashboard/sales/invoice.svg"
           alt="icon"
           width="24"
           height="24"
@@ -78,7 +77,7 @@ function PurchasePage() {
       permissionKey: "supplier",
       icon: (
         <Image
-          src="/assets/icons/dashboard/inventory/supplier.svg"
+          src="/assets/icons/dashboard/purchase/supplier.svg"
           alt="icon"
           width="24"
           height="24"
@@ -91,7 +90,7 @@ function PurchasePage() {
       permissionKey: "warehouse",
       icon: (
         <Image
-          src="/assets/icons/dashboard/inventory/warehouse.svg"
+          src="/assets/icons/dashboard/purchase/warehouse.svg"
           alt="icon"
           width="24"
           height="24"
