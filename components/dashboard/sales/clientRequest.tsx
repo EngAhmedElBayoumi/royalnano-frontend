@@ -7,14 +7,49 @@ import { useRouter } from "@/i18n/routing";
 import { useState, useEffect } from "react";
 import { useGetClientRequestQuery } from "@/redux/services/clientRequestApi";
 import { useGetBranchesQuery } from "@/redux/services/dashboard/inventory/branchesApi";
+import CustomModal from "@/components/modals/CustomModal";
+import TextInput from "@/components/formFields/TextInput";
+import { usePostSetPriceMutation } from "@/redux/services/dashboard/sales/setPriceApi";
 
 export default function ClientRequest() {
   const [page, setPage] = useState(1);
-  const [branchNames, setBranchNames] = useState<{ [key: number]: string }>({}); 
+  const [branchNames, setBranchNames] = useState<{ [key: number]: string }>({});
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedRequestId, setSelectedRequestId] = useState<number | null>(
+    null
+  );
+  const [price, setPrice] = useState<string>("");
+  const [postSetPrice, { isLoading }] = usePostSetPriceMutation();
 
   const handlePageChange = (newPage: number) => {
-    console.log("Page changed to:", newPage); 
+    console.log("Page changed to:", newPage);
     setPage(newPage);
+  };
+
+  const handleSetInitialPrice = (requestId: number) => {
+    setSelectedRequestId(requestId);
+    setIsModalOpen(true);
+  };
+
+  const handleSubmitPrice = async () => {
+    console.log(
+      "Submitting price:",
+      price,
+      "for request ID:",
+      selectedRequestId
+    );
+    if (selectedRequestId && price) {
+      try {
+        await postSetPrice({
+          request_id: selectedRequestId,
+          data: { price },
+        }).unwrap();
+        setIsModalOpen(false);
+        setPrice("");
+      } catch (error) {
+        console.error("Failed to set price:", error);
+      }
+    }
   };
 
   const {
@@ -35,42 +70,55 @@ export default function ClientRequest() {
   } = useGetBranchesQuery({});
 
   const router = useRouter();
-  console.log("Client Requests API Response:", clientRequests);
-
 
   useEffect(() => {
     if (branchesData?.results) {
-      const branchMap = branchesData.results.reduce((acc: { [x: string]: string; }, branch: { id: string | number; name: string; }) => {
-        acc[branch.id] = branch.name;
-        return acc;
-      }, {} as { [key: number]: string });
+      const branchMap = branchesData.results.reduce(
+        (
+          acc: { [x: string]: string },
+          branch: { id: string | number; name: string }
+        ) => {
+          acc[branch.id] = branch.name;
+          return acc;
+        },
+        {} as { [key: number]: string }
+      );
       setBranchNames(branchMap);
     }
   }, [branchesData]);
 
   const transformedData =
-    clientRequests?.results?.map((request: { id: number; full_name: string; phone_number: number; car_type: string; car_model: string; status: string; description: string; order_note: string; service: string; branch:   number; }) => ({
-      id: request.id,
-      full_name: request.full_name,
-      phone_number: request.phone_number,
-      car_type: request.car_type,
-      car_model: request.car_model,
-      status: request.status,
-      description: request.description,
-      order_note: request.order_note,
-      service: request.service,
-      branch_name: branchNames[request.branch] || "Loading...", 
-    })) || [];
-
-  console.log("Transformed Data:", transformedData);
+    clientRequests?.results?.map(
+      (request: {
+        id: number;
+        full_name: string;
+        phone_number: number;
+        car_type: string;
+        car_model: string;
+        status: string;
+        description: string;
+        order_note: string;
+        service: string;
+        branch: number;
+      }) => ({
+        id: request.id,
+        full_name: request.full_name,
+        phone_number: request.phone_number,
+        car_type: request.car_type,
+        car_model: request.car_model,
+        status: request.status,
+        description: request.description,
+        order_note: request.order_note,
+        service: request.service,
+        branch_name: branchNames[request.branch] || "Loading...",
+      })
+    ) || [];
 
   const columns = [
     { field: "id", header: "ID" },
     { field: "full_name", header: "Full Name" },
     { field: "phone_number", header: "Phone Number" },
-    // { field: "car_type", header: "Car Type" },
     { field: "car_model", header: "Car Model" },
-    // { field: "status", header: "Status" },
     { field: "branch_name", header: "Branch Name" },
   ];
 
@@ -85,19 +133,31 @@ export default function ClientRequest() {
     router.push("/dashboard/sales/client-requests/create");
   };
 
-  console.log("CustomTable Props in ClientRequest:", {
-    data: transformedData,
-    rows: 10,
-    columns,
-    cardsData,
-    buttonText: "Add Client Request",
-    ButtonEvent: handleClick,
-    onPageChange: handlePageChange,
-    totalRecords: clientRequests?.count || 0,
-  });
-
   return (
     <>
+      <CustomModal
+        isOpen={isModalOpen}
+        onChange={setIsModalOpen}
+        title="Set Initial Price"
+        description="Enter the initial price for the request."
+      >
+        <div className="space-y-4">
+          <TextInput
+            placeholder="Enter price"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+            type="number"
+          />
+          <button
+            className="bg-primary text-white px-4 py-2 rounded"
+            onClick={handleSubmitPrice}
+            disabled={isLoading || !price}
+          >
+            Submit
+          </button>
+        </div>
+      </CustomModal>
+
       {isClientRequestsLoading || isBranchesLoading ? (
         <>
           <CardsSkelton />
@@ -125,6 +185,8 @@ export default function ClientRequest() {
           ButtonEvent={handleClick}
           onPageChange={handlePageChange}
           totalRecords={clientRequests?.count || 0}
+          isClientRequest={true}
+          onSetInitialPrice={handleSetInitialPrice} // Pass the handler
         />
       )}
     </>

@@ -55,6 +55,8 @@ interface CustomTableProps {
   emptyMessage: string;
   onPageChange?: (page: number) => void;
   totalRecords?: number;
+  isClientRequest?: boolean;
+  onSetInitialPrice?: (requestId: number) => void; // Add this prop
 }
 
 export default function CustomTable({
@@ -77,6 +79,8 @@ export default function CustomTable({
   emptyMessage,
   onPageChange,
   totalRecords,
+  isClientRequest,
+  onSetInitialPrice, // Add this prop
 }: CustomTableProps) {
   const router = useRouter();
   const t = useTranslations();
@@ -283,7 +287,7 @@ export default function CustomTable({
               />
             ))}
 
-            {(viewRoute || editRoute) && (
+            {(viewRoute || editRoute || isClientRequest) && (
               <Column
                 body={(rowData: DataInTable) => (
                   <DropdownMenu>
@@ -321,11 +325,24 @@ export default function CustomTable({
                           {t("edit")}
                         </DropdownMenuItem>
                       )}
+                      {isClientRequest &&
+                        rowData?.status === "pending" &&
+                        onSetInitialPrice && (
+                          <DropdownMenuItem
+                            className="bg-dashboardBg shadow-md py-1 cursor-pointer capitalize"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              onSetInitialPrice(rowData.id);
+                            }}
+                          >
+                            Set Initial Price
+                          </DropdownMenuItem>
+                        )}
                     </DropdownMenuContent>
                   </DropdownMenu>
                 )}
-                headerClassName="text-center  text-white text-[16px] font-[500] py-[13px] px-[38px] border-r border-white border-[2px] bg-primary rounded-tr-[1e0px]"
-                header="     "
+                headerClassName="text-center text-white text-[16px] font-[500] py-[13px] px-[38px] border-r border-white border-[2px] bg-primary rounded-tr-[10px]"
+                header="Actions"
                 style={{ width: "5rem", textAlign: "center" }}
               />
             )}
