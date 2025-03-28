@@ -15,10 +15,10 @@ export const initializePaymentApi = createApi({
       query: (id) => `sales/initialize-payment/${id}/`,
     }),
     createInitialPrice: builder.mutation({
-      query: (data) => ({
+      query: (payload) => ({  // Changed from 'data' to 'payload' for clarity
         url: `sales/initialize-payment/`,
         method: "POST",
-        body: data,
+        body: payload,  // This will send { request_id: serviceId }
       }),
     }),
     updateInitialPrice: builder.mutation({

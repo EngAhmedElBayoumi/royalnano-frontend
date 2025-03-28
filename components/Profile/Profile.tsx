@@ -10,30 +10,39 @@ import ProfileForm from "./ProfileForm";
 import { useGetSalesSalesClientRequestQuery } from "@/redux/services/dashboard/sales/salesClientRequests";
 import CustomButton from "../formFields/CustomButton";
 import { useCreateInitialPriceMutation } from "@/redux/services/dashboard/sales/initialPriceApi";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+
+// import { toast } from "sonner"; // Make sure to import toast if you're using it
 
 const Profile = () => {
   const t = useTranslations("website.profile");
   const locale = useParams()?.locale as string;
   const { data } = useGetSalesSalesClientRequestQuery({});
-  const [createPayment] = useCreateInitialPriceMutation();
+  const [createInitialPrice] = useCreateInitialPriceMutation();
   const [paymentUrl, setPaymentUrl] = useState<string | null>(null);
+  const [isProcessingPayment, setIsProcessingPayment] = useState(false);
 
   const handlePayment = async (serviceId: number) => {
+    setIsProcessingPayment(true);
     try {
-      const res = await createPayment(serviceId).unwrap();
+      const payload = { request_id: serviceId };
+      const res = await createInitialPrice(payload).unwrap();
+      
       if (res?.payment_url) {
+        console.log("Payment URL:", res.payment_url);
         setPaymentUrl(res.payment_url);
+        window.location.replace(res.payment_url)
+      } else {
+        // toast.error(t("payment.noUrl"));
+        console.error("No payment URL in response");
       }
     } catch (error) {
       console.error("Payment failed:", error);
+      // toast.error(t("payment.failed"));
+    } finally {
+      setIsProcessingPayment(false);
     }
   };
 
-  const closePaymentModal = () => {
-    setPaymentUrl(null);
-  
-  };
 
   return (
     <section className="flex justify-center flex-wrap">
@@ -72,12 +81,16 @@ const Profile = () => {
                     />
                   </Link>
                   {service.initial_price && (
-                    <h2>Initial Price: {service.initial_price}</h2>
+                    <h2 className="text-sm font-medium mt-2">
+                      {t("payment.initialPrice")}: {service.initial_price}
+                    </h2>
                   )}
                   {service.status === "approved" && (
                     <CustomButton 
-                      text="Pay" 
+                      text={t("payment.payButton")}
                       onClick={() => handlePayment(service.id)}
+                      disabled={isProcessingPayment}
+                      className="mt-2"
                     />
                   )}
                 </div>
@@ -90,21 +103,7 @@ const Profile = () => {
           </TabsContent>
         </Tabs>
 
-        <Dialog open={!!paymentUrl} onOpenChange={closePaymentModal}>
-          <DialogContent className="max-w-[800px] w-[90vw] h-[70vh] p-0 overflow-hidden">
-            {paymentUrl && (
-              <iframe 
-                src={paymentUrl}
-                className="w-full h-full border-0 rounded-lg"
-                allowFullScreen
-                allow="payment *"
-                style={{
-                  boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'
-                }}
-              />
-            )}
-          </DialogContent>
-        </Dialog>
+       
       </main>
     </section>
   );

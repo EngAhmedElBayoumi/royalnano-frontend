@@ -477,6 +477,11 @@
       }
     },
     "profile": {
+      "payment": {
+        "paymentModalTitle": "جاري الدفع...",
+        "initialPrice": "السعر الأولي",
+        "payButton": "دفع"
+      },
       "title": "الصفحة الشخصية",
       "tabs": {
         "previousServices": "الخدمات السابقة",

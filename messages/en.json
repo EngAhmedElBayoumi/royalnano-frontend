@@ -535,6 +535,11 @@
       }
     },
     "profile": {
+      "payment": {
+        "paymentModalTitle": "Payment Processing",
+        "initialPrice": "initial Price",
+        "payButton": "Pay"
+      },
       "title": "Profile",
       "tabs": {
         "previousServices": "Previous Services",
