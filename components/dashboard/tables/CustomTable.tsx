@@ -123,7 +123,7 @@ export default function CustomTable({
 
   const renderHeader = () => (
     <>
-      <InfoCardsComponent data={cardData} />
+      {/* <InfoCardsComponent data={cardData} /> */}
       <div className="flex mb-4 justify-between items-center flex-wrap gap-2">
         <InputText
           className="border bg-transparent border-[#474747] px-2 w-[100%] xs:w-[30%] xs:min-w-[200px] py-2 rounded-[10px]"
