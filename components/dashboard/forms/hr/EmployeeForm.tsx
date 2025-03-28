@@ -103,7 +103,7 @@ const EmployeeForm = ({
       setJobPermissions([]);
     }
   }, [selectedJobId, jobs]);
-
+  console.log(form.getValues("custom_permissions"));
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -179,6 +179,7 @@ const EmployeeForm = ({
             label={t("permissions")}
             placeholder={t("permissions")}
             options={jobPermissions}
+            className="mt-2 xl:mt-5"
           />
         )}
 
