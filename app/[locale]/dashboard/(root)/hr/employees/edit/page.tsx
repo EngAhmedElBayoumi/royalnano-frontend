@@ -24,6 +24,9 @@ export default function EditEmployee() {
     branch: String(data?.branch?.id),
     department: String(data?.department?.id) || "",
     job_title: String(data?.job_title?.id) || "",
+    custom_permissions: data.custom_permissions.map(
+      (custom_permission: { id: string }) => String(custom_permission.id)
+    ),
     password: "",
   };
 
