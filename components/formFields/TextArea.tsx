@@ -41,7 +41,7 @@ const CustomTextArea = <T extends FieldValues>({
               placeholder={placeholder}
               rows={rows}
               disabled={readonly}
-              className="bg-[#F4F4F4] border-gray rounded-10 px-2 min-w-[270px] md:min-w-[400px] mt-1"
+              className="bg-[#F4F4F4] border-gray rounded-10 px-2 mt-1"
               {...field}
             />
           </FormControl>

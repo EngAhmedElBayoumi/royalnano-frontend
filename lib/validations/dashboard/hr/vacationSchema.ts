@@ -6,21 +6,21 @@ export const vacationSchema = z
     status: z.string().nonempty("status is required"),
     reason: z.string().nonempty("reasons is required"),
     start_date: z.date({ required_error: "start date is required" }),
-    to: z.date({ required_error: "To date is required" }),
+    end_date: z.date({ required_error: "End date is required" }),
   })
-  .refine((data) => data.start_date < data.to, {
-    message: "start date must be before to date",
+  .refine((data) => data.start_date < data.end_date, {
+    message: "start date must be before end date",
     path: ["start_date"],
   })
   .refine(
     (data) => {
-      const { start_date, to } = data;
+      const { start_date, end_date } = data;
       const diffInDays =
-        (to.getTime() - start_date.getTime()) / (1000 * 60 * 60 * 24);
+        (end_date.getTime() - start_date.getTime()) / (1000 * 60 * 60 * 24);
       return diffInDays <= 30;
     },
     {
       message: "Vacation period cannot exceed 30 days",
-      path: ["to"],
+      path: ["end_date"],
     }
   );

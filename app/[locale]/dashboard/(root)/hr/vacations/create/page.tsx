@@ -11,6 +11,7 @@ export default function CreateVacation() {
   const [createVacation, { isLoading }] = useCreateVacationMutation();
 
   const handleSubmit = async (data: VacationsFormValues) => {
+    console.log(data);
     const response = await createVacation(data);
     if (response.error) throw new Error("Create failed");
   };
