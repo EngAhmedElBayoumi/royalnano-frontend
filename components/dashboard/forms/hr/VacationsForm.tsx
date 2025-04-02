@@ -20,8 +20,8 @@ interface VacationsFormProps {
 export interface VacationsFormValues {
   employee: string;
   status: string;
-  start_date: Date;
-  end_date: Date;
+  start_date: string;
+  end_date: string;
   reason: string;
 }
 
@@ -35,8 +35,10 @@ const VacationsForm = ({
     defaultValues: defaultValues || {
       employee: "",
       status: "pending",
-      start_date: new Date(),
-      end_date: new Date(new Date().setDate(new Date().getDate() + 1)),
+      // start_date: new Date(),
+      // end_date: new Date(new Date().setDate(new Date().getDate() + 1)),
+      start_date: "",
+      end_date: "",
       reason: "",
     },
   });
@@ -80,19 +82,19 @@ const VacationsForm = ({
               name="start_date"
               label={t("start_date")}
               placeholder={t("start_date")}
-              disabledEndDate={form.watch("end_date")}
+              // disabledEndDate={form.watch("end_date")}
             />
             <DatePicker
               control={form.control}
               name="end_date"
               label={t("end_date")}
               placeholder={t("end_date")}
-              disabledStartDate={form.watch("start_date")}
-              disabledEndDate={
-                new Date(
-                  form.watch("start_date").getTime() + 30 * 24 * 60 * 60 * 1000
-                )
-              } // 30 days after 'start_date'
+              // disabledStartDate={form.watch("start_date")}
+              // disabledEndDate={
+              //   new Date(
+              //     form.watch("start_date").getTime() + 30 * 24 * 60 * 60 * 1000
+              //   )
+              // } // 30 days after 'start_date'
             />
           </div>
           <CustomTextArea
