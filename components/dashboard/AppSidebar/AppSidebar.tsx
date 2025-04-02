@@ -102,7 +102,7 @@ export function AppSidebar() {
       <SidebarFooter>
         <SidebarGroup>
           <SidebarGroupContent>
-            <SidebarMenuButton
+            {/* <SidebarMenuButton
               asChild
               isActive={currentPath.includes("settings")}
               className="py-6 !rounded-10"
@@ -116,7 +116,7 @@ export function AppSidebar() {
                 />
                 <span className="text-primary">{t("settings")}</span>
               </Link>
-            </SidebarMenuButton>
+            </SidebarMenuButton> */}
             <SidebarMenuButton
               className="py-6 !rounded-10 !bg-transparent"
               onClick={handleLogout}
