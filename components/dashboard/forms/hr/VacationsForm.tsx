@@ -42,7 +42,7 @@ const VacationsForm = ({
   });
 
   const globalTranslate = useTranslations();
-  const t = useTranslations("hr.bonuses");
+  const t = useTranslations("hr.vacation");
   const unitsOptions = [
     { value: "pending", label: "pending" },
     { value: "approved", label: "approved" },

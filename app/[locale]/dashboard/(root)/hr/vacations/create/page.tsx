@@ -17,7 +17,7 @@ export default function CreateVacation() {
 
   return (
     <CreatePage
-      title={t("vacation.createVacation")}
+      title={t("vacation.addVacation")}
       isLoading={isLoading}
       onSubmit={handleSubmit}
       Form={VacationsForm}
