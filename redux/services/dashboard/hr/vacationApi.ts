@@ -14,6 +14,13 @@ export const vacationApi = createApi({
     getVacationById: builder.query({
       query: (id) => `hr/leave-request/${id}/`,
     }),
+    createVacation: builder.mutation({
+      query: (data) => ({
+        url: `hr/leave-request/`,
+        method: "POST",
+        body: data,
+      }),
+    }),
     updateVacation: builder.mutation({
       query: ({ id, data }) => ({
         url: `hr/leave-request/${id}/`,
@@ -27,5 +34,6 @@ export const vacationApi = createApi({
 export const {
   useGetVacationQuery,
   useGetVacationByIdQuery,
+  useCreateVacationMutation,
   useUpdateVacationMutation,
 } = vacationApi;
