@@ -4,9 +4,9 @@ import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { vacationSchema } from "@/lib/validations/dashboard/hr/vacationSchema";
+import { useGetEmployeesQuery } from "@/redux/services/dashboard/hr/employeeApi";
 import { Form } from "@/components/ui/form";
 import CustomButton from "@/components/formFields/CustomButton";
-import TextInput from "@/components/formFields/TextInput";
 import DatePicker from "@/components/formFields/DatePicker";
 import CustomSelect from "@/components/formFields/CustomSelect";
 import CustomTextArea from "@/components/formFields/TextArea";
@@ -48,17 +48,25 @@ const VacationsForm = ({
     { value: "approved", label: "approved" },
     { value: "rejected", label: "rejected" },
   ];
+
+  const { data: employees } = useGetEmployeesQuery({});
+  const employeesOptions =
+    employees?.results?.map((employee: { id: number; name: string }) => ({
+      value: String(employee.id),
+      label: employee.name,
+    })) || [];
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <section className="min-h-[60vh]">
           <div className="grid sm:grid-cols-2 gap-x-4 gap-y-2 xl:gap-y-5 lg:gap-x-10">
-            <TextInput
+            <CustomSelect
               control={form.control}
               name="employee"
               label={t("employee")}
               placeholder={t("employee")}
-              readonly={true}
+              options={employeesOptions}
             />
             <CustomSelect
               control={form.control}
@@ -73,7 +81,6 @@ const VacationsForm = ({
               label={t("start_date")}
               placeholder={t("start_date")}
               disabledEndDate={form.watch("end_date")}
-              readonly={true}
             />
             <DatePicker
               control={form.control}
@@ -86,7 +93,6 @@ const VacationsForm = ({
                   form.watch("start_date").getTime() + 30 * 24 * 60 * 60 * 1000
                 )
               } // 30 days after 'start_date'
-              readonly={true}
             />
           </div>
           <CustomTextArea

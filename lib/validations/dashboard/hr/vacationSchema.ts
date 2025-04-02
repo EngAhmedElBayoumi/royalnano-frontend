@@ -2,22 +2,21 @@ import * as z from "zod";
 
 export const vacationSchema = z
   .object({
-    name: z.string().nonempty("Name is required"),
-    job_title: z.string().nonempty("Job title is required"),
-    vacation_period: z.string().nonempty("Vacation period is required"),
-    from: z.date({ required_error: "From date is required" }),
+    employee: z.string().nonempty("Employee is required"),
+    status: z.string().nonempty("status is required"),
+    reason: z.string().nonempty("reasons is required"),
+    start_date: z.date({ required_error: "start date is required" }),
     to: z.date({ required_error: "To date is required" }),
-    date: z.date({ required_error: "Date is required" }),
   })
-  .refine((data) => data.from < data.to, {
-    message: "from date must be before to date",
-    path: ["from"],
+  .refine((data) => data.start_date < data.to, {
+    message: "start date must be before to date",
+    path: ["start_date"],
   })
   .refine(
     (data) => {
-      const { from, to } = data;
+      const { start_date, to } = data;
       const diffInDays =
-        (to.getTime() - from.getTime()) / (1000 * 60 * 60 * 24);
+        (to.getTime() - start_date.getTime()) / (1000 * 60 * 60 * 24);
       return diffInDays <= 30;
     },
     {
