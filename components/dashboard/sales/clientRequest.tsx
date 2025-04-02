@@ -40,6 +40,7 @@ export default function ClientRequest() {
         }).unwrap();
         setIsModalOpen(false);
         setPrice(0);
+        refetch();
       } catch (error) {
         console.error("Failed to set price:", error);
       }
@@ -61,6 +62,7 @@ export default function ClientRequest() {
     data: branchesData,
     isLoading: isBranchesLoading,
     error: branchesError,
+    refetch,
   } = useGetBranchesQuery({});
 
   const router = useRouter();
@@ -81,6 +83,9 @@ export default function ClientRequest() {
     }
   }, [branchesData]);
 
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
   const transformedData =
     clientRequests?.results?.map(
       (request: {
