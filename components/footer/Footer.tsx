@@ -10,7 +10,7 @@ const Footer = () => {
     <footer className="bg-secondary text-white py-4 lg:py-6 xl:py-8 flex justify-center">
       <section className="main-container w-full px-4 md:px-0">
         <div className="grid gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-5">
-          <article className="mb-4 lg:mb-0 justify-center xs:justify-start flex flex-wrap xs:flex-nowrap gap-3 col-span-3 md:col-span-2">
+          <article className="mb-4 lg:mb-0 text-center xs:text-start justify-center xs:justify-start flex flex-wrap xs:flex-nowrap gap-3 col-span-3 md:col-span-2">
             <Image
               src="/assets/images/logo.png"
               alt="Royal Nano Ceramic Logo"
@@ -20,20 +20,20 @@ const Footer = () => {
             />
             <p className="xl:text-sm">{t("hero.slide2.description")}</p>
           </article>
-          <nav className="mb-4 lg:mb-0 items-center flex flex-col xs:block col-span-2 xs:col-span-1">
+          <nav className="mb-4 lg:mb-0 text-center xs:text-start items-center flex flex-col xs:block col-span-2 xs:col-span-1">
             <h3 className="md:text-sm xl:text-md">Company</h3>
             <hr className="border-t-5 rounded-10 border-primary mb-2 w-[101px]" />
             <ul className="xl:text-sm">
               {navLinks.map((link) => (
                 <li key={link.href}>
                   <Link href={link.href} passHref>
-                    {link.label}
+                    {t(`nav.${link.label}`)}
                   </Link>
                 </li>
               ))}
             </ul>
           </nav>
-          <section className="mb-4 lg:mb-0 items-center flex flex-col xs:block col-span-2 xs:col-span-1">
+          <section className="mb-4 lg:mb-0 text-center xs:text-start items-center flex flex-col xs:block col-span-2 xs:col-span-1">
             <h3 className="md:text-sm xl:text-md">Branches</h3>
             <hr className="border-t-5 rounded-10 border-primary mb-2 w-[102px]" />
             <ul className="xl:text-sm">
@@ -62,7 +62,7 @@ const Footer = () => {
           <p className="xl:text-sm mb-4 md:mb-0 font-semibold">
             Copyright by Royal @2024
           </p>
-          <div className="flex space-x-8">
+          <div className="flex gap-8">
             {socialLinks.map((link) => (
               <a
                 key={link.href}
