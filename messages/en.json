@@ -487,7 +487,12 @@
       "dashboard": "Dashboard",
       "Logout": "Logout"
     },
-    "footer": {},
+    "footer": {
+      "company": "Company",
+      "branches": "Branches",
+      "reach-out": "Reach Out!",
+      "copyright": "Copyright © 2025 Royal Nano Ceramic. All rights reserved."
+    },
     "hero": {
       "slide1": {
         "title": "How can we help you?",

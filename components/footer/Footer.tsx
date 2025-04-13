@@ -21,7 +21,7 @@ const Footer = () => {
             <p className="xl:text-sm">{t("hero.slide2.description")}</p>
           </article>
           <nav className="mb-4 lg:mb-0 text-center xs:text-start items-center flex flex-col xs:block col-span-2 xs:col-span-1">
-            <h3 className="md:text-sm xl:text-md">Company</h3>
+            <h3 className="md:text-sm xl:text-md">{t("footer.company")}</h3>
             <hr className="border-t-5 rounded-10 border-primary mb-2 w-[101px]" />
             <ul className="xl:text-sm">
               {navLinks.map((link) => (
@@ -34,7 +34,7 @@ const Footer = () => {
             </ul>
           </nav>
           <section className="mb-4 lg:mb-0 text-center xs:text-start items-center flex flex-col xs:block col-span-2 xs:col-span-1">
-            <h3 className="md:text-sm xl:text-md">Branches</h3>
+            <h3 className="md:text-sm xl:text-md">{t("footer.branches")}</h3>
             <hr className="border-t-5 rounded-10 border-primary mb-2 w-[102px]" />
             <ul className="xl:text-sm">
               <li>October</li>
@@ -45,7 +45,7 @@ const Footer = () => {
             </ul>
           </section>
           <address className="items-center flex flex-col xs:block col-span-2 sm:col-span-1">
-            <h3 className="md:text-sm xl:text-md">Reach out!</h3>
+            <h3 className="md:text-sm xl:text-md">{t("footer.reach-out")}</h3>
             <hr className="border-t-5 rounded-10 border-primary mb-2 w-[115px]" />
             <p className="xl:text-sm">
               <a href="tel:+201032222542">+20 103 2222 542</a>
@@ -60,7 +60,7 @@ const Footer = () => {
         <hr className="mt-8 border-t-10 rounded-10 border-primary" />
         <div className="pt-4 flex flex-col md:flex-row justify-between items-center">
           <p className="xl:text-sm mb-4 md:mb-0 font-semibold">
-            Copyright by Royal @2024
+            {t("footer.copyright")}
           </p>
           <div className="flex gap-8">
             {socialLinks.map((link) => (
