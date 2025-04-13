@@ -1,14 +1,13 @@
 "use client";
 import Image from "next/image";
 import { contactInfo, NavbarSocialLinks } from "@/data/NavbarData";
-import {Link} from '@/i18n/routing';
+import { Link } from "@/i18n/routing";
 // import { DropdownMenuRadioGroup } from "../ui/dropdown-menu";
 import { FormProvider, useForm } from "react-hook-form";
 import LanguageSwitcher from "../dashboard/languageSwitcher";
 // import { DropdownMenuGroup } from "@radix-ui/react-dropdown-menu";
 
-const TopSection = ( 
-) => {
+const TopSection = () => {
   const methods = useForm();
 
   return (
@@ -35,9 +34,9 @@ const TopSection = (
           if (i === 3) {
             return (
               <div key="hello" className="gap-1 md:py-2 py-2 flex items-center">
-  <FormProvider {...methods}>
-      <LanguageSwitcher />
-    </FormProvider>
+                <FormProvider {...methods}>
+                  <LanguageSwitcher />
+                </FormProvider>
                 {/* <p className="text-white text-[15px] md:flex hidden">EN</p>
                 <Image
                   key={link.href}
@@ -50,7 +49,7 @@ const TopSection = (
             );
           } else
             return (
-              <Link key={link.href} href={link.href} passHref>
+              <Link key={link.href} href={link.href} passHref target="_blank">
                 <Image
                   alt={link.alt}
                   src={link.src}
