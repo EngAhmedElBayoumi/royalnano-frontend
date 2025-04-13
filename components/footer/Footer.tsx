@@ -9,8 +9,8 @@ const Footer = () => {
   return (
     <footer className="bg-secondary text-white py-4 lg:py-6 xl:py-8 flex justify-center">
       <section className="main-container w-full px-4 md:px-0">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          <article className="mb-4 lg:mb-0 flex gap-3">
+        <div className="grid gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-5">
+          <article className="mb-4 lg:mb-0 justify-center xs:justify-start flex flex-wrap xs:flex-nowrap gap-3 col-span-3 md:col-span-2">
             <Image
               src="/assets/images/logo.png"
               alt="Royal Nano Ceramic Logo"
@@ -20,7 +20,7 @@ const Footer = () => {
             />
             <p className="xl:text-sm">{t("hero.slide2.description")}</p>
           </article>
-          <nav className="mb-4 lg:mb-0">
+          <nav className="mb-4 lg:mb-0 items-center flex flex-col xs:block col-span-2 xs:col-span-1">
             <h3 className="md:text-sm xl:text-md">Company</h3>
             <hr className="border-t-5 rounded-10 border-primary mb-2 w-[101px]" />
             <ul className="xl:text-sm">
@@ -33,7 +33,7 @@ const Footer = () => {
               ))}
             </ul>
           </nav>
-          <section className="mb-4 lg:mb-0">
+          <section className="mb-4 lg:mb-0 items-center flex flex-col xs:block col-span-2 xs:col-span-1">
             <h3 className="md:text-sm xl:text-md">Branches</h3>
             <hr className="border-t-5 rounded-10 border-primary mb-2 w-[102px]" />
             <ul className="xl:text-sm">
@@ -44,7 +44,7 @@ const Footer = () => {
               <li>Alexandria</li>
             </ul>
           </section>
-          <address>
+          <address className="items-center flex flex-col xs:block col-span-2 sm:col-span-1">
             <h3 className="md:text-sm xl:text-md">Reach out!</h3>
             <hr className="border-t-5 rounded-10 border-primary mb-2 w-[115px]" />
             <p className="xl:text-sm">
