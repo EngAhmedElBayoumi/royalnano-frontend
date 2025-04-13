@@ -1,9 +1,11 @@
 import React from "react";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
-import {Link} from '@/i18n/routing';
+import { Link } from "@/i18n/routing";
 import { navLinks, socialLinks } from "@/data/FooterData";
 
 const Footer = () => {
+  const t = useTranslations("website");
   return (
     <footer className="bg-secondary text-white py-4 lg:py-6 xl:py-8 flex justify-center">
       <section className="main-container w-full px-4 md:px-0">
@@ -16,10 +18,7 @@ const Footer = () => {
               height={88}
               className="h-[88px]"
             />
-            <p className="xl:text-sm">
-              Royal Nano Ceramic is a leading car protection company in Egypt,
-              offering advanced nano ceramic coatings to protect and enhance.
-            </p>
+            <p className="xl:text-sm">{t("hero.slide2.description")}</p>
           </article>
           <nav className="mb-4 lg:mb-0">
             <h3 className="md:text-sm xl:text-md">Company</h3>
