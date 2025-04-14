@@ -11,9 +11,24 @@ import TextInput from "@/components/formFields/TextInput";
 import PhoneInputField from "@/components/formFields/PhoneInputField";
 import PasswordInput from "@/components/formFields/PasswordInput";
 import CustomButton from "@/components/formFields/CustomButton";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { useState } from "react";
+
+interface RegisterError {
+  data?: {
+    detail?: string;
+    email_address?: string[];
+    phone_number?: string[];
+    password?: string[];
+    non_field_errors?: string[];
+  };
+  message?: string;
+  status?: number;
+}
 
 export default function RegisterForm() {
   const [register, { isLoading }] = useRegisterMutation();
+  const [error, setError] = useState<string | null>(null);
 
   const form = useForm({
     resolver: zodResolver(registerValidation),
@@ -25,7 +40,6 @@ export default function RegisterForm() {
       password: "",
       confirm_password: "",
     },
-    // mode: "onChange",
   });
 
   const onSubmit = async (data: {
@@ -36,14 +50,33 @@ export default function RegisterForm() {
     password: string;
     confirm_password: string;
   }) => {
+    setError(null);
     try {
       await register({
         ...data,
         name: data?.first_name + " " + data?.last_name,
         role: "client",
       }).unwrap();
-    } catch (error) {
-      console.error("Registration failed:", error);
+    } catch (error: unknown) {
+      let errorMessage = "An error occurred during registration";
+
+      const registerError = error as RegisterError;
+
+      if (registerError.data?.detail) {
+        errorMessage = registerError.data.detail;
+      } else if (registerError.data?.email_address?.length) {
+        errorMessage = registerError.data.email_address[0];
+      } else if (registerError.data?.phone_number?.length) {
+        errorMessage = registerError.data.phone_number[0];
+      } else if (registerError.data?.password?.length) {
+        errorMessage = registerError.data.password[0];
+      } else if (registerError.data?.non_field_errors?.length) {
+        errorMessage = registerError.data.non_field_errors[0];
+      } else if (registerError.message) {
+        errorMessage = registerError.message;
+      }
+
+      setError(errorMessage);
     }
   };
 
@@ -55,8 +88,13 @@ export default function RegisterForm() {
       >
         <p className="text-center font-[600] text-[25px]">Register</p>
 
+        {error && (
+          <Alert variant="destructive">
+            <AlertDescription>{error}</AlertDescription>
+          </Alert>
+        )}
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-          {/* Left Column */}
           <TextInput
             control={form.control}
             name="first_name"
