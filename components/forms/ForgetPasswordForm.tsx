@@ -12,8 +12,21 @@ import {
 import { Input } from "@/components/ui/input";
 import { forgetPasswordValidation } from "@/lib/validations/forgetPasswordValidation";
 import { useForgotPasswordMutation } from "@/redux/services/forgotPasswordApi";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { useState } from "react";
+
+interface ForgotPasswordError {
+  data?: {
+    detail?: string;
+    email_address?: string[];
+    non_field_errors?: string[];
+  };
+  message?: string;
+  status?: number;
+}
 
 export default function ForgetPasswordForm() {
+  const [error, setError] = useState<string | null>(null);
   const [forgotPassword, { isLoading }] = useForgotPasswordMutation();
   const form = useForm({
     resolver: zodResolver(forgetPasswordValidation),
@@ -23,13 +36,28 @@ export default function ForgetPasswordForm() {
   });
 
   const onSubmit = async (data: { email_address: string }) => {
+    setError(null);
     try {
       const response = await forgotPassword(data).unwrap();
       console.log(response);
 
       form.reset();
-    } catch (e) {
-      console.log(e);
+    } catch (error: unknown) {
+      let errorMessage = "An error occurred while processing your request";
+
+      const forgotError = error as ForgotPasswordError;
+
+      if (forgotError.data?.detail) {
+        errorMessage = forgotError.data.detail;
+      } else if (forgotError.data?.email_address?.length) {
+        errorMessage = forgotError.data.email_address[0];
+      } else if (forgotError.data?.non_field_errors?.length) {
+        errorMessage = forgotError.data.non_field_errors[0];
+      } else if (forgotError.message) {
+        errorMessage = forgotError.message;
+      }
+
+      setError(errorMessage);
     }
   };
 
@@ -40,6 +68,13 @@ export default function ForgetPasswordForm() {
         className="gap-4 h-[100%] flex flex-col pt-[80px] px-4 sm:px-7"
       >
         <p className="text-center font-[600] text-[25px]">Forget Password</p>
+
+        {error && (
+          <Alert variant="destructive">
+            <AlertDescription>{error}</AlertDescription>
+          </Alert>
+        )}
+
         <div>
           <p className="text-center text-[#8B8B8B] font-[400] text-sm xl:text-[20px]">
             Please enter your email to send to
