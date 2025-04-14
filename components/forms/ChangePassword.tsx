@@ -14,6 +14,18 @@ import { Input } from "@/components/ui/input";
 import { changePasswordValidation } from "@/lib/validations/changePasswordValidation";
 import { useState } from "react"; // Import useState for checkbox state
 import { useResetPasswordMutation } from "@/redux/services/resetPassword";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+
+interface ChangePasswordError {
+  data?: {
+    detail?: string;
+    password?: string[];
+    confirmPassword?: string[];
+    non_field_errors?: string[];
+  };
+  message?: string;
+  status?: number;
+}
 
 export default function ChangePasswordForm() {
   const [resetPassword, { isLoading }] = useResetPasswordMutation();
@@ -27,12 +39,34 @@ export default function ChangePasswordForm() {
 
   const [isNumbersChecked, setIsNumbersChecked] = useState(false);
   const [isLettersChecked, setIsLettersChecked] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const onSubmit = async (data: {
     confirmPassword: string;
     password: string;
   }) => {
-    await resetPassword(data);
+    setError(null);
+    try {
+      await resetPassword(data).unwrap();
+    } catch (error: unknown) {
+      let errorMessage = "An error occurred while changing password";
+
+      const changeError = error as ChangePasswordError;
+
+      if (changeError.data?.detail) {
+        errorMessage = changeError.data.detail;
+      } else if (changeError.data?.password?.length) {
+        errorMessage = changeError.data.password[0];
+      } else if (changeError.data?.confirmPassword?.length) {
+        errorMessage = changeError.data.confirmPassword[0];
+      } else if (changeError.data?.non_field_errors?.length) {
+        errorMessage = changeError.data.non_field_errors[0];
+      } else if (changeError.message) {
+        errorMessage = changeError.message;
+      }
+
+      setError(errorMessage);
+    }
   };
 
   return (
@@ -44,6 +78,12 @@ export default function ChangePasswordForm() {
         <p className="text-center text-primary font-[600] text-[25px]">
           Change Password
         </p>
+
+        {error && (
+          <Alert variant="destructive">
+            <AlertDescription>{error}</AlertDescription>
+          </Alert>
+        )}
 
         <FormField
           control={form.control}
