@@ -7,8 +7,21 @@ import { OTPValidation } from "@/lib/validations/OTPValidation";
 // import { useVerifyOTPMutation } from "@/redux/services/verifyOTP";
 import { useResendOTPMutation } from "@/redux/services/resendOTP";
 // import { OTPFieldName } from "../services/types";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { useState } from "react";
+
+interface OTPError {
+  data?: {
+    detail?: string;
+    code?: string[];
+    non_field_errors?: string[];
+  };
+  message?: string;
+  status?: number;
+}
 
 export default function OTPverificationForm() {
+  const [error, setError] = useState<string | null>(null);
   // const [verifyOTP, { isLoading }] = useVerifyOTPMutation();
   const [resendOTPFn] = useResendOTPMutation();
   const form = useForm({
@@ -23,18 +36,28 @@ export default function OTPverificationForm() {
     },
   });
 
-  const onSubmit = async () =>
-    //   data: {
-    //   num1: number;
-    //   num2: number;
-    //   num3: number;
-    //   num4: number;
-    //   num5: number;
-    //   num6: number;
-    // }
-    {
+  const onSubmit = async () => {
+    setError(null);
+    try {
       // await verifyOTP(data);
-    };
+    } catch (error: unknown) {
+      let errorMessage = "An error occurred during verification";
+
+      const otpError = error as OTPError;
+
+      if (otpError.data?.detail) {
+        errorMessage = otpError.data.detail;
+      } else if (otpError.data?.code?.length) {
+        errorMessage = otpError.data.code[0];
+      } else if (otpError.data?.non_field_errors?.length) {
+        errorMessage = otpError.data.non_field_errors[0];
+      } else if (otpError.message) {
+        errorMessage = otpError.message;
+      }
+
+      setError(errorMessage);
+    }
+  };
 
   const resendOTP = async (data: { data: string }) => {
     await resendOTPFn(data);
@@ -49,6 +72,13 @@ export default function OTPverificationForm() {
         <p className="text-center text-primary font-[600] text-[25px]">
           OTP Verification
         </p>
+
+        {error && (
+          <Alert variant="destructive">
+            <AlertDescription>{error}</AlertDescription>
+          </Alert>
+        )}
+
         <div>
           <p className="text-center text-[#8B8B8B] font-[400] text-sm xl:text-[20px]">
             Please enter the code sent to your mobile
