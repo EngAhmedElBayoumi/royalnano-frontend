@@ -14,11 +14,23 @@ import config from "@/lib/config";
 import { setProfile } from "@/redux/slices/profileSlice";
 import TextInput from "@/components/formFields/TextInput";
 import PasswordInput from "@/components/formFields/PasswordInput";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { useState } from "react";
+
+interface LoginError {
+  data?: {
+    detail?: string;
+    non_field_errors?: string[];
+  };
+  message?: string;
+  status?: number;
+}
 
 export default function LoginForm() {
   const dispatch = useDispatch();
   const [Login, { isLoading }] = useLoginMutation();
   const router = useRouter();
+  const [error, setError] = useState<string | null>(null);
 
   const form = useForm({
     resolver: zodResolver(loginValidation), // Ensure zodResolver is correctly set
@@ -33,6 +45,7 @@ export default function LoginForm() {
     email_address: string;
     password: string;
   }) => {
+    setError(null); // Clear any previous errors
     try {
       const response = await Login(data).unwrap();
 
@@ -42,6 +55,11 @@ export default function LoginForm() {
           "Content-Type": "application/json",
         },
       });
+
+      if (!profileResponse.ok) {
+        throw new Error("Failed to fetch profile data");
+      }
+
       const profileData = await profileResponse.json();
 
       dispatch(
@@ -55,8 +73,20 @@ export default function LoginForm() {
       dispatch(setProfile(profileData));
       if (profileData.role !== "client") router.push("/dashboard");
       else router.push("/");
-    } catch (error) {
-      console.log(error);
+    } catch (error: unknown) {
+      let errorMessage = "An error occurred during login";
+
+      const loginError = error as LoginError;
+
+      if (loginError.data?.detail) {
+        errorMessage = loginError.data.detail;
+      } else if (loginError.data?.non_field_errors?.length) {
+        errorMessage = loginError.data.non_field_errors[0];
+      } else if (loginError.message) {
+        errorMessage = loginError.message;
+      }
+
+      setError(errorMessage);
     }
   };
 
@@ -67,6 +97,13 @@ export default function LoginForm() {
         className="gap-4 flex flex-col p-4 sm:px-7"
       >
         <p className="text-center font-[600] text-[25px]">Log in</p>
+
+        {error && (
+          <Alert variant="destructive">
+            <AlertDescription>{error}</AlertDescription>
+          </Alert>
+        )}
+
         <TextInput
           control={form.control}
           name="email_address"
