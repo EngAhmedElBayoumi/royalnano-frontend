@@ -485,7 +485,8 @@
       "LogIn": "Log In",
       "Register": "Register",
       "dashboard": "Dashboard",
-      "Logout": "Logout"
+      "Logout": "Logout",
+      "blogs": "Blogs"
     },
     "footer": {
       "company": "Company",
@@ -565,6 +566,12 @@
       },
       "noData": "No gallery items found",
       "loadingError": "Error loading gallery data"
+    },
+    "blogs": {
+      "title": "Blogs",
+      "noData": "No blog items found",
+      "loadingError": "Error loading blog data",
+      "readMore": "Read More"
     }
   },
   "Purchase": {
