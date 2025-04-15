@@ -38,6 +38,7 @@ import { evaluationApi } from "./services/dashboard/hr/evaluationApi";
 import { PurchaseSupplierApi } from "./services/dashboard/purchase/supplierApi";
 import { salesReturnApi } from "./services/dashboard/sales/salesReturnApi";
 import { servicesAPi } from "./services/website/servicesApi";
+import { blogsAPi } from "./services/website/blogsApi";
 import { clientRequestAPi } from "./services/clientRequestApi";
 import { purchaseOrderApi } from "./services/dashboard/purchase/orderApi";
 import { purchaseExpenseCategoryApi } from "./services/dashboard/purchase/expenseCategory";
@@ -102,6 +103,7 @@ export const store = configureStore({
     [evaluationApi.reducerPath]: evaluationApi.reducer,
     [salesReturnApi.reducerPath]: salesReturnApi.reducer,
     [servicesAPi.reducerPath]: servicesAPi.reducer,
+    [blogsAPi.reducerPath]: blogsAPi.reducer,
     [clientRequestAPi.reducerPath]: clientRequestAPi.reducer,
     [PurchaseSupplierApi.reducerPath]: PurchaseSupplierApi.reducer,
     [purchaseOrderApi.reducerPath]: purchaseOrderApi.reducer,
@@ -114,7 +116,8 @@ export const store = configureStore({
     [permissionsApi.reducerPath]: permissionsApi.reducer,
     [statisticsAPi.reducerPath]: statisticsAPi.reducer,
 
-    [salesSalesClientRequestApi.reducerPath]: salesSalesClientRequestApi.reducer,
+    [salesSalesClientRequestApi.reducerPath]:
+      salesSalesClientRequestApi.reducer,
     [initializePaymentApi.reducerPath]: initializePaymentApi.reducer,
 
     [setPriceApi.reducerPath]: setPriceApi.reducer,
@@ -172,8 +175,7 @@ export const store = configureStore({
       .concat(statisticsAPi.middleware)
       .concat(salesSalesClientRequestApi.middleware)
       .concat(initializePaymentApi.middleware)
-      
-      .concat(servicesAPi.middleware);
+      .concat(blogsAPi.middleware);
   },
 });
 

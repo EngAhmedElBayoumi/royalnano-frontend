@@ -1,5 +1,6 @@
 import { useTranslations } from "next-intl";
 import PageHeader from "@/components/PageHeader";
+import AllBlogs from "@/components/blogs/AllBlogs";
 
 export const metadata = {
   title: "Blogs | Royal Nano",
@@ -10,7 +11,7 @@ const Blogs = () => {
   return (
     <>
       <PageHeader title={t("title")} />
-      <div className="relative top-[-160px]"></div>
+      <AllBlogs />
     </>
   );
 };
