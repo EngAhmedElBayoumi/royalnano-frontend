@@ -10,6 +10,7 @@ const Blogs = () => {
   return (
     <>
       <PageHeader title={t("title")} />
+      <div className="relative top-[-160px]"></div>
     </>
   );
 };
