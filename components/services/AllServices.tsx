@@ -1,10 +1,11 @@
 "use client";
 import React, { useState } from "react";
 import { useTranslations } from "next-intl";
+import { Paginator } from "primereact/paginator";
 import { useGetServicesQuery } from "@/redux/services/website/servicesApi";
 import ServiceCard from "@/components/cards/ServiceCard";
-import { Paginator } from "primereact/paginator";
 import LoadingError from "@/components/dashboard/LoadingError";
+import NoData from "@/components/NoData";
 import ServicesSkeleton from "./ServicesSkeleton";
 
 interface Service {
@@ -35,6 +36,8 @@ const AllServices = () => {
           <LoadingError />
         ) : isLoading ? (
           <ServicesSkeleton />
+        ) : services?.length === 0 ? (
+          <NoData message={t("noData")} />
         ) : (
           <main className="main-container grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {services.map((service: Service) => (

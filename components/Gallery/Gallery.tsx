@@ -1,12 +1,13 @@
 "use client";
 import Image from "next/image";
 import React, { useState } from "react";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useGetGalleryQuery } from "@/redux/services/galleryApi";
-import GalleryItemModal from "./GalleryItemModal";
-import { useTranslations } from "next-intl";
 import { Paginator } from "primereact/paginator";
+import { useTranslations } from "next-intl";
+import { useGetGalleryQuery } from "@/redux/services/galleryApi";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import GalleryItemModal from "./GalleryItemModal";
 import LoadingError from "@/components/dashboard/LoadingError";
+import NoData from "@/components/NoData";
 import GallerySkeleton from "./GallerySkeleton";
 
 interface GalleryItem {
@@ -123,7 +124,9 @@ const Gallery = () => {
                   </div>
                 ))
               ) : (
-                <p className="col-span-full text-center">{t("noData")}</p>
+                <div className="col-span-full text-center">
+                  <NoData message={t("noData")} />
+                </div>
               )}
             </main>
             {totalRecords > 12 && (
