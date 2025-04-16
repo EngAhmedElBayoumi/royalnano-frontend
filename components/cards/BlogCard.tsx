@@ -14,7 +14,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ id, title, content, image }) => {
   const t = useTranslations("website.blogs");
 
   return (
-    <>
+    <div>
       <Image
         src={image ?? "/assets/images/diamond-hybrid.png"}
         alt={title}
@@ -35,7 +35,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ id, title, content, image }) => {
           {t("readMore")}
         </Link>
       </div>
-    </>
+    </div>
   );
 };
 

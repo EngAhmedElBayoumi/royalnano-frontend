@@ -31,7 +31,7 @@ const AllBlogs = () => {
         ) : isLoading ? (
           <BlogsSkeleton />
         ) : (
-          <main className="main-container grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <main className="main-container grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-10">
             {Blogs.map((Blog: Blog) => (
               <BlogCard
                 key={Blog.id}
