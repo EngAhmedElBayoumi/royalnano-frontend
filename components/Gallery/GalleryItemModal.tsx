@@ -11,14 +11,14 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import { Navigation } from "swiper/modules";
+import { Navigation, Autoplay } from "swiper/modules";
 import type { Swiper as SwiperType } from "swiper";
 
 interface GalleryItem {
   id: number;
   title: string;
   item_type: "image" | "video";
-  gallery_images: string[];
+  gallery_images: { id: number; image: string }[];
   video: string | null;
 }
 
@@ -55,15 +55,18 @@ const GalleryItemModal: React.FC<GalleryItemModalProps> = ({
                 prevEl: ".swiper-button-prev",
               }}
               onSlideChange={(swiper) => setSelectedIndex(swiper.activeIndex)}
-              modules={[Navigation]}
+              modules={[Navigation, Autoplay]}
+              autoplay={{
+                delay: 2500,
+              }}
             >
-              {item.gallery_images.map((image, index) => (
+              {item.gallery_images.map((image) => (
                 <SwiperSlide
-                  key={index}
+                  key={image.id}
                   className="flex justify-center w-full h-full"
                 >
                   <Image
-                    src={image}
+                    src={image.image}
                     alt={item.title}
                     width={400}
                     height={400}
@@ -77,8 +80,8 @@ const GalleryItemModal: React.FC<GalleryItemModalProps> = ({
             <div className="flex justify-center mt-4">
               {item.gallery_images.map((image, index) => (
                 <Image
-                  key={index}
-                  src={image}
+                  key={image.id}
+                  src={image.image}
                   alt={`Thumbnail ${index + 1}`}
                   width={100}
                   height={100}

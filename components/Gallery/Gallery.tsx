@@ -14,7 +14,7 @@ interface GalleryItem {
   id: number;
   title: string;
   item_type: "image" | "video";
-  gallery_images: string[];
+  gallery_images: { id: number; image: string }[];
   video: string | null;
 }
 
@@ -115,7 +115,7 @@ const Gallery = () => {
                       <Image
                         width={305}
                         height={310}
-                        src={item.gallery_images[0]}
+                        src={item.gallery_images[0].image}
                         alt={item.title}
                         className="w-full h-full"
                       />

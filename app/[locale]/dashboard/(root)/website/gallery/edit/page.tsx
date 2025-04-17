@@ -28,12 +28,22 @@ export default function EditGallery() {
 
       // Append text fields
       formData.append("title", data.title);
-      if (data.file instanceof File)
-        formData.append("item_type", data.item_type);
-      if (data.file && data.file instanceof File && data.item_type === "image")
-        formData.append("image", data.file);
-      if (data.file && data.file instanceof File && data.item_type === "video")
-        formData.append("video", data.file);
+      if (data.file && data.file instanceof File) {
+        if (data.item_type === "image") {
+          formData.append("gallery_images", data.file);
+
+          // Add additional images if they exist
+          if (data.additionalFiles?.length) {
+            data.additionalFiles.forEach((file) => {
+              if (file instanceof File) {
+                formData.append(`gallery_images`, file);
+              }
+            });
+          }
+        } else if (data.item_type === "video") {
+          formData.append("video", data.file);
+        }
+      }
 
       const response = await updateGallery({ id, data: formData });
       if ("error" in response) {

@@ -12,16 +12,26 @@ export default function CreateGallery() {
 
   const handleSubmit = async (data: GalleryFormValues) => {
     try {
-      // Create FormData instance to handle file upload
       const formData = new FormData();
-
-      // Append text fields
       formData.append("title", data.title);
       formData.append("item_type", data.item_type);
-      if (data.file && data.file instanceof File && data.item_type === "image")
-        formData.append("image", data.file);
-      if (data.file && data.file instanceof File && data.item_type === "video")
-        formData.append("video", data.file);
+
+      if (data.file && data.file instanceof File) {
+        if (data.item_type === "image") {
+          formData.append("gallery_images", data.file);
+
+          // Add additional images if they exist
+          if (data.additionalFiles?.length) {
+            data.additionalFiles.forEach((file) => {
+              if (file instanceof File) {
+                formData.append(`gallery_images`, file);
+              }
+            });
+          }
+        } else if (data.item_type === "video") {
+          formData.append("video", data.file);
+        }
+      }
 
       const response = await createGallery(formData);
       if ("error" in response) {
