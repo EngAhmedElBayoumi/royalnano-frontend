@@ -39,6 +39,7 @@ import { PurchaseSupplierApi } from "./services/dashboard/purchase/supplierApi";
 import { salesReturnApi } from "./services/dashboard/sales/salesReturnApi";
 import { servicesAPi } from "./services/website/servicesApi";
 import { blogsAPi } from "./services/website/blogsApi";
+import { commentsAPi } from "./services/website/commentsApi";
 import { clientRequestAPi } from "./services/clientRequestApi";
 import { purchaseOrderApi } from "./services/dashboard/purchase/orderApi";
 import { purchaseExpenseCategoryApi } from "./services/dashboard/purchase/expenseCategory";
@@ -104,6 +105,7 @@ export const store = configureStore({
     [salesReturnApi.reducerPath]: salesReturnApi.reducer,
     [servicesAPi.reducerPath]: servicesAPi.reducer,
     [blogsAPi.reducerPath]: blogsAPi.reducer,
+    [commentsAPi.reducerPath]: commentsAPi.reducer,
     [clientRequestAPi.reducerPath]: clientRequestAPi.reducer,
     [PurchaseSupplierApi.reducerPath]: PurchaseSupplierApi.reducer,
     [purchaseOrderApi.reducerPath]: purchaseOrderApi.reducer,
@@ -115,11 +117,9 @@ export const store = configureStore({
     [jobsApi.reducerPath]: jobsApi.reducer,
     [permissionsApi.reducerPath]: permissionsApi.reducer,
     [statisticsAPi.reducerPath]: statisticsAPi.reducer,
-
     [salesSalesClientRequestApi.reducerPath]:
       salesSalesClientRequestApi.reducer,
     [initializePaymentApi.reducerPath]: initializePaymentApi.reducer,
-
     [setPriceApi.reducerPath]: setPriceApi.reducer,
     auth: persistedAuthReducer,
     profile: persistedProfileReducer,

@@ -46,7 +46,7 @@ const Comments: React.FC<CommentsProps> = ({ blogId, comments }) => {
         content: data.content,
         blog_id: blogId,
       });
-      if (response.error) throw new Error("creation failed");
+      if (response.error) throw new Error("error");
     } catch (error: unknown) {
       let errorMessage = "An error occurred";
 

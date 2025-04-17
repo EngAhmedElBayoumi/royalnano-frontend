@@ -57,10 +57,10 @@ export const baseQuery = async (
     const isGetRequest =
       typeof args === "string" || !("method" in args) || args.method === "GET";
 
-    return (
-      (isGetRequest && isWebsiteEndpoint) ||
-      (isPublicEndpoint && isNotDashboard)
-    );
+    console.log("args", isGetRequest);
+    return isWebsiteEndpoint
+      ? isGetRequest
+      : isPublicEndpoint && isNotDashboard;
   });
 
   // If the request is public, no token is needed

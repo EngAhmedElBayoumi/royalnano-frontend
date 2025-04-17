@@ -23,7 +23,7 @@ const BlogDetailsSkeleton = () => {
       {/* Comments section */}
       <section className="flex flex-wrap mt-8">
         <div className="w-[500px]" />
-        <div className="flex-1 mt-4 min-w-[500px]">
+        <div className="flex-1 mt-4 min-w-[360px]">
           {/* Comment input skeleton */}
           <div className="flex">
             <Skeleton className="flex-1 h-[42px] rounded-none rounded-s-lg" />
