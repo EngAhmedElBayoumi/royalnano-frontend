@@ -21,7 +21,7 @@ import {
   DropdownMenuTrigger,
 } from "@radix-ui/react-dropdown-menu";
 import "./CustomTable.css";
-import  { InfoCardInterface } from "../cards/InfoCard";
+import { InfoCardInterface } from "../cards/InfoCard";
 import { useTranslations } from "next-intl";
 import { Paginator } from "primereact/paginator";
 
@@ -209,6 +209,22 @@ export default function CustomTable({
                 headerClassName="text-center capitalize text-white text-[16px] font-[500] py-[13px] px-[38px] border-r border-white border-[2px]"
                 body={(rowData: DataInTable) => {
                   const fieldValue = rowData[col.field];
+
+                  if (
+                    col.field === "gallery_images" &&
+                    Array.isArray(fieldValue)
+                  ) {
+                    return (
+                      // eslint-disable-next-line
+                      <img
+                        src={fieldValue?.[0]?.image as string}
+                        alt={`${col.header} image`}
+                        width={50}
+                        height={50}
+                        className="rounded-md object-cover"
+                      />
+                    );
+                  }
                   if (Array.isArray(fieldValue)) {
                     const isExpanded = expandedRows[rowData.id] || false;
                     const itemsToShow = isExpanded
