@@ -21,24 +21,47 @@ const PUBLIC_ENDPOINTS = [
   "token",
   "website",
 ];
+
+// Update the args type to include the method property
+type RequestArgs =
+  | string
+  | {
+      url: string;
+      method?: string;
+      body?: unknown;
+    };
+
 export const baseQuery = async (
-  args: string | { url: string; body?: unknown },
+  args: RequestArgs,
   // eslint-disable-next-line
   api: any,
   extraOptions: Record<string, unknown>
 ) => {
   const state: RootState = api.getState();
-  let accessToken = state.auth.accessToken;
-  const refreshToken = state.auth.refreshToken;
+  let accessToken = state?.auth?.accessToken;
+  const refreshToken = state?.auth?.refreshToken;
 
   // Check if the request is for a public API and not on dashboard page
-  const isPublicRequest = PUBLIC_ENDPOINTS.some((endpoint) =>
-    typeof args === "string"
-      ? args.startsWith(endpoint) &&
-        !window.location.pathname.includes("dashboard")
-      : args.url.startsWith(endpoint) &&
-        !window.location.pathname.includes("dashboard")
-  );
+  const isPublicRequest = PUBLIC_ENDPOINTS.some((endpoint) => {
+    const isPublicEndpoint =
+      typeof args === "string"
+        ? args.startsWith(endpoint)
+        : args.url.startsWith(endpoint);
+
+    const isWebsiteEndpoint =
+      typeof args === "string"
+        ? args.startsWith("website/")
+        : args.url.startsWith("website/");
+
+    const isNotDashboard = !window.location.pathname.includes("dashboard");
+    const isGetRequest =
+      typeof args === "string" || !("method" in args) || args.method === "GET";
+
+    return (
+      (isGetRequest && isWebsiteEndpoint) ||
+      (isPublicEndpoint && isNotDashboard)
+    );
+  });
 
   // If the request is public, no token is needed
   if (isPublicRequest)

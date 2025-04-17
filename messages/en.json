@@ -572,7 +572,10 @@
       "title": "Blogs",
       "noData": "No blog items found",
       "loadingError": "Error loading blog data",
-      "readMore": "Read More"
+      "readMore": "Read More",
+      "addComment": "Add a Comment",
+      "writeComment": "Write a comment...",
+      "requiredError": "Comment is required"
     }
   },
   "Purchase": {
