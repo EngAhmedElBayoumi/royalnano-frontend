@@ -57,7 +57,6 @@ export const baseQuery = async (
     const isGetRequest =
       typeof args === "string" || !("method" in args) || args.method === "GET";
 
-    console.log("args", isGetRequest);
     return isWebsiteEndpoint
       ? isGetRequest
       : isPublicEndpoint && isNotDashboard;

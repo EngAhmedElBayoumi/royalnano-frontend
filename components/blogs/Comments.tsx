@@ -25,6 +25,7 @@ const Comments: React.FC<CommentsProps> = ({ blogId, comments }) => {
   const t = useTranslations("website.blogs");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [error, setError] = useState<string>("");
+  const [allComments, setAllComments] = useState(comments);
   const [createComment, { isLoading }] = useCreateCommentMutation();
 
   const commentSchema: ZodSchema<{ content: string }> = z.object({
@@ -36,6 +37,7 @@ const Comments: React.FC<CommentsProps> = ({ blogId, comments }) => {
     handleSubmit,
     watch,
     formState: { errors },
+    reset,
   } = useForm<{ content: string }>({
     resolver: zodResolver(commentSchema),
   });
@@ -45,8 +47,13 @@ const Comments: React.FC<CommentsProps> = ({ blogId, comments }) => {
       const response = await createComment({
         content: data.content,
         blog_id: blogId,
-      });
-      if (response.error) throw new Error("error");
+      }).unwrap(); // Use unwrap to get the response data directly
+
+      // Add the new comment to the existing comments
+      setAllComments((prevComments) => [response, ...prevComments]);
+
+      // Reset the form
+      reset();
     } catch (error: unknown) {
       let errorMessage = "An error occurred";
 
@@ -92,7 +99,7 @@ const Comments: React.FC<CommentsProps> = ({ blogId, comments }) => {
       </form>
 
       <div className="mt-4 flex flex-col gap-4">
-        {comments?.map((comment) => (
+        {allComments?.map((comment) => (
           <div key={comment.id} className="flex gap-2 items-center">
             <Image
               src={"/assets/images/user-placeholder.jpg"}
