@@ -27,30 +27,28 @@ const AllBlogs = () => {
   const totalRecords = data?.count || 0;
 
   return (
-    <section className="pb-8 bg-white relative top-[-100px] animate-on-scroll">
-      <div className="flex justify-center flex-col items-center">
-        {error ? (
-          <LoadingError />
-        ) : isLoading ? (
-          <BlogsSkeleton />
-        ) : Blogs?.length === 0 ? (
-          <NoData message={t("noData")} />
-        ) : (
-          <main className="main-container grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-10">
-            {Blogs.map((Blog: Blog) => (
-              <BlogCard
-                key={Blog.id}
-                id={Blog.id}
-                title={Blog.title}
-                image={Blog.image}
-                content={Blog.content}
-              />
-            ))}
-          </main>
-        )}
-      </div>
+    <section className="pb-8 relative top-[-100px] animate-on-scroll flex flex-col justify-center items-center">
+      {error ? (
+        <LoadingError />
+      ) : isLoading ? (
+        <BlogsSkeleton />
+      ) : Blogs?.length === 0 ? (
+        <NoData message={t("noData")} />
+      ) : (
+        <main className="main-container grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-10">
+          {Blogs.map((Blog: Blog) => (
+            <BlogCard
+              key={Blog.id}
+              id={Blog.id}
+              title={Blog.title}
+              image={Blog.image}
+              content={Blog.content}
+            />
+          ))}
+        </main>
+      )}
       {totalRecords > 8 && (
-        <div className="mt-6 flex justify-center">
+        <div className="mt-6">
           <Paginator
             first={(page - 1) * 8}
             rows={8}

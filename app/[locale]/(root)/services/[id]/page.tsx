@@ -1,6 +1,6 @@
+import { Metadata } from "next";
 import ServiceDetails from "@/components/Profile/ServiceDetails";
 import PageHeader from "@/components/PageHeader";
-import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "ServiceDetails | Royal Nano",
