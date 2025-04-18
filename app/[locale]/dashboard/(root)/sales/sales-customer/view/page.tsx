@@ -1,16 +1,14 @@
 "use client";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft } from "lucide-react";
-// import CustomerInfoTab from "./components/CustomerInfoTab";
-// import FollowupsTab from "./components/FollowupsTab";
-// import QuotationsTab from "./components/QuotationsTab";
 import { useGetSalesCustomerQuery } from "@/redux/services/dashboard/sales/salesCustomerApi";
 import { useTranslations } from "next-intl";
 import CustomerInfoTab from "@/components/dashboard/sales/customerInfoTab";
 import FollowupsTab from "@/components/dashboard/sales/followupTab";
 import QuotationsTab from "@/components/dashboard/sales/QuotationsTab";
+import CustomTabs from "@/components/dashboard/CustomTabs";
 
 export default function SalesCustomerViewPage() {
   const router = useRouter();
@@ -32,6 +30,45 @@ export default function SalesCustomerViewPage() {
   if (isCustomerLoading) return <div>{t("loading")}</div>;
   if (customerError) return <div>{t("error")}</div>;
 
+  const tabs = [
+    {
+      label: "info",
+      icon: (
+        <Image
+          src="/assets/icons/dashboard/sales/customerTabs/info.svg"
+          alt="icon"
+          width="24"
+          height="24"
+        />
+      ),
+      content: <CustomerInfoTab customerData={customerData} />,
+    },
+    {
+      label: "followups",
+      icon: (
+        <Image
+          src="/assets/icons/dashboard/sales/customerTabs/followup.svg"
+          alt="icon"
+          width="24"
+          height="24"
+        />
+      ),
+      content: <FollowupsTab customerId={Number(id)} />,
+    },
+    {
+      label: "quotations",
+      icon: (
+        <Image
+          src="/assets/icons/dashboard/sales/quotation.svg"
+          alt="icon"
+          width="24"
+          height="24"
+        />
+      ),
+      content: <QuotationsTab customerId={Number(id)} />,
+    },
+  ];
+
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-4">
@@ -41,29 +78,7 @@ export default function SalesCustomerViewPage() {
         <h1 className="text-2xl font-bold">{customerData?.customer_name}</h1>
       </div>
 
-      <Tabs defaultValue="info" className="w-full">
-        <TabsList className="grid w-full grid-cols-3">
-          <TabsTrigger value="info">{t("Customer.tabs.info")}</TabsTrigger>
-          <TabsTrigger value="followups">
-            {t("Customer.tabs.followups")}
-          </TabsTrigger>
-          <TabsTrigger value="quotations">
-            {t("Customer.tabs.quotations")}
-          </TabsTrigger>
-        </TabsList>
-
-        <TabsContent value="info">
-          <CustomerInfoTab customerData={customerData} />
-        </TabsContent>
-
-        <TabsContent value="followups">
-          <FollowupsTab customerId={Number(id)} />
-        </TabsContent>
-
-        <TabsContent value="quotations">
-          <QuotationsTab customerId={Number(id)} />
-        </TabsContent>
-      </Tabs>
+      <CustomTabs tabs={tabs} defaultTab="info" />
     </div>
   );
 }
