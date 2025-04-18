@@ -11,6 +11,7 @@ import Services from "@/components/dashboard/website/services";
 import Gallery from "@/components/dashboard/website/gallery";
 import ContactUs from "@/components/dashboard/website/contactUs";
 import CustomerReviews from "@/components/dashboard/website/customerReviews";
+import Blogs from "@/components/dashboard/website/Blogs";
 
 function WebsitePage() {
   const t = useTranslations("dashboardWebsite.tabs");
@@ -95,6 +96,19 @@ function WebsitePage() {
       label: t("customerReviews"),
       permissionKey: "customerreview",
       content: <CustomerReviews />,
+    },
+    {
+      label: t("blogs"),
+      permissionKey: "blog",
+      icon: (
+        <Image
+          src="/assets/icons/dashboard/website/blogs.svg"
+          alt="icon"
+          width="24"
+          height="24"
+        />
+      ),
+      content: <Blogs />,
     },
   ];
 

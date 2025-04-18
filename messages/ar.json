@@ -289,7 +289,8 @@
       "services": "الخدمات",
       "contact": "التواصل",
       "gallery": "معرض الصور",
-      "customerReviews": "تقييمات العملاء"
+      "customerReviews": "تقييمات العملاء",
+      "blogs": "المدونات"
     },
     "Services": {
       "services": "الخدمات",
@@ -317,6 +318,14 @@
       "addGallery": "إضافة عنصر للمعرض",
       "editGallery": "تعديل عنصر المعرض",
       "noGalleryDataFound": "لا توجد بيانات للمعرض"
+    },
+    "Blogs": {
+      "addBlog": "إضافة مدونة",
+      "editBlog": "تعديل المدونة",
+      "title": "العنوان",
+      "content": "المحتوى",
+      "image": "الصورة",
+      "noBlogsDataFound": "لا توجد بيانات للمدونات"
     },
     "CustomerReviews": {
       "name": "الاسم",

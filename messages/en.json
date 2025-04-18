@@ -347,7 +347,8 @@
       "services": "Services",
       "contact": "Contact",
       "gallery": "Gallery",
-      "customerReviews": "Customer Reviews"
+      "customerReviews": "Customer Reviews",
+      "blogs": "Blogs"
     },
     "Services": {
       "services": "Services",
@@ -384,6 +385,14 @@
       "addCustomerReview": "Add Customer Review",
       "editCustomerReview": "Edit Customer Review",
       "noCustomerReviewsFound": "No customer reviews found"
+    },
+    "Blogs": {
+      "addBlog": "Add Blog",
+      "editBlog": "Edit Blog",
+      "title": "Title",
+      "content": "Content",
+      "image": "Image",
+      "noBlogsDataFound": "No Blogs data found"
     }
   },
   "website": {
