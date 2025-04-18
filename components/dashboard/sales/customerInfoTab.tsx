@@ -1,3 +1,5 @@
+import { useTranslations } from "next-intl";
+
 interface CustomerInfoTabProps {
   customerData: {
     customer_name: string;
@@ -24,42 +26,56 @@ interface CustomerInfoTabProps {
 export default function CustomerInfoTab({
   customerData,
 }: CustomerInfoTabProps) {
+  const t = useTranslations("customer_info");
+
   return (
     <div className="px-6 pb-[10px]">
       {/* Basic Info */}
       <div className="space-y-2">
-        <h3 className="font-medium">Basic Information</h3>
+        <h3 className="font-medium">{t("basic_info")}</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
           <div>
-            <p className="text-sm text-muted-foreground">Customer Name</p>
+            <p className="text-sm text-muted-foreground">
+              {t("fields.customer_name")}
+            </p>
             <p>{customerData?.customer_name}</p>
           </div>
           <div>
-            <p className="text-sm text-muted-foreground">Contact Person</p>
+            <p className="text-sm text-muted-foreground">
+              {t("fields.contact_person")}
+            </p>
             <p>{customerData?.contact_person}</p>
           </div>
           <div>
-            <p className="text-sm text-muted-foreground">Phone Number</p>
+            <p className="text-sm text-muted-foreground">
+              {t("fields.phone_number")}
+            </p>
             <p>{customerData?.phone_number}</p>
           </div>
           <div>
-            <p className="text-sm text-muted-foreground">Email</p>
+            <p className="text-sm text-muted-foreground">{t("fields.email")}</p>
             <p>{customerData?.email}</p>
           </div>
           <div>
-            <p className="text-sm text-muted-foreground">Address</p>
+            <p className="text-sm text-muted-foreground">
+              {t("fields.address")}
+            </p>
             <p>{customerData?.address}</p>
           </div>
           <div>
-            <p className="text-sm text-muted-foreground">City</p>
+            <p className="text-sm text-muted-foreground">{t("fields.city")}</p>
             <p>{customerData?.city}</p>
           </div>
           <div>
-            <p className="text-sm text-muted-foreground">Country</p>
+            <p className="text-sm text-muted-foreground">
+              {t("fields.country")}
+            </p>
             <p>{customerData?.country}</p>
           </div>
           <div>
-            <p className="text-sm text-muted-foreground">Customer Type</p>
+            <p className="text-sm text-muted-foreground">
+              {t("fields.customer_type")}
+            </p>
             <p>{customerData?.customer_type}</p>
           </div>
         </div>
@@ -69,18 +85,24 @@ export default function CustomerInfoTab({
 
       {/* Additional Info */}
       <div className="space-y-2">
-        <h3 className="font-medium">Additional Information</h3>
+        <h3 className="font-medium">{t("additional_info")}</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
           <div>
-            <p className="text-sm text-muted-foreground">Tax Number</p>
+            <p className="text-sm text-muted-foreground">
+              {t("fields.tax_number")}
+            </p>
             <p>{customerData?.tax_number}</p>
           </div>
           <div>
-            <p className="text-sm text-muted-foreground">National ID</p>
+            <p className="text-sm text-muted-foreground">
+              {t("fields.national_id")}
+            </p>
             <p>{customerData?.national_id}</p>
           </div>
           <div>
-            <p className="text-sm text-muted-foreground">Source</p>
+            <p className="text-sm text-muted-foreground">
+              {t("fields.source")}
+            </p>
             <p>{customerData?.source}</p>
           </div>
         </div>
@@ -90,26 +112,36 @@ export default function CustomerInfoTab({
 
       {/* Branch Info */}
       <div className="space-y-2">
-        <h3 className="font-medium">Branch Information</h3>
+        <h3 className="font-medium">{t("branch_info")}</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
           <div>
-            <p className="text-sm text-muted-foreground">Branch Name</p>
+            <p className="text-sm text-muted-foreground">
+              {t("fields.branch_name")}
+            </p>
             <p>{customerData?.branch?.name}</p>
           </div>
           <div>
-            <p className="text-sm text-muted-foreground">Branch Code</p>
+            <p className="text-sm text-muted-foreground">
+              {t("fields.branch_code")}
+            </p>
             <p>{customerData?.branch?.branch_code}</p>
           </div>
           <div>
-            <p className="text-sm text-muted-foreground">Branch Phone</p>
+            <p className="text-sm text-muted-foreground">
+              {t("fields.branch_phone")}
+            </p>
             <p>{customerData?.branch?.phone_number}</p>
           </div>
           <div>
-            <p className="text-sm text-muted-foreground">Branch Email</p>
+            <p className="text-sm text-muted-foreground">
+              {t("fields.branch_email")}
+            </p>
             <p>{customerData?.branch?.email}</p>
           </div>
           <div className="col-span-2 md:col-span-3">
-            <p className="text-sm text-muted-foreground">Branch Address</p>
+            <p className="text-sm text-muted-foreground">
+              {t("fields.branch_address")}
+            </p>
             <p>{customerData?.branch?.address}</p>
           </div>
         </div>

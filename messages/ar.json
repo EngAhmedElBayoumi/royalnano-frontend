@@ -303,6 +303,30 @@
       "errorDescription": "حدث خطأ أثناء إنشاء العميل"
     }
   },
+  "customer_info": {
+    "title": "معلومات العميل",
+    "basic_info": "المعلومات الأساسية",
+    "additional_info": "معلومات إضافية",
+    "branch_info": "معلومات الفرع",
+    "fields": {
+      "customer_name": "اسم العميل",
+      "contact_person": "الشخص المسؤول",
+      "phone_number": "رقم الهاتف",
+      "email": "البريد الإلكتروني",
+      "address": "العنوان",
+      "city": "المدينة",
+      "country": "الدولة",
+      "customer_type": "نوع العميل",
+      "tax_number": "الرقم الضريبي",
+      "national_id": "الرقم القومي",
+      "source": "المصدر",
+      "branch_name": "اسم الفرع",
+      "branch_code": "رمز الفرع",
+      "branch_phone": "هاتف الفرع",
+      "branch_email": "بريد الفرع الإلكتروني",
+      "branch_address": "عنوان الفرع"
+    }
+  },
   "dashboardWebsite": {
     "tabs": {
       "services": "الخدمات",
