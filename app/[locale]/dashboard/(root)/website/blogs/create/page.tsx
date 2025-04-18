@@ -8,7 +8,7 @@ import CreatePage from "@/components/dashboard/CreatePage";
 
 export default function CreateBlog() {
   const [createBlog, { isLoading }] = useCreateBlogMutation();
-  const t = useTranslations("dashboardWebsite.Blogs");
+  const t = useTranslations("dashboardWebsite");
 
   const handleSubmit = async (data: BlogFormValues) => {
     try {
@@ -35,10 +35,10 @@ export default function CreateBlog() {
 
   return (
     <CreatePage
-      title={t("addBlog")}
+      title={t("Blogs.addBlog")}
       onSubmit={handleSubmit}
       Form={BlogForm}
-      redirectPath="/dashboard/website"
+      redirectPath={`/dashboard/website?tab=${t("tabs.blogs")}`}
       isLoading={isLoading}
     />
   );
