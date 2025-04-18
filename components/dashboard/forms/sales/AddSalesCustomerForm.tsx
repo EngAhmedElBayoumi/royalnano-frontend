@@ -17,6 +17,8 @@ import { useRouter } from "@/i18n/routing";
 import { useState } from "react";
 import CustomModal from "@/components/modals/CustomModal";
 import PhoneInputField from "@/components/formFields/PhoneInputField";
+import useExtraFields from "@/hooks/useExtraFields";
+import ExtraFields from "@/components/formFields/ExtraFields";
 
 interface SalesCustomerFormProps {
   defaultValues?: Partial<SalesCustomerFormValues>;
@@ -44,6 +46,7 @@ const AddSalesCustomerForm = ({ defaultValues }: SalesCustomerFormProps) => {
       customer_type: "individual",
       tax_number: "",
       national_id: "",
+      extra_fields: {},
     },
   });
 
@@ -79,6 +82,16 @@ const AddSalesCustomerForm = ({ defaultValues }: SalesCustomerFormProps) => {
   const handleModalChange = (isOpen: boolean) => {
     setIsModalOpen(isOpen);
   };
+
+  const {
+    extraFields,
+    handleAddExtraField,
+    handleRemoveExtraField,
+    handleExtraFieldChange,
+  } = useExtraFields({
+    defaultFields: defaultValues?.extra_fields ?? {},
+    setValue: form.setValue,
+  });
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleSubmit)}>
@@ -166,6 +179,12 @@ const AddSalesCustomerForm = ({ defaultValues }: SalesCustomerFormProps) => {
               placeholder={t("SalesCustomer.nationalId")}
             />
           </div>
+          <ExtraFields
+            extraFields={extraFields}
+            onAddField={handleAddExtraField}
+            onRemoveField={handleRemoveExtraField}
+            onFieldChange={handleExtraFieldChange}
+          />
         </section>
         <div className="flex justify-end gap-2 mt-5 flex-col-reverse xs:flex-row">
           <Link href={`/dashboard/sales?tab=${t("customer")}`} passHref>

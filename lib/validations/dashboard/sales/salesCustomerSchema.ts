@@ -17,6 +17,9 @@ export const SalesCustomerFormValuesSchema = z.object({
   customer_type: z.enum(["individual", "business"]),
   tax_number: z.string().min(1, "Tax number is required"),
   national_id: z.string().min(1, "National ID is required"),
+  extra_fields: z.record(z.any()).optional(),
 });
 
-export type SalesCustomerFormValues = z.infer<typeof SalesCustomerFormValuesSchema>;
+export type SalesCustomerFormValues = z.infer<
+  typeof SalesCustomerFormValuesSchema
+>;
