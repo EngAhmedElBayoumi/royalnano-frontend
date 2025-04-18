@@ -514,7 +514,10 @@
       "title": "المدونات",
       "noData": "لا توجد مدونات",
       "loadingError": "خطأ في تحميل البيانات",
-      "readMore": "اقرأ المزيد"
+      "readMore": "اقرأ المزيد",
+      "addComment": "إضافة تعليق",
+      "writeComment": "اكتب تعليقك",
+      "requiredError": "التعليق مطلوب"
     }
   },
   "Purchase": {

@@ -19,7 +19,7 @@ export default function Gallery() {
   const columns = [
     { field: "title", header: t("title") },
     { field: "item_type", header: t("item_type") },
-    { field: "image", header: t("image") },
+    { field: "gallery_images", header: t("image") },
     { field: "video", header: t("video") },
   ];
 

@@ -75,8 +75,14 @@ const Nav = () => {
       } z-20 sticky top-0 transition-colors duration-300 flex justify-center`}
     >
       <main className="main-container flex justify-between py-2 items-center">
-        <Image src="/assets/icons/logo.svg" alt="logo" width={50} height={80} />
-
+        <Link href="/" passHref>
+          <Image
+            src="/assets/icons/logo.svg"
+            alt="logo"
+            width={50}
+            height={80}
+          />
+        </Link>
         {/* Desktop menu */}
         <div className="hidden md:flex gap-8">
           {navLinks.map((link) => (

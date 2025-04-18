@@ -28,12 +28,24 @@ export default function EditGallery() {
 
       // Append text fields
       formData.append("title", data.title);
-      if (data.file instanceof File)
-        formData.append("item_type", data.item_type);
-      if (data.file && data.file instanceof File && data.item_type === "image")
-        formData.append("image", data.file);
-      if (data.file && data.file instanceof File && data.item_type === "video")
-        formData.append("video", data.file);
+      if (data.file && data.file instanceof File) {
+        if (data.item_type === "image") {
+          // Combine the main file and additional files into one array
+          const allImages = [data.file, ...(data.additionalFiles || [])].filter(
+            (file): file is File => file instanceof File
+          );
+
+          // Create a single Blob containing all images
+          const imageArrayBlob = new Blob(allImages, {
+            type: "application/octet-stream",
+          });
+
+          // Append the Blob under a single key
+          formData.append("gallery_images", imageArrayBlob);
+        } else if (data.item_type === "video") {
+          formData.append("video", data.file);
+        }
+      }
 
       const response = await updateGallery({ id, data: formData });
       if ("error" in response) {

@@ -1,20 +1,25 @@
-import React from "react";
+import React, { useRef, useState } from "react";
+import Image from "next/image";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import Image from "next/image";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import { Navigation, Autoplay } from "swiper/modules";
+import type { Swiper as SwiperType } from "swiper";
 
 interface GalleryItem {
   id: number;
   title: string;
   item_type: "image" | "video";
-  image: string | null;
+  gallery_images: { id: number; image: string }[];
   video: string | null;
-  created_at: string;
 }
 
 interface GalleryItemModalProps {
@@ -28,6 +33,8 @@ const GalleryItemModal: React.FC<GalleryItemModalProps> = ({
   onClose,
   item,
 }) => {
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const swiperRef = useRef<SwiperType | null>(null);
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-[600px] h-[90vh] bg-[transparent] border-none">
@@ -39,13 +46,56 @@ const GalleryItemModal: React.FC<GalleryItemModalProps> = ({
           </DialogHeader>
         </VisuallyHidden>
         {item.item_type === "image" ? (
-          <Image
-            src={item.image || ""}
-            alt={item.title}
-            width={400}
-            height={400}
-            className="w-full h-full object-cover rounded-lg relative top-5"
-          />
+          <>
+            <Swiper
+              onSwiper={(swiper) => (swiperRef.current = swiper)} // Assign swiper instance
+              className="w-full h-full"
+              navigation={{
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+              }}
+              onSlideChange={(swiper) => setSelectedIndex(swiper.activeIndex)}
+              modules={[Navigation, Autoplay]}
+              autoplay={{
+                delay: 2500,
+              }}
+            >
+              {item.gallery_images.map((image) => (
+                <SwiperSlide
+                  key={image.id}
+                  className="flex justify-center w-full h-full"
+                >
+                  <Image
+                    src={image.image}
+                    alt={item.title}
+                    width={400}
+                    height={400}
+                    className="w-full h-full object-cover rounded-lg"
+                  />
+                </SwiperSlide>
+              ))}
+              <div className="swiper-button-prev" />
+              <div className="swiper-button-next" />
+            </Swiper>
+            <div className="flex justify-center mt-4">
+              {item.gallery_images.map((image, index) => (
+                <Image
+                  key={image.id}
+                  src={image.image}
+                  alt={`Thumbnail ${index + 1}`}
+                  width={100}
+                  height={100}
+                  className={`cursor-pointer rounded-lg mx-1 ${
+                    selectedIndex === index ? "border-2 border-primary" : ""
+                  }`}
+                  onClick={() => {
+                    setSelectedIndex(index);
+                    swiperRef.current?.slideTo(index); // Use the swiper instance to slide
+                  }}
+                />
+              ))}
+            </div>
+          </>
         ) : (
           <video controls className="w-full h-full">
             <source src={item.video || ""} type="video/mp4" />

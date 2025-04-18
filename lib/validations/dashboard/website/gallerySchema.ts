@@ -7,14 +7,15 @@ export const gallerySchema = z
   .object({
     title: z.string().nonempty("Title is required"),
     item_type: z.enum(["image", "video"]),
-    file: z.union([z.instanceof(File), z.string()], { 
-      errorMap: () => ({ message: "File or URL is required" })
+    file: z.union([z.instanceof(File), z.string()], {
+      errorMap: () => ({ message: "File or URL is required" }),
     }),
+    additionalFiles: z.array(z.any()).optional(),
   })
   .superRefine((data, ctx) => {
     const { item_type, file } = data;
 
-    if (typeof file === 'string') {
+    if (typeof file === "string") {
       return; // Skip validation for URLs
     }
 
