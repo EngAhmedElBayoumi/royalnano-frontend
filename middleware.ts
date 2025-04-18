@@ -35,10 +35,11 @@ export async function middleware(req: NextRequest) {
     "/login",
     "/otp-verification",
     "/register",
+    "/book-now",
   ];
 
   // Define the protected routes
-  const protectedRoutes = ["/dashboard", "/profile", "/book-now"];
+  const protectedRoutes = ["/dashboard", "/profile"];
 
   // Check if the user is authenticated using the access token
   if (accessToken && checkToken(accessToken)) {

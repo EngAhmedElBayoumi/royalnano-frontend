@@ -3,7 +3,6 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import CustomTabs from "@/components/dashboard/CustomTabs";
 import SalesInvoice from "@/components/dashboard/sales/salesInvoice";
-import SalesOrder from "@/components/dashboard/sales/salesOrder";
 import SalesQuotation from "@/components/dashboard/sales/salesQuotation";
 import SalesReturn from "@/components/dashboard/sales/salesReturn";
 import SalesCustomer from "@/components/dashboard/sales/salesCustomer";
@@ -49,18 +48,7 @@ function SalesPage() {
       label: t("salesQuotation"),
       content: <SalesQuotation />,
     },
-    {
-      icon: (
-        <Image
-          width="24"
-          height="24"
-          alt="order"
-          src="/assets/icons/dashboard/sales/order.svg"
-        />
-      ),
-      label: t("order"),
-      content: <SalesOrder />,
-    },
+
     {
       icon: (
         <Image

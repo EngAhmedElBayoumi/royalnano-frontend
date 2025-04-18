@@ -9,11 +9,11 @@ import { useGetSalesQuotationQuery } from "@/redux/services/dashboard/sales/sale
 import { useState } from "react";
 
 export default function SalesQuotation() {
-    const [page, setPage] = useState(1);
-   
-    const handlePageChange = (newPage: number) => {
-      setPage(newPage);
-    };
+  const [page, setPage] = useState(1);
+
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage);
+  };
   const {
     isLoading,
     error,
@@ -24,47 +24,46 @@ export default function SalesQuotation() {
     page,
     page_size: 10,
   });
-
+  console.log("quotationss", salesQuotations);
   const router = useRouter();
 
   const columns = [
     { field: "quotation_number", header: "Quotation Number" },
-    
+
     { field: "customer_name", header: "Customer Name" },
     { field: "date", header: "Date" },
     { field: "status", header: "Status" },
     { field: "validity_period", header: "Validity Period" },
     { field: "total_amount", header: "Total Amount" },
-    
+
     { field: "items", header: "Items" },
-//     items
-// : 
-// Array(1)
-// 0
-// : 
-// discount
-// : 
-// "1.00"
-// discount_percent
-// : 
-// "1.00"
-// item_name
-// : 
-// "1"
-// quantity
-// : 
-// 1
-// tax_rate
-// : 
-// "1.00"
-// total
-// : 
-// "0.00"
-// unit_price
-// : 
-// "1.00"
+    //     items
+    // :
+    // Array(1)
+    // 0
+    // :
+    // discount
+    // :
+    // "1.00"
+    // discount_percent
+    // :
+    // "1.00"
+    // item_name
+    // :
+    // "1"
+    // quantity
+    // :
+    // 1
+    // tax_rate
+    // :
+    // "1.00"
+    // total
+    // :
+    // "0.00"
+    // unit_price
+    // :
+    // "1.00"
   ];
- 
 
   const cardsData = [
     { title: "New requests", num: 145 },
@@ -104,7 +103,7 @@ export default function SalesQuotation() {
           buttonText="Add Sales Quotation"
           ButtonEvent={handleClick}
           onPageChange={handlePageChange}
-          totalRecords={salesQuotations?.count || 0} 
+          totalRecords={salesQuotations?.count || 0}
         />
       )}
     </>

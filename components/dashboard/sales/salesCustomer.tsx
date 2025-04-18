@@ -24,27 +24,43 @@ export default function SalesCustomer() {
     page,
     page_size: 10,
   });
-
+  console.log(salesCustomers);
   const router = useRouter();
   // console.log("page",page)
   console.log("Sales Customers API Response:", salesCustomers);
 
   const transformedData =
-    salesCustomers?.results?.map((customer: { id: number; customer_name: string; contact_person: string; phone_number: number; email: string; address: string; city: string; country: string; notes: string; branch: { name: string; }; customer_type: string; tax_number: number; national_id: number; }) => ({
-      id: customer.id,
-      customer_name: customer.customer_name,
-      contact_person: customer.contact_person,
-      phone_number: customer.phone_number,
-      email: customer.email,
-      address: customer.address,
-      city: customer.city,
-      country: customer.country,
-      notes: customer.notes,
-      branch_name: customer.branch.name,
-      customer_type: customer.customer_type,
-      tax_number: customer.tax_number || "N/A",
-      national_id: customer.national_id,
-    })) || [];
+    salesCustomers?.results?.map(
+      (customer: {
+        id: number;
+        customer_name: string;
+        contact_person: string;
+        phone_number: number;
+        email: string;
+        address: string;
+        city: string;
+        country: string;
+        notes: string;
+        branch: { name: string };
+        customer_type: string;
+        tax_number: number;
+        national_id: number;
+      }) => ({
+        id: customer.id,
+        customer_name: customer.customer_name,
+        contact_person: customer.contact_person,
+        phone_number: customer.phone_number,
+        email: customer.email,
+        address: customer.address,
+        city: customer.city,
+        country: customer.country,
+        notes: customer.notes,
+        branch_name: customer.branch.name,
+        customer_type: customer.customer_type,
+        tax_number: customer.tax_number || "N/A",
+        national_id: customer.national_id,
+      })
+    ) || [];
 
   console.log("Transformed Data:", transformedData);
 
@@ -105,6 +121,7 @@ export default function SalesCustomer() {
           editRoute="/dashboard/sales/sales-customer/edit/"
           data={transformedData}
           rows={10}
+          viewRoute="/dashboard/sales/sales-customer/view"
           columns={columns}
           cardData={cardsData}
           buttonText="Add Sales Customer"

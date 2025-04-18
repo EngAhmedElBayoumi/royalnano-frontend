@@ -57,7 +57,7 @@ export default function ClientRequest() {
     page,
     page_size: 10,
   });
-
+  console.log(clientRequests);
   const {
     data: branchesData,
     isLoading: isBranchesLoading,
