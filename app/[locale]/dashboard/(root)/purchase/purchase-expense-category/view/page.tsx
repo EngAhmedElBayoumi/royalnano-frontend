@@ -5,7 +5,9 @@ import IconWithTitle from "@/components/dashboard/IconWithTitle";
 import FormSkelton from "@/components/dashboard/skelton/FormSkelton";
 import LoadingError from "@/components/dashboard/LoadingError";
 import { useGetExpenseCategoryByIdQuery } from "@/redux/services/dashboard/purchase/expenseCategory";
-import ExpenseCategoryForm, { ExpenseCategoryFormValues } from "@/components/dashboard/forms/purchase/PurchaseExpenseCategoryForm";
+import ExpenseCategoryForm, {
+  ExpenseCategoryFormValues,
+} from "@/components/dashboard/forms/purchase/PurchaseExpenseCategoryForm";
 
 export default function ViewExpenseCategory() {
   const searchParams = useSearchParams();
@@ -16,7 +18,7 @@ export default function ViewExpenseCategory() {
   const defaultValues: ExpenseCategoryFormValues = data && {
     id: data.id,
     name: data.name,
-    description: data.description || "", 
+    description: data.description || "",
   };
 
   const handleSubmit = async (data: ExpenseCategoryFormValues) => {
@@ -24,7 +26,7 @@ export default function ViewExpenseCategory() {
   };
 
   return (
-    <main className="mx-7 my-5">
+    <main className="mx-4 sm:mx-7 my-5">
       <div className="flex">
         <IconWithTitle
           imageSrc="/assets/icons/view.svg"
@@ -34,7 +36,7 @@ export default function ViewExpenseCategory() {
         />
       </div>
 
-      <div className="bg-[#F8F7F7] px-6 pt-5 pb-8 ltr:rounded-r-[20px] ltr:rounded-bl-[20px] rtl:rounded-l-[20px] rtl:rounded-br-[20px]">
+      <div className="bg-[#F8F7F7] px-4 sm:px-6 pt-5 pb-8 ltr:rounded-r-[20px] ltr:rounded-bl-[20px] rtl:rounded-l-[20px] rtl:rounded-br-[20px]">
         {isLoading ? (
           <div className="ltr:lg:pr-[200px] rtl:lg:pl-[200px]">
             <FormSkelton />

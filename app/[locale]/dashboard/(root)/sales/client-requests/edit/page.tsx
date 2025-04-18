@@ -1,14 +1,17 @@
 "use client";
-import ClientRequestForm, { ClientRequestFormValues } from "@/components/dashboard/forms/sales/ClientRequestForm";
+import ClientRequestForm, {
+  ClientRequestFormValues,
+} from "@/components/dashboard/forms/sales/ClientRequestForm";
 import IconWithTitle from "@/components/dashboard/IconWithTitle";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import CustomModal from "@/components/modals/CustomModal";
 import { useRouter } from "@/i18n/routing";
-import { useGetClientRequestByIdQuery, useUpdateClientRequestMutation } from "@/redux/services/clientRequestApi"; // Import the query to fetch existing data
+import {
+  useGetClientRequestByIdQuery,
+  useUpdateClientRequestMutation,
+} from "@/redux/services/clientRequestApi"; // Import the query to fetch existing data
 import { useSearchParams } from "next/navigation";
-
-
 
 export default function EditClientRequest() {
   const t = useTranslations("Sales");
@@ -16,14 +19,15 @@ export default function EditClientRequest() {
   const handleModalChange = (isOpen: boolean) => {
     setIsModalOpen(isOpen);
   };
-    const searchParams = useSearchParams();
-  
+  const searchParams = useSearchParams();
+
   const id = searchParams.get("id");
 
   const [updateClientRequest] = useUpdateClientRequestMutation();
   const router = useRouter();
 
-  const { data: clientRequest, isLoading: isFetching } = useGetClientRequestByIdQuery(id);
+  const { data: clientRequest, isLoading: isFetching } =
+    useGetClientRequestByIdQuery(id);
 
   const handleSubmit = async (data: ClientRequestFormValues) => {
     console.log("Form data submitted:", data);
@@ -42,7 +46,7 @@ export default function EditClientRequest() {
   }
 
   return (
-    <main className="mx-7 my-5">
+    <main className="mx-4 sm:mx-7 my-5">
       <div className="flex">
         <CustomModal
           isOpen={isModalOpen}
@@ -58,9 +62,9 @@ export default function EditClientRequest() {
         />
       </div>
 
-      <div className="bg-dashboardBg px-6 pt-5 pb-8 ltr:rounded-r-[20px] ltr:rounded-bl-[20px] rtl:rounded-l-[20px] rtl:rounded-br-[20px] ltr:lg:pr-[200px] rtl:lg:pl-[200px]">
+      <div className="bg-dashboardBg px-4 sm:px-6 pt-5 pb-8 ltr:rounded-r-[20px] ltr:rounded-bl-[20px] rtl:rounded-l-[20px] rtl:rounded-br-[20px] ltr:lg:pr-[200px] rtl:lg:pl-[200px]">
         <ClientRequestForm
-          defaultValues={clientRequest} 
+          defaultValues={clientRequest}
           onSubmit={handleSubmit}
         />
       </div>
