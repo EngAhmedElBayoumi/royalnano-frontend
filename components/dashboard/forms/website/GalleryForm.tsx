@@ -99,44 +99,43 @@ const GalleryForm = ({
               className="mt-2"
             />
 
-            {/* Additional file inputs */}
-            {Array.from({ length: fileCount - 1 }).map((_, index) => (
-              <div key={index} className="relative">
-                <FileInput
-                  control={form.control}
-                  name={`additionalFiles.${index}`}
-                  accepted={acceptedFileTypes}
-                  className="mt-2"
-                />
+            {/* Show additional files section only for images */}
+            {itemType === "image" && (
+              <>
+                {/* Additional file inputs */}
+                {Array.from({ length: fileCount - 1 }).map((_, index) => (
+                  <div key={index} className="relative">
+                    <FileInput
+                      control={form.control}
+                      name={`additionalFiles.${index}`}
+                      accepted={acceptedFileTypes}
+                      label={t("file")}
+                    />
+                    <button
+                      type="button"
+                      onClick={() => handleRemoveFile(index)}
+                      className="absolute -top-1 right-1 bg-red-500 rounded-full p-2"
+                    >
+                      <Image
+                        src="/assets/icons/dashboard/close.svg"
+                        alt="remove"
+                        width="10"
+                        height="10"
+                      />
+                    </button>
+                  </div>
+                ))}
+
+                {/* Add more button */}
                 <button
                   type="button"
-                  onClick={() => handleRemoveFile(index)}
-                  className="absolute top-2 right-2 bg-red-500 text-white rounded-full p-2"
+                  onClick={handleAddMoreFiles}
+                  className="flex items-center justify-center gap-2 text-primary mt-4 w-20 h-20 bg-white rounded-md border border-dashed border-primary hover:bg-primary hover:text-white transition duration-200 ease-in-out"
                 >
-                  <Image
-                    src="/assets/icons/dashboard/close.svg"
-                    alt="remove"
-                    width="10"
-                    height="10"
-                  />
+                  +
                 </button>
-              </div>
-            ))}
-
-            {/* Add more button */}
-            <button
-              type="button"
-              onClick={handleAddMoreFiles}
-              className="flex items-center gap-2 text-primary mt-4"
-            >
-              <Image
-                src="/assets/icons/dashboard/plus.svg"
-                alt="add"
-                width="20"
-                height="20"
-              />
-              {t("addMore")}
-            </button>
+              </>
+            )}
           </div>
         </div>
         <div className="flex justify-end gap-2 mt-5 flex-col-reverse xs:flex-row">
