@@ -51,6 +51,7 @@ import { statisticsAPi } from "./services/dashboard/statisticsApi";
 import { salesSalesClientRequestApi } from "./services/dashboard/sales/salesClientRequests";
 import { initializePaymentApi } from "./services/dashboard/sales/initialPriceApi";
 import { setPriceApi } from "./services/dashboard/sales/setPriceApi";
+import { followUpApi } from "./services/dashboard/sales/followUpApi";
 // Create separate configs for each reducer
 const authPersistConfig = {
   key: "auth",
@@ -119,6 +120,7 @@ export const store = configureStore({
       salesSalesClientRequestApi.reducer,
     [initializePaymentApi.reducerPath]: initializePaymentApi.reducer,
     [setPriceApi.reducerPath]: setPriceApi.reducer,
+    [followUpApi.reducerPath]: followUpApi.reducer,
     auth: persistedAuthReducer,
     profile: persistedProfileReducer,
   },
@@ -173,7 +175,8 @@ export const store = configureStore({
       .concat(salesSalesClientRequestApi.middleware)
       .concat(initializePaymentApi.middleware)
       .concat(blogsAPi.middleware)
-      .concat(commentsAPi.middleware);
+      .concat(commentsAPi.middleware)
+      .concat(followUpApi.middleware);
   },
 });
 
