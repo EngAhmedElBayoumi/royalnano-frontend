@@ -19,6 +19,7 @@ import CustomModal from "@/components/modals/CustomModal";
 import PhoneInputField from "@/components/formFields/PhoneInputField";
 import useExtraFields from "@/hooks/useExtraFields";
 import ExtraFields from "@/components/formFields/ExtraFields";
+import { useGetEmployeesQuery } from "@/redux/services/dashboard/hr/employeeApi";
 
 interface SalesCustomerFormProps {
   defaultValues?: Partial<SalesCustomerFormValues>;
@@ -30,6 +31,7 @@ const AddSalesCustomerForm = ({ defaultValues }: SalesCustomerFormProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [createSalesCustomer] = useCreateSalesCustomerMutation();
   const { data: branchesData } = useGetBranchesQuery({});
+  const { data: employeesData } = useGetEmployeesQuery({});
 
   const form = useForm<SalesCustomerFormValues>({
     resolver: zodResolver(SalesCustomerFormValuesSchema),
@@ -47,6 +49,9 @@ const AddSalesCustomerForm = ({ defaultValues }: SalesCustomerFormProps) => {
       tax_number: "",
       national_id: "",
       extra_fields: {},
+      source: "other",
+      assigned_to: null,
+      recommended_by: null,
     },
   });
 
@@ -54,6 +59,12 @@ const AddSalesCustomerForm = ({ defaultValues }: SalesCustomerFormProps) => {
     branchesData?.results?.map((branch: { id: number; name: string }) => ({
       value: String(branch.id),
       label: branch.name,
+    })) || [];
+
+  const employeeOptions =
+    employeesData?.results?.map((employee: { id: number; name: string }) => ({
+      value: String(employee.id),
+      label: employee.name,
     })) || [];
 
   const handleSubmit = async (data: SalesCustomerFormValues) => {
@@ -178,6 +189,36 @@ const AddSalesCustomerForm = ({ defaultValues }: SalesCustomerFormProps) => {
               label={t("SalesCustomer.nationalId")}
               placeholder={t("SalesCustomer.nationalId")}
             />
+            <CustomSelect
+              control={form.control}
+              name="source"
+              label={t("SalesCustomer.source")}
+              placeholder={t("SalesCustomer.source")}
+              options={[
+                { value: "facebook", label: "Facebook" },
+                { value: "instagram", label: "Instagram" },
+                { value: "tiktok", label: "TikTok" },
+                { value: "twitter", label: "Twitter" },
+                { value: "recommendation", label: "Recommendation" },
+                { value: "other", label: "Other" },
+              ]}
+            />
+            <CustomSelect
+              control={form.control}
+              name="assigned_to"
+              label={t("SalesCustomer.assignedTo")}
+              placeholder={t("SalesCustomer.assignedTo")}
+              options={employeeOptions}
+            />
+            {form.watch("source") === "recommendation" && (
+              <CustomSelect
+                control={form.control}
+                name="recommended_by"
+                label={t("SalesCustomer.recommendedBy")}
+                placeholder={t("SalesCustomer.recommendedBy")}
+                options={employeeOptions}
+              />
+            )}
           </div>
           <ExtraFields
             extraFields={extraFields}

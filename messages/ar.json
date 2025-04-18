@@ -282,6 +282,25 @@
       "status": "الحالة",
       "save": "حفظ",
       "cancel": "إلغاء"
+    },
+    "SalesCustomer": {
+      "source": "المصدر",
+      "assignedTo": "مخصص إلى",
+      "recommendedBy": "موصى به من قبل",
+      "customerName": "اسم العميل",
+      "contactPerson": "الشخص المسؤول",
+      "phoneNumber": "رقم الهاتف",
+      "email": "البريد الإلكتروني",
+      "address": "العنوان",
+      "city": "المدينة",
+      "country": "الدولة",
+      "notes": "ملاحظات",
+      "branch": "الفرع",
+      "customerType": "نوع العميل",
+      "taxNumber": "الرقم الضريبي",
+      "nationalId": "الرقم القومي",
+      "errorTitle": "خطأ",
+      "errorDescription": "حدث خطأ أثناء إنشاء العميل"
     }
   },
   "dashboardWebsite": {

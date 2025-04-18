@@ -328,7 +328,10 @@
       "branch": "Branch",
       "customerType": "Customer Type",
       "taxNumber": "Tax Number",
-      "nationalId": "National ID"
+      "nationalId": "National ID",
+      "source": "Source",
+      "assignedTo": "Assigned To",
+      "recommendedBy": "Recommended By"
     },
     "ClientRequest": {
       "fullName": "Full Name",
