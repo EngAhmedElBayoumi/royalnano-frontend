@@ -35,7 +35,6 @@ export async function middleware(req: NextRequest) {
     "/login",
     "/otp-verification",
     "/register",
-    "/book-now",
   ];
 
   // Define the protected routes
