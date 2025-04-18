@@ -172,7 +172,8 @@ export const store = configureStore({
       .concat(statisticsAPi.middleware)
       .concat(salesSalesClientRequestApi.middleware)
       .concat(initializePaymentApi.middleware)
-      .concat(blogsAPi.middleware);
+      .concat(blogsAPi.middleware)
+      .concat(commentsAPi.middleware);
   },
 });
 

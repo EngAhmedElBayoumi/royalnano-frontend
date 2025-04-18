@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import { useTranslations } from "next-intl";
-import Image from "next/image";
 import { z, ZodSchema } from "zod";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import config from "@/lib/config";
 import { useCreateCommentMutation } from "@/redux/services/website/commentsApi";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
 import CustomButton from "@/components/formFields/CustomButton";
 import CustomModal from "@/components/modals/CustomModal";
 
+const baseUrl = config.apiUrl;
 interface Error {
   data?: {
     detail?: string;
@@ -19,7 +21,11 @@ interface Error {
 }
 interface CommentsProps {
   blogId: string;
-  comments: { id: number; content: string; user: string }[];
+  comments: {
+    id: number;
+    content: string;
+    user: { name: string; profile_picture: string | null };
+  }[];
 }
 const Comments: React.FC<CommentsProps> = ({ blogId, comments }) => {
   const t = useTranslations("website.blogs");
@@ -46,7 +52,7 @@ const Comments: React.FC<CommentsProps> = ({ blogId, comments }) => {
     try {
       const response = await createComment({
         content: data.content,
-        blog_id: blogId,
+        blog: blogId,
       }).unwrap(); // Use unwrap to get the response data directly
 
       // Add the new comment to the existing comments
@@ -101,15 +107,18 @@ const Comments: React.FC<CommentsProps> = ({ blogId, comments }) => {
       <div className="mt-4 flex flex-col gap-4">
         {allComments?.map((comment) => (
           <div key={comment.id} className="flex gap-2 items-center">
-            <Image
-              src={"/assets/images/user-placeholder.jpg"}
-              alt={comment.user}
-              width={50}
-              height={50}
-              className="rounded-full"
-            />
+            <Avatar>
+              <AvatarImage
+                src={
+                  comment.user.profile_picture
+                    ? baseUrl + comment.user.profile_picture.substring(1)
+                    : "/assets/images/user-placeholder.jpg"
+                }
+              />
+              <AvatarFallback>{comment.user.name}</AvatarFallback>
+            </Avatar>
             <div className="text-[14px]">
-              <h3 className="font-bold">{comment.user}</h3>
+              <h3 className="font-bold">{comment.user.name}</h3>
               <p className="text-subtitle">{comment.content}</p>
             </div>
           </div>
