@@ -29,8 +29,6 @@ const GalleryForm = ({
   defaultValues,
   isLoading,
 }: GalleryFormProps) => {
-  const [fileCount, setFileCount] = useState(1);
-
   const form = useForm<GalleryFormValues>({
     resolver: zodResolver(gallerySchema),
     defaultValues: defaultValues || {
@@ -41,6 +39,9 @@ const GalleryForm = ({
     },
   });
 
+  const [fileCount, setFileCount] = useState(
+    defaultValues?.additionalFiles?.length || 0
+  );
   const globalTranslate = useTranslations();
   const t = useTranslations("dashboardWebsite.gallery");
 
@@ -102,7 +103,7 @@ const GalleryForm = ({
             {itemType === "image" && (
               <>
                 {/* Additional file inputs */}
-                {Array.from({ length: fileCount - 1 }).map((_, index) => (
+                {Array.from({ length: fileCount }).map((_, index) => (
                   <div key={index} className="relative">
                     <FileInput
                       control={form.control}

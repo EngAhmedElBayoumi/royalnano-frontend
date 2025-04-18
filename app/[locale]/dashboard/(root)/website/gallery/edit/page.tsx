@@ -19,8 +19,13 @@ export default function EditGallery() {
 
   const defaultValues: GalleryFormValues = data && {
     ...data,
-    file: data?.image ?? data?.video,
+    file: data?.gallery_images?.[0]?.image ?? data?.video,
+    additionalFiles:
+      data?.gallery_images
+        ?.slice(1)
+        .map((image: { image: string }) => image.image) || [],
   };
+
   const handleSubmit = async (data: GalleryFormValues) => {
     try {
       // Create FormData instance to handle file upload
