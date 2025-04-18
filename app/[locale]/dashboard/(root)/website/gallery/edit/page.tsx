@@ -30,16 +30,18 @@ export default function EditGallery() {
       formData.append("title", data.title);
       if (data.file && data.file instanceof File) {
         if (data.item_type === "image") {
-          formData.append("gallery_images", data.file);
+          // Combine the main file and additional files into one array
+          const allImages = [data.file, ...(data.additionalFiles || [])].filter(
+            (file): file is File => file instanceof File
+          );
 
-          // Add additional images if they exist
-          if (data.additionalFiles?.length) {
-            data.additionalFiles.forEach((file) => {
-              if (file instanceof File) {
-                formData.append(`gallery_images`, file);
-              }
-            });
-          }
+          // Create a single Blob containing all images
+          const imageArrayBlob = new Blob(allImages, {
+            type: "application/octet-stream",
+          });
+
+          // Append the Blob under a single key
+          formData.append("gallery_images", imageArrayBlob);
         } else if (data.item_type === "video") {
           formData.append("video", data.file);
         }

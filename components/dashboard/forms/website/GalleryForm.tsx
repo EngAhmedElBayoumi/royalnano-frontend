@@ -69,7 +69,6 @@ const GalleryForm = ({
     form.setValue("additionalFiles", updatedFiles);
     setFileCount((prev) => prev - 1);
   };
-
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
