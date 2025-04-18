@@ -3,7 +3,7 @@ import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { serviceSchema } from "@/lib/validations/dashboard/website/serviceSchema";
+import { blogSchema } from "@/lib/validations/dashboard/website/blogSchema";
 import { ACCEPTED_IMAGE_TYPES } from "@/lib/utils/types";
 import { Form } from "@/components/ui/form";
 import CustomButton from "@/components/formFields/CustomButton";
@@ -25,7 +25,7 @@ export interface BlogFormValues {
 
 const BlogForm = ({ onSubmit, defaultValues, isLoading }: BlogFormProps) => {
   const form = useForm({
-    resolver: zodResolver(serviceSchema),
+    resolver: zodResolver(blogSchema),
     defaultValues: defaultValues || {
       title: "",
       content: "",
