@@ -35,13 +35,10 @@ export default function EditGallery() {
             (file): file is File => file instanceof File
           );
 
-          // Create a single Blob containing all images
-          const imageArrayBlob = new Blob(allImages, {
-            type: "application/octet-stream",
+          // Append each image directly as binary data under the same key
+          allImages.forEach((file) => {
+            formData.append("gallery_images", file);
           });
-
-          // Append the Blob under a single key
-          formData.append("gallery_images", imageArrayBlob);
         } else if (data.item_type === "video") {
           formData.append("video", data.file);
         }
