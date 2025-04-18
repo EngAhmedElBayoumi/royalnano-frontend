@@ -20,13 +20,10 @@ export default function CustomerInfoTab({
             <div className="grid grid-cols-2 gap-2">
               <div>
                 <p className="text-sm text-muted-foreground">Customer Name</p>
-                <p>{customerData.customer_name}</p>
+                <p>{customerData?.customer_name}</p>
               </div>
-              {/* Add all other fields similarly */}
             </div>
           </div>
-
-          {/* Other sections... */}
         </div>
       </CardContent>
     </Card>

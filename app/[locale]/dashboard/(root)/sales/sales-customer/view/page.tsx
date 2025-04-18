@@ -1,34 +1,30 @@
 "use client";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
 import { ChevronLeft } from "lucide-react";
-import { useGetSalesCustomerQuery } from "@/redux/services/dashboard/sales/salesCustomerApi";
-import { useTranslations } from "next-intl";
+import { useGetSalesCustomerByIdQuery } from "@/redux/services/dashboard/sales/salesCustomerApi";
+import { Spinner } from "@/components/ui/spinner";
 import CustomerInfoTab from "@/components/dashboard/sales/customerInfoTab";
 import FollowupsTab from "@/components/dashboard/sales/followupTab";
 import QuotationsTab from "@/components/dashboard/sales/QuotationsTab";
 import CustomTabs from "@/components/dashboard/CustomTabs";
+import LoadingError from "@/components/dashboard/LoadingError";
 
 export default function SalesCustomerViewPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
-  const t = useTranslations("Sales");
 
   const {
     data: customerData,
     isLoading: isCustomerLoading,
     error: customerError,
-  } = useGetSalesCustomerQuery({ id: Number(id) });
+  } = useGetSalesCustomerByIdQuery(id);
 
   if (!id || isNaN(Number(id))) {
     router.push("/dashboard/sales");
     return null;
   }
-
-  if (isCustomerLoading) return <div>{t("loading")}</div>;
-  if (customerError) return <div>{t("error")}</div>;
 
   const tabs = [
     {
@@ -70,15 +66,23 @@ export default function SalesCustomerViewPage() {
   ];
 
   return (
-    <div className="space-y-4">
-      <div className="flex items-center gap-4">
-        <Button variant="outline" size="icon" onClick={() => router.back()}>
-          <ChevronLeft className="h-4 w-4" />
-        </Button>
-        <h1 className="text-2xl font-bold">{customerData?.customer_name}</h1>
+    <>
+      <div className="flex items-center gap-4 mx-4 sm:mx-7">
+        <ChevronLeft
+          className="h-4 w-4 cursor-pointer"
+          onClick={() => router.back()}
+        />
+        <h1 className="text-2xl font-bold">Sales customer details</h1>
       </div>
-
-      <CustomTabs tabs={tabs} defaultTab="info" />
-    </div>
+      {customerError ? (
+        <LoadingError />
+      ) : isCustomerLoading ? (
+        <div className="flex justify-center mt-4">
+          <Spinner size="xl" className="bg-black dark:bg-white" />
+        </div>
+      ) : (
+        <CustomTabs tabs={tabs} defaultTab="info" />
+      )}
+    </>
   );
 }
