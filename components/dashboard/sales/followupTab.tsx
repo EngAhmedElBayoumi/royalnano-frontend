@@ -124,14 +124,14 @@ export default function FollowupsTab({ customerId }: FollowupsTabProps) {
         isOpen={isAddModalOpen}
         onClose={() => setIsAddModalOpen(false)}
         customerId={customerId}
-        refetch={refetch} // Pass refetch to AddFollowUpModal
+        refetch={refetch}
       />
       {selectedFollowUp && (
         <EditFollowUpModal
           isOpen={isEditModalOpen}
           onClose={() => setIsEditModalOpen(false)}
           followUp={selectedFollowUp}
-          refetch={refetch} // Pass refetch to EditFollowUpModal
+          refetch={refetch}
         />
       )}
     </div>
