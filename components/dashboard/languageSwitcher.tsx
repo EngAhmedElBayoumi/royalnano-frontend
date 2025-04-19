@@ -10,7 +10,11 @@ const LanguageSwitcher = () => {
   const locale = useLocale();
 
   const handleLanguageChange = (newLocale: string) => {
-    router.push(pathname, { locale: newLocale });
+    const searchParams = new URLSearchParams(window.location.search); // Get current query parameters
+    const queryString = searchParams.toString(); // Convert query parameters to a string
+    const newPath = queryString ? `${pathname}?${queryString}` : pathname; // Append query string if it exists
+
+    router.push(newPath, { locale: newLocale });
   };
 
   return (
