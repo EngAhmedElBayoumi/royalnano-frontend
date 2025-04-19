@@ -746,6 +746,8 @@
     "comment_action": "تعليق",
     "follow_up_action": "متابعة",
     "save": "حفظ المتابعة",
-    "cancel_action": "إلغاء"
+    "cancel_action": "إلغاء",
+    "followups": "المتابعات",
+    "no_followups": "لا توجد متابعات مسجلة حتى الآن"
   }
 }

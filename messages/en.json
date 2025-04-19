@@ -788,6 +788,8 @@
     "comment_action": "Comment",
     "follow_up_action": "Follow-Up",
     "save": "Save Follow-Up",
-    "cancel_action": "Cancel"
+    "cancel_action": "Cancel",
+    "followups": "Followups",
+    "no_followups": "No followups recorded yet"
   }
 }
