@@ -256,7 +256,7 @@
     "order": "Sales Order",
     "invoice": "Sales Invoice",
     "receipt": "Sales Receipt",
-    "addCustomer": "Add Client Request",
+    "addCustomer": "Add Customer",
     "SalesQuotation": {
       "quotation": "Sales Quotation",
       "selectItem": "Select Item",
