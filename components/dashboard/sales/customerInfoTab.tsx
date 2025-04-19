@@ -42,7 +42,7 @@ export default function CustomerInfoTab({ customerId }: CustomerInfoTabProps) {
   return customerError ? (
     <LoadingError />
   ) : isCustomerLoading ? (
-    <div className="flex justify-center mt-4">
+    <div className="flex justify-center mt-4 min-h-[70vh]">
       <Spinner size="xl" className="bg-black dark:bg-white" />
     </div>
   ) : (
