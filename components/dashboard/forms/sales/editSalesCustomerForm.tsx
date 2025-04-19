@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
 import { Link } from "@/i18n/routing";
+import { useSearchParams } from "next/navigation"; // Use useSearchParams to extract query params
 import { useTranslations } from "next-intl";
 import {
   SalesCustomerFormValues,
@@ -26,10 +27,17 @@ const EditSalesCustomerForm = ({
   defaultValues,
 }: EditSalesCustomerFormProps) => {
   const router = useRouter();
+  const searchParams = useSearchParams(); // Extract query parameters
   const t = useTranslations("Sales");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [updateSalesCustomer] = useUpdateSalesCustomerMutation();
   const { data: branchesData } = useGetBranchesQuery({});
+
+  // Extract customerId from query parameters
+  const customerIdFromQuery = searchParams.get("customerId");
+  const initialCustomerId = customerIdFromQuery
+    ? parseInt(customerIdFromQuery, 10)
+    : 0;
 
   const form = useForm<SalesCustomerFormValues>({
     resolver: zodResolver(SalesCustomerFormValuesSchema),
@@ -56,23 +64,20 @@ const EditSalesCustomerForm = ({
     })) || [];
 
   const handleSubmit = async (data: SalesCustomerFormValues) => {
-    console.log("Form data submitted:", data);
-    console.log("Form errors:", form.formState.errors);
     try {
-      console.log("Submit button clicked");
-      console.log("Form data:", data);
       const payload = {
         ...data,
       };
-      console.log("Payload:", payload);
       const response = await updateSalesCustomer(payload);
-      console.log("API response:", response);
       if ("error" in response) {
         console.error("API error:", response.error);
         throw new Error("Update failed");
       }
-      console.log("Customer updated successfully");
-      router.push(`/dashboard/sales?tab=Customer`);
+      router.push(
+        initialCustomerId
+          ? `/dashboard/sales/sales-customer/view?id=${initialCustomerId}&tab=details`
+          : `/dashboard/sales?tab=Customer`
+      );
     } catch (error) {
       console.error("Error in update:", error);
       setIsModalOpen(true);
@@ -170,7 +175,14 @@ const EditSalesCustomerForm = ({
           </div>
         </section>
         <div className="flex justify-end gap-2 mt-5 flex-col-reverse xs:flex-row">
-          <Link href={`/dashboard/sales?tab=${t("customer")}`} passHref>
+          <Link
+            href={
+              initialCustomerId
+                ? `/dashboard/sales/sales-customer/view?id=${initialCustomerId}&tab=details`
+                : `/dashboard/sales?tab=Customer`
+            }
+            passHref
+          >
             <CustomButton text={t("cancel")} variant="secondary" />
           </Link>
           <CustomButton text={t("save")} type="submit" />
