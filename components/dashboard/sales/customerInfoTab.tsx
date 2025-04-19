@@ -1,34 +1,51 @@
 import { useTranslations } from "next-intl";
+import { useGetSalesCustomerByIdQuery } from "@/redux/services/dashboard/sales/salesCustomerApi";
+import { Spinner } from "@/components/ui/spinner";
+import LoadingError from "@/components/dashboard/LoadingError";
+
+// interface CustomerInfoTabProps {
+//   customerData: {
+//     customer_name: string;
+//     contact_person: string;
+//     phone_number: string;
+//     email: string;
+//     address: string;
+//     city: string;
+//     country: string;
+//     branch: {
+//       name: string;
+//       branch_code: string;
+//       phone_number: string;
+//       email: string;
+//       address: string;
+//     };
+//     customer_type: string;
+//     tax_number: string;
+//     national_id: string;
+//     source: string;
+//   };
+// }
 
 interface CustomerInfoTabProps {
-  customerData: {
-    customer_name: string;
-    contact_person: string;
-    phone_number: string;
-    email: string;
-    address: string;
-    city: string;
-    country: string;
-    branch: {
-      name: string;
-      branch_code: string;
-      phone_number: string;
-      email: string;
-      address: string;
-    };
-    customer_type: string;
-    tax_number: string;
-    national_id: string;
-    source: string;
-  };
+  customerId: number;
 }
 
-export default function CustomerInfoTab({
-  customerData,
-}: CustomerInfoTabProps) {
+export default function CustomerInfoTab({ customerId }: CustomerInfoTabProps) {
   const t = useTranslations("customer_info");
 
-  return (
+  const {
+    data: customerData,
+    isLoading: isCustomerLoading,
+    error: customerError,
+  } = useGetSalesCustomerByIdQuery(customerId);
+
+  return customerError ? (
+    <LoadingError />
+  ) : isCustomerLoading ? (
+    <div className="flex justify-center mt-4">
+      <Spinner size="xl" className="bg-black dark:bg-white" />
+    </div>
+  ) : (
     <div className="px-6 pb-[10px]">
       {/* Basic Info */}
       <div className="space-y-2">

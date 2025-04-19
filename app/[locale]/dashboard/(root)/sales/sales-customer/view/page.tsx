@@ -2,24 +2,15 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { ChevronLeft } from "lucide-react";
-import { useGetSalesCustomerByIdQuery } from "@/redux/services/dashboard/sales/salesCustomerApi";
-import { Spinner } from "@/components/ui/spinner";
 import CustomerInfoTab from "@/components/dashboard/sales/customerInfoTab";
 import FollowupsTab from "@/components/dashboard/sales/followupTab";
 import QuotationsTab from "@/components/dashboard/sales/QuotationsTab";
 import CustomTabs from "@/components/dashboard/CustomTabs";
-import LoadingError from "@/components/dashboard/LoadingError";
 
 export default function SalesCustomerViewPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
-
-  const {
-    data: customerData,
-    isLoading: isCustomerLoading,
-    error: customerError,
-  } = useGetSalesCustomerByIdQuery(id);
 
   if (!id || isNaN(Number(id))) {
     router.push("/dashboard/sales");
@@ -37,7 +28,7 @@ export default function SalesCustomerViewPage() {
           height="24"
         />
       ),
-      content: <CustomerInfoTab customerData={customerData} />,
+      content: <CustomerInfoTab customerId={Number(id)} />,
     },
     {
       label: "followups",
@@ -74,15 +65,8 @@ export default function SalesCustomerViewPage() {
         />
         <h1 className="text-2xl font-bold">Sales customer details</h1>
       </div>
-      {customerError ? (
-        <LoadingError />
-      ) : isCustomerLoading ? (
-        <div className="flex justify-center mt-4">
-          <Spinner size="xl" className="bg-black dark:bg-white" />
-        </div>
-      ) : (
-        <CustomTabs tabs={tabs} defaultTab="info" />
-      )}
+
+      <CustomTabs tabs={tabs} defaultTab="info" />
     </>
   );
 }
