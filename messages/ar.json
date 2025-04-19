@@ -737,6 +737,7 @@
   },
   "follow_up": {
     "add_follow_up": "إضافة متابعة",
+    "edit_follow_up": "تعديل متابعة",
     "follow_up_type": "نوع المتابعة",
     "comment": "تعليق",
     "customer": "العميل",
@@ -744,10 +745,17 @@
     "reserve": "حجز",
     "cancel": "إلغاء",
     "comment_action": "تعليق",
-    "follow_up_action": "متابعة",
+    "follow_up": "متابعة",
     "save": "حفظ المتابعة",
     "cancel_action": "إلغاء",
     "followups": "المتابعات",
-    "no_followups": "لا توجد متابعات مسجلة حتى الآن"
+    "no_followups": "لا توجد متابعات مسجلة حتى الآن",
+    "edit": "تعديل",
+    "loading": "جاري التحميل...",
+    "error_loading": "خطأ في تحميل المتابعات",
+    "type": "النوع",
+    "date": "التاريخ",
+    "actions": "الإجراءات",
+    "no_comment": "لا يوجد تعليق"
   }
 }

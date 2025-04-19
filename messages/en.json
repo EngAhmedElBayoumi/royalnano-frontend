@@ -779,6 +779,7 @@
   },
   "follow_up": {
     "add_follow_up": "Add Follow-Up",
+    "edit_follow_up": "Edit Follow-Up",
     "follow_up_type": "Follow-Up Type",
     "comment": "Comment",
     "customer": "Customer",
@@ -786,10 +787,17 @@
     "reserve": "Reserve",
     "cancel": "Cancel",
     "comment_action": "Comment",
-    "follow_up_action": "Follow-Up",
+    "follow_up": "Follow-Up",
     "save": "Save Follow-Up",
     "cancel_action": "Cancel",
     "followups": "Followups",
-    "no_followups": "No followups recorded yet"
+    "edit": "Edit",
+    "no_followups": "No followups recorded yet",
+    "loading": "Loading...",
+    "error_loading": "Error loading follow-ups",
+    "type": "Type",
+    "date": "Date",
+    "actions": "Actions",
+    "no_comment": "No comment"
   }
 }

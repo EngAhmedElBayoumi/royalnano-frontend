@@ -6,10 +6,10 @@ export const followUpApi = createApi({
   baseQuery,
   endpoints: (builder) => ({
     getFollowUp: builder.query({
-      query: ({ search, ordering, page, page_size }) => ({
+      query: ({ search, ordering, page, page_size, customer }) => ({
         url: "sales/follow-ups/",
         method: "GET",
-        params: { search, ordering, page, page_size },
+        params: { search, ordering, page, page_size, customer },
       }),
     }),
     createFollowUp: builder.mutation({

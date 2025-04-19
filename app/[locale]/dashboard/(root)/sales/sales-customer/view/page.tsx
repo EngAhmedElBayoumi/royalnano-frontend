@@ -69,7 +69,7 @@ export default function SalesCustomerViewPage() {
     <>
       <div className="flex items-center gap-4 mx-4 sm:mx-7">
         <ChevronLeft
-          className="h-4 w-4 cursor-pointer"
+          className="h-4 w-4 cursor-pointer rtl:rotate-180"
           onClick={() => router.back()}
         />
         <h1 className="text-2xl font-bold">Sales customer details</h1>
