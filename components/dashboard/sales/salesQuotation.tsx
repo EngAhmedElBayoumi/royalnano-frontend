@@ -1,68 +1,67 @@
 "use client";
 import CustomTable from "@/components/dashboard/tables/CustomTable";
-// import { useRouter } from "next/navigation";
 import TableSkelton from "../skelton/TableSkelton";
 import CardsSkelton from "../skelton/CardsSkelton";
 import Image from "next/image";
 import { useRouter } from "@/i18n/routing";
-import { useGetSalesQuotationQuery } from "@/redux/services/dashboard/sales/salesQuotationsApi";
+import {
+  useGetSalesQuotationQuery,
+  useGetCustomerQuotationsQuery,
+} from "@/redux/services/dashboard/sales/salesQuotationsApi";
 import { useState } from "react";
 
-export default function SalesQuotation() {
+interface SalesQuotationProps {
+  customerId?: number; // Optional prop for customer-specific quotations
+}
+
+export default function SalesQuotation({ customerId }: SalesQuotationProps) {
   const [page, setPage] = useState(1);
 
   const handlePageChange = (newPage: number) => {
     setPage(newPage);
   };
+
+  const router = useRouter();
+
+  // Call both hooks unconditionally
   const {
-    isLoading,
-    error,
-    data: salesQuotations,
+    isLoading: isLoadingAll,
+    error: errorAll,
+    data: allSalesQuotations,
   } = useGetSalesQuotationQuery({
     search: "",
     ordering: "id",
     page,
     page_size: 10,
   });
-  console.log("quotationss", salesQuotations);
-  const router = useRouter();
+
+  const {
+    isLoading: isLoadingCustomer,
+    error: errorCustomer,
+    data: customerSalesQuotations,
+  } = useGetCustomerQuotationsQuery({
+    customer_id: customerId || 0, // Pass 0 if customerId is undefined
+    search: "",
+    ordering: "id",
+    page,
+    page_size: 10,
+  });
+
+  // Determine which data to use
+  const isLoading = customerId ? isLoadingCustomer : isLoadingAll;
+  const error = customerId ? errorCustomer : errorAll;
+  const salesQuotations = customerId
+    ? customerSalesQuotations
+    : allSalesQuotations;
 
   const columns = [
     { field: "quotation_number", header: "Quotation Number" },
-
     { field: "customer_name", header: "Customer Name" },
     { field: "date", header: "Date" },
     { field: "status", header: "Status" },
     { field: "validity_period", header: "Validity Period" },
     { field: "total_amount", header: "Total Amount" },
-
     { field: "items", header: "Items" },
-    //     items
-    // :
-    // Array(1)
-    // 0
-    // :
-    // discount
-    // :
-    // "1.00"
-    // discount_percent
-    // :
-    // "1.00"
-    // item_name
-    // :
-    // "1"
-    // quantity
-    // :
-    // 1
-    // tax_rate
-    // :
-    // "1.00"
-    // total
-    // :
-    // "0.00"
-    // unit_price
-    // :
-    // "1.00"
   ];
 
   const cardsData = [
@@ -72,9 +71,13 @@ export default function SalesQuotation() {
     { title: "Failed", num: 48 },
     { title: "Paid", num: 48 },
   ];
+
   const handleClick = () => {
-    router.push("/dashboard/sales/sales-quotation/create");
+    router.push(
+      "/dashboard/sales/sales-quotation/create?customerId=" + customerId
+    );
   };
+
   return (
     <>
       {isLoading ? (
@@ -94,8 +97,10 @@ export default function SalesQuotation() {
         </div>
       ) : (
         <CustomTable
-          emptyMessage="no sales Quotations data found"
-          editRoute="/dashboard/sales/sales-quotation/edit/"
+          emptyMessage="No sales quotations data found"
+          editRoute={
+            "/dashboard/sales/sales-quotation/edit?customerId=" + customerId
+          }
           data={salesQuotations?.results}
           rows={10}
           columns={columns}

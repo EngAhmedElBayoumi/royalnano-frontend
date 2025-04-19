@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
 import { Link } from "@/i18n/routing";
+import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { salesQuotationSchema } from "@/lib/validations/dashboard/sales/salesQuotationSchema";
 import DatePicker from "@/components/formFields/DatePicker";
@@ -38,15 +39,22 @@ const AddSalesQuotationForm = ({
   defaultValues,
 }: AddSalesQuotationFormProps) => {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const t = useTranslations("Sales");
   const [createSalesQuotation] = useCreateSalesQuotationMutation();
   const { data: customers } = useGetMiniSalesCustomerQuery({});
+
+  // Extract customerId from query parameters
+  const customerIdFromQuery = searchParams.get("customerId");
+  const initialCustomerId = customerIdFromQuery
+    ? parseInt(customerIdFromQuery, 10)
+    : 0;
 
   const form = useForm<SalesQuotationFormValues>({
     resolver: zodResolver(salesQuotationSchema),
     defaultValues: defaultValues || {
       date: new Date().toISOString().split("T")[0],
-      customer: 1,
+      customer: initialCustomerId ?? 1, // Use the customerId from query params
       validity_period: new Date().toISOString().split("T")[0],
       quotation_number: "",
       status: "rejected",
@@ -105,7 +113,11 @@ const AddSalesQuotationForm = ({
         throw new Error("Creation failed");
       }
 
-      router.push(`/dashboard/sales?tab=Sales+Quotation`);
+      router.push(
+        initialCustomerId
+          ? `/dashboard/sales/sales-customer/view?id=${initialCustomerId}&tab=quotations`
+          : `/dashboard/sales?tab=Sales+Quotation`
+      );
     } catch (error) {
       console.error("Error in creation:", error);
     }
@@ -136,6 +148,7 @@ const AddSalesQuotationForm = ({
               label={t("SalesQuotation.customer")}
               placeholder={t("SalesQuotation.customer")}
               options={customerOptions}
+              readonly={!!initialCustomerId}
               onChange={(value) => {
                 const customerId = parseInt(String(value), 10);
                 form.setValue("customer", customerId);
