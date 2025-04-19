@@ -46,6 +46,7 @@ export default function EditFollowUpModal({
     defaultValues: {
       follow_up_type: followUp?.follow_up_type || "follow_up",
       comment: followUp?.comment || "",
+      created_at: new Date(followUp.created_at),
     },
   });
 
