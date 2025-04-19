@@ -259,6 +259,7 @@
     "addCustomer": "Add Customer",
     "SalesQuotation": {
       "quotation": "Sales Quotation",
+      "editQuotation": "Edit Quotation",
       "selectItem": "Select Item",
       "date": "Date",
       "customer": "Customer",

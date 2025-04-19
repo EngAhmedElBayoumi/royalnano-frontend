@@ -244,7 +244,7 @@ const AddSalesQuotationForm = ({
             href={
               initialCustomerId
                 ? `/dashboard/sales/sales-customer/view?id=${initialCustomerId}&tab=quotations`
-                : `/dashboard/sales?tab=Sales+Quotation`
+                : `/dashboard/sales?tab=${t("salesQuotation")}`
             }
             passHref
           >

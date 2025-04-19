@@ -102,9 +102,7 @@ export default function SalesQuotation({ customerId }: SalesQuotationProps) {
       ) : (
         <CustomTable
           emptyMessage="No sales quotations data found"
-          editRoute={
-            "/dashboard/sales/sales-quotation/edit?customerId=" + customerId
-          }
+          editRoute={"/dashboard/sales/sales-quotation/edit"}
           data={salesQuotations?.results}
           rows={10}
           columns={columns}

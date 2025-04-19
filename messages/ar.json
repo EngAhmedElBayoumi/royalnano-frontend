@@ -256,6 +256,7 @@
     "invoice": "فاتورة المبيعات",
     "receipt": "إيصال المبيعات",
     "SalesQuotation": {
+      "editQuotation": "تعديل عرض الأسعار",
       "date": "التاريخ",
       "customer": "العميل",
       "validityPeriod": "فترة الصلاحية",

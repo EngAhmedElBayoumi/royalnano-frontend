@@ -34,7 +34,7 @@ export default function EditSalesQuotation() {
       <div className="flex">
         <IconWithTitle
           imageSrc="/assets/icons/edit.svg"
-          title={t("quotation")}
+          title={t("editQuotation")}
           backgroundColor="#F8F7F7"
           textColor="primary"
         />
