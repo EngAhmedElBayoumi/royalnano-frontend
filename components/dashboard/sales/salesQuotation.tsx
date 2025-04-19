@@ -50,9 +50,13 @@ export default function SalesQuotation({ customerId }: SalesQuotationProps) {
   // Determine which data to use
   const isLoading = customerId ? isLoadingCustomer : isLoadingAll;
   const error = customerId ? errorCustomer : errorAll;
-  const salesQuotations = customerId
+  const salesQuotations = { results: [], count: 0 };
+  salesQuotations.results = customerId
     ? customerSalesQuotations
-    : allSalesQuotations?.results || [];
+    : allSalesQuotations?.results;
+  salesQuotations.count = customerId
+    ? customerSalesQuotations?.length || 0
+    : allSalesQuotations?.count || 0;
 
   const columns = [
     { field: "quotation_number", header: "Quotation Number" },
@@ -101,7 +105,7 @@ export default function SalesQuotation({ customerId }: SalesQuotationProps) {
           editRoute={
             "/dashboard/sales/sales-quotation/edit?customerId=" + customerId
           }
-          data={salesQuotations}
+          data={salesQuotations?.results}
           rows={10}
           columns={columns}
           cardData={cardsData}
