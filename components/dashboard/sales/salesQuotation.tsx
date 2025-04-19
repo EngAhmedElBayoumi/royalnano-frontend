@@ -52,7 +52,7 @@ export default function SalesQuotation({ customerId }: SalesQuotationProps) {
   const error = customerId ? errorCustomer : errorAll;
   const salesQuotations = customerId
     ? customerSalesQuotations
-    : allSalesQuotations;
+    : allSalesQuotations?.results || [];
 
   const columns = [
     { field: "quotation_number", header: "Quotation Number" },
@@ -101,7 +101,7 @@ export default function SalesQuotation({ customerId }: SalesQuotationProps) {
           editRoute={
             "/dashboard/sales/sales-quotation/edit?customerId=" + customerId
           }
-          data={salesQuotations?.results}
+          data={salesQuotations}
           rows={10}
           columns={columns}
           cardData={cardsData}
