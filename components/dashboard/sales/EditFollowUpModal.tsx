@@ -10,6 +10,7 @@ import TextArea from "@/components/formFields/TextArea";
 import CustomButton from "@/components/formFields/CustomButton";
 import { useTranslations } from "next-intl";
 import { FollowUp } from "@/types/FollowUp"; // Import the reusable FollowUp type
+import DateTimePicker from "@/components/formFields/DateTimePicker";
 
 const followUpSchema = z.object({
   follow_up_type: z.enum(["reserve", "cancel", "comment", "follow_up"], {
@@ -19,6 +20,7 @@ const followUpSchema = z.object({
     .string()
     .max(100, "Comment must be 100 characters or less")
     .optional(),
+  created_at: z.date().optional(),
 });
 
 type FollowUpFormValues = z.infer<typeof followUpSchema>;
@@ -94,6 +96,15 @@ export default function EditFollowUpModal({
             placeholder={t("comment")}
             className="mt-2 xl:mt-5"
           />
+
+          <DateTimePicker
+            control={control}
+            name="created_at"
+            label={t("created_at")}
+            placeholder={t("select_date_time")}
+            className="mt-2 xl:mt-5"
+          />
+
           <div className="flex justify-end gap-2 flex-col-reverse xs:flex-row">
             <CustomButton
               text={t("cancel_action")}

@@ -9,6 +9,7 @@ import CustomSelect from "@/components/formFields/CustomSelect";
 import TextArea from "@/components/formFields/TextArea";
 import CustomButton from "@/components/formFields/CustomButton";
 import { useTranslations } from "next-intl";
+import DateTimePicker from "@/components/formFields/DateTimePicker";
 
 const followUpSchema = z.object({
   follow_up_type: z.enum(["reserve", "cancel", "comment", "follow_up"], {
@@ -19,6 +20,7 @@ const followUpSchema = z.object({
     .max(100, "Comment must be 100 characters or less")
     .optional(),
   customer: z.number().int().positive("Customer ID is required"),
+  created_at: z.date().optional(),
 });
 
 type FollowUpFormValues = z.infer<typeof followUpSchema>;
@@ -27,7 +29,7 @@ interface AddFollowUpModalProps {
   isOpen: boolean;
   onClose: () => void;
   customerId: number;
-  refetch: () => void; // Add refetch prop
+  refetch: () => void;
 }
 
 export default function AddFollowUpModal({
@@ -45,6 +47,7 @@ export default function AddFollowUpModal({
       follow_up_type: "follow_up",
       comment: "",
       customer: customerId,
+      created_at: new Date(),
     },
   });
 
@@ -93,6 +96,13 @@ export default function AddFollowUpModal({
             name="comment"
             label={t("comment")}
             placeholder={t("comment")}
+            className="mt-2 xl:mt-5"
+          />
+          <DateTimePicker
+            control={control}
+            name="created_at"
+            label={t("created_at")}
+            placeholder={t("select_date_time")}
             className="mt-2 xl:mt-5"
           />
           <div className="flex justify-end gap-2 flex-col-reverse xs:flex-row">

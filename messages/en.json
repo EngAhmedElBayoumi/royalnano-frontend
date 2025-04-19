@@ -799,6 +799,8 @@
     "type": "Type",
     "date": "Date",
     "actions": "Actions",
-    "no_comment": "No comment"
+    "no_comment": "No comment",
+    "created_at": "Created At",
+    "select_date_time": "Select Date and Time"
   }
 }
