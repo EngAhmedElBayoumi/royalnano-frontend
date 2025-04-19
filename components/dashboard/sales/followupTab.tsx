@@ -24,7 +24,7 @@ export default function FollowupsTab({ customerId }: FollowupsTabProps) {
   const [page, setPage] = useState(0);
   const pageSize = 10;
 
-  const { data, isLoading, isError } = useGetFollowUpQuery({
+  const { data, isLoading, error, refetch } = useGetFollowUpQuery({
     search: customerId.toString(),
     page: page + 1, // PrimeReact uses 0-based indexing, API uses 1-based
     page_size: pageSize,
@@ -70,7 +70,7 @@ export default function FollowupsTab({ customerId }: FollowupsTabProps) {
         <div className="flex items-center justify-center h-60">
           <p className="text-muted-foreground">{t("loading")}</p>
         </div>
-      ) : isError ? (
+      ) : error ? (
         <div className="flex items-center justify-center h-60">
           <p className="text-muted-foreground">{t("error_loading")}</p>
         </div>
@@ -124,12 +124,14 @@ export default function FollowupsTab({ customerId }: FollowupsTabProps) {
         isOpen={isAddModalOpen}
         onClose={() => setIsAddModalOpen(false)}
         customerId={customerId}
+        refetch={refetch} // Pass refetch to AddFollowUpModal
       />
       {selectedFollowUp && (
         <EditFollowUpModal
           isOpen={isEditModalOpen}
           onClose={() => setIsEditModalOpen(false)}
           followUp={selectedFollowUp}
+          refetch={refetch} // Pass refetch to EditFollowUpModal
         />
       )}
     </div>

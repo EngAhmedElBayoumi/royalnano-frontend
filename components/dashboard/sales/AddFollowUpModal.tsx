@@ -27,12 +27,14 @@ interface AddFollowUpModalProps {
   isOpen: boolean;
   onClose: () => void;
   customerId: number;
+  refetch: () => void; // Add refetch prop
 }
 
 export default function AddFollowUpModal({
   isOpen,
   onClose,
   customerId,
+  refetch,
 }: AddFollowUpModalProps) {
   const t = useTranslations("follow_up");
   const [createFollowUp] = useCreateFollowUpMutation();
@@ -51,6 +53,7 @@ export default function AddFollowUpModal({
   const handleFormSubmit = async (data: FollowUpFormValues) => {
     try {
       await createFollowUp(data).unwrap();
+      refetch(); // Refetch follow-ups after successful submission
       onClose();
       reset();
     } catch (error) {

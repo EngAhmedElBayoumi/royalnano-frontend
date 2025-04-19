@@ -27,12 +27,14 @@ interface EditFollowUpModalProps {
   isOpen: boolean;
   onClose: () => void;
   followUp: FollowUp; // Use the reusable FollowUp type here
+  refetch: () => void; // Add refetch prop
 }
 
 export default function EditFollowUpModal({
   isOpen,
   onClose,
   followUp,
+  refetch,
 }: EditFollowUpModalProps) {
   const t = useTranslations("follow_up");
   const [updateFollowUp] = useUpdateFollowUpMutation();
@@ -50,6 +52,7 @@ export default function EditFollowUpModal({
   const handleFormSubmit = async (data: FollowUpFormValues) => {
     try {
       await updateFollowUp({ id: followUp.id, ...data }).unwrap();
+      refetch(); // Refetch follow-ups after successful update
       onClose();
       reset();
     } catch (error) {
