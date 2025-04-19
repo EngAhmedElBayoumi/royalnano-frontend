@@ -102,7 +102,7 @@ const CustomSelect = <T extends FieldValues>({
           disabled={readonly}
         >
           <SelectTrigger
-            className={` bg-[#F4F4F4] border-gray rounded-10   xl:py-7 min-w-[80px]  ${
+            className={`bg-[#F4F4F4] border-gray rounded-10 xl:py-7 min-w-[80px] ${
               !value ? "text-gray" : ""
             } ${className}`}
           >

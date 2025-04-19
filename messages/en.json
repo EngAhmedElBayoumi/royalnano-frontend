@@ -776,5 +776,18 @@
       "branch_email": "Branch Email",
       "branch_address": "Branch Address"
     }
+  },
+  "follow_up": {
+    "add_follow_up": "Add Follow-Up",
+    "follow_up_type": "Follow-Up Type",
+    "comment": "Comment",
+    "customer": "Customer",
+    "select_follow_up_type": "Select Follow-Up Type",
+    "reserve": "Reserve",
+    "cancel": "Cancel",
+    "comment_action": "Comment",
+    "follow_up_action": "Follow-Up",
+    "save": "Save Follow-Up",
+    "cancel_action": "Cancel"
   }
 }

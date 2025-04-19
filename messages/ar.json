@@ -734,5 +734,18 @@
       "freeQuantity": "كمية مجانية",
       "vat": "ضريبة القيمة المضافة"
     }
+  },
+  "follow_up": {
+    "add_follow_up": "إضافة متابعة",
+    "follow_up_type": "نوع المتابعة",
+    "comment": "تعليق",
+    "customer": "العميل",
+    "select_follow_up_type": "اختر نوع المتابعة",
+    "reserve": "حجز",
+    "cancel": "إلغاء",
+    "comment_action": "تعليق",
+    "follow_up_action": "متابعة",
+    "save": "حفظ المتابعة",
+    "cancel_action": "إلغاء"
   }
 }
