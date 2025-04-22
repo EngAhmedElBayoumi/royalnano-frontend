@@ -34,6 +34,7 @@ export default function EditPage<T>({
 }: EditPageProps<T>) {
   const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalError, setModalError] = useState<string>("");
 
   const handleModalChange = (isOpen: boolean) => {
     setIsModalOpen(isOpen);
@@ -45,7 +46,11 @@ export default function EditPage<T>({
       router.push(redirectPath);
     } catch (error) {
       setIsModalOpen(true);
-      console.log(error);
+      if (error instanceof Error) {
+        setModalError(error.message || "An error occurred");
+      } else {
+        setModalError("An error occurred");
+      }
     }
   };
 
@@ -55,7 +60,7 @@ export default function EditPage<T>({
         isOpen={isModalOpen}
         onChange={handleModalChange}
         title="Error!"
-        description="Your Request wasn't processed successfully.."
+        description={modalError}
       />
       <div className="flex">
         <IconWithTitle

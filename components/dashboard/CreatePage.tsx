@@ -34,6 +34,7 @@ export default function CreatePage({
 }: CreatePageProps) {
   const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [error, setError] = useState<string>("");
 
   const handleModalChange = (isOpen: boolean) => {
     setIsModalOpen(isOpen);
@@ -44,9 +45,13 @@ export default function CreatePage({
     try {
       await onSubmit(data);
       router.push(redirectPath);
-    } catch (error) {
+    } catch (error: unknown) {
       setIsModalOpen(true);
-      console.log(error);
+      if (error instanceof Error) {
+        setError(error.message || "An error occurred");
+      } else {
+        setError("An error occurred");
+      }
     }
   };
 
@@ -56,7 +61,7 @@ export default function CreatePage({
         isOpen={isModalOpen}
         onChange={handleModalChange}
         title="Error!"
-        description="Your Request wasn't processed successfully.."
+        description={error}
       />
       <div className="flex">
         <IconWithTitle

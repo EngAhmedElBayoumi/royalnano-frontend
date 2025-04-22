@@ -103,7 +103,6 @@ const EmployeeForm = ({
       setJobPermissions([]);
     }
   }, [selectedJobId, jobs]);
-  console.log(form.getValues("custom_permissions"));
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
