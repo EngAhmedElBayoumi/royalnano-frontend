@@ -10,6 +10,7 @@ import "maplibre-gl/dist/maplibre-gl.css";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { branchSchema } from "@/lib/validations/dashboard/branchSchema";
+import { useGetEmployeesQuery } from "@/redux/services/dashboard/hr/employeeApi";
 
 import { Form } from "@/components/ui/form";
 import CustomButton from "@/components/formFields/CustomButton";
@@ -59,11 +60,13 @@ const BranchForm = ({
 }: BranchFormProps) => {
   const t = useTranslations("branches");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { data: employees } = useGetEmployeesQuery({});
 
-  const managersOption = [
-    { value: "1", label: "Yasmine" },
-    { value: "2", label: "Nermine" },
-  ];
+  const managersOption =
+    employees?.results?.map((employee: { id: number; name: string }) => ({
+      value: String(employee.id),
+      label: employee.name,
+    })) || [];
 
   const form = useForm({
     resolver: zodResolver(branchSchema),
