@@ -20,11 +20,12 @@ export default function EditVacation() {
 
   const defaultValues: VacationsFormValues = data && {
     ...data,
-    employee: String(data.employee.name),
+    employee: String(data.employee.id),
   };
 
   const handleSubmit = async (data: VacationsFormValues) => {
     const payload = {
+      ...data,
       status: data.status,
     };
     const response = await updateVacation({ id, data: payload });
