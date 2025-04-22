@@ -99,8 +99,9 @@ const AttendanceForm = ({
 
   useEffect(() => {
     if (check_in) {
+      const hours = isNaN(Number(workingHours)) ? 0 : Number(workingHours);
       const newCheck_out = new Date(
-        check_in.getTime() + workingHours * 60 * 60 * 1000
+        check_in.getTime() + hours * 60 * 60 * 1000
       );
       form.setValue("check_out", newCheck_out);
     }
