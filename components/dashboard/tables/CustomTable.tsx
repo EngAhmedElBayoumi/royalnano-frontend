@@ -136,7 +136,7 @@ export default function CustomTable({
       <div className="flex mb-4 justify-between items-center flex-wrap gap-2">
         <div className="flex gap-2 items-center w-full xs:flex-1 flex-wrap">
           <InputText
-            className="border bg-transparent border-[#474747] px-2 w-[100%] xs:w-[25rem] py-[0.42rem] rounded-[10px] text-sm"
+            className="shadow-none border bg-transparent border-[#474747] px-2 w-[100%] xs:w-[25rem] py-[0.42rem] rounded-[10px] text-sm"
             value={globalFilterValue}
             onChange={onGlobalFilterChange}
             placeholder={t("search")}
@@ -146,7 +146,7 @@ export default function CustomTable({
             options={columns}
             optionLabel="header"
             onChange={onColumnToggle}
-            className="w-full xs:w-[25rem] border border-[#474747] bg-transparent rounded-[10px]"
+            className="shadow-none w-full xs:w-[25rem] border border-[#474747] bg-transparent rounded-[10px]"
             display="chip"
           />
         </div>

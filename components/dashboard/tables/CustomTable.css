@@ -28,11 +28,19 @@
   background-color: #a57a2a;
 }
 
-.p-highlight {
+.p-paginator-page.p-highlight {
   background-color: #6a582b;
   color: white;
   font-weight: bold;
   border-radius: 5px;
+}
+.p-multiselect-panel .p-multiselect-items .p-multiselect-item.p-highlight {
+  background-color: hsla(47, 52%, 55%, 0.2) !important;
+}
+.p-checkbox-box,
+.p-checkbox-box svg {
+  color: white;
+  background-color: var(--primary) !important;
 }
 
 .p-paginator-prev,
