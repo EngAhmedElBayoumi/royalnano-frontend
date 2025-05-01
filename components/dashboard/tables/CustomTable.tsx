@@ -7,6 +7,7 @@ import React, {
 } from "react";
 import { DataTable, DataTableFilterMeta } from "primereact/datatable";
 import { Column } from "primereact/column";
+import { MultiSelect } from "primereact/multiselect";
 import { InputText } from "primereact/inputtext";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
@@ -65,7 +66,6 @@ export default function CustomTable({
   data,
   rows,
   columns,
-
   buttonText,
   ButtonEvent,
   headerBG,
@@ -93,10 +93,19 @@ export default function CustomTable({
   const [expandedRows, setExpandedRows] = useState<{ [key: number]: boolean }>(
     {}
   );
+  const [visibleColumns, setVisibleColumns] = useState(columns);
 
   useEffect(() => {
     setCustomers(data);
   }, [data]);
+
+  const onColumnToggle = (event: { value: ColumnConfig[] }) => {
+    const selectedColumns = event.value;
+    const orderedSelectedColumns = columns.filter((col) =>
+      selectedColumns.some((sCol: ColumnConfig) => sCol.field === col.field)
+    );
+    setVisibleColumns(orderedSelectedColumns);
+  };
 
   const onGlobalFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -125,12 +134,22 @@ export default function CustomTable({
     <>
       {/* <InfoCardsComponent data={cardData} /> */}
       <div className="flex mb-4 justify-between items-center flex-wrap gap-2">
-        <InputText
-          className="border bg-transparent border-[#474747] px-2 w-[100%] xs:w-[30%] xs:min-w-[200px] py-2 rounded-[10px]"
-          value={globalFilterValue}
-          onChange={onGlobalFilterChange}
-          placeholder={t("search")}
-        />
+        <div className="flex gap-2 items-center w-full xs:flex-1 flex-wrap">
+          <InputText
+            className="border bg-transparent border-[#474747] px-2 w-[100%] xs:w-[25rem] py-[0.42rem] rounded-[10px] text-sm"
+            value={globalFilterValue}
+            onChange={onGlobalFilterChange}
+            placeholder={t("search")}
+          />
+          <MultiSelect
+            value={visibleColumns}
+            options={columns}
+            optionLabel="header"
+            onChange={onColumnToggle}
+            className="w-full xs:w-[25rem] border border-[#474747] bg-transparent rounded-[10px]"
+            display="chip"
+          />
+        </div>
         {buttonText && (
           <Button
             className="bg-primary text-white capitalize"
@@ -199,7 +218,7 @@ export default function CustomTable({
               }`;
             }}
           >
-            {columns.map((col) => (
+            {visibleColumns.map((col) => (
               <Column
                 key={col.field}
                 headerStyle={headerStyle}

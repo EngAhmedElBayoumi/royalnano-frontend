@@ -5,6 +5,8 @@ import { getMessages } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import ReduxProvider from "@/components/ReduxProvider";
 import ScrollAnimation from "@/components/provider";
+import { PrimeReactProvider } from "primereact/api";
+import "primereact/resources/themes/lara-light-cyan/theme.css";
 
 const cairo = Cairo({ subsets: ["latin"] });
 
@@ -28,7 +30,7 @@ export default async function LocaleLayout({
       <body className={cairo.className}>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ReduxProvider>
-            {children}
+            <PrimeReactProvider>{children}</PrimeReactProvider>
             <ScrollAnimation />
           </ReduxProvider>
         </NextIntlClientProvider>
