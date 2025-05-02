@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { DataTable, DataTableFilterMeta } from "primereact/datatable";
@@ -74,7 +74,7 @@ const CustomTable = ({
   const toggleExpand = (id: number) => {
     setExpandedRows((prev) => ({ ...prev, [id]: !prev[id] }));
   };
-
+  const dataTableRef = useRef<DataTable<unknown>>(null);
   const header = (
     <TableControls
       globalFilterValue={globalFilterValue}
@@ -90,6 +90,8 @@ const CustomTable = ({
       buttonText={buttonText}
       ButtonEvent={ButtonEvent}
       t={t}
+      tableData={tableData}
+      dataTableRef={dataTableRef}
     />
   );
 
@@ -109,6 +111,7 @@ const CustomTable = ({
       {data.length ? (
         <div className="mb-5 bg-dashboardBg p-4 rounded-[20px]">
           <DataTable
+            ref={dataTableRef}
             value={tableData}
             rows={rows}
             filters={filters}
