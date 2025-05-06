@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { ColumnConfig } from "./types";
 import { InputText } from "primereact/inputtext";
@@ -14,8 +15,8 @@ interface TableControlsProps {
   buttonText?: string;
   ButtonEvent: React.MouseEventHandler<HTMLButtonElement>;
   t: (key: string) => string;
-  tableData: DataInTable[];
-  dataTableRef: React.RefObject<DataTable<unknown>>;
+  tableData: Record<string, any>[];
+  dataTableRef: React.RefObject<DataTable<any>>;
 }
 
 const TableControls = ({
@@ -48,7 +49,7 @@ const TableControls = ({
     autoTable(doc, {
       head: [exportColumns.map((col) => col.title)],
       body: tableData.map((row) =>
-        exportColumns.map((col) => row[col.dataKey])
+        exportColumns.map((col) => row[col.dataKey as keyof typeof row])
       ),
     });
 
@@ -68,7 +69,7 @@ const TableControls = ({
     });
   };
 
-  const saveAsExcelFile = (buffer, fileName) => {
+  const saveAsExcelFile = (buffer: BlobPart, fileName: string) => {
     import("file-saver").then((module) => {
       if (module && module.default) {
         const EXCEL_TYPE =
