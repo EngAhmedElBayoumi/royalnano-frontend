@@ -1,5 +1,5 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
-import { baseQuery } from "../../common";
+import { baseQuery } from "@/redux/services/common";
 
 export const salesSalesClientRequestApi = createApi({
   reducerPath: "salesSalesClientRequestApi",
@@ -18,14 +18,14 @@ export const salesSalesClientRequestApi = createApi({
         method: "POST",
         body: data,
       }),
-    }),   
+    }),
     getMiniSalesSalesClientRequest: builder.query({
-        query: ({ search, ordering, page, page_size }) => ({
-          url: "sales/client-requests/all/mini/",
-          method: "GET",
-          params: { search, ordering, page, page_size },
-        }),
+      query: ({ search, ordering, page, page_size }) => ({
+        url: "sales/client-requests/all/mini/",
+        method: "GET",
+        params: { search, ordering, page, page_size },
       }),
+    }),
     getSalesSalesClientRequestById: builder.query({
       query: (id) => `sales/client-requests/all/${id}/`,
     }),
@@ -39,4 +39,10 @@ export const salesSalesClientRequestApi = createApi({
   }),
 });
 
-export const { useGetSalesSalesClientRequestQuery,useCreateSalesSalesClientRequestMutation, useGetSalesSalesClientRequestByIdQuery, useUpdateSalesSalesClientRequestMutation, useGetMiniSalesSalesClientRequestQuery } = salesSalesClientRequestApi;
+export const {
+  useGetSalesSalesClientRequestQuery,
+  useCreateSalesSalesClientRequestMutation,
+  useGetSalesSalesClientRequestByIdQuery,
+  useUpdateSalesSalesClientRequestMutation,
+  useGetMiniSalesSalesClientRequestQuery,
+} = salesSalesClientRequestApi;

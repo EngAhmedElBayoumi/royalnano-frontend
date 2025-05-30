@@ -1,5 +1,5 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
-import { baseQuery } from "./../common";
+import { baseQuery } from "@/redux/services/common";
 
 export const blogsAPi = createApi({
   reducerPath: "blogsAPi",

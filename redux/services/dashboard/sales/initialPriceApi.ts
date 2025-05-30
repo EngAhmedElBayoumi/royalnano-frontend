@@ -1,5 +1,5 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
-import { baseQuery } from "../../common";
+import { baseQuery } from "@/redux/services/common";
 
 export const initializePaymentApi = createApi({
   reducerPath: "initializePaymentApi",
@@ -15,10 +15,11 @@ export const initializePaymentApi = createApi({
       query: (id) => `sales/initialize-payment/${id}/`,
     }),
     createInitialPrice: builder.mutation({
-      query: (payload) => ({  // Changed from 'data' to 'payload' for clarity
+      query: (payload) => ({
+        // Changed from 'data' to 'payload' for clarity
         url: `sales/initialize-payment/`,
         method: "POST",
-        body: payload,  // This will send { request_id: serviceId }
+        body: payload, // This will send { request_id: serviceId }
       }),
     }),
     updateInitialPrice: builder.mutation({

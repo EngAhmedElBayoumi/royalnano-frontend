@@ -1,5 +1,5 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
-import { baseQuery } from "../../common";
+import { baseQuery } from "@/redux/services/common";
 
 export const salesReturnApi = createApi({
   reducerPath: "salesReturnApi",
@@ -10,7 +10,6 @@ export const salesReturnApi = createApi({
         url: "sales/sales-return/",
         method: "GET",
         params: { search, ordering, page, page_size },
-
       }),
     }),
 
@@ -21,26 +20,25 @@ export const salesReturnApi = createApi({
         body: data,
       }),
     }),
-   
-          //fe hena patch kman , bs let's test asln eh l sh8al mnhom -_-
+
+    //fe hena patch kman , bs let's test asln eh l sh8al mnhom -_-
     updateSalesReturn: builder.mutation({
-        query: ({ id, ...data }) => ({
-          url: `sales/sales-return/${id}/`,
-          method: "PATCH",
-          body: data,
-        }),
+      query: ({ id, ...data }) => ({
+        url: `sales/sales-return/${id}/`,
+        method: "PATCH",
+        body: data,
       }),
-   
+    }),
 
-
-    
     getSalesReturnById: builder.query({
       query: (id) => `sales/sales-return/${id}/`,
     }),
-
-
-    
   }),
 });
 
-export const { useGetSalesReturnQuery,useCreateSalesReturnMutation, useGetSalesReturnByIdQuery, useUpdateSalesReturnMutation } = salesReturnApi;
+export const {
+  useGetSalesReturnQuery,
+  useCreateSalesReturnMutation,
+  useGetSalesReturnByIdQuery,
+  useUpdateSalesReturnMutation,
+} = salesReturnApi;
