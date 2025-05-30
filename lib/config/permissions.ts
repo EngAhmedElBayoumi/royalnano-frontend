@@ -1,6 +1,7 @@
 // Define permission requirements for specific routes
 export const permissionRoutes = {
   "/dashboard/inventory": [
+    "unit",
     "inventoryitem",
     "expensecategory",
     "preorder",

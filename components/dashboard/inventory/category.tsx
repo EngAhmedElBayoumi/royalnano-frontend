@@ -2,8 +2,8 @@
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useGetItemCategoryQuery } from "@/redux/services/dashboard/inventory/itemCategoryApi";
-import TableWrapper from "@/components/dashboard/tables/TableWrapper";
 import { useTableData } from "@/hooks/useTableData";
+import TableWrapper from "@/components/dashboard/tables/TableWrapper";
 
 export default function Category() {
   const { data, isLoading, error, permissions, handlePageChange } =

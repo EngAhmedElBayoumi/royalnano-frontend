@@ -45,11 +45,18 @@
     "selectBranchLocation": "اختر موقع الفرع"
   },
   "Inventory": {
+    "units": "الوحدات",
     "stockAdjustment": "تعديل المخزون",
     "movement": "الحركة",
     "preorder": "الطلب المسبق",
     "categoryModel": "نموذج الفئة",
     "items": "العناصر",
+    "InventoryUnit": {
+      "unitName": "اسم الوحدة",
+      "noUnitsDataFound": "لا توجد بيانات للوحدات",
+      "addUnit": "إضافة وحدة",
+      "editUnit": "تعديل وحدة"
+    },
     "InventoryItem": {
       "itemCode": "رمز العنصر",
       "itemName": "اسم العنصر",

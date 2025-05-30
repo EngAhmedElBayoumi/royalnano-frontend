@@ -45,11 +45,18 @@
     "selectBranchLocation": "Select Branch Location"
   },
   "Inventory": {
+    "units": "Units",
     "stockAdjustment": "Stock Adjustment",
     "movement": "Movement",
     "preorder": "Preorder",
     "categoryModel": "Category Model",
     "items": "Items",
+    "InventoryUnit": {
+      "unitName": "Unit Name",
+      "noUnitsDataFound": "No units data found",
+      "addUnit": "Add Unit",
+      "editUnit": "Edit Unit"
+    },
     "InventoryItem": {
       "itemCode": "Item Code",
       "itemName": "Item Name",
