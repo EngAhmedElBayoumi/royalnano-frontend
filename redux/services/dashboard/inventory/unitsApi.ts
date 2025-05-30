@@ -1,8 +1,8 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseQuery } from "@/redux/services/common";
 
-export const unitApi = createApi({
-  reducerPath: "unitApi",
+export const unitsApi = createApi({
+  reducerPath: "unitsApi",
   baseQuery,
   endpoints: (builder) => ({
     getUnits: builder.query({
@@ -36,4 +36,4 @@ export const {
   useGetUnitByIdQuery,
   useCreateUnitMutation,
   useUpdateUnitMutation,
-} = unitApi;
+} = unitsApi;

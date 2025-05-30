@@ -19,6 +19,7 @@ import { branchApi } from "./services/dashboard/inventory/branchesApi";
 import { movementApi } from "./services/dashboard/inventory/movementApi";
 import { preorderApi } from "./services/dashboard/inventory/preorderApi";
 import { refreshTokenApi } from "./services/refreshTokenApi";
+import { unitsApi } from "./services/dashboard/inventory/unitsApi";
 import { itemsApi } from "./services/dashboard/inventory/itemsApi";
 import { itemCategoryApi } from "./services/dashboard/inventory/itemCategoryApi";
 import { stockApi } from "./services/dashboard/inventory/stockApi";
@@ -52,6 +53,7 @@ import { salesSalesClientRequestApi } from "./services/dashboard/sales/salesClie
 import { initializePaymentApi } from "./services/dashboard/sales/initialPriceApi";
 import { setPriceApi } from "./services/dashboard/sales/setPriceApi";
 import { followUpApi } from "./services/dashboard/sales/followUpApi";
+
 // Create separate configs for each reducer
 const authPersistConfig = {
   key: "auth",
@@ -86,6 +88,7 @@ export const store = configureStore({
     [movementApi.reducerPath]: movementApi.reducer,
     [preorderApi.reducerPath]: preorderApi.reducer,
     [refreshTokenApi.reducerPath]: refreshTokenApi.reducer,
+    [unitsApi.reducerPath]: unitsApi.reducer,
     [itemsApi.reducerPath]: itemsApi.reducer,
     [itemCategoryApi.reducerPath]: itemCategoryApi.reducer,
     [stockApi.reducerPath]: stockApi.reducer,
@@ -145,6 +148,7 @@ export const store = configureStore({
       .concat(movementApi.middleware)
       .concat(preorderApi.middleware)
       .concat(refreshTokenApi.middleware)
+      .concat(unitsApi.middleware)
       .concat(itemsApi.middleware)
       .concat(itemCategoryApi.middleware)
       .concat(stockApi.middleware)
