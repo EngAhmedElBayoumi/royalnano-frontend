@@ -74,7 +74,7 @@ const CustomTable = ({
   const toggleExpand = (id: number) => {
     setExpandedRows((prev) => ({ ...prev, [id]: !prev[id] }));
   };
-  const dataTableRef = useRef<DataTable<unknown>>(null);
+  const dataTableRef = useRef<DataTable<DataInTable[]>>(null);
   const header = (
     <TableControls
       globalFilterValue={globalFilterValue}
