@@ -8,7 +8,7 @@ import { useGetFollowUpQuery } from "@/redux/services/dashboard/sales/followUpAp
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { Paginator } from "primereact/paginator";
-import { FollowUp } from "@/types/FollowUp";
+import { FollowUp } from "@/components/dashboard/sales/types";
 
 interface FollowupsTabProps {
   customerId: number;

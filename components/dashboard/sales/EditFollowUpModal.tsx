@@ -9,7 +9,7 @@ import CustomSelect from "@/components/formFields/CustomSelect";
 import TextArea from "@/components/formFields/TextArea";
 import CustomButton from "@/components/formFields/CustomButton";
 import { useTranslations } from "next-intl";
-import { FollowUp } from "@/types/FollowUp"; // Import the reusable FollowUp type
+import { FollowUp } from "@/components/dashboard/sales/types";
 import DateTimePicker from "@/components/formFields/DateTimePicker";
 
 const followUpSchema = z.object({
