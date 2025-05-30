@@ -1,7 +1,7 @@
 "use client";
 import CustomTable from "@/components/dashboard/tables/CustomTable";
 import { useRouter } from "next/navigation";
-import { DataInTable } from "@/components/dashboard/tables/CustomTable";
+import { DataInTable } from "@/components/dashboard/tables/types";
 export default function Clients() {
   const router = useRouter();
 
@@ -30,8 +30,7 @@ export default function Clients() {
     <>
       <div className="px-6 pt-7 pb-25  ">
         <CustomTable
-                emptyMessage="you have no clients"
-
+          emptyMessage="you have no clients"
           editRoute="/dashboard/clients/edit/"
           secondHeaderBG="transparent"
           secondHeaderTitle="Import Customer List"

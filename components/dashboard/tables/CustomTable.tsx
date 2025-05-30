@@ -6,7 +6,7 @@ import { DataTable, DataTableFilterMeta } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { FilterMatchMode } from "primereact/api";
 import { Paginator } from "primereact/paginator";
-import "./CustomTable.css"; // Import your CSS file for custom styles
+import "./CustomTable.css";
 import TableControls from "./TableControls";
 import TableIconHeader from "./TableIconHeader";
 import { renderColumnBody } from "./TableColumnBody";
