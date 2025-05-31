@@ -5,7 +5,7 @@ import { useGetUnitsQuery } from "@/redux/services/dashboard/inventory/unitsApi"
 import { useTableData } from "@/hooks/useTableData";
 import TableWrapper from "@/components/dashboard/tables/TableWrapper";
 
-export default function Category() {
+export default function Units() {
   const { data, isLoading, error, permissions, handlePageChange } =
     useTableData({
       permissionKey: "unit",

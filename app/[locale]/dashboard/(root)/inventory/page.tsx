@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import CustomTabs from "@/components/dashboard/CustomTabs";
+import Units from "@/components/dashboard/inventory/units";
 import Items from "@/components/dashboard/inventory/items";
 import Category from "@/components/dashboard/inventory/category";
 import Preorder from "@/components/dashboard/inventory/preorder";
@@ -31,6 +32,19 @@ function InventoryPage() {
         />
       ),
       content: <Items />,
+    },
+    {
+      label: t("units"),
+      permissionKey: "unit",
+      icon: (
+        <Image
+          src="/assets/icons/dashboard/inventory/items.svg"
+          alt="icon"
+          width="24"
+          height="24"
+        />
+      ),
+      content: <Units />,
     },
     {
       label: t("categoryModel"),
