@@ -1,82 +1,43 @@
 "use client";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
-import IconWithTitle from "@/components/dashboard/IconWithTitle";
-import CustomModal from "@/components/modals/CustomModal";
-import FormSkelton from "@/components/dashboard/skelton/FormSkelton";
-import LoadingError from "@/components/dashboard/LoadingError";
-import SalesInvoiceForm, {
-  SalesInvoiceFormValues,
-} from "@/components/dashboard/forms/sales/SalesInvoiceForm";
+import { handleApiError } from "@/lib/utils/handleApiError";
 import {
   useGetSalesInvoiceByIdQuery,
   useUpdateSalesInvoiceMutation,
 } from "@/redux/services/dashboard/sales/salesInvoiceApi";
+import SalesInvoiceForm, {
+  SalesInvoiceFormValues,
+} from "@/components/dashboard/forms/sales/SalesInvoiceForm";
+import EditPage from "@/components/dashboard/EditPage";
 
 export default function EditSalesInvoice() {
-  const router = useRouter();
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
 
   const t = useTranslations("Sales.SalesInvoice");
   const tabTranslate = useTranslations("Sales");
 
-  const [updatePreorder] = useUpdateSalesInvoiceMutation();
   const { data, isLoading, error } = useGetSalesInvoiceByIdQuery(id);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const defaultValues: SalesInvoiceFormValues = data;
-
-  const handleModalChange = (isOpen: boolean) => {
-    setIsModalOpen(isOpen);
-  };
+  const [updatePreorder, { isLoading: submitting }] =
+    useUpdateSalesInvoiceMutation();
 
   const handleSubmit = async (data: SalesInvoiceFormValues) => {
-    try {
-      const response = await updatePreorder({ id, data });
+    const response = await updatePreorder({ id, data });
 
-      if (response.error) throw new Error("edit failed");
-      else router.push(`/dashboard/inventory?tab=${tabTranslate("preorder")}`);
-    } catch (error) {
-      setIsModalOpen(true);
-      console.log(error);
-    }
+    if (response.error) handleApiError(response.error);
   };
 
   return (
-    <main className="mx-4 sm:mx-7 my-5">
-      <CustomModal
-        isOpen={isModalOpen}
-        onChange={handleModalChange}
-        title="Error!"
-        description="Your Request wasn't processed successfully.."
-      />
-      <div className="flex">
-        <IconWithTitle
-          imageSrc="/assets/icons/edit.svg"
-          title={t("editPreorder")}
-          backgroundColor="#F8F7F7"
-          textColor="primary"
-        />
-      </div>
-
-      <div className="bg-dashboardBg px-4 sm:px-6 pt-5 pb-8 ltr:rounded-r-[20px] ltr:rounded-bl-[20px] rtl:rounded-l-[20px] rtl:rounded-br-[20px]">
-        {isLoading ? (
-          <div className="ltr:lg:pr-[200px] rtl:lg:pl-[200px]">
-            <FormSkelton />
-          </div>
-        ) : error ? (
-          <LoadingError />
-        ) : (
-          <div className="ltr:lg:pr-[200px] rtl:lg:pl-[200px]">
-            <SalesInvoiceForm
-              onSubmit={handleSubmit}
-              defaultValues={defaultValues}
-            />
-          </div>
-        )}
-      </div>
-    </main>
+    <EditPage
+      title={t("salesInvoice")}
+      data={data}
+      isLoading={isLoading}
+      error={error}
+      onSubmit={handleSubmit}
+      Form={SalesInvoiceForm}
+      submitting={submitting}
+      redirectPath={`/dashboard/sales?tab=${tabTranslate("invoice")}`}
+    />
   );
 }

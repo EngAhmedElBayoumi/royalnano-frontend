@@ -14,8 +14,10 @@ import EditPage from "@/components/dashboard/EditPage";
 export default function EditPreorder() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
+
   const t = useTranslations("Inventory.InventoryPreorder");
   const tabTranslate = useTranslations("Inventory");
+  
   const { data, isLoading, error } = useGetPreorderByIdQuery(id);
   const [updatePreorder, { isLoading: submitting }] =
     useUpdatePreorderMutation();
