@@ -54,11 +54,11 @@ function SalesPage() {
         <Image
           width="24"
           height="24"
-          alt="invoice"
+          alt={t("salesInvoice")}
           src="/assets/icons/dashboard/sales/invoice.svg"
         />
       ),
-      label: t("invoice"),
+      label: t("salesInvoice"),
       content: <SalesInvoice />,
     },
     {
@@ -66,7 +66,7 @@ function SalesPage() {
         <Image
           width="24"
           height="24"
-          alt="invoice"
+          alt={t("client")}
           src="/assets/icons/dashboard/sales/invoice.svg"
         />
       ),

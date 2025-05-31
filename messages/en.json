@@ -261,7 +261,6 @@
     "customer": "Customer",
     "salesQuotation": "Sales Quotation",
     "order": "Sales Order",
-    "invoice": "Sales Invoice",
     "receipt": "Sales Receipt",
     "addCustomer": "Add Customer",
     "SalesQuotation": {

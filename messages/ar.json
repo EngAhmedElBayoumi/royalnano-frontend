@@ -260,7 +260,7 @@
     "editCustomer": "تعديل بيانات العميل",
     "salesQuotation": "عرض الأسعار",
     "order": "أمر المبيعات",
-    "invoice": "فاتورة المبيعات",
+    "salesInvoice": "فاتورة المبيعات",
     "receipt": "إيصال المبيعات",
     "SalesQuotation": {
       "editQuotation": "تعديل عرض الأسعار",

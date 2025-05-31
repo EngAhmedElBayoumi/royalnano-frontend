@@ -37,7 +37,7 @@ export default function EditSalesInvoice() {
       onSubmit={handleSubmit}
       Form={SalesInvoiceForm}
       submitting={submitting}
-      redirectPath={`/dashboard/sales?tab=${tabTranslate("invoice")}`}
+      redirectPath={`/dashboard/sales?tab=${tabTranslate("salesInvoice")}`}
     />
   );
 }
