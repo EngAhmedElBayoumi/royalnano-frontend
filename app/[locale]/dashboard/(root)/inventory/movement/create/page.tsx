@@ -1,8 +1,11 @@
 "use client";
 import { useTranslations } from "next-intl";
+import { handleApiError } from "@/lib/utils/handleApiError";
 import { useCreateMovementMutation } from "@/redux/services/dashboard/inventory/movementApi";
 import CreatePage from "@/components/dashboard/CreatePage";
-import MovementForm, { MovementFormValues } from "@/components/dashboard/forms/inventory/MovementForm";
+import MovementForm, {
+  MovementFormValues,
+} from "@/components/dashboard/forms/inventory/MovementForm";
 
 export default function CreateMovement() {
   const t = useTranslations("Inventory");
@@ -15,7 +18,9 @@ export default function CreateMovement() {
       movement_date: new Date(data.movement_date).toISOString().slice(0, 10),
     };
     const response = await createMovement(payload);
-    if (response.error) throw new Error("creation failed");
+    if (response.error) {
+      handleApiError(response.error);
+    }
   };
 
   return (

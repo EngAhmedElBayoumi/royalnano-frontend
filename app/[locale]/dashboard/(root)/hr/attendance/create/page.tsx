@@ -1,6 +1,7 @@
 "use client";
 import { useTranslations } from "next-intl";
 import { format } from "date-fns";
+import { handleApiError } from "@/lib/utils/handleApiError";
 import { useCreateAttendanceMutation } from "@/redux/services/dashboard/hr/attendanceApi";
 import AttendanceForm, {
   AttendanceFormValues,
@@ -21,7 +22,7 @@ export default function CreateAttendance() {
       check_out: format(data.check_out, "HH:mm:ss"),
     };
     const response = await createAttendance(payload);
-    if (response.error) throw new Error("creation failed");
+    if (response.error) handleApiError(response.error);
   };
 
   return (

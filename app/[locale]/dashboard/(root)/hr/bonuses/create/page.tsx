@@ -1,5 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
+import { handleApiError } from "@/lib/utils/handleApiError";
 import { useCreateBonusMutation } from "@/redux/services/dashboard/hr/bonusesApi";
 import CreatePage from "@/components/dashboard/CreatePage";
 import BonusesForm, {
@@ -16,7 +17,7 @@ export default function CreateBonus() {
       employee: Number(data.employee),
     };
     const response = await createBonus(payload);
-    if (response.error) throw new Error("creation failed");
+    if (response.error) handleApiError(response.error);
   };
 
   return (

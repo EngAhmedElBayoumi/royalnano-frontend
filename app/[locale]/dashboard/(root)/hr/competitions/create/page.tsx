@@ -1,5 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
+import { handleApiError } from "@/lib/utils/handleApiError";
 import CompetitionForm, {
   CompetitionFormValues,
 } from "@/components/dashboard/forms/hr/CompetitionForm";
@@ -17,7 +18,7 @@ export default function CreateCompetition() {
     };
 
     const response = await createCompetition(payload);
-    if (response.error) throw new Error("creation failed");
+    if (response.error) handleApiError(response.error);
   };
 
   return (

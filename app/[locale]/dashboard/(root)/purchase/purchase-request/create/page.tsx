@@ -1,5 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
+import { handleApiError } from "@/lib/utils/handleApiError";
 import CreatePage from "@/components/dashboard/CreatePage";
 import PurchaseRequestForm, {
   PurchaseRequestFormValues,
@@ -11,29 +12,24 @@ export default function CreateRequest() {
   const [createRequest, { isLoading }] = useCreateRequestMutation();
 
   const handleSubmit = async (data: PurchaseRequestFormValues) => {
-    try {
-      const payload = {
-        ...data,
-        id: Number(data.id),
-        request_by: Number(data.request_by),
-        branch: Number(data.branch),
-        items: data.items.map((item) => ({
-          ...item,
-          id: Number(item.id),
-          quantity: Number(item.quantity),
-          unit_price: Number(item.unit_price),
-          total: Number(item.total),
-        })),
-      };
+    const payload = {
+      ...data,
+      id: Number(data.id),
+      request_by: Number(data.request_by),
+      branch: Number(data.branch),
+      items: data.items.map((item) => ({
+        ...item,
+        id: Number(item.id),
+        quantity: Number(item.quantity),
+        unit_price: Number(item.unit_price),
+        total: Number(item.total),
+      })),
+    };
 
-      const response = await createRequest(payload);
+    const response = await createRequest(payload);
 
-      if ("error" in response) {
-        throw new Error("Creation failed");
-      }
-    } catch (error) {
-      console.error("Error creating request:", error);
-      throw error;
+    if ("error" in response) {
+      handleApiError(response.error);
     }
   };
 

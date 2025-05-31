@@ -1,6 +1,7 @@
 "use client";
 import { useTranslations } from "next-intl";
 import { format } from "date-fns";
+import { handleApiError } from "@/lib/utils/handleApiError";
 import { useCreateInterviewMutation } from "@/redux/services/dashboard/hr/interviewsApi";
 import CreatePage from "@/components/dashboard/CreatePage";
 import InterviewsForm, {
@@ -16,7 +17,9 @@ export default function CreateInterview() {
       ...data,
       interview_date: format(data.interview_date, "yyyy-MM-dd'T'HH:mm:ss'Z'"),
     });
-    if (response.error) throw new Error("creation failed");
+    if (response.error) {
+      handleApiError(response.error);
+    }
   };
 
   return (

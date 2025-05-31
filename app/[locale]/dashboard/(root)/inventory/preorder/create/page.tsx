@@ -1,5 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
+import { handleApiError } from "@/lib/utils/handleApiError";
 import { useCreatePreorderMutation } from "@/redux/services/dashboard/inventory/preorderApi";
 import CreatePage from "@/components/dashboard/CreatePage";
 import PreorderForm, {
@@ -16,7 +17,9 @@ export default function CreatePreorder() {
       item: Number(data.item),
     };
     const response = await createPreorder(payload);
-    if (response.error) throw new Error("creation failed");
+    if (response.error) {
+      handleApiError(response.error);
+    }
   };
 
   return (

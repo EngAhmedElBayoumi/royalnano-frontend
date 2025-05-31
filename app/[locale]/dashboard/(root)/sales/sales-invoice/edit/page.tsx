@@ -34,13 +34,9 @@ export default function EditSalesInvoice() {
 
   const handleSubmit = async (data: SalesInvoiceFormValues) => {
     try {
-      const payload = {
-        ...data,
-        // item: Number(data.item),
-      };
-      const response = await updatePreorder({ id, data: payload });
+      const response = await updatePreorder({ id, data });
 
-      if (response.error) throw new Error("creation failed");
+      if (response.error) throw new Error("edit failed");
       else router.push(`/dashboard/inventory?tab=${tabTranslate("preorder")}`);
     } catch (error) {
       setIsModalOpen(true);

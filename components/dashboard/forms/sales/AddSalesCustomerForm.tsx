@@ -68,22 +68,11 @@ const AddSalesCustomerForm = ({ defaultValues }: SalesCustomerFormProps) => {
     })) || [];
 
   const handleSubmit = async (data: SalesCustomerFormValues) => {
-    console.log("Form data submitted:", data);
-    console.log("Form errors:", form.formState.errors);
     try {
-      console.log("Submit button clicked");
-      console.log("Form data:", data);
-      const payload = {
-        ...data,
-      };
-      console.log("Payload:", payload);
-      const response = await createSalesCustomer(payload);
-      console.log("API response:", response);
+      const response = await createSalesCustomer(data);
       if ("error" in response) {
-        console.error("API error:", response.error);
         throw new Error("Creation failed");
       }
-      console.log("Customer created successfully");
       router.push(`/dashboard/sales?tab=Customer`);
     } catch (error) {
       console.error("Error in creation:", error);

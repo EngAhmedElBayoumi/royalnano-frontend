@@ -1,5 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
+import { handleApiError } from "@/lib/utils/handleApiError";
 import { useCreateJobsMutation } from "@/redux/services/dashboard/hr/jobsApi";
 import CreatePage from "@/components/dashboard/CreatePage";
 import JobsForm, {
@@ -13,7 +14,9 @@ export default function CreateJobs() {
 
   const handleSubmit = async (data: JobsFormValues) => {
     const response = await createJobs(data);
-    if (response.error) throw new Error("creation failed");
+    if (response.error) {
+      handleApiError(response.error);
+    }
   };
 
   return (

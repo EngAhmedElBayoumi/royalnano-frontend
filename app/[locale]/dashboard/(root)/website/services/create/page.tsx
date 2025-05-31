@@ -1,6 +1,7 @@
 "use client";
-import { useCreateServiceMutation } from "@/redux/services/website/servicesApi";
 import { useTranslations } from "next-intl";
+import { handleApiError } from "@/lib/utils/handleApiError";
+import { useCreateServiceMutation } from "@/redux/services/website/servicesApi";
 import ServiceForm, {
   ServiceFormValues,
 } from "@/components/dashboard/forms/website/ServiceForm";
@@ -11,26 +12,22 @@ export default function CreateService() {
   const t = useTranslations("dashboardWebsite.Services");
 
   const handleSubmit = async (data: ServiceFormValues) => {
-    try {
-      // Create FormData instance to handle file upload
-      const formData = new FormData();
+    // Create FormData instance to handle file upload
+    const formData = new FormData();
 
-      // Append text fields
-      formData.append("name", data.name);
-      formData.append("alias", data.alias);
-      formData.append("description", data.description);
+    // Append text fields
+    formData.append("name", data.name);
+    formData.append("alias", data.alias);
+    formData.append("description", data.description);
 
-      // Append image file if it exists
-      if (data.image && data.image instanceof File) {
-        formData.append("image", data.image);
-      }
+    // Append image file if it exists
+    if (data.image && data.image instanceof File) {
+      formData.append("image", data.image);
+    }
 
-      const response = await createService(formData);
-      if ("error" in response) {
-        throw new Error("Creation failed");
-      }
-    } catch (error) {
-      throw error;
+    const response = await createService(formData);
+    if (response.error) {
+      handleApiError(response.error);
     }
   };
 

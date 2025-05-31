@@ -1,8 +1,11 @@
 "use client";
 import { useTranslations } from "next-intl";
+import { handleApiError } from "@/lib/utils/handleApiError";
 import { useCreateCategoryMutation } from "@/redux/services/dashboard/inventory/itemCategoryApi";
 import CreatePage from "@/components/dashboard/CreatePage";
-import CategoryForm, { CategoryFormValues } from "@/components/dashboard/forms/inventory/CategoryForm";
+import CategoryForm, {
+  CategoryFormValues,
+} from "@/components/dashboard/forms/inventory/CategoryForm";
 
 export default function CreateCategory() {
   const t = useTranslations("Inventory");
@@ -10,7 +13,9 @@ export default function CreateCategory() {
 
   const handleSubmit = async (data: CategoryFormValues) => {
     const response = await createCategory(data);
-    if (response.error) throw new Error("creation failed");
+    if (response.error) {
+      handleApiError(response.error);
+    }
   };
 
   return (

@@ -1,5 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
+import { handleApiError } from "@/lib/utils/handleApiError";
 import { useCreateDepartmentMutation } from "@/redux/services/dashboard/hr/departmentApi";
 import CreatePage from "@/components/dashboard/CreatePage";
 import DepartmentForm, {
@@ -12,7 +13,7 @@ export default function CreateDepartment() {
 
   const handleSubmit = async (data: DepartmentFormValues) => {
     const response = await createDepartment(data);
-    if (response.error) throw new Error("creation failed");
+    if (response.error) handleApiError(response.error);
   };
 
   return (

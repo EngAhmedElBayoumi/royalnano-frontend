@@ -1,6 +1,7 @@
 "use client";
-import { useCreateReviewMutation } from "@/redux/services/customerReviewApi";
 import { useTranslations } from "next-intl";
+import { handleApiError } from "@/lib/utils/handleApiError";
+import { useCreateReviewMutation } from "@/redux/services/customerReviewApi";
 import CustomerReviewForm, {
   CustomerReviewFormValues,
 } from "@/components/dashboard/forms/website/CustomerReviewForm";
@@ -11,27 +12,22 @@ export default function CreateCustomerReview() {
   const t = useTranslations("dashboardWebsite");
 
   const handleSubmit = async (data: CustomerReviewFormValues) => {
-    try {
-      // Create FormData instance to handle file upload
-      const formData = new FormData();
+    // Create FormData instance to handle file upload
+    const formData = new FormData();
 
-      // Append text fields
-      formData.append("name", data.name);
-      formData.append("review", data.review);
-      formData.append("rating", data.rating.toString());
+    // Append text fields
+    formData.append("name", data.name);
+    formData.append("review", data.review);
+    formData.append("rating", data.rating.toString());
 
-      // Append image file if it exists
-      if (data.image && data?.image instanceof File) {
-        formData.append("image", data.image);
-      }
+    // Append image file if it exists
+    if (data.image && data?.image instanceof File) {
+      formData.append("image", data.image);
+    }
 
-      const response = await createReview(formData);
-      if ("error" in response) {
-        throw new Error("Creation failed");
-      }
-    } catch (error) {
-      console.log("Customer review creation error:", error);
-      throw error;
+    const response = await createReview(formData);
+    if (response.error) {
+      handleApiError(response.error);
     }
   };
 

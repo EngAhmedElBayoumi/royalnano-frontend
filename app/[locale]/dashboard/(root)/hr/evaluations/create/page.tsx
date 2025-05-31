@@ -1,5 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
+import { handleApiError } from "@/lib/utils/handleApiError";
 import EvaluationForm, {
   EvaluationFormValues,
 } from "@/components/dashboard/forms/hr/EvaluationForm";
@@ -12,7 +13,7 @@ export default function CreateEvaluation() {
 
   const handleSubmit = async (data: EvaluationFormValues) => {
     const response = await createEvaluation(data);
-    if (response.error) throw new Error("creation failed");
+    if (response.error) handleApiError(response.error);
   };
 
   return (

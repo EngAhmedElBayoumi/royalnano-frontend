@@ -1,5 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
+import { handleApiError } from "@/lib/utils/handleApiError";
 import CreatePage from "@/components/dashboard/CreatePage";
 import PurchaseOrderForm, {
   PurchaseOrderFormValues,
@@ -42,7 +43,7 @@ export default function CreateOrder() {
     const response = await createOrder(payload);
 
     if (response.error) {
-      throw new Error("Creation failed");
+      handleApiError(response.error);
     }
   };
 

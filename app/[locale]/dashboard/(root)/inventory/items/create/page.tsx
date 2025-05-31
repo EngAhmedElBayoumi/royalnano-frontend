@@ -1,8 +1,11 @@
 "use client";
 import { useTranslations } from "next-intl";
+import { handleApiError } from "@/lib/utils/handleApiError";
 import { useCreateItemMutation } from "@/redux/services/dashboard/inventory/itemsApi";
 import CreatePage from "@/components/dashboard/CreatePage";
-import ItemForm, { ItemFormValues } from "@/components/dashboard/forms/inventory/ItemForm";
+import ItemForm, {
+  ItemFormValues,
+} from "@/components/dashboard/forms/inventory/ItemForm";
 
 export default function CreateItem() {
   const t = useTranslations("Inventory.InventoryItem");
@@ -16,7 +19,9 @@ export default function CreateItem() {
       supplier: Number(data.supplier),
     };
     const response = await createItem(payload);
-    if (response.error) throw new Error("creation failed");
+    if (response.error) {
+      handleApiError(response.error);
+    }
   };
 
   return (
