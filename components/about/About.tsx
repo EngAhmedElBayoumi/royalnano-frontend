@@ -16,7 +16,7 @@ const About = ({ showTitle }: { showTitle: boolean }) => {
     <section
       className={` ${
         showTitle ? "py-4 lg:py-6 xl:py-8" : "py-0"
-      } bg-white animate-on-scroll`}
+      } bg-white animate-on-scroll transition-all duration-500 ease-in-out`}
     >
       <h2
         className={` ${

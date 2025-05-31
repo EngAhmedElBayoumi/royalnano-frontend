@@ -1,12 +1,13 @@
 "use client";
 import { useTranslations } from "next-intl";
+import { handleApiError } from "@/lib/utils/handleApiError";
 import { useCreateBranchMutation } from "@/redux/services/dashboard/inventory/branchesApi";
 import CreatePage from "@/components/dashboard/CreatePage";
 import BranchForm, {
   BranchFormValues,
 } from "@/components/dashboard/forms/BranchForm";
 
-export default function CreateBranchs() {
+export default function CreateBranch() {
   const t = useTranslations("branches");
   const [createBranch, { isLoading }] = useCreateBranchMutation();
 
@@ -16,7 +17,7 @@ export default function CreateBranchs() {
       manager: Number(data.manager),
     };
     const response = await createBranch(payload);
-    if (response.error) throw new Error("creation failed");
+    if (response.error) handleApiError(response.error);
   };
 
   return (

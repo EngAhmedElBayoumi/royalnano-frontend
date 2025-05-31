@@ -1,5 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
+import { handleApiError } from "@/lib/utils/handleApiError";
 import { useCreateApplicantMutation } from "@/redux/services/dashboard/hr/applicantsApi";
 import CreatePage from "@/components/dashboard/CreatePage";
 import ApplicantsForm, {
@@ -12,7 +13,7 @@ export default function CreateApplicant() {
 
   const handleSubmit = async (data: ApplicantsFormValues) => {
     const response = await createApplicant(data);
-    if (response.error) throw new Error("creation failed");
+    if (response.error) handleApiError(response.error);
   };
 
   return (
