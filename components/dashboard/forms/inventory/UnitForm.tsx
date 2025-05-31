@@ -37,8 +37,8 @@ const UnitForm = ({ onSubmit, defaultValues, isLoading }: UnitFormProps) => {
             <TextInput
               control={form.control}
               name="name"
-              label={t("Inventory.InventoryCategory.categoryName")}
-              placeholder={t("Inventory.InventoryCategory.categoryName")}
+              label={t("Inventory.InventoryUnit.unitName")}
+              placeholder={t("Inventory.InventoryUnit.unitName")}
             />
           </div>
         </section>

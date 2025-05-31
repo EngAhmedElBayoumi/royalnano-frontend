@@ -9,6 +9,7 @@ import EditPage from "@/components/dashboard/EditPage";
 import EmployeeForm, {
   EmployeeFormValues,
 } from "@/components/dashboard/forms/hr/EmployeeForm";
+import { handleApiError } from "@/lib/utils/handleApiError";
 
 export default function EditEmployee() {
   const searchParams = useSearchParams();
@@ -40,15 +41,7 @@ export default function EditEmployee() {
 
     const response = await updateEmployee({ id, data: payload });
     if (response.error) {
-      if ("data" in response.error) {
-        const errorData = response.error.data as Record<string, string[]>;
-        const errorMessage = Object.values(errorData).flat().join(", "); // Combine all error messages into a single string
-        throw new Error(errorMessage || "An error occurred");
-      } else if ("message" in response.error) {
-        throw new Error(response.error.message);
-      } else {
-        throw new Error("An error occurred");
-      }
+      handleApiError(response.error);
     }
   };
 
