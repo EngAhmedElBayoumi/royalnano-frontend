@@ -2,14 +2,15 @@
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { format } from "date-fns";
+import { handleApiError } from "@/lib/utils/handleApiError";
 import {
   useUpdateInterviewMutation,
   useGetInterviewByIdQuery,
 } from "@/redux/services/dashboard/hr/interviewsApi";
-import EditPage from "@/components/dashboard/EditPage";
 import InterviewsForm, {
   InterviewFormValues,
 } from "@/components/dashboard/forms/hr/InterviewForm";
+import EditPage from "@/components/dashboard/EditPage";
 
 export default function EditInterview() {
   const searchParams = useSearchParams();
@@ -36,7 +37,7 @@ export default function EditInterview() {
         interview_date: format(data.interview_date, "yyyy-MM-dd'T'HH:mm:ss'Z'"),
       },
     });
-    if (response.error) throw new Error("edit failed");
+    if (response.error) handleApiError(response.error);
   };
 
   return (

@@ -1,14 +1,15 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { handleApiError } from "@/lib/utils/handleApiError";
 import {
   useGetVacationByIdQuery,
   useUpdateVacationMutation,
 } from "@/redux/services/dashboard/hr/vacationApi";
-import EditPage from "@/components/dashboard/EditPage";
 import VacationsForm, {
   VacationsFormValues,
 } from "@/components/dashboard/forms/hr/VacationsForm";
+import EditPage from "@/components/dashboard/EditPage";
 
 export default function EditVacation() {
   const searchParams = useSearchParams();
@@ -29,7 +30,7 @@ export default function EditVacation() {
       status: data.status,
     };
     const response = await updateVacation({ id, data: payload });
-    if (response.error) throw new Error("edit failed");
+    if (response.error) handleApiError(response.error);
   };
 
   return (

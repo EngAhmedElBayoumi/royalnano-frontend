@@ -1,6 +1,7 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { handleApiError } from "@/lib/utils/handleApiError";
 import {
   useGetBlogByIdQuery,
   useUpdateBlogMutation,
@@ -18,26 +19,18 @@ export default function EditBlog() {
   const [updateBlog, { isLoading: submitting }] = useUpdateBlogMutation();
 
   const handleSubmit = async (data: BlogFormValues) => {
-    try {
-      // Create FormData instance to handle file upload
-      const formData = new FormData();
+    const formData = new FormData();
 
-      // Append text fields
-      formData.append("title", data.title);
-      formData.append("content", data.content);
+    formData.append("title", data.title);
+    formData.append("content", data.content);
 
-      // Append image file if it exists
-      if (data.image && data.image instanceof File) {
-        formData.append("image", data.image);
-      }
+    if (data.image && data.image instanceof File) {
+      formData.append("image", data.image);
+    }
 
-      const response = await updateBlog({ id, data: formData });
-      if ("error" in response) {
-        throw new Error("Edit failed");
-      }
-    } catch (error) {
-      console.log("Blog edit error:", error);
-      throw error;
+    const response = await updateBlog({ id, data: formData });
+    if (response.error) {
+      handleApiError(response.error);
     }
   };
 

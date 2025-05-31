@@ -1,6 +1,7 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { handleApiError } from "@/lib/utils/handleApiError";
 import {
   useUpdateBranchMutation,
   useGetBranchByIdQuery,
@@ -10,7 +11,7 @@ import BranchForm, {
   BranchFormValues,
 } from "@/components/dashboard/forms/BranchForm";
 
-export default function EditBranchs() {
+export default function EditBranch() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
   const t = useTranslations("branches");
@@ -28,7 +29,7 @@ export default function EditBranchs() {
       manager: Number(data.manager),
     };
     const response = await updateBranch({ id, data: payload });
-    if (response.error) throw new Error("edit failed");
+    if (response.error) handleApiError(response.error);
   };
 
   return (

@@ -1,6 +1,7 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { handleApiError } from "@/lib/utils/handleApiError";
 import {
   useGetServiceByIdQuery,
   useUpdateServiceMutation,
@@ -18,28 +19,21 @@ export default function EditService() {
   const [updateService, { isLoading: submitting }] = useUpdateServiceMutation();
 
   const handleSubmit = async (data: ServiceFormValues) => {
-    try {
-      // Create FormData instance to handle file upload
-      const formData = new FormData();
+    // Create FormData instance to handle file upload
+    const formData = new FormData();
 
-      // Append text fields
-      formData.append("name", data.name);
-      formData.append("alias", data.alias);
-      formData.append("description", data.description);
+    // Append text fields
+    formData.append("name", data.name);
+    formData.append("alias", data.alias);
+    formData.append("description", data.description);
 
-      // Append image file if it exists
-      if (data.image && data.image instanceof File) {
-        formData.append("image", data.image);
-      }
-
-      const response = await updateService({ id, data: formData });
-      if ("error" in response) {
-        throw new Error("Edit failed");
-      }
-    } catch (error) {
-      console.log("Service edit error:", error);
-      throw error;
+    // Append image file if it exists
+    if (data.image && data.image instanceof File) {
+      formData.append("image", data.image);
     }
+
+    const response = await updateService({ id, data: formData });
+    if (response.error) handleApiError(response.error);
   };
 
   return (

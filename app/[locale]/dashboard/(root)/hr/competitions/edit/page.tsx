@@ -1,6 +1,7 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { handleApiError } from "@/lib/utils/handleApiError";
 import CompetitionForm, {
   CompetitionFormValues,
 } from "@/components/dashboard/forms/hr/CompetitionForm";
@@ -31,7 +32,7 @@ export default function EditCompetition() {
       winner: Number(data.winner),
     };
     const response = await updateCompetition({ id, data: payload });
-    if (response.error) throw new Error("edit failed");
+    if (response.error) handleApiError(response.error);
   };
 
   return (

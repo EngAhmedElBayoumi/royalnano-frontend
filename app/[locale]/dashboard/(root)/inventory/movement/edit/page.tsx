@@ -1,13 +1,14 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
-import MovementForm, {
-  MovementFormValues,
-} from "@/components/dashboard/forms/inventory/MovementForm";
+import { handleApiError } from "@/lib/utils/handleApiError";
 import {
   useGetMovementByIdQuery,
   useUpdateMovementMutation,
 } from "@/redux/services/dashboard/inventory/movementApi";
+import MovementForm, {
+  MovementFormValues,
+} from "@/components/dashboard/forms/inventory/MovementForm";
 import EditPage from "@/components/dashboard/EditPage";
 
 export default function EditMovement() {
@@ -30,7 +31,7 @@ export default function EditMovement() {
       movement_date: new Date(data.movement_date).toISOString().slice(0, 10),
     };
     const response = await updateMovement({ id, data: payload });
-    if (response.error) throw new Error("edit failed");
+    if (response.error) handleApiError(response.error);
   };
 
   return (

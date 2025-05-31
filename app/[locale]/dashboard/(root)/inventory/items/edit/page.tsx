@@ -1,6 +1,7 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { handleApiError } from "@/lib/utils/handleApiError";
 import {
   useGetItemByIdQuery,
   useUpdateItemMutation,
@@ -34,7 +35,7 @@ export default function EditItem() {
       supplier: Number(data.supplier),
     };
     const response = await updateItem({ id, data: payload });
-    if (response.error) throw new Error("edit failed");
+    if (response.error) handleApiError(response.error);
   };
 
   return (

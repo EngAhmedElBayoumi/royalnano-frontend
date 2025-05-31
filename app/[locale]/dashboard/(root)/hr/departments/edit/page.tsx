@@ -1,6 +1,7 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { handleApiError } from "@/lib/utils/handleApiError";
 import {
   useUpdateDepartmentMutation,
   useGetDepartmentByIdQuery,
@@ -24,7 +25,7 @@ export default function EditDepartment() {
 
   const handleSubmit = async (data: DepartmentFormValues) => {
     const response = await updateDepartment({ id, data });
-    if (response.error) throw new Error("edit failed");
+    if (response.error) handleApiError(response.error);
   };
 
   return (

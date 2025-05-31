@@ -1,9 +1,15 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { handleApiError } from "@/lib/utils/handleApiError";
+import {
+  useGetSupplierByIdQuery,
+  useUpdateSupplierMutation,
+} from "@/redux/services/dashboard/purchase/supplierApi";
+import SupplierForm, {
+  SupplierFormValues,
+} from "@/components/dashboard/forms/purchase/SupplierForm";
 import EditPage from "@/components/dashboard/EditPage";
-import { useGetSupplierByIdQuery, useUpdateSupplierMutation } from "@/redux/services/dashboard/purchase/supplierApi";
-import SupplierForm, { SupplierFormValues } from "@/components/dashboard/forms/purchase/SupplierForm";
 
 export default function EditPurchaseSupplier() {
   const searchParams = useSearchParams();
@@ -39,29 +45,14 @@ export default function EditPurchaseSupplier() {
 
   // Handle form submission
   const handleSubmit = async (data: SupplierFormValues) => {
-    try {
-      const payload = {
-        ...data,
-        id: Number(data.id), 
-        branch: Number(data.branch), 
-        accounting_expenses_category: Number(data.accounting_expenses_category), 
-      };
-
-      console.log("Payload being sent to the API:", payload); 
-
-      const response = await updateSupplier({ id, data: payload });
-
-      console.log("API Response:", response); 
-
-      if ("error" in response) {
-        const errorMessage = response.data.message || "Edit failed";
-        console.error("API Error Details:", response.error); 
-        throw new Error(errorMessage);
-      }
-    } catch (error) {
-      console.error("Error updating supplier:", error);
-      throw error; 
-    }
+    const payload = {
+      ...data,
+      id: Number(data.id),
+      branch: Number(data.branch),
+      accounting_expenses_category: Number(data.accounting_expenses_category),
+    };
+    const response = await updateSupplier({ id, data: payload });
+    if (response.error) handleApiError(response.error);
   };
 
   return (

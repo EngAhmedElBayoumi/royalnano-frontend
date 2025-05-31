@@ -2,6 +2,7 @@
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { format } from "date-fns";
+import { handleApiError } from "@/lib/utils/handleApiError";
 import {
   useUpdateAttendanceMutation,
   useGetAttendanceByIdQuery,
@@ -49,7 +50,7 @@ export default function EditAttendance() {
       check_out: format(data.check_out, "HH:mm:ss"),
     };
     const response = await updateAttendance({ id, data: payload });
-    if (response.error) throw new Error("edit failed");
+    if (response.error) handleApiError(response.error);
   };
 
   return (

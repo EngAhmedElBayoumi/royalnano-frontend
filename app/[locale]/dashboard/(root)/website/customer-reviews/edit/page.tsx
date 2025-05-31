@@ -1,6 +1,7 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { handleApiError } from "@/lib/utils/handleApiError";
 import {
   useGetReviewByIdQuery,
   useUpdateReviewMutation,
@@ -24,27 +25,18 @@ export default function EditCustomerReview() {
   };
 
   const handleSubmit = async (data: CustomerReviewFormValues) => {
-    try {
-      // Create FormData instance to handle file upload
-      const formData = new FormData();
+    const formData = new FormData();
 
-      // Append text fields
-      formData.append("name", data.name);
-      formData.append("review", data.review);
-      formData.append("rating", data.rating.toString());
+    formData.append("name", data.name);
+    formData.append("review", data.review);
+    formData.append("rating", data.rating.toString());
 
-      // Append image file if it exists
-      if (data.image && data.image instanceof File) {
-        formData.append("image", data.image);
-      }
-
-      const response = await updateReview({ id, data: formData });
-      if ("error" in response) {
-        throw new Error("Edit failed");
-      }
-    } catch (error) {
-      throw error;
+    if (data.image && data.image instanceof File) {
+      formData.append("image", data.image);
     }
+
+    const response = await updateReview({ id, data: formData });
+    if (response.error) handleApiError(response.error);
   };
 
   return (

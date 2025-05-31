@@ -1,6 +1,7 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { handleApiError } from "@/lib/utils/handleApiError";
 import {
   useUpdateBonusMutation,
   useGetBonusByIdQuery,
@@ -29,7 +30,7 @@ export default function EditBonus() {
       employee: Number(data.employee),
     };
     const response = await updateBonus({ id, data: payload });
-    if (response.error) throw new Error("edit failed");
+    if (response.error) handleApiError(response.error);
   };
 
   return (

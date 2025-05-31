@@ -1,6 +1,7 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { handleApiError } from "@/lib/utils/handleApiError";
 import EvaluationForm, {
   EvaluationFormValues,
 } from "@/components/dashboard/forms/hr/EvaluationForm";
@@ -26,7 +27,7 @@ export default function EditEvaluation() {
 
   const handleSubmit = async (data: EvaluationFormValues) => {
     const response = await updateEvaluation({ id, data });
-    if (response.error) throw new Error("edit failed");
+    if (response.error) handleApiError(response.error);
   };
 
   return (

@@ -1,14 +1,15 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { handleApiError } from "@/lib/utils/handleApiError";
 import {
   useGetPreorderByIdQuery,
   useUpdatePreorderMutation,
 } from "@/redux/services/dashboard/inventory/preorderApi";
-import EditPage from "@/components/dashboard/EditPage";
 import PreorderForm, {
   PreorderFormValues,
 } from "@/components/dashboard/forms/inventory/PreorderForm";
+import EditPage from "@/components/dashboard/EditPage";
 
 export default function EditPreorder() {
   const searchParams = useSearchParams();
@@ -30,7 +31,7 @@ export default function EditPreorder() {
       item: Number(data.item),
     };
     const response = await updatePreorder({ id, data: payload });
-    if (response.error) throw new Error("edit failed");
+    if (response.error) handleApiError(response.error);
   };
 
   return (
