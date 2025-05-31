@@ -21,7 +21,7 @@ export default function EditUnit() {
   const { data: unit, isLoading, error } = useGetUnitByIdQuery(id);
 
   const handleSubmit = async (data: UnitFormValues) => {
-    const response = await updateUnit({ ...data, id });
+    const response = await updateUnit({ id, data });
     if (response.error) handleApiError(response.error);
   };
 
