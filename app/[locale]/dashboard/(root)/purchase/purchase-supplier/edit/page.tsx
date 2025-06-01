@@ -15,11 +15,10 @@ export default function EditPurchaseSupplier() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
   const t = useTranslations("Purchase.Supplier");
-  const tabTranslate = useTranslations("Purchase");
 
   const { data, isLoading, error } = useGetSupplierByIdQuery(id);
-
-  const [updateSupplier] = useUpdateSupplierMutation();
+  const [updateSupplier, { isLoading: submitting }] =
+    useUpdateSupplierMutation();
   const defaultValues: SupplierFormValues | undefined = data && {
     ...data,
     title: data.title || "",
@@ -43,7 +42,6 @@ export default function EditPurchaseSupplier() {
     accounting_expenses_category: data.accounting_expenses_category || 0,
   };
 
-  // Handle form submission
   const handleSubmit = async (data: SupplierFormValues) => {
     const payload = {
       ...data,
@@ -60,10 +58,11 @@ export default function EditPurchaseSupplier() {
       title={t("editPurchaseSupplier")}
       data={defaultValues}
       isLoading={isLoading}
+      submitting={submitting}
       error={error}
       onSubmit={handleSubmit}
       Form={SupplierForm}
-      redirectPath={`/dashboard/purchase?tab=${tabTranslate("supplier")}`}
+      redirectPath="/dashboard/purchase?tab=supplier"
     />
   );
 }

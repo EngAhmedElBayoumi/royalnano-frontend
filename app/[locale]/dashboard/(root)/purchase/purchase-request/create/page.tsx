@@ -25,12 +25,8 @@ export default function CreateRequest() {
         total: Number(item.total),
       })),
     };
-
     const response = await createRequest(payload);
-
-    if ("error" in response) {
-      handleApiError(response.error);
-    }
+    if (response.error) handleApiError(response.error);
   };
 
   return (
@@ -38,8 +34,8 @@ export default function CreateRequest() {
       title={t("addRequest")}
       onSubmit={handleSubmit}
       Form={PurchaseRequestForm}
-      redirectPath={`/dashboard/purchase?tab=${t("request")}`}
       isLoading={isLoading}
+      redirectPath="/dashboard/purchase?tab=request"
     />
   );
 }

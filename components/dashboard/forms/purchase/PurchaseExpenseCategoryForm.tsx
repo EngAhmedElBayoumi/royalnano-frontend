@@ -1,20 +1,15 @@
 "use client";
-import { Form } from "@/components/ui/form";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import CustomButton from "@/components/formFields/CustomButton";
-import TextInput from "@/components/formFields/TextInput";
 import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
-import { z } from "zod";
-
-export const expenseCategorySchema = z.object({
-  id: z.number().optional(),
-  name: z.string().min(1, "Name is required"),
-  description: z.string().optional(),
-});
-
-export type ExpenseCategoryFormValues = z.infer<typeof expenseCategorySchema>;
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  ExpenseCategoryFormValues,
+  expenseCategorySchema,
+} from "@/lib/validations/dashboard/purchase/expenseCategorySchema";
+import { useForm } from "react-hook-form";
+import { Form } from "@/components/ui/form";
+import CustomButton from "@/components/formFields/CustomButton";
+import TextInput from "@/components/formFields/TextInput";
 
 interface ExpenseCategoryFormProps {
   onSubmit: (data: ExpenseCategoryFormValues) => Promise<void>;

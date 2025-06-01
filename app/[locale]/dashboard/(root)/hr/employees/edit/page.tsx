@@ -15,6 +15,7 @@ export default function EditEmployee() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
   const t = useTranslations("hr");
+
   const { data, isLoading, error } = useGetEmployeeByIdQuery(id);
   const [updateEmployee, { isLoading: submitting }] =
     useUpdateEmployeeMutation();
@@ -40,9 +41,7 @@ export default function EditEmployee() {
     };
 
     const response = await updateEmployee({ id, data: payload });
-    if (response.error) {
-      handleApiError(response.error);
-    }
+    if (response.error) handleApiError(response.error);
   };
 
   return (
@@ -54,7 +53,7 @@ export default function EditEmployee() {
       submitting={submitting}
       onSubmit={handleSubmit}
       Form={EmployeeForm}
-      redirectPath={`/dashboard/hr?tab=${t("tabs.employees")}`}
+      redirectPath="/dashboard/hr?tab=employees"
     />
   );
 }

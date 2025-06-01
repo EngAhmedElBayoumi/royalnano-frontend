@@ -19,6 +19,7 @@ function PurchasePage() {
   );
   const tabs = [
     {
+      id: "expense-category",
       label: t("expenseCategory"),
       permissionKey: "expensecategory",
       icon: (
@@ -32,9 +33,9 @@ function PurchasePage() {
       content: <PurchaseExpenseCategory />,
     },
     {
+      id: "invoice",
       label: t("invoice"),
-      //to be edited
-      permissionKey: "invoicedetail",
+      permissionKey: "invoicedetail", // To be edited if needed
       icon: (
         <Image
           src="/assets/icons/dashboard/sales/invoice.svg"
@@ -46,6 +47,7 @@ function PurchasePage() {
       content: <PurchaseInvoice />,
     },
     {
+      id: "order",
       label: t("order"),
       permissionKey: "purchaseorder",
       icon: (
@@ -59,9 +61,9 @@ function PurchasePage() {
       content: <PurchaseOrder />,
     },
     {
+      id: "request",
       label: t("request"),
-      //to be edited
-      permissionKey: "purchaserequest",
+      permissionKey: "purchaserequest", // To be edited if needed
       icon: (
         <Image
           src="/assets/icons/dashboard/sales/invoice.svg"
@@ -73,6 +75,7 @@ function PurchasePage() {
       content: <PurchaseRequest />,
     },
     {
+      id: "supplier",
       label: t("supplier"),
       permissionKey: "supplier",
       icon: (
@@ -86,6 +89,7 @@ function PurchasePage() {
       content: <PurchaseSupplier />,
     },
     {
+      id: "warehouse",
       label: t("warehouse"),
       permissionKey: "warehouse",
       icon: (
@@ -103,7 +107,7 @@ function PurchasePage() {
   const filteredTabs = tabs.filter((tab) => {
     return permissions[tab.permissionKey]?.view;
   });
-  return <CustomTabs tabs={filteredTabs} defaultTab={filteredTabs[0]?.label} />;
+  return <CustomTabs tabs={filteredTabs} defaultTab={filteredTabs[0]?.id} />;
 }
 
 export default PurchasePage;

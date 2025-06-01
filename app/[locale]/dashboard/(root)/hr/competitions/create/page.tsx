@@ -26,7 +26,7 @@ export default function CreateCompetition() {
       title={t("competitions.createCompetition")}
       onSubmit={handleSubmit}
       Form={CompetitionForm}
-      redirectPath={`/dashboard/hr?tab=${t("tabs.competitions")}`}
+      redirectPath="/dashboard/hr?tab=competitions"
       isLoading={isLoading}
     />
   );

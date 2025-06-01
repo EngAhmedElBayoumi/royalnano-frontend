@@ -9,7 +9,7 @@ import CreatePage from "@/components/dashboard/CreatePage";
 
 export default function CreateCustomerReview() {
   const [createReview, { isLoading }] = useCreateReviewMutation();
-  const t = useTranslations("dashboardWebsite");
+  const t = useTranslations("dashboardWebsite.CustomerReviews");
 
   const handleSubmit = async (data: CustomerReviewFormValues) => {
     // Create FormData instance to handle file upload
@@ -33,10 +33,10 @@ export default function CreateCustomerReview() {
 
   return (
     <CreatePage
-      title={t("CustomerReviews.addCustomerReview")}
+      title={t("addCustomerReview")}
       onSubmit={handleSubmit}
       Form={CustomerReviewForm}
-      redirectPath={`/dashboard/website?tab=${t("tabs.customerReviews")}`}
+      redirectPath="/dashboard/website?tab=customer-reviews"
       isLoading={isLoading}
     />
   );

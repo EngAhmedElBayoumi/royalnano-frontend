@@ -8,7 +8,7 @@ import { useCreateEvaluationMutation } from "@/redux/services/dashboard/hr/evalu
 import CreatePage from "@/components/dashboard/CreatePage";
 
 export default function CreateEvaluation() {
-  const t = useTranslations("hr");
+  const t = useTranslations("hr.evaluations");
   const [createEvaluation, { isLoading }] = useCreateEvaluationMutation();
 
   const handleSubmit = async (data: EvaluationFormValues) => {
@@ -18,10 +18,10 @@ export default function CreateEvaluation() {
 
   return (
     <CreatePage
-      title={t("evaluations.addEvaluation")}
+      title={t("addEvaluation")}
       onSubmit={handleSubmit}
       Form={EvaluationForm}
-      redirectPath={`/dashboard/hr?tab=${t("tabs.evaluations")}`}
+      redirectPath="/dashboard/hr?tab=evaluations"
       isLoading={isLoading}
     />
   );

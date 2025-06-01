@@ -15,7 +15,6 @@ export default function EditUnit() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
   const t = useTranslations("Inventory.InventoryUnit");
-  const tabTranslate = useTranslations("Inventory");
 
   const [updateUnit, { isLoading: submitting }] = useUpdateUnitMutation();
   const { data: unit, isLoading, error } = useGetUnitByIdQuery(id);
@@ -34,7 +33,7 @@ export default function EditUnit() {
       submitting={submitting}
       onSubmit={handleSubmit}
       Form={UnitForm}
-      redirectPath={`/dashboard/inventory?tab=${tabTranslate("units")}`}
+      redirectPath="/dashboard/inventory?tab=units"
     />
   );
 }

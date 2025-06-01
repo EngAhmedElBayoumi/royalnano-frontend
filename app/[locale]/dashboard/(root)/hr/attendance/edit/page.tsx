@@ -16,9 +16,11 @@ export default function EditAttendance() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
   const t = useTranslations("hr");
+
   const { data, isLoading, error } = useGetAttendanceByIdQuery(id);
   const [updateAttendance, { isLoading: submitting }] =
     useUpdateAttendanceMutation();
+
   const checkInDate =
     data && data?.check_in
       ? new Date(`${data.date}T${data.check_in}`)
@@ -62,7 +64,7 @@ export default function EditAttendance() {
       submitting={submitting}
       onSubmit={handleSubmit}
       Form={AttendanceForm}
-      redirectPath={`/dashboard/hr?tab=${t("tabs.attendance")}`}
+      redirectPath="/dashboard/hr?tab=attendance"
     />
   );
 }

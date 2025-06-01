@@ -43,26 +43,44 @@ const TableActions = ({
           />
         </button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-40">
+      <DropdownMenuContent
+        className="bg-dashboardBg shadow-md rounded-lg px-4"
+        align="start"
+        sideOffset={5}
+      >
         {showView && onView && (
           <DropdownMenuItem
-            className="bg-dashboardBg shadow-md py-1 cursor-pointer capitalize"
+            className="py-1 cursor-pointer capitalize flex items-center gap-2"
             onClick={(e) => onView(id, e)}
           >
+            <Image
+              src="/assets/icons/eye.svg"
+              alt="view"
+              width={18}
+              height={18}
+              className="saturate-0 hover:saturate-100 transition"
+            />
             {t("view")}
           </DropdownMenuItem>
         )}
         {showEdit && onEdit && (
           <DropdownMenuItem
-            className="bg-dashboardBg shadow-md py-1 cursor-pointer capitalize"
+            className="py-1 cursor-pointer capitalize flex items-center gap-2"
             onClick={(e) => onEdit(id, e)}
           >
             {t("edit")}
+            <Image
+              src="/assets/icons/edit.svg"
+              alt="edit"
+              width={18}
+              height={18}
+              className="saturate-0 hover:saturate-100 transition"
+            />
           </DropdownMenuItem>
         )}
         {isClientRequest && status === "pending" && onSetInitialPrice && (
           <DropdownMenuItem
-            className="bg-dashboardBg shadow-md py-1 cursor-pointer capitalize"
+            className="py-1 cursor-pointer capitalize"
             onClick={() => onSetInitialPrice(id)}
           >
             Set Initial Price

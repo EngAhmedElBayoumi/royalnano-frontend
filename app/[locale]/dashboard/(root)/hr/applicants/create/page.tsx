@@ -21,7 +21,7 @@ export default function CreateApplicant() {
       title={t("applicants.addApplicant")}
       onSubmit={handleSubmit}
       Form={ApplicantsForm}
-      redirectPath={`/dashboard/hr?tab=${t("tabs.applicants")}`}
+      redirectPath="/dashboard/hr?tab=applicants"
       isLoading={isLoading}
     />
   );

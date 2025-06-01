@@ -14,7 +14,7 @@ import EditPage from "@/components/dashboard/EditPage";
 export default function EditCustomerReview() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
-  const t = useTranslations("dashboardWebsite");
+  const t = useTranslations("dashboardWebsite.CustomerReviews");
   const { data, isLoading, error } = useGetReviewByIdQuery(id);
   const [updateReview, { isLoading: submitting }] = useUpdateReviewMutation();
 
@@ -41,14 +41,14 @@ export default function EditCustomerReview() {
 
   return (
     <EditPage
-      title={t("CustomerReviews.editCustomerReview")}
+      title={t("editCustomerReview")}
       data={defaultValues}
       isLoading={isLoading}
       error={error}
       submitting={submitting}
       onSubmit={handleSubmit}
       Form={CustomerReviewForm}
-      redirectPath={`/dashboard/website?tab=${t("tabs.customerReviews")}`}
+      redirectPath="/dashboard/website?tab=customer-reviews"
     />
   );
 }

@@ -8,7 +8,7 @@ import MovementForm, {
 } from "@/components/dashboard/forms/inventory/MovementForm";
 
 export default function CreateMovement() {
-  const t = useTranslations("Inventory");
+  const t = useTranslations("Inventory.InventoryMovement");
   const [createMovement, { isLoading }] = useCreateMovementMutation();
 
   const handleSubmit = async (data: MovementFormValues) => {
@@ -18,17 +18,15 @@ export default function CreateMovement() {
       movement_date: new Date(data.movement_date).toISOString().slice(0, 10),
     };
     const response = await createMovement(payload);
-    if (response.error) {
-      handleApiError(response.error);
-    }
+    if (response.error) handleApiError(response.error);
   };
 
   return (
     <CreatePage
-      title={t("InventoryMovement.addMovement")}
+      title={t("addMovement")}
       onSubmit={handleSubmit}
       Form={MovementForm}
-      redirectPath={`/dashboard/inventory?tab=${t("movement")}`}
+      redirectPath="/dashboard/inventory?tab=movement"
       isLoading={isLoading}
     />
   );

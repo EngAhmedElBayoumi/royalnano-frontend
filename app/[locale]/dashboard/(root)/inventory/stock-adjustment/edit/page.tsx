@@ -17,7 +17,7 @@ export default function EditStockAdjustment() {
   const [updateStockAdjustment, { isLoading: submitting }] =
     useUpdateStockAdjustmentMutation();
   const { data, isLoading, error } = useGetStockAdjustmentByIdQuery(id);
-  const t = useTranslations("inventory");
+  const t = useTranslations("Inventory.InventoryStockAdjustment");
 
   const defaultValues: StockAdjustmentFormValues = data && {
     ...data,
@@ -38,14 +38,14 @@ export default function EditStockAdjustment() {
 
   return (
     <EditPage
-      title={t("stockAdjustment.editStockAdjustment")}
+      title={t("editStockAdjustment")}
       data={defaultValues}
       isLoading={isLoading}
       error={error}
       submitting={submitting}
       onSubmit={handleSubmit}
       Form={StockAdjustmentForm}
-      redirectPath={`/dashboard/inventory?tab=${t("stockAdjustment")}`}
+      redirectPath="/dashboard/inventory?tab=stock-adjustment"
     />
   );
 }

@@ -8,7 +8,7 @@ import PreorderForm, {
 } from "@/components/dashboard/forms/inventory/PreorderForm";
 
 export default function CreatePreorder() {
-  const t = useTranslations("Inventory");
+  const t = useTranslations("Inventory.InventoryPreorder");
   const [createPreorder, { isLoading }] = useCreatePreorderMutation();
 
   const handleSubmit = async (data: PreorderFormValues) => {
@@ -24,10 +24,10 @@ export default function CreatePreorder() {
 
   return (
     <CreatePage
-      title={t("InventoryPreorder.addPreorder")}
+      title={t("addPreorder")}
       onSubmit={handleSubmit}
       Form={PreorderForm}
-      redirectPath={`/dashboard/inventory?tab=${t("preorder")}`}
+      redirectPath="/dashboard/inventory?tab=preorder"
       isLoading={isLoading}
     />
   );

@@ -15,7 +15,8 @@ import EditPage from "@/components/dashboard/EditPage";
 export default function EditInterview() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
-  const t = useTranslations("hr");
+  const t = useTranslations("hr.interviews");
+
   const { data, isLoading, error } = useGetInterviewByIdQuery(id);
   const [updateInterview, { isLoading: submitting }] =
     useUpdateInterviewMutation();
@@ -42,14 +43,14 @@ export default function EditInterview() {
 
   return (
     <EditPage
-      title={t("interviews.editInterview")}
+      title={t("editInterview")}
       data={defaultValues}
       isLoading={isLoading}
       error={error}
       submitting={submitting}
       onSubmit={handleSubmit}
       Form={InterviewsForm}
-      redirectPath={`/dashboard/hr?tab=${t("tabs.interviews")}`}
+      redirectPath="/dashboard/hr?tab=interviews"
     />
   );
 }

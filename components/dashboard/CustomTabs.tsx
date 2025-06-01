@@ -6,6 +6,7 @@ import { useLocale } from "next-intl";
 
 interface CustomTabsProps {
   tabs: Array<{
+    id: string;
     label: string;
     content: React.ReactNode;
     icon?: React.ReactNode;
@@ -13,7 +14,7 @@ interface CustomTabsProps {
   defaultTab?: string;
 }
 
-function CustomTabs({ tabs, defaultTab = tabs[0]?.label }: CustomTabsProps) {
+function CustomTabs({ tabs, defaultTab = tabs[0]?.id }: CustomTabsProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const locale = useLocale();
@@ -42,7 +43,7 @@ function CustomTabs({ tabs, defaultTab = tabs[0]?.label }: CustomTabsProps) {
         {tabs.map((tab, index) => (
           <TabsTrigger
             key={index}
-            value={tab.label}
+            value={tab.id}
             className="capitalize data-[state=active]:bg-dashboardBg data-[state=active]:text-primary transition-colors duration-200 p-2 flex items-center gap-2 rounded-t-[20px]"
           >
             <div className="group-data-[state=active]:[&>svg]:fill-primary group-data-[state=active]:[&>svg]:stroke-primary w-5">
@@ -54,7 +55,7 @@ function CustomTabs({ tabs, defaultTab = tabs[0]?.label }: CustomTabsProps) {
       </TabsList>
 
       {tabs.map((tab, index) => (
-        <TabsContent key={index} value={tab.label}>
+        <TabsContent key={index} value={tab.id}>
           <div className="px-6 pb-25">
             <div
               className={`bg-dashboardBg pt-4 mb-5 ${

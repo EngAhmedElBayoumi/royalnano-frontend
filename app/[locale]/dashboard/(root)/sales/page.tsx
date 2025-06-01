@@ -13,6 +13,7 @@ function SalesPage() {
 
   const tabs = [
     {
+      id: "sales-return",
       label: t("sales"),
       icon: (
         <Image
@@ -25,6 +26,8 @@ function SalesPage() {
       content: <SalesReturn />,
     },
     {
+      id: "sales-customer",
+      label: t("customer"),
       icon: (
         <Image
           width="24"
@@ -33,10 +36,11 @@ function SalesPage() {
           src="/assets/icons/dashboard/sales/customer.svg"
         />
       ),
-      label: t("customer"),
       content: <SalesCustomer />,
     },
     {
+      id: "sales-quotation",
+      label: t("salesQuotation"),
       icon: (
         <Image
           width="24"
@@ -45,11 +49,11 @@ function SalesPage() {
           src="/assets/icons/dashboard/sales/quotation.svg"
         />
       ),
-      label: t("salesQuotation"),
       content: <SalesQuotation />,
     },
-
     {
+      id: "sales-invoice",
+      label: t("salesInvoice"),
       icon: (
         <Image
           width="24"
@@ -58,10 +62,11 @@ function SalesPage() {
           src="/assets/icons/dashboard/sales/invoice.svg"
         />
       ),
-      label: t("salesInvoice"),
       content: <SalesInvoice />,
     },
     {
+      id: "client-request",
+      label: t("client"),
       icon: (
         <Image
           width="24"
@@ -70,28 +75,11 @@ function SalesPage() {
           src="/assets/icons/dashboard/sales/invoice.svg"
         />
       ),
-      label: t("client"),
       content: <ClientRequest />,
     },
-    // {
-    //   icon: (
-    //     <Image
-    //       width="24"
-    //       height="24"
-    //       alt="receipt"
-    //       src="/assets/icons/dashboard/sales/receipt.svg"
-    //     />
-    //   ),
-    //   label: t("receipt"),
-    //   content: <Attendance />,
-    // },
   ];
 
-  return (
-    <>
-      <CustomTabs tabs={tabs} defaultTab={t("sales")} />
-    </>
-  );
+  return <CustomTabs tabs={tabs} defaultTab={tabs[0].id} />;
 }
 
 export default SalesPage;

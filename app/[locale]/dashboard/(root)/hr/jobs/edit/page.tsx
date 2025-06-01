@@ -12,7 +12,7 @@ import EditPage from "@/components/dashboard/EditPage";
 export default function EditJobs() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
-  const t = useTranslations("hr");
+  const t = useTranslations("hr.jobs");
   const { data: jobData, isLoading, error } = useGetJobsByIdQuery(id);
   const [updateJobs, { isLoading: submitting }] = useUpdateJobsMutation();
 
@@ -40,14 +40,14 @@ export default function EditJobs() {
 
   return (
     <EditPage
-      title={t("jobs.editJob")}
+      title={t("editJob")}
       data={defaultValues}
       isLoading={isLoading}
       error={error}
       submitting={submitting}
       onSubmit={handleSubmit}
       Form={JobsForm}
-      redirectPath={`/dashboard/hr?tab=${t("tabs.jobs")}`}
+      redirectPath="/dashboard/hr?tab=jobs"
     />
   );
 }

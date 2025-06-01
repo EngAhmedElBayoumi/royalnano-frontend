@@ -43,8 +43,8 @@ export default function EditItem() {
       title={t("editItem")}
       data={defaultValues}
       isLoading={isLoading}
-      error={error}
       submitting={submitting}
+      error={error}
       onSubmit={handleSubmit}
       Form={ItemForm}
       redirectPath="/dashboard/inventory"

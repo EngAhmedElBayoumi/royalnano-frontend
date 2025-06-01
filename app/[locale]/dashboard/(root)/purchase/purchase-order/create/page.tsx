@@ -1,11 +1,11 @@
 "use client";
 import { useTranslations } from "next-intl";
 import { handleApiError } from "@/lib/utils/handleApiError";
-import CreatePage from "@/components/dashboard/CreatePage";
+import { useCreateOrderMutation } from "@/redux/services/dashboard/purchase/orderApi";
 import PurchaseOrderForm, {
   PurchaseOrderFormValues,
 } from "@/components/dashboard/forms/purchase/PurchaseOrderForm";
-import { useCreateOrderMutation } from "@/redux/services/dashboard/purchase/orderApi";
+import CreatePage from "@/components/dashboard/CreatePage";
 
 export default function CreateOrder() {
   const t = useTranslations("Purchase.Order");
@@ -41,10 +41,7 @@ export default function CreateOrder() {
     };
 
     const response = await createOrder(payload);
-
-    if (response.error) {
-      handleApiError(response.error);
-    }
+    if (response.error) handleApiError(response.error);
   };
 
   return (
@@ -52,7 +49,7 @@ export default function CreateOrder() {
       title={t("addOrder")}
       onSubmit={handleSubmit}
       Form={PurchaseOrderForm}
-      redirectPath={`/dashboard/purchase?tab=${t("order")}`}
+      redirectPath="/dashboard/purchase?tab=order"
       isLoading={isLoading}
     />
   );

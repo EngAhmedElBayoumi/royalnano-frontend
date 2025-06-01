@@ -30,7 +30,7 @@ export default function CreateEmployee() {
       title={t("employees.addEmployee")}
       onSubmit={handleSubmit}
       Form={EmployeeForm}
-      redirectPath={`/dashboard/hr?tab=${t("tabs.employees")}`}
+      redirectPath="/dashboard/hr?tab=employees"
       isLoading={isLoading}
     />
   );

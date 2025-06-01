@@ -9,7 +9,7 @@ import InterviewsForm, {
 } from "@/components/dashboard/forms/hr/InterviewForm";
 
 export default function CreateInterview() {
-  const t = useTranslations("hr");
+  const t = useTranslations("hr.interviews");
   const [createInterview, { isLoading }] = useCreateInterviewMutation();
 
   const handleSubmit = async (data: InterviewFormValues) => {
@@ -24,10 +24,10 @@ export default function CreateInterview() {
 
   return (
     <CreatePage
-      title={t("interviews.addInterview")}
+      title={t("addInterview")}
       onSubmit={handleSubmit}
       Form={InterviewsForm}
-      redirectPath={`/dashboard/hr?tab=${t("tabs.interviews")}`}
+      redirectPath="/dashboard/hr?tab=interviews"
       isLoading={isLoading}
     />
   );

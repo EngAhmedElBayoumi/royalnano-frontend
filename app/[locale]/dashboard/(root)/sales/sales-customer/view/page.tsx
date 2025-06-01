@@ -19,6 +19,7 @@ export default function SalesCustomerViewPage() {
 
   const tabs = [
     {
+      id: "info",
       label: "info",
       icon: (
         <Image
@@ -31,6 +32,7 @@ export default function SalesCustomerViewPage() {
       content: <CustomerInfoTab customerId={Number(id)} />,
     },
     {
+      id: "followups",
       label: "followups",
       icon: (
         <Image
@@ -43,6 +45,7 @@ export default function SalesCustomerViewPage() {
       content: <FollowupsTab customerId={Number(id)} />,
     },
     {
+      id: "quotations",
       label: "quotations",
       icon: (
         <Image

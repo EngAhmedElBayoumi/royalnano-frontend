@@ -1,6 +1,7 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { handleApiError } from "@/lib/utils/handleApiError";
 import {
   useGetCategoryByIdQuery,
   useUpdateCategoryMutation,
@@ -14,7 +15,6 @@ export default function EditCategory() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
   const t = useTranslations("Inventory.InventoryCategory");
-  const tabTranslate = useTranslations("Inventory");
 
   const [updateCategory, { isLoading: submitting }] =
     useUpdateCategoryMutation();
@@ -22,7 +22,7 @@ export default function EditCategory() {
 
   const handleSubmit = async (data: CategoryFormValues) => {
     const response = await updateCategory({ ...data, id });
-    if (response.error) throw new Error("update failed");
+    if (response.error) handleApiError(response.error);
   };
 
   return (
@@ -34,7 +34,7 @@ export default function EditCategory() {
       submitting={submitting}
       onSubmit={handleSubmit}
       Form={CategoryForm}
-      redirectPath={`/dashboard/inventory?tab=${tabTranslate("categoryModel")}`}
+      redirectPath="/dashboard/inventory?tab=category"
     />
   );
 }

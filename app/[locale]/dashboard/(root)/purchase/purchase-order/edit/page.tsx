@@ -15,7 +15,7 @@ export default function EditPurchaseRequest() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
   const t = useTranslations("Purchase.Request");
-  const tabTranslate = useTranslations("Purchase");
+
   const { data, isLoading, error } = useGetRequestByIdQuery(id);
   const [updatePreRequest, { isLoading: submitting }] =
     useUpdateRequestMutation();
@@ -34,7 +34,7 @@ export default function EditPurchaseRequest() {
       onSubmit={handleSubmit}
       Form={PurchaseRequestForm}
       submitting={submitting}
-      redirectPath={`/dashboard/purchase?tab=${tabTranslate("request")}`}
+      redirectPath="/dashboard/purchase?tab=request"
     />
   );
 }

@@ -14,7 +14,8 @@ import EditPage from "@/components/dashboard/EditPage";
 export default function EditGallery() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
-  const t = useTranslations("dashboardWebsite");
+  const t = useTranslations("dashboardWebsite.gallery");
+
   const [updateGallery, { isLoading: submitting }] = useUpdateGalleryMutation();
   const { data, isLoading, error } = useGetGalleryByIdQuery(id);
 
@@ -52,14 +53,14 @@ export default function EditGallery() {
   };
   return (
     <EditPage
-      title={t("gallery.editGallery")}
+      title={t("editGallery")}
       data={defaultValues}
       submitting={submitting}
       isLoading={isLoading}
       error={error}
       onSubmit={handleSubmit}
       Form={GalleryForm}
-      redirectPath={`/dashboard/website?tab=${t("tabs.gallery")}`}
+      redirectPath="/dashboard/website?tab=tabs.gallery"
     />
   );
 }

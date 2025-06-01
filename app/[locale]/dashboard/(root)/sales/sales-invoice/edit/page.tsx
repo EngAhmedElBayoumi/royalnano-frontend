@@ -16,7 +16,6 @@ export default function EditSalesInvoice() {
   const id = searchParams.get("id");
 
   const t = useTranslations("Sales.SalesInvoice");
-  const tabTranslate = useTranslations("Sales");
 
   const { data, isLoading, error } = useGetSalesInvoiceByIdQuery(id);
   const [updatePreorder, { isLoading: submitting }] =
@@ -24,7 +23,6 @@ export default function EditSalesInvoice() {
 
   const handleSubmit = async (data: SalesInvoiceFormValues) => {
     const response = await updatePreorder({ id, data });
-
     if (response.error) handleApiError(response.error);
   };
 
@@ -37,7 +35,7 @@ export default function EditSalesInvoice() {
       onSubmit={handleSubmit}
       Form={SalesInvoiceForm}
       submitting={submitting}
-      redirectPath={`/dashboard/sales?tab=${tabTranslate("salesInvoice")}`}
+      redirectPath="/dashboard/sales?tab=sales-invoice"
     />
   );
 }

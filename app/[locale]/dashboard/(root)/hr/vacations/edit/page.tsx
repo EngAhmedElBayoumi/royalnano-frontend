@@ -14,7 +14,8 @@ import EditPage from "@/components/dashboard/EditPage";
 export default function EditVacation() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
-  const t = useTranslations("hr");
+  const t = useTranslations("hr.vacation");
+
   const { data, isLoading, error } = useGetVacationByIdQuery(id);
   const [updateVacation, { isLoading: submitting }] =
     useUpdateVacationMutation();
@@ -35,14 +36,14 @@ export default function EditVacation() {
 
   return (
     <EditPage
-      title={t("vacation.editVacation")}
+      title={t("editVacation")}
       data={defaultValues}
       isLoading={isLoading}
       error={error}
       submitting={submitting}
       onSubmit={handleSubmit}
       Form={VacationsForm}
-      redirectPath={`/dashboard/hr?tab=${t("tabs.vacation")}`}
+      redirectPath="/dashboard/hr?tab=vacation"
     />
   );
 }

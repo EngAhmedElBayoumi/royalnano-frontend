@@ -1,13 +1,11 @@
 "use client";
 import { useTranslations } from "next-intl";
 import { handleApiError } from "@/lib/utils/handleApiError";
-import CreatePage from "@/components/dashboard/CreatePage";
 import { useCreateSupplierMutation } from "@/redux/services/dashboard/purchase/supplierApi";
 import SupplierForm, {
   SupplierFormValues,
 } from "@/components/dashboard/forms/purchase/SupplierForm";
-// import PurchaseSupplierForm, { PurchaseSupplierFormValues } from "@/components/dashboard/forms/purchase/PurchaseSupplierForm";
-// import { useCreateSupplierMutation } from "@/redux/services/dashboard/purchase/supplier";
+import CreatePage from "@/components/dashboard/CreatePage";
 
 export default function CreateSupplier() {
   const t = useTranslations("Purchase.Supplier");
@@ -27,12 +25,8 @@ export default function CreateSupplier() {
       //   total: Number(item.total),
       // })),
     };
-
     const response = await createSupplier(payload);
-
-    if (response.error) {
-      handleApiError(response.error);
-    }
+    if (response.error) handleApiError(response.error);
   };
 
   return (
@@ -40,7 +34,7 @@ export default function CreateSupplier() {
       title={t("addSupplier")}
       onSubmit={handleSubmit}
       Form={SupplierForm}
-      redirectPath={`/dashboard/purchase?tab=${t("supplier")}`}
+      redirectPath="/dashboard/purchase?tab=supplier"
       isLoading={isLoading}
     />
   );

@@ -8,7 +8,7 @@ import StockAdjustmentForm, {
 } from "@/components/dashboard/forms/inventory/StockAdjustmentForm";
 
 export default function CreateStockAdjustment() {
-  const t = useTranslations("Inventory");
+  const t = useTranslations("Inventory.InventoryStockAdjustment");
   const [createStockAdjustment, { isLoading }] =
     useCreateStockAdjustmentMutation();
 
@@ -21,17 +21,15 @@ export default function CreateStockAdjustment() {
         .slice(0, 10),
     };
     const response = await createStockAdjustment(payload);
-    if (response.error) {
-      handleApiError(response.error);
-    }
+    if (response.error) handleApiError(response.error);
   };
 
   return (
     <CreatePage
-      title={t("InventoryStockAdjustment.addStockAdjustment")}
+      title={t("addStockAdjustment")}
       onSubmit={handleSubmit}
       Form={StockAdjustmentForm}
-      redirectPath={`/dashboard/inventory?tab=${t("stockAdjustment")}`}
+      redirectPath="/dashboard/inventory?tab=stock-adjustment"
       isLoading={isLoading}
     />
   );

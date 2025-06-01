@@ -8,22 +8,20 @@ import CategoryForm, {
 } from "@/components/dashboard/forms/inventory/CategoryForm";
 
 export default function CreateCategory() {
-  const t = useTranslations("Inventory");
+  const t = useTranslations("Inventory.InventoryCategory");
   const [createCategory, { isLoading }] = useCreateCategoryMutation();
 
   const handleSubmit = async (data: CategoryFormValues) => {
     const response = await createCategory(data);
-    if (response.error) {
-      handleApiError(response.error);
-    }
+    if (response.error) handleApiError(response.error);
   };
 
   return (
     <CreatePage
-      title={t("InventoryCategory.addCategory")}
+      title={t("addCategory")}
       onSubmit={handleSubmit}
       Form={CategoryForm}
-      redirectPath={`/dashboard/inventory?tab=${t("categoryModel")}`}
+      redirectPath="/dashboard/inventory?tab=category"
       isLoading={isLoading}
     />
   );

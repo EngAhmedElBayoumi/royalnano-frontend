@@ -15,7 +15,7 @@ export default function EditPurchaseOrder() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
   const t = useTranslations("Purchase.Order");
-  const tabTranslate = useTranslations("Purchase");
+
   const { data, isLoading, error } = useGetOrderByIdQuery(id);
   const [updatePreorder] = useUpdateOrderMutation();
 
@@ -32,7 +32,7 @@ export default function EditPurchaseOrder() {
       error={error}
       onSubmit={handleSubmit}
       Form={PurchaseOrderForm}
-      redirectPath={`/dashboard/purchase?tab=${tabTranslate("order")}`}
+      redirectPath="/dashboard/purchase?tab=order"
     />
   );
 }

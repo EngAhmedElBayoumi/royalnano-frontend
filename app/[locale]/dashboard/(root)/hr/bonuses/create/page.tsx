@@ -25,7 +25,7 @@ export default function CreateBonus() {
       title={t("bonuses.addBonus")}
       onSubmit={handleSubmit}
       Form={BonusesForm}
-      redirectPath={`/dashboard/hr?tab=${t("tabs.bonuses")}`}
+      redirectPath="/dashboard/hr?tab=bonuses"
       isLoading={isLoading}
     />
   );

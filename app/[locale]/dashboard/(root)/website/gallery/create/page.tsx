@@ -9,7 +9,7 @@ import CreatePage from "@/components/dashboard/CreatePage";
 
 export default function CreateGallery() {
   const [createGallery, { isLoading }] = useCreateGalleryMutation();
-  const t = useTranslations("dashboardWebsite");
+  const t = useTranslations("dashboardWebsite.gallery");
 
   const handleSubmit = async (data: GalleryFormValues) => {
     const formData = new FormData();
@@ -33,18 +33,16 @@ export default function CreateGallery() {
     }
 
     const response = await createGallery(formData);
-    if (response.error) {
-      handleApiError(response.error);
-    }
+    if (response.error) handleApiError(response.error);
   };
 
   return (
     <CreatePage
-      title={t("gallery.addGallery")}
+      title={t("addGallery")}
       onSubmit={handleSubmit}
       Form={GalleryForm}
-      redirectPath={`/dashboard/website?tab=${t("tabs.gallery")}`}
       isLoading={isLoading}
+      redirectPath="/dashboard/website?tab=tabs.gallery"
     />
   );
 }

@@ -39,7 +39,7 @@ export default function EditApplicant() {
       submitting={submitting}
       onSubmit={handleSubmit}
       Form={ApplicantsForm}
-      redirectPath={`/dashboard/hr?tab=${t("tabs.applicants")}`}
+      redirectPath="/dashboard/hr?tab=applicants"
     />
   );
 }

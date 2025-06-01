@@ -14,7 +14,8 @@ import EditPage from "@/components/dashboard/EditPage";
 export default function EditBlog() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
-  const t = useTranslations("dashboardWebsite");
+  const t = useTranslations("dashboardWebsite.Blogs");
+
   const { data, isLoading, error } = useGetBlogByIdQuery(id);
   const [updateBlog, { isLoading: submitting }] = useUpdateBlogMutation();
 
@@ -36,14 +37,14 @@ export default function EditBlog() {
 
   return (
     <EditPage
-      title={t("Blogs.editBlog")}
+      title={t("editBlog")}
       data={data}
       isLoading={isLoading}
       error={error}
       submitting={submitting}
       onSubmit={handleSubmit}
       Form={BlogForm}
-      redirectPath={`/dashboard/website?tab=${t("tabs.blogs")}`}
+      redirectPath="/dashboard/website?tab=blogs"
     />
   );
 }

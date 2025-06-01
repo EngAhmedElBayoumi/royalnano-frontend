@@ -14,10 +14,11 @@ import EditPage from "@/components/dashboard/EditPage";
 export default function EditMovement() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
+  const t = useTranslations("Inventory.InventoryMovement");
+
   const [updateMovement, { isLoading: submitting }] =
     useUpdateMovementMutation();
   const { data, isLoading, error } = useGetMovementByIdQuery(id);
-  const t = useTranslations("inventory");
 
   const defaultValues: MovementFormValues = data && {
     ...data,
@@ -36,14 +37,14 @@ export default function EditMovement() {
 
   return (
     <EditPage
-      title={t("movement.editMovement")}
+      title={t("editMovement")}
       data={defaultValues}
       isLoading={isLoading}
       error={error}
       submitting={submitting}
       onSubmit={handleSubmit}
       Form={MovementForm}
-      redirectPath={`/dashboard/inventory?tab=${t("movement")}`}
+      redirectPath="/dashboard/inventory?tab=movement"
     />
   );
 }

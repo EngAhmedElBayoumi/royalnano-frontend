@@ -21,6 +21,7 @@ function InventoryPage() {
 
   const tabs = [
     {
+      id: "items",
       label: t("items"),
       permissionKey: "inventoryitem",
       icon: (
@@ -34,6 +35,7 @@ function InventoryPage() {
       content: <Items />,
     },
     {
+      id: "units",
       label: t("units"),
       permissionKey: "unit",
       icon: (
@@ -47,6 +49,7 @@ function InventoryPage() {
       content: <Units />,
     },
     {
+      id: "category",
       label: t("categoryModel"),
       permissionKey: "expensecategory",
       icon: (
@@ -60,6 +63,7 @@ function InventoryPage() {
       content: <Category />,
     },
     {
+      id: "preorder",
       label: t("preorder"),
       permissionKey: "preorder",
       icon: (
@@ -73,6 +77,7 @@ function InventoryPage() {
       content: <Preorder />,
     },
     {
+      id: "movement",
       label: t("movement"),
       permissionKey: "movement",
       icon: (
@@ -86,6 +91,7 @@ function InventoryPage() {
       content: <Movement />,
     },
     {
+      id: "stock-adjustment",
       label: t("stockAdjustment"),
       permissionKey: "stockadjustment",
       icon: (
@@ -104,7 +110,7 @@ function InventoryPage() {
     return permissions[tab.permissionKey]?.view;
   });
 
-  return <CustomTabs tabs={filteredTabs} defaultTab={filteredTabs[0]?.label} />;
+  return <CustomTabs tabs={filteredTabs} defaultTab={filteredTabs[0]?.id} />;
 }
 
 export default InventoryPage;

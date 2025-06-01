@@ -22,6 +22,7 @@ function WebsitePage() {
 
   const tabs = [
     {
+      id: "services",
       label: t("services"),
       permissionKey: "service",
       icon: (
@@ -59,6 +60,9 @@ function WebsitePage() {
     //   content: <About />,
     // },
     {
+      id: "gallery",
+      label: t("gallery"),
+      permissionKey: "gallery",
       icon: (
         <Image
           src="/assets/icons/dashboard/website/gallery.svg"
@@ -67,11 +71,12 @@ function WebsitePage() {
           height="24"
         />
       ),
-      label: t("gallery"),
-      permissionKey: "gallery",
       content: <Gallery />,
     },
     {
+      id: "contact",
+      label: t("contact"),
+      permissionKey: "contact",
       icon: (
         <Image
           src="/assets/icons/dashboard/website/contact.svg"
@@ -80,11 +85,12 @@ function WebsitePage() {
           height="24"
         />
       ),
-      label: t("contact"),
-      permissionKey: "contact",
       content: <ContactUs />,
     },
     {
+      id: "customer-reviews",
+      label: t("customerReviews"),
+      permissionKey: "customerreview",
       icon: (
         <Image
           src="/assets/icons/dashboard/website/reviews.svg"
@@ -93,11 +99,10 @@ function WebsitePage() {
           height="24"
         />
       ),
-      label: t("customerReviews"),
-      permissionKey: "customerreview",
       content: <CustomerReviews />,
     },
     {
+      id: "blogs",
       label: t("blogs"),
       permissionKey: "blog",
       icon: (
@@ -116,7 +121,7 @@ function WebsitePage() {
     return permissions[tab.permissionKey]?.view;
   });
 
-  return <CustomTabs tabs={filteredTabs} defaultTab={filteredTabs[0]?.label} />;
+  return <CustomTabs tabs={filteredTabs} defaultTab={filteredTabs[0]?.id} />;
 }
 
 export default WebsitePage;

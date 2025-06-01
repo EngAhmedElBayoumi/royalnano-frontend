@@ -8,7 +8,7 @@ import UnitForm, {
 } from "@/components/dashboard/forms/inventory/UnitForm";
 
 export default function CreateUnit() {
-  const t = useTranslations("Inventory");
+  const t = useTranslations("Inventory.InventoryUnit");
   const [createUnit, { isLoading }] = useCreateUnitMutation();
 
   const handleSubmit = async (data: UnitFormValues) => {
@@ -18,10 +18,10 @@ export default function CreateUnit() {
 
   return (
     <CreatePage
-      title={t("InventoryUnit.addUnit")}
+      title={t("addUnit")}
       onSubmit={handleSubmit}
       Form={UnitForm}
-      redirectPath={`/dashboard/inventory?tab=${t("units")}`}
+      redirectPath="/dashboard/inventory?tab=units"
       isLoading={isLoading}
     />
   );

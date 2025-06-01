@@ -26,6 +26,7 @@ export const permissionRoutes = {
     "interview",
     "competition",
     "evaluation",
+    "jobrole",
   ],
   "/dashboard/clients": ["customer"],
   "/dashboard/branches": ["branch"],

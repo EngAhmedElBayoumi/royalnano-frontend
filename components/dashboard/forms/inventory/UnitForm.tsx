@@ -8,14 +8,13 @@ import { Form } from "@/components/ui/form";
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
 
+export interface UnitFormValues {
+  name: string;
+}
 interface UnitFormProps {
   onSubmit: (data: UnitFormValues) => Promise<void>;
   defaultValues?: UnitFormValues;
   isLoading?: boolean;
-}
-
-export interface UnitFormValues {
-  name: string;
 }
 
 const UnitForm = ({ onSubmit, defaultValues, isLoading }: UnitFormProps) => {

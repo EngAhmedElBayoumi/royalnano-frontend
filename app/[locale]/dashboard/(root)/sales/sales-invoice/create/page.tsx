@@ -7,7 +7,7 @@ import SalesInvoiceForm from "@/components/dashboard/forms/sales/SalesInvoiceFor
 import CreatePage from "@/components/dashboard/CreatePage";
 
 export default function CreateSalesInvoice() {
-  const t = useTranslations("Sales");
+  const t = useTranslations("Sales.SalesInvoice");
   const [createSalesInvoice, { isLoading }] = useCreateSalesInvoiceMutation();
 
   const handleSubmit = async (data: SalesInvoiceFormValues): Promise<void> => {
@@ -19,10 +19,10 @@ export default function CreateSalesInvoice() {
 
   return (
     <CreatePage
-      title="Add Sales Invoice"
+      title={t("salesInvoice")}
       onSubmit={handleSubmit}
       Form={SalesInvoiceForm}
-      redirectPath={`/dashboard/sales?tab=${t("sales")}`}
+      redirectPath="/dashboard/sales?tab=sales-invoice"
       isLoading={isLoading}
     />
   );

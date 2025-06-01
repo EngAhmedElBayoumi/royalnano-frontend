@@ -25,6 +25,7 @@ function HrPage() {
 
   const tabs = [
     {
+      id: "departments",
       label: t("departments"),
       permissionKey: "department",
       icon: (
@@ -38,6 +39,7 @@ function HrPage() {
       content: <Departments />,
     },
     {
+      id: "employees",
       label: t("employees"),
       permissionKey: "employee",
       icon: (
@@ -51,6 +53,7 @@ function HrPage() {
       content: <Employees />,
     },
     {
+      id: "attendance",
       label: t("attendance"),
       permissionKey: "attendance",
       icon: (
@@ -64,6 +67,7 @@ function HrPage() {
       content: <Attendance />,
     },
     {
+      id: "vacation",
       label: t("vacation"),
       permissionKey: "leaverequest",
       icon: (
@@ -77,6 +81,7 @@ function HrPage() {
       content: <Vacations />,
     },
     {
+      id: "bonuses",
       label: t("bonuses"),
       permissionKey: "bonusdeduction",
       icon: (
@@ -90,6 +95,7 @@ function HrPage() {
       content: <Bonuses />,
     },
     {
+      id: "applicants",
       label: t("applicants"),
       permissionKey: "applicant",
       icon: (
@@ -103,6 +109,7 @@ function HrPage() {
       content: <Applicants />,
     },
     {
+      id: "interviews",
       label: t("interviews"),
       permissionKey: "interview",
       icon: (
@@ -116,6 +123,7 @@ function HrPage() {
       content: <Interviews />,
     },
     {
+      id: "competitions",
       label: t("competitions"),
       permissionKey: "competition",
       icon: (
@@ -129,6 +137,7 @@ function HrPage() {
       content: <Competitions />,
     },
     {
+      id: "evaluations",
       label: t("evaluations"),
       permissionKey: "evaluation",
       icon: (
@@ -142,18 +151,18 @@ function HrPage() {
       content: <Evaluations />,
     },
     {
+      id: "jobs",
       label: t("jobs"),
-      permissionKey: "evaluation",
+      permissionKey: "jobrole",
       icon: (
         <Image
           width="24"
           height="24"
-          alt={t("evaluations")}
+          alt={t("jobs")}
           src="/assets/icons/dashboard/hr/evaluations.svg"
         />
       ),
-      content: <Jobs/>,
-
+      content: <Jobs />,
     },
   ];
 
@@ -163,7 +172,7 @@ function HrPage() {
 
   return (
     <>
-      <CustomTabs tabs={filteredTabs} defaultTab={filteredTabs[0]?.label} />
+      <CustomTabs tabs={filteredTabs} defaultTab={filteredTabs[0]?.id} />
     </>
   );
 }
