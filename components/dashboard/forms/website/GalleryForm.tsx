@@ -139,12 +139,7 @@ const GalleryForm = ({
           </div>
         </div>
         <div className="flex justify-end gap-2 mt-5 flex-col-reverse xs:flex-row">
-          <Link
-            href={`/dashboard/website?tab=${globalTranslate(
-              "dashboardWebsite.tabs.gallery"
-            )}`}
-            passHref
-          >
+          <Link href="/dashboard/website?tab=gallery" passHref>
             <CustomButton
               text={globalTranslate("cancel")}
               variant="secondary"

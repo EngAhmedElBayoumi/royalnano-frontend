@@ -73,7 +73,7 @@ const AddSalesCustomerForm = ({ defaultValues }: SalesCustomerFormProps) => {
       if ("error" in response) {
         throw new Error("Creation failed");
       }
-      router.push(`/dashboard/sales?tab=Customer`);
+      router.push(`/dashboard/sales?tab=sales-customer`);
     } catch (error) {
       console.error("Error in creation:", error);
       setIsModalOpen(true);
@@ -217,7 +217,7 @@ const AddSalesCustomerForm = ({ defaultValues }: SalesCustomerFormProps) => {
           />
         </section>
         <div className="flex justify-end gap-2 mt-5 flex-col-reverse xs:flex-row">
-          <Link href={`/dashboard/sales?tab=${t("customer")}`} passHref>
+          <Link href="/dashboard/sales?tab=sales-customer" passHref>
             <CustomButton text={t("cancel")} variant="secondary" />
           </Link>
           <CustomButton text={t("save")} type="submit" />

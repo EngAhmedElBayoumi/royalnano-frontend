@@ -201,7 +201,7 @@ const SalesInvoiceForm = ({
           </div>
         </section>
         <div className="flex justify-end gap-2 mt-5 flex-col-reverse xs:flex-row">
-          <Link href={`/dashboard/sales?tab=${t("salesInvoice")}`} passHref>
+          <Link href="/dashboard/sales?tab=sales-invoice" passHref>
             <CustomButton text={t("cancel")} variant="secondary" />
           </Link>
           <CustomButton text={t("save")} type="submit" />

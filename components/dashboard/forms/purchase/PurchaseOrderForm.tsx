@@ -358,10 +358,7 @@ const PurchaseOrderForm = ({
 
         {!isView && (
           <div className="flex justify-end gap-2 mt-5 flex-col-reverse xs:flex-row">
-            <Link
-              href={`/dashboard/purchase?tab=${t("purchaseOrderModel")}`}
-              passHref
-            >
+            <Link href="/dashboard/purchase?tab=order" passHref>
               <CustomButton text={t("cancel")} variant="secondary" />
             </Link>
             <CustomButton text={t("save")} />

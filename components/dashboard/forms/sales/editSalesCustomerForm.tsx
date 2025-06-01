@@ -76,7 +76,7 @@ const EditSalesCustomerForm = ({
       router.push(
         initialCustomerId
           ? `/dashboard/sales/sales-customer/view?id=${initialCustomerId}&tab=details`
-          : `/dashboard/sales?tab=Customer`
+          : `/dashboard/sales?tab=sales-customer`
       );
     } catch (error) {
       console.error("Error in update:", error);
@@ -179,7 +179,7 @@ const EditSalesCustomerForm = ({
             href={
               initialCustomerId
                 ? `/dashboard/sales/sales-customer/view?id=${initialCustomerId}&tab=details`
-                : `/dashboard/sales?tab=Customer`
+                : `/dashboard/sales?tab=sales-customer`
             }
             passHref
           >

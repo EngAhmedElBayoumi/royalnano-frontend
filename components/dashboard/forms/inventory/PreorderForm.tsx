@@ -33,7 +33,6 @@ const PreorderForm = ({
   const t = useTranslations();
 
   const { data: items } = useGetItemsQuery({});
-
   const itemsOptions =
     items?.results?.map((item: { id: number; item_name: string }) => ({
       value: String(item.id),
@@ -78,10 +77,7 @@ const PreorderForm = ({
           />
         </section>
         <div className="flex justify-end gap-2 mt-5 flex-col-reverse xs:flex-row">
-          <Link
-            href={`/dashboard/inventory?tab=${t("Inventory.preorder")}`}
-            passHref
-          >
+          <Link href="/dashboard/inventory?tab=preorder" passHref>
             <CustomButton text={t("cancel")} variant="secondary" />
           </Link>
           <CustomButton

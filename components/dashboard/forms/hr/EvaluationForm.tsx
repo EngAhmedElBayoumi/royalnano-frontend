@@ -115,10 +115,7 @@ const EvaluationForm = ({
           />
         </section>
         <div className="flex justify-end gap-2 mt-5 flex-col-reverse xs:flex-row">
-          <Link
-            href={`/dashboard/hr?tab=${globalTranslate("hr.tabs.evaluations")}`}
-            passHref
-          >
+          <Link href="/dashboard/hr?tab=evaluations" passHref>
             <CustomButton
               text={globalTranslate("cancel")}
               variant="secondary"

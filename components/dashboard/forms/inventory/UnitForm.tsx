@@ -42,10 +42,7 @@ const UnitForm = ({ onSubmit, defaultValues, isLoading }: UnitFormProps) => {
           </div>
         </section>
         <div className="flex justify-end gap-2 mt-5 flex-col-reverse xs:flex-row">
-          <Link
-            href={`/dashboard/inventory?tab=${t("Inventory.units")}`}
-            passHref
-          >
+          <Link href="/dashboard/inventory?tab=units" passHref>
             <CustomButton text={t("cancel")} variant="secondary" />
           </Link>
           <CustomButton

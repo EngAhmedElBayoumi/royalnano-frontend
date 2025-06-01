@@ -31,7 +31,7 @@ export default function CreateAttendance() {
       onSubmit={handleSubmit}
       Form={AttendanceForm}
       isLoading={isLoading}
-      redirectPath={`/dashboard/hr?tab=${t("tabs.attendance")}`}
+      redirectPath="/dashboard/hr?tab=attendance"
     />
   );
 }
