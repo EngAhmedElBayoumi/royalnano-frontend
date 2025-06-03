@@ -23,8 +23,8 @@ export default function EditInterview() {
 
   const defaultValues = data && {
     ...data,
-    interview_date: new Date(data.interview_date),
     applicant: Number(data.applicant.id),
+    interview_date: new Date(data.interview_date),
     interviewers: data.interviewers.map((interviewer: { id: string }) =>
       String(interviewer.id)
     ),

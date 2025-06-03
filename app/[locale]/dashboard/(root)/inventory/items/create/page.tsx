@@ -12,13 +12,7 @@ export default function CreateItem() {
   const [createItem, { isLoading }] = useCreateItemMutation();
 
   const handleSubmit = async (data: ItemFormValues) => {
-    const payload = {
-      ...data,
-      category: Number(data.category),
-      branch: Number(data.branch),
-      supplier: Number(data.supplier),
-    };
-    const response = await createItem(payload);
+    const response = await createItem(data);
     if (response.error) {
       handleApiError(response.error);
     }

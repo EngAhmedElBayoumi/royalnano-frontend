@@ -33,6 +33,7 @@ export default function EditItem() {
       category: Number(data.category),
       branch: Number(data.branch),
       supplier: Number(data.supplier),
+      unit: Number(data.unit),
     };
     const response = await updateItem({ id, data: payload });
     if (response.error) handleApiError(response.error);

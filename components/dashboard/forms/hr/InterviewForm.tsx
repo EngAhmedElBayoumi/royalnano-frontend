@@ -11,6 +11,8 @@ import CustomButton from "@/components/formFields/CustomButton";
 import DateTimePicker from "@/components/formFields/DateTimePicker";
 import CustomSelect from "@/components/formFields/CustomSelect";
 import MultiSelect from "@/components/formFields/MultiSelect";
+import useExtraFields from "@/hooks/useExtraFields";
+import ExtraFields from "@/components/formFields/ExtraFields";
 
 interface InterviewFormProps {
   onSubmit: (data: InterviewFormValues) => Promise<void>;
@@ -65,6 +67,16 @@ const InterviewForm = ({
     { value: "rejected", label: t("statuses.rejected") },
   ];
 
+  const {
+    extraFields,
+    handleAddExtraField,
+    handleRemoveExtraField,
+    handleExtraFieldChange,
+  } = useExtraFields({
+    defaultFields: defaultValues?.extra_fields ?? {},
+    setValue: form.setValue,
+  });
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -99,6 +111,12 @@ const InterviewForm = ({
               options={statusOptions}
             />
           </div>
+          <ExtraFields
+            extraFields={extraFields}
+            onAddField={handleAddExtraField}
+            onRemoveField={handleRemoveExtraField}
+            onFieldChange={handleExtraFieldChange}
+          />
         </section>
         <div className="flex justify-end gap-2 mt-5 flex-col-reverse xs:flex-row">
           <Link href="/dashboard/hr?tab=interviews" passHref>

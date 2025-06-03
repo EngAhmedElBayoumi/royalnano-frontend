@@ -7,11 +7,14 @@ import { itemSchema } from "@/lib/validations/dashboard/inventory/itemSchema";
 import { useGetItemCategoryQuery } from "@/redux/services/dashboard/inventory/itemCategoryApi";
 import { useGetBranchesQuery } from "@/redux/services/dashboard/inventory/branchesApi";
 import { useGetSuppliersMiniQuery } from "@/redux/services/dashboard/purchase/supplierApi";
+import { useGetUnitsQuery } from "@/redux/services/dashboard/inventory/unitsApi";
 import { Form } from "@/components/ui/form";
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
 import CustomSelect from "@/components/formFields/CustomSelect";
 import CustomTextArea from "@/components/formFields/TextArea";
+import useExtraFields from "@/hooks/useExtraFields";
+import ExtraFields from "@/components/formFields/ExtraFields";
 
 interface ItemFormProps {
   onSubmit: (data: ItemFormValues) => Promise<void>;
@@ -24,14 +27,15 @@ export interface ItemFormValues {
   item_code: string;
   quantity: number;
   category: number;
-  unit: string;
+  unit: number;
   purchase_price: number;
   selling_price: number;
   branch: number;
   supplier: number;
   description: string;
+  extra_fields?: Record<string, string> | null;
 }
-export interface Category {
+export interface listItems {
   id: number;
   name: string;
 }
@@ -44,12 +48,13 @@ const ItemForm = ({ onSubmit, defaultValues, isLoading }: ItemFormProps) => {
       item_code: "",
       quantity: 0,
       category: 1,
-      unit: "",
+      unit: 1,
       purchase_price: 0,
       selling_price: 0,
       branch: 1,
       supplier: 1,
       description: "",
+      extra_fields: {},
     },
   });
 
@@ -58,20 +63,22 @@ const ItemForm = ({ onSubmit, defaultValues, isLoading }: ItemFormProps) => {
   const { data: categories } = useGetItemCategoryQuery({});
   const { data: branches } = useGetBranchesQuery({});
   const { data: suppliers } = useGetSuppliersMiniQuery({});
+  const { data: units } = useGetUnitsQuery({});
 
   const categoriesOptions =
-    categories?.map((category: Category) => ({
+    categories?.map((category: listItems) => ({
       value: String(category.id),
       label: category.name,
     })) || [];
 
-  const unitsOptions = [
-    { value: "Egp", label: "Egp" },
-    { value: "Usd", label: "Usd" },
-  ];
+  const unitsOptions =
+    units?.results?.map((unit: listItems) => ({
+      value: String(unit.id),
+      label: unit.name,
+    })) || [];
 
   const branchesOptions =
-    branches?.results?.map((branch: { id: number; name: string }) => ({
+    branches?.results?.map((branch: listItems) => ({
       value: String(branch.id),
       label: branch.name,
     })) || [];
@@ -84,6 +91,15 @@ const ItemForm = ({ onSubmit, defaultValues, isLoading }: ItemFormProps) => {
       })
     ) || [];
 
+  const {
+    extraFields,
+    handleAddExtraField,
+    handleRemoveExtraField,
+    handleExtraFieldChange,
+  } = useExtraFields({
+    defaultFields: defaultValues?.extra_fields ?? {},
+    setValue: form.setValue,
+  });
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -157,6 +173,12 @@ const ItemForm = ({ onSubmit, defaultValues, isLoading }: ItemFormProps) => {
             label={t("description")}
             placeholder={t("description")}
             className="mt-2 xl:mt-5"
+          />
+          <ExtraFields
+            extraFields={extraFields}
+            onAddField={handleAddExtraField}
+            onRemoveField={handleRemoveExtraField}
+            onFieldChange={handleExtraFieldChange}
           />
         </section>
         <div className="flex justify-end gap-2 mt-5 flex-col-reverse xs:flex-row">
