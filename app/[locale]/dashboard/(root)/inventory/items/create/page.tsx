@@ -13,9 +13,7 @@ export default function CreateItem() {
 
   const handleSubmit = async (data: ItemFormValues) => {
     const response = await createItem(data);
-    if (response.error) {
-      handleApiError(response.error);
-    }
+    if (response.error) handleApiError(response.error);
   };
 
   return (

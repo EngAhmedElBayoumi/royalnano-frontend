@@ -1,71 +1,57 @@
 "use client";
-// import EditSalesCustomerForm from "@/components/dashboard/forms/sales/EditSalesCustomerForm";
-import IconWithTitle from "@/components/dashboard/IconWithTitle";
-import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
-import { useGetSalesCustomerByIdQuery } from "@/redux/services/dashboard/sales/salesCustomerApi";
+import { useTranslations } from "next-intl";
+import { handleApiError } from "@/lib/utils/handleApiError";
+import {
+  useGetSalesCustomerByIdQuery,
+  useUpdateSalesCustomerMutation,
+} from "@/redux/services/dashboard/sales/salesCustomerApi";
 import { SalesCustomerFormValues } from "@/lib/validations/dashboard/sales/salesCustomerSchema";
-import EditSalesCustomerForm from "@/components/dashboard/forms/sales/editSalesCustomerForm";
-import FormSkelton from "@/components/dashboard/skelton/FormSkelton";
-import LoadingError from "@/components/dashboard/LoadingError";
+import SalesCustomerForm from "@/components/dashboard/forms/sales/SalesCustomerForm";
+import EditPage from "@/components/dashboard/EditPage";
 
 export default function EditSalesCustomer() {
-  const t = useTranslations("Sales");
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
+  const t = useTranslations("Sales");
 
-  const [defaultValues, setDefaultValues] = useState<
-    Partial<SalesCustomerFormValues>
-  >({});
+  const { data, isLoading, error } = useGetSalesCustomerByIdQuery(id);
+  const [updateSalesCustomer, { isLoading: submitting }] =
+    useUpdateSalesCustomerMutation();
 
-  const {
-    data: customerData,
-    isLoading,
-    error,
-  } = useGetSalesCustomerByIdQuery(id);
+  const customerIdFromQuery = searchParams.get("customerId");
+  const initialCustomerId = customerIdFromQuery
+    ? parseInt(customerIdFromQuery, 10)
+    : 0;
+  const defaultValues = data && {
+    ...data,
+    branch: data.branch.id,
+    assigned_to: data.assigned_to.id,
+  };
 
-  useEffect(() => {
-    if (customerData) {
-      setDefaultValues({
-        customer_name: customerData.customer_name,
-        contact_person: customerData.contact_person,
-        phone_number: customerData.phone_number,
-        email: customerData.email,
-        address: customerData.address,
-        city: customerData.city,
-        country: customerData.country,
-        notes: customerData.notes,
-        branch: customerData.branch,
-        customer_type: customerData.customer_type,
-        tax_number: customerData.tax_number,
-        national_id: customerData.national_id,
-      });
-    }
-  }, [customerData]);
-
+  const handleSubmit = async (data: SalesCustomerFormValues) => {
+    const payload = {
+      ...data,
+      branch: Number(data.branch),
+      assigned_to: Number(data.assigned_to),
+    };
+    const response = await updateSalesCustomer({ id, data: payload });
+    if (response.error) handleApiError(response.error);
+  };
   return (
-    <main className="mx-4 sm:mx-7 my-5">
-      <div className="flex">
-        <IconWithTitle
-          imageSrc="/assets/icons/edit.svg"
-          title={t("editCustomer")}
-          backgroundColor="#F8F7F7"
-          textColor="primary"
-        />
-      </div>
-
-      <div className="bg-dashboardBg px-4 sm:px-6 pt-5 pb-8 ltr:rounded-r-[20px] ltr:rounded-bl-[20px] rtl:rounded-l-[20px] rtl:rounded-br-[20px] ltr:lg:pr-[200px] rtl:lg:pl-[200px]">
-        {isLoading ? (
-          <FormSkelton />
-        ) : error ? (
-          <LoadingError />
-        ) : (
-          defaultValues &&
-          !isLoading &&
-          !error && <EditSalesCustomerForm defaultValues={defaultValues} />
-        )}
-      </div>
-    </main>
+    <EditPage
+      title={t("editCustomer")}
+      data={defaultValues}
+      isLoading={isLoading}
+      submitting={submitting}
+      error={error}
+      onSubmit={handleSubmit}
+      Form={SalesCustomerForm}
+      redirectPath={
+        initialCustomerId
+          ? `/dashboard/sales/sales-customer/view?id=${initialCustomerId}&tab=details`
+          : `/dashboard/sales?tab=sales-customer`
+      }
+    />
   );
 }

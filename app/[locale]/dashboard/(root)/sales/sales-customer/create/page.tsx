@@ -1,27 +1,27 @@
 "use client";
-import AddSalesCustomerForm from "@/components/dashboard/forms/sales/AddSalesCustomerForm";
-import IconWithTitle from "@/components/dashboard/IconWithTitle";
 import { useTranslations } from "next-intl";
+import { handleApiError } from "@/lib/utils/handleApiError";
+import { useCreateSalesCustomerMutation } from "@/redux/services/dashboard/sales/salesCustomerApi";
+import { SalesCustomerFormValues } from "@/lib/validations/dashboard/sales/salesCustomerSchema";
+import SalesCustomerForm from "@/components/dashboard/forms/sales/SalesCustomerForm";
+import CreatePage from "@/components/dashboard/CreatePage";
 
 export default function CreateSalesCustomer() {
   const t = useTranslations("Sales");
 
-  return (
-    <main className="mx-4 sm:mx-7 my-5">
-      <div className="flex">
-        {/* Page Title */}
-        <IconWithTitle
-          imageSrc="/assets/icons/add.svg"
-          title={t("addCustomer")}
-          backgroundColor="#F8F7F7"
-          textColor="primary"
-        />
-      </div>
+  const [createSalesCustomer, { isLoading }] = useCreateSalesCustomerMutation();
 
-      {/* Form Container */}
-      <div className="bg-dashboardBg px-4 sm:px-6 pt-5 pb-8 ltr:rounded-r-[20px] ltr:rounded-bl-[20px] rtl:rounded-l-[20px] rtl:rounded-br-[20px] ltr:lg:pr-[200px] rtl:lg:pl-[200px]">
-        <AddSalesCustomerForm />
-      </div>
-    </main>
+  const handleSubmit = async (data: SalesCustomerFormValues) => {
+    const response = await createSalesCustomer(data);
+    if (response.error) handleApiError(response.error);
+  };
+  return (
+    <CreatePage
+      title={t("addCustomer")}
+      onSubmit={handleSubmit}
+      Form={SalesCustomerForm}
+      redirectPath="/dashboard/sales?tab=sales-customer"
+      isLoading={isLoading}
+    />
   );
 }

@@ -16,8 +16,8 @@ export default function EditItem() {
   const id = searchParams.get("id");
   const t = useTranslations("Inventory.InventoryItem");
 
-  const [updateItem, { isLoading: submitting }] = useUpdateItemMutation();
   const { data, isLoading, error } = useGetItemByIdQuery(id);
+  const [updateItem, { isLoading: submitting }] = useUpdateItemMutation();
 
   const defaultValues = data && {
     ...data,

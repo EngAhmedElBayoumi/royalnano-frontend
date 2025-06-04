@@ -1,44 +1,49 @@
 "use client";
-import { Form } from "@/components/ui/form";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import CustomButton from "@/components/formFields/CustomButton";
-import TextInput from "@/components/formFields/TextInput";
 import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import {
   SalesCustomerFormValues,
   SalesCustomerFormValuesSchema,
 } from "@/lib/validations/dashboard/sales/salesCustomerSchema";
-import CustomSelect from "@/components/formFields/CustomSelect";
 import { useGetBranchesQuery } from "@/redux/services/dashboard/inventory/branchesApi";
-import { useCreateSalesCustomerMutation } from "@/redux/services/dashboard/sales/salesCustomerApi";
-import { useRouter } from "@/i18n/routing";
-import { useState } from "react";
-import CustomModal from "@/components/modals/CustomModal";
+import { useGetEmployeesQuery } from "@/redux/services/dashboard/hr/employeeApi";
+import { Form } from "@/components/ui/form";
+import CustomButton from "@/components/formFields/CustomButton";
+import TextInput from "@/components/formFields/TextInput";
+import CustomSelect from "@/components/formFields/CustomSelect";
+import CustomTextArea from "@/components/formFields/TextArea";
 import PhoneInputField from "@/components/formFields/PhoneInputField";
 import useExtraFields from "@/hooks/useExtraFields";
 import ExtraFields from "@/components/formFields/ExtraFields";
-import { useGetEmployeesQuery } from "@/redux/services/dashboard/hr/employeeApi";
 
 interface SalesCustomerFormProps {
   defaultValues?: Partial<SalesCustomerFormValues>;
+  onSubmit: (data: SalesCustomerFormValues) => Promise<void>;
+  isLoading?: boolean;
+}
+interface listItems {
+  id: number;
+  name: string;
 }
 
-const AddSalesCustomerForm = ({ defaultValues }: SalesCustomerFormProps) => {
-  const router = useRouter();
-  const t = useTranslations("Sales");
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [createSalesCustomer] = useCreateSalesCustomerMutation();
+const SalesCustomerForm = ({
+  onSubmit,
+  defaultValues,
+  isLoading,
+}: SalesCustomerFormProps) => {
+  const globalTranslate = useTranslations();
+  const t = useTranslations("Sales.SalesCustomer");
   const { data: branchesData } = useGetBranchesQuery({});
   const { data: employeesData } = useGetEmployeesQuery({});
 
   const form = useForm<SalesCustomerFormValues>({
     resolver: zodResolver(SalesCustomerFormValuesSchema),
     defaultValues: defaultValues || {
-      customer_name: "nermennnnnnnnnnnnnn",
-      contact_person: "nermo",
-      phone_number: "+13127598362138",
+      customer_name: "",
+      contact_person: "",
+      phone_number: "",
       email: "",
       address: "",
       city: "",
@@ -56,32 +61,16 @@ const AddSalesCustomerForm = ({ defaultValues }: SalesCustomerFormProps) => {
   });
 
   const branchesOptions =
-    branchesData?.results?.map((branch: { id: number; name: string }) => ({
+    branchesData?.results?.map((branch: listItems) => ({
       value: String(branch.id),
       label: branch.name,
     })) || [];
 
   const employeeOptions =
-    employeesData?.results?.map((employee: { id: number; name: string }) => ({
+    employeesData?.results?.map((employee: listItems) => ({
       value: String(employee.id),
       label: employee.name,
     })) || [];
-
-  const handleSubmit = async (data: SalesCustomerFormValues) => {
-    try {
-      const response = await createSalesCustomer(data);
-      if ("error" in response) {
-        throw new Error("Creation failed");
-      }
-      router.push(`/dashboard/sales?tab=sales-customer`);
-    } catch (error) {
-      console.error("Error in creation:", error);
-      setIsModalOpen(true);
-    }
-  };
-  const handleModalChange = (isOpen: boolean) => {
-    setIsModalOpen(isOpen);
-  };
 
   const {
     extraFields,
@@ -94,73 +83,72 @@ const AddSalesCustomerForm = ({ defaultValues }: SalesCustomerFormProps) => {
   });
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(handleSubmit)}>
+      <form onSubmit={form.handleSubmit(onSubmit)}>
         <section className="min-h-[60vh]">
           <div className="grid sm:grid-cols-2 gap-x-4 gap-y-2 xl:gap-y-5 lg:gap-x-10">
             <TextInput
               control={form.control}
               name="customer_name"
-              label={t("SalesCustomer.customerName")}
-              placeholder={t("SalesCustomer.customerName")}
+              label={t("customerName")}
+              placeholder={t("customerName")}
             />
             <TextInput
               control={form.control}
               name="contact_person"
-              label={t("SalesCustomer.contactPerson")}
-              placeholder={t("SalesCustomer.contactPerson")}
+              label={t("contactPerson")}
+              placeholder={t("contactPerson")}
             />
             <PhoneInputField
               control={form.control}
               name="phone_number"
-              label={t("SalesCustomer.phoneNumber")}
-              // placeholder={t("SalesCustomer.phoneNumber")}
+              label={t("phoneNumber")}
             />
 
             <TextInput
               control={form.control}
               name="email"
-              label={t("SalesCustomer.email")}
-              placeholder={t("SalesCustomer.email")}
+              label={t("email")}
+              placeholder={t("email")}
               type="email"
             />
             <TextInput
               control={form.control}
               name="address"
-              label={t("SalesCustomer.address")}
-              placeholder={t("SalesCustomer.address")}
+              label={t("address")}
+              placeholder={t("address")}
             />
             <TextInput
               control={form.control}
               name="city"
-              label={t("SalesCustomer.city")}
-              placeholder={t("SalesCustomer.city")}
+              label={t("city")}
+              placeholder={t("city")}
             />
             <TextInput
               control={form.control}
               name="country"
-              label={t("SalesCustomer.country")}
-              placeholder={t("SalesCustomer.country")}
+              label={t("country")}
+              placeholder={t("country")}
             />
-            <TextInput
+            <CustomTextArea
               control={form.control}
               name="notes"
-              label={t("SalesCustomer.notes")}
-              placeholder={t("SalesCustomer.notes")}
+              label={t("notes")}
+              placeholder={t("notes")}
             />
             <CustomSelect
               valueType="number"
               control={form.control}
               name="branch"
-              label={t("SalesCustomer.branch")}
-              placeholder={t("SalesCustomer.branch")}
+              label={t("branch")}
+              placeholder={t("branch")}
               options={branchesOptions}
             />
             <CustomSelect
               valueType="string"
               control={form.control}
               name="customer_type"
-              label={t("SalesCustomer.customerType")}
-              placeholder={t("SalesCustomer.customerType")}
+              label={t("customerType")}
+              placeholder={t("customerType")}
               options={[
                 { value: "individual", label: "Individual" },
                 { value: "business", label: "Business" },
@@ -169,20 +157,20 @@ const AddSalesCustomerForm = ({ defaultValues }: SalesCustomerFormProps) => {
             <TextInput
               control={form.control}
               name="tax_number"
-              label={t("SalesCustomer.taxNumber")}
-              placeholder={t("SalesCustomer.taxNumber")}
+              label={t("taxNumber")}
+              placeholder={t("taxNumber")}
             />
             <TextInput
               control={form.control}
               name="national_id"
-              label={t("SalesCustomer.nationalId")}
-              placeholder={t("SalesCustomer.nationalId")}
+              label={t("nationalId")}
+              placeholder={t("nationalId")}
             />
             <CustomSelect
               control={form.control}
               name="source"
-              label={t("SalesCustomer.source")}
-              placeholder={t("SalesCustomer.source")}
+              label={t("source")}
+              placeholder={t("source")}
               options={[
                 { value: "facebook", label: "Facebook" },
                 { value: "instagram", label: "Instagram" },
@@ -195,16 +183,16 @@ const AddSalesCustomerForm = ({ defaultValues }: SalesCustomerFormProps) => {
             <CustomSelect
               control={form.control}
               name="assigned_to"
-              label={t("SalesCustomer.assignedTo")}
-              placeholder={t("SalesCustomer.assignedTo")}
+              label={t("assignedTo")}
+              placeholder={t("assignedTo")}
               options={employeeOptions}
             />
             {form.watch("source") === "recommendation" && (
               <CustomSelect
                 control={form.control}
                 name="recommended_by"
-                label={t("SalesCustomer.recommendedBy")}
-                placeholder={t("SalesCustomer.recommendedBy")}
+                label={t("recommendedBy")}
+                placeholder={t("recommendedBy")}
                 options={employeeOptions}
               />
             )}
@@ -218,20 +206,22 @@ const AddSalesCustomerForm = ({ defaultValues }: SalesCustomerFormProps) => {
         </section>
         <div className="flex justify-end gap-2 mt-5 flex-col-reverse xs:flex-row">
           <Link href="/dashboard/sales?tab=sales-customer" passHref>
-            <CustomButton text={t("cancel")} variant="secondary" />
+            <CustomButton
+              text={globalTranslate("cancel")}
+              variant="secondary"
+            />
           </Link>
-          <CustomButton text={t("save")} type="submit" />
+          <CustomButton
+            text={
+              isLoading ? globalTranslate("saving") : globalTranslate("save")
+            }
+            isDisabled={isLoading}
+            type="submit"
+          />
         </div>
       </form>
-
-      <CustomModal
-        isOpen={isModalOpen}
-        onChange={handleModalChange}
-        title={t("errorTitle")}
-        description={t("errorDescription")}
-      />
     </Form>
   );
 };
 
-export default AddSalesCustomerForm;
+export default SalesCustomerForm;
