@@ -5,9 +5,8 @@ import IconWithTitle from "@/components/dashboard/IconWithTitle";
 import FormSkelton from "@/components/dashboard/skelton/FormSkelton";
 import LoadingError from "@/components/dashboard/LoadingError";
 import { useGetExpenseCategoryByIdQuery } from "@/redux/services/dashboard/purchase/expenseCategory";
-import ExpenseCategoryForm, {
-  ExpenseCategoryFormValues,
-} from "@/components/dashboard/forms/purchase/PurchaseExpenseCategoryForm";
+import ExpenseCategoryForm from "@/components/dashboard/forms/purchase/PurchaseExpenseCategoryForm";
+import { ExpenseCategoryFormValues } from "@/lib/validations/dashboard/purchase/expenseCategorySchema";
 
 export default function ViewExpenseCategory() {
   const searchParams = useSearchParams();
