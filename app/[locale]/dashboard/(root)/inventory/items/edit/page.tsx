@@ -23,6 +23,8 @@ export default function EditItem() {
     ...data,
     branch: data.branch.id,
     supplier: data.supplier.id,
+    category: data.category.id,
+    unit: data.unit.id,
     purchase_price: Number(data.purchase_price),
     selling_price: Number(data.selling_price),
   };
