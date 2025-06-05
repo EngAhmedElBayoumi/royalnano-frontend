@@ -773,5 +773,82 @@
     "no_comment": "لا يوجد تعليق",
     "created_at": "تاريخ الإنشاء",
     "select_date_time": "اختر التاريخ والوقت"
+  },
+
+  "auth": {
+    "authTemplate": {
+      "Welcome To": "مرحبًا بك في",
+      "Royal": "رويال",
+      "Nano Ceramic": "نانو سيراميك"
+    },
+    "changePassword": {
+      "title": "تغيير كلمة المرور",
+      "password": "كلمة المرور",
+      "confirmPassword": "تأكيد كلمة المرور",
+      "passwordRequirements": "يجب أن تحتوي كلمة المرور على",
+      "numbers": "أرقام",
+      "letters": "أحرف",
+      "submit": "إعادة التعيين",
+      "submitting": "جاري الإرسال ...",
+      "error": {
+        "default": "حدث خطأ أثناء تغيير كلمة المرور"
+      }
+    },
+    "login": {
+      "title": "تسجيل الدخول",
+      "email": "البريد الإلكتروني",
+      "emailPlaceholder": "أدخل بريدك الإلكتروني",
+      "password": "كلمة المرور",
+      "passwordPlaceholder": "أدخل كلمة المرور",
+      "forgetPassword": "نسيت كلمة المرور؟",
+      "login": "تسجيل الدخول",
+      "submitting": "جارٍ الإرسال...",
+      "noAccount": "ليس لديك حساب؟",
+      "register": "إنشاء حساب",
+      "error": {
+        "default": "حدث خطأ أثناء تسجيل الدخول"
+      }
+    },
+
+    "forgetPassword": {
+      "title": "نسيت كلمة المرور",
+      "instruction1": "يرجى إدخال بريدك الإلكتروني لإرسال",
+      "instruction2": "رمز التحقق إليك",
+      "emailLabel": "البريد الإلكتروني",
+      "emailPlaceholder": "أدخل البريد الإلكتروني",
+      "sendOTP": "إرسال رمز التحقق",
+      "sending": "جاري الإرسال ...",
+      "error": {
+        "default": "حدث خطأ أثناء معالجة طلبك"
+      }
+    },
+    "otp": {
+      "title": "التحقق من الرمز",
+      "instruction": "يرجى إدخال الرمز الذي تم إرساله إلى رقم هاتفك",
+      "toNumber": "المرسل إلى",
+      "noCode": "لم يصلك أي رمز؟",
+      "resend": "إعادة الإرسال",
+      "submit": "إرسال",
+      "submitting": "جاري الإرسال...",
+      "error": {
+        "default": "حدث خطأ أثناء التحقق"
+      }
+    },
+    "register": {
+      "title": "إنشاء حساب",
+      "firstName": "الاسم الأول",
+      "lastName": "اسم العائلة",
+      "phone": "رقم الهاتف",
+      "email": "البريد الإلكتروني",
+      "password": "كلمة المرور",
+      "confirmPassword": "تأكيد كلمة المرور",
+      "submit": "تسجيل",
+      "submitting": "جاري الإرسال...",
+      "alreadyHaveAccount": "لديك حساب بالفعل",
+      "login": "تسجيل الدخول",
+      "error": {
+        "default": "حدث خطأ أثناء التسجيل"
+      }
+    }
   }
 }

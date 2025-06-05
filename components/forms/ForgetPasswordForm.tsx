@@ -14,6 +14,7 @@ import { forgetPasswordValidation } from "@/lib/validations/forgetPasswordValida
 import { useForgotPasswordMutation } from "@/redux/services/forgotPasswordApi";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 interface ForgotPasswordError {
   data?: {
@@ -26,6 +27,8 @@ interface ForgotPasswordError {
 }
 
 export default function ForgetPasswordForm() {
+  const t = useTranslations("auth.forgetPassword");
+
   const [error, setError] = useState<string | null>(null);
   const [forgotPassword, { isLoading }] = useForgotPasswordMutation();
   const form = useForm({
@@ -43,7 +46,7 @@ export default function ForgetPasswordForm() {
 
       form.reset();
     } catch (error: unknown) {
-      let errorMessage = "An error occurred while processing your request";
+      let errorMessage = t("error.default");
 
       const forgotError = error as ForgotPasswordError;
 
@@ -67,7 +70,7 @@ export default function ForgetPasswordForm() {
         onSubmit={form.handleSubmit(onSubmit)}
         className="gap-4 h-[100%] flex flex-col pt-[80px] px-4 sm:px-7"
       >
-        <p className="text-center font-[600] text-[25px]">Forget Password</p>
+        <p className="text-center font-[600] text-[25px]">{t("title")}</p>
 
         {error && (
           <Alert variant="destructive">
@@ -77,10 +80,10 @@ export default function ForgetPasswordForm() {
 
         <div>
           <p className="text-center text-[#8B8B8B] font-[400] text-sm xl:text-[20px]">
-            Please enter your email to send to
+            {t("instruction1")}
           </p>
           <p className="text-center text-[#8B8B8B] font-[400] text-sm xl:text-[20px]">
-            you a verification code
+            {t("instruction2")}
           </p>
         </div>
 
@@ -90,25 +93,12 @@ export default function ForgetPasswordForm() {
           render={({ field }) => (
             <FormItem className="flex flex-col gap-0 w-full">
               <FormLabel className="text-subtitle font-[500] text-sm xl:text-[20px]">
-                Email address
+                {t("emailLabel")}
               </FormLabel>
               <FormControl>
                 <div className="flex items-center bg-white border border-primary rounded-lg overflow-hidden">
-                  {/* <div className="flex items-center px-3 bg-gray-100">
-                    <span className="text-[#8B8B8B] font-[500] text-[16px] me-2">
-                      +20
-                    </span>
-                    <Image
-                      height={16}
-                      width={27}
-                      src="/assets/icons/egypt.svg"
-                      alt="Egyptian flag"
-                      className="mr-2"
-                    />
-                  </div> */}
-                  {/* Input Field */}
                   <Input
-                    placeholder="Email address"
+                    placeholder={t("emailPlaceholder")}
                     type="email"
                     className="p-3 border-0 rounded-none flex-1 focus:outline-none focus:ring-0"
                     {...field}
@@ -125,7 +115,7 @@ export default function ForgetPasswordForm() {
           className="bg-[#BD9D28] text-white py-1.5 rounded-xl px-[71px] font-[700] text-sm xl:text-[20px] w-[100%] mt-[50%]"
           type="submit"
         >
-          {isLoading ? "sending ..." : "Send OTP"}
+          {isLoading ? t("sending") : t("sendOTP")}
         </button>
       </form>
     </Form>

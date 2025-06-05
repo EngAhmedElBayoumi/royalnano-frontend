@@ -811,5 +811,94 @@
     "no_comment": "No comment",
     "created_at": "Created At",
     "select_date_time": "Select Date and Time"
+  },
+  "auth": {
+    "authTemplate": {
+      "Welcome To": "",
+      "Royal": "",
+      "Nano Ceramic": ""
+    },
+    "changePassword": {
+      "title": "Change Password",
+      "password": "Password",
+      "confirmPassword": "Confirm Password",
+      "passwordRequirements": "Your Password Must Contain",
+      "numbers": "Numbers",
+      "letters": "Letters",
+      "submit": "Reset",
+      "submitting": "Submitting ...",
+      "error": {
+        "default": "An error occurred while changing password"
+      }
+    },
+    "login": {
+      "title": "Log in",
+      "email": "Email",
+      "password": "Password",
+      "placeholder": {
+        "email": "Email",
+        "password": "Password"
+      },
+      "forgotPassword": "Forget Password?",
+      "submit": "Log in",
+      "submitting": "Submitting...",
+      "noAccount": "Don't have an account?",
+      "register": "Register",
+      "error": {
+        "default": "An error occurred during login"
+      }
+    },
+    "forgotPassword": {
+      "title": "Forget Password",
+      "description": {
+        "line1": "Please enter your email to send to",
+        "line2": "you a verification code"
+      },
+      "email": {
+        "label": "Email address",
+        "placeholder": "Email address"
+      },
+      "submit": "Send OTP",
+      "submitting": "sending ...",
+      "error": {
+        "default": "An error occurred while processing your request"
+      }
+    },
+    "otpVerification": {
+      "title": "OTP Verification",
+      "instruction": {
+        "line1": "Please enter the code sent to your mobile",
+        "line2": "number"
+      },
+      "resend": {
+        "text": "I didn't receive any code.",
+        "button": "RESEND"
+      },
+      "submit": "Submit",
+      "submitting": "Submitting...",
+      "error": {
+        "default": "An error occurred during verification"
+      }
+    },
+    "register": {
+      "title": "Register",
+      "fields": {
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "phoneNumber": "Phone Number",
+        "email": "Email",
+        "password": "Password",
+        "confirmPassword": "Confirm Password"
+      },
+      "submit": "Register",
+      "submitting": "Submitting...",
+      "error": {
+        "default": "An error occurred during registration"
+      },
+      "footer": {
+        "question": "Already have an account?",
+        "login": "Log in"
+      }
+    }
   }
 }
