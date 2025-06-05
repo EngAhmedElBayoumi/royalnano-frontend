@@ -263,6 +263,8 @@
     "salesInvoice": "فاتورة المبيعات",
     "receipt": "إيصال المبيعات",
     "SalesQuotation": {
+      "status": "الحالة",
+
       "editQuotation": "تعديل عرض الأسعار",
       "date": "التاريخ",
       "customer": "العميل",

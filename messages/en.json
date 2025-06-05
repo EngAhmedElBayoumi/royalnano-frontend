@@ -264,6 +264,7 @@
     "receipt": "Sales Receipt",
     "addCustomer": "Add Customer",
     "SalesQuotation": {
+      "status": "status",
       "quotation": "Sales Quotation",
       "editQuotation": "Edit Quotation",
       "selectItem": "Select Item",

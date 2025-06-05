@@ -166,6 +166,18 @@ const AddSalesQuotationForm = ({
               label={t("SalesQuotation.quotationNumber")}
               placeholder={t("SalesQuotation.quotationNumber")}
             />
+            <CustomSelect
+              control={form.control}
+              name="status"
+              label={t("SalesQuotation.status")} // ترجمته مثلاً: "Status"
+              placeholder={t("SalesQuotation.status")} // مثال: "Select status"
+              options={[
+                { value: "sent", label: "Sent" },
+                { value: "accepted", label: "Accepted" },
+                // { value: "pending", label: "Pending" },
+                { value: "rejected", label: "Rejected" },
+              ]}
+            />
           </div>
 
           <div className="mt-6">
