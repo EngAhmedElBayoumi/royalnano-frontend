@@ -4,10 +4,21 @@ import { z } from "zod";
 export const SalesCustomerFormValuesSchema = z.object({
   customer_name: z.string().min(1, "Customer name is required"),
   contact_person: z.string().min(1, "Contact person is required"),
-  phone_number: z
-    .string()
-    .nonempty("Phone number is required")
-    .regex(phoneRegex, "Invalid phone number"),
+  phone_numbers: z
+    .array(
+      z.object({
+        phone_number: z
+          .string()
+          .min(1, "Phone number is required")
+          .max(17, "Phone number must be 17 characters or less")
+          .regex(phoneRegex, "Invalid phone number"),
+        description: z
+          .string()
+          .min(1, "Description is required")
+          .max(200, "Description must be 200 characters or less"),
+      })
+    )
+    .min(1, "At least one phone number is required"),
   email: z.string().email("Invalid email address"),
   address: z.string().min(1, "Address is required"),
   city: z.string().min(1, "City is required"),
@@ -30,6 +41,4 @@ export const SalesCustomerFormValuesSchema = z.object({
   recommended_by: z.number().nullable(),
 });
 
-export type SalesCustomerFormValues = z.infer<
-  typeof SalesCustomerFormValuesSchema
->;
+export type SalesCustomerFormValues = z.infer<typeof SalesCustomerFormValuesSchema>;

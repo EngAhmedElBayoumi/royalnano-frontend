@@ -326,6 +326,7 @@
     "SalesCustomer": {
       "customerName": "Customer Name",
       "contactPerson": "Contact Person",
+      "phoneNumbers": "Phone Numbers",
       "phoneNumber": "Phone Number",
       "email": "Email",
       "address": "Address",
@@ -333,12 +334,14 @@
       "country": "Country",
       "notes": "Notes",
       "branch": "Branch",
+      "description": "Description",
       "customerType": "Customer Type",
       "taxNumber": "Tax Number",
       "nationalId": "National ID",
       "source": "Source",
       "assignedTo": "Assigned To",
-      "recommendedBy": "Recommended By"
+      "recommendedBy": "Recommended By",
+      "addPhoneNumber": "Add Phone Number"
     },
     "ClientRequest": {
       "fullName": "Full Name",

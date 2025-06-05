@@ -1,7 +1,7 @@
 "use client";
 import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
-import { useForm } from "react-hook-form";
+import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   SalesCustomerFormValues,
@@ -14,9 +14,9 @@ import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
 import CustomSelect from "@/components/formFields/CustomSelect";
 import CustomTextArea from "@/components/formFields/TextArea";
-import PhoneInputField from "@/components/formFields/PhoneInputField";
 import useExtraFields from "@/hooks/useExtraFields";
 import ExtraFields from "@/components/formFields/ExtraFields";
+import Image from "next/image";
 
 interface SalesCustomerFormProps {
   defaultValues?: Partial<SalesCustomerFormValues>;
@@ -43,7 +43,7 @@ const SalesCustomerForm = ({
     defaultValues: defaultValues || {
       customer_name: "",
       contact_person: "",
-      phone_number: "",
+      phone_numbers: [{ phone_number: "", description: "" }], // Default structure for phone_numbers
       email: "",
       address: "",
       city: "",
@@ -58,6 +58,11 @@ const SalesCustomerForm = ({
       assigned_to: null,
       recommended_by: null,
     },
+  });
+
+  const { fields, append, remove } = useFieldArray({
+    control: form.control,
+    name: "phone_numbers",
   });
 
   const branchesOptions =
@@ -81,6 +86,7 @@ const SalesCustomerForm = ({
     defaultFields: defaultValues?.extra_fields ?? {},
     setValue: form.setValue,
   });
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -97,11 +103,6 @@ const SalesCustomerForm = ({
               name="contact_person"
               label={t("contactPerson")}
               placeholder={t("contactPerson")}
-            />
-            <PhoneInputField
-              control={form.control}
-              name="phone_number"
-              label={t("phoneNumber")}
             />
 
             <TextInput
@@ -197,6 +198,50 @@ const SalesCustomerForm = ({
               />
             )}
           </div>
+          {/* Phone Numbers Section */}
+          <div className="col-span-2">
+            <label className="block text-sm font-medium text-gray-700">
+              {t("phoneNumbers")}
+            </label>
+            {fields.map((field, index) => (
+              <div
+                key={field.id}
+                className="grid grid-cols-2 gap-4 my-4 items-start relative"
+              >
+                <TextInput
+                  control={form.control}
+                  name={`phone_numbers.${index}.phone_number`}
+                  label={t("phoneNumber")}
+                  placeholder={t("phoneNumber")}
+                />
+                <TextInput
+                  control={form.control}
+                  name={`phone_numbers.${index}.description`}
+                  label={t("description")}
+                  placeholder={t("description")}
+                />
+                <button
+                  type="button"
+                  onClick={() => remove(index)}
+                  className="absolute -top-1 right-1 bg-red-500 rounded-full p-2"
+                >
+                  <Image
+                    src="/assets/icons/dashboard/close.svg"
+                    alt="remove"
+                    width="10"
+                    height="10"
+                  />
+                </button>
+              </div>
+            ))}
+            <CustomButton
+              text={t("addPhoneNumber")}
+              type="button"
+              onClick={() => append({ phone_number: "", description: "" })}
+              className="mt-2"
+            />
+          </div>
+
           <ExtraFields
             extraFields={extraFields}
             onAddField={handleAddExtraField}
