@@ -16,6 +16,7 @@ export const SalesCustomerFormValuesSchema = z.object({
           .string()
           .min(1, "Description is required")
           .max(200, "Description must be 200 characters or less"),
+        id: z.number().optional(), // optional for edit mode
       })
     )
     .min(1, "At least one phone number is required"),
@@ -39,6 +40,23 @@ export const SalesCustomerFormValuesSchema = z.object({
   ]),
   assigned_to: z.number().nullable(),
   recommended_by: z.number().nullable(),
+
+  // ✅ New fields for attachments
+  attachments: z
+    .array(
+      z.object({
+        description: z.string().min(1, "Attachment description is required"),
+        file: z.string().url("Invalid file URL"),
+        id: z.number().optional(), // optional for edit mode
+      })
+    )
+    .optional(),
+
+  attachments_data: z.string().optional(),
+
+  phone_numbers_data: z.string().optional(),
 });
 
-export type SalesCustomerFormValues = z.infer<typeof SalesCustomerFormValuesSchema>;
+export type SalesCustomerFormValues = z.infer<
+  typeof SalesCustomerFormValuesSchema
+>;
