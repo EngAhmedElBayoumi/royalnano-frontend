@@ -1,7 +1,7 @@
 "use client";
 import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
-import { useForm, useFieldArray } from "react-hook-form";
+import { useForm, useFieldArray, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   SalesCustomerFormValues,
@@ -17,6 +17,7 @@ import CustomTextArea from "@/components/formFields/TextArea";
 import useExtraFields from "@/hooks/useExtraFields";
 import ExtraFields from "@/components/formFields/ExtraFields";
 import Image from "next/image";
+import { useState } from "react";
 
 interface SalesCustomerFormProps {
   defaultValues?: Partial<SalesCustomerFormValues>;
@@ -43,20 +44,21 @@ const SalesCustomerForm = ({
     defaultValues: defaultValues || {
       customer_name: "",
       contact_person: "",
-      phone_numbers: [{ phone_number: "", description: "" }], // Default structure for phone_numbers
+      phone_numbers: [{ phone_number: "", description: "" }],
       email: "",
       address: "",
       city: "",
       country: "",
       notes: "",
-      branch: 0,
+      branch: undefined,
       customer_type: "individual",
       tax_number: "",
       national_id: "",
       extra_fields: {},
       source: "other",
-      assigned_to: null,
-      recommended_by: null,
+      assigned_to: undefined,
+      recommended_by: undefined,
+      attachments: [],
     },
   });
 
@@ -64,6 +66,12 @@ const SalesCustomerForm = ({
     control: form.control,
     name: "phone_numbers",
   });
+
+  const [attachments, setAttachments] = useState<
+    { file: string; description: string; id: number }[]
+  >([]);
+
+  const [attachmentsData, setAttachmentsData] = useState("");
 
   const branchesOptions =
     branchesData?.results?.map((branch: listItems) => ({
@@ -73,7 +81,7 @@ const SalesCustomerForm = ({
 
   const employeeOptions =
     employeesData?.results?.map((employee: listItems) => ({
-      value: String(employee.id),
+      value: employee.id,
       label: employee.name,
     })) || [];
 
@@ -86,6 +94,52 @@ const SalesCustomerForm = ({
     defaultFields: defaultValues?.extra_fields ?? {},
     setValue: form.setValue,
   });
+
+  const handleAttachmentUpload = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const files = event.target.files;
+    if (!files?.length) return;
+
+    const uploaded: any[] = [];
+
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+
+      // Simulate uploading and getting back a URL
+      const fileUrl = URL.createObjectURL(file); // replace with actual upload logic
+
+      uploaded.push({
+        id: Date.now() + i,
+        file: fileUrl,
+        description: "",
+      });
+    }
+
+    const newAttachments = [...attachments, ...uploaded];
+    setAttachments(newAttachments);
+    setAttachmentsData(JSON.stringify(newAttachments));
+    form.setValue("attachments", newAttachments);
+    form.setValue("attachments_data", JSON.stringify(newAttachments));
+  };
+
+  const handleAttachmentDescriptionChange = (index: number, desc: string) => {
+    const newAttachments = [...attachments];
+    newAttachments[index].description = desc;
+    setAttachments(newAttachments);
+    setAttachmentsData(JSON.stringify(newAttachments));
+    form.setValue("attachments", newAttachments);
+    form.setValue("attachments_data", JSON.stringify(newAttachments));
+  };
+
+  const handleRemoveAttachment = (index: number) => {
+    const updated = [...attachments];
+    updated.splice(index, 1);
+    setAttachments(updated);
+    setAttachmentsData(JSON.stringify(updated));
+    form.setValue("attachments", updated);
+    form.setValue("attachments_data", JSON.stringify(updated));
+  };
 
   return (
     <Form {...form}>
@@ -104,7 +158,6 @@ const SalesCustomerForm = ({
               label={t("contactPerson")}
               placeholder={t("contactPerson")}
             />
-
             <TextInput
               control={form.control}
               name="email"
@@ -184,12 +237,14 @@ const SalesCustomerForm = ({
             <CustomSelect
               control={form.control}
               name="assigned_to"
+              valueType="number"
               label={t("assignedTo")}
               placeholder={t("assignedTo")}
               options={employeeOptions}
             />
             {form.watch("source") === "recommendation" && (
               <CustomSelect
+                valueType="number"
                 control={form.control}
                 name="recommended_by"
                 label={t("recommendedBy")}
@@ -198,8 +253,9 @@ const SalesCustomerForm = ({
               />
             )}
           </div>
-          {/* Phone Numbers Section */}
-          <div className="col-span-2">
+
+          {/* Phone Numbers */}
+          <div className="col-span-2 mt-4">
             <label className="block text-sm font-medium text-gray-700">
               {t("phoneNumbers")}
             </label>
@@ -242,6 +298,39 @@ const SalesCustomerForm = ({
             />
           </div>
 
+          {/* Attachments */}
+          <div className="col-span-2 mt-6">
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              {t("attachments")}
+            </label>
+            <input
+              type="file"
+              accept="image/*,.pdf"
+              multiple
+              onChange={handleAttachmentUpload}
+            />
+            {attachments.map((att, index) => (
+              <div key={att.id} className="flex gap-2 items-center mt-2">
+                <input
+                  type="text"
+                  className="input"
+                  placeholder="Attachment description"
+                  value={att.description}
+                  onChange={(e) =>
+                    handleAttachmentDescriptionChange(index, e.target.value)
+                  }
+                />
+                <button
+                  type="button"
+                  onClick={() => handleRemoveAttachment(index)}
+                  className="text-red-600"
+                >
+                  Remove
+                </button>
+              </div>
+            ))}
+          </div>
+
           <ExtraFields
             extraFields={extraFields}
             onAddField={handleAddExtraField}
@@ -249,6 +338,7 @@ const SalesCustomerForm = ({
             onFieldChange={handleExtraFieldChange}
           />
         </section>
+
         <div className="flex justify-end gap-2 mt-5 flex-col-reverse xs:flex-row">
           <Link href="/dashboard/sales?tab=sales-customer" passHref>
             <CustomButton
