@@ -320,7 +320,14 @@
       "total": "Total",
       "consumedItems": "Consumed Items",
       "inventoryItem": "Inventory Item",
-      "addConsumedItem": "Add Consumed Item"
+      "addConsumedItem": "Add Consumed Item",
+      "quotation": "Quotation",
+      "invoiceNumber": "Invoice Number",
+      "createdAt": "Created At",
+      "productId": "Product ID",
+      "addItem": "Add Item",
+      "removeItem": "Remove Item",
+      "removeConsumedItem": "Remove Consumed Item"
     },
 
     "errorTitle": "Error!",

@@ -7,20 +7,26 @@ export const salesInvoiceSchema = z.object({
   total_amount: z.coerce.number().nonnegative(),
   status: z.string().min(1, "Required"),
   description: z.string().optional(),
-  sales_order: z.coerce.number().nonnegative(),
+  quotation: z.coerce.number().nonnegative(), // تعديل هنا
   customer: z.coerce.number().nonnegative(),
   branch: z.coerce.number().nonnegative(),
+  invoice_number: z.string().min(1),
+  created_at: z.string().min(1),
+  extra_fields: z.record(z.string(), z.string()).optional(),
+  id: z.coerce.number().optional(),
 
   items: z
     .array(
       z.object({
+        id: z.coerce.number().optional(),
         quantity: z.coerce.number().positive(),
-        sales_invoice: z.coerce.number().optional(),
         unit_price: z.string(),
         discount: z.string(),
         discount_percent: z.string(),
         total: z.string(),
-        // item: z.coerce.number().positive(),
+        item: z.string(),
+        custom_item_name: z.string().optional(),
+        extra_fields: z.record(z.string(), z.string()).optional(),
       })
     )
     .min(1, "At least one item is required"),

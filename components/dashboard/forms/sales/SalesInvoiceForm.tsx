@@ -29,13 +29,14 @@ export interface SalesInvoiceFormValues {
     discount: string;
     discount_percent: string;
     total: string;
-    item: number; // Product ID
+    item: string; // Product ID
     extra_fields: Record<string, string>;
   }[];
-  consumed_items?: {
-    inventory_item: number;
-    quantity: number;
-  }[];
+  // consumed_items?: {
+  //   inventory_item: number;
+  //   quantity: number;
+  // }[];
+  consumed_items?: [];
   extra_fields: Record<string, string>; // Added root extra_fields
   invoice_number: string; // Added new field
   created_at: string; // Added new field
@@ -70,14 +71,14 @@ const SalesInvoiceForm = ({
     name: "items",
   });
 
-  const {
-    fields: consumedFields,
-    append: appendConsumed,
-    remove: removeConsumed,
-  } = useFieldArray({
-    control: form.control,
-    name: "consumed_items",
-  });
+  // const {
+  //   fields: consumedFields,
+  //   append: appendConsumed,
+  //   remove: removeConsumed,
+  // } = useFieldArray({
+  //   control: form.control,
+  //   name: "consumed_items",
+  // });
 
   const t = useTranslations("Sales");
 
@@ -88,7 +89,7 @@ const SalesInvoiceForm = ({
       discount: "0.00",
       discount_percent: "0",
       total: "0.00",
-      item: 0,
+      item: "nerm",
       extra_fields: {},
     });
   };
@@ -152,7 +153,7 @@ const SalesInvoiceForm = ({
             />
             <TextInput
               control={form.control}
-              name="quotation" // Changed from sales_order
+              name="quotation"
               label={t("SalesInvoice.quotation")}
               placeholder={t("SalesInvoice.quotation")}
               type="number"
@@ -173,13 +174,13 @@ const SalesInvoiceForm = ({
             />
             <TextInput
               control={form.control}
-              name="invoice_number" // New field
+              name="invoice_number"
               label={t("SalesInvoice.invoiceNumber")}
               placeholder={t("SalesInvoice.invoiceNumber")}
             />
             <TextInput
               control={form.control}
-              name="created_at" // New field
+              name="created_at"
               label={t("SalesInvoice.createdAt")}
               placeholder={t("SalesInvoice.createdAt")}
               type="datetime-local"
@@ -197,7 +198,7 @@ const SalesInvoiceForm = ({
                   name={`items.${index}.item`}
                   label={t("SalesInvoice.productId")}
                   placeholder={t("SalesInvoice.productId")}
-                  type="number"
+                  type="text"
                 />
                 <TextInput
                   control={form.control}
@@ -250,7 +251,7 @@ const SalesInvoiceForm = ({
             </button>
           </div>
 
-          <div className="mt-10">
+          {/* <div className="mt-10">
             <h3 className="text-lg font-semibold mb-4">
               {t("SalesInvoice.consumedItems")}
             </h3>
@@ -296,7 +297,7 @@ const SalesInvoiceForm = ({
             >
               {t("SalesInvoice.addConsumedItem")}
             </button>
-          </div>
+          </div> */}
         </section>
 
         <div className="flex justify-end gap-2 mt-5 flex-col-reverse xs:flex-row">
