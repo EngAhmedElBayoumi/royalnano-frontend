@@ -7,6 +7,8 @@ import TextInput from "@/components/formFields/TextInput";
 import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
 import { salesInvoiceSchema } from "@/lib/validations/dashboard/sales/salesInvoiceSchema";
+import CustomSelect from "@/components/formFields/CustomSelect";
+import { useGetConsumedItemsQuery } from "@/redux/services/dashboard/sales/salesConsumedItemsApi";
 
 interface SalesInvoiceFormProps {
   onSubmit: (data: SalesInvoiceFormValues) => Promise<void>;
@@ -32,11 +34,11 @@ export interface SalesInvoiceFormValues {
     item: string; // Product ID
     extra_fields: Record<string, string>;
   }[];
-  // consumed_items?: {
-  //   inventory_item: number;
-  //   quantity: number;
-  // }[];
-  consumed_items?: [];
+  consumed_items?: {
+    inventory_item: number;
+    quantity: number;
+  }[];
+  // consumed_items?: [];
   extra_fields: Record<string, string>; // Added root extra_fields
   invoice_number: string; // Added new field
   created_at: string; // Added new field
@@ -71,14 +73,14 @@ const SalesInvoiceForm = ({
     name: "items",
   });
 
-  // const {
-  //   fields: consumedFields,
-  //   append: appendConsumed,
-  //   remove: removeConsumed,
-  // } = useFieldArray({
-  //   control: form.control,
-  //   name: "consumed_items",
-  // });
+  const {
+    fields: consumedFields,
+    append: appendConsumed,
+    remove: removeConsumed,
+  } = useFieldArray({
+    control: form.control,
+    name: "consumed_items",
+  });
 
   const t = useTranslations("Sales");
 
@@ -94,6 +96,18 @@ const SalesInvoiceForm = ({
     });
   };
 
+  const { data: consumedItems, isLoading } = useGetConsumedItemsQuery({
+    search: "",
+    ordering: "id",
+    page: 1,
+    page_size: 10,
+  });
+
+  // Map consumed items to select options
+  const consumedItemOptions = (consumedItems?.results || []).map((item) => ({
+    value: item.id.toString(), // Convert to string if your component expects string values
+    label: item.name || `Item ${item.id}`, // Use actual field from your API response
+  }));
   return (
     <Form {...form}>
       <form
@@ -251,7 +265,7 @@ const SalesInvoiceForm = ({
             </button>
           </div>
 
-          {/* <div className="mt-10">
+          <div className="mt-10">
             <h3 className="text-lg font-semibold mb-4">
               {t("SalesInvoice.consumedItems")}
             </h3>
@@ -260,12 +274,13 @@ const SalesInvoiceForm = ({
                 key={field.id}
                 className="col-span-2 border p-4 rounded-lg mb-4"
               >
-                <TextInput
-                  type="number"
+                <CustomSelect
                   control={form.control}
                   name={`consumed_items.${index}.inventory_item`}
-                  label={t("SalesInvoice.inventoryItem")}
-                  placeholder={t("SalesInvoice.inventoryItem")}
+                  label={t("SalesInvoice.consumedItem")}
+                  placeholder={t("SalesInvoice.selectConsumedItem")}
+                  options={consumedItemOptions}
+                  // isLoading={isLoading}
                 />
                 <TextInput
                   control={form.control}
@@ -273,7 +288,9 @@ const SalesInvoiceForm = ({
                   label={t("SalesInvoice.quantity")}
                   placeholder={t("SalesInvoice.quantity")}
                   type="number"
+                  // min={1}
                 />
+
                 {consumedFields.length > 1 && (
                   <button
                     type="button"
@@ -297,7 +314,7 @@ const SalesInvoiceForm = ({
             >
               {t("SalesInvoice.addConsumedItem")}
             </button>
-          </div> */}
+          </div>
         </section>
 
         <div className="flex justify-end gap-2 mt-5 flex-col-reverse xs:flex-row">

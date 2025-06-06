@@ -318,6 +318,8 @@
       "discount": "Discount",
       "discountPercent": "Discount Percent",
       "total": "Total",
+      "consumedItem": "Consumed Item",
+      "selectConsumedItem": "Select Consumed Item",
       "consumedItems": "Consumed Items",
       "inventoryItem": "Inventory Item",
       "addConsumedItem": "Add Consumed Item",
