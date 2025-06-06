@@ -20,7 +20,7 @@ export interface SalesInvoiceFormValues {
   total_amount: number;
   status: string;
   description: string;
-  sales_order: number;
+  quotation: number; // Changed from sales_order
   customer: number;
   branch: number;
   items: {
@@ -29,13 +29,16 @@ export interface SalesInvoiceFormValues {
     discount: string;
     discount_percent: string;
     total: string;
-    item: number;
+    item: number; // Product ID
     extra_fields: Record<string, string>;
   }[];
   consumed_items?: {
     inventory_item: number;
     quantity: number;
   }[];
+  extra_fields: Record<string, string>; // Added root extra_fields
+  invoice_number: string; // Added new field
+  created_at: string; // Added new field
 }
 
 const SalesInvoiceForm = ({
@@ -47,15 +50,18 @@ const SalesInvoiceForm = ({
     defaultValues: defaultValues || {
       invoice_date: "",
       due_date: "",
-      sales_representative: "2",
+      sales_representative: "John Doe",
       total_amount: 0,
       status: "paid",
-      description: "sample desc",
-      sales_order: 1,
-      customer: 2,
+      description: "Invoice for June order - electronics",
+      quotation: 1,
+      customer: 1,
       branch: 41,
       items: [],
       consumed_items: [],
+      extra_fields: {},
+      invoice_number: "INV-2025-0001",
+      created_at: "2025-06-06T10:30:00Z",
     },
   });
 
@@ -78,10 +84,10 @@ const SalesInvoiceForm = ({
   const handleAddItem = () => {
     append({
       quantity: 1,
-      unit_price: "2",
-      discount: "2",
+      unit_price: "0.00",
+      discount: "0.00",
       discount_percent: "0",
-      total: "0",
+      total: "0.00",
       item: 0,
       extra_fields: {},
     });
@@ -146,9 +152,9 @@ const SalesInvoiceForm = ({
             />
             <TextInput
               control={form.control}
-              name="sales_order"
-              label={t("SalesInvoice.salesOrder")}
-              placeholder={t("SalesInvoice.salesOrder")}
+              name="quotation" // Changed from sales_order
+              label={t("SalesInvoice.quotation")}
+              placeholder={t("SalesInvoice.quotation")}
               type="number"
             />
             <TextInput
@@ -165,6 +171,19 @@ const SalesInvoiceForm = ({
               placeholder={t("SalesInvoice.branch")}
               type="number"
             />
+            <TextInput
+              control={form.control}
+              name="invoice_number" // New field
+              label={t("SalesInvoice.invoiceNumber")}
+              placeholder={t("SalesInvoice.invoiceNumber")}
+            />
+            <TextInput
+              control={form.control}
+              name="created_at" // New field
+              label={t("SalesInvoice.createdAt")}
+              placeholder={t("SalesInvoice.createdAt")}
+              type="datetime-local"
+            />
           </div>
 
           <div className="mt-6">
@@ -176,8 +195,8 @@ const SalesInvoiceForm = ({
                 <TextInput
                   control={form.control}
                   name={`items.${index}.item`}
-                  label={t("SalesInvoice.item")}
-                  placeholder={t("SalesInvoice.item")}
+                  label={t("SalesInvoice.productId")}
+                  placeholder={t("SalesInvoice.productId")}
                   type="number"
                 />
                 <TextInput
@@ -217,7 +236,7 @@ const SalesInvoiceForm = ({
                     onClick={() => remove(index)}
                     className="text-red-500 mt-2"
                   >
-                    Remove Item
+                    {t("SalesInvoice.removeItem")}
                   </button>
                 )}
               </div>
@@ -227,7 +246,7 @@ const SalesInvoiceForm = ({
               onClick={handleAddItem}
               className="bg-primary text-white p-2 rounded-lg mt-4"
             >
-              Add Item
+              {t("SalesInvoice.addItem")}
             </button>
           </div>
 
@@ -260,7 +279,7 @@ const SalesInvoiceForm = ({
                     onClick={() => removeConsumed(index)}
                     className="text-red-500 mt-2"
                   >
-                    Remove Consumed Item
+                    {t("SalesInvoice.removeConsumedItem")}
                   </button>
                 )}
               </div>
@@ -269,7 +288,7 @@ const SalesInvoiceForm = ({
               type="button"
               onClick={() =>
                 appendConsumed({
-                  inventory_item: 2,
+                  inventory_item: 0,
                   quantity: 1,
                 })
               }
