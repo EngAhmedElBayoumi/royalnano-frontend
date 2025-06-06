@@ -301,8 +301,8 @@
       "save": "Save",
       "cancel": "Cancel"
     },
+
     "SalesInvoice": {
-      "selectItem": "Select Item",
       "invoiceDate": "Invoice Date",
       "dueDate": "Due Date",
       "salesRepresentative": "Sales Representative",
@@ -312,16 +312,17 @@
       "salesOrder": "Sales Order",
       "customer": "Customer",
       "branch": "Branch",
+      "item": "Item",
       "quantity": "Quantity",
-      "salesInvoice": "Sales Invoice",
-      "customItemName": "Custom Item Name",
-      "customPrice": "Custom Price",
       "unitPrice": "Unit Price",
       "discount": "Discount",
       "discountPercent": "Discount Percent",
       "total": "Total",
-      "item": "Item"
+      "consumedItems": "Consumed Items",
+      "inventoryItem": "Inventory Item",
+      "addConsumedItem": "Add Consumed Item"
     },
+
     "errorTitle": "Error!",
     "errorDescription": "Your request wasn't processed successfully. Please try again.",
     "SalesCustomer": {

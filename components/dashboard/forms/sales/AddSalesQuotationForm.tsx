@@ -57,7 +57,7 @@ const AddSalesQuotationForm = ({
       customer: initialCustomerId ?? 1, // Use the customerId from query params
       validity_period: new Date().toISOString().split("T")[0],
       quotation_number: "",
-      status: "rejected",
+      status: "sent",
       items: [],
     },
   });

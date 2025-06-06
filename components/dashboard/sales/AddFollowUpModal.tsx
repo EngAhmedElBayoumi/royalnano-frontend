@@ -21,6 +21,7 @@ const followUpSchema = z.object({
     .optional(),
   customer: z.number().int().positive("Customer ID is required"),
   created_at: z.date().optional(),
+  action_date: z.date().optional(),
 });
 
 type FollowUpFormValues = z.infer<typeof followUpSchema>;
@@ -48,6 +49,7 @@ export default function AddFollowUpModal({
       comment: "",
       customer: customerId,
       created_at: new Date(),
+      action_date: new Date(),
     },
   });
 
@@ -55,8 +57,12 @@ export default function AddFollowUpModal({
 
   const handleFormSubmit = async (data: FollowUpFormValues) => {
     try {
-      await createFollowUp(data).unwrap();
-      refetch(); // Refetch follow-ups after successful submission
+      await createFollowUp({
+        ...data,
+        created_at: data.created_at?.toISOString(),
+        action_date: data.action_date?.toISOString(), // ✅ تحويل التاريخ قبل الإرسال
+      }).unwrap();
+      refetch();
       onClose();
       reset();
     } catch (error) {
@@ -88,7 +94,6 @@ export default function AddFollowUpModal({
               { value: "comment", label: t("comment_action") },
               { value: "follow_up", label: t("follow_up") },
             ]}
-            className=""
           />
 
           <TextArea
@@ -98,6 +103,7 @@ export default function AddFollowUpModal({
             placeholder={t("comment")}
             className="mt-2 xl:mt-5"
           />
+
           <DateTimePicker
             control={control}
             name="created_at"
@@ -105,6 +111,15 @@ export default function AddFollowUpModal({
             placeholder={t("select_date_time")}
             className="mt-2 xl:mt-5"
           />
+
+          <DateTimePicker
+            control={control}
+            name="action_date"
+            label={t("action_date")}
+            placeholder={t("select_date_time")}
+            className="mt-2 xl:mt-5"
+          />
+
           <div className="flex justify-end gap-2 flex-col-reverse xs:flex-row">
             <CustomButton
               text={t("cancel_action")}
