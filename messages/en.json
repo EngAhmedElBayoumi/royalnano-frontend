@@ -352,7 +352,9 @@
       "source": "Source",
       "assignedTo": "Assigned To",
       "recommendedBy": "Recommended By",
-      "addPhoneNumber": "Add Phone Number"
+      "addPhoneNumber": "Add Phone Number",
+      "attachments": "attachments",
+      "addAttachment": "Add Attachment"
     },
     "ClientRequest": {
       "fullName": "Full Name",

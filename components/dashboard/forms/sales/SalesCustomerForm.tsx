@@ -1,7 +1,7 @@
 "use client";
 import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
-import { useForm, useFieldArray } from "react-hook-form";
+import { useForm, useFieldArray, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   SalesCustomerFormValues,
@@ -106,7 +106,8 @@ const SalesCustomerForm = ({
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
 
-      const fileUrl = URL.createObjectURL(file);
+      // Simulate uploading and getting back a URL
+      const fileUrl = URL.createObjectURL(file); // replace with actual upload logic
 
       uploaded.push({
         id: Date.now() + i,
@@ -297,6 +298,7 @@ const SalesCustomerForm = ({
             />
           </div>
 
+          {/* Attachments */}
           <div className="col-span-2 mt-6">
             <label className="block text-sm font-medium text-gray-700 mb-1">
               {t("attachments")}

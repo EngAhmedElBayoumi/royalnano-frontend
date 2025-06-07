@@ -17,6 +17,7 @@ export const salesCustomerApi = createApi({
         url: "sales/customer/",
         method: "POST",
         body: data,
+        formData: true,
       }),
     }),
     getMiniSalesCustomer: builder.query({

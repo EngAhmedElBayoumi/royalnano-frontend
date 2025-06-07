@@ -108,13 +108,13 @@ export default function LoginForm() {
           control={form.control}
           name="email_address"
           label={t("email")}
-          placeholder={t("emailPlaceholder")}
+          placeholder={t("placeholder.email")}
         />
         <PasswordInput
           control={form.control}
           name="password"
           label={t("password")}
-          placeholder={t("passwordPlaceholder")}
+          placeholder={t("placeholder.password")}
         />
 
         <Link
@@ -122,7 +122,7 @@ export default function LoginForm() {
           href="/forget-password"
           passHref
         >
-          {t("forgetPassword")}
+          {t("forgotPassword")}
         </Link>
 
         <button
@@ -130,7 +130,7 @@ export default function LoginForm() {
           type="submit"
           disabled={isLoading}
         >
-          {isLoading ? t("submitting") : t("login")}
+          {isLoading ? t("submitting") : t("title")}
         </button>
 
         <div className="flex font-[600] text-sm xl:text-[20px] justify-center">
