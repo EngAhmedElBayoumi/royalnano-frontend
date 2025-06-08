@@ -1,7 +1,7 @@
 "use client";
 import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
-import { useForm, useFieldArray, Controller } from "react-hook-form";
+import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   SalesCustomerFormValues,
@@ -17,7 +17,6 @@ import CustomTextArea from "@/components/formFields/TextArea";
 import useExtraFields from "@/hooks/useExtraFields";
 import ExtraFields from "@/components/formFields/ExtraFields";
 import Image from "next/image";
-import { useState } from "react";
 
 interface SalesCustomerFormProps {
   defaultValues?: Partial<SalesCustomerFormValues>;
@@ -67,12 +66,6 @@ const SalesCustomerForm = ({
     name: "phone_numbers",
   });
 
-  const [attachments, setAttachments] = useState<
-    { file: string; description: string; id: number }[]
-  >([]);
-
-  const [attachmentsData, setAttachmentsData] = useState("");
-
   const branchesOptions =
     branchesData?.results?.map((branch: listItems) => ({
       value: String(branch.id),
@@ -84,7 +77,6 @@ const SalesCustomerForm = ({
       value: employee.id,
       label: employee.name,
     })) || [];
-
   const {
     extraFields,
     handleAddExtraField,
@@ -94,52 +86,6 @@ const SalesCustomerForm = ({
     defaultFields: defaultValues?.extra_fields ?? {},
     setValue: form.setValue,
   });
-
-  const handleAttachmentUpload = async (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const files = event.target.files;
-    if (!files?.length) return;
-
-    const uploaded: any[] = [];
-
-    for (let i = 0; i < files.length; i++) {
-      const file = files[i];
-
-      // Simulate uploading and getting back a URL
-      const fileUrl = URL.createObjectURL(file); // replace with actual upload logic
-
-      uploaded.push({
-        id: Date.now() + i,
-        file: fileUrl,
-        description: "",
-      });
-    }
-
-    const newAttachments = [...attachments, ...uploaded];
-    setAttachments(newAttachments);
-    setAttachmentsData(JSON.stringify(newAttachments));
-    form.setValue("attachments", newAttachments);
-    form.setValue("attachments_data", JSON.stringify(newAttachments));
-  };
-
-  const handleAttachmentDescriptionChange = (index: number, desc: string) => {
-    const newAttachments = [...attachments];
-    newAttachments[index].description = desc;
-    setAttachments(newAttachments);
-    setAttachmentsData(JSON.stringify(newAttachments));
-    form.setValue("attachments", newAttachments);
-    form.setValue("attachments_data", JSON.stringify(newAttachments));
-  };
-
-  const handleRemoveAttachment = (index: number) => {
-    const updated = [...attachments];
-    updated.splice(index, 1);
-    setAttachments(updated);
-    setAttachmentsData(JSON.stringify(updated));
-    form.setValue("attachments", updated);
-    form.setValue("attachments_data", JSON.stringify(updated));
-  };
 
   return (
     <Form {...form}>
@@ -299,7 +245,7 @@ const SalesCustomerForm = ({
           </div>
 
           {/* Attachments */}
-          <div className="col-span-2 mt-6">
+          {/* <div className="col-span-2 mt-6">
             <label className="block text-sm font-medium text-gray-700 mb-1">
               {t("attachments")}
             </label>
@@ -329,7 +275,7 @@ const SalesCustomerForm = ({
                 </button>
               </div>
             ))}
-          </div>
+          </div> */}
 
           <ExtraFields
             extraFields={extraFields}

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { Form } from "@/components/ui/form";
 import { useForm, useFieldArray } from "react-hook-form";
@@ -96,7 +97,7 @@ const SalesInvoiceForm = ({
     });
   };
 
-  const { data: consumedItems, isLoading } = useGetConsumedItemsQuery({
+  const { data: consumedItems } = useGetConsumedItemsQuery({
     search: "",
     ordering: "id",
     page: 1,
@@ -104,10 +105,12 @@ const SalesInvoiceForm = ({
   });
 
   // Map consumed items to select options
-  const consumedItemOptions = (consumedItems?.results || []).map((item) => ({
-    value: item.id.toString(), // Convert to string if your component expects string values
-    label: item.name || `Item ${item.id}`, // Use actual field from your API response
-  }));
+  const consumedItemOptions = (consumedItems?.results || []).map(
+    (item: { id: { toString: () => any }; name: any }) => ({
+      value: item.id.toString(), // Convert to string if your component expects string values
+      label: item.name || `Item ${item.id}`, // Use actual field from your API response
+    })
+  );
   return (
     <Form {...form}>
       <form
