@@ -217,37 +217,12 @@ export default function InvoicesTab({ customerId }: { customerId: number }) {
                     {invoice.consumed_items.map(
                       (consumed: {
                         id: Key | null | undefined;
-                        inventory_item:
-                          | string
-                          | number
-                          | bigint
-                          | boolean
-                          | ReactElement<
-                              any,
-                              string | JSXElementConstructor<any>
-                            >
-                          | Iterable<ReactNode>
-                          | ReactPortal
-                          | Promise<AwaitedReactNode>
-                          | null
-                          | undefined;
-                        quantity:
-                          | string
-                          | number
-                          | bigint
-                          | boolean
-                          | ReactElement<
-                              any,
-                              string | JSXElementConstructor<any>
-                            >
-                          | Iterable<ReactNode>
-                          | ReactPortal
-                          | Promise<AwaitedReactNode>
-                          | null
-                          | undefined;
+                        inventory_item: { item_name: string };
+                        quantity: number;
                       }) => (
                         <li key={consumed.id}>
-                          Inventory Item ID: {consumed.inventory_item} — Qty:{" "}
+                          Inventory Item Name:{" "}
+                          {consumed.inventory_item.item_name} — Qty:{" "}
                           {consumed.quantity}
                         </li>
                       )

@@ -10,6 +10,8 @@ import { useTranslations } from "next-intl";
 import { salesInvoiceSchema } from "@/lib/validations/dashboard/sales/salesInvoiceSchema";
 import CustomSelect from "@/components/formFields/CustomSelect";
 import { useGetConsumedItemsQuery } from "@/redux/services/dashboard/sales/salesConsumedItemsApi";
+import { useGetBranchesQuery } from "@/redux/services/dashboard/inventory/branchesApi";
+import { useGetSalesCustomerQuery } from "@/redux/services/dashboard/sales/salesCustomerApi";
 
 interface SalesInvoiceFormProps {
   onSubmit: (data: SalesInvoiceFormValues) => Promise<void>;
@@ -65,10 +67,25 @@ const SalesInvoiceForm = ({
       consumed_items: [],
       extra_fields: {},
       invoice_number: "INV-2025-0001",
-      created_at: "2025-06-06T10:30:00Z",
+      created_at: "",
     },
   });
+  const { data: branches } = useGetBranchesQuery({});
+  const { data: customers } = useGetSalesCustomerQuery({});
 
+  const branchOptions = (branches?.results || []).map(
+    (b: { id: { toString: () => any }; name: any }) => ({
+      value: b.id.toString(),
+      label: b.name,
+    })
+  );
+
+  const customerOptions = (customers?.results || []).map(
+    (c: { id: { toString: () => any }; customer_name: any }) => ({
+      value: c.id.toString(),
+      label: c.customer_name,
+    })
+  );
   const { fields, append, remove } = useFieldArray({
     control: form.control,
     name: "items",
@@ -175,32 +192,39 @@ const SalesInvoiceForm = ({
               placeholder={t("SalesInvoice.quotation")}
               type="number"
             />
-            <TextInput
-              control={form.control}
-              name="customer"
-              label={t("SalesInvoice.customer")}
-              placeholder={t("SalesInvoice.customer")}
-              type="number"
-            />
-            <TextInput
+
+            <CustomSelect
               control={form.control}
               name="branch"
               label={t("SalesInvoice.branch")}
               placeholder={t("SalesInvoice.branch")}
-              type="number"
+              options={branchOptions}
+              // value={defaultValues?.branch}
             />
+
+            <CustomSelect
+              control={form.control}
+              name="customer"
+              // {...field}
+              label={t("SalesInvoice.customer")}
+              placeholder={t("SalesInvoice.customer")}
+              options={customerOptions}
+              // value={defaultValues?.customer}
+            />
+
             <TextInput
               control={form.control}
               name="invoice_number"
               label={t("SalesInvoice.invoiceNumber")}
               placeholder={t("SalesInvoice.invoiceNumber")}
             />
+
             <TextInput
               control={form.control}
               name="created_at"
               label={t("SalesInvoice.createdAt")}
               placeholder={t("SalesInvoice.createdAt")}
-              type="datetime-local"
+              type="date"
             />
           </div>
 
