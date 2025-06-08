@@ -60,7 +60,7 @@ const EditSalesQuotationForm = ({
       customer: 0,
       validity_period: "",
       quotation_number: "",
-      status: "rejected",
+      status: "sent",
       items: [],
     },
   });
@@ -145,7 +145,8 @@ const EditSalesQuotationForm = ({
           throw new Error("Update failed");
         }
         console.log("Quotation updated successfully");
-        router.push(`/dashboard/sales?tab=Sales+Quotation`);
+        //localhost:3001/en/dashboard/sales?tab=sales-quotation
+        http: router.push(`/dashboard/sales?tab=sales-quotation`);
       } else {
         console.log("No ID was provided");
       }
@@ -203,6 +204,18 @@ const EditSalesQuotationForm = ({
               name="quotation_number"
               label={t("SalesQuotation.quotationNumber")}
               placeholder={t("SalesQuotation.quotationNumber")}
+            />
+            <CustomSelect
+              control={form.control}
+              name="status"
+              label={t("SalesQuotation.status")}
+              placeholder={t("SalesQuotation.status")}
+              options={[
+                { value: "sent", label: "Sent" },
+                { value: "accepted", label: "Accepted" },
+                { value: "draft", label: "Draft" },
+                { value: "rejected", label: "Rejected" },
+              ]}
             />
           </div>
 

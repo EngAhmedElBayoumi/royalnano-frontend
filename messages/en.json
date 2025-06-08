@@ -329,7 +329,8 @@
       "productId": "Product ID",
       "addItem": "Add Item",
       "removeItem": "Remove Item",
-      "removeConsumedItem": "Remove Consumed Item"
+      "removeConsumedItem": "Remove Consumed Item",
+      "salesInvoice": "Sales Invoice"
     },
 
     "errorTitle": "Error!",

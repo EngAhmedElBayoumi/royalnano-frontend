@@ -174,7 +174,7 @@ const AddSalesQuotationForm = ({
               options={[
                 { value: "sent", label: "Sent" },
                 { value: "accepted", label: "Accepted" },
-                // { value: "pending", label: "Pending" },
+                { value: "draft", label: "Draft" },
                 { value: "rejected", label: "Rejected" },
               ]}
             />
