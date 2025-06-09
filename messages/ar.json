@@ -23,7 +23,8 @@
     "sales": "المبيعات",
     "settings": "الإعدادات",
     "logout": "تسجيل الخروج",
-    "purchase": "المشتريات"
+    "purchase": "المشتريات",
+    "finance": "المالية"
   },
   "branches": {
     "branches": "الفروع",
@@ -773,5 +774,11 @@
     "no_comment": "لا يوجد تعليق",
     "created_at": "تاريخ الإنشاء",
     "select_date_time": "اختر التاريخ والوقت"
+  },
+  "finance":{
+    "finance":"المالية",
+    "parent":"الرئيسي",
+    "addFinance":"إضافة حساب"
+
   }
 }

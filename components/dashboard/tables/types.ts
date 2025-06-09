@@ -17,7 +17,7 @@ export interface CustomTableProps {
   columns: ColumnConfig[];
   cardData: InfoCardInterface[];
   buttonText?: string;
-  ButtonEvent: MouseEventHandler<HTMLButtonElement>;
+  ButtonEvent?: MouseEventHandler<HTMLButtonElement>;
   headerIcon?: string;
   headerTitle?: string;
   headerBG?: string;

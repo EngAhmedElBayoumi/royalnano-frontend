@@ -64,7 +64,7 @@ export function AppSidebar() {
 
                 const hasPermission =
                   link.name === "home" ||
-                  link.permissions.some(
+                  link.permissions?.some(
                     (permission) => permissions[permission]?.view
                   );
 
@@ -82,7 +82,7 @@ export function AppSidebar() {
                         <Link href={`/dashboard${link.path}`} passHref>
                           <Image
                             src={`/assets/icons/sidebar/${link.icon}`}
-                            alt={t(link.name)}
+                            alt={t(link?.name)}
                             width={30}
                             height={30}
                           />

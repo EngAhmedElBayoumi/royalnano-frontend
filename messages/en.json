@@ -23,7 +23,8 @@
     "sales": "Sales",
     "settings": "Settings",
     "logout": "Logout",
-    "purchase": "Purchase"
+    "purchase": "Purchase",
+    "finance": "Finance"
   },
   "branches": {
     "branches": "Branches",
@@ -811,5 +812,11 @@
     "no_comment": "No comment",
     "created_at": "Created At",
     "select_date_time": "Select Date and Time"
+  },
+   "finance":{
+    "finance":"Finance",
+    "parent":"Parent",
+    "addFinance":"Add Account"
+
   }
 }

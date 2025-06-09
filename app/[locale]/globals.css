@@ -241,3 +241,44 @@ textarea::-webkit-resizer {
   background-color: #f4f4f4 !important;
   font-size: 18px !important;
 }
+
+/* finace shape carve style */
+/* sidebar sublink */
+.lick-shape {
+    display: flex;
+    align-items: flex-end; /* Align the curve to the bottom of the vertical bar */
+    position: relative;
+  }
+  .curve {
+    width: 18px; /* Diameter of the curve */
+    height: 30px; /* Diameter of the curve */
+    border: 1px solid #BBBBBE; /* Matches the thickness of the line */
+    border-left: none; /* Removes the left side of the border */
+    border-top: none; /* Removes the top side of the border */
+    border-radius:30% 0 30% 0  ; /* Creates a smooth curve at the bottom-right */
+    transform: translateY(-12px); /* Adjust the alignment to connect seamlessly */
+  }
+  
+  .arrow-curve {
+    width: 20px; /* Width of the arrow's base */
+    height: 20px; /* Height of the arrow's base */
+    position: relative;
+    border: 1px solid #BBBBBE; /* Matches the thickness of the line */
+    border-left: none; /* Remove the right border for the arrow */
+    border-top: none; /* Remove the top border for the arrow */
+    border-radius: 0 50% 0 50%; /* Create a smooth curve at the bottom-right */
+    transform: translateY(-12px) rotate(-45deg); /* Tilt to create an arrow-like effect */
+  }
+  
+  /* Add the arrow point */
+  .curve::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; /* Position at the bottom of the curve */
+    right: 10px; /* Adjust to align with the curve */
+    width: 6px;
+    height: 6px;
+    background-color: #BBBBBE; /* Same color as the line */
+    transform: rotate(45deg); /* Rotate to form a triangular point */
+    /* clip-path: polygon(50% 0, 0 100%, 100% 100%); Create a triangle shape */
+  }
