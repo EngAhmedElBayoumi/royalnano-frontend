@@ -28,7 +28,7 @@ export interface PurchaseOrderFormValues {
     kind: string;
     name: string;
     unit: string;
-    quantity: string;
+    quantity: number;
     unit_price: string;
     id: number;
     bonus: string;
@@ -43,7 +43,7 @@ export interface PurchaseOrderFormValues {
     vat: string;
     subtotal: string;
     quantity: number;
-    free_quantity: string;
+    free_quantity: number;
     total: string;
   };
 }
@@ -85,8 +85,8 @@ const PurchaseOrderForm = ({
         discount: "",
         vat: "",
         subtotal: "",
-        quantity: "",
-        free_quantity: "",
+        quantity: 1,
+        free_quantity: 1,
         total: "",
       },
     },
@@ -203,6 +203,7 @@ const PurchaseOrderForm = ({
                   label={t("quantity")}
                   placeholder={t("quantity")}
                   readonly={isView}
+                  type="number"
                 />
                 <TextInput
                   control={form.control}
@@ -296,6 +297,7 @@ const PurchaseOrderForm = ({
                 label={t("freeQuantity")}
                 placeholder={t("freeQuantity")}
                 readonly={isView}
+                type="number"
               />
               <TextInput
                 control={form.control}

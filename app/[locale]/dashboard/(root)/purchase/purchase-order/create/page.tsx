@@ -34,8 +34,8 @@ export default function CreateOrder() {
         discount: Number(data.invoice_detail.discount),
         vat: Number(data.invoice_detail.vat),
         subtotal: Number(data.invoice_detail.subtotal),
-        quantity: Number(data.invoice_detail.quantity),
-        free_quantity: Number(data.invoice_detail.free_quantity),
+        quantity: data.invoice_detail.quantity,
+        free_quantity: data.invoice_detail.free_quantity,
         total: Number(data.invoice_detail.total),
       },
     };

@@ -21,8 +21,8 @@ const invoiceDetailSchema = z.object({
   discount: z.string().min(1, "Discount is required"),
   vat: z.string().min(1, "VAT is required"),
   subtotal: z.string().min(1, "Subtotal is required"),
-  quantity: z.string().min(1, "Quantity is required"),
-  free_quantity: z.string().min(1, "Free quantity is required"),
+  quantity: z.number().min(1, "Quantity must be at least 1"),
+  free_quantity: z.number().min(1, "Free quantity must be at least 1"),
   total: z.string().min(1, "Total is required"),
 });
 
