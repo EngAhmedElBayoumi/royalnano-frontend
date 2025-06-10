@@ -42,7 +42,8 @@
     "saving": "يتم الحفظ...",
     "cancel": "إلغاء",
     "setLocation": "تعيين الموقع",
-    "selectBranchLocation": "اختر موقع الفرع"
+    "selectBranchLocation": "اختر موقع الفرع",
+    "balance":"الميزانية"
   },
   "Inventory": {
     "units": "الوحدات",

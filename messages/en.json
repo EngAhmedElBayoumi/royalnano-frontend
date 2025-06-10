@@ -42,7 +42,8 @@
     "saving": "saving...",
     "cancel": "Cancel",
     "setLocation": "Set Location",
-    "selectBranchLocation": "Select Branch Location"
+    "selectBranchLocation": "Select Branch Location",
+    "balance":"Balance"
   },
   "Inventory": {
     "units": "Units",
