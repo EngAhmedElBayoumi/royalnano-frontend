@@ -379,7 +379,8 @@
       "contact": "التواصل",
       "gallery": "معرض الصور",
       "customerReviews": "تقييمات العملاء",
-      "blogs": "المدونات"
+      "blogs": "المدونات",
+      "social": "وسائل التواصل الاجتماعي"
     },
     "Services": {
       "services": "الخدمات",
@@ -424,6 +425,13 @@
       "addCustomerReview": "إضافة تقييم",
       "editCustomerReview": "تعديل التقييم",
       "noCustomerReviewsFound": "لا توجد بيانات للتقييمات"
+    },
+    "social": {
+      "add_social": "إضافة وسيلة تواصل اجتماعي",
+      "edit_social": "تعديل وسيلة تواصل اجتماعي",
+      "no_social_data_found": "لا توجد بيانات لوسائل التواصل الاجتماعي",
+      "code": "الرمز",
+      "description": "الوصف"
     }
   },
   "website": {

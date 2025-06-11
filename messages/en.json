@@ -378,7 +378,8 @@
       "contact": "Contact",
       "gallery": "Gallery",
       "customerReviews": "Customer Reviews",
-      "blogs": "Blogs"
+      "blogs": "Blogs",
+      "social": "Social Media"
     },
     "Services": {
       "services": "Services",
@@ -423,6 +424,13 @@
       "content": "Content",
       "image": "Image",
       "noBlogsDataFound": "No Blogs data found"
+    },
+    "social": {
+      "add_social": "Add Social Media",
+      "edit_social": "Edit Social Media",
+      "no_social_data_found": "No Social data found",
+      "code": "Code",
+      "description": "Description"
     }
   },
   "website": {
