@@ -40,6 +40,8 @@ export default function Movement() {
   const transformedData = movementData.results.map((movement: Movement) => ({
     ...movement,
     item: movement.item.item_name,
+    from_branch: movement.from_branch.name,
+    to_branch: movement.to_branch.name,
   }));
 
   const columns = [
