@@ -1,6 +1,5 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { useForm } from "react-hook-form";
 import {
   Form,
@@ -12,9 +11,10 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { changePasswordValidation } from "@/lib/validations/changePasswordValidation";
-import { useState } from "react"; // Import useState for checkbox state
+import { useState } from "react";
 import { useResetPasswordMutation } from "@/redux/services/resetPassword";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { useTranslations } from "next-intl";
 
 interface ChangePasswordError {
   data?: {
@@ -28,6 +28,8 @@ interface ChangePasswordError {
 }
 
 export default function ChangePasswordForm() {
+  const t = useTranslations("auth.changePassword");
+
   const [resetPassword, { isLoading }] = useResetPasswordMutation();
   const form = useForm({
     resolver: zodResolver(changePasswordValidation),
@@ -49,7 +51,7 @@ export default function ChangePasswordForm() {
     try {
       await resetPassword(data).unwrap();
     } catch (error: unknown) {
-      let errorMessage = "An error occurred while changing password";
+      let errorMessage = t("error.default");
 
       const changeError = error as ChangePasswordError;
 
@@ -76,7 +78,7 @@ export default function ChangePasswordForm() {
         className="gap-4 flex flex-col p-4 sm:px-7"
       >
         <p className="text-center text-primary font-[600] text-[25px]">
-          Change Password
+          {t("title")}
         </p>
 
         {error && (
@@ -91,12 +93,12 @@ export default function ChangePasswordForm() {
           render={({ field }) => (
             <FormItem className="flex flex-col gap-0 w-full ">
               <FormLabel className="text-subtitle font-[500] text-sm xl:text-[20px] ">
-                Password
+                {t("password")}
               </FormLabel>
               <FormControl className="flex-1 text-gray-200 ">
                 <Input
                   type="password"
-                  placeholder="Password"
+                  placeholder={t("password")}
                   className="p-1 bg-white border-[0.5] border-primary"
                   {...field}
                 />
@@ -105,17 +107,18 @@ export default function ChangePasswordForm() {
             </FormItem>
           )}
         />
+
         <FormField
           control={form.control}
           name="confirmPassword"
           render={({ field }) => (
             <FormItem className="flex flex-col gap-0 w-full">
               <FormLabel className="text-subtitle font-[500] text-sm xl:text-[20px] ">
-                Confirm Password
+                {t("confirmPassword")}
               </FormLabel>
               <FormControl className="flex-1 text-gray-200 ">
                 <Input
-                  placeholder="Confirm Password"
+                  placeholder={t("confirmPassword")}
                   type="password"
                   className="p-1 bg-white border-[0.5] border-primary"
                   {...field}
@@ -125,12 +128,12 @@ export default function ChangePasswordForm() {
             </FormItem>
           )}
         />
+
         <div className="flex flex-col gap-4">
           <p className="text-[#8B8B8B] font-[600] text-[16px]">
-            Your Password Must Contain
+            {t("passwordRequirements")}
           </p>
 
-          {/* Checkboxes for Numbers and Letters */}
           <div className="flex flex-col gap-2 ">
             <div className="flex items-center">
               <input
@@ -144,9 +147,10 @@ export default function ChangePasswordForm() {
                 htmlFor="numbers"
                 className={`${isNumbersChecked ? "text-primary" : ""}`}
               >
-                Numbers
+                {t("numbers")}
               </label>
             </div>
+
             <div className="flex items-center">
               <input
                 type="checkbox"
@@ -159,7 +163,7 @@ export default function ChangePasswordForm() {
                 htmlFor="letters"
                 className={`${isLettersChecked ? "text-primary" : ""}`}
               >
-                Letters
+                {t("letters")}
               </label>
             </div>
           </div>
@@ -169,7 +173,7 @@ export default function ChangePasswordForm() {
           className="bg-[#BD9D28] text-white py-1.5 rounded-xl px-[71px] md:text-sm xl:text-md w-[100%] m-auto mt-[15%]"
           type="submit"
         >
-          {isLoading ? "submitting ..." : "Reset"}
+          {isLoading ? t("submitting") : t("submit")}
         </button>
       </form>
     </Form>

@@ -57,7 +57,7 @@ const AddSalesQuotationForm = ({
       customer: initialCustomerId ?? 1, // Use the customerId from query params
       validity_period: new Date().toISOString().split("T")[0],
       quotation_number: "",
-      status: "rejected",
+      status: "sent",
       items: [],
     },
   });
@@ -165,6 +165,18 @@ const AddSalesQuotationForm = ({
               name="quotation_number"
               label={t("SalesQuotation.quotationNumber")}
               placeholder={t("SalesQuotation.quotationNumber")}
+            />
+            <CustomSelect
+              control={form.control}
+              name="status"
+              label={t("SalesQuotation.status")} // ترجمته مثلاً: "Status"
+              placeholder={t("SalesQuotation.status")} // مثال: "Select status"
+              options={[
+                { value: "sent", label: "Sent" },
+                { value: "accepted", label: "Accepted" },
+                { value: "draft", label: "Draft" },
+                { value: "rejected", label: "Rejected" },
+              ]}
             />
           </div>
 

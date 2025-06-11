@@ -1,11 +1,9 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-// import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { loginValidation } from "@/lib/validations/login";
 import { Link } from "@/i18n/routing";
-// import Image from "next/image";
 import { useLoginMutation } from "@/redux/services/loginApi";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
@@ -16,6 +14,7 @@ import TextInput from "@/components/formFields/TextInput";
 import PasswordInput from "@/components/formFields/PasswordInput";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 interface LoginError {
   data?: {
@@ -27,25 +26,26 @@ interface LoginError {
 }
 
 export default function LoginForm() {
+  const t = useTranslations("auth.login");
+
   const dispatch = useDispatch();
   const [Login, { isLoading }] = useLoginMutation();
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
 
   const form = useForm({
-    resolver: zodResolver(loginValidation), // Ensure zodResolver is correctly set
+    resolver: zodResolver(loginValidation),
     defaultValues: {
       email_address: "",
       password: "",
     },
-    // mode: "onChange", // Validate on every change
   });
 
   const onSubmit = async (data: {
     email_address: string;
     password: string;
   }) => {
-    setError(null); // Clear any previous errors
+    setError(null);
     try {
       const response = await Login(data).unwrap();
 
@@ -74,7 +74,7 @@ export default function LoginForm() {
       if (profileData.role !== "client") router.push("/dashboard");
       else router.push("/");
     } catch (error: unknown) {
-      let errorMessage = "An error occurred during login";
+      let errorMessage = t("error.default");
 
       const loginError = error as LoginError;
 
@@ -96,7 +96,7 @@ export default function LoginForm() {
         onSubmit={form.handleSubmit(onSubmit)}
         className="gap-4 flex flex-col p-4 sm:px-7"
       >
-        <p className="text-center font-[600] text-[25px]">Log in</p>
+        <p className="text-center font-[600] text-[25px]">{t("title")}</p>
 
         {error && (
           <Alert variant="destructive">
@@ -107,72 +107,38 @@ export default function LoginForm() {
         <TextInput
           control={form.control}
           name="email_address"
-          label="Email"
-          placeholder="Email"
+          label={t("email")}
+          placeholder={t("placeholder.email")}
         />
         <PasswordInput
           control={form.control}
           name="password"
-          label="Password"
-          placeholder="Password"
+          label={t("password")}
+          placeholder={t("placeholder.password")}
         />
 
-        {/* Forget Password Link */}
         <Link
           className="ml-auto text-[#969696] text-sm xl:text-[20px] font-[600]"
           href="/forget-password"
           passHref
         >
-          Forget Password?
+          {t("forgotPassword")}
         </Link>
 
-        {/* Submit Button */}
         <button
           className="bg-[#BD9D28] text-white py-1.5 rounded-xl px-[71px] md:text-sm xl:text-md w-[100%] m-auto"
           type="submit"
           disabled={isLoading}
         >
-          {isLoading ? "Submitting..." : "Log in"}
+          {isLoading ? t("submitting") : t("title")}
         </button>
 
-        {/* Register Link */}
         <div className="flex font-[600] text-sm xl:text-[20px] justify-center">
-          <p className="mr-1 text-[#8B8B8B]">Dont have an account?</p>
+          <p className="mr-1 text-[#8B8B8B]">{t("noAccount")}</p>
           <Link href="/register" className="text-primary" passHref>
-            Register
+            {t("register")}
           </Link>
         </div>
-
-        {/* Divider with OR */}
-        {/* <div className="flex items-center">
-          <div className="w-[203px] h-[2px] bg-subtitle"></div>
-          <p className="mx-[27px] text-[25px] font-[500] text-[#5A5A5A]">OR</p>
-          <div className="w-[203px] h-[2px] bg-subtitle"></div>
-        </div> */}
-
-        {/* Google Login Button */}
-        {/* <Button className="bg-white border text-[#EC0000] font-[600] text-[25px] h-11 border-subtitle">
-          <Image
-            src="/assets/icons/btnGoogle.svg"
-            alt="Google"
-            width={30}
-            height={30}
-            className="me-2"
-          />
-          Google
-        </Button> */}
-
-        {/* Facebook Login Button */}
-        {/* <Button className="bg-white border text-[#0047B2] font-[600] text-[25px] h-11 border-subtitle">
-          <Image
-            src="/assets/icons/btnFB.svg"
-            alt="Facebook"
-            width={30}
-            height={30}
-            className="me-2"
-          />
-          Facebook
-        </Button> */}
       </form>
     </Form>
   );

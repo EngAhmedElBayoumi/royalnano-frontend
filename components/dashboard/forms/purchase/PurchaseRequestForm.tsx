@@ -24,7 +24,7 @@ export interface PurchaseRequestFormValues {
     item_kind: string;
     item_name: string;
     unit: string;
-    quantity: string;
+    quantity: number;
     unit_price: string;
     id: number;
     total: string;
@@ -40,33 +40,22 @@ const PurchaseRequestForm = ({
   const form = useForm<PurchaseRequestFormValues>({
     resolver: zodResolver(purchaseRequestSchema),
     defaultValues: defaultValues || {
-      request_date: "2023-10-01",
-      description: "Sample purchase request",
+      request_date: "",
+      description: "",
       id: 1,
-      request_by: 2,
-      branch: 3,
+      request_by: 1,
+      branch: 1,
       items: [
         {
-          kind: "Stationery",
-          item_kind: "Notebook",
-          item_name: "Notebook A4",
-          unit: "Piece",
-          quantity: "10",
-          unit_price: "2.50",
+          kind: "",
+          item_kind: "",
+          item_name: "",
+          unit: "",
+          quantity: 1,
+          unit_price: "",
           id: 1,
-          total: "25.00",
-          description: "A4 size notebook",
-        },
-        {
-          kind: "Electronics",
-          item_kind: "Cable",
-          item_name: "USB Cable",
-          unit: "Piece",
-          quantity: "5",
-          unit_price: "3.00",
-          id: 2,
-          total: "15.00",
-          description: "USB Type-C cable",
+          total: "",
+          description: "",
         },
       ],
     },
@@ -161,6 +150,7 @@ const PurchaseRequestForm = ({
                   label={t("quantity")}
                   placeholder={t("quantity")}
                   readonly={isView}
+                  type="number"
                 />
                 <TextInput
                   control={form.control}

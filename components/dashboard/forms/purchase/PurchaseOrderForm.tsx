@@ -28,7 +28,7 @@ export interface PurchaseOrderFormValues {
     kind: string;
     name: string;
     unit: string;
-    quantity: string;
+    quantity: number;
     unit_price: string;
     id: number;
     bonus: string;
@@ -42,8 +42,8 @@ export interface PurchaseOrderFormValues {
     discount: string;
     vat: string;
     subtotal: string;
-    quantity: string;
-    free_quantity: string;
+    quantity: number;
+    free_quantity: number;
     total: string;
   };
 }
@@ -56,89 +56,40 @@ const PurchaseOrderForm = ({
   const form = useForm<PurchaseOrderFormValues>({
     resolver: zodResolver(purchaseOrderSchema),
     defaultValues: defaultValues || {
-      order_date: "2023-10-01",
-      offer_expiry: "2023-10-15",
-      prefix: "PO",
-      delivery_date: "2023-10-10",
-      due_date: "2023-10-20",
+      order_date: "",
+      offer_expiry: "",
+      prefix: "",
+      delivery_date: "",
+      due_date: "",
       id: 1,
       branch: 1,
       supplier: 1,
-      description: "Sample purchase order for office supplies",
+      description: "",
       items: [
         {
-          kind: "Stationery",
-          name: "Notebook",
-          unit: "Piece",
-          quantity: "10",
-          unit_price: "2.50",
+          kind: "",
+          name: "",
+          unit: "",
+          quantity: 1,
+          unit_price: "",
           id: 1,
-          bonus: "1",
-          amount: "25.00",
-          discount: "0.00",
-          discount_percent: "0",
-          vat_kd: "5",
-          total: "26.25",
-        },
-        {
-          kind: "Electronics",
-          name: "USB Cable",
-          unit: "Piece",
-          quantity: "5",
-          unit_price: "3.00",
-          id: 2,
-          bonus: "0",
-          amount: "15.00",
-          discount: "1.00",
-          discount_percent: "5",
-          vat_kd: "5",
-          total: "14.70",
+          bonus: "",
+          amount: "",
+          discount: "",
+          discount_percent: "",
+          vat_kd: "",
+          total: "",
         },
       ],
       invoice_detail: {
-        discount: "1.00",
-        vat: "2.00",
-        subtotal: "40.00",
-        quantity: "15",
-        free_quantity: "1",
-        total: "41.00",
+        discount: "",
+        vat: "",
+        subtotal: "",
+        quantity: 1,
+        free_quantity: 1,
+        total: "",
       },
     },
-    // {
-    //   order_date: "",
-    //   offer_expiry: "",
-    //   prefix: "",
-    //   delivery_date: "",
-    //   due_date: "",
-    //   id: 0,
-    //   branch: 0,
-    //   supplier: 0,
-    //   description: "",
-    //   items: [
-    //     {
-    //       kind: "",
-    //       name: "",
-    //       unit: "",
-    //       quantity: "",
-    //       unit_price: "",
-    //       id: 0,
-    //       bonus: "",
-    //       amount: "",
-    //       discount: "",
-    //       discount_percent: "",
-    //       vat_kd: "",
-    //       total: "",
-    //     },
-    //   ],
-    //   invoice_detail: {
-    //     discount: "",
-    //     vat: "",
-    //     subtotal: "",
-    //     quantity: "",
-    //     free_quantity: "",
-    //     total: "",
-    //   },
-    // },
   });
 
   const t = useTranslations("Purchase.Order");
@@ -252,6 +203,7 @@ const PurchaseOrderForm = ({
                   label={t("quantity")}
                   placeholder={t("quantity")}
                   readonly={isView}
+                  type="number"
                 />
                 <TextInput
                   control={form.control}
@@ -337,6 +289,7 @@ const PurchaseOrderForm = ({
                 label={t("quantity")}
                 placeholder={t("quantity")}
                 readonly={isView}
+                type="number"
               />
               <TextInput
                 control={form.control}
@@ -344,6 +297,7 @@ const PurchaseOrderForm = ({
                 label={t("freeQuantity")}
                 placeholder={t("freeQuantity")}
                 readonly={isView}
+                type="number"
               />
               <TextInput
                 control={form.control}
