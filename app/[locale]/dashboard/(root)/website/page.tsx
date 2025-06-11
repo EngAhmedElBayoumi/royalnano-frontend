@@ -119,7 +119,7 @@ function WebsitePage() {
     {
       id: "social",
       label: t("social"),
-      permissionKey: "social",
+      permissionKey: "socialcode",
       icon: (
         <Image
           src="/assets/icons/dashboard/website/social.svg"

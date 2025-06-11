@@ -35,7 +35,7 @@ export const permissionRoutes = {
     "gallery",
     "contact",
     "customerreview",
-    "social",
+    "socialcode",
     "blog",
   ],
   "/dashboard/purchase": [

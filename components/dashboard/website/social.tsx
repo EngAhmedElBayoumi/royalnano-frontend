@@ -11,7 +11,7 @@ export default function Social() {
 
   const { data, isLoading, error, permissions, handlePageChange } =
     useTableData({
-      permissionKey: "social",
+      permissionKey: "socialcode",
       // eslint-disable-next-line
       useQueryHook: useGetSocialQuery,
     });
