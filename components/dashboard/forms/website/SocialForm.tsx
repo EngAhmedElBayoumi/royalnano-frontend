@@ -34,7 +34,38 @@ const SocialForm = ({
   const t = useTranslations("dashboard_website.social");
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}></form>
+      <form onSubmit={form.handleSubmit(onSubmit)}>
+        <section className="min-h-[60vh]">
+          <div className="grid gap-x-4 gap-y-2 xl:gap-y-5 lg:gap-x-10">
+            <TextInput
+              control={form.control}
+              name="code"
+              label={t("code")}
+              placeholder={t("code")}
+            />
+            <TextArea
+              control={form.control}
+              name="description"
+              label={t("description")}
+              placeholder={t("description")}
+            />
+          </div>
+        </section>
+        <div className="flex justify-end gap-2 mt-5 flex-col-reverse xs:flex-row">
+          <Link href="/dashboard/website?tab=social" passHref>
+            <CustomButton
+              text={globalTranslate("cancel")}
+              variant="secondary"
+            />
+          </Link>
+          <CustomButton
+            text={
+              isLoading ? globalTranslate("saving") : globalTranslate("save")
+            }
+            isDisabled={isLoading}
+          />
+        </div>
+      </form>
     </Form>
   );
 };
