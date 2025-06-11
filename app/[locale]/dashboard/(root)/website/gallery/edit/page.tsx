@@ -60,7 +60,7 @@ export default function EditGallery() {
       error={error}
       onSubmit={handleSubmit}
       Form={GalleryForm}
-      redirectPath="/dashboard/website?tab=tabs.gallery"
+      redirectPath="/dashboard/website?tab=gallery"
     />
   );
 }

@@ -42,7 +42,7 @@ export default function CreateGallery() {
       onSubmit={handleSubmit}
       Form={GalleryForm}
       isLoading={isLoading}
-      redirectPath="/dashboard/website?tab=tabs.gallery"
+      redirectPath="/dashboard/website?tab=gallery"
     />
   );
 }
