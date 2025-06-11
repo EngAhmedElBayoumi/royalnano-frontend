@@ -24,20 +24,12 @@ export default function EditItem() {
     branch: data.branch.id,
     supplier: data.supplier.id,
     category: data.category.id,
-    unit: data.unit.id,
     purchase_price: Number(data.purchase_price),
     selling_price: Number(data.selling_price),
   };
 
   const handleSubmit = async (data: ItemFormValues) => {
-    const payload = {
-      ...data,
-      category: Number(data.category),
-      branch: Number(data.branch),
-      supplier: Number(data.supplier),
-      unit: Number(data.unit),
-    };
-    const response = await updateItem({ id, data: payload });
+    const response = await updateItem({ id, data });
     if (response.error) handleApiError(response.error);
   };
 

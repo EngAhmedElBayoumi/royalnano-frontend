@@ -20,7 +20,7 @@ interface MovementFormProps {
 }
 
 export interface MovementFormValues {
-  item: string;
+  item: number;
   quantity: number;
   movement_type: string;
   movement_date: Date;
@@ -39,7 +39,7 @@ const MovementForm = ({
   const form = useForm({
     resolver: zodResolver(movementSchema),
     defaultValues: defaultValues || {
-      item: "",
+      item: 1,
       quantity: 0,
       movement_type: "",
       movement_date: new Date(),
