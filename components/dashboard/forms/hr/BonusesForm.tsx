@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { bonusSchema } from "@/lib/validations/dashboard/hr/bonusSchema";
 import { useGetEmployeesQuery } from "@/redux/services/dashboard/hr/employeeApi";
+import { listItems } from "@/lib/utils/types";
 import { Form } from "@/components/ui/form";
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
@@ -46,7 +47,7 @@ const BonusesForm = ({
   const { data: employees } = useGetEmployeesQuery({});
 
   const employeesOptions =
-    employees?.results?.map((employee: { id: number; name: string }) => ({
+    employees?.results?.map((employee: listItems) => ({
       value: String(employee.id),
       label: employee.name,
     })) || [];

@@ -13,6 +13,7 @@ import { useGetServicesQuery } from "@/redux/services/website/servicesApi";
 import { useEffect } from "react";
 import { useRouter } from "@/i18n/routing";
 import PhoneInputField from "../formFields/PhoneInputField";
+import { listItems } from "@/lib/utils/types";
 
 type FormData = {
   full_name: string;
@@ -81,13 +82,13 @@ export default function BookingForm() {
   }, [errors]);
 
   const serviceNames =
-    servicesData?.results?.map((service: { id: number; name: string }) => ({
+    servicesData?.results?.map((service: listItems) => ({
       value: String(service.id),
       label: service.name,
     })) || [];
 
   const branchesList =
-    branchesData?.results?.map((branch: { id: number; name: string }) => ({
+    branchesData?.results?.map((branch: listItems) => ({
       value: String(branch.id),
       label: branch.name,
     })) || [];

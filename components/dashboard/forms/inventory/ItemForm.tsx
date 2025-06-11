@@ -8,6 +8,7 @@ import { useGetItemCategoryQuery } from "@/redux/services/dashboard/inventory/it
 import { useGetBranchesQuery } from "@/redux/services/dashboard/inventory/branchesApi";
 import { useGetSuppliersMiniQuery } from "@/redux/services/dashboard/purchase/supplierApi";
 import { useGetUnitsQuery } from "@/redux/services/dashboard/inventory/unitsApi";
+import { listItems } from "@/lib/utils/types";
 import { Form } from "@/components/ui/form";
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
@@ -34,10 +35,6 @@ export interface ItemFormValues {
   supplier: number;
   description: string;
   extra_fields?: Record<string, string> | null;
-}
-export interface listItems {
-  id: number;
-  name: string;
 }
 
 const ItemForm = ({ onSubmit, defaultValues, isLoading }: ItemFormProps) => {

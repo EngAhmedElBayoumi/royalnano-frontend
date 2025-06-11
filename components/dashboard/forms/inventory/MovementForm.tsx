@@ -1,16 +1,18 @@
 "use client";
 import { Link } from "@/i18n/routing";
+import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { movementSchema } from "@/lib/validations/dashboard/inventory/movementSchema";
 import { useGetItemsQuery } from "@/redux/services/dashboard/inventory/itemsApi";
+import { useGetBranchesQuery } from "@/redux/services/dashboard/inventory/branchesApi";
+import { listItems } from "@/lib/utils/types";
 import { Form } from "@/components/ui/form";
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
 import CustomSelect from "@/components/formFields/CustomSelect";
 import CustomTextArea from "@/components/formFields/TextArea";
 import DatePicker from "@/components/formFields/DatePicker";
-import { useTranslations } from "next-intl";
 
 interface MovementFormProps {
   onSubmit: (data: MovementFormValues) => Promise<void>;
@@ -22,9 +24,11 @@ interface MovementFormProps {
 export interface MovementFormValues {
   item: number;
   quantity: number;
-  movement_type: string;
+  from_branch: number;
+  to_branch: number;
   movement_date: Date;
   description: string;
+  extra_fields?: Record<string, string> | null;
 }
 
 const MovementForm = ({
@@ -33,7 +37,7 @@ const MovementForm = ({
   isView,
   isLoading,
 }: MovementFormProps) => {
-  const t = useTranslations();
+  const t = useTranslations("Inventory.InventoryMovement");
   const globalTranslate = useTranslations();
 
   const form = useForm({
@@ -41,12 +45,15 @@ const MovementForm = ({
     defaultValues: defaultValues || {
       item: 1,
       quantity: 0,
-      movement_type: "",
+      from_branch: 1,
+      to_branch: 1,
       movement_date: new Date(),
       description: "",
+      extra_fields: {},
     },
   });
   const { data: items } = useGetItemsQuery({});
+  const { data: branches } = useGetBranchesQuery({});
 
   const itemsOptions =
     items?.results?.map((item: { id: number; item_name: string }) => ({
@@ -54,11 +61,11 @@ const MovementForm = ({
       label: item.item_name,
     })) || [];
 
-  const typeOptions = [
-    { value: "In", label: "In" },
-    { value: "Out", label: "Out" },
-  ];
-
+  const branchesOptions =
+    branches?.results?.map((branch: listItems) => ({
+      value: String(branch.id),
+      label: branch.name,
+    })) || [];
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -67,41 +74,49 @@ const MovementForm = ({
             <CustomSelect
               control={form.control}
               name="item"
-              label={t("Inventory.InventoryMovement.item")}
-              placeholder={t("Inventory.InventoryMovement.item")}
+              label={t("item")}
+              placeholder={t("item")}
               options={itemsOptions}
               readonly={isView}
             />
             <TextInput
               control={form.control}
               name="quantity"
-              label={t("Inventory.InventoryMovement.quantity")}
-              placeholder={t("Inventory.InventoryMovement.quantity")}
+              label={t("quantity")}
+              placeholder={t("quantity")}
               type="number"
               readonly={isView}
             />
 
             <CustomSelect
               control={form.control}
-              name="movement_type"
-              label={t("Inventory.InventoryMovement.movementType")}
-              placeholder={t("Inventory.InventoryMovement.movementType")}
-              options={typeOptions}
+              name="from_branch"
+              label={t("from_branch")}
+              placeholder={t("from_branch")}
+              options={branchesOptions}
+              readonly={isView}
+            />
+            <CustomSelect
+              control={form.control}
+              name="to_branch"
+              label={t("to_branch")}
+              placeholder={t("to_branch")}
+              options={branchesOptions}
               readonly={isView}
             />
             <DatePicker
               control={form.control}
               name="movement_date"
-              label={t("Inventory.InventoryMovement.date")}
-              placeholder={t("Inventory.InventoryMovement.date")}
+              label={t("date")}
+              placeholder={t("date")}
               readonly={isView}
             />
           </div>
           <CustomTextArea
             control={form.control}
             name="description"
-            label={t("Inventory.InventoryMovement.description")}
-            placeholder={t("Inventory.InventoryMovement.description")}
+            label={t("description")}
+            placeholder={t("description")}
             className="mt-2 xl:mt-5"
             readonly={isView}
           />
@@ -109,7 +124,10 @@ const MovementForm = ({
         {!isView && (
           <div className="flex justify-end gap-2 mt-5 flex-col-reverse xs:flex-row">
             <Link href="/dashboard/inventory?tab=movement" passHref>
-              <CustomButton text={t("cancel")} variant="secondary" />
+              <CustomButton
+                text={globalTranslate("cancel")}
+                variant="secondary"
+              />
             </Link>
             <CustomButton
               text={

@@ -11,6 +11,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { branchSchema } from "@/lib/validations/dashboard/branchSchema";
 import { useGetEmployeesQuery } from "@/redux/services/dashboard/hr/employeeApi";
+import { listItems } from "@/lib/utils/types";
 
 import { Form } from "@/components/ui/form";
 import CustomButton from "@/components/formFields/CustomButton";
@@ -67,7 +68,7 @@ const BranchForm = ({
   const { data: employees } = useGetEmployeesQuery({});
 
   const managersOption =
-    employees?.results?.map((employee: { id: number; name: string }) => ({
+    employees?.results?.map((employee: listItems) => ({
       value: String(employee.id),
       label: employee.name,
     })) || [];

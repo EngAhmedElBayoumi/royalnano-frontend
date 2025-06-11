@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { interviewSchema } from "@/lib/validations/dashboard/hr/interviewSchema";
 import { useGetEmployeesQuery } from "@/redux/services/dashboard/hr/employeeApi";
 import { useGetApplicantsQuery } from "@/redux/services/dashboard/hr/applicantsApi";
+import { listItems } from "@/lib/utils/types";
 import { Form } from "@/components/ui/form";
 import CustomButton from "@/components/formFields/CustomButton";
 import DateTimePicker from "@/components/formFields/DateTimePicker";
@@ -50,13 +51,13 @@ const InterviewForm = ({
   const { data: applicants } = useGetApplicantsQuery({});
 
   const employeesOptions =
-    employees?.results?.map((employee: { id: number; name: string }) => ({
+    employees?.results?.map((employee: listItems) => ({
       value: String(employee.id),
       label: employee.name,
     })) || [];
 
   const applicantsOptions =
-    applicants?.results?.map((applicant: { id: number; name: string }) => ({
+    applicants?.results?.map((applicant: listItems) => ({
       value: String(applicant.id),
       label: applicant.name,
     })) || [];
