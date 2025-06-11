@@ -3,7 +3,7 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { Paginator } from "primereact/paginator";
 import { useTranslations } from "next-intl";
-import { useGetGalleryQuery } from "@/redux/services/galleryApi";
+import { useGetGalleryQuery } from "@/redux/services/website/galleryApi";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import GalleryItemModal from "./GalleryItemModal";
 import LoadingError from "@/components/dashboard/LoadingError";

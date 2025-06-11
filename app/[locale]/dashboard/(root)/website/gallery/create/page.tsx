@@ -1,7 +1,7 @@
 "use client";
 import { useTranslations } from "next-intl";
 import { handleApiError } from "@/lib/utils/handleApiError";
-import { useCreateGalleryMutation } from "@/redux/services/galleryApi";
+import { useCreateGalleryMutation } from "@/redux/services/website/galleryApi";
 import GalleryForm, {
   GalleryFormValues,
 } from "@/components/dashboard/forms/website/GalleryForm";

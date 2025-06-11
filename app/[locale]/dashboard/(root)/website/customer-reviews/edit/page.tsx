@@ -5,7 +5,7 @@ import { handleApiError } from "@/lib/utils/handleApiError";
 import {
   useGetReviewByIdQuery,
   useUpdateReviewMutation,
-} from "@/redux/services/customerReviewApi";
+} from "@/redux/services/website/customerReviewApi";
 import CustomerReviewForm, {
   CustomerReviewFormValues,
 } from "@/components/dashboard/forms/website/CustomerReviewForm";

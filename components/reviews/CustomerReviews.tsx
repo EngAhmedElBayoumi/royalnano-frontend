@@ -5,7 +5,7 @@ import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import ReviewCard from "@/components/cards/ReviewCard";
-import { useGetAllReviewsQuery } from "@/redux/services/customerReviewApi";
+import { useGetAllReviewsQuery } from "@/redux/services/website/customerReviewApi";
 import LoadingError from "@/components/dashboard/LoadingError";
 import ReviewsSkeleton from "./ReviewsSkeleton";
 import { useTranslations } from "next-intl";

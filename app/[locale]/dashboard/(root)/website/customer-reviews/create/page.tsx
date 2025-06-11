@@ -1,7 +1,7 @@
 "use client";
 import { useTranslations } from "next-intl";
 import { handleApiError } from "@/lib/utils/handleApiError";
-import { useCreateReviewMutation } from "@/redux/services/customerReviewApi";
+import { useCreateReviewMutation } from "@/redux/services/website/customerReviewApi";
 import CustomerReviewForm, {
   CustomerReviewFormValues,
 } from "@/components/dashboard/forms/website/CustomerReviewForm";

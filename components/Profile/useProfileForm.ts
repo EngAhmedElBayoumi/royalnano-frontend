@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { profileSchema } from "@/lib/validations/profileSchema";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
-import { useUpdateProfileMutation } from "@/redux/services/profileApi";
+import { useUpdateProfileMutation } from "@/redux/services/website/profileApi";
 import { setProfile } from "@/redux/slices/profileSlice";
 
 const useProfileForm = () => {

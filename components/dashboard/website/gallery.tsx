@@ -1,7 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { useGetGalleryQuery } from "@/redux/services/galleryApi";
+import { useGetGalleryQuery } from "@/redux/services/website/galleryApi";
 import { useTableData } from "@/hooks/useTableData";
 import TableWrapper from "@/components/dashboard/tables/TableWrapper";
 

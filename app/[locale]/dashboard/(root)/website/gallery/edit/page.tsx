@@ -5,7 +5,7 @@ import { handleApiError } from "@/lib/utils/handleApiError";
 import {
   useGetGalleryByIdQuery,
   useUpdateGalleryMutation,
-} from "@/redux/services/galleryApi";
+} from "@/redux/services/website/galleryApi";
 import GalleryForm, {
   GalleryFormValues,
 } from "@/components/dashboard/forms/website/GalleryForm";

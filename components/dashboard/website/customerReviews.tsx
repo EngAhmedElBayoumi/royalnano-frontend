@@ -1,7 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { useGetAllReviewsQuery } from "@/redux/services/customerReviewApi";
+import { useGetAllReviewsQuery } from "@/redux/services/website/customerReviewApi";
 import { useTableData } from "@/hooks/useTableData";
 import TableWrapper from "@/components/dashboard/tables/TableWrapper";
 

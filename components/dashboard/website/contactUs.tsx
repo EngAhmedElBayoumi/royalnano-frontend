@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { useGetContactsQuery } from "@/redux/services/contactApi";
+import { useGetContactsQuery } from "@/redux/services/website/contactApi";
 import { useTableData } from "@/hooks/useTableData";
 import TableWrapper from "@/components/dashboard/tables/TableWrapper";
 
