@@ -40,6 +40,7 @@ import { salesReturnApi } from "./services/dashboard/sales/salesReturnApi";
 import { servicesAPi } from "./services/website/servicesApi";
 import { blogsAPi } from "./services/website/blogsApi";
 import { commentsAPi } from "./services/website/commentsApi";
+import { socialApi } from "./services/website/socialApi";
 import { clientRequestAPi } from "./services/clientRequestApi";
 import { purchaseOrderApi } from "./services/dashboard/purchase/orderApi";
 import { purchaseExpenseCategoryApi } from "./services/dashboard/purchase/expenseCategory";
@@ -110,6 +111,7 @@ export const store = configureStore({
     [servicesAPi.reducerPath]: servicesAPi.reducer,
     [blogsAPi.reducerPath]: blogsAPi.reducer,
     [commentsAPi.reducerPath]: commentsAPi.reducer,
+    [socialApi.reducerPath]: socialApi.reducer,
     [clientRequestAPi.reducerPath]: clientRequestAPi.reducer,
     [PurchaseSupplierApi.reducerPath]: PurchaseSupplierApi.reducer,
     [purchaseOrderApi.reducerPath]: purchaseOrderApi.reducer,
@@ -185,6 +187,7 @@ export const store = configureStore({
       .concat(initializePaymentApi.middleware)
       .concat(blogsAPi.middleware)
       .concat(commentsAPi.middleware)
+      .concat(socialApi.middleware)
       .concat(followUpApi.middleware)
       .concat(financeApi.middleware)
       .concat(consumedItemsApi.middleware);
