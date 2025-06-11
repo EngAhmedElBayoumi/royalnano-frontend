@@ -43,7 +43,7 @@ const GalleryForm = ({
     defaultValues?.additionalFiles?.length || 0
   );
   const globalTranslate = useTranslations();
-  const t = useTranslations("dashboardWebsite.gallery");
+  const t = useTranslations("dashboard_website.gallery");
 
   const itemTypeOptions = [
     { value: "image", label: t("image") },

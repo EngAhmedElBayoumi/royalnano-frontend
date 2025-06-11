@@ -39,7 +39,7 @@ const ServiceForm = ({
     },
   });
   const globalTranslate = useTranslations();
-  const t = useTranslations("dashboardWebsite.Services");
+  const t = useTranslations("dashboard_website.Services");
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>

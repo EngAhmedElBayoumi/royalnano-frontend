@@ -14,7 +14,7 @@ import EditPage from "@/components/dashboard/EditPage";
 export default function EditBlog() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
-  const t = useTranslations("dashboardWebsite.Blogs");
+  const t = useTranslations("dashboard_website.Blogs");
 
   const { data, isLoading, error } = useGetBlogByIdQuery(id);
   const [updateBlog, { isLoading: submitting }] = useUpdateBlogMutation();

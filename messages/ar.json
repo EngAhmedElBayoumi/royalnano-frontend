@@ -373,7 +373,7 @@
       "branch_address": "عنوان الفرع"
     }
   },
-  "dashboardWebsite": {
+  "dashboard_website": {
     "tabs": {
       "services": "الخدمات",
       "contact": "التواصل",

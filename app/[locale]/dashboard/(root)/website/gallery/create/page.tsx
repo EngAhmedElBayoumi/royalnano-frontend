@@ -9,7 +9,7 @@ import CreatePage from "@/components/dashboard/CreatePage";
 
 export default function CreateGallery() {
   const [createGallery, { isLoading }] = useCreateGalleryMutation();
-  const t = useTranslations("dashboardWebsite.gallery");
+  const t = useTranslations("dashboard_website.gallery");
 
   const handleSubmit = async (data: GalleryFormValues) => {
     const formData = new FormData();

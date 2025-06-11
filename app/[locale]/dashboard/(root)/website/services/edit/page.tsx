@@ -14,7 +14,7 @@ import EditPage from "@/components/dashboard/EditPage";
 export default function EditService() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
-  const t = useTranslations("dashboardWebsite.Services");
+  const t = useTranslations("dashboard_website.Services");
   const { data, isLoading, error } = useGetServiceByIdQuery(id);
   const [updateService, { isLoading: submitting }] = useUpdateServiceMutation();
 

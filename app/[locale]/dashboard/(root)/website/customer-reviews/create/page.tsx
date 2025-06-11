@@ -9,7 +9,7 @@ import CreatePage from "@/components/dashboard/CreatePage";
 
 export default function CreateCustomerReview() {
   const [createReview, { isLoading }] = useCreateReviewMutation();
-  const t = useTranslations("dashboardWebsite.CustomerReviews");
+  const t = useTranslations("dashboard_website.CustomerReviews");
 
   const handleSubmit = async (data: CustomerReviewFormValues) => {
     // Create FormData instance to handle file upload

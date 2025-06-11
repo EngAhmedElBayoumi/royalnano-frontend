@@ -7,7 +7,7 @@ import TableWrapper from "@/components/dashboard/tables/TableWrapper";
 
 export default function CustomerReviews() {
   const router = useRouter();
-  const t = useTranslations("dashboardWebsite.CustomerReviews");
+  const t = useTranslations("dashboard_website.CustomerReviews");
 
   const { data, isLoading, error, permissions, handlePageChange } =
     useTableData({

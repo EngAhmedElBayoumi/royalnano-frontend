@@ -1,31 +1,30 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { useGetBlogsQuery } from "@/redux/services/website/blogsApi";
+import { useGetSocialQuery } from "@/redux/services/website/socialApi";
 import { useTableData } from "@/hooks/useTableData";
 import TableWrapper from "@/components/dashboard/tables/TableWrapper";
 
-export default function Blogs() {
+export default function Social() {
   const router = useRouter();
-  const t = useTranslations("dashboard_website.Blogs");
+  const t = useTranslations("dashboard_website.social");
 
   const { data, isLoading, error, permissions, handlePageChange } =
     useTableData({
-      permissionKey: "blog",
+      permissionKey: "social",
       // eslint-disable-next-line
-      useQueryHook: useGetBlogsQuery,
+      useQueryHook: useGetSocialQuery,
     });
 
   const columns = [
-    { field: "title", header: t("title") },
-    { field: "content", header: t("content") },
-    { field: "image", header: t("image") },
+    { field: "code", header: t("code") },
+    { field: "description", header: t("description") },
   ];
 
   const cardsData = [{ title: "newRequests", num: 145 }];
 
   const handleClick = () => {
-    router.push("/dashboard/website/blogs/create");
+    router.push("/dashboard/website/social/create");
   };
 
   return (
@@ -35,9 +34,9 @@ export default function Blogs() {
       data={data}
       columns={columns}
       cardData={cardsData}
-      emptyMessage={t("noBlogsDataFound")}
-      editRoute="/dashboard/website/blogs/edit/"
-      buttonText={t("addBlog")}
+      emptyMessage={t("no_social_data_found")}
+      editRoute="/dashboard/website/social/edit/"
+      buttonText={t("add_social")}
       ButtonEvent={handleClick}
       onPageChange={handlePageChange}
       permissions={permissions}

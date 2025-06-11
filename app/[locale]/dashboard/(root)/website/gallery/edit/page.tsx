@@ -14,7 +14,7 @@ import EditPage from "@/components/dashboard/EditPage";
 export default function EditGallery() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
-  const t = useTranslations("dashboardWebsite.gallery");
+  const t = useTranslations("dashboard_website.gallery");
 
   const [updateGallery, { isLoading: submitting }] = useUpdateGalleryMutation();
   const { data, isLoading, error } = useGetGalleryByIdQuery(id);

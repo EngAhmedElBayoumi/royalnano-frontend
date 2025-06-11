@@ -9,7 +9,7 @@ import CreatePage from "@/components/dashboard/CreatePage";
 
 export default function CreateBlog() {
   const [createBlog, { isLoading }] = useCreateBlogMutation();
-  const t = useTranslations("dashboardWebsite.Blogs");
+  const t = useTranslations("dashboard_website.Blogs");
 
   const handleSubmit = async (data: BlogFormValues) => {
     // Create FormData instance to handle file upload

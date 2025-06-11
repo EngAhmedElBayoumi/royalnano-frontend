@@ -4,7 +4,7 @@ import { useTableData } from "@/hooks/useTableData";
 import TableWrapper from "@/components/dashboard/tables/TableWrapper";
 
 export default function ContactUs() {
-  const t = useTranslations("dashboardWebsite.contacts");
+  const t = useTranslations("dashboard_website.contacts");
 
   const columns = [
     { field: "full_name", header: t("full_name") },

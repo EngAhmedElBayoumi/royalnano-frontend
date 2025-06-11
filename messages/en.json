@@ -372,7 +372,7 @@
       "branch": "Branch"
     }
   },
-  "dashboardWebsite": {
+  "dashboard_website": {
     "tabs": {
       "services": "Services",
       "contact": "Contact",

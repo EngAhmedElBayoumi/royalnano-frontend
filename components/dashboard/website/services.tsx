@@ -7,7 +7,7 @@ import TableWrapper from "@/components/dashboard/tables/TableWrapper";
 
 export default function Services() {
   const router = useRouter();
-  const t = useTranslations("dashboardWebsite.Services");
+  const t = useTranslations("dashboard_website.Services");
 
   const { data, isLoading, error, permissions, handlePageChange } =
     useTableData({
@@ -15,7 +15,7 @@ export default function Services() {
       // eslint-disable-next-line
       useQueryHook: useGetServicesQuery,
     });
-    console.log(data)
+  console.log(data);
 
   const columns = [
     { field: "name", header: t("name") },
