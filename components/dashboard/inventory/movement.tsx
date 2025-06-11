@@ -49,8 +49,8 @@ export default function Movement() {
     { field: "item", header: t("item") },
     { field: "quantity", header: t("quantity") },
     { field: "movement_date", header: t("date") },
-    { field: "from_branch", header: t("fromBranch") },
-    { field: "to_branch", header: t("toBranch") },
+    { field: "from_branch", header: t("from_branch") },
+    { field: "to_branch", header: t("to_branch") },
     { field: "description", header: t("description") },
   ];
 
