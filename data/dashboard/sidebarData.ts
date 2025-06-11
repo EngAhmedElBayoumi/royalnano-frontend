@@ -50,4 +50,10 @@ export const sidebarLinks = [
     icon: "sales.svg",
     permissions: permissionRoutes["/dashboard/purchase"],
   },
+  {
+    path: "/finance",
+    name: "finance",
+    icon: "sales.svg",
+    permissions: permissionRoutes["/dashboard/sales"],
+  },
 ];
