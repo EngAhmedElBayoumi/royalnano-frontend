@@ -6,6 +6,7 @@ import SalesInvoice from "@/components/dashboard/sales/salesInvoice";
 import SalesQuotation from "@/components/dashboard/sales/salesQuotation";
 import SalesCustomer from "@/components/dashboard/sales/salesCustomer";
 import ClientRequest from "@/components/dashboard/sales/clientRequest";
+import FollowUp from "@/components/dashboard/sales/FollowUp";
 
 function SalesPage() {
   const t = useTranslations("Sales");
@@ -74,7 +75,7 @@ function SalesPage() {
           src="/assets/icons/dashboard/sales/customerTabs/followup.svg"
         />
       ),
-      content: <ClientRequest />,
+      content: <FollowUp />,
     },
   ];
 

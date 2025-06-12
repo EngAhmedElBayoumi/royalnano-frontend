@@ -33,7 +33,7 @@ function CustomTabs({ tabs, defaultTab = tabs[0]?.id }: CustomTabsProps) {
       value={activeTab}
       onValueChange={setActiveTab}
       defaultValue={defaultTab}
-      className="bg-white mr-auto pt-4 mb-0"
+      className="mr-auto pt-4 mb-0"
       dir={locale === "ar" ? "rtl" : "ltr"}
     >
       <TabsList
