@@ -14,10 +14,12 @@ export default function Items() {
       permissionKey: "inventoryitem",
       useQueryHook: useGetItemsQuery,
     });
-  const transformedData = data?.results?.map((item) => ({
-    ...item,
-    unit: item.unit.name,
-  }));
+  const transformedData = data?.results?.map(
+    (item: { unit: { name: string } }) => ({
+      ...item,
+      unit: item.unit.name,
+    })
+  );
 
   const columns = [
     { field: "item_code", header: t("itemCode") },
