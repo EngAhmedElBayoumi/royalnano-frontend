@@ -135,7 +135,7 @@ const CustomTable = ({
                 field={col.field}
                 header={col.header}
                 headerStyle={{ backgroundColor: "#C8AE50" }}
-                className="m-auto py-[13px] px-[38px] text-[14px] font-[500] border-r border-white border-[2px]"
+                className="rtl:text-right m-auto py-[13px] px-[38px] text-[14px] font-[500] border-r border-white border-[2px]"
                 headerClassName="text-center capitalize text-white text-[16px] font-[500] py-[13px] px-[38px] border-r border-white border-[2px]"
                 body={(rowData) =>
                   renderColumnBody({ col, rowData, expandedRows, toggleExpand })
