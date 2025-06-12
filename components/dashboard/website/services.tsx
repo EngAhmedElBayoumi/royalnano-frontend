@@ -22,6 +22,7 @@ export default function Services() {
     { field: "alias", header: t("alias") },
     { field: "description", header: t("description") },
     { field: "image", header: t("image") },
+    { field: "is_active", header: t("is_active") },
   ];
 
   const cardsData = [{ title: "newRequests", num: 145 }];

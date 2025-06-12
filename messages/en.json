@@ -389,7 +389,8 @@
       "name": "Name",
       "alias": "Alias",
       "description": "Description",
-      "image": "Image"
+      "image": "Image",
+      "is_active": "website publish"
     },
     "contacts": {
       "full_name": "Full Name",
