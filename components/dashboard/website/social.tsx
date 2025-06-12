@@ -27,7 +27,7 @@ export default function Social() {
   const socialData =
     data?.map((item: SocialFormValues) => ({
       ...item,
-      url: `https://royalnano-frontend.vercel.app/en/contact/?slug=${item.code}`,
+      url: `https://royalnano-frontend.vercel.app/en/contact?slug=${item.code}`,
     })) || [];
 
   const cardsData = [{ title: "newRequests", num: 145 }];
