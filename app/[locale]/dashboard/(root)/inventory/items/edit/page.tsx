@@ -10,6 +10,7 @@ import ItemForm, {
   ItemFormValues,
 } from "@/components/dashboard/forms/inventory/ItemForm";
 import EditPage from "@/components/dashboard/EditPage";
+import { extractChangedFields } from "@/lib/utils/extractChangedFields";
 
 export default function EditItem() {
   const searchParams = useSearchParams();
@@ -29,18 +30,8 @@ export default function EditItem() {
   };
 
   const handleSubmit = async (data: ItemFormValues) => {
-    // Extract only the changed fields
-    const changedData = (Object.keys(data) as (keyof ItemFormValues)[]).reduce(
-      (acc, key) => {
-        if (data[key] !== defaultValues?.[key]) {
-          // ts-ignore-next-line
-          // @ts-expect-error: TypeScript doesn't recognize that key is a valid key of ItemFormValues
-          acc[key] = data[key];
-        }
-        return acc;
-      },
-      {} as Partial<ItemFormValues>
-    );
+    const changedData = extractChangedFields(data, defaultValues);
+
     const response = await updateItem({ id, data: changedData });
     if (response.error) handleApiError(response.error);
   };
