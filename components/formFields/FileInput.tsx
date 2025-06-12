@@ -37,6 +37,7 @@ const FileInput = <T extends FieldValues>({
       setPreviewUrl(URL.createObjectURL(initialFile));
     } else if (typeof initialFile === "string" && initialFile) {
       setPreviewUrl(initialFile);
+      console.log(initialFile, "initialFile");
     }
   }, [control, name]);
 

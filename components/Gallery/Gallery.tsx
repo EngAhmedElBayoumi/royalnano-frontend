@@ -115,7 +115,7 @@ const Gallery = () => {
                       <Image
                         width={305}
                         height={310}
-                        src={item.gallery_images[0].image}
+                        src={item.gallery_images[0]?.image}
                         alt={item.title}
                         className="w-full h-full"
                       />
