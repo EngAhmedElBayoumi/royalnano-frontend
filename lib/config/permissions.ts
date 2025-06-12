@@ -15,6 +15,7 @@ export const permissionRoutes = {
     "order",
     "invoice",
     "clientrequest",
+    "followup",
   ],
   "/dashboard/hr": [
     "employee",

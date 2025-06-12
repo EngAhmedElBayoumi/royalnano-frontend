@@ -47,7 +47,6 @@ export default function AddFollowUpModal({
       follow_up_type: "follow_up",
       comment: "",
       customer: customerId,
-
       action_date: new Date(),
     },
   });

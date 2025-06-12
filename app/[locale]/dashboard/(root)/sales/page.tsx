@@ -63,6 +63,19 @@ function SalesPage() {
       ),
       content: <ClientRequest />,
     },
+    {
+      id: "followup",
+      label: t("followup"),
+      icon: (
+        <Image
+          width="24"
+          height="24"
+          alt={t("followup")}
+          src="/assets/icons/dashboard/sales/customerTabs/followup.svg"
+        />
+      ),
+      content: <ClientRequest />,
+    },
   ];
 
   return <CustomTabs tabs={tabs} defaultTab={tabs[0].id} />;
