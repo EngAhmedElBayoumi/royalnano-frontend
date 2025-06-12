@@ -1,4 +1,5 @@
 "use client";
+import { useSearchParams } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { aboutValidation } from "@/lib/validations/contact";
@@ -23,6 +24,9 @@ export default function ContactForm() {
   const [postContact, { isLoading }] = usePostContactMutation();
   const t = useTranslations("website.ContactForm");
 
+  const searchParams = useSearchParams();
+  const slug = searchParams.get("slug") || "website"; // Extract slug or default to "website"
+
   const form = useForm({
     resolver: zodResolver(aboutValidation),
     defaultValues: {
@@ -30,6 +34,7 @@ export default function ContactForm() {
       email: "",
       phone_number: "",
       message: "",
+      source: slug, // Set default source based on slug
     },
   });
 
@@ -39,7 +44,7 @@ export default function ContactForm() {
     phone_number: string;
     message: string;
   }) => {
-    await postContact(data);
+    await postContact({ ...data, source: slug }); // Use slug in the source field
     form.reset();
     setIsOpen(true);
   };
