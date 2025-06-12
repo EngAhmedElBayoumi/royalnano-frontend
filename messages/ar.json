@@ -813,7 +813,7 @@
     "date": "التاريخ",
     "actions": "الإجراءات",
     "no_comment": "لا يوجد تعليق",
-    "created_at": "تاريخ الإنشاء",
+    "action_date": "تاريخ التنفيذ",
     "select_date_time": "اختر التاريخ والوقت"
   },
   "finance": {

@@ -841,7 +841,7 @@
     "date": "Date",
     "actions": "Actions",
     "no_comment": "No comment",
-    "created_at": "Created At",
+    "action_date": "Action Date",
     "select_date_time": "Select Date and Time"
   },
   "finance": {
