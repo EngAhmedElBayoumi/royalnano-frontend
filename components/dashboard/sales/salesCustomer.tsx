@@ -32,10 +32,12 @@ export default function SalesCustomer() {
   const transformedData =
     salesCustomers?.results?.map(
       (customer: {
+        phone_number: string;
+        phone_numbers: { phone_number: string }[];
         id: number;
         customer_name: string;
         contact_person: string;
-        phone_number: number;
+        // phone_number: number;
         email: string;
         address: string;
         city: string;
@@ -49,7 +51,10 @@ export default function SalesCustomer() {
         id: customer.id,
         customer_name: customer.customer_name,
         contact_person: customer.contact_person,
-        phone_number: customer.phone_number,
+        phone_number:
+          customer.phone_number ||
+          customer.phone_numbers[0]?.phone_number ||
+          "N/A",
         email: customer.email,
         address: customer.address,
         city: customer.city,

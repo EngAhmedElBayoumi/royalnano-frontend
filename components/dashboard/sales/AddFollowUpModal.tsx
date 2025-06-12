@@ -48,7 +48,7 @@ export default function AddFollowUpModal({
       follow_up_type: "follow_up",
       comment: "",
       customer: customerId,
-      created_at: new Date(),
+      // created_at: new Date(),
       action_date: new Date(),
     },
   });
@@ -59,7 +59,7 @@ export default function AddFollowUpModal({
     try {
       await createFollowUp({
         ...data,
-        created_at: data.created_at?.toISOString(),
+        // created_at: data.created_at?.toISOString(),
         action_date: data.action_date?.toISOString(), // ✅ تحويل التاريخ قبل الإرسال
       }).unwrap();
       refetch();
@@ -104,13 +104,13 @@ export default function AddFollowUpModal({
             className="mt-2 xl:mt-5"
           />
 
-          <DateTimePicker
+          {/* <DateTimePicker
             control={control}
             name="created_at"
             label={t("created_at")}
             placeholder={t("select_date_time")}
             className="mt-2 xl:mt-5"
-          />
+          /> */}
 
           <DateTimePicker
             control={control}

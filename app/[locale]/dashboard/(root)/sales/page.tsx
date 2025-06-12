@@ -4,7 +4,6 @@ import { useTranslations } from "next-intl";
 import CustomTabs from "@/components/dashboard/CustomTabs";
 import SalesInvoice from "@/components/dashboard/sales/salesInvoice";
 import SalesQuotation from "@/components/dashboard/sales/salesQuotation";
-import SalesReturn from "@/components/dashboard/sales/salesReturn";
 import SalesCustomer from "@/components/dashboard/sales/salesCustomer";
 import ClientRequest from "@/components/dashboard/sales/clientRequest";
 
@@ -12,19 +11,6 @@ function SalesPage() {
   const t = useTranslations("Sales");
 
   const tabs = [
-    {
-      id: "sales-return",
-      label: t("sales"),
-      icon: (
-        <Image
-          width="24"
-          height="24"
-          alt="sales"
-          src="/assets/icons/dashboard/sales/sales.svg"
-        />
-      ),
-      content: <SalesReturn />,
-    },
     {
       id: "sales-customer",
       label: t("customer"),

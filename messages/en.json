@@ -338,7 +338,7 @@
     "SalesCustomer": {
       "customerName": "Customer Name",
       "contactPerson": "Contact Person",
-      "phoneNumbers": "Phone Numbers",
+      "phoneNumbers": "Additional Phone Numbers",
       "phoneNumber": "Phone Number",
       "email": "Email",
       "address": "Address",
@@ -355,7 +355,12 @@
       "recommendedBy": "Recommended By",
       "addPhoneNumber": "Add Phone Number",
       "attachments": "attachments",
-      "addAttachment": "Add Attachment"
+      "addAttachment": "Add Attachment",
+      "attachmentDescription": "attachment Description",
+      "attachmentsDescription": "attachmentsDescription",
+      "phoneNumbersDescription": "phoneNumbersDescription",
+      "describePhoneNumbers": "fvcdvfdf",
+      "describeAttachments": "fcfd"
     },
     "ClientRequest": {
       "fullName": "Full Name",

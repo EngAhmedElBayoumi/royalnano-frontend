@@ -12,6 +12,17 @@ export default function CreateSalesCustomer() {
   const [createSalesCustomer, { isLoading }] = useCreateSalesCustomerMutation();
 
   const handleSubmit = async (data: SalesCustomerFormValues) => {
+    const payload = {
+      ...data,
+      phone_numbers_data: "Primary contact numbers", // Or make this a form field
+      attachments_data: "Contract and ID documents", // Or make this a form field
+    };
+    try {
+      await createSalesCustomer(payload);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (e) {
+      console.error("Submission error:", Error);
+    }
     const response = await createSalesCustomer(data);
     if (response.error) handleApiError(response.error);
   };

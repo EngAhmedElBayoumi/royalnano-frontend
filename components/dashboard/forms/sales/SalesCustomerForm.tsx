@@ -23,6 +23,7 @@ interface SalesCustomerFormProps {
   onSubmit: (data: SalesCustomerFormValues) => Promise<void>;
   isLoading?: boolean;
 }
+
 interface listItems {
   id: number;
   name: string;
@@ -43,6 +44,7 @@ const SalesCustomerForm = ({
     defaultValues: defaultValues || {
       customer_name: "",
       contact_person: "",
+      phone_number: "",
       phone_numbers: [{ phone_number: "", description: "" }],
       email: "",
       address: "",
@@ -198,8 +200,13 @@ const SalesCustomerForm = ({
                 options={employeeOptions}
               />
             )}
+            <TextInput
+              control={form.control}
+              name="phone_number"
+              label={t("phoneNumber")}
+              placeholder={t("phoneNumber")}
+            />
           </div>
-
           {/* Phone Numbers */}
           <div className="col-span-2 mt-4">
             <label className="block text-sm font-medium text-gray-700">

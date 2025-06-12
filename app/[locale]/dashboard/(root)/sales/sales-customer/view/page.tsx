@@ -7,6 +7,7 @@ import FollowupsTab from "@/components/dashboard/sales/followupTab";
 import QuotationsTab from "@/components/dashboard/sales/QuotationsTab";
 import CustomTabs from "@/components/dashboard/CustomTabs";
 import InvoicesTab from "@/components/dashboard/sales/invoicesTab";
+import AttachmentsTab from "@/components/dashboard/sales/AttachmentsTab";
 
 export default function SalesCustomerViewPage() {
   const router = useRouter();
@@ -70,6 +71,19 @@ export default function SalesCustomerViewPage() {
         />
       ),
       content: <InvoicesTab customerId={Number(id)} />,
+    },
+    {
+      id: "attachments",
+      label: "attachments",
+      icon: (
+        <Image
+          src="/assets/icons/dashboard/sales/invoice.svg"
+          alt="icon"
+          width="24"
+          height="24"
+        />
+      ),
+      content: <AttachmentsTab customerId={Number(id)} />,
     },
   ];
 
