@@ -397,6 +397,7 @@
       "email": "البريد الإلكتروني",
       "phone_number": "رقم الهاتف",
       "message": "الرسالة",
+      "source": "المصدر",
       "noContactDataFound": "لا توجد بيانات للتواصل"
     },
     "gallery": {

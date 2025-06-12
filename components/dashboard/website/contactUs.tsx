@@ -11,6 +11,7 @@ export default function ContactUs() {
     { field: "email", header: t("email") },
     { field: "phone_number", header: t("phone_number") },
     { field: "message", header: t("message") },
+    { field: "source", header: t("source") },
   ];
 
   const { data, isLoading, error, permissions, handlePageChange } =
