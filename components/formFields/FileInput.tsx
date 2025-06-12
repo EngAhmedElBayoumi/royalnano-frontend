@@ -31,7 +31,22 @@ const FileInput = <T extends FieldValues>({
   const [previewUrl, setPreviewUrl] = React.useState<string | null>(null);
 
   useEffect(() => {
-    const initialFile = control._formValues[name];
+    console.log(control._formValues, name);
+
+    // Support nested/array field names like "additionalFiles.0"
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const getValueByPath = (obj: any, path: string) => {
+      return path.split(".").reduce((acc, key) => {
+        // Convert numeric keys to array indices
+        const idx = Number(key);
+        if (!isNaN(idx) && Array.isArray(acc)) {
+          return acc[idx];
+        }
+        return acc ? acc[key] : undefined;
+      }, obj);
+    };
+
+    const initialFile = getValueByPath(control._formValues, name);
     if (initialFile instanceof File) {
       setPreviewUrl(URL.createObjectURL(initialFile));
     } else if (typeof initialFile === "string" && initialFile) {
