@@ -38,8 +38,6 @@ const GalleryForm = ({
       additionalFiles: [],
     },
   });
-  console.log(defaultValues?.additionalFiles);
-
   const { fields, append, remove } = useFieldArray({
     control: form.control,
     // ts-ignore-next-line
