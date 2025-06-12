@@ -20,7 +20,7 @@ export default function CreateRequest() {
       items: data.items.map((item) => ({
         ...item,
         id: Number(item.id),
-        quantity: Number(item.quantity),
+        quantity: item.quantity,
         unit_price: Number(item.unit_price),
         total: Number(item.total),
       })),

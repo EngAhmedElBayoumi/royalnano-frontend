@@ -23,7 +23,8 @@
     "sales": "المبيعات",
     "settings": "الإعدادات",
     "logout": "تسجيل الخروج",
-    "purchase": "المشتريات"
+    "purchase": "المشتريات",
+    "finance": "المالية"
   },
   "branches": {
     "branches": "الفروع",
@@ -42,7 +43,8 @@
     "saving": "يتم الحفظ...",
     "cancel": "إلغاء",
     "setLocation": "تعيين الموقع",
-    "selectBranchLocation": "اختر موقع الفرع"
+    "selectBranchLocation": "اختر موقع الفرع",
+    "balance": "الميزانية"
   },
   "Inventory": {
     "units": "الوحدات",
@@ -90,7 +92,8 @@
       "item": "العنصر",
       "quantity": "الكمية",
       "date": "التاريخ",
-      "movementType": "نوع الحركة",
+      "from_branch": "من الفرع",
+      "to_branch": "إلى الفرع",
       "description": "الوصف",
       "noMovementsDataFound": "لا توجد بيانات حركة",
       "addMovement": "إضافة حركة",
@@ -370,13 +373,14 @@
       "branch_address": "عنوان الفرع"
     }
   },
-  "dashboardWebsite": {
+  "dashboard_website": {
     "tabs": {
       "services": "الخدمات",
       "contact": "التواصل",
       "gallery": "معرض الصور",
       "customerReviews": "تقييمات العملاء",
-      "blogs": "المدونات"
+      "blogs": "المدونات",
+      "social": "وسائل التواصل الاجتماعي"
     },
     "Services": {
       "services": "الخدمات",
@@ -386,13 +390,15 @@
       "name": "الاسم",
       "alias": "الاسم المستعار",
       "description": "الوصف",
-      "image": "الصورة"
+      "image": "الصورة",
+      "is_active": "نشر على الموقع"
     },
     "contacts": {
       "full_name": "الاسم بالكامل",
       "email": "البريد الإلكتروني",
       "phone_number": "رقم الهاتف",
       "message": "الرسالة",
+      "source": "المصدر",
       "noContactDataFound": "لا توجد بيانات للتواصل"
     },
     "gallery": {
@@ -421,6 +427,13 @@
       "addCustomerReview": "إضافة تقييم",
       "editCustomerReview": "تعديل التقييم",
       "noCustomerReviewsFound": "لا توجد بيانات للتقييمات"
+    },
+    "social": {
+      "add_social": "إضافة وسيلة تواصل اجتماعي",
+      "edit_social": "تعديل وسيلة تواصل اجتماعي",
+      "no_social_data_found": "لا توجد بيانات لوسائل التواصل الاجتماعي",
+      "code": "الرمز",
+      "description": "الوصف"
     }
   },
   "website": {
@@ -803,7 +816,11 @@
     "created_at": "تاريخ الإنشاء",
     "select_date_time": "اختر التاريخ والوقت"
   },
-
+  "finance": {
+    "finance": "المالية",
+    "parent": "الرئيسي",
+    "addFinance": "إضافة حساب"
+  },
   "auth": {
     "authTemplate": {
       "Welcome To": "مرحبًا بك في",
@@ -826,10 +843,12 @@
     "login": {
       "title": "تسجيل الدخول",
       "email": "البريد الإلكتروني",
-      "emailPlaceholder": "أدخل بريدك الإلكتروني",
       "password": "كلمة المرور",
-      "passwordPlaceholder": "أدخل كلمة المرور",
-      "forgetPassword": "نسيت كلمة المرور؟",
+      "placeholder": {
+        "email": "أدخل بريدك الإلكتروني",
+        "password": "أدخل كلمة المرور"
+      },
+      "forgotPassword": "نسيت كلمة المرور؟",
       "login": "تسجيل الدخول",
       "submitting": "جارٍ الإرسال...",
       "noAccount": "ليس لديك حساب؟",

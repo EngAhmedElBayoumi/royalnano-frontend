@@ -116,7 +116,7 @@ const AddSalesQuotationForm = ({
       router.push(
         initialCustomerId
           ? `/dashboard/sales/sales-customer/view?id=${initialCustomerId}&tab=quotations`
-          : `/dashboard/sales?tab=Sales+Quotation`
+          : `/dashboard/sales?tab=sales-quotation`
       );
     } catch (error) {
       console.error("Error in creation:", error);

@@ -4,10 +4,10 @@ import { ACCEPTED_IMAGE_TYPES } from "@/lib/utils/types";
 const MAX_FILE_SIZE = 1024 * 1024 * 5;
 
 export const blogSchema = z.object({
-  name: z
+  title: z
     .string()
-    .min(1, "Blog name is required")
-    .max(100, "Name must be less than 100 characters"),
+    .min(1, "Blog title is required")
+    .max(100, "Title must be less than 100 characters"),
   content: z.string().min(1, "Content is required"),
   image: z
     .custom<File | string | null>()

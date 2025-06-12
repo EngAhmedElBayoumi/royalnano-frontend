@@ -11,6 +11,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { branchSchema } from "@/lib/validations/dashboard/branchSchema";
 import { useGetEmployeesQuery } from "@/redux/services/dashboard/hr/employeeApi";
+import { listItems } from "@/lib/utils/types";
 
 import { Form } from "@/components/ui/form";
 import CustomButton from "@/components/formFields/CustomButton";
@@ -19,6 +20,8 @@ import PhoneInputField from "@/components/formFields/PhoneInputField";
 import CustomTextArea from "@/components/formFields/TextArea";
 import CustomModal from "@/components/modals/CustomModal";
 import CustomSelect from "@/components/formFields/CustomSelect";
+import useExtraFields from "@/hooks/useExtraFields";
+import ExtraFields from "@/components/formFields/ExtraFields";
 
 interface BranchFormProps {
   onSubmit: (data: BranchFormValues) => Promise<void>;
@@ -37,6 +40,8 @@ export interface BranchFormValues {
   latitude?: number;
   description?: string;
   manager?: number;
+  balance?: string;
+  extra_fields?: Record<string, string> | null;
 }
 
 interface Viewport {
@@ -63,7 +68,7 @@ const BranchForm = ({
   const { data: employees } = useGetEmployeesQuery({});
 
   const managersOption =
-    employees?.results?.map((employee: { id: number; name: string }) => ({
+    employees?.results?.map((employee: listItems) => ({
       value: String(employee.id),
       label: employee.name,
     })) || [];
@@ -81,6 +86,8 @@ const BranchForm = ({
       latitude: 30,
       description: "",
       manager: 1,
+      balance: "0.00",
+      extra_fields: {},
     },
   });
   const [viewport, setViewport] = useState({
@@ -118,6 +125,15 @@ const BranchForm = ({
     }));
   };
 
+  const {
+    extraFields,
+    handleAddExtraField,
+    handleRemoveExtraField,
+    handleExtraFieldChange,
+  } = useExtraFields({
+    defaultFields: defaultValues?.extra_fields ?? {},
+    setValue: form.setValue,
+  });
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -198,6 +214,12 @@ const BranchForm = ({
               placeholder={t("manager")}
               options={managersOption}
             />
+            <TextInput
+              control={form.control}
+              name="balance"
+              label={t("balance")}
+              placeholder={t("balance")}
+            />
           </div>
           <CustomTextArea
             control={form.control}
@@ -205,6 +227,12 @@ const BranchForm = ({
             label={t("description")}
             placeholder={t("description")}
             className="mt-2 xl:mt-5"
+          />
+          <ExtraFields
+            extraFields={extraFields}
+            onAddField={handleAddExtraField}
+            onRemoveField={handleRemoveExtraField}
+            onFieldChange={handleExtraFieldChange}
           />
         </section>
         <div className="flex justify-end gap-2 mt-5 flex-col-reverse xs:flex-row">

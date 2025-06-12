@@ -2,7 +2,7 @@ import { fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RootState } from "@/redux/store";
 import { logout, setCredentials } from "@/redux/slices/authSlice";
 import { setProfile } from "@/redux/slices/profileSlice";
-import { refreshTokenApi } from "./refreshTokenApi";
+import { refreshTokenApi } from "./auth/refreshTokenApi";
 import config from "@/lib/config";
 import { checkToken } from "@/lib/utils/checkToken";
 

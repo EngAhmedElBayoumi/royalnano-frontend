@@ -10,6 +10,7 @@ import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
 import FileInput from "@/components/formFields/FileInput";
 import TextArea from "@/components/formFields/TextArea";
+import SwitchField from "@/components/formFields/Switch";
 
 interface ServiceFormProps {
   onSubmit: (data: ServiceFormValues) => Promise<void>;
@@ -22,6 +23,7 @@ export interface ServiceFormValues {
   alias: string;
   description: string;
   image: File | string | null;
+  is_active: boolean;
 }
 
 const ServiceForm = ({
@@ -36,10 +38,11 @@ const ServiceForm = ({
       alias: "",
       description: "",
       image: null,
+      is_active: true,
     },
   });
   const globalTranslate = useTranslations();
-  const t = useTranslations("dashboardWebsite.Services");
+  const t = useTranslations("dashboard_website.Services");
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -56,6 +59,11 @@ const ServiceForm = ({
               name="alias"
               label={t("alias")}
               placeholder={t("alias")}
+            />
+            <SwitchField
+              control={form.control}
+              name="is_active"
+              label={t("is_active")}
             />
           </div>
           <TextArea

@@ -9,7 +9,7 @@ import CreatePage from "@/components/dashboard/CreatePage";
 
 export default function CreateService() {
   const [createService, { isLoading }] = useCreateServiceMutation();
-  const t = useTranslations("dashboardWebsite.Services");
+  const t = useTranslations("dashboard_website.Services");
 
   const handleSubmit = async (data: ServiceFormValues) => {
     // Create FormData instance to handle file upload

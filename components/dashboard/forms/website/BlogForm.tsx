@@ -33,7 +33,7 @@ const BlogForm = ({ onSubmit, defaultValues, isLoading }: BlogFormProps) => {
     },
   });
   const globalTranslate = useTranslations();
-  const t = useTranslations("dashboardWebsite.Blogs");
+  const t = useTranslations("dashboard_website.Blogs");
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>

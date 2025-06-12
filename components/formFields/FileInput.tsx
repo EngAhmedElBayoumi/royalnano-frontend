@@ -2,6 +2,7 @@
 import React, { useEffect } from "react";
 import { Control, FieldValues, Path } from "react-hook-form";
 import { isVideoUrl } from "@/lib/utils/isVideoUrl";
+import { getFormValueByPath } from "@/lib/utils/getFormValueByPath";
 import Image from "next/image";
 import {
   FormField,
@@ -31,9 +32,8 @@ const FileInput = <T extends FieldValues>({
   const [previewUrl, setPreviewUrl] = React.useState<string | null>(null);
 
   useEffect(() => {
-    const initialFile = control._formValues[name];
+    const initialFile = getFormValueByPath(control._formValues, name);
     if (initialFile instanceof File) {
-      setFile(initialFile);
       setPreviewUrl(URL.createObjectURL(initialFile));
     } else if (typeof initialFile === "string" && initialFile) {
       setPreviewUrl(initialFile);

@@ -23,7 +23,8 @@
     "sales": "Sales",
     "settings": "Settings",
     "logout": "Logout",
-    "purchase": "Purchase"
+    "purchase": "Purchase",
+    "finance": "Finance"
   },
   "branches": {
     "branches": "Branches",
@@ -42,7 +43,8 @@
     "saving": "saving...",
     "cancel": "Cancel",
     "setLocation": "Set Location",
-    "selectBranchLocation": "Select Branch Location"
+    "selectBranchLocation": "Select Branch Location",
+    "balance": "Balance"
   },
   "Inventory": {
     "units": "Units",
@@ -90,7 +92,8 @@
       "item": "Item",
       "quantity": "Quantity",
       "date": "Date",
-      "movementType": "Movement Type",
+      "from_branch": " From Branch",
+      "to_branch": "To Branch",
       "description": "Description",
       "noMovementsDataFound": "No movements data found",
       "addMovement": "Add Movement",
@@ -374,13 +377,14 @@
       "branch": "Branch"
     }
   },
-  "dashboardWebsite": {
+  "dashboard_website": {
     "tabs": {
       "services": "Services",
       "contact": "Contact",
       "gallery": "Gallery",
       "customerReviews": "Customer Reviews",
-      "blogs": "Blogs"
+      "blogs": "Blogs",
+      "social": "Social Media"
     },
     "Services": {
       "services": "Services",
@@ -390,13 +394,15 @@
       "name": "Name",
       "alias": "Alias",
       "description": "Description",
-      "image": "Image"
+      "image": "Image",
+      "is_active": "website publish"
     },
     "contacts": {
       "full_name": "Full Name",
       "email": "Email",
       "phone_number": "Phone Number",
       "message": "Message",
+      "source": "Source",
       "noContactDataFound": "No contact data found"
     },
     "gallery": {
@@ -419,12 +425,19 @@
       "noCustomerReviewsFound": "No customer reviews found"
     },
     "Blogs": {
-      "addBlog": "Add Blog",
+      "addBlog": "Create blog article",
       "editBlog": "Edit Blog",
       "title": "Title",
       "content": "Content",
       "image": "Image",
       "noBlogsDataFound": "No Blogs data found"
+    },
+    "social": {
+      "add_social": "Add Social Media",
+      "edit_social": "Edit Social Media",
+      "no_social_data_found": "No Social data found",
+      "code": "Code",
+      "description": "Description"
     }
   },
   "website": {
@@ -830,6 +843,11 @@
     "no_comment": "No comment",
     "created_at": "Created At",
     "select_date_time": "Select Date and Time"
+  },
+  "finance": {
+    "finance": "Finance",
+    "parent": "Parent",
+    "addFinance": "Add Account"
   },
   "auth": {
     "authTemplate": {

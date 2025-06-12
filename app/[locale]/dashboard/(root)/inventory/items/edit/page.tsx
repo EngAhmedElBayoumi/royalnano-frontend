@@ -10,6 +10,7 @@ import ItemForm, {
   ItemFormValues,
 } from "@/components/dashboard/forms/inventory/ItemForm";
 import EditPage from "@/components/dashboard/EditPage";
+import { extractChangedFields } from "@/lib/utils/extractChangedFields";
 
 export default function EditItem() {
   const searchParams = useSearchParams();
@@ -24,20 +25,14 @@ export default function EditItem() {
     branch: data.branch.id,
     supplier: data.supplier.id,
     category: data.category.id,
-    unit: data.unit.id,
     purchase_price: Number(data.purchase_price),
     selling_price: Number(data.selling_price),
   };
 
   const handleSubmit = async (data: ItemFormValues) => {
-    const payload = {
-      ...data,
-      category: Number(data.category),
-      branch: Number(data.branch),
-      supplier: Number(data.supplier),
-      unit: Number(data.unit),
-    };
-    const response = await updateItem({ id, data: payload });
+    const changedData = extractChangedFields(data, defaultValues);
+
+    const response = await updateItem({ id, data: changedData });
     if (response.error) handleApiError(response.error);
   };
 

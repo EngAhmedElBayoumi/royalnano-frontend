@@ -30,7 +30,14 @@ export const permissionRoutes = {
   ],
   "/dashboard/clients": ["customer"],
   "/dashboard/branches": ["branch"],
-  "/dashboard/website": ["service", "gallery", "contact", "customerreview"],
+  "/dashboard/website": [
+    "service",
+    "gallery",
+    "contact",
+    "customerreview",
+    "socialcode",
+    "blog",
+  ],
   "/dashboard/purchase": [
     "expensecategory",
     "invoicedetail",
@@ -39,4 +46,5 @@ export const permissionRoutes = {
     "supplier",
     "warehouse",
   ],
+  // "/dashboard/finance": ["account"],
 };

@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { forgetPasswordValidation } from "@/lib/validations/forgetPasswordValidation";
-import { useForgotPasswordMutation } from "@/redux/services/forgotPasswordApi";
+import { useForgotPasswordMutation } from "@/redux/services/auth/forgotPasswordApi";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { useState } from "react";
 import { useTranslations } from "next-intl";

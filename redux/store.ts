@@ -4,21 +4,21 @@ import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import authReducer from "./slices/authSlice";
 import profileReducer from "./slices/profileSlice";
-import { contactApi } from "./services/contactApi";
-import { customerReviewApi } from "./services/customerReviewApi";
-import { galleryAPi } from "./services/galleryApi";
-import { profileApi } from "./services/profileApi";
-import { loginApi } from "./services/loginApi";
-import { logoutApi } from "./services/logoutApi";
-import { registerApi } from "./services/registerApi";
-import { forgotPasswordApi } from "./services/forgotPasswordApi";
-import { resendOTPApi } from "./services/resendOTP";
-import { verifyOTPApi } from "./services/verifyOTP";
-import { resetPasswordPApi } from "./services/resetPassword";
+import { contactApi } from "./services/website/contactApi";
+import { customerReviewApi } from "./services/website/customerReviewApi";
+import { galleryAPi } from "./services/website/galleryApi";
+import { profileApi } from "./services/website/profileApi";
+import { loginApi } from "./services/auth/loginApi";
+import { logoutApi } from "./services/auth/logoutApi";
+import { registerApi } from "./services/auth/registerApi";
+import { forgotPasswordApi } from "./services/auth/forgotPasswordApi";
+import { resendOTPApi } from "./services/auth/resendOTP";
+import { verifyOTPApi } from "./services/auth/verifyOTP";
+import { resetPasswordPApi } from "./services/auth/resetPassword";
 import { branchApi } from "./services/dashboard/inventory/branchesApi";
 import { movementApi } from "./services/dashboard/inventory/movementApi";
 import { preorderApi } from "./services/dashboard/inventory/preorderApi";
-import { refreshTokenApi } from "./services/refreshTokenApi";
+import { refreshTokenApi } from "./services/auth/refreshTokenApi";
 import { unitsApi } from "./services/dashboard/inventory/unitsApi";
 import { itemsApi } from "./services/dashboard/inventory/itemsApi";
 import { itemCategoryApi } from "./services/dashboard/inventory/itemCategoryApi";
@@ -40,6 +40,7 @@ import { salesReturnApi } from "./services/dashboard/sales/salesReturnApi";
 import { servicesAPi } from "./services/website/servicesApi";
 import { blogsAPi } from "./services/website/blogsApi";
 import { commentsAPi } from "./services/website/commentsApi";
+import { socialApi } from "./services/website/socialApi";
 import { clientRequestAPi } from "./services/clientRequestApi";
 import { purchaseOrderApi } from "./services/dashboard/purchase/orderApi";
 import { purchaseExpenseCategoryApi } from "./services/dashboard/purchase/expenseCategory";
@@ -53,6 +54,7 @@ import { salesSalesClientRequestApi } from "./services/dashboard/sales/salesClie
 import { initializePaymentApi } from "./services/dashboard/sales/initialPriceApi";
 import { setPriceApi } from "./services/dashboard/sales/setPriceApi";
 import { followUpApi } from "./services/dashboard/sales/followUpApi";
+import { financeApi } from "./services/dashboard/finance/financeApi";
 import { consumedItemsApi } from "./services/dashboard/sales/salesConsumedItemsApi";
 import { attachmentsApi } from "./services/dashboard/sales/salesCustomerAttachmentsApi";
 
@@ -110,6 +112,7 @@ export const store = configureStore({
     [servicesAPi.reducerPath]: servicesAPi.reducer,
     [blogsAPi.reducerPath]: blogsAPi.reducer,
     [commentsAPi.reducerPath]: commentsAPi.reducer,
+    [socialApi.reducerPath]: socialApi.reducer,
     [clientRequestAPi.reducerPath]: clientRequestAPi.reducer,
     [PurchaseSupplierApi.reducerPath]: PurchaseSupplierApi.reducer,
     [purchaseOrderApi.reducerPath]: purchaseOrderApi.reducer,
@@ -126,6 +129,7 @@ export const store = configureStore({
     [initializePaymentApi.reducerPath]: initializePaymentApi.reducer,
     [setPriceApi.reducerPath]: setPriceApi.reducer,
     [followUpApi.reducerPath]: followUpApi.reducer,
+    [financeApi.reducerPath]: financeApi.reducer,
     [consumedItemsApi.reducerPath]: consumedItemsApi.reducer,
     [attachmentsApi.reducerPath]: attachmentsApi.reducer,
 
@@ -185,9 +189,13 @@ export const store = configureStore({
       .concat(initializePaymentApi.middleware)
       .concat(blogsAPi.middleware)
       .concat(commentsAPi.middleware)
+      .concat(socialApi.middleware)
       .concat(followUpApi.middleware)
       .concat(consumedItemsApi.middleware)
-      .concat(attachmentsApi.middleware);
+      .concat(attachmentsApi.middleware)
+
+      .concat(financeApi.middleware)
+      .concat(consumedItemsApi.middleware);
   },
 });
 

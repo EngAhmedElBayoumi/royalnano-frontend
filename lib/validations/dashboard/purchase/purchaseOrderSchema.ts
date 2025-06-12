@@ -5,7 +5,7 @@ const itemSchema = z.object({
   kind: z.string().min(1, "Kind is required"),
   name: z.string().min(1, "Name is required"),
   unit: z.string().min(1, "Unit is required"),
-  quantity: z.string().min(1, "Quantity is required"),
+  quantity: z.number().min(1, "Quantity must be at least 1"),
   unit_price: z.string().min(1, "Unit price is required"),
   id: z.number().int().positive("ID must be a positive integer"),
   bonus: z.string().min(1, "Bonus is required"),
@@ -21,8 +21,8 @@ const invoiceDetailSchema = z.object({
   discount: z.string().min(1, "Discount is required"),
   vat: z.string().min(1, "VAT is required"),
   subtotal: z.string().min(1, "Subtotal is required"),
-  quantity: z.string().min(1, "Quantity is required"),
-  free_quantity: z.string().min(1, "Free quantity is required"),
+  quantity: z.number().min(1, "Quantity must be at least 1"),
+  free_quantity: z.number().min(1, "Free quantity must be at least 1"),
   total: z.string().min(1, "Total is required"),
 });
 

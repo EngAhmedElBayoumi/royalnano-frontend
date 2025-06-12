@@ -20,7 +20,6 @@ const followUpSchema = z.object({
     .max(100, "Comment must be 100 characters or less")
     .optional(),
   customer: z.number().int().positive("Customer ID is required"),
-  created_at: z.date().optional(),
   action_date: z.date().optional(),
 });
 
@@ -48,7 +47,7 @@ export default function AddFollowUpModal({
       follow_up_type: "follow_up",
       comment: "",
       customer: customerId,
-      // created_at: new Date(),
+
       action_date: new Date(),
     },
   });
@@ -59,8 +58,7 @@ export default function AddFollowUpModal({
     try {
       await createFollowUp({
         ...data,
-        // created_at: data.created_at?.toISOString(),
-        action_date: data.action_date?.toISOString(), // ✅ تحويل التاريخ قبل الإرسال
+        action_date: data.action_date?.toISOString(),
       }).unwrap();
       refetch();
       onClose();
@@ -103,14 +101,6 @@ export default function AddFollowUpModal({
             placeholder={t("comment")}
             className="mt-2 xl:mt-5"
           />
-
-          {/* <DateTimePicker
-            control={control}
-            name="created_at"
-            label={t("created_at")}
-            placeholder={t("select_date_time")}
-            className="mt-2 xl:mt-5"
-          /> */}
 
           <DateTimePicker
             control={control}

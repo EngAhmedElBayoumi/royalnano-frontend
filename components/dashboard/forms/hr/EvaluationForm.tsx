@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { evaluationSchema } from "@/lib/validations/dashboard/hr/evaluationSchema";
 import { useGetInterviewsQuery } from "@/redux/services/dashboard/hr/interviewsApi";
 import { useGetEmployeesQuery } from "@/redux/services/dashboard/hr/employeeApi";
+import { listItems } from "@/lib/utils/types";
 import { Form } from "@/components/ui/form";
 import CustomButton from "@/components/formFields/CustomButton";
 import CustomTextArea from "@/components/formFields/TextArea";
@@ -59,7 +60,7 @@ const EvaluationForm = ({
     ) || [];
 
   const interviewerOptions =
-    employees?.results?.map((employee: { id: number; name: string }) => ({
+    employees?.results?.map((employee: listItems) => ({
       value: String(employee.id),
       label: employee.name,
     })) || [];

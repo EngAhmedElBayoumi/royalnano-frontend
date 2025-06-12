@@ -7,7 +7,7 @@ import TableWrapper from "@/components/dashboard/tables/TableWrapper";
 
 export default function Blogs() {
   const router = useRouter();
-  const t = useTranslations("dashboardWebsite.Blogs");
+  const t = useTranslations("dashboard_website.Blogs");
 
   const { data, isLoading, error, permissions, handlePageChange } =
     useTableData({
@@ -15,7 +15,6 @@ export default function Blogs() {
       // eslint-disable-next-line
       useQueryHook: useGetBlogsQuery,
     });
-  console.log(data);
 
   const columns = [
     { field: "title", header: t("title") },

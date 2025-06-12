@@ -22,7 +22,9 @@ export default function EditMovement() {
 
   const defaultValues: MovementFormValues = data && {
     ...data,
-    item: String(data.item.id),
+    item: data.item.id,
+    from_branch: data.from_branch.id,
+    to_branch: data.to_branch.id,
   };
 
   const handleSubmit = async (data: MovementFormValues) => {

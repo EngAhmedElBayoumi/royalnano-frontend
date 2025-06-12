@@ -1,7 +1,7 @@
 "use client";
 import { useTranslations } from "next-intl";
 import { handleApiError } from "@/lib/utils/handleApiError";
-import { useCreateGalleryMutation } from "@/redux/services/galleryApi";
+import { useCreateGalleryMutation } from "@/redux/services/website/galleryApi";
 import GalleryForm, {
   GalleryFormValues,
 } from "@/components/dashboard/forms/website/GalleryForm";
@@ -9,7 +9,7 @@ import CreatePage from "@/components/dashboard/CreatePage";
 
 export default function CreateGallery() {
   const [createGallery, { isLoading }] = useCreateGalleryMutation();
-  const t = useTranslations("dashboardWebsite.gallery");
+  const t = useTranslations("dashboard_website.gallery");
 
   const handleSubmit = async (data: GalleryFormValues) => {
     const formData = new FormData();
@@ -42,7 +42,7 @@ export default function CreateGallery() {
       onSubmit={handleSubmit}
       Form={GalleryForm}
       isLoading={isLoading}
-      redirectPath="/dashboard/website?tab=tabs.gallery"
+      redirectPath="/dashboard/website?tab=gallery"
     />
   );
 }

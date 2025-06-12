@@ -1,13 +1,13 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { useGetAllReviewsQuery } from "@/redux/services/customerReviewApi";
+import { useGetAllReviewsQuery } from "@/redux/services/website/customerReviewApi";
 import { useTableData } from "@/hooks/useTableData";
 import TableWrapper from "@/components/dashboard/tables/TableWrapper";
 
 export default function CustomerReviews() {
   const router = useRouter();
-  const t = useTranslations("dashboardWebsite.CustomerReviews");
+  const t = useTranslations("dashboard_website.CustomerReviews");
 
   const { data, isLoading, error, permissions, handlePageChange } =
     useTableData({
