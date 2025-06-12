@@ -28,14 +28,14 @@ export default function EditSocial() {
 
   return (
     <EditPage
-      title={t("editSocial")}
+      title={t("edit_social")}
       data={defaultValues}
       isLoading={isLoading}
       submitting={submitting}
       error={error}
       onSubmit={handleSubmit}
       Form={SocialForm}
-      redirectPath="/dashboard/website"
+      redirectPath="/dashboard/website?tab=social"
     />
   );
 }
