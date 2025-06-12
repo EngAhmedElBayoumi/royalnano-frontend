@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect } from "react";
 import { useTranslations } from "next-intl";
-import { useGetServicesQuery } from "@/redux/services/website/servicesApi";
+import { useGetActiveServicesQuery } from "@/redux/services/website/servicesApi";
 import useActiveService from "./useActiveService";
 import ServiceItem from "./ServiceItem";
 import LoadingError from "@/components/dashboard/LoadingError";
@@ -16,7 +16,7 @@ interface Service {
 
 const OurServices = () => {
   const t = useTranslations("website.services");
-  const { data, isLoading, error } = useGetServicesQuery({ page: 1 });
+  const { data, isLoading, error } = useGetActiveServicesQuery({ page: 1 });
   const services = React.useMemo(
     () => data?.results.slice(0, 4) || [],
     [data?.results]
