@@ -34,7 +34,7 @@ export default function EditItem() {
       (acc, key) => {
         if (data[key] !== defaultValues?.[key]) {
           // ts-ignore-next-line
-          // @ts-ignore: TypeScript doesn't recognize that key is a valid key of ItemFormValues
+          // @ts-expect-error: TypeScript doesn't recognize that key is a valid key of ItemFormValues
           acc[key] = data[key];
         }
         return acc;

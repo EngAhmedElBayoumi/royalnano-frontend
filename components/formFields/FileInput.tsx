@@ -33,11 +33,9 @@ const FileInput = <T extends FieldValues>({
   useEffect(() => {
     const initialFile = control._formValues[name];
     if (initialFile instanceof File) {
-      setFile(initialFile);
       setPreviewUrl(URL.createObjectURL(initialFile));
     } else if (typeof initialFile === "string" && initialFile) {
       setPreviewUrl(initialFile);
-      console.log(initialFile, "initialFile");
     }
   }, [control, name]);
 

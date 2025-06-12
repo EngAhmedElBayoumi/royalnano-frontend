@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
-import { useForm } from "react-hook-form";
+import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { gallerySchema } from "@/lib/validations/dashboard/website/gallerySchema";
 import { Form } from "@/components/ui/form";
@@ -20,8 +20,8 @@ interface GalleryFormProps {
 export interface GalleryFormValues {
   title: string;
   item_type: "image" | "video";
-  file: File;
-  additionalFiles: File[];
+  file: File | string;
+  additionalFiles: (File | string)[];
 }
 
 const GalleryForm = ({
@@ -38,10 +38,15 @@ const GalleryForm = ({
       additionalFiles: [],
     },
   });
+  console.log(defaultValues?.additionalFiles);
 
-  const [fileCount, setFileCount] = useState(
-    defaultValues?.additionalFiles?.length || 0
-  );
+  const { fields, append, remove } = useFieldArray({
+    control: form.control,
+    // ts-ignore-next-line
+    // @ts-expect-error: additionalFiles is not recognized as a field in the form
+    name: "additionalFiles",
+  });
+
   const globalTranslate = useTranslations();
   const t = useTranslations("dashboard_website.gallery");
 
@@ -60,16 +65,6 @@ const GalleryForm = ({
     setAcceptedFileTypes(itemType === "image" ? "image/*" : "video/*");
   }, [itemType]);
 
-  const handleAddMoreFiles = () => {
-    setFileCount((prev) => prev + 1);
-  };
-
-  const handleRemoveFile = (index: number) => {
-    const currentFiles = form.getValues("additionalFiles");
-    const updatedFiles = currentFiles.filter((_, i) => i !== index);
-    form.setValue("additionalFiles", updatedFiles);
-    setFileCount((prev) => prev - 1);
-  };
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -103,8 +98,8 @@ const GalleryForm = ({
             {itemType === "image" && (
               <>
                 {/* Additional file inputs */}
-                {Array.from({ length: fileCount }).map((_, index) => (
-                  <div key={index} className="relative">
+                {fields.map((field, index) => (
+                  <div key={field.id} className="relative">
                     <FileInput
                       control={form.control}
                       name={`additionalFiles.${index}`}
@@ -113,7 +108,7 @@ const GalleryForm = ({
                     />
                     <button
                       type="button"
-                      onClick={() => handleRemoveFile(index)}
+                      onClick={() => remove(index)}
                       className="absolute -top-1 right-1 bg-red-500 rounded-full p-2"
                     >
                       <Image
@@ -129,7 +124,7 @@ const GalleryForm = ({
                 {/* Add more button */}
                 <button
                   type="button"
-                  onClick={handleAddMoreFiles}
+                  onClick={() => append({})}
                   className="flex items-center justify-center gap-2 text-primary mt-4 w-20 h-20 bg-white rounded-md border border-dashed border-primary hover:bg-primary hover:text-white transition duration-200 ease-in-out"
                 >
                   +
