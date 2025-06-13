@@ -25,7 +25,7 @@ export default function FollowupsTab({ customerId }: FollowupsTabProps) {
   const pageSize = 10;
 
   const { data, isLoading, error, refetch } = useGetFollowUpQuery({
-    search: customerId.toString(),
+    search: "",
     page: page + 1, // PrimeReact uses 0-based indexing, API uses 1-based
     page_size: pageSize,
     customer: customerId,
@@ -130,6 +130,7 @@ export default function FollowupsTab({ customerId }: FollowupsTabProps) {
         <EditFollowUpModal
           isOpen={isEditModalOpen}
           onClose={() => setIsEditModalOpen(false)}
+          customerId={customerId}
           followUp={selectedFollowUp}
           refetch={refetch}
         />

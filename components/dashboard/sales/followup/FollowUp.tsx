@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import CustomTabs from "@/components/dashboard/CustomTabs";
 import FollowUpTypes from "./FollowUpTypes";
+import FollowUpList from "./FollowUpList";
 
 const FollowUp = () => {
   const t = useTranslations("follow_up");
@@ -18,7 +19,7 @@ const FollowUp = () => {
           src="/assets/icons/dashboard/sales/customerTabs/followup.svg"
         />
       ),
-      content: "",
+      content: <FollowUpList />,
     },
     {
       id: "follow-up-type",

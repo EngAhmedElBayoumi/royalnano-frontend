@@ -2,30 +2,34 @@
 import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { unitSchema } from "@/lib/validations/dashboard/inventory/unitSchema";
+import {
+  FollowUpTypeFormValues,
+  followUpTypeSchema,
+} from "@/lib/validations/dashboard/sales/followUp/FollowUpTypesSchema";
 import { useForm } from "react-hook-form";
 import { Form } from "@/components/ui/form";
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
 
-export interface UnitFormValues {
-  name: string;
-}
-interface UnitFormProps {
-  onSubmit: (data: UnitFormValues) => Promise<void>;
-  defaultValues?: UnitFormValues;
+interface FollowUpTypeFormProps {
+  onSubmit: (data: FollowUpTypeFormValues) => Promise<void>;
+  defaultValues?: FollowUpTypeFormValues;
   isLoading?: boolean;
 }
 
-const UnitForm = ({ onSubmit, defaultValues, isLoading }: UnitFormProps) => {
+const FollowUpTypeForm = ({
+  onSubmit,
+  defaultValues,
+  isLoading,
+}: FollowUpTypeFormProps) => {
   const form = useForm({
-    resolver: zodResolver(unitSchema),
+    resolver: zodResolver(followUpTypeSchema),
     defaultValues: defaultValues || {
       name: "",
     },
   });
 
-  const t = useTranslations("Inventory.InventoryUnit");
+  const t = useTranslations("follow_up.followUpType");
   const globalTranslate = useTranslations();
 
   return (
@@ -36,13 +40,16 @@ const UnitForm = ({ onSubmit, defaultValues, isLoading }: UnitFormProps) => {
             <TextInput
               control={form.control}
               name="name"
-              label={t("unitName")}
-              placeholder={t("unitName")}
+              label={t("followupName")}
+              placeholder={t("followupName")}
             />
           </div>
         </section>
         <div className="flex justify-end gap-2 mt-5 flex-col-reverse xs:flex-row">
-          <Link href="/dashboard/inventory?tab=units" passHref>
+          <Link
+            href="/dashboard/sales?tab=followup&subtab=follow-up-type"
+            passHref
+          >
             <CustomButton
               text={globalTranslate("cancel")}
               variant="secondary"
@@ -60,4 +67,4 @@ const UnitForm = ({ onSubmit, defaultValues, isLoading }: UnitFormProps) => {
   );
 };
 
-export default UnitForm;
+export default FollowUpTypeForm;
