@@ -18,7 +18,7 @@ export default function CreateService() {
     // Append text fields
     formData.append("name", data.name);
     formData.append("alias", data.alias);
-    formData.append("is_active", data.is_active);
+    formData.append("is_active", data.is_active.toString());
     formData.append("description", data.description);
 
     // Append image file if it exists
