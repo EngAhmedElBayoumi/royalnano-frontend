@@ -39,7 +39,7 @@ const FollowUpList = () => {
       data={data}
       columns={columns}
       cardData={cardsData}
-      emptyMessage={t("noFollowUpTypesDataFound")}
+      emptyMessage={t("no_followups")}
       editRoute="/dashboard/sales/followup/edit"
       buttonText={t("add_follow_up")}
       ButtonEvent={handleClick}
