@@ -266,6 +266,7 @@
     "order": "Sales Order",
     "receipt": "Sales Receipt",
     "addCustomer": "Add Customer",
+    "followup": "Follow Up",
     "SalesQuotation": {
       "status": "status",
       "quotation": "Sales Quotation",
@@ -829,7 +830,7 @@
     "reserve": "Reserve",
     "cancel": "Cancel",
     "comment_action": "Comment",
-    "follow_up": "Follow-Up",
+    "follow_up": "Follow Up",
     "save": "Save Follow-Up",
     "cancel_action": "Cancel",
     "followups": "Followups",
@@ -841,8 +842,14 @@
     "date": "Date",
     "actions": "Actions",
     "no_comment": "No comment",
-    "created_at": "Created At",
-    "select_date_time": "Select Date and Time"
+    "action_date": "Action Date",
+    "select_date_time": "Select Date and Time",
+    "followUpType": {
+      "followupName": "Name",
+      "noFollowUpTypesDataFound": "No Follow Up Types  found",
+      "addFollowUpType": "Add Follow Up Type",
+      "editFollowUpType": "Edit Follow Up Type"
+    }
   },
   "finance": {
     "finance": "Finance",

@@ -3,7 +3,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { ChevronLeft } from "lucide-react";
 import CustomerInfoTab from "@/components/dashboard/sales/customerInfoTab";
-import FollowupsTab from "@/components/dashboard/sales/followupTab";
+import FollowupsTab from "@/components/dashboard/sales/followup/followupTab";
 import QuotationsTab from "@/components/dashboard/sales/QuotationsTab";
 import CustomTabs from "@/components/dashboard/CustomTabs";
 import InvoicesTab from "@/components/dashboard/sales/invoicesTab";

@@ -265,6 +265,7 @@
     "order": "أمر المبيعات",
     "salesInvoice": "فاتورة المبيعات",
     "receipt": "إيصال المبيعات",
+    "followup": "المتابعة",
     "SalesQuotation": {
       "status": "الحالة",
 
@@ -813,8 +814,14 @@
     "date": "التاريخ",
     "actions": "الإجراءات",
     "no_comment": "لا يوجد تعليق",
-    "created_at": "تاريخ الإنشاء",
-    "select_date_time": "اختر التاريخ والوقت"
+    "action_date": "تاريخ التنفيذ",
+    "select_date_time": "اختر التاريخ والوقت",
+    "followUpType": {
+      "followupName": "الاسم",
+      "noFollowUpTypesDataFound": "لا توجد بيانات لأنواع المتابعات  ",
+      "addFollowUpType": "إضافة نوع متابعة",
+      "editFollowUpType": "تعديل نوع متابعة"
+    }
   },
   "finance": {
     "finance": "المالية",
