@@ -33,7 +33,14 @@ const FollowUp = () => {
       content: "",
     },
   ];
-  return <CustomTabs tabs={tabs} defaultTab={tabs[0].id} />;
+  return (
+    <CustomTabs
+      tabs={tabs}
+      defaultTab={tabs[0].id}
+      paramName="subtab"
+      parentTab="followup"
+    />
+  );
 };
 
 export default FollowUp;
