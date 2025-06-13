@@ -1,7 +1,6 @@
 "use client";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import { useUpdateFollowUpMutation } from "@/redux/services/dashboard/sales/followUpApi";
 import { Form } from "@/components/ui/form";
 import CustomModal from "@/components/modals/CustomModal";
@@ -11,25 +10,17 @@ import CustomButton from "@/components/formFields/CustomButton";
 import { useTranslations } from "next-intl";
 import { FollowUp } from "@/components/dashboard/sales/types";
 import DateTimePicker from "@/components/formFields/DateTimePicker";
-
-const followUpSchema = z.object({
-  follow_up_type: z.enum(["reserve", "cancel", "comment", "follow_up"], {
-    required_error: "Follow-up type is required",
-  }),
-  comment: z
-    .string()
-    .max(100, "Comment must be 100 characters or less")
-    .optional(),
-  action_date: z.date().optional(),
-});
-
-type FollowUpFormValues = z.infer<typeof followUpSchema>;
+import {
+  FollowUpFormValues,
+  followUpSchema,
+} from "@/lib/validations/dashboard/sales/followUp/followUpSchema";
 
 interface EditFollowUpModalProps {
   isOpen: boolean;
   onClose: () => void;
-  followUp: FollowUp; // Use the reusable FollowUp type here
-  refetch: () => void; // Add refetch prop
+  followUp: FollowUp;
+  customerId: number;
+  refetch: () => void;
 }
 
 export default function EditFollowUpModal({
@@ -37,6 +28,7 @@ export default function EditFollowUpModal({
   onClose,
   followUp,
   refetch,
+  customerId,
 }: EditFollowUpModalProps) {
   const t = useTranslations("follow_up");
   const [updateFollowUp] = useUpdateFollowUpMutation();
@@ -44,8 +36,9 @@ export default function EditFollowUpModal({
   const form = useForm<FollowUpFormValues>({
     resolver: zodResolver(followUpSchema),
     defaultValues: {
-      follow_up_type: followUp?.follow_up_type || "follow_up",
+      follow_up_type: followUp?.follow_up_type,
       comment: followUp?.comment || "",
+      customer: customerId,
       action_date: new Date(followUp.action_date),
     },
   });

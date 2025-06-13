@@ -1,7 +1,6 @@
 "use client";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import { useCreateFollowUpMutation } from "@/redux/services/dashboard/sales/followUpApi";
 import { Form } from "@/components/ui/form";
 import CustomModal from "@/components/modals/CustomModal";
@@ -10,20 +9,10 @@ import TextArea from "@/components/formFields/TextArea";
 import CustomButton from "@/components/formFields/CustomButton";
 import { useTranslations } from "next-intl";
 import DateTimePicker from "@/components/formFields/DateTimePicker";
-
-const followUpSchema = z.object({
-  follow_up_type: z.enum(["reserve", "cancel", "comment", "follow_up"], {
-    required_error: "Follow-up type is required",
-  }),
-  comment: z
-    .string()
-    .max(100, "Comment must be 100 characters or less")
-    .optional(),
-  customer: z.number().int().positive("Customer ID is required"),
-  action_date: z.date().optional(),
-});
-
-type FollowUpFormValues = z.infer<typeof followUpSchema>;
+import {
+  FollowUpFormValues,
+  followUpSchema,
+} from "@/lib/validations/dashboard/sales/followUp/followUpSchema";
 
 interface AddFollowUpModalProps {
   isOpen: boolean;
@@ -44,7 +33,7 @@ export default function AddFollowUpModal({
   const form = useForm<FollowUpFormValues>({
     resolver: zodResolver(followUpSchema),
     defaultValues: {
-      follow_up_type: "follow_up",
+      follow_up_type: 1,
       comment: "",
       customer: customerId,
       action_date: new Date(),

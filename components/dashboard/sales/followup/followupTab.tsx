@@ -130,6 +130,7 @@ export default function FollowupsTab({ customerId }: FollowupsTabProps) {
         <EditFollowUpModal
           isOpen={isEditModalOpen}
           onClose={() => setIsEditModalOpen(false)}
+          customerId={customerId}
           followUp={selectedFollowUp}
           refetch={refetch}
         />
