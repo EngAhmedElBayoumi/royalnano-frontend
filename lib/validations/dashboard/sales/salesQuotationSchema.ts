@@ -7,11 +7,9 @@ export const salesQuotationSchema = z.object({
     .string()
     .min(1, "Quotation number is required")
     .optional(),
-  status: z
-    .enum(["sent", "accepted", "draft", "rejected"], {
-      errorMap: () => ({ message: "Status is required" }),
-    })
-    .optional(),
+  status: z.enum(["sent", "accepted", "draft", "rejected"], {
+    errorMap: () => ({ message: "Status is required" }),
+  }),
   items: z
     .array(
       z.object({
