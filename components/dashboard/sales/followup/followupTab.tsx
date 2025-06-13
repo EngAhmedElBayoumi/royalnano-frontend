@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
-import AddFollowUpModal from "@/components/dashboard/sales/AddFollowUpModal";
-import EditFollowUpModal from "@/components/dashboard/sales/EditFollowUpModal";
+import AddFollowUpModal from "@/components/dashboard/sales/followup/AddFollowUpModal";
+import EditFollowUpModal from "@/components/dashboard/sales/followup/EditFollowUpModal";
 import { useTranslations } from "next-intl";
 import { useGetFollowUpQuery } from "@/redux/services/dashboard/sales/followUpApi";
 import { DataTable } from "primereact/datatable";
