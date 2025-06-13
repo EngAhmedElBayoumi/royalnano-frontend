@@ -191,9 +191,9 @@ export const store = configureStore({
       .concat(commentsAPi.middleware)
       .concat(socialApi.middleware)
       .concat(followUpApi.middleware)
+      .concat(followUpTypesApi.middleware)
       .concat(consumedItemsApi.middleware)
       .concat(attachmentsApi.middleware)
-
       .concat(financeApi.middleware);
   },
 });
