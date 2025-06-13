@@ -194,8 +194,7 @@ export const store = configureStore({
       .concat(consumedItemsApi.middleware)
       .concat(attachmentsApi.middleware)
 
-      .concat(financeApi.middleware)
-      .concat(consumedItemsApi.middleware);
+      .concat(financeApi.middleware);
   },
 });
 
