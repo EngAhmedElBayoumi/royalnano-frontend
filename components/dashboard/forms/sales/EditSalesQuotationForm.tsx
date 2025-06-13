@@ -287,6 +287,7 @@ const EditSalesQuotationForm = ({
                     type="button"
                     onClick={() => remove(index)}
                     className="text-red-500 mt-2"
+                    disabled={isView}
                   >
                     Remove Item
                   </button>
@@ -298,6 +299,7 @@ const EditSalesQuotationForm = ({
               type="button"
               onClick={handleAddItem}
               className="bg-primary text-white p-2 rounded-lg mt-4"
+              disabled={isView}
             >
               Add Item
             </button>
@@ -308,7 +310,7 @@ const EditSalesQuotationForm = ({
           <Link href="/dashboard/sales?tab=sales-quotation" passHref>
             <CustomButton text={t("cancel")} variant="secondary" />
           </Link>
-          <CustomButton text={t("save")} type="submit" />
+          <CustomButton text={t("save")} type="submit" isDisabled={isView} />
         </div>
       </form>
     </Form>
