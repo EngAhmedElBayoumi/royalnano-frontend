@@ -51,9 +51,9 @@ const FollowUpForm = ({
     })) || [];
 
   const customerOptions =
-    customers?.map((customer: listItems) => ({
+    customers?.map((customer: { id: number; customer_name: string }) => ({
       value: String(customer.id),
-      label: customer.name,
+      label: customer.customer_name,
     })) || [];
   return (
     <Form {...form}>

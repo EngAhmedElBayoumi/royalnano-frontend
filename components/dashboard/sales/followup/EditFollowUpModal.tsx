@@ -1,9 +1,7 @@
 "use client";
 import { useTranslations } from "next-intl";
 import { FollowUp } from "@/components/dashboard/sales/types";
-import {
-  FollowUpFormValues,
-} from "@/lib/validations/dashboard/sales/followUp/followUpSchema";
+import { FollowUpFormValues } from "@/lib/validations/dashboard/sales/followUp/followUpSchema";
 import { useUpdateFollowUpMutation } from "@/redux/services/dashboard/sales/followUpApi";
 import CustomModal from "@/components/modals/CustomModal";
 import FollowUpForm from "./forms/FollowUpForm";
@@ -37,10 +35,7 @@ export default function EditFollowUpModal({
     try {
       await updateFollowUp({
         id: followUp.id,
-        data: {
-          ...data,
-          action_date: data.action_date?.toISOString(),
-        },
+        data,
       }).unwrap();
       refetch();
       onClose();

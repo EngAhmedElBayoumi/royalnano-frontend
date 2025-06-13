@@ -30,10 +30,7 @@ export default function AddFollowUpModal({
 
   const handleSubmit = async (data: FollowUpFormValues) => {
     try {
-      await createFollowUp({
-        ...data,
-        action_date: data.action_date?.toISOString(),
-      }).unwrap();
+      await createFollowUp(data).unwrap();
       refetch();
       onClose();
     } catch (error) {
