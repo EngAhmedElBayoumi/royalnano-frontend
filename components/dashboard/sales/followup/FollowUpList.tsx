@@ -1,7 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { useGetFollowUpTypesQuery } from "@/redux/services/dashboard/sales/followUpTypesApi";
+import { useGetFollowUpQuery } from "@/redux/services/dashboard/sales/followUpApi";
 import { useTableData } from "@/hooks/useTableData";
 import TableWrapper from "@/components/dashboard/tables/TableWrapper";
 
@@ -9,7 +9,7 @@ const FollowUpList = () => {
   const { data, isLoading, error, permissions, handlePageChange } =
     useTableData({
       permissionKey: "followup",
-      useQueryHook: useGetFollowUpTypesQuery,
+      useQueryHook: useGetFollowUpQuery,
     });
 
   const router = useRouter();
