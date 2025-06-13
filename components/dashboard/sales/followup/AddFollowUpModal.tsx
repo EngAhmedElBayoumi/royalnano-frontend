@@ -1,18 +1,9 @@
 "use client";
 import { useTranslations } from "next-intl";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useCreateFollowUpMutation } from "@/redux/services/dashboard/sales/followUpApi";
-import {
-  FollowUpFormValues,
-  followUpSchema,
-} from "@/lib/validations/dashboard/sales/followUp/followUpSchema";
-import { Form } from "@/components/ui/form";
+import { FollowUpFormValues } from "@/lib/validations/dashboard/sales/followUp/followUpSchema";
 import CustomModal from "@/components/modals/CustomModal";
-import CustomSelect from "@/components/formFields/CustomSelect";
-import TextArea from "@/components/formFields/TextArea";
-import DateTimePicker from "@/components/formFields/DateTimePicker";
-import CustomButton from "@/components/formFields/CustomButton";
+import FollowUpForm from "./forms/FollowUpForm";
 
 interface AddFollowUpModalProps {
   isOpen: boolean;
@@ -28,21 +19,16 @@ export default function AddFollowUpModal({
   refetch,
 }: AddFollowUpModalProps) {
   const t = useTranslations("follow_up");
-  const [createFollowUp] = useCreateFollowUpMutation();
+  const [createFollowUp, { isLoading }] = useCreateFollowUpMutation();
 
-  const form = useForm<FollowUpFormValues>({
-    resolver: zodResolver(followUpSchema),
-    defaultValues: {
-      follow_up_type: 1,
-      comment: "",
-      customer: customerId,
-      action_date: new Date(),
-    },
-  });
+  const defaultValues = {
+    follow_up_type: 1,
+    comment: "",
+    customer: customerId,
+    action_date: new Date(),
+  };
 
-  const { control, handleSubmit, reset } = form;
-
-  const handleFormSubmit = async (data: FollowUpFormValues) => {
+  const handleSubmit = async (data: FollowUpFormValues) => {
     try {
       await createFollowUp({
         ...data,
@@ -50,7 +36,6 @@ export default function AddFollowUpModal({
       }).unwrap();
       refetch();
       onClose();
-      reset();
     } catch (error) {
       console.error("Error creating follow-up:", error);
     }
@@ -64,54 +49,12 @@ export default function AddFollowUpModal({
       description=""
       className="sm:w-[80%] md:w-1/2 lg:w-1/2 xl:w-1/3 2xl:w-1/3 px-3 xs:px-6"
     >
-      <Form {...form}>
-        <form
-          onSubmit={handleSubmit(handleFormSubmit)}
-          className="space-y-4 w-full"
-        >
-          <CustomSelect
-            control={control}
-            name="follow_up_type"
-            label={t("follow_up_type")}
-            placeholder={t("select_follow_up_type")}
-            options={[
-              { value: "reserve", label: t("reserve") },
-              { value: "cancel", label: t("cancel") },
-              { value: "comment", label: t("comment_action") },
-              { value: "follow_up", label: t("follow_up") },
-            ]}
-          />
-
-          <TextArea
-            control={control}
-            name="comment"
-            label={t("comment")}
-            placeholder={t("comment")}
-            className="mt-2 xl:mt-5"
-          />
-
-          <DateTimePicker
-            control={control}
-            name="action_date"
-            label={t("action_date")}
-            placeholder={t("select_date_time")}
-            className="mt-2 xl:mt-5"
-          />
-
-          <div className="flex justify-end gap-2 flex-col-reverse xs:flex-row">
-            <CustomButton
-              text={t("cancel_action")}
-              variant="secondary"
-              onClick={() => {
-                onClose();
-                reset();
-              }}
-              className="xs:w-fit"
-            />
-            <CustomButton text={t("save")} type="submit" />
-          </div>
-        </form>
-      </Form>
+      <FollowUpForm
+        onSubmit={handleSubmit}
+        isLoading={isLoading}
+        defaultValues={defaultValues}
+        hideCustomer={true}
+      />
     </CustomModal>
   );
 }

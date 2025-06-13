@@ -2,7 +2,7 @@
 import { useTranslations } from "next-intl";
 import { handleApiError } from "@/lib/utils/handleApiError";
 import { useCreateFollowUpMutation } from "@/redux/services/dashboard/sales/followUpApi";
-import { FollowUpFormValues } from "@/lib/validations/dashboard/sales/followUp/FollowUpSchema";
+import { FollowUpFormValues } from "@/lib/validations/dashboard/sales/followUp/followUpSchema";
 import FollowUpForm from "@/components/dashboard/sales/followup/forms/FollowUpForm";
 import CreatePage from "@/components/dashboard/CreatePage";
 

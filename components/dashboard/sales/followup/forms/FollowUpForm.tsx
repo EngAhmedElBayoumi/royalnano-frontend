@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import {
   FollowUpFormValues,
   followUpSchema,
-} from "@/lib/validations/dashboard/sales/followUp/FollowUpSchema";
+} from "@/lib/validations/dashboard/sales/followUp/followUpSchema";
 import { listItems } from "@/lib/utils/types";
 import { useGetFollowUpTypesQuery } from "@/redux/services/dashboard/sales/followUpTypesApi";
 import { useGetMiniSalesCustomerQuery } from "@/redux/services/dashboard/sales/salesCustomerApi";
