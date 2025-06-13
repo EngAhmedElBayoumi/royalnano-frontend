@@ -814,6 +814,41 @@
     "select_date_time": "Select Date and Time"
   },
    "finance":{
+    "tabs": {
+      "finance": "Finance",
+      "payment-voucher": " Payment Voucher",
+      "receipt-voucher": " Receipt Voucher"
+    },
+    "paymentVoucher": {
+      "title": "Payment Voucher",
+      "addPaymentVoucher": "Add Payment Voucher",
+      "editPaymentVoucher": "Edit Payment Voucher",
+      "noDataFound": "No payment voucher data found.",
+      "voucherNumber": "Voucher Number",
+      "date": "Date",
+      "amount": "Amount",
+      "description": "Description",
+      "branch": "Branch",
+      "account": "Account",
+      "payee": "Payee",
+      "save": "Save",
+      "cancel": "Cancel"
+    },
+    "receiptVoucher": {
+      "title": "Receipt Voucher",
+      "addReceiptVoucher": "Add Receipt Voucher",
+      "editReceiptVoucher": "Edit Receipt Voucher",
+      "noDataFound": "No receipt voucher data found.",
+      "voucherNumber": "Voucher Number",
+      "date": "Date",
+      "amount": "Amount",
+      "description": "Description",
+      "branch": "Branch",
+      "account": "Account",
+      "payer": "Payer",
+      "save": "Save",
+      "cancel": "Cancel"
+    },
     "finance":"Finance",
     "parent":"Parent",
     "addFinance":"Add Account"

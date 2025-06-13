@@ -776,6 +776,41 @@
     "select_date_time": "اختر التاريخ والوقت"
   },
   "finance":{
+    "tabs": {
+      "finance": "المالية",
+      "payment-voucher": "إيصالات الدفع",
+      "receipt-voucher": "إيصالات الاستلام"
+    },
+    "paymentVoucher": {
+      "editPaymentVoucher": "تعديل إيصال الدفع",
+      "viewPaymentVoucher": "عرض إيصال الدفع",
+      "cancel": "إلغاء",
+      "save": "حفظ",
+      "voucherNumber": "رقم الإيصال",
+      "date": "التاريخ",
+      "amount": "المبلغ",
+      "description": "الوصف",
+      "branch": "الفرع",
+      "supplier": "المورد",
+      "noDataFound": "لا توجد بيانات لإيصالات الدفع",
+      "addPaymentVoucher": "إضافة إيصال دفع",
+      "paymentMethod": "طريقة الدفع"
+    },
+    "receiptVoucher": {
+      "editReceiptVoucher": "تعديل إيصال الاستلام",
+      "viewReceiptVoucher": "عرض إيصال الاستلام",
+      "cancel": "إلغاء",
+      "save": "حفظ",
+      "voucherNumber": "رقم الإيصال",
+      "date": "التاريخ",
+      "amount": "المبلغ",
+      "description": "الوصف",
+      "branch": "الفرع",
+      "customer": "العميل",
+      "noDataFound": "لا توجد بيانات لإيصالات الاستلام",
+      "addReceiptVoucher": "إضافة إيصال استلام"
+    },
+
     "finance":"المالية",
     "parent":"الرئيسي",
     "addFinance":"إضافة حساب"
