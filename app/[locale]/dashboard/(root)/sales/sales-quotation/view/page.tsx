@@ -11,7 +11,7 @@ import { useGetSalesQuotationByIdQuery } from "@/redux/services/dashboard/sales/
 export default function ViewSalesQuotations() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
-  const t = useTranslations("Inventory.InventoryMovement");
+  const t = useTranslations("Sales");
 
   const { data, isLoading, error } = useGetSalesQuotationByIdQuery(id);
 
@@ -28,7 +28,7 @@ export default function ViewSalesQuotations() {
       <div className="flex">
         <IconWithTitle
           imageSrc="/assets/icons/view.svg"
-          title={t("viewMovement")}
+          title={t("salesQuotation")}
           backgroundColor="#F8F7F7"
           textColor="primary"
         />

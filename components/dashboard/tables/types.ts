@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { MouseEventHandler, ReactNode } from "react";
 import { InfoCardInterface } from "../cards/InfoCard";
 
@@ -9,6 +10,7 @@ export interface DataInTable {
 export interface ColumnConfig {
   field: string;
   header: string;
+  render?: (row: any) => React.ReactNode;
 }
 
 export interface CustomTableProps {

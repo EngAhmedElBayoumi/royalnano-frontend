@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import CustomTable from "@/components/dashboard/tables/CustomTable";
 import TableSkelton from "../skelton/TableSkelton";
@@ -7,8 +8,11 @@ import { useRouter } from "@/i18n/routing";
 import {
   useGetSalesQuotationQuery,
   useGetCustomerQuotationsQuery,
+  useUpdateSalesQuotationMutation,
+  useGetSalesQuotationByIdQuery,
 } from "@/redux/services/dashboard/sales/salesQuotationsApi";
 import { useState } from "react";
+import CustomSelect from "@/components/formFields/CustomSelect";
 
 interface SalesQuotationProps {
   customerId?: number; // Optional prop for customer-specific quotations
@@ -16,6 +20,18 @@ interface SalesQuotationProps {
 
 export default function SalesQuotation({ customerId }: SalesQuotationProps) {
   const [page, setPage] = useState(1);
+  const [updateSalesQuotation] = useUpdateSalesQuotationMutation();
+  const { data: quotation } = useGetSalesQuotationByIdQuery(1);
+  const handleStatusChange = async (id: number, newStatus: string) => {
+    try {
+      await updateSalesQuotation({
+        id,
+        body: { ...quotation, status: newStatus },
+      });
+    } catch (err) {
+      console.error("Failed to update status", err);
+    }
+  };
 
   const handlePageChange = (newPage: number) => {
     setPage(newPage);
@@ -59,10 +75,28 @@ export default function SalesQuotation({ customerId }: SalesQuotationProps) {
     : allSalesQuotations?.count || 0;
 
   const columns = [
-    { field: "quotation_number", header: "Quotation Number" },
     { field: "customer_name", header: "Customer Name" },
     { field: "date", header: "Date" },
-    { field: "status", header: "Status" },
+    // { field: "status", header: "Status" },
+    {
+      field: "status",
+      header: "Status",
+      render: (row: any) => (
+        <CustomSelect
+          placeholder=""
+          control={undefined}
+          name={`status-${row.id}`}
+          value={String(row.status)}
+          onChange={(value) => handleStatusChange(row.id, String(value))}
+          options={[
+            { value: "sent", label: "Sent" },
+            { value: "accepted", label: "Accepted" },
+            { value: "draft", label: "Draft" },
+            { value: "rejected", label: "Rejected" },
+          ]}
+        />
+      ),
+    },
     { field: "validity_period", header: "Validity Period" },
     { field: "total_amount", header: "Total Amount" },
     { field: "items", header: "Items" },
@@ -102,7 +136,7 @@ export default function SalesQuotation({ customerId }: SalesQuotationProps) {
       ) : (
         <CustomTable
           emptyMessage="No sales quotations data found"
-          editRoute={"/dashboard/sales/sales-quotation/edit"}
+          viewRoute={"/dashboard/sales/sales-quotation/view"}
           data={salesQuotations?.results}
           rows={10}
           columns={columns}
