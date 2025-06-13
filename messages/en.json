@@ -843,7 +843,13 @@
     "actions": "Actions",
     "no_comment": "No comment",
     "action_date": "Action Date",
-    "select_date_time": "Select Date and Time"
+    "select_date_time": "Select Date and Time",
+    "followUpType": {
+      "followupName": "Name",
+      "noFollowUpTypesDataFound": "No Follow Up Types  found",
+      "addFollowUpType": "Add Follow Up Type",
+      "editFollowUpType": "Edit Follow Up Type"
+    }
   },
   "finance": {
     "finance": "Finance",

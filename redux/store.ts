@@ -57,7 +57,7 @@ import { followUpApi } from "./services/dashboard/sales/followUpApi";
 import { financeApi } from "./services/dashboard/finance/financeApi";
 import { consumedItemsApi } from "./services/dashboard/sales/salesConsumedItemsApi";
 import { attachmentsApi } from "./services/dashboard/sales/salesCustomerAttachmentsApi";
-
+import { followUpTypesApi } from "./services/dashboard/sales/followUpTypesApi";
 // Create separate configs for each reducer
 const authPersistConfig = {
   key: "auth",
@@ -132,7 +132,7 @@ export const store = configureStore({
     [financeApi.reducerPath]: financeApi.reducer,
     [consumedItemsApi.reducerPath]: consumedItemsApi.reducer,
     [attachmentsApi.reducerPath]: attachmentsApi.reducer,
-
+    [followUpTypesApi.reducerPath]: followUpTypesApi.reducer,
     auth: persistedAuthReducer,
     profile: persistedProfileReducer,
   },

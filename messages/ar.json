@@ -815,7 +815,13 @@
     "actions": "الإجراءات",
     "no_comment": "لا يوجد تعليق",
     "action_date": "تاريخ التنفيذ",
-    "select_date_time": "اختر التاريخ والوقت"
+    "select_date_time": "اختر التاريخ والوقت",
+    "followUpType": {
+      "followupName": "الاسم",
+      "noFollowUpTypesDataFound": "لا توجد بيانات لأنواع المتابعات  ",
+      "addFollowUpType": "إضافة نوع متابعة",
+      "editFollowUpType": "تعديل نوع متابعة"
+    }
   },
   "finance": {
     "finance": "المالية",
