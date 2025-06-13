@@ -33,9 +33,8 @@ function CustomTabs({
   useEffect(() => {
     const url = new URL(window.location.href);
 
-    if (paramName === "subtab" && parentTab)
-      url.searchParams.set("tab", parentTab);
-    else url.searchParams.delete("subtab");
+    if (parentTab) url.searchParams.set("tab", parentTab);
+    if (paramName !== "subtab") url.searchParams.delete("subtab");
 
     url.searchParams.set(paramName, activeTab);
 
