@@ -72,7 +72,7 @@ export default function PaymentVoucherTab() {
           columns={columns}
           cardData={cardsData}
           emptyMessage={t("noDataFound")}
-          editRoute="/dashboard/hr/jobs/edit/"
+          editRoute="/dashboard/finance/payment-voucher/edit"
           buttonText={t("addPaymentVoucher")}
           ButtonEvent={handleClick}
           onPageChange={handlePageChange}

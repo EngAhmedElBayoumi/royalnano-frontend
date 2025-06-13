@@ -7,6 +7,7 @@ import { RootState } from "@/redux/store";
 import FinancesTab from "@/components/dashboard/finance/finance";
 import PaymentVoucherTab from "@/components/dashboard/finance/payment-voucher";
 import CustomTabs from "@/components/dashboard/CustomTabs";
+import ReceiptVoucherTab from "@/components/dashboard/finance/receipt-voucher";
 
 
 function FinancePage() {
@@ -45,6 +46,20 @@ function FinancePage() {
       ),
       content: <PaymentVoucherTab />,
     },
+    {
+      id: "receipt-voucher",
+      label: t("receipt-voucher"),
+      permissionKey: "customer",
+      icon: (
+        <Image
+          width="24"
+          height="24"
+          alt={t("receipt-voucher")}
+          src="/assets/icons/dashboard/hr/attendance.svg"
+        />
+      ),
+      content: <ReceiptVoucherTab/>, // Placeholder for Receipt Voucher Tab, implement as needed
+    }
     
   ];
 

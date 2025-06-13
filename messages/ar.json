@@ -802,15 +802,18 @@
       "cancel": "إلغاء",
       "save": "حفظ",
       "voucherNumber": "رقم الإيصال",
-      "date": "التاريخ",
-      "amount": "المبلغ",
-      "description": "الوصف",
-      "branch": "الفرع",
       "customer": "العميل",
+      "account": "الحساب",
+      "invoice":"فاتورة",
+      "amountReceived": "المبلغ المستلم",
+      "receivedDate": "تاريخ الاستلام",
+      "referenceNumber": "رقم المرجع",
+       "status": "الحالة",
+       "notes": "ملاحظات",
       "noDataFound": "لا توجد بيانات لإيصالات الاستلام",
       "addReceiptVoucher": "إضافة إيصال استلام"
     },
-
+    
     "finance":"المالية",
     "parent":"الرئيسي",
     "addFinance":"إضافة حساب"
