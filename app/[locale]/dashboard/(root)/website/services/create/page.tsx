@@ -18,18 +18,15 @@ export default function CreateService() {
     // Append text fields
     formData.append("name", data.name);
     formData.append("alias", data.alias);
-    formData.append("is_active", data.is_active.toString());
+    formData.append("is_active", String(data.is_active)); // Convert boolean to string
     formData.append("description", data.description);
 
     // Append image file if it exists
-    if (data.image && data.image instanceof File) {
+    if (data.image && data.image instanceof File)
       formData.append("image", data.image);
-    }
 
     const response = await createService(formData);
-    if (response.error) {
-      handleApiError(response.error);
-    }
+    if (response.error) handleApiError(response.error);
   };
 
   return (
