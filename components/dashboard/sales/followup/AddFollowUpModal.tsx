@@ -1,18 +1,18 @@
 "use client";
+import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useCreateFollowUpMutation } from "@/redux/services/dashboard/sales/followUpApi";
-import { Form } from "@/components/ui/form";
-import CustomModal from "@/components/modals/CustomModal";
-import CustomSelect from "@/components/formFields/CustomSelect";
-import TextArea from "@/components/formFields/TextArea";
-import CustomButton from "@/components/formFields/CustomButton";
-import { useTranslations } from "next-intl";
-import DateTimePicker from "@/components/formFields/DateTimePicker";
 import {
   FollowUpFormValues,
   followUpSchema,
 } from "@/lib/validations/dashboard/sales/followUp/followUpSchema";
+import { Form } from "@/components/ui/form";
+import CustomModal from "@/components/modals/CustomModal";
+import CustomSelect from "@/components/formFields/CustomSelect";
+import TextArea from "@/components/formFields/TextArea";
+import DateTimePicker from "@/components/formFields/DateTimePicker";
+import CustomButton from "@/components/formFields/CustomButton";
 
 interface AddFollowUpModalProps {
   isOpen: boolean;
