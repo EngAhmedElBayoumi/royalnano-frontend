@@ -21,6 +21,16 @@ const FollowUpList = () => {
     { field: "action_date", header: t("action_date") },
     { field: "comment", header: t("comment") },
   ];
+  const transformedData = data?.results?.map(
+    (followUp: {
+      customer: { name: string };
+      follow_up_type: { name: string };
+    }) => ({
+      ...followUp,
+      customer: followUp.customer.name,
+      follow_up_type: followUp.follow_up_type.name,
+    })
+  );
 
   const cardsData = [
     { title: "New requests", num: 145 },
@@ -36,7 +46,7 @@ const FollowUpList = () => {
     <TableWrapper
       isLoading={isLoading}
       error={error}
-      data={data}
+      data={{ results: transformedData, count: data?.count || 0 }}
       columns={columns}
       cardData={cardsData}
       emptyMessage={t("no_followups")}
