@@ -95,7 +95,11 @@ const DateTimePicker = <T extends FieldValues>({
                 </Button>
               </FormControl>
             </PopoverTrigger>
-            <PopoverContent className="w-auto p-0" align="start">
+            <PopoverContent
+              className="w-auto p-0 z-[9999]"
+              align="start"
+              sideOffset={40}
+            >
               <div className="sm:flex">
                 <Calendar
                   mode="single"
