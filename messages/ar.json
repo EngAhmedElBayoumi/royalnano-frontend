@@ -50,6 +50,16 @@
       "setLocation": "تعيين الموقع",
       "selectBranchLocation": "اختر موقع الفرع",
       "balance": "الميزانية"
+    },
+     "branches_transactions":{
+      "transaction_type":"نوع العملية",
+      "amount":"المبلغ",
+      "description": "الوصف",
+      "branch": "الفرع",
+      "image_reset": "إعادة تعيين الصورة",
+      "add_branch_transaction": "إضافة عملية فرعية",
+      "edit_branch_transaction": "تعديل عملية فرعية",
+      "no_branches_transaction_data_found": "لا توجد بيانات للعمليات الفرعية"
     }
   },
   "Inventory": {
