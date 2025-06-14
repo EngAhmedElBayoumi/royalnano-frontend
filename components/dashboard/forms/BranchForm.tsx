@@ -93,7 +93,7 @@ const BranchForm = ({
   const [viewport, setViewport] = useState({
     latitude: defaultValues?.latitude ?? 30,
     longitude: defaultValues?.longitude ?? 31,
-    zoom: 10,
+    zoom: 5,
     width: "100%",
     height: "400px",
   });
