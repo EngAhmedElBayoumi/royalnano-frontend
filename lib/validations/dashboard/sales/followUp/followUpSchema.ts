@@ -10,10 +10,9 @@ export const followUpSchema = z.object({
   action_date: z
     .date()
     .optional()
-    .refine(
-      (date) => !date || date >= new Date(new Date().setHours(0, 0, 0, 0)),
-      { message: "Action date cannot be in the past" }
-    ),
+    .refine((date) => !date || date >= new Date(), {
+      message: "Action date cannot be in the past",
+    }),
 });
 
 export type FollowUpFormValues = z.infer<typeof followUpSchema>;
