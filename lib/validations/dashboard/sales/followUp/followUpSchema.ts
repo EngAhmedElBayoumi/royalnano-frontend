@@ -7,7 +7,13 @@ export const followUpSchema = z.object({
     .max(100, "Comment must be 100 characters or less")
     .optional(),
   customer: z.coerce.number().positive("Customer must be selected"),
-  action_date: z.date().optional(),
+  action_date: z
+    .date()
+    .optional()
+    .refine(
+      (date) => !date || date >= new Date(new Date().setHours(0, 0, 0, 0)),
+      { message: "Action date cannot be in the past" }
+    ),
 });
 
 export type FollowUpFormValues = z.infer<typeof followUpSchema>;
