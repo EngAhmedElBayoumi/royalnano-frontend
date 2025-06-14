@@ -117,3 +117,6 @@ html[dir="rtl"] .p-paginator-next {
 .p-datatable-wrapper::-webkit-scrollbar {
   height: 4px !important;
 }
+.p-datatable-header{
+  background-color: transparent !important;
+}
