@@ -34,7 +34,7 @@ export default function CreateBranchTransaction() {
       title={t("add_branch_transaction")}
       onSubmit={handleSubmit}
       Form={BranchTransactionsForm}
-      redirectPath="/dashboard/branches?tab=branches_transactions"
+      redirectPath="/dashboard/branches?tab=branches-transactions"
       isLoading={isLoading}
     />
   );
