@@ -20,7 +20,7 @@ const followUpSchema = z.object({
     .max(100, "Comment must be 100 characters or less")
     .optional(),
   customer: z.number().int().positive("Customer ID is required"),
-  created_at: z.date().optional(),
+  action_date: z.date().optional(),
 });
 
 type FollowUpFormValues = z.infer<typeof followUpSchema>;
@@ -47,7 +47,7 @@ export default function AddFollowUpModal({
       follow_up_type: "follow_up",
       comment: "",
       customer: customerId,
-      created_at: new Date(),
+      action_date: new Date(),
     },
   });
 
@@ -55,8 +55,11 @@ export default function AddFollowUpModal({
 
   const handleFormSubmit = async (data: FollowUpFormValues) => {
     try {
-      await createFollowUp(data).unwrap();
-      refetch(); // Refetch follow-ups after successful submission
+      await createFollowUp({
+        ...data,
+        action_date: data.action_date?.toISOString(), 
+      }).unwrap();
+      refetch();
       onClose();
       reset();
     } catch (error) {
@@ -88,7 +91,6 @@ export default function AddFollowUpModal({
               { value: "comment", label: t("comment_action") },
               { value: "follow_up", label: t("follow_up") },
             ]}
-            className=""
           />
 
           <TextArea
@@ -98,13 +100,15 @@ export default function AddFollowUpModal({
             placeholder={t("comment")}
             className="mt-2 xl:mt-5"
           />
+
           <DateTimePicker
             control={control}
-            name="created_at"
-            label={t("created_at")}
+            name="action_date"
+            label={t("action_date")}
             placeholder={t("select_date_time")}
             className="mt-2 xl:mt-5"
           />
+
           <div className="flex justify-end gap-2 flex-col-reverse xs:flex-row">
             <CustomButton
               text={t("cancel_action")}

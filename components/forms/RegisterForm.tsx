@@ -1,11 +1,9 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-// import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { registerValidation } from "@/lib/validations/register";
 import { Link } from "@/i18n/routing";
-// import Image from "next/image";
 import { useRegisterMutation } from "@/redux/services/registerApi";
 import TextInput from "@/components/formFields/TextInput";
 import PhoneInputField from "@/components/formFields/PhoneInputField";
@@ -13,6 +11,7 @@ import PasswordInput from "@/components/formFields/PasswordInput";
 import CustomButton from "@/components/formFields/CustomButton";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 interface RegisterError {
   data?: {
@@ -27,6 +26,8 @@ interface RegisterError {
 }
 
 export default function RegisterForm() {
+  const t = useTranslations("auth.register");
+
   const [register, { isLoading }] = useRegisterMutation();
   const [error, setError] = useState<string | null>(null);
 
@@ -58,7 +59,7 @@ export default function RegisterForm() {
         role: "client",
       }).unwrap();
     } catch (error: unknown) {
-      let errorMessage = "An error occurred during registration";
+      let errorMessage = t("error.default");
 
       const registerError = error as RegisterError;
 
@@ -86,7 +87,7 @@ export default function RegisterForm() {
         onSubmit={form.handleSubmit(onSubmit)}
         className="gap-4 flex flex-col p-4 sm:px-7"
       >
-        <p className="text-center font-[600] text-[25px]">Register</p>
+        <p className="text-center font-[600] text-[25px]">{t("title")}</p>
 
         {error && (
           <Alert variant="destructive">
@@ -98,81 +99,52 @@ export default function RegisterForm() {
           <TextInput
             control={form.control}
             name="first_name"
-            label="first Name"
-            placeholder="first Name"
+            label={t("firstName")}
+            placeholder={t("firstName")}
           />
           <TextInput
             control={form.control}
             name="last_name"
-            label="last Name"
-            placeholder="last Name"
+            label={t("lastName")}
+            placeholder={t("lastName")}
           />
           <PhoneInputField
             control={form.control}
             name="phone_number"
-            label="Phone Number"
+            label={t("phone")}
           />
-
           <TextInput
             control={form.control}
             name="email_address"
-            label="Email"
-            placeholder="Email"
+            label={t("email")}
+            placeholder={t("email")}
           />
           <PasswordInput
             control={form.control}
             name="password"
-            label="Password"
-            placeholder="Password"
+            label={t("password")}
+            placeholder={t("password")}
           />
           <PasswordInput
             control={form.control}
             name="confirm_password"
-            label="confirm_password"
-            placeholder="confirm_password"
+            label={t("confirmPassword")}
+            placeholder={t("confirmPassword")}
           />
         </div>
 
         <CustomButton
-          text={isLoading ? "Submitting..." : "Register"}
+          text={isLoading ? t("submitting") : t("submit")}
           isDisabled={isLoading}
           className="bg-primaryDark"
         />
 
         <div className="flex font-[600] text-sm xl:text-[20px] justify-center">
-          <p className="mr-1 text-[#8B8B8B]">Already have an account?</p>
+          <p className="mr-1 text-[#8B8B8B]">{t("alreadyHaveAccount")}?</p>
           <Link href="/login" className="text-primary" passHref>
-            Log in
+            {t("login")}
           </Link>
         </div>
-
-        {/* <div className="flex items-center">
-          <div className="w-[203px] h-[2px] bg-subtitle"></div>
-          <p className="mx-[27px] text-[25px] font-[500] text-[#5A5A5A]">OR</p>
-          <div className="w-[203px] h-[2px] bg-subtitle"></div>
-        </div>
-
-        <Button className="bg-white border text-[#EC0000] font-[600] text-[25px] h-11 border-subtitle">
-          <Image
-            src="/assets/icons/btnGoogle.svg"
-            alt="Google"
-            width={30}
-            height={30}
-            className="me-2"
-          />
-          Google
-        </Button>
-
-        <Button className="bg-white border text-[#0047B2] font-[600] text-[25px] h-11 border-subtitle">
-          <Image
-            src="/assets/icons/btnFB.svg"
-            alt="Facebook"
-            width={30}
-            height={30}
-            className="me-2"
-          />
-          Facebook
-        </Button> */}
       </form>
     </Form>
   );

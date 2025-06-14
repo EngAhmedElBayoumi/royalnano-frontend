@@ -20,7 +20,7 @@ const followUpSchema = z.object({
     .string()
     .max(100, "Comment must be 100 characters or less")
     .optional(),
-  created_at: z.date().optional(),
+  action_date: z.date().optional(),
 });
 
 type FollowUpFormValues = z.infer<typeof followUpSchema>;
@@ -46,7 +46,7 @@ export default function EditFollowUpModal({
     defaultValues: {
       follow_up_type: followUp?.follow_up_type || "follow_up",
       comment: followUp?.comment || "",
-      created_at: new Date(followUp.created_at),
+      action_date: new Date(followUp.action_date),
     },
   });
 
@@ -54,7 +54,13 @@ export default function EditFollowUpModal({
 
   const handleFormSubmit = async (data: FollowUpFormValues) => {
     try {
-      await updateFollowUp({ id: followUp.id, ...data }).unwrap();
+      await updateFollowUp({
+        id: followUp.id,
+        data: {
+          ...data,
+          action_date: data.action_date?.toISOString(),
+        },
+      }).unwrap();
       refetch(); // Refetch follow-ups after successful update
       onClose();
       reset();
@@ -100,8 +106,8 @@ export default function EditFollowUpModal({
 
           <DateTimePicker
             control={control}
-            name="created_at"
-            label={t("created_at")}
+            name="action_date"
+            label={t("action_date")}
             placeholder={t("select_date_time")}
             className="mt-2 xl:mt-5"
           />

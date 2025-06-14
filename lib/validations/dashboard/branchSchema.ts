@@ -19,4 +19,6 @@ export const branchSchema = z.object({
   email: z.string().email("Invalid email address").max(100).optional(),
   address: z.string().optional(),
   manager: z.coerce.number().optional(),
+  balance: z.string().regex(/^\d+(\.\d+)?$/, "Balance must be a decimal value"),
+  extra_fields: z.record(z.any()).optional(),
 });

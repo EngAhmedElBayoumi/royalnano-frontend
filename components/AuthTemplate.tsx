@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 const AuthTemplate = ({
   src,
   Form,
@@ -8,6 +9,8 @@ const AuthTemplate = ({
   src: string;
   Form: React.ComponentType;
 }) => {
+  const t = useTranslations("auth.authTemplate");
+
   return (
     <section className="flex justify-center items-center py-[3vh] bg-gray-100">
       <main className="py-2 bg-neutralGray lg:h-[94vh] flex flex-col lg:flex-row min-w-[280px] w-[90%] sm:w-[80%] rounded-tl-[100px] rounded-br-[100px]">
@@ -23,11 +26,11 @@ const AuthTemplate = ({
             />
           </Link>
           <div className="flex text-sm lg:text-[20px] xl:text-xl font-[400] gap-1">
-            <p className="text-nowrap">Welcome To</p>
-            <span className="text-primary">Royal</span>
+            <p className="text-nowrap">{t("Welcome To")}</p>
+            <span className="text-primary">{t("Royal")}</span>
           </div>
           <p className="mb-10 text-sm lg:text-[20px] xl:text-xl font-[400]">
-            Nano Ceramic
+            {t("Nano Ceramic")}
           </p>
           <Image
             className="hidden lg:flex"

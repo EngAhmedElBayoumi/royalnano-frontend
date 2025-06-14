@@ -6,9 +6,9 @@ import { Input } from "@/components/ui/input";
 import { OTPValidation } from "@/lib/validations/OTPValidation";
 // import { useVerifyOTPMutation } from "@/redux/services/verifyOTP";
 import { useResendOTPMutation } from "@/redux/services/resendOTP";
-// import { OTPFieldName } from "../services/types";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 interface OTPError {
   data?: {
@@ -21,6 +21,8 @@ interface OTPError {
 }
 
 export default function OTPverificationForm() {
+  const t = useTranslations("auth.otp");
+
   const [error, setError] = useState<string | null>(null);
   // const [verifyOTP, { isLoading }] = useVerifyOTPMutation();
   const [resendOTPFn] = useResendOTPMutation();
@@ -41,7 +43,7 @@ export default function OTPverificationForm() {
     try {
       // await verifyOTP(data);
     } catch (error: unknown) {
-      let errorMessage = "An error occurred during verification";
+      let errorMessage = t("error.default");
 
       const otpError = error as OTPError;
 
@@ -62,7 +64,9 @@ export default function OTPverificationForm() {
   const resendOTP = async (data: { data: string }) => {
     await resendOTPFn(data);
   };
+
   type OTPFieldName = "num1" | "num2" | "num3" | "num4" | "num5" | "num6";
+
   return (
     <Form {...form}>
       <form
@@ -70,7 +74,7 @@ export default function OTPverificationForm() {
         className="gap-4 h-[100%] flex flex-col pt-[80px] px-4 sm:px-7"
       >
         <p className="text-center text-primary font-[600] text-[25px]">
-          OTP Verification
+          {t("title")}
         </p>
 
         {error && (
@@ -81,12 +85,13 @@ export default function OTPverificationForm() {
 
         <div>
           <p className="text-center text-[#8B8B8B] font-[400] text-sm xl:text-[20px]">
-            Please enter the code sent to your mobile
+            {t("instruction")}
           </p>
           <p className="text-center text-[#8B8B8B] font-[400] text-sm xl:text-[20px]">
-            number <span className="text-primary">01027489652</span>
+            {t("toNumber")} <span className="text-primary">01027489652</span>
           </p>
         </div>
+
         <div className="flex items-center justify-center gap-2">
           {[1, 2, 3, 4, 5, 6].map((item) => {
             const fieldName = `num${item}` as OTPFieldName;
@@ -114,17 +119,20 @@ export default function OTPverificationForm() {
                         />
                       </div>
                     </FormControl>
-                    {/* <FormMessage /> */}
                   </FormItem>
                 )}
               />
             );
           })}
         </div>
+
         <div className="text-center text-[#8B8B8B] font-[400] text-sm xl:text-[20px] flex justify-center items-center gap-1">
-          <p>I didn&apos;t receive any code.</p>
-          <button onClick={() => resendOTP({ data: "" })} className="bg-none ">
-            RESEND
+          <p>{t("noCode")}</p>
+          <button
+            onClick={() => resendOTP({ data: "" })}
+            className="bg-none text-primary font-semibold"
+          >
+            {t("resend")}
           </button>
         </div>
 
@@ -132,8 +140,8 @@ export default function OTPverificationForm() {
           className="bg-[#BD9D28] text-white py-1.5 rounded-xl px-[71px] font-[700] text-sm xl:text-[20px] w-[100%] mt-[40%]"
           type="submit"
         >
-          Submit
-          {/* {isLoading ? "Submitting ..." : "Submit"} */}
+          {t("submit")}
+          {/* {isLoading ? t("submitting") : t("submit")} */}
         </button>
       </form>
     </Form>
