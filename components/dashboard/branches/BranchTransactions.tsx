@@ -20,8 +20,15 @@ export default function BranchTransactions() {
     { field: "amount", header: t("amount") },
     { field: "description", header: t("description") },
     { field: "branch", header: t("branch") },
-    { field: "image_reset", header: t("image_reset") },
+    { field: "reset_image", header: t("reset_image") },
   ];
+
+    const transformedData = data?.results?.map(
+    (branchTransaction: { branch: { name: string } }) => ({
+      ...branchTransaction,
+      branch: branchTransaction?.branch?.name,
+    })
+  );
 
   const cardsData = [
     { title: "Total Branches", num: data?.count || 0 },
@@ -40,7 +47,7 @@ export default function BranchTransactions() {
       <TableWrapper
         isLoading={isLoading}
         error={error}
-        data={data}
+      data={{ results: transformedData, count: data?.count || 0 }}
         columns={columns}
         cardData={cardsData}
         emptyMessage={t("no_branches_transaction_data_found")}

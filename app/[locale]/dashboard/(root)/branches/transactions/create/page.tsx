@@ -22,8 +22,8 @@ export default function CreateBranchTransaction() {
     formData.append("description", data.description ?? "");
 
     // Append image file if it exists
-    if (data.image_reset && data.image_reset instanceof File)
-      formData.append("image_reset", data.image_reset);
+    if (data.reset_image && data.reset_image instanceof File)
+      formData.append("reset_image", data.reset_image);
 
     const response = await createBranchTransaction(formData);
     if (response.error) handleApiError(response.error);

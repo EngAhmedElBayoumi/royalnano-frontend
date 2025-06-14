@@ -15,7 +15,7 @@ export const branchTransactionsSchema = z.object({
     }),
   description: z.string().nullable().optional(),
   branch: z.coerce.number().min(1, "Branch must be selected"),
-  image_reset: z
+  reset_image: z
     .custom<File | string | null>()
     .nullable()
     .refine(

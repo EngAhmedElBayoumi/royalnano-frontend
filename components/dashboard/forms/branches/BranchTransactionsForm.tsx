@@ -33,7 +33,7 @@ const BranchTransactionsForm = ({
       amount: "0.00",
       description: "",
       branch: 1,
-      image_reset: null,
+      reset_image: null,
     },
   });
   const globalTranslate = useTranslations();
@@ -83,8 +83,8 @@ const BranchTransactionsForm = ({
           />
           <FileInput
             control={form.control}
-            name="image_reset"
-            label={t("image_reset")}
+            name="reset_image"
+            label={t("reset_image")}
             accepted={ACCEPTED_IMAGE_TYPES.join(",")}
             className="mt-2 xl:mt-5"
           />

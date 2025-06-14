@@ -56,7 +56,7 @@
       "amount":"Amount",
       "description": "Description",
       "branch": "Branch",
-      "image_reset": "Image Reset",
+      "reset_image": "Image Reset",
       "add_branch_transaction": "Add Branch Transaction",
       "edit_branch_transaction": "Edit Branch Transaction",
       "no_branches_transaction_data_found": "No branches transactions data found",
