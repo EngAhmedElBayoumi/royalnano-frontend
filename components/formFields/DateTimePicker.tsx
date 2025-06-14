@@ -98,7 +98,7 @@ const DateTimePicker = <T extends FieldValues>({
             <PopoverContent
               className="w-auto p-0 z-[9999]"
               align="start"
-              sideOffset={40}
+              sideOffset={60}
             >
               <div className="sm:flex">
                 <Calendar
