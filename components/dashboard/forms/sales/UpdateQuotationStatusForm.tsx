@@ -6,14 +6,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
 import { z } from "zod";
 
-import CustomSelect from "@/components/formFields/CustomSelect";
-import CustomButton from "@/components/formFields/CustomButton";
 import {
   useGetSalesQuotationByIdQuery,
   useUpdateSalesQuotationMutation,
 } from "@/redux/services/dashboard/sales/salesQuotationsApi";
 
-// Status Options
 const statusOptions = [
   { value: "sent", label: "Sent" },
   { value: "accepted", label: "Accepted" },
@@ -21,7 +18,6 @@ const statusOptions = [
   { value: "rejected", label: "Rejected" },
 ];
 
-// Validation Schema
 const salesQuotationSchema = z.object({
   status: z.enum(["sent", "accepted", "draft", "rejected"], {
     errorMap: () => ({ message: "Status is required" }),
@@ -94,7 +90,6 @@ export const UpdateQuotationStatusForm = ({
           onChange={async (e) => {
             const newStatus = e.target.value;
 
-            // تجاهل لو نفس القيمة أو مفيش داتا
             if (!salesQuotationData || newStatus === salesQuotationData.status)
               return;
 
@@ -132,14 +127,6 @@ export const UpdateQuotationStatusForm = ({
             </option>
           ))}
         </select>
-
-        {/* {!isDisabled && (
-          <CustomButton
-            className="px-3 py-1 text-xs rounded-md text-white shadow-md transition-all duration-200"
-            text="Save"
-            type="submit"
-          />
-        )} */}
 
         {message && (
           <div
