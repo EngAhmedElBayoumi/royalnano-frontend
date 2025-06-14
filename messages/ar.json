@@ -27,24 +27,30 @@
     "finance": "المالية"
   },
   "branches": {
-    "branches": "الفروع",
-    "addBranch": "إضافة فرع",
-    "editBranch": "تعديل فرع",
-    "noBranchesDataFound": "لا توجد بيانات للفروع",
-    "name": "الاسم",
-    "phoneNumber": "رقم الهاتف",
-    "branchCode": "رمز الفرع",
-    "location": "الموقع",
-    "manager": "المدير",
-    "address": "العنوان",
-    "description": "الوصف",
-    "email": "البريد الإلكتروني",
-    "save": "حفظ",
-    "saving": "يتم الحفظ...",
-    "cancel": "إلغاء",
-    "setLocation": "تعيين الموقع",
-    "selectBranchLocation": "اختر موقع الفرع",
-    "balance": "الميزانية"
+    "tabs": {
+      "branches": "الفروع",
+      "branches_transactions": "العمليات على الفروع"
+    },
+    "branches_data": {
+      "branches": "الفروع",
+      "addBranch": "إضافة فرع",
+      "editBranch": "تعديل فرع",
+      "noBranchesDataFound": "لا توجد بيانات للفروع",
+      "name": "الاسم",
+      "phoneNumber": "رقم الهاتف",
+      "branchCode": "رمز الفرع",
+      "location": "الموقع",
+      "manager": "المدير",
+      "address": "العنوان",
+      "description": "الوصف",
+      "email": "البريد الإلكتروني",
+      "save": "حفظ",
+      "saving": "يتم الحفظ...",
+      "cancel": "إلغاء",
+      "setLocation": "تعيين الموقع",
+      "selectBranchLocation": "اختر موقع الفرع",
+      "balance": "الميزانية"
+    }
   },
   "Inventory": {
     "units": "الوحدات",

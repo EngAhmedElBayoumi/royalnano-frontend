@@ -8,7 +8,7 @@ import BranchForm, {
 } from "@/components/dashboard/forms/BranchForm";
 
 export default function CreateBranch() {
-  const t = useTranslations("branches");
+  const t = useTranslations("branches.branches_data");
   const [createBranch, { isLoading }] = useCreateBranchMutation();
 
   const handleSubmit = async (data: BranchFormValues) => {

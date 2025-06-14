@@ -63,7 +63,7 @@ const BranchForm = ({
   defaultValues,
   isLoading,
 }: BranchFormProps) => {
-  const t = useTranslations("branches");
+  const t = useTranslations("branches.branches_data");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { data: employees } = useGetEmployeesQuery({});
 

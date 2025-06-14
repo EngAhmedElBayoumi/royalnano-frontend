@@ -30,7 +30,7 @@ export const permissionRoutes = {
     "jobrole",
   ],
   "/dashboard/clients": ["customer"],
-  "/dashboard/branches": ["branch"],
+  "/dashboard/branches": ["branch", "branchaccounttransaction"],
   "/dashboard/website": [
     "service",
     "gallery",

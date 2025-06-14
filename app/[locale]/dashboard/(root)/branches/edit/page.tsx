@@ -14,7 +14,7 @@ import BranchForm, {
 export default function EditBranch() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
-  const t = useTranslations("branches");
+  const t = useTranslations("branches.branches_data");
   const { data, isLoading, error } = useGetBranchByIdQuery(id);
   const [updateBranch, { isLoading: submitting }] = useUpdateBranchMutation();
 
