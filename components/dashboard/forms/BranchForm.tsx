@@ -9,7 +9,7 @@ import "maplibre-gl/dist/maplibre-gl.css";
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { branchSchema } from "@/lib/validations/dashboard/branchSchema";
+import { branchSchema } from "@/lib/validations/dashboard/branches/branchSchema";
 import { useGetEmployeesQuery } from "@/redux/services/dashboard/hr/employeeApi";
 import { listItems } from "@/lib/utils/types";
 
