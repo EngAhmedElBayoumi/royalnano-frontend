@@ -26,16 +26,15 @@ export default function EditSalesCustomer() {
   const defaultValues = data && {
     ...data,
     branch: data.branch.id,
-    assigned_to: data.assigned_to.id,
   };
-
+  console.log(data);
   const handleSubmit = async (data: SalesCustomerFormValues) => {
     const payload = {
       ...data,
       branch: Number(data.branch),
       assigned_to: Number(data.assigned_to),
     };
-    const response = await updateSalesCustomer({ id, data: payload });
+    const response = await updateSalesCustomer({ id, data: data });
     if (response.error) handleApiError(response.error);
   };
   return (

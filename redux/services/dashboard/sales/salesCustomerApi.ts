@@ -31,7 +31,7 @@ export const salesCustomerApi = createApi({
       query: (id) => `sales/customer/${id}/`,
     }),
     updateSalesCustomer: builder.mutation({
-      query: ({ id, ...data }) => ({
+      query: ({ id, data }) => ({
         url: `sales/customer/${id}/`,
         method: "PATCH",
         body: data,

@@ -5,7 +5,6 @@ export const SalesCustomerFormValuesSchema = z.object({
   contact_person: z.string().min(1, "Contact person is required"),
 
   phone_numbers: z.any().optional(),
-  phone_numbers_data: z.string().optional(),
 
   email: z.string().email("Invalid email address"),
   address: z.string().min(1, "Address is required"),

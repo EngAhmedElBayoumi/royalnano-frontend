@@ -156,7 +156,7 @@ const SalesCustomerForm = ({
               placeholder={t("customerType")}
               options={[
                 { value: "individual", label: "Individual" },
-                { value: "business", label: "Business" },
+                { value: "company", label: "Company" },
               ]}
             />
             <TextInput
