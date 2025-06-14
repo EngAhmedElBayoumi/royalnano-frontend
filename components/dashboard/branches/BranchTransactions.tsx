@@ -32,7 +32,7 @@ export default function BranchTransactions() {
   ];
 
   const handleClick = () => {
-    router.push("/dashboard/branches/create");
+    router.push("/dashboard/branches/transactions/create");
   };
 
   return (
@@ -44,7 +44,7 @@ export default function BranchTransactions() {
         columns={columns}
         cardData={cardsData}
         emptyMessage={t("no_branches_transaction_data_found")}
-        editRoute="/dashboard/branches/branch-transactions/edit/"
+        editRoute="/dashboard/branches/transactions/edit/"
         buttonText={t("add_branch_transaction")}
         ButtonEvent={handleClick}
         onPageChange={handlePageChange}
