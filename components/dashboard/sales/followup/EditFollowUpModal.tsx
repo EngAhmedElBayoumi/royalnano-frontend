@@ -25,7 +25,7 @@ export default function EditFollowUpModal({
   const [updateFollowUp, { isLoading }] = useUpdateFollowUpMutation();
 
   const defaultValues = {
-    follow_up_type: followUp?.follow_up_type,
+    follow_up_type: followUp?.follow_up_type?.id,
     comment: followUp?.comment || "",
     customer: customerId,
     action_date: new Date(followUp.action_date),

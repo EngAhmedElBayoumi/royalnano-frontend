@@ -23,11 +23,11 @@ const FollowUpList = () => {
   ];
   const transformedData = data?.results?.map(
     (followUp: {
-      customer: { name: string };
+      customer: { customer_name: string };
       follow_up_type: { name: string };
     }) => ({
       ...followUp,
-      customer: followUp.customer.name,
+      customer: followUp.customer.customer_name,
       follow_up_type: followUp.follow_up_type.name,
     })
   );

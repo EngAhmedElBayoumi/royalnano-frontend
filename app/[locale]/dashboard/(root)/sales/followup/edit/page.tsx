@@ -18,6 +18,12 @@ export default function EditFollowUp() {
   const [updateFollowUp, { isLoading: submitting }] =
     useUpdateFollowUpMutation();
   const { data, isLoading, error } = useGetFollowUpByIdQuery(id);
+  const defaultValues = {
+    ...data,
+    action_date: new Date(data?.action_date),
+    follow_up_type: data?.follow_up_type?.id,
+    customer: data?.customer?.id,
+  };
 
   const handleSubmit = async (data: FollowUpFormValues) => {
     const response = await updateFollowUp({ id, data });
@@ -27,7 +33,7 @@ export default function EditFollowUp() {
   return (
     <EditPage
       title={t("edit_follow_up")}
-      data={data}
+      data={defaultValues}
       isLoading={isLoading}
       error={error}
       submitting={submitting}

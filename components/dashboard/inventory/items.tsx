@@ -17,7 +17,7 @@ export default function Items() {
   const transformedData = data?.results?.map(
     (item: { unit: { name: string } }) => ({
       ...item,
-      unit: item.unit.name,
+      unit: item?.unit?.name,
     })
   );
 
