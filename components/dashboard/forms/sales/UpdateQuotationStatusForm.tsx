@@ -9,6 +9,7 @@ import {
 } from "@/redux/services/dashboard/sales/salesQuotationsApi";
 import { useEffect } from "react";
 import { z } from "zod";
+import CustomButton from "@/components/formFields/CustomButton";
 
 const statusOptions = [
   { value: "sent", label: "Sent" },
@@ -22,9 +23,10 @@ export const UpdateQuotationStatusForm = ({
 }: {
   quotationId: number;
 }) => {
-  const { data: salesQuotationData, isLoading } =
-    useGetSalesQuotationByIdQuery(quotationId);
-  console.log(quotationId);
+  const { data: salesQuotationData, isLoading } = useGetSalesQuotationByIdQuery(
+    quotationId && quotationId
+  );
+  // console.log(quotationId);
   // console.log(salesQuotationData);
   const [updateSalesQuotation] = useUpdateSalesQuotationMutation();
   const salesQuotationSchema = z.object({
@@ -48,26 +50,10 @@ export const UpdateQuotationStatusForm = ({
   const onSubmit = async (values: any) => {
     if (!salesQuotationData) return;
 
-    const updatedPayload = {
-      ...salesQuotationData,
-      status: values.status, // ✅ المستخدم غيرها
-      extra_fields: salesQuotationData.extra_fields ?? {},
-      items: salesQuotationData.items.map((item: any) => ({
-        item_name: item.item_name,
-        quantity: item.quantity,
-        unit_price: item.unit_price,
-        discount: item.discount,
-        discount_percent: item.discount_percent,
-        tax_rate: item.tax_rate,
-        total: item.total,
-        extra_fields: item.extra_fields ?? {},
-      })),
-    };
-    console.log("payload", updatedPayload);
     try {
       const res = await updateSalesQuotation({
         id: quotationId,
-        data: updatedPayload,
+        ...values,
       }).unwrap();
 
       console.log("Updated successfully ✅", res);
@@ -81,19 +67,28 @@ export const UpdateQuotationStatusForm = ({
     <FormProvider {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex items-center gap-2"
+        className="flex flex-row justify-center items-center gap-2 "
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+        }}
       >
         <CustomSelect
           valueType="string"
           control={form.control}
           name="status"
           // value={salesQuotationData?.status}
-          label="Choose status"
+          // label="Choose status"
           options={statusOptions}
           placeholder="Select status"
         />
-        {/* <CustomButton text="Save" type="submit" /> */}
-        <button type="submit">Save</button>
+        <CustomButton
+          className="w-[50%] text-sm p-0"
+          text="Save"
+          type="submit"
+        />
+        {/* <button type="submit">Save</button> */}
       </form>
     </FormProvider>
   );
