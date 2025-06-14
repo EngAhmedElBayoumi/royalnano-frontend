@@ -3,7 +3,7 @@ import { ACCEPTED_IMAGE_TYPES } from "@/lib/utils/types";
 
 const MAX_FILE_SIZE = 1024 * 1024 * 5;
 
-export const serviceSchema = z.object({
+export const branchTransactionsSchema = z.object({
   transaction_type: z.enum(["deposit", "withdraw"], {
     required_error: "Transaction type is required",
     invalid_type_error: "Transaction type must be either 'deposit' or 'withdraw'",
@@ -39,3 +39,7 @@ export const serviceSchema = z.object({
       "Max image size is 5MB."
     ),
 });
+
+export type BranchTransactionsFormValues = z.infer<
+  typeof branchTransactionsSchema
+>;

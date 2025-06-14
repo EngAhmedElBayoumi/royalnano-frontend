@@ -9,7 +9,7 @@ import {
 import EditPage from "@/components/dashboard/EditPage";
 import BranchForm, {
   BranchFormValues,
-} from "@/components/dashboard/forms/BranchForm";
+} from "@/components/dashboard/forms/branches/BranchForm";
 
 export default function EditBranch() {
   const searchParams = useSearchParams();

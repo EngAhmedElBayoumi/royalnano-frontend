@@ -59,7 +59,9 @@
       "image_reset": "Image Reset",
       "add_branch_transaction": "Add Branch Transaction",
       "edit_branch_transaction": "Edit Branch Transaction",
-      "no_branches_transaction_data_found": "No branches transactions data found"
+      "no_branches_transaction_data_found": "No branches transactions data found",
+      "deposit": "Deposit",
+      "withdraw": "Withdraw"
     }
   },
   "Inventory": {
