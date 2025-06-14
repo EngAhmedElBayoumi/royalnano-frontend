@@ -86,32 +86,71 @@ export const UpdateQuotationStatusForm = ({
     <FormProvider {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-row justify-center items-center gap-2"
+        className="flex flex-col justify-center items-center gap-2"
       >
-        <CustomSelect
-          control={form.control}
-          name="status"
-          onChange={(value) => console.log(value)}
-          options={statusOptions}
-          placeholder={
-            salesQuotationData?.status
-              ? salesQuotationData?.status
-              : // statusOptions.find((opt) => opt.value === salesQuotationData.status)?.label
-                "Select status"
-          }
-          readonly={isDisabled}
-        />
+        <select
+          {...form.register("status")}
+          value={form.watch("status")}
+          onChange={async (e) => {
+            const newStatus = e.target.value;
 
-        {!isDisabled && (
+            // تجاهل لو نفس القيمة أو مفيش داتا
+            if (!salesQuotationData || newStatus === salesQuotationData.status)
+              return;
+
+            form.setValue("status", newStatus);
+
+            if (newStatus === "accepted") {
+              setIsDisabled(true);
+            }
+
+            try {
+              const res = await updateSalesQuotation({
+                id: quotationId,
+                status: newStatus,
+              }).unwrap();
+              console.log("Updated successfully ✅", res);
+              setMessage("✅ Status updated successfully");
+            } catch (err) {
+              console.error("Failed to update ❌", err);
+              setMessage("❌ Failed to update status");
+            }
+
+            setTimeout(() => setMessage(""), 3000);
+          }}
+          disabled={isDisabled}
+          className="w-48 px-2 py-1 border rounded-md text-sm shadow-sm"
+        >
+          <option value="" disabled>
+            {salesQuotationData?.status
+              ? `Current: ${salesQuotationData.status}`
+              : "Select status"}
+          </option>
+          {statusOptions.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+
+        {/* {!isDisabled && (
           <CustomButton
-            className="w-[50%] text-sm p-0"
+            className="px-3 py-1 text-xs rounded-md text-white shadow-md transition-all duration-200"
             text="Save"
             type="submit"
           />
-        )}
+        )} */}
 
         {message && (
-          <p className="text-green-600 font-semibold text-sm mt-2">{message}</p>
+          <div
+            className={`mt-2 px-3 py-2 rounded-md text-sm font-medium shadow-sm transition-all duration-300 ${
+              message.includes("success")
+                ? "bg-green-100 text-green-700 border border-green-300"
+                : "bg-red-100 text-red-700 border border-red-300"
+            }`}
+          >
+            {message}
+          </div>
         )}
       </form>
     </FormProvider>
