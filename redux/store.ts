@@ -16,6 +16,7 @@ import { resendOTPApi } from "./services/auth/resendOTP";
 import { verifyOTPApi } from "./services/auth/verifyOTP";
 import { resetPasswordPApi } from "./services/auth/resetPassword";
 import { branchApi } from "./services/dashboard/inventory/branchesApi";
+import { branchTransactionsApi } from "./services/dashboard/inventory/branchTransactionsApi";
 import { movementApi } from "./services/dashboard/inventory/movementApi";
 import { preorderApi } from "./services/dashboard/inventory/preorderApi";
 import { refreshTokenApi } from "./services/auth/refreshTokenApi";
@@ -89,6 +90,7 @@ export const store = configureStore({
     [verifyOTPApi.reducerPath]: verifyOTPApi.reducer,
     [resetPasswordPApi.reducerPath]: resetPasswordPApi.reducer,
     [branchApi.reducerPath]: branchApi.reducer,
+    [branchTransactionsApi.reducerPath]: branchTransactionsApi.reducer,
     [movementApi.reducerPath]: movementApi.reducer,
     [preorderApi.reducerPath]: preorderApi.reducer,
     [refreshTokenApi.reducerPath]: refreshTokenApi.reducer,
@@ -154,6 +156,7 @@ export const store = configureStore({
       .concat(verifyOTPApi.middleware)
       .concat(resetPasswordPApi.middleware)
       .concat(branchApi.middleware)
+      .concat(branchTransactionsApi.middleware)
       .concat(movementApi.middleware)
       .concat(preorderApi.middleware)
       .concat(refreshTokenApi.middleware)
