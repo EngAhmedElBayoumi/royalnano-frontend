@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import CustomTabs from "@/components/dashboard/CustomTabs";
 import Branches from "@/components/dashboard/branches/Branches";
+import BranchTransactions from "@/components/dashboard/branches/BranchTransactions";
 
 function InventoryPage() {
   const t = useTranslations("branches.tabs");
@@ -41,7 +42,7 @@ function InventoryPage() {
           height="24"
         />
       ),
-      content: "",
+      content: <BranchTransactions />,
     },
   ];
 
