@@ -89,7 +89,7 @@ export default function FollowupsTab({ customerId }: FollowupsTabProps) {
             <Column
               field="follow_up_type"
               header={t("type")}
-              body={(rowData) => t(rowData.follow_up_type.name)}
+              body={(rowData) => rowData.follow_up_type.name}
             />
             <Column
               field="comment"
