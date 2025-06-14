@@ -117,6 +117,7 @@ const DateTimePicker = <T extends FieldValues>({
                         .reverse()
                         .map((hour) => (
                           <Button
+                            type="button"
                             key={hour}
                             size="icon"
                             variant={
@@ -141,6 +142,7 @@ const DateTimePicker = <T extends FieldValues>({
                       {Array.from({ length: 12 }, (_, i) => i * 5).map(
                         (minute) => (
                           <Button
+                            type="button"
                             key={minute}
                             size="icon"
                             variant={
@@ -168,6 +170,7 @@ const DateTimePicker = <T extends FieldValues>({
                     <div className="flex sm:flex-col p-2">
                       {["AM", "PM"].map((ampm) => (
                         <Button
+                          type="button"
                           key={ampm}
                           size="icon"
                           variant={
