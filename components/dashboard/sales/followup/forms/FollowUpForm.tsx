@@ -92,7 +92,7 @@ const FollowUpForm = ({
         </section>
         <section className="flex justify-end gap-2 mt-5 flex-col-reverse xs:flex-row">
           <Link
-            href="/dashboard/sales?tab=followup&subtab=follow-up-type"
+            href="/dashboard/sales?tab=followup&subtab=follow-up-list"
             passHref
           >
             <CustomButton
