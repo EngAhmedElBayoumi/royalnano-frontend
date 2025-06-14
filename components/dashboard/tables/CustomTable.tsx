@@ -109,7 +109,7 @@ const CustomTable = ({
       />
 
       {data.length ? (
-        <div className="mb-5 bg-dashboardBg p-4 rounded-[20px]">
+        <div className="mb-5 bg-dashboardBg py-4 rounded-[20px]">
           <DataTable
             ref={dataTableRef}
             value={tableData}

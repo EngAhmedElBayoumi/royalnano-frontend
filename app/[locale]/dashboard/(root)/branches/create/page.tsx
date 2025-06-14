@@ -5,7 +5,7 @@ import { useCreateBranchMutation } from "@/redux/services/dashboard/inventory/br
 import CreatePage from "@/components/dashboard/CreatePage";
 import BranchForm, {
   BranchFormValues,
-} from "@/components/dashboard/forms/BranchForm";
+} from "@/components/dashboard/forms/branches/BranchForm";
 
 export default function CreateBranch() {
   const t = useTranslations("branches.branches_data");
