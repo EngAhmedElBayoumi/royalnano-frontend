@@ -19,6 +19,7 @@ interface FileInputProps<T extends FieldValues> {
   label?: string;
   className?: string;
   accepted?: string;
+  shouldReset?: boolean;
 }
 
 const FileInput = <T extends FieldValues>({
@@ -27,6 +28,7 @@ const FileInput = <T extends FieldValues>({
   label,
   className,
   accepted,
+  shouldReset,
 }: FileInputProps<T>) => {
   const [file, setFile] = React.useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = React.useState<string | null>(null);
@@ -39,6 +41,16 @@ const FileInput = <T extends FieldValues>({
       setPreviewUrl(initialFile);
     }
   }, [control, name]);
+  const inputRef = React.useRef<HTMLInputElement | null>(null);
+  useEffect(() => {
+    if (shouldReset) {
+      setFile(null);
+      setPreviewUrl(null);
+      if (inputRef.current) {
+        inputRef.current.value = ""; // ✅ تصفير القيمة المعروضة
+      }
+    }
+  }, [shouldReset]);
 
   return (
     <FormField
@@ -51,6 +63,7 @@ const FileInput = <T extends FieldValues>({
           )}
           <FormControl>
             <Input
+              ref={inputRef}
               type="file"
               accept={accepted}
               name={name}

@@ -106,12 +106,21 @@ export const baseQuery = async (
     baseUrl,
     prepareHeaders: (headers, {}) => {
       // Don't set content-type for FormData, browser will set it automatically
+      // if (
+      //   typeof args === "object" &&
+      //   args.body &&
+      //   !(args.body instanceof FormData)
+      // ) {
+      //   headers.set("content-type", "application/json");
+      // }
       if (
         typeof args === "object" &&
         args.body &&
         !(args.body instanceof FormData)
       ) {
-        headers.set("content-type", "application/json");
+        headers.set("Content-Type", "application/json");
+      } else {
+        headers.delete("Content-Type"); // ← ده مهم جدًا!
       }
 
       if (accessToken) {

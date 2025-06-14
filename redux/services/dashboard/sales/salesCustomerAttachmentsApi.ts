@@ -6,11 +6,11 @@ export const attachmentsApi = createApi({
   baseQuery,
   endpoints: (builder) => ({
     createAttachments: builder.mutation({
-      query: ({ id, ...data }) => ({
-        url: `sales/customer/${id}/attachments`,
+      query: ({ id, data }) => ({
+        url: `sales/customer/${id}/attachments/`,
         method: "POST",
         body: data,
-        formData: true,
+        // formData: true,
       }),
     }),
 
