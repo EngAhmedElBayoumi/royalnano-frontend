@@ -50,10 +50,10 @@
       "setLocation": "Set Location",
       "selectBranchLocation": "Select Branch Location",
       "balance": "Balance"
-    }, 
-    "branches_transactions":{
-      "transaction_type":"Transaction Type",
-      "amount":"Amount",
+    },
+    "branches_transactions": {
+      "transaction_type": "Transaction Type",
+      "amount": "Amount",
       "description": "Description",
       "branch": "Branch",
       "reset_image": "Image Reset",
@@ -756,9 +756,14 @@
       "itemDescription": "Item Description"
     },
     "Invoice": {
-      "itemCode": "Item Code",
-      "purchaseInvoiceLevel": "Purchase Invoice Level",
+      "invoiceNumber": "Invoice Number",
+      "status": "Status",
       "description": "Description",
+      "dueDate": "Due Date",
+      "createdAt": "created at",
+      "voucherDate": "Voucher Date",
+      "prefix": "Prefix",
+      "totalAmount": "Total Amount",
       "noDataFound": "No invoice data found.",
       "addInvoice": "Add Invoice",
       "cards": {
