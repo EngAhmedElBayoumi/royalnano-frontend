@@ -139,6 +139,7 @@ export default function SalesQuotation({ customerId }: SalesQuotationProps) {
       ),
     },
     { field: "validity_period", header: "Validity Period" },
+    // { field: "id", header: "iDDD" },
     { field: "total_amount", header: "Total Amount" },
     { field: "items", header: "Items" },
   ];
