@@ -1,6 +1,5 @@
 "use client";
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
@@ -49,7 +48,7 @@ export const UpdateQuotationStatusForm = ({
         setIsDisabled(true);
       }
     }
-  }, [salesQuotationData]);
+  }, [form, salesQuotationData]);
 
   // Submit handler
   const onSubmit = async (values: any) => {

@@ -52,6 +52,7 @@ export default function PurchaseInvoice() {
   ];
 
   const formattedData =
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     inventoryItems?.results?.map((invoice: any) => ({
       id: invoice.id,
       invoiceNumber: invoice.invoice_number || "-",

@@ -1,15 +1,15 @@
 "use client";
 import { useForm } from "react-hook-form";
-import { number, z } from "zod";
+import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
 import { Form } from "@/components/ui/form";
 import { useCreateAttachmentsMutation } from "@/redux/services/dashboard/sales/salesCustomerAttachmentsApi";
 import FileInput from "@/components/formFields/FileInput";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import CustomModal from "@/components/modals/CustomModal";
-import { set } from "date-fns";
+// import { set } from "date-fns";
 // import { useCreateAttachmentMutation } from "@/redux/services/dashboard/attachmentsApi"; // غيّري الباث لو محتاج
 
 const attachmentSchema = z.object({
@@ -23,8 +23,8 @@ type AttachmentFormValues = z.infer<typeof attachmentSchema>;
 
 const UploadAttachmentForm = ({ customerId }: { customerId: number }) => {
   const [createAttachment, { isLoading }] = useCreateAttachmentsMutation();
-  const [isOpen, setIsOpen] = useState(false);
-  const fileInputRef = useRef<HTMLInputElement | null>(null);
+  // const [isOpen, setIsOpen] = useState(false);
+  // const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [shouldResetFileInput, setShouldResetFileInput] = useState(false);
 
   const form = useForm<AttachmentFormValues>({
@@ -48,7 +48,7 @@ const UploadAttachmentForm = ({ customerId }: { customerId: number }) => {
       const formData = new FormData();
       formData.append("description", data.description);
       formData.append("file", data.file);
-      for (let pair of formData.entries()) {
+      for (const pair of formData.entries()) {
         console.log(`${pair[0]}:`, pair[1]);
       }
       console.log("formdata", formData instanceof FormData);

@@ -69,7 +69,7 @@ const SalesCustomerForm = ({
     if (form.watch("source") !== "recommendation") {
       form.setValue("recommended_by", null); // أو undefined
     }
-  }, [form.watch("source")]);
+  }, [form]);
 
   const branchesOptions =
     branchesData?.results?.map((branch: listItems) => ({
