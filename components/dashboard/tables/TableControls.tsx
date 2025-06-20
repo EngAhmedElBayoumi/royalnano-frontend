@@ -140,11 +140,12 @@ const TableControls = ({
         )}
         {onReassignClick && reassignButtonText && (
           <Button
-            className="bg-orange-500 text-white capitalize"
+            className="bg-primary text-white capitalize"
             onClick={onReassignClick}
             disabled={!selectedRowsCount || selectedRowsCount === 0}
           >
-            {reassignButtonText} {selectedRowsCount ? `(${selectedRowsCount})` : ''}
+            {reassignButtonText}{" "}
+            {selectedRowsCount ? `(${selectedRowsCount})` : ""}
           </Button>
         )}
       </div>
