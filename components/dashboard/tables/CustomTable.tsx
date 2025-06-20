@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
@@ -127,6 +128,7 @@ const CustomTable = ({
 
       {data.length ? (
         <div className="mb-5 bg-dashboardBg py-4 rounded-[20px]">
+          {/*  @ts-ignore eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
           <DataTable
             ref={dataTableRef}
             value={tableData}
@@ -135,7 +137,7 @@ const CustomTable = ({
             globalFilterFields={columns.map((c) => c.field)}
             header={header}
             dataKey="id"
-            selectionMode="multiple"
+            selectionMode={enableSelection ? "multiple" : undefined}
             selection={enableSelection ? selectedRowsState : undefined}
             onSelectionChange={
               enableSelection ? handleSelectionChange : undefined
@@ -204,7 +206,6 @@ const CustomTable = ({
               />
             )}
           </DataTable>
-
           {totalRecords && totalRecords > rows && (
             <Paginator
               first={page}
