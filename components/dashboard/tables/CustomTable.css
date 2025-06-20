@@ -40,8 +40,8 @@
 }
 .p-checkbox-box,
 .p-checkbox-box svg {
-  color: white;
-  background-color: var(--primary) !important;
+  background-color: white;
+  color: var(--primary) !important;
 }
 
 .p-paginator-prev,
@@ -92,8 +92,6 @@ html[dir="rtl"] .p-paginator-next {
 .p-datatable .p-datatable-tbody > tr {
   border-bottom: 4px solid #ffffff;
 }
-
-
 
 .p-datatable .p-datatable-thead > tr > th {
   border-bottom: 4px solid #ffffff;

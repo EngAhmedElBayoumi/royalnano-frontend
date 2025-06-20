@@ -60,11 +60,10 @@ const CustomTable = ({
   const handleSelectionChange = (e: { value: DataInTable[] }) => {
     setSelectedRowsState(e.value);
     if (onSelectionChange) {
-      const selectedIds = e.value.map(row => row.id);
+      const selectedIds = e.value.map((row) => row.id);
       onSelectionChange(selectedIds);
     }
   };
-
 
   useEffect(() => {
     setTableData(data);
@@ -136,8 +135,11 @@ const CustomTable = ({
             globalFilterFields={columns.map((c) => c.field)}
             header={header}
             dataKey="id"
+            selectionMode="multiple"
             selection={enableSelection ? selectedRowsState : undefined}
-            onSelectionChange={enableSelection ? handleSelectionChange : undefined}
+            onSelectionChange={
+              enableSelection ? handleSelectionChange : undefined
+            }
             emptyMessage={
               <EmptyMessage onClick={ButtonEvent} emptyMessage={emptyMessage} />
             }
@@ -152,9 +154,9 @@ const CustomTable = ({
             {enableSelection && (
               <Column
                 selectionMode="multiple"
-                headerStyle={{ 
+                headerStyle={{
                   backgroundColor: "#C8AE50",
-                  width: "3rem"
+                  width: "3rem",
                 }}
                 className="text-center py-[13px] px-[10px] border-r border-white border-[2px]"
                 headerClassName="text-center text-white text-[16px] font-[500] py-[13px] px-[10px] border-r border-white border-[2px]"
