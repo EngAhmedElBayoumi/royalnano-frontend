@@ -17,6 +17,10 @@ interface TableControlsProps {
   t: (key: string) => string;
   tableData: Record<string, any>[];
   dataTableRef: React.RefObject<DataTable<any>>;
+  // New props for reassign functionality
+  onReassignClick?: () => void;
+  reassignButtonText?: string;
+  selectedRowsCount?: number;
 }
 
 const TableControls = ({
@@ -30,6 +34,9 @@ const TableControls = ({
   t,
   tableData,
   dataTableRef,
+  onReassignClick,
+  reassignButtonText,
+  selectedRowsCount,
 }: TableControlsProps) => {
   const exportColumns = columns.map((col) => ({
     title: col.header,
@@ -129,6 +136,15 @@ const TableControls = ({
             onClick={ButtonEvent}
           >
             {buttonText}
+          </Button>
+        )}
+        {onReassignClick && reassignButtonText && (
+          <Button
+            className="bg-orange-500 text-white capitalize"
+            onClick={onReassignClick}
+            disabled={!selectedRowsCount || selectedRowsCount === 0}
+          >
+            {reassignButtonText} {selectedRowsCount ? `(${selectedRowsCount})` : ''}
           </Button>
         )}
       </div>

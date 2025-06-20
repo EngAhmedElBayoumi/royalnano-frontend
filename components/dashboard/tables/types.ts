@@ -34,5 +34,11 @@ export interface CustomTableProps {
   onPageChange?: (page: number) => void;
   totalRecords?: number;
   isClientRequest?: boolean;
-  onSetInitialPrice?: (requestId: number) => void; // Add this prop
+  onSetInitialPrice?: (requestId: number) => void;
+  // New props for selection
+  enableSelection?: boolean;
+  selectedRows?: number[];
+  onSelectionChange?: (selectedIds: number[]) => void;
+  onReassignClick?: () => void;
+  reassignButtonText?: string;
 }
