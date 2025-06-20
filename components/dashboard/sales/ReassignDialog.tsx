@@ -103,8 +103,8 @@ const ReassignDialog: React.FC<ReassignDialogProps> = ({
                 <SelectContent>
                   {(employeesData?.results as Employee[])?.map((employee) => (
                     <SelectItem key={employee.id} value={employee.id.toString()}>
-                      <div className="flex flex-col items-start">
-                        <span className="font-medium">{employee.name}</span>
+                      <div className="flex  items-start">
+                        <span className="font-medium">{employee.name}</span> - 
                         <span className="text-sm text-gray-500">
                           {employee.job_title?.name || "غير محدد"}
                         </span>
