@@ -5,7 +5,7 @@ import { handleApiError } from "@/lib/utils/handleApiError";
 import {
   useGetReviewByIdQuery,
   useUpdateReviewMutation,
-} from "@/redux/services/customerReviewApi";
+} from "@/redux/services/website/customerReviewApi";
 import CustomerReviewForm, {
   CustomerReviewFormValues,
 } from "@/components/dashboard/forms/website/CustomerReviewForm";
@@ -14,7 +14,7 @@ import EditPage from "@/components/dashboard/EditPage";
 export default function EditCustomerReview() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
-  const t = useTranslations("dashboardWebsite.CustomerReviews");
+  const t = useTranslations("dashboard_website.CustomerReviews");
   const { data, isLoading, error } = useGetReviewByIdQuery(id);
   const [updateReview, { isLoading: submitting }] = useUpdateReviewMutation();
 

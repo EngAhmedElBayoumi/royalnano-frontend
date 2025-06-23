@@ -5,7 +5,7 @@ import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { OTPValidation } from "@/lib/validations/OTPValidation";
 // import { useVerifyOTPMutation } from "@/redux/services/verifyOTP";
-import { useResendOTPMutation } from "@/redux/services/resendOTP";
+import { useResendOTPMutation } from "@/redux/services/auth/resendOTP";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { useState } from "react";
 import { useTranslations } from "next-intl";

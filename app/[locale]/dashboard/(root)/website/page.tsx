@@ -12,9 +12,10 @@ import Gallery from "@/components/dashboard/website/gallery";
 import ContactUs from "@/components/dashboard/website/contactUs";
 import CustomerReviews from "@/components/dashboard/website/customerReviews";
 import Blogs from "@/components/dashboard/website/Blogs";
+import Social from "@/components/dashboard/website/social";
 
 function WebsitePage() {
-  const t = useTranslations("dashboardWebsite.tabs");
+  const t = useTranslations("dashboard_website.tabs");
 
   const permissions = useSelector(
     (state: RootState) => state.profile.permissions
@@ -114,6 +115,20 @@ function WebsitePage() {
         />
       ),
       content: <Blogs />,
+    },
+    {
+      id: "social",
+      label: t("social"),
+      permissionKey: "socialcode",
+      icon: (
+        <Image
+          src="/assets/icons/dashboard/website/social.svg"
+          alt="icon"
+          width="24"
+          height="24"
+        />
+      ),
+      content: <Social />,
     },
   ];
 

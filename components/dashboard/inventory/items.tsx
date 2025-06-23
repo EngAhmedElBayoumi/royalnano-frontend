@@ -14,6 +14,12 @@ export default function Items() {
       permissionKey: "inventoryitem",
       useQueryHook: useGetItemsQuery,
     });
+  const transformedData = data?.results?.map(
+    (item: { unit: { name: string } }) => ({
+      ...item,
+      unit: item?.unit?.name,
+    })
+  );
 
   const columns = [
     { field: "item_code", header: t("itemCode") },
@@ -43,7 +49,7 @@ export default function Items() {
       error={error}
       emptyMessage={t("noItemsDataFound") || "No items data found"}
       editRoute="/dashboard/inventory/items/edit/"
-      data={data}
+      data={{ results: transformedData, count: data?.count || 0 }}
       columns={columns}
       cardData={cardsData}
       buttonText={t("addItem")}

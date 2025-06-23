@@ -20,14 +20,16 @@ import { useEffect } from "react";
 interface EditSalesQuotationFormProps {
   defaultValues?: SalesQuotationFormValues;
   quotationId: number;
+  onSubmit?: (data: SalesQuotationFormValues) => void;
+  isView?: boolean;
 }
 
 export interface SalesQuotationFormValues {
   date: string;
   customer: number;
   validity_period: string;
-  quotation_number: string;
-  status: string;
+  quotation_number?: string;
+  status?: string;
   items: {
     item_name: string;
     quantity: number;
@@ -42,6 +44,7 @@ export interface SalesQuotationFormValues {
 const EditSalesQuotationForm = ({
   defaultValues,
   quotationId,
+  isView,
 }: EditSalesQuotationFormProps) => {
   const router = useRouter();
   const t = useTranslations("Sales");
@@ -180,6 +183,7 @@ const EditSalesQuotationForm = ({
               name="date"
               label={t("SalesQuotation.date")}
               placeholder={t("SalesQuotation.date")}
+              readonly={isView}
             />
             <CustomSelect
               valueType="number"
@@ -192,18 +196,21 @@ const EditSalesQuotationForm = ({
                 const customerId = parseInt(String(value), 10);
                 form.setValue("customer", customerId);
               }}
+              readonly={isView}
             />
             <DatePicker
               control={form.control}
               name="validity_period"
               label={t("SalesQuotation.validityPeriod")}
               placeholder={t("SalesQuotation.validityPeriod")}
+              readonly={isView}
             />
             <TextInput
               control={form.control}
               name="quotation_number"
               label={t("SalesQuotation.quotationNumber")}
               placeholder={t("SalesQuotation.quotationNumber")}
+              readonly={isView}
             />
             <CustomSelect
               control={form.control}
@@ -216,6 +223,7 @@ const EditSalesQuotationForm = ({
                 { value: "draft", label: "Draft" },
                 { value: "rejected", label: "Rejected" },
               ]}
+              readonly={isView}
             />
           </div>
 
@@ -230,6 +238,7 @@ const EditSalesQuotationForm = ({
                   name={`items.${index}.item_name`}
                   label={t("SalesQuotation.itemName")}
                   placeholder={t("SalesQuotation.itemName")}
+                  readonly={isView}
                 />
 
                 <TextInput
@@ -238,6 +247,7 @@ const EditSalesQuotationForm = ({
                   label={t("SalesQuotation.quantity")}
                   placeholder={t("SalesQuotation.quantity")}
                   type="number"
+                  readonly={isView}
                 />
 
                 <TextInput
@@ -245,6 +255,7 @@ const EditSalesQuotationForm = ({
                   name={`items.${index}.unit_price`}
                   label={t("SalesQuotation.unitPrice")}
                   placeholder={t("SalesQuotation.unitPrice")}
+                  readonly={isView}
                 />
 
                 <TextInput
@@ -252,6 +263,7 @@ const EditSalesQuotationForm = ({
                   name={`items.${index}.discount`}
                   label={t("SalesQuotation.discount")}
                   placeholder={t("SalesQuotation.discount")}
+                  readonly={isView}
                 />
 
                 <TextInput
@@ -259,6 +271,7 @@ const EditSalesQuotationForm = ({
                   name={`items.${index}.discount_percent`}
                   label={t("SalesQuotation.discountPercent")}
                   placeholder={t("SalesQuotation.discountPercent")}
+                  readonly={isView}
                 />
 
                 <TextInput
@@ -266,6 +279,7 @@ const EditSalesQuotationForm = ({
                   name={`items.${index}.tax_rate`}
                   label={t("SalesQuotation.taxRate")}
                   placeholder={t("SalesQuotation.taxRate")}
+                  readonly={isView}
                 />
 
                 {fields.length > 1 && (
@@ -273,6 +287,7 @@ const EditSalesQuotationForm = ({
                     type="button"
                     onClick={() => remove(index)}
                     className="text-red-500 mt-2"
+                    disabled={isView}
                   >
                     Remove Item
                   </button>
@@ -284,6 +299,7 @@ const EditSalesQuotationForm = ({
               type="button"
               onClick={handleAddItem}
               className="bg-primary text-white p-2 rounded-lg mt-4"
+              disabled={isView}
             >
               Add Item
             </button>
@@ -294,7 +310,7 @@ const EditSalesQuotationForm = ({
           <Link href="/dashboard/sales?tab=sales-quotation" passHref>
             <CustomButton text={t("cancel")} variant="secondary" />
           </Link>
-          <CustomButton text={t("save")} type="submit" />
+          <CustomButton text={t("save")} type="submit" isDisabled={isView} />
         </div>
       </form>
     </Form>

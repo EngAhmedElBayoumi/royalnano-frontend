@@ -9,12 +9,12 @@ import {
 import EditPage from "@/components/dashboard/EditPage";
 import BranchForm, {
   BranchFormValues,
-} from "@/components/dashboard/forms/BranchForm";
+} from "@/components/dashboard/forms/branches/BranchForm";
 
 export default function EditBranch() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
-  const t = useTranslations("branches");
+  const t = useTranslations("branches.branches_data");
   const { data, isLoading, error } = useGetBranchByIdQuery(id);
   const [updateBranch, { isLoading: submitting }] = useUpdateBranchMutation();
 

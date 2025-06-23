@@ -39,7 +39,7 @@ const CustomerReviewForm = ({
     },
   });
   const globalTranslate = useTranslations();
-  const t = useTranslations("dashboardWebsite.CustomerReviews");
+  const t = useTranslations("dashboard_website.CustomerReviews");
 
   return (
     <Form {...form}>

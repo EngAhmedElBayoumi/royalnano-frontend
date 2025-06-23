@@ -23,7 +23,7 @@ export const followUpApi = createApi({
       query: (id) => `sales/follow-ups/${id}/`,
     }),
     updateFollowUp: builder.mutation({
-      query: ({ id, ...data }) => ({
+      query: ({ id, data }) => ({
         url: `sales/follow-ups/${id}/`,
         method: "PATCH",
         body: data,

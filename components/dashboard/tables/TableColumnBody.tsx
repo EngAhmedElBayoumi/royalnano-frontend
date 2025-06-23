@@ -54,7 +54,7 @@ export const renderColumnBody = ({
     );
   }
 
-  if (col.field === "image" && fieldValue) {
+  if (col.field.includes("image") && fieldValue) {
     return (
       <img
         src={fieldValue}

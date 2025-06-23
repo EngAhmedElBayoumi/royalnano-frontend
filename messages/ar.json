@@ -27,24 +27,42 @@
     "finance": "المالية"
   },
   "branches": {
-    "branches": "الفروع",
-    "addBranch": "إضافة فرع",
-    "editBranch": "تعديل فرع",
-    "noBranchesDataFound": "لا توجد بيانات للفروع",
-    "name": "الاسم",
-    "phoneNumber": "رقم الهاتف",
-    "branchCode": "رمز الفرع",
-    "location": "الموقع",
-    "manager": "المدير",
-    "address": "العنوان",
-    "description": "الوصف",
-    "email": "البريد الإلكتروني",
-    "save": "حفظ",
-    "saving": "يتم الحفظ...",
-    "cancel": "إلغاء",
-    "setLocation": "تعيين الموقع",
-    "selectBranchLocation": "اختر موقع الفرع",
-    "balance":"الميزانية"
+    "tabs": {
+      "branches": "الفروع",
+      "branches_transactions": "العمليات على الفروع"
+    },
+    "branches_data": {
+      "branches": "الفروع",
+      "addBranch": "إضافة فرع",
+      "editBranch": "تعديل فرع",
+      "noBranchesDataFound": "لا توجد بيانات للفروع",
+      "name": "الاسم",
+      "phoneNumber": "رقم الهاتف",
+      "branchCode": "رمز الفرع",
+      "location": "الموقع",
+      "manager": "المدير",
+      "address": "العنوان",
+      "description": "الوصف",
+      "email": "البريد الإلكتروني",
+      "save": "حفظ",
+      "saving": "يتم الحفظ...",
+      "cancel": "إلغاء",
+      "setLocation": "تعيين الموقع",
+      "selectBranchLocation": "اختر موقع الفرع",
+      "balance": "الميزانية"
+    },
+     "branches_transactions":{
+      "transaction_type":"نوع العملية",
+      "amount":"المبلغ",
+      "description": "الوصف",
+      "branch": "الفرع",
+      "reset_image": "إعادة تعيين الصورة",
+      "add_branch_transaction": "إضافة عملية فرعية",
+      "edit_branch_transaction": "تعديل عملية فرعية",
+      "no_branches_transaction_data_found": "لا توجد بيانات للعمليات الفرعية",
+      "deposit": "إيداع",
+      "withdraw": "سحب"
+    }
   },
   "Inventory": {
     "units": "الوحدات",
@@ -92,7 +110,8 @@
       "item": "العنصر",
       "quantity": "الكمية",
       "date": "التاريخ",
-      "movementType": "نوع الحركة",
+      "from_branch": "من الفرع",
+      "to_branch": "إلى الفرع",
       "description": "الوصف",
       "noMovementsDataFound": "لا توجد بيانات حركة",
       "addMovement": "إضافة حركة",
@@ -264,6 +283,7 @@
     "order": "أمر المبيعات",
     "salesInvoice": "فاتورة المبيعات",
     "receipt": "إيصال المبيعات",
+    "followup": "المتابعة",
     "SalesQuotation": {
       "status": "الحالة",
 
@@ -372,13 +392,14 @@
       "branch_address": "عنوان الفرع"
     }
   },
-  "dashboardWebsite": {
+  "dashboard_website": {
     "tabs": {
       "services": "الخدمات",
       "contact": "التواصل",
       "gallery": "معرض الصور",
       "customerReviews": "تقييمات العملاء",
-      "blogs": "المدونات"
+      "blogs": "المدونات",
+      "social": "وسائل التواصل الاجتماعي"
     },
     "Services": {
       "services": "الخدمات",
@@ -388,13 +409,15 @@
       "name": "الاسم",
       "alias": "الاسم المستعار",
       "description": "الوصف",
-      "image": "الصورة"
+      "image": "الصورة",
+      "is_active": "نشر على الموقع"
     },
     "contacts": {
       "full_name": "الاسم بالكامل",
       "email": "البريد الإلكتروني",
       "phone_number": "رقم الهاتف",
       "message": "الرسالة",
+      "source": "المصدر",
       "noContactDataFound": "لا توجد بيانات للتواصل"
     },
     "gallery": {
@@ -423,6 +446,13 @@
       "addCustomerReview": "إضافة تقييم",
       "editCustomerReview": "تعديل التقييم",
       "noCustomerReviewsFound": "لا توجد بيانات للتقييمات"
+    },
+    "social": {
+      "add_social": "إضافة وسيلة تواصل اجتماعي",
+      "edit_social": "تعديل وسيلة تواصل اجتماعي",
+      "no_social_data_found": "لا توجد بيانات لوسائل التواصل الاجتماعي",
+      "code": "الرمز",
+      "description": "الوصف"
     }
   },
   "website": {
@@ -802,10 +832,19 @@
     "date": "التاريخ",
     "actions": "الإجراءات",
     "no_comment": "لا يوجد تعليق",
-    "created_at": "تاريخ الإنشاء",
-    "select_date_time": "اختر التاريخ والوقت"
+    "action_date": "تاريخ التنفيذ",
+    "select_date_time": "اختر التاريخ والوقت",
+    "followUpType": {
+      "followupName": "الاسم",
+      "noFollowUpTypesDataFound": "لا توجد بيانات لأنواع المتابعات  ",
+      "addFollowUpType": "إضافة نوع متابعة",
+      "editFollowUpType": "تعديل نوع متابعة"
+    }
   },
-  "finance":{
+  "finance": {
+    "finance": "المالية",
+    "parent": "الرئيسي",
+    "addFinance": "إضافة حساب",
     "tabs": {
       "finance": "المالية",
       "payment-voucher": "إيصالات الدفع",
@@ -844,11 +883,8 @@
       "addReceiptVoucher": "إضافة إيصال استلام"
     },
     
-    "finance":"المالية",
-    "parent":"الرئيسي",
-    "addFinance":"إضافة حساب"
+   
 
-  },
   "auth": {
     "authTemplate": {
       "Welcome To": "مرحبًا بك في",
@@ -871,10 +907,12 @@
     "login": {
       "title": "تسجيل الدخول",
       "email": "البريد الإلكتروني",
-      "emailPlaceholder": "أدخل بريدك الإلكتروني",
       "password": "كلمة المرور",
-      "passwordPlaceholder": "أدخل كلمة المرور",
-      "forgetPassword": "نسيت كلمة المرور؟",
+      "placeholder": {
+        "email": "أدخل بريدك الإلكتروني",
+        "password": "أدخل كلمة المرور"
+      },
+      "forgotPassword": "نسيت كلمة المرور؟",
       "login": "تسجيل الدخول",
       "submitting": "جارٍ الإرسال...",
       "noAccount": "ليس لديك حساب؟",

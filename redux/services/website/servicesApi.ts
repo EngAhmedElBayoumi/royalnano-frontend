@@ -11,6 +11,12 @@ export const servicesAPi = createApi({
         params: { search, ordering, page, page_size },
       }),
     }),
+    getActiveServices: builder.query({
+      query: ({ search, ordering, page, page_size }) => ({
+        url: "website/services/active",
+        params: { search, ordering, page, page_size },
+      }),
+    }),
     getServiceById: builder.query({
       query: (id) => `website/services/${id}/`,
     }),
@@ -35,6 +41,7 @@ export const servicesAPi = createApi({
 
 export const {
   useGetServicesQuery,
+  useGetActiveServicesQuery,
   useGetServiceByIdQuery,
   useCreateServiceMutation,
   useUpdateServiceMutation,

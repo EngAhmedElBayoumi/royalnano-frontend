@@ -2,7 +2,7 @@ import { fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RootState } from "@/redux/store";
 import { logout, setCredentials } from "@/redux/slices/authSlice";
 import { setProfile } from "@/redux/slices/profileSlice";
-import { refreshTokenApi } from "./refreshTokenApi";
+import { refreshTokenApi } from "./auth/refreshTokenApi";
 import config from "@/lib/config";
 import { checkToken } from "@/lib/utils/checkToken";
 
@@ -106,12 +106,21 @@ export const baseQuery = async (
     baseUrl,
     prepareHeaders: (headers, {}) => {
       // Don't set content-type for FormData, browser will set it automatically
+      // if (
+      //   typeof args === "object" &&
+      //   args.body &&
+      //   !(args.body instanceof FormData)
+      // ) {
+      //   headers.set("content-type", "application/json");
+      // }
       if (
         typeof args === "object" &&
         args.body &&
         !(args.body instanceof FormData)
       ) {
-        headers.set("content-type", "application/json");
+        headers.set("Content-Type", "application/json");
+      } else {
+        headers.delete("Content-Type"); // ← ده مهم جدًا!
       }
 
       if (accessToken) {

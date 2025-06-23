@@ -1,6 +1,6 @@
 export type FollowUp = {
   id: number;
-  follow_up_type: "reserve" | "cancel" | "comment" | "follow_up";
+  follow_up_type: { id: number };
   comment: string | null;
   action_date: string;
 };

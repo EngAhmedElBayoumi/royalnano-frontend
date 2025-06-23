@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { Form } from "@/components/ui/form";
 import { registerValidation } from "@/lib/validations/register";
 import { Link } from "@/i18n/routing";
-import { useRegisterMutation } from "@/redux/services/registerApi";
+import { useRegisterMutation } from "@/redux/services/auth/registerApi";
 import TextInput from "@/components/formFields/TextInput";
 import PhoneInputField from "@/components/formFields/PhoneInputField";
 import PasswordInput from "@/components/formFields/PasswordInput";

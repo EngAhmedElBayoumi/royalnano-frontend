@@ -1,4 +1,5 @@
 "use client";
+import { useEffect, useState } from "react";
 import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
@@ -8,12 +9,12 @@ import { useGetBranchesQuery } from "@/redux/services/dashboard/inventory/branch
 import { useGetDepartmentsQuery } from "@/redux/services/dashboard/hr/departmentApi";
 import { useGetJobsQuery } from "@/redux/services/dashboard/hr/jobsApi";
 import { Form } from "@/components/ui/form";
+import { listItems } from "@/lib/utils/types";
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
 import PhoneInputField from "@/components/formFields/PhoneInputField";
 import CustomSelect from "@/components/formFields/CustomSelect";
 import SwitchField from "@/components/formFields/Switch";
-import { useEffect, useState } from "react";
 import MultiSelect from "@/components/formFields/MultiSelect";
 
 interface EmployeeFormProps {
@@ -64,19 +65,19 @@ const EmployeeForm = ({
   const { data: jobs } = useGetJobsQuery({});
 
   const branchesOptions =
-    branches?.results?.map((branch: { id: number; name: string }) => ({
+    branches?.results?.map((branch: listItems) => ({
       value: String(branch.id),
       label: branch.name,
     })) || [];
 
   const departmentsOptions =
-    departments?.results?.map((department: { id: number; name: string }) => ({
+    departments?.results?.map((department: listItems) => ({
       value: String(department.id),
       label: department.name,
     })) || [];
 
   const jobsOptions =
-    jobs?.results?.map((job: { id: number; name: string }) => ({
+    jobs?.results?.map((job: listItems) => ({
       value: String(job.id),
       label: job.name,
     })) || [];

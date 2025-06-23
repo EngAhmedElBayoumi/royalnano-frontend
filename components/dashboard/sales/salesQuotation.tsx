@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import CustomTable from "@/components/dashboard/tables/CustomTable";
 import TableSkelton from "../skelton/TableSkelton";
@@ -9,9 +10,10 @@ import {
   useGetCustomerQuotationsQuery,
 } from "@/redux/services/dashboard/sales/salesQuotationsApi";
 import { useState } from "react";
+import { UpdateQuotationStatusForm } from "../forms/sales/UpdateQuotationStatusForm";
 
 interface SalesQuotationProps {
-  customerId?: number; // Optional prop for customer-specific quotations
+  customerId?: number;
 }
 
 export default function SalesQuotation({ customerId }: SalesQuotationProps) {
@@ -23,7 +25,6 @@ export default function SalesQuotation({ customerId }: SalesQuotationProps) {
 
   const router = useRouter();
 
-  // Call both hooks unconditionally
   const {
     isLoading: isLoadingAll,
     error: errorAll,
@@ -40,14 +41,13 @@ export default function SalesQuotation({ customerId }: SalesQuotationProps) {
     error: errorCustomer,
     data: customerSalesQuotations,
   } = useGetCustomerQuotationsQuery({
-    customer_id: customerId || 0, // Pass 0 if customerId is undefined
+    customer_id: customerId || 0,
     search: "",
     ordering: "id",
     page,
     page_size: 10,
   });
 
-  // Determine which data to use
   const isLoading = customerId ? isLoadingCustomer : isLoadingAll;
   const error = customerId ? errorCustomer : errorAll;
   const salesQuotations = { results: [], count: 0 };
@@ -59,10 +59,18 @@ export default function SalesQuotation({ customerId }: SalesQuotationProps) {
     : allSalesQuotations?.count || 0;
 
   const columns = [
-    { field: "quotation_number", header: "Quotation Number" },
     { field: "customer_name", header: "Customer Name" },
     { field: "date", header: "Date" },
-    { field: "status", header: "Status" },
+    {
+      field: "status",
+      header: "Status",
+      render: (row: any) =>
+        row.id ? (
+          <UpdateQuotationStatusForm key={row.id} quotationId={row.id} />
+        ) : (
+          <span>Loading...</span>
+        ),
+    },
     { field: "validity_period", header: "Validity Period" },
     { field: "total_amount", header: "Total Amount" },
     { field: "items", header: "Items" },
@@ -102,7 +110,7 @@ export default function SalesQuotation({ customerId }: SalesQuotationProps) {
       ) : (
         <CustomTable
           emptyMessage="No sales quotations data found"
-          editRoute={"/dashboard/sales/sales-quotation/edit"}
+          viewRoute={"/dashboard/sales/sales-quotation/view"}
           data={salesQuotations?.results}
           rows={10}
           columns={columns}

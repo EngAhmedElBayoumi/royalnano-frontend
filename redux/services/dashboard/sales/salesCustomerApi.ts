@@ -17,7 +17,7 @@ export const salesCustomerApi = createApi({
         url: "sales/customer/",
         method: "POST",
         body: data,
-        formData: true,
+        // formData: true,
       }),
     }),
     getMiniSalesCustomer: builder.query({
@@ -31,9 +31,16 @@ export const salesCustomerApi = createApi({
       query: (id) => `sales/customer/${id}/`,
     }),
     updateSalesCustomer: builder.mutation({
-      query: ({ id, ...data }) => ({
+      query: ({ id, data }) => ({
         url: `sales/customer/${id}/`,
         method: "PATCH",
+        body: data,
+      }),
+    }),
+    reassignCustomers: builder.mutation({
+      query: (data) => ({
+        url: "sales/customer/reassign/",
+        method: "POST",
         body: data,
       }),
     }),
@@ -46,4 +53,5 @@ export const {
   useGetSalesCustomerByIdQuery,
   useUpdateSalesCustomerMutation,
   useGetMiniSalesCustomerQuery,
+  useReassignCustomersMutation,
 } = salesCustomerApi;

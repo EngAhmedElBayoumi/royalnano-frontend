@@ -12,7 +12,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { changePasswordValidation } from "@/lib/validations/changePasswordValidation";
 import { useState } from "react";
-import { useResetPasswordMutation } from "@/redux/services/resetPassword";
+import { useResetPasswordMutation } from "@/redux/services/auth/resetPassword";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { useTranslations } from "next-intl";
 

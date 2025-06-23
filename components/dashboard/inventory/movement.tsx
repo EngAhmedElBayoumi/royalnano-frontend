@@ -4,6 +4,7 @@ import { useGetMovementsQuery } from "@/redux/services/dashboard/inventory/movem
 import { useTranslations } from "next-intl";
 import TableWrapper from "@/components/dashboard/tables/TableWrapper";
 import { useTableData } from "@/hooks/useTableData";
+import { listItems } from "@/lib/utils/types";
 
 // Define the type for movement
 interface Movement {
@@ -15,7 +16,8 @@ interface Movement {
   };
   movement_date: string;
   quantity: number;
-  movement_type: string;
+  from_branch: listItems;
+  to_branch: listItems;
   description: string;
 }
 
@@ -23,7 +25,13 @@ export default function Movement() {
   const router = useRouter();
   const t = useTranslations("Inventory.InventoryMovement");
 
-  const { data: movementData = { results: [] }, isLoading, error, permissions, handlePageChange } = useTableData({
+  const {
+    data: movementData = { results: [] },
+    isLoading,
+    error,
+    permissions,
+    handlePageChange,
+  } = useTableData({
     permissionKey: "movement",
     useQueryHook: useGetMovementsQuery,
   });
@@ -32,6 +40,8 @@ export default function Movement() {
   const transformedData = movementData.results.map((movement: Movement) => ({
     ...movement,
     item: movement.item.item_name,
+    from_branch: movement.from_branch.name,
+    to_branch: movement.to_branch.name,
   }));
 
   const columns = [
@@ -39,7 +49,8 @@ export default function Movement() {
     { field: "item", header: t("item") },
     { field: "quantity", header: t("quantity") },
     { field: "movement_date", header: t("date") },
-    { field: "movement_type", header: t("movementType") },
+    { field: "from_branch", header: t("from_branch") },
+    { field: "to_branch", header: t("to_branch") },
     { field: "description", header: t("description") },
   ];
 

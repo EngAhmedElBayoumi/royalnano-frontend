@@ -5,19 +5,26 @@ import TableWrapper from "@/components/dashboard/tables/TableWrapper";
 import { useTableData } from "@/hooks/useTableData";
 import { useGetInvoicesQuery } from "@/redux/services/dashboard/purchase/invoiceApi";
 
-export interface Item {
-  item: {
-    id: number;
-    item_code: string;
-    item_name: string;
-  };
-  PurchaseInvoice_level: number;
-  description: string;
-  id: string;
-}
+// export interface Item {
+//   item: {
+//     id: number;
+//     item_code: string;
+//     item_name: string;
+//   };
+//   created_at: string;
+//   PurchaseInvoice_level: number;
+//   description: string;
+//   id: string;
+// }
 
 export default function PurchaseInvoice() {
-  const { data: inventoryItems, isLoading, error, permissions, handlePageChange } = useTableData({
+  const {
+    data: inventoryItems,
+    isLoading,
+    error,
+    permissions,
+    handlePageChange,
+  } = useTableData({
     permissionKey: "invoicedetail",
     useQueryHook: useGetInvoicesQuery,
   });
@@ -26,9 +33,14 @@ export default function PurchaseInvoice() {
   const t = useTranslations("Purchase.Invoice");
 
   const columns = [
-    { field: "itemCode", header: t("itemCode") },
-    { field: "PurchaseInvoiceLevel", header: t("purchaseInvoiceLevel") },
+    { field: "invoiceNumber", header: t("invoiceNumber") },
+    { field: "status", header: t("status") },
     { field: "description", header: t("description") },
+    { field: "dueDate", header: t("dueDate") },
+    { field: "createdAt", header: t("createdAt") },
+    { field: "voucherDate", header: t("voucherDate") },
+    // { field: "prefix", header: t("prefix") },
+    { field: "totalAmount", header: t("totalAmount") },
   ];
 
   const cardsData = [
@@ -40,13 +52,18 @@ export default function PurchaseInvoice() {
   ];
 
   const formattedData =
-    inventoryItems?.results?.map((item: Item) => ({
-      id: item.id,
-      itemCode: item.item.item_code,
-      PurchaseInvoiceLevel: item.PurchaseInvoice_level,
-      description: item.description,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    inventoryItems?.results?.map((invoice: any) => ({
+      id: invoice.id,
+      invoiceNumber: invoice.invoice_number || "-",
+      status: invoice.status || "-",
+      description: invoice.description || "-",
+      dueDate: invoice.due_date || "-",
+      createdAt: invoice.created_at || "-",
+      voucherDate: invoice.voucher_date || "-",
+      prefix: invoice.prefix || "-",
+      totalAmount: invoice.total_amount || "0.00",
     })) || [];
-
   const handleClick = () => {
     router.push("/dashboard/purchase/purchase-invoice/create");
   };

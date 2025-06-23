@@ -25,7 +25,7 @@ const UnitForm = ({ onSubmit, defaultValues, isLoading }: UnitFormProps) => {
     },
   });
 
-  const t = useTranslations();
+  const t = useTranslations("Inventory.InventoryUnit");
   const globalTranslate = useTranslations();
 
   return (
@@ -36,14 +36,17 @@ const UnitForm = ({ onSubmit, defaultValues, isLoading }: UnitFormProps) => {
             <TextInput
               control={form.control}
               name="name"
-              label={t("Inventory.InventoryUnit.unitName")}
-              placeholder={t("Inventory.InventoryUnit.unitName")}
+              label={t("unitName")}
+              placeholder={t("unitName")}
             />
           </div>
         </section>
         <div className="flex justify-end gap-2 mt-5 flex-col-reverse xs:flex-row">
           <Link href="/dashboard/inventory?tab=units" passHref>
-            <CustomButton text={t("cancel")} variant="secondary" />
+            <CustomButton
+              text={globalTranslate("cancel")}
+              variant="secondary"
+            />
           </Link>
           <CustomButton
             text={

@@ -22,8 +22,8 @@ export interface SalesQuotationFormValues {
   date: string;
   customer: number;
   validity_period: string;
-  quotation_number: string;
-  status: string;
+  // quotation_number: string;
+  // status: string;
   items: {
     item_name: string;
     quantity: number;
@@ -56,8 +56,8 @@ const AddSalesQuotationForm = ({
       date: new Date().toISOString().split("T")[0],
       customer: initialCustomerId ?? 1, // Use the customerId from query params
       validity_period: new Date().toISOString().split("T")[0],
-      quotation_number: "",
-      status: "sent",
+      // quotation_number: "",
+      // status: "sent",
       items: [],
     },
   });
@@ -116,7 +116,7 @@ const AddSalesQuotationForm = ({
       router.push(
         initialCustomerId
           ? `/dashboard/sales/sales-customer/view?id=${initialCustomerId}&tab=quotations`
-          : `/dashboard/sales?tab=Sales+Quotation`
+          : `/dashboard/sales?tab=sales-quotation`
       );
     } catch (error) {
       console.error("Error in creation:", error);
@@ -160,13 +160,13 @@ const AddSalesQuotationForm = ({
               label={t("SalesQuotation.validityPeriod")}
               placeholder={t("SalesQuotation.validityPeriod")}
             />
-            <TextInput
+            {/* <TextInput
               control={form.control}
               name="quotation_number"
               label={t("SalesQuotation.quotationNumber")}
               placeholder={t("SalesQuotation.quotationNumber")}
-            />
-            <CustomSelect
+            /> */}
+            {/* <CustomSelect
               control={form.control}
               name="status"
               label={t("SalesQuotation.status")} // ترجمته مثلاً: "Status"
@@ -177,7 +177,7 @@ const AddSalesQuotationForm = ({
                 { value: "draft", label: "Draft" },
                 { value: "rejected", label: "Rejected" },
               ]}
-            />
+            /> */}
           </div>
 
           <div className="mt-6">

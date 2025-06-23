@@ -45,27 +45,28 @@ const TableActions = ({
       </DropdownMenuTrigger>
       <DropdownMenuContent
         className="bg-dashboardBg shadow-md rounded-lg px-4"
-        align="start"
+        align="end"
         sideOffset={5}
       >
         {showView && onView && (
           <DropdownMenuItem
-            className="py-1 cursor-pointer capitalize flex items-center gap-2"
+            className="min-w-20 py-1 cursor-pointer capitalize flex justify-between items-center gap-2"
             onClick={(e) => onView(id, e)}
           >
+            {t("view")}
+
             <Image
-              src="/assets/icons/eye.svg"
+              src="/assets/icons/view.svg"
               alt="view"
               width={18}
               height={18}
               className="saturate-0 hover:saturate-100 transition"
             />
-            {t("view")}
           </DropdownMenuItem>
         )}
         {showEdit && onEdit && (
           <DropdownMenuItem
-            className="py-1 cursor-pointer capitalize flex items-center gap-2"
+            className="min-w-20 py-1 cursor-pointer capitalize flex justify-between items-center gap-2"
             onClick={(e) => onEdit(id, e)}
           >
             {t("edit")}

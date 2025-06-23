@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { Form } from "@/components/ui/form";
 import { loginValidation } from "@/lib/validations/login";
 import { Link } from "@/i18n/routing";
-import { useLoginMutation } from "@/redux/services/loginApi";
+import { useLoginMutation } from "@/redux/services/auth/loginApi";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "@/redux/slices/authSlice";

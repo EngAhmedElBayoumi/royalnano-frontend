@@ -12,6 +12,7 @@ export const serviceSchema = z.object({
     .string()
     .min(1, "Alias is required")
     .max(100, "Alias must be less than 100 characters"),
+  is_active: z.boolean().default(true),
   description: z.string().min(1, "Description is required"),
   image: z
     .custom<File | string | null>()

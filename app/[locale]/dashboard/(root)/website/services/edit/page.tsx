@@ -14,7 +14,7 @@ import EditPage from "@/components/dashboard/EditPage";
 export default function EditService() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
-  const t = useTranslations("dashboardWebsite.Services");
+  const t = useTranslations("dashboard_website.Services");
   const { data, isLoading, error } = useGetServiceByIdQuery(id);
   const [updateService, { isLoading: submitting }] = useUpdateServiceMutation();
 
@@ -25,6 +25,7 @@ export default function EditService() {
     // Append text fields
     formData.append("name", data.name);
     formData.append("alias", data.alias);
+    formData.append("is_active", String(data.is_active));
     formData.append("description", data.description);
 
     // Append image file if it exists

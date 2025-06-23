@@ -14,7 +14,6 @@ export default function CreateMovement() {
   const handleSubmit = async (data: MovementFormValues) => {
     const payload = {
       ...data,
-      item: Number(data.item),
       movement_date: new Date(data.movement_date).toISOString().slice(0, 10),
     };
     const response = await createMovement(payload);

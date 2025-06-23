@@ -63,6 +63,7 @@ function FinancePage() {
     
   ];
 
+
   const filteredTabs = tabs.filter((tab) => {
     return permissions[tab.permissionKey]?.view;
   });
@@ -70,6 +71,11 @@ function FinancePage() {
   return (
     <>
       <CustomTabs tabs={filteredTabs} defaultTab={filteredTabs[0]?.id} />
+
+  if (error) {
+    return <LoadingError />;
+  }
+
     </>
   );
 }

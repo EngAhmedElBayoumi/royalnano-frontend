@@ -11,6 +11,7 @@ import Image from "next/image";
 import MapGL, { Marker } from "react-map-gl/maplibre";
 import { MapLayerMouseEvent } from "react-map-gl/maplibre";
 import "maplibre-gl/dist/maplibre-gl.css";
+import { listItems } from "@/lib/utils/types";
 import { Form } from "@/components/ui/form";
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
@@ -74,13 +75,13 @@ const AttendanceForm = ({
   const { data: branches } = useGetBranchesQuery({});
 
   const employeesOptions =
-    employees?.results?.map((employee: { id: number; name: string }) => ({
+    employees?.results?.map((employee: listItems) => ({
       value: String(employee.id),
       label: employee.name,
     })) || [];
 
   const branchesOptions =
-    branches?.results?.map((branch: { id: number; name: string }) => ({
+    branches?.results?.map((branch: listItems) => ({
       value: String(branch.id),
       label: branch.name,
     })) || [];

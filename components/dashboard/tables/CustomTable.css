@@ -1,6 +1,7 @@
 .p-datatable-wrapper {
   border-radius: 1.5rem;
   overflow: hidden;
+  max-width: 100% !important;
 }
 
 .p-paginator {
@@ -39,8 +40,8 @@
 }
 .p-checkbox-box,
 .p-checkbox-box svg {
-  color: white;
-  background-color: var(--primary) !important;
+  background-color: white;
+  color: var(--primary) !important;
 }
 
 .p-paginator-prev,
@@ -92,11 +93,6 @@ html[dir="rtl"] .p-paginator-next {
   border-bottom: 4px solid #ffffff;
 }
 
-/* 
-.p-datatable {
-    border: 1px solid #ffffff;
-} */
-
 .p-datatable .p-datatable-thead > tr > th {
   border-bottom: 4px solid #ffffff;
 }
@@ -116,4 +112,8 @@ html[dir="rtl"] .p-paginator-next {
 .tablist::-webkit-scrollbar,
 .p-datatable-wrapper::-webkit-scrollbar {
   height: 4px !important;
+}
+.p-datatable-header {
+  background-color: transparent !important;
+  padding: 1rem 0 !important;
 }

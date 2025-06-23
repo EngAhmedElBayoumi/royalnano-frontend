@@ -17,6 +17,7 @@ import CustomTextArea from "@/components/formFields/TextArea";
 import useExtraFields from "@/hooks/useExtraFields";
 import ExtraFields from "@/components/formFields/ExtraFields";
 import Image from "next/image";
+import { useEffect } from "react";
 
 interface SalesCustomerFormProps {
   defaultValues?: Partial<SalesCustomerFormValues>;
@@ -49,15 +50,14 @@ const SalesCustomerForm = ({
       city: "",
       country: "",
       notes: "",
-      branch: undefined,
+      branch: 41,
       customer_type: "individual",
       tax_number: "",
       national_id: "",
       extra_fields: {},
       source: "other",
-      assigned_to: undefined,
-      recommended_by: undefined,
-      attachments: [],
+      assigned_to: 1,
+      recommended_by: 1,
     },
   });
 
@@ -65,6 +65,11 @@ const SalesCustomerForm = ({
     control: form.control,
     name: "phone_numbers",
   });
+  useEffect(() => {
+    if (form.watch("source") !== "recommendation") {
+      form.setValue("recommended_by", null); // أو undefined
+    }
+  }, [form]);
 
   const branchesOptions =
     branchesData?.results?.map((branch: listItems) => ({
@@ -151,7 +156,7 @@ const SalesCustomerForm = ({
               placeholder={t("customerType")}
               options={[
                 { value: "individual", label: "Individual" },
-                { value: "business", label: "Business" },
+                { value: "company", label: "Company" },
               ]}
             />
             <TextInput
@@ -244,39 +249,6 @@ const SalesCustomerForm = ({
             />
           </div>
 
-          {/* Attachments */}
-          {/* <div className="col-span-2 mt-6">
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              {t("attachments")}
-            </label>
-            <input
-              type="file"
-              accept="image/*,.pdf"
-              multiple
-              onChange={handleAttachmentUpload}
-            />
-            {attachments.map((att, index) => (
-              <div key={att.id} className="flex gap-2 items-center mt-2">
-                <input
-                  type="text"
-                  className="input"
-                  placeholder="Attachment description"
-                  value={att.description}
-                  onChange={(e) =>
-                    handleAttachmentDescriptionChange(index, e.target.value)
-                  }
-                />
-                <button
-                  type="button"
-                  onClick={() => handleRemoveAttachment(index)}
-                  className="text-red-600"
-                >
-                  Remove
-                </button>
-              </div>
-            ))}
-          </div> */}
-
           <ExtraFields
             extraFields={extraFields}
             onAddField={handleAddExtraField}
@@ -300,6 +272,7 @@ const SalesCustomerForm = ({
             type="submit"
           />
         </div>
+        <pre>{JSON.stringify(form.formState.errors, null, 2)}</pre>
       </form>
     </Form>
   );

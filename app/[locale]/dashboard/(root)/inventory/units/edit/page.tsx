@@ -17,7 +17,7 @@ export default function EditUnit() {
   const t = useTranslations("Inventory.InventoryUnit");
 
   const [updateUnit, { isLoading: submitting }] = useUpdateUnitMutation();
-  const { data: unit, isLoading, error } = useGetUnitByIdQuery(id);
+  const { data, isLoading, error } = useGetUnitByIdQuery(id);
 
   const handleSubmit = async (data: UnitFormValues) => {
     const response = await updateUnit({ id, data });
@@ -27,7 +27,7 @@ export default function EditUnit() {
   return (
     <EditPage
       title={t("editUnit")}
-      data={unit}
+      data={data}
       isLoading={isLoading}
       error={error}
       submitting={submitting}

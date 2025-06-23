@@ -1,7 +1,7 @@
 "use client";
 import { useTranslations } from "next-intl";
 import { handleApiError } from "@/lib/utils/handleApiError";
-import { useCreateReviewMutation } from "@/redux/services/customerReviewApi";
+import { useCreateReviewMutation } from "@/redux/services/website/customerReviewApi";
 import CustomerReviewForm, {
   CustomerReviewFormValues,
 } from "@/components/dashboard/forms/website/CustomerReviewForm";
@@ -9,7 +9,7 @@ import CreatePage from "@/components/dashboard/CreatePage";
 
 export default function CreateCustomerReview() {
   const [createReview, { isLoading }] = useCreateReviewMutation();
-  const t = useTranslations("dashboardWebsite.CustomerReviews");
+  const t = useTranslations("dashboard_website.CustomerReviews");
 
   const handleSubmit = async (data: CustomerReviewFormValues) => {
     // Create FormData instance to handle file upload

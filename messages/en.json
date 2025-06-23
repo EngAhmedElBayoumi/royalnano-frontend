@@ -27,24 +27,42 @@
     "finance": "Finance"
   },
   "branches": {
-    "branches": "Branches",
-    "addBranch": "Add Branch",
-    "editBranch": "Edit Branch",
-    "noBranchesDataFound": "No branches data found",
-    "name": "Name",
-    "phoneNumber": "Phone Number",
-    "branchCode": "Branch Code",
-    "location": "Location",
-    "manager": "Manager",
-    "address": "Address",
-    "description": "Description",
-    "email": "Email",
-    "save": "Save",
-    "saving": "saving...",
-    "cancel": "Cancel",
-    "setLocation": "Set Location",
-    "selectBranchLocation": "Select Branch Location",
-    "balance":"Balance"
+    "tabs": {
+      "branches": "Branches",
+      "branches_transactions": "Branches Transactions"
+    },
+    "branches_data": {
+      "branches": "Branches",
+      "addBranch": "Add Branch",
+      "editBranch": "Edit Branch",
+      "noBranchesDataFound": "No branches data found",
+      "name": "Name",
+      "phoneNumber": "Phone Number",
+      "branchCode": "Branch Code",
+      "location": "Location",
+      "manager": "Manager",
+      "address": "Address",
+      "description": "Description",
+      "email": "Email",
+      "save": "Save",
+      "saving": "saving...",
+      "cancel": "Cancel",
+      "setLocation": "Set Location",
+      "selectBranchLocation": "Select Branch Location",
+      "balance": "Balance"
+    },
+    "branches_transactions": {
+      "transaction_type": "Transaction Type",
+      "amount": "Amount",
+      "description": "Description",
+      "branch": "Branch",
+      "reset_image": "Image Reset",
+      "add_branch_transaction": "Add Branch Transaction",
+      "edit_branch_transaction": "Edit Branch Transaction",
+      "no_branches_transaction_data_found": "No branches transactions data found",
+      "deposit": "Deposit",
+      "withdraw": "Withdraw"
+    }
   },
   "Inventory": {
     "units": "Units",
@@ -92,7 +110,8 @@
       "item": "Item",
       "quantity": "Quantity",
       "date": "Date",
-      "movementType": "Movement Type",
+      "from_branch": " From Branch",
+      "to_branch": "To Branch",
       "description": "Description",
       "noMovementsDataFound": "No movements data found",
       "addMovement": "Add Movement",
@@ -265,6 +284,7 @@
     "order": "Sales Order",
     "receipt": "Sales Receipt",
     "addCustomer": "Add Customer",
+    "followup": "Follow Up",
     "SalesQuotation": {
       "status": "status",
       "quotation": "Sales Quotation",
@@ -340,7 +360,7 @@
     "SalesCustomer": {
       "customerName": "Customer Name",
       "contactPerson": "Contact Person",
-      "phoneNumbers": "Phone Numbers",
+      "phoneNumbers": "Additional Phone Numbers",
       "phoneNumber": "Phone Number",
       "email": "Email",
       "address": "Address",
@@ -357,7 +377,12 @@
       "recommendedBy": "Recommended By",
       "addPhoneNumber": "Add Phone Number",
       "attachments": "attachments",
-      "addAttachment": "Add Attachment"
+      "addAttachment": "Add Attachment",
+      "attachmentDescription": "attachment Description",
+      "attachmentsDescription": "attachmentsDescription",
+      "phoneNumbersDescription": "phoneNumbersDescription",
+      "describePhoneNumbers": "fvcdvfdf",
+      "describeAttachments": "fcfd"
     },
     "ClientRequest": {
       "fullName": "Full Name",
@@ -371,13 +396,14 @@
       "branch": "Branch"
     }
   },
-  "dashboardWebsite": {
+  "dashboard_website": {
     "tabs": {
       "services": "Services",
       "contact": "Contact",
       "gallery": "Gallery",
       "customerReviews": "Customer Reviews",
-      "blogs": "Blogs"
+      "blogs": "Blogs",
+      "social": "Social Media"
     },
     "Services": {
       "services": "Services",
@@ -387,13 +413,15 @@
       "name": "Name",
       "alias": "Alias",
       "description": "Description",
-      "image": "Image"
+      "image": "Image",
+      "is_active": "website publish"
     },
     "contacts": {
       "full_name": "Full Name",
       "email": "Email",
       "phone_number": "Phone Number",
       "message": "Message",
+      "source": "Source",
       "noContactDataFound": "No contact data found"
     },
     "gallery": {
@@ -416,12 +444,19 @@
       "noCustomerReviewsFound": "No customer reviews found"
     },
     "Blogs": {
-      "addBlog": "Add Blog",
+      "addBlog": "Create blog article",
       "editBlog": "Edit Blog",
       "title": "Title",
       "content": "Content",
       "image": "Image",
       "noBlogsDataFound": "No Blogs data found"
+    },
+    "social": {
+      "add_social": "Add Social Media",
+      "edit_social": "Edit Social Media",
+      "no_social_data_found": "No Social data found",
+      "code": "Code",
+      "description": "Description"
     }
   },
   "website": {
@@ -721,9 +756,14 @@
       "itemDescription": "Item Description"
     },
     "Invoice": {
-      "itemCode": "Item Code",
-      "purchaseInvoiceLevel": "Purchase Invoice Level",
+      "invoiceNumber": "Invoice Number",
+      "status": "Status",
       "description": "Description",
+      "dueDate": "Due Date",
+      "createdAt": "created at",
+      "voucherDate": "Voucher Date",
+      "prefix": "Prefix",
+      "totalAmount": "Total Amount",
       "noDataFound": "No invoice data found.",
       "addInvoice": "Add Invoice",
       "cards": {
@@ -813,7 +853,7 @@
     "reserve": "Reserve",
     "cancel": "Cancel",
     "comment_action": "Comment",
-    "follow_up": "Follow-Up",
+    "follow_up": "Follow Up",
     "save": "Save Follow-Up",
     "cancel_action": "Cancel",
     "followups": "Followups",
@@ -825,10 +865,19 @@
     "date": "Date",
     "actions": "Actions",
     "no_comment": "No comment",
-    "created_at": "Created At",
-    "select_date_time": "Select Date and Time"
+    "action_date": "Action Date",
+    "select_date_time": "Select Date and Time",
+    "followUpType": {
+      "followupName": "Name",
+      "noFollowUpTypesDataFound": "No Follow Up Types  found",
+      "addFollowUpType": "Add Follow Up Type",
+      "editFollowUpType": "Edit Follow Up Type"
+    }
   },
-   "finance":{
+  "finance": {
+    "finance": "Finance",
+    "parent": "Parent",
+    "addFinance": "Add Account",
     "tabs": {
       "finance": "Finance",
       "payment-voucher": " Payment Voucher",
@@ -869,7 +918,6 @@
     "parent":"Parent",
     "addFinance":"Add Account"
   },
-
   "auth": {
     "authTemplate": {
       "Welcome To": "",

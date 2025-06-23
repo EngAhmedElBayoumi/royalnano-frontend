@@ -5,7 +5,7 @@ import { handleApiError } from "@/lib/utils/handleApiError";
 import {
   useGetGalleryByIdQuery,
   useUpdateGalleryMutation,
-} from "@/redux/services/galleryApi";
+} from "@/redux/services/website/galleryApi";
 import GalleryForm, {
   GalleryFormValues,
 } from "@/components/dashboard/forms/website/GalleryForm";
@@ -14,7 +14,7 @@ import EditPage from "@/components/dashboard/EditPage";
 export default function EditGallery() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
-  const t = useTranslations("dashboardWebsite.gallery");
+  const t = useTranslations("dashboard_website.gallery");
 
   const [updateGallery, { isLoading: submitting }] = useUpdateGalleryMutation();
   const { data, isLoading, error } = useGetGalleryByIdQuery(id);
@@ -60,7 +60,7 @@ export default function EditGallery() {
       error={error}
       onSubmit={handleSubmit}
       Form={GalleryForm}
-      redirectPath="/dashboard/website?tab=tabs.gallery"
+      redirectPath="/dashboard/website?tab=gallery"
     />
   );
 }

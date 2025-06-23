@@ -12,28 +12,40 @@ interface CustomTabsProps {
     icon?: React.ReactNode;
   }>;
   defaultTab?: string;
+  paramName?: string;
+  parentTab?: string;
 }
 
-function CustomTabs({ tabs, defaultTab = tabs[0]?.id }: CustomTabsProps) {
+function CustomTabs({
+  tabs,
+  defaultTab = tabs[0]?.id,
+  paramName = "tab",
+  parentTab,
+}: CustomTabsProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const locale = useLocale();
 
   const [activeTab, setActiveTab] = useState<string>(() => {
-    return searchParams.get("tab") || defaultTab;
+    return searchParams.get(paramName) || defaultTab;
   });
 
   useEffect(() => {
     const url = new URL(window.location.href);
-    url.searchParams.set("tab", activeTab);
+
+    if (parentTab) url.searchParams.set("tab", parentTab);
+    if (paramName !== "subtab") url.searchParams.delete("subtab");
+
+    url.searchParams.set(paramName, activeTab);
+
     router.replace(url.toString(), { scroll: false });
-  }, [activeTab, router]);
+  }, [activeTab, router, paramName, parentTab]);
   return (
     <Tabs
       value={activeTab}
       onValueChange={setActiveTab}
       defaultValue={defaultTab}
-      className="bg-white mr-auto pt-4 mb-0"
+      className="mr-auto pt-4 mb-0"
       dir={locale === "ar" ? "rtl" : "ltr"}
     >
       <TabsList

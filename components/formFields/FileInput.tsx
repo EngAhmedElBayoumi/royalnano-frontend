@@ -2,6 +2,7 @@
 import React, { useEffect } from "react";
 import { Control, FieldValues, Path } from "react-hook-form";
 import { isVideoUrl } from "@/lib/utils/isVideoUrl";
+import { getFormValueByPath } from "@/lib/utils/getFormValueByPath";
 import Image from "next/image";
 import {
   FormField,
@@ -18,6 +19,7 @@ interface FileInputProps<T extends FieldValues> {
   label?: string;
   className?: string;
   accepted?: string;
+  shouldReset?: boolean;
 }
 
 const FileInput = <T extends FieldValues>({
@@ -26,19 +28,29 @@ const FileInput = <T extends FieldValues>({
   label,
   className,
   accepted,
+  shouldReset,
 }: FileInputProps<T>) => {
   const [file, setFile] = React.useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = React.useState<string | null>(null);
 
   useEffect(() => {
-    const initialFile = control._formValues[name];
+    const initialFile = getFormValueByPath(control._formValues, name);
     if (initialFile instanceof File) {
-      setFile(initialFile);
       setPreviewUrl(URL.createObjectURL(initialFile));
     } else if (typeof initialFile === "string" && initialFile) {
       setPreviewUrl(initialFile);
     }
   }, [control, name]);
+  const inputRef = React.useRef<HTMLInputElement | null>(null);
+  useEffect(() => {
+    if (shouldReset) {
+      setFile(null);
+      setPreviewUrl(null);
+      if (inputRef.current) {
+        inputRef.current.value = ""; // ✅ تصفير القيمة المعروضة
+      }
+    }
+  }, [shouldReset]);
 
   return (
     <FormField
@@ -51,6 +63,7 @@ const FileInput = <T extends FieldValues>({
           )}
           <FormControl>
             <Input
+              ref={inputRef}
               type="file"
               accept={accepted}
               name={name}

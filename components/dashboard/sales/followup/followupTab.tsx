@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
-import AddFollowUpModal from "@/components/dashboard/sales/AddFollowUpModal";
-import EditFollowUpModal from "@/components/dashboard/sales/EditFollowUpModal";
+import AddFollowUpModal from "@/components/dashboard/sales/followup/AddFollowUpModal";
+import EditFollowUpModal from "@/components/dashboard/sales/followup/EditFollowUpModal";
 import { useTranslations } from "next-intl";
 import { useGetFollowUpQuery } from "@/redux/services/dashboard/sales/followUpApi";
 import { DataTable } from "primereact/datatable";
@@ -25,7 +25,7 @@ export default function FollowupsTab({ customerId }: FollowupsTabProps) {
   const pageSize = 10;
 
   const { data, isLoading, error, refetch } = useGetFollowUpQuery({
-    search: customerId.toString(),
+    search: "",
     page: page + 1, // PrimeReact uses 0-based indexing, API uses 1-based
     page_size: pageSize,
     customer: customerId,
@@ -89,7 +89,7 @@ export default function FollowupsTab({ customerId }: FollowupsTabProps) {
             <Column
               field="follow_up_type"
               header={t("type")}
-              body={(rowData) => t(rowData.follow_up_type)}
+              body={(rowData) => rowData.follow_up_type.name}
             />
             <Column
               field="comment"
@@ -130,6 +130,7 @@ export default function FollowupsTab({ customerId }: FollowupsTabProps) {
         <EditFollowUpModal
           isOpen={isEditModalOpen}
           onClose={() => setIsEditModalOpen(false)}
+          customerId={customerId}
           followUp={selectedFollowUp}
           refetch={refetch}
         />

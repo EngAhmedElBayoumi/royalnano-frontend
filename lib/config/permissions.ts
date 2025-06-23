@@ -15,6 +15,7 @@ export const permissionRoutes = {
     "order",
     "invoice",
     "clientrequest",
+    "followup",
   ],
   "/dashboard/hr": [
     "employee",
@@ -29,8 +30,15 @@ export const permissionRoutes = {
     "jobrole",
   ],
   "/dashboard/clients": ["customer"],
-  "/dashboard/branches": ["branch"],
-  "/dashboard/website": ["service", "gallery", "contact", "customerreview"],
+  "/dashboard/branches": ["branch", "branchaccounttransaction"],
+  "/dashboard/website": [
+    "service",
+    "gallery",
+    "contact",
+    "customerreview",
+    "socialcode",
+    "blog",
+  ],
   "/dashboard/purchase": [
     "expensecategory",
     "invoicedetail",

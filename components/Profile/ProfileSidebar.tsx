@@ -2,7 +2,7 @@ import Image from "next/image";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import config from "@/lib/config";
-import { useUpdateProfileMutation } from "@/redux/services/profileApi";
+import { useUpdateProfileMutation } from "@/redux/services/website/profileApi";
 import { useRef } from "react";
 import { useDispatch } from "react-redux";
 import { setProfile } from "@/redux/slices/profileSlice";

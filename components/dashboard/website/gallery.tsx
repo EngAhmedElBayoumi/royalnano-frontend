@@ -1,13 +1,13 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { useGetGalleryQuery } from "@/redux/services/galleryApi";
+import { useGetGalleryQuery } from "@/redux/services/website/galleryApi";
 import { useTableData } from "@/hooks/useTableData";
 import TableWrapper from "@/components/dashboard/tables/TableWrapper";
 
 export default function Gallery() {
   const router = useRouter();
-  const t = useTranslations("dashboardWebsite.gallery");
+  const t = useTranslations("dashboard_website.gallery");
 
   const { data, isLoading, error, permissions, handlePageChange } =
     useTableData({

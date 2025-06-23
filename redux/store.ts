@@ -4,21 +4,22 @@ import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import authReducer from "./slices/authSlice";
 import profileReducer from "./slices/profileSlice";
-import { contactApi } from "./services/contactApi";
-import { customerReviewApi } from "./services/customerReviewApi";
-import { galleryAPi } from "./services/galleryApi";
-import { profileApi } from "./services/profileApi";
-import { loginApi } from "./services/loginApi";
-import { logoutApi } from "./services/logoutApi";
-import { registerApi } from "./services/registerApi";
-import { forgotPasswordApi } from "./services/forgotPasswordApi";
-import { resendOTPApi } from "./services/resendOTP";
-import { verifyOTPApi } from "./services/verifyOTP";
-import { resetPasswordPApi } from "./services/resetPassword";
+import { contactApi } from "./services/website/contactApi";
+import { customerReviewApi } from "./services/website/customerReviewApi";
+import { galleryAPi } from "./services/website/galleryApi";
+import { profileApi } from "./services/website/profileApi";
+import { loginApi } from "./services/auth/loginApi";
+import { logoutApi } from "./services/auth/logoutApi";
+import { registerApi } from "./services/auth/registerApi";
+import { forgotPasswordApi } from "./services/auth/forgotPasswordApi";
+import { resendOTPApi } from "./services/auth/resendOTP";
+import { verifyOTPApi } from "./services/auth/verifyOTP";
+import { resetPasswordPApi } from "./services/auth/resetPassword";
 import { branchApi } from "./services/dashboard/inventory/branchesApi";
+import { branchTransactionsApi } from "./services/dashboard/inventory/branchTransactionsApi";
 import { movementApi } from "./services/dashboard/inventory/movementApi";
 import { preorderApi } from "./services/dashboard/inventory/preorderApi";
-import { refreshTokenApi } from "./services/refreshTokenApi";
+import { refreshTokenApi } from "./services/auth/refreshTokenApi";
 import { unitsApi } from "./services/dashboard/inventory/unitsApi";
 import { itemsApi } from "./services/dashboard/inventory/itemsApi";
 import { itemCategoryApi } from "./services/dashboard/inventory/itemCategoryApi";
@@ -40,6 +41,7 @@ import { salesReturnApi } from "./services/dashboard/sales/salesReturnApi";
 import { servicesAPi } from "./services/website/servicesApi";
 import { blogsAPi } from "./services/website/blogsApi";
 import { commentsAPi } from "./services/website/commentsApi";
+import { socialApi } from "./services/website/socialApi";
 import { clientRequestAPi } from "./services/clientRequestApi";
 import { purchaseOrderApi } from "./services/dashboard/purchase/orderApi";
 import { purchaseExpenseCategoryApi } from "./services/dashboard/purchase/expenseCategory";
@@ -57,7 +59,8 @@ import { financeApi } from "./services/dashboard/finance/financeApi";
 import { paymentVoucherApi } from "./services/dashboard/finance/paymentVoucherApi";
 import { receiptVoucherApi } from "./services/dashboard/finance/receiptVoucherApi";
 import { consumedItemsApi } from "./services/dashboard/sales/salesConsumedItemsApi";
-
+import { attachmentsApi } from "./services/dashboard/sales/salesCustomerAttachmentsApi";
+import { followUpTypesApi } from "./services/dashboard/sales/followUpTypesApi";
 
 // Create separate configs for each reducer
 const authPersistConfig = {
@@ -90,6 +93,7 @@ export const store = configureStore({
     [verifyOTPApi.reducerPath]: verifyOTPApi.reducer,
     [resetPasswordPApi.reducerPath]: resetPasswordPApi.reducer,
     [branchApi.reducerPath]: branchApi.reducer,
+    [branchTransactionsApi.reducerPath]: branchTransactionsApi.reducer,
     [movementApi.reducerPath]: movementApi.reducer,
     [preorderApi.reducerPath]: preorderApi.reducer,
     [refreshTokenApi.reducerPath]: refreshTokenApi.reducer,
@@ -113,6 +117,7 @@ export const store = configureStore({
     [servicesAPi.reducerPath]: servicesAPi.reducer,
     [blogsAPi.reducerPath]: blogsAPi.reducer,
     [commentsAPi.reducerPath]: commentsAPi.reducer,
+    [socialApi.reducerPath]: socialApi.reducer,
     [clientRequestAPi.reducerPath]: clientRequestAPi.reducer,
     [PurchaseSupplierApi.reducerPath]: PurchaseSupplierApi.reducer,
     [purchaseOrderApi.reducerPath]: purchaseOrderApi.reducer,
@@ -133,7 +138,8 @@ export const store = configureStore({
     [paymentVoucherApi.reducerPath]: paymentVoucherApi.reducer,
     [receiptVoucherApi.reducerPath]: receiptVoucherApi.reducer,
     [consumedItemsApi.reducerPath]: consumedItemsApi.reducer,
-
+    [attachmentsApi.reducerPath]: attachmentsApi.reducer,
+    [followUpTypesApi.reducerPath]: followUpTypesApi.reducer,
     auth: persistedAuthReducer,
     profile: persistedProfileReducer,
   },
@@ -155,6 +161,7 @@ export const store = configureStore({
       .concat(verifyOTPApi.middleware)
       .concat(resetPasswordPApi.middleware)
       .concat(branchApi.middleware)
+      .concat(branchTransactionsApi.middleware)
       .concat(movementApi.middleware)
       .concat(preorderApi.middleware)
       .concat(refreshTokenApi.middleware)
@@ -190,11 +197,16 @@ export const store = configureStore({
       .concat(initializePaymentApi.middleware)
       .concat(blogsAPi.middleware)
       .concat(commentsAPi.middleware)
+      .concat(socialApi.middleware)
       .concat(followUpApi.middleware)
       .concat(financeApi.middleware)
       .concat(paymentVoucherApi.middleware)
       .concat(receiptVoucherApi.middleware)
       .concat(consumedItemsApi.middleware)
+      .concat(followUpTypesApi.middleware)
+      .concat(consumedItemsApi.middleware)
+      .concat(attachmentsApi.middleware)
+    
   },
 });
 

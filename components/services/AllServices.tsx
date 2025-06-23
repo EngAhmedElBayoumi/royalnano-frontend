@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { useTranslations } from "next-intl";
 import { Paginator } from "primereact/paginator";
-import { useGetServicesQuery } from "@/redux/services/website/servicesApi";
+import { useGetActiveServicesQuery } from "@/redux/services/website/servicesApi";
 import ServiceCard from "@/components/cards/ServiceCard";
 import LoadingError from "@/components/dashboard/LoadingError";
 import NoData from "@/components/NoData";
@@ -18,7 +18,7 @@ interface Service {
 const AllServices = () => {
   const t = useTranslations("website.services");
   const [page, setPage] = useState(1);
-  const { data, isLoading, error } = useGetServicesQuery({
+  const { data, isLoading, error } = useGetActiveServicesQuery({
     page,
     page_size: 8,
   });
