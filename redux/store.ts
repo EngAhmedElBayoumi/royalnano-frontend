@@ -56,9 +56,12 @@ import { initializePaymentApi } from "./services/dashboard/sales/initialPriceApi
 import { setPriceApi } from "./services/dashboard/sales/setPriceApi";
 import { followUpApi } from "./services/dashboard/sales/followUpApi";
 import { financeApi } from "./services/dashboard/finance/financeApi";
+import { paymentVoucherApi } from "./services/dashboard/finance/paymentVoucherApi";
+import { receiptVoucherApi } from "./services/dashboard/finance/receiptVoucherApi";
 import { consumedItemsApi } from "./services/dashboard/sales/salesConsumedItemsApi";
 import { attachmentsApi } from "./services/dashboard/sales/salesCustomerAttachmentsApi";
 import { followUpTypesApi } from "./services/dashboard/sales/followUpTypesApi";
+
 // Create separate configs for each reducer
 const authPersistConfig = {
   key: "auth",
@@ -132,6 +135,8 @@ export const store = configureStore({
     [setPriceApi.reducerPath]: setPriceApi.reducer,
     [followUpApi.reducerPath]: followUpApi.reducer,
     [financeApi.reducerPath]: financeApi.reducer,
+    [paymentVoucherApi.reducerPath]: paymentVoucherApi.reducer,
+    [receiptVoucherApi.reducerPath]: receiptVoucherApi.reducer,
     [consumedItemsApi.reducerPath]: consumedItemsApi.reducer,
     [attachmentsApi.reducerPath]: attachmentsApi.reducer,
     [followUpTypesApi.reducerPath]: followUpTypesApi.reducer,
@@ -194,10 +199,14 @@ export const store = configureStore({
       .concat(commentsAPi.middleware)
       .concat(socialApi.middleware)
       .concat(followUpApi.middleware)
+      .concat(financeApi.middleware)
+      .concat(paymentVoucherApi.middleware)
+      .concat(receiptVoucherApi.middleware)
+      .concat(consumedItemsApi.middleware)
       .concat(followUpTypesApi.middleware)
       .concat(consumedItemsApi.middleware)
       .concat(attachmentsApi.middleware)
-      .concat(financeApi.middleware);
+    
   },
 });
 

@@ -844,8 +844,47 @@
   "finance": {
     "finance": "المالية",
     "parent": "الرئيسي",
-    "addFinance": "إضافة حساب"
-  },
+    "addFinance": "إضافة حساب",
+    "tabs": {
+      "finance": "المالية",
+      "payment-voucher": "إيصالات الدفع",
+      "receipt-voucher": "إيصالات الاستلام"
+    },
+    "paymentVoucher": {
+      "editPaymentVoucher": "تعديل إيصال الدفع",
+      "viewPaymentVoucher": "عرض إيصال الدفع",
+      "cancel": "إلغاء",
+      "save": "حفظ",
+      "voucherNumber": "رقم الإيصال",
+      "date": "التاريخ",
+      "amount": "المبلغ",
+      "description": "الوصف",
+      "branch": "الفرع",
+      "supplier": "المورد",
+      "noDataFound": "لا توجد بيانات لإيصالات الدفع",
+      "addPaymentVoucher": "إضافة إيصال دفع",
+      "paymentMethod": "طريقة الدفع"
+    },
+    "receiptVoucher": {
+      "editReceiptVoucher": "تعديل إيصال الاستلام",
+      "viewReceiptVoucher": "عرض إيصال الاستلام",
+      "cancel": "إلغاء",
+      "save": "حفظ",
+      "voucherNumber": "رقم الإيصال",
+      "customer": "العميل",
+      "account": "الحساب",
+      "invoice":"فاتورة",
+      "amountReceived": "المبلغ المستلم",
+      "receivedDate": "تاريخ الاستلام",
+      "referenceNumber": "رقم المرجع",
+       "status": "الحالة",
+       "notes": "ملاحظات",
+      "noDataFound": "لا توجد بيانات لإيصالات الاستلام",
+      "addReceiptVoucher": "إضافة إيصال استلام"
+    },
+    
+   
+
   "auth": {
     "authTemplate": {
       "Welcome To": "مرحبًا بك في",
