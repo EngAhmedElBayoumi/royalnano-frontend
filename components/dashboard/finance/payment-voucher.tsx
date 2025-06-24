@@ -9,12 +9,12 @@ import { useRouter } from 'next/navigation';
 export interface PaymentVoucherRow {
   id: number;
   voucher_number: string;
-  account:number|string;
-  supplier:number | string;
+  account:{id:number | string, name:string};
+  supplier:{id:number | string, name:string};
   payment_date: string;
   payment_method: string;
   amount_paid: string;
-  purchase_invoice:number | string;
+  purchase_invoice: { id: number | string; number: string };
   description: string;
   created_at: string;
 }
@@ -36,15 +36,17 @@ export default function PaymentVoucherTab() {
     { field: "description", header: "Description" },
     { field: "created_at", header: "Created At" },
   ];
+  console.log("Payment Voucher Data:", data);
+  
   const paymentVoucherData: PaymentVoucherRow[] =data?.map((item: PaymentVoucherRow, index: number) => ({
       id: index + 1,
       voucher_number: item.voucher_number,
-      account: item.account,
-      supplier: item.supplier,
+      account: item?.account?.name,
+      supplier: item.supplier?.name,
       payment_date: item.payment_date,
       payment_method: item.payment_method,
       amount_paid: item.amount_paid,
-      purchase_invoice: item.purchase_invoice,
+      purchase_invoice: item.purchase_invoice?.number,
       description: item.description,
       created_at: item.created_at,
     })) || [];

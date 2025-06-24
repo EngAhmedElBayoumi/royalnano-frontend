@@ -68,13 +68,13 @@ function FinancePage() {
     return permissions[tab.permissionKey]?.view;
   });
 
+  
+
   return (
     <>
       <CustomTabs tabs={filteredTabs} defaultTab={filteredTabs[0]?.id} />
 
-  if (error) {
-    return <LoadingError />;
-  }
+  
 
     </>
   );

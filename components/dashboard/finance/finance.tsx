@@ -68,21 +68,21 @@ export default function FinancesTab() {
           <FinanceCard finance={data} />
           <CustomTable
             emptyMessage="you have no finance"
-            // editRoute="/dashboard/clients/edit/"
+             editRoute=""
             secondHeaderBG="transparent"
-            // secondHeaderTitle="Import Finance List"
+             secondHeaderTitle="Import Finance List"
             secondHeaderIcon="/assets/icons/importCustomerList.svg"
             secondHeaderTextColor="#C8AE50"
             headerBG="#F8F7F7"
             headerTextColor="#C8AE50"
-            // headerTitle="Finence"
+             headerTitle="Finence"
             headerIcon="/assets/icons/client.svg"
             data={yourCustomerData}
             rows={10}
             columns={columns}
             cardData={cardsData}
-            // buttonText="Add Client"
-            // ButtonEvent={handleClick}
+            buttonText=""
+           ButtonEvent={() => {}}
           />
         </div>
       )}
