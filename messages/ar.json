@@ -850,7 +850,7 @@
       "payment-voucher": "إيصالات الدفع",
       "receipt-voucher": "إيصالات الاستلام"
     },
-    "paymentVoucher": {
+  "paymentVoucher": {
       "editPaymentVoucher": "تعديل إيصال الدفع",
       "viewPaymentVoucher": "عرض إيصال الدفع",
       "cancel": "إلغاء",
@@ -881,11 +881,9 @@
        "notes": "ملاحظات",
       "noDataFound": "لا توجد بيانات لإيصالات الاستلام",
       "addReceiptVoucher": "إضافة إيصال استلام"
-    },
-    
-   
-
-  "auth": {
+    }
+     },
+    "auth": {
     "authTemplate": {
       "Welcome To": "مرحبًا بك في",
       "Royal": "رويال",
@@ -921,7 +919,6 @@
         "default": "حدث خطأ أثناء تسجيل الدخول"
       }
     },
-
     "forgetPassword": {
       "title": "نسيت كلمة المرور",
       "instruction1": "يرجى إدخال بريدك الإلكتروني لإرسال",
@@ -962,5 +959,6 @@
         "default": "حدث خطأ أثناء التسجيل"
       }
     }
+    
   }
 }

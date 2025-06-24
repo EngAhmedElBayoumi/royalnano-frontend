@@ -913,10 +913,7 @@
        "notes": "Notes",
       "save": "Save",
       "cancel": "Cancel"
-    },
-    "finance":"Finance",
-    "parent":"Parent",
-    "addFinance":"Add Account"
+    }
   },
   "auth": {
     "authTemplate": {
