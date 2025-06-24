@@ -204,7 +204,6 @@ export const store = configureStore({
       .concat(receiptVoucherApi.middleware)
       .concat(consumedItemsApi.middleware)
       .concat(followUpTypesApi.middleware)
-      .concat(consumedItemsApi.middleware)
       .concat(attachmentsApi.middleware)
     
   },
