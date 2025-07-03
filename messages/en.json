@@ -878,6 +878,8 @@
     "finance": "Finance",
     "parent": "Parent",
     "addFinance": "Add Account",
+    "accountTree": "Account Tree",
+    "noChildAccountsAvailable": "No child accounts available",
     "tabs": {
       "finance": "Finance",
       "payment-voucher": " Payment Voucher",

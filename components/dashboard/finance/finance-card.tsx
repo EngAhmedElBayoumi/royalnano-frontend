@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { NewAccountDialog } from "./new-account-dialog";
 import { useGetFinanceByIdQuery } from "@/redux/services/dashboard/finance/financeApi";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useTranslations } from "next-intl";
 type FinanceRowWithChildren = financeRow & { children?: financeRow[] };
 
 type Finance = FinanceRowWithChildren[];
@@ -16,6 +17,7 @@ interface FinanceCardProps {
 }
 
 export default function FinanceCard({ finance }: FinanceCardProps) {
+  const t = useTranslations("finance");
   const [selectedAccountId, setSelectedAccountId] = useState<number | null>(
     null
   );
@@ -33,7 +35,7 @@ export default function FinanceCard({ finance }: FinanceCardProps) {
   return (
     <div className="flex gap-6">
       <div className="w-[179px] h-[334px] overflow-y-auto flex flex-col justify-start items-start p-[16px_20px] border border-[#DDDCDF] rounded-[10px] bg-[#F9F9F9]">
-        <p className="text-[#D9B44A] text-[13px] mb-1">شجره الحساب</p>
+        <p className="text-[#D9B44A] text-[13px] mb-1">{t("accountTree")}</p>
 
         {finance?.map((item: financeRow) => (
           <div
@@ -67,7 +69,7 @@ export default function FinanceCard({ finance }: FinanceCardProps) {
         </div>
       ) : accountDetails?.children && accountDetails?.children.length > 0 ? (
         <div className="w-[179px] h-[334px] flex flex-col justify-start items-start p-[16px_20px] border border-[#DDDCDF] rounded-[10px] bg-[#F9F9F9]">
-          <p className="text-[#D9B44A] text-[13px] mb-1">شجره الحساب</p>
+          <p className="text-[#D9B44A] text-[13px] mb-1">{t("accountTree")}</p>
           {accountDetails?.children?.map((item: financeRow) => (
             <div
               key={item.id}
@@ -89,7 +91,7 @@ export default function FinanceCard({ finance }: FinanceCardProps) {
       ) : (
         <div className="w-[179px] h-[334px] flex flex-col justify-center items-center p-[16px_20px] border border-[#DDDCDF] rounded-[10px] bg-[#F9F9F9]">
           <p className="text-[#888888] text-[12px]">
-            No child accounts available
+            {t("noChildAccountsAvailable")}
           </p>
         </div>
       )}

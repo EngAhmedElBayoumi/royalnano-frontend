@@ -845,6 +845,8 @@
     "finance": "المالية",
     "parent": "الرئيسي",
     "addFinance": "إضافة حساب",
+    "accountTree": "شجرة الحسابات",
+    "noChildAccountsAvailable": "لا توجد حسابات فرعية متاحة",
     "tabs": {
       "finance": "المالية",
       "payment-voucher": "إيصالات الدفع",
