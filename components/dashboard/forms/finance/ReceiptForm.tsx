@@ -63,6 +63,7 @@ const ReceiptForm = ({
   isLoading,
 }: ReceiptFormProps) => {
   const globalTranslate = useTranslations();
+  const t = useTranslations("finance.receiptVoucher");
   
   // Fetch data from APIs
   const { data: accounts } = useGetFinanceQuery({});
@@ -106,45 +107,45 @@ const ReceiptForm = ({
       <form onSubmit={form.handleSubmit(onSubmit)} className="grid  gap-6">
         <CustomSelect
           name="account"
-          label="Account"
+          label={t("account")}
           options={accountOptions}
-          placeholder="Select Account"
+          placeholder={t("selectAccount")}
           control={form?.control}
         />
 
         <CustomSelect
           name="customer"
-          label="Customer"
+          label={t("customer")}
           options={customerOptions} // Add your supplier options here
-          placeholder="Select Customer"
+          placeholder={t("selectCustomer")}
           control={form?.control}
         />
         <CustomSelect
           name="invoice"
-          label="Invoice"
+          label={t("invoice")}
           options={invoiceOptions} // Add your invoice options here
-          placeholder="Select Invoice"
+          placeholder={t("selectInvoice")}
           control={form?.control}
         />
         <TextInput
           name="amount_received"
-          label="Amount Paid"
+          label={t("amountPaid")}
           type="number"
-          placeholder="Enter Amount Paid"
+          placeholder={t("enterAmountPaid")}
           control={form?.control}
         />
 
         <TextInput
           name="reference_number"
-          label="Reference Number"
-          placeholder="Enter Reference Number"
+          label={t("referenceNumber")}
+          placeholder={t("enterReferenceNumber")}
           control={form?.control}
         />
 
         <TextInput
           name="notes"
-          label="Notes"
-          placeholder="Enter Notes"
+          label={t("notes")}
+          placeholder={t("enterNotes")}
           control={form?.control}
         />
 

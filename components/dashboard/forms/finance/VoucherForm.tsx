@@ -64,6 +64,8 @@ const VoucherForm = ({
   isLoading,
 }: VoucherFormProps) => {
   const globalTranslate = useTranslations();
+  const t = useTranslations("finance.paymentVoucher");
+  const tMethods = useTranslations("finance.paymentMethods");
   
   // Fetch data from APIs
   const { data: accounts } = useGetFinanceQuery({});
@@ -112,59 +114,59 @@ const VoucherForm = ({
       >
         <CustomSelect
           name="account"
-          label="Account"
+          label={t("account")}
           options={accountOptions}
-          placeholder="Select Account"
+          placeholder={t("selectAccount")}
           control={form?.control}
         />
         
         <CustomSelect
           name="supplier"
-          label="Supplier"
+          label={t("supplier")}
           options={supplierOptions}
-          placeholder="Select Supplier"
+          placeholder={t("selectSupplier")}
           control={form?.control}
         />
         
         <TextInput
           name="amount_paid"
-          label="Amount Paid"
+          label={t("amountPaid")}
           type="number"
-          placeholder="Enter Amount Paid"
+          placeholder={t("enterAmountPaid")}
           control={form?.control}
         />
 
         <CustomSelect
           name="payment_method"
-          label="Payment Method"
+          label={t("paymentMethod")}
           options={[
-            { value: "cash", label: "Cash" },
-            { value: "bank_transfer", label: "Bank Transfer" },
-            { value: "cheque", label: "Cheque" },
+            { value: "cash", label: tMethods("cash") },
+            { value: "bank_transfer", label: tMethods("bankTransfer") },
+            { value: "cheque", label: tMethods("cheque") },
           ]}
-          placeholder="Select Payment Method"
+          placeholder={t("selectPaymentMethod")}
           control={form?.control}
         />
         
         <DatePicker
           name="payment_date"
-          label="Payment Date"
-          placeholder="Select Payment Date"
+          label={t("paymentDate")}
+          placeholder={t("selectPaymentDate")}
           control={form?.control}
         />
         
         <CustomSelect
           name="purchase_invoice"
-          label="Purchase Invoice"
+          label={t("purchaseInvoice")}
           options={invoiceOptions}
-          placeholder="Select Purchase Invoice"
+          placeholder={t("selectPurchaseInvoice")}
           control={form?.control}
         />
         
         <TextInput
           name="description"
-          label="Description"
-          placeholder="Enter Description"
+          label={t("description")}
+          placeholder={t("enterDescription")}
           control={form?.control}
         />
         
