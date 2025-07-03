@@ -1,4 +1,4 @@
-import { financeRow } from "@/app/[locale]/dashboard/(root)/finance/page";
+import { financeRow } from "./finance";
 
 import React, { useState } from "react";
 import { NewAccountDialog } from "./new-account-dialog";

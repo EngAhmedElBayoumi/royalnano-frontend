@@ -1,3 +1,4 @@
+"use client";
 import EditPage from '@/components/dashboard/EditPage';
 import VoucherForm, { VoucherFormValues } from '@/components/dashboard/forms/finance/VoucherForm';
 import { handleApiError } from '@/lib/utils/handleApiError';
