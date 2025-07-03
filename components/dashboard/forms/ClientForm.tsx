@@ -7,6 +7,7 @@ import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
 import PhoneInputField from "@/components/formFields/PhoneInputField";
 import { Link } from "@/i18n/routing";
+import { useTranslations } from "next-intl";
 
 interface ClientFormProps {
   onSubmit: (data: ClientFormValues) => Promise<void>;
@@ -28,6 +29,8 @@ export interface ClientFormValues {
 }
 
 const ClientForm = ({ onSubmit, defaultValues }: ClientFormProps) => {
+  const t = useTranslations("clients.clientForm");
+  
   const form = useForm({
     resolver: zodResolver(clientSchema),
     defaultValues: defaultValues || {
@@ -52,85 +55,85 @@ const ClientForm = ({ onSubmit, defaultValues }: ClientFormProps) => {
           <TextInput
             control={form.control}
             name="client_name"
-            label="Client Name"
-            placeholder="Client Name"
+            label={t("clientName")}
+            placeholder={t("clientName")}
           />
 
           <TextInput
             control={form.control}
             name="email"
-            label="Email"
-            placeholder="Email"
+            label={t("email")}
+            placeholder={t("email")}
           />
 
           <PhoneInputField
             control={form.control}
             name="phone_number"
-            label="Phone Number"
+            label={t("phoneNumber")}
           />
 
           <TextInput
             control={form.control}
             name="facility_name"
-            label="Facility Name"
-            placeholder="Facility Name"
+            label={t("facilityName")}
+            placeholder={t("facilityName")}
           />
 
           <TextInput
             control={form.control}
             name="tax_number"
-            label="Tax Number"
-            placeholder="Tax Number"
+            label={t("taxNumber")}
+            placeholder={t("taxNumber")}
           />
 
           <TextInput
             control={form.control}
             name="address"
-            label="Address"
-            placeholder="Address"
+            label={t("address")}
+            placeholder={t("address")}
           />
 
           <TextInput
             control={form.control}
             name="city"
-            label="City"
-            placeholder="City"
+            label={t("city")}
+            placeholder={t("city")}
           />
 
           <TextInput
             control={form.control}
             name="area"
-            label="Area"
-            placeholder="Area"
+            label={t("area")}
+            placeholder={t("area")}
           />
 
           <TextInput
             control={form.control}
             name="building_number"
-            label="Building Number"
-            placeholder="Building Number"
+            label={t("buildingNumber")}
+            placeholder={t("buildingNumber")}
           />
 
           <TextInput
             control={form.control}
             name="website"
-            label="Website"
-            placeholder="Website"
+            label={t("website")}
+            placeholder={t("website")}
           />
 
           <TextInput
             control={form.control}
             name="condition"
-            label="Condition"
-            placeholder="Condition"
+            label={t("condition")}
+            placeholder={t("condition")}
           />
         </div>
         <div className="flex justify-end gap-2">
           <Link href="/dashboard/clients" passHref>
-            <CustomButton text="Cancel" variant="secondary" />
+            <CustomButton text={t("cancel")} variant="secondary" />
           </Link>
 
-          <CustomButton text="Save" />
+          <CustomButton text={t("save")} />
         </div>
       </form>
     </Form>

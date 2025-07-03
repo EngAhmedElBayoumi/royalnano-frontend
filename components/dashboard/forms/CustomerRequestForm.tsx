@@ -9,6 +9,7 @@ import PhoneInputField from "@/components/formFields/PhoneInputField";
 import CustomSelect from "@/components/formFields/CustomSelect";
 import { Link } from "@/i18n/routing";
 import TextArea from "@/components/formFields/TextArea";
+import { useTranslations } from "next-intl";
 
 interface CustomerRequestFormProps {
   onSubmit: (data: CustomerRequestFormValues) => Promise<void>;
@@ -29,6 +30,12 @@ const CustomerRequestForm = ({
   onSubmit,
   defaultValues,
 }: CustomerRequestFormProps) => {
+  const t = useTranslations("customerRequests.customerRequestForm");
+  const tCarTypes = useTranslations("customerRequests.carTypes");
+  const tCarModels = useTranslations("customerRequests.carModels");
+  const tServices = useTranslations("customerRequests.services");
+  const tBranches = useTranslations("customerRequests.branches");
+  
   const form = useForm({
     resolver: zodResolver(customerRequestSchema),
     defaultValues: defaultValues || {
@@ -43,27 +50,27 @@ const CustomerRequestForm = ({
   });
 
   const carTypeOptions = [
-    { value: "Sedan", label: "Sedan" },
-    { value: "SUV", label: "SUV" },
-    { value: "Truck", label: "Truck" },
+    { value: "Sedan", label: tCarTypes("sedan") },
+    { value: "SUV", label: tCarTypes("suv") },
+    { value: "Truck", label: tCarTypes("truck") },
   ];
 
   const carModelOptions = [
-    { value: "Model A", label: "Model A" },
-    { value: "Model B", label: "Model B" },
-    { value: "Model C", label: "Model C" },
+    { value: "Model A", label: tCarModels("modelA") },
+    { value: "Model B", label: tCarModels("modelB") },
+    { value: "Model C", label: tCarModels("modelC") },
   ];
 
   const serviceOptions = [
-    { value: "Service 1", label: "Service 1" },
-    { value: "Service 2", label: "Service 2" },
-    { value: "Service 3", label: "Service 3" },
+    { value: "Service 1", label: tServices("service1") },
+    { value: "Service 2", label: tServices("service2") },
+    { value: "Service 3", label: tServices("service3") },
   ];
 
   const branchOptions = [
-    { value: "Branch 1", label: "Branch 1" },
-    { value: "Branch 2", label: "Branch 2" },
-    { value: "Branch 3", label: "Branch 3" },
+    { value: "Branch 1", label: tBranches("branch1") },
+    { value: "Branch 2", label: tBranches("branch2") },
+    { value: "Branch 3", label: tBranches("branch3") },
   ];
 
   return (
@@ -73,56 +80,56 @@ const CustomerRequestForm = ({
           <TextInput
             control={form.control}
             name="client_name"
-            label="Client Name"
-            placeholder="Client Name"
+            label={t("clientName")}
+            placeholder={t("clientName")}
           />
           <PhoneInputField
             control={form.control}
             name="phone_number"
-            label="Phone Number"
+            label={t("phoneNumber")}
           />
           <CustomSelect
             control={form.control}
             name="car_type"
-            label="Car Type"
-            placeholder="Car Type"
+            label={t("carType")}
+            placeholder={t("carType")}
             options={carTypeOptions}
           />
           <CustomSelect
             control={form.control}
             name="car_model"
-            label="Car Model"
-            placeholder="Car Model"
+            label={t("carModel")}
+            placeholder={t("carModel")}
             options={carModelOptions}
           />
           <CustomSelect
             control={form.control}
             name="service"
-            label="Choose Service"
-            placeholder="Choose Service"
+            label={t("service")}
+            placeholder={t("service")}
             options={serviceOptions}
           />
           <CustomSelect
             control={form.control}
             name="branch"
-            label="Choose Branch"
-            placeholder="Choose Branch"
+            label={t("branch")}
+            placeholder={t("branch")}
             options={branchOptions}
           />
         </div>
         <TextArea
           control={form.control}
           name="additional_notes"
-          label="Additional Notes"
-          placeholder="Additional Notes"
+          label={t("additionalNotes")}
+          placeholder={t("additionalNotes")}
           className="mt-2 xl:mt-5"
         />
         <div className="flex justify-end gap-2 mt-5 flex-col-reverse xs:flex-row">
           <Link href="/dashboard/customer-requests" passHref>
-            <CustomButton text="Cancel" variant="secondary" />
+            <CustomButton text={t("cancel")} variant="secondary" />
           </Link>
 
-          <CustomButton text="Save" />
+          <CustomButton text={t("save")} />
         </div>
       </form>
     </Form>
