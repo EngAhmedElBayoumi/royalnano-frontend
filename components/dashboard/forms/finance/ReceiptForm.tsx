@@ -3,8 +3,9 @@ import CustomSelect from "@/components/formFields/CustomSelect";
 import TextInput from "@/components/formFields/TextInput";
 import { Form } from "@/components/ui/form";
 import { receiptSchema } from "@/lib/validations/dashboard/finance/receiptSchema";
-import { useGetInvoicesQuery } from "@/redux/services/dashboard/purchase/invoiceApi";
-import { useGetCustomerQuotationsQuery } from "@/redux/services/dashboard/sales/salesQuotationsApi";
+import { useGetFinanceQuery } from "@/redux/services/dashboard/finance/financeApi";
+import { useGetSalesCustomerQuery } from "@/redux/services/dashboard/sales/salesCustomerApi";
+import { useGetSalesInvoiceQuery } from "@/redux/services/dashboard/sales/salesInvoiceApi";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
@@ -17,30 +18,42 @@ export interface ReceiptFormValues {
   reference_number: string|number;
   notes: string;
 }
+
 export interface ReceiptFormProps {
   onSubmit: (data: ReceiptFormValues) => Promise<void>;
-    defaultValues?: ReceiptFormValues;
-    isLoading?: boolean;
-
+  defaultValues?: ReceiptFormValues;
+  isLoading?: boolean;
 }
+
+interface AccountOption {
+  value: string;
+  label: string;
+}
+
 interface CustomerOption {
-    value: string;
-    label: string;
+  value: string;
+  label: string;
 }
 
 interface InvoiceOption {
-    value: string;
-    label: string;
+  value: string;
+  label: string;
+}
+
+interface Account {
+  id: number;
+  name: string;
+  code: string;
 }
 
 interface Customer {
-    id: number;
-    name: string;
+  id: number;
+  customer_name: string;
 }
 
 interface Invoice {
-    id: number;
-    invoice_number: string;
+  id: number;
+  invoice_number: string;
 }
 
 // ReceiptForm component for creating or editing receipt vouchers
@@ -50,25 +63,31 @@ const ReceiptForm = ({
   isLoading,
 }: ReceiptFormProps) => {
   const globalTranslate = useTranslations();
-  // Fetch options for select fields
-  const { data: customers  } = useGetCustomerQuotationsQuery("");
-  const { data: invoices  } = useGetInvoicesQuery("");
   
+  // Fetch data from APIs
+  const { data: accounts } = useGetFinanceQuery({});
+  const { data: customers } = useGetSalesCustomerQuery({});
+  const { data: invoices } = useGetSalesInvoiceQuery({});
   
-  
+  console.log("accounts", accounts);
   console.log("customers", customers);
-    console.log("invoices", invoices);
+  console.log("invoices", invoices);
 
+  // Create options arrays
+  const accountOptions: AccountOption[] = accounts?.map((account: Account): AccountOption => ({
+    value: account.id.toString(),
+    label: `${account.code} - ${account.name}`
+  })) || [];
 
-const customerOptions: CustomerOption[] = customers?.map((customer: Customer): CustomerOption => ({
+  const customerOptions: CustomerOption[] = customers?.results?.map((customer: Customer): CustomerOption => ({
     value: customer.id.toString(),
-    label: customer.name
-}));
+    label: customer.customer_name
+  })) || [];
 
-const invoiceOptions: InvoiceOption[] = invoices?.map((invoice: Invoice): InvoiceOption => ({
+  const invoiceOptions: InvoiceOption[] = invoices?.results?.map((invoice: Invoice): InvoiceOption => ({
     value: invoice.id.toString(),
     label: `#${invoice.invoice_number}`
-}));
+  })) || [];
   const form = useForm({
     resolver: zodResolver(receiptSchema),
     defaultValues: defaultValues || {
@@ -88,7 +107,7 @@ const invoiceOptions: InvoiceOption[] = invoices?.map((invoice: Invoice): Invoic
         <CustomSelect
           name="account"
           label="Account"
-          options={[]} // Add your account options here
+          options={accountOptions}
           placeholder="Select Account"
           control={form?.control}
         />
