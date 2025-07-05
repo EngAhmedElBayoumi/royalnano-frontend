@@ -11,6 +11,11 @@ export const permissionsApi = createApi({
         params: { search, ordering, page, page_size },
       }),
     }),
+    getGroupedPermissions: builder.query({
+      query: () => ({
+        url: `hr/permissions/grouped/`,
+      }),
+    }),
     getPermissionsById: builder.query({
       query: (id) => `hr/permissions/${id}/`,
     }),
@@ -33,6 +38,7 @@ export const permissionsApi = createApi({
 
 export const {
   useGetPermissionsQuery,
+  useGetGroupedPermissionsQuery,
   useGetPermissionsByIdQuery,
   useCreatePermissionsMutation,
   useUpdatePermissionsMutation,

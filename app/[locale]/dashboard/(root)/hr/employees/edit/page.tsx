@@ -26,6 +26,7 @@ export default function EditEmployee() {
     branch: String(data?.branch?.id),
     department: String(data?.department?.id) || "",
     job_title: String(data?.job_title?.id) || "",
+    leader: String(data?.leader?.id) || "",
     custom_permissions: data.custom_permissions.map(
       (custom_permission: number) => String(custom_permission)
     ),
@@ -38,6 +39,7 @@ export default function EditEmployee() {
       branch: Number(data.branch),
       department: Number(data.department),
       job_title: Number(data.job_title),
+      leader: data.leader ? Number(data.leader) : null,
     };
 
     const response = await updateEmployee({ id, data: payload });

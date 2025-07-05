@@ -8,6 +8,7 @@ import { employeeSchema } from "@/lib/validations/dashboard/hr/employeeSchema";
 import { useGetBranchesQuery } from "@/redux/services/dashboard/inventory/branchesApi";
 import { useGetDepartmentsQuery } from "@/redux/services/dashboard/hr/departmentApi";
 import { useGetJobsQuery } from "@/redux/services/dashboard/hr/jobsApi";
+import { useGetEmployeesQuery } from "@/redux/services/dashboard/hr/employeeApi";
 import { Form } from "@/components/ui/form";
 import { listItems } from "@/lib/utils/types";
 import CustomButton from "@/components/formFields/CustomButton";
@@ -15,7 +16,8 @@ import TextInput from "@/components/formFields/TextInput";
 import PhoneInputField from "@/components/formFields/PhoneInputField";
 import CustomSelect from "@/components/formFields/CustomSelect";
 import SwitchField from "@/components/formFields/Switch";
-import MultiSelect from "@/components/formFields/MultiSelect";
+import GroupedPermissionsSelector from "@/components/formFields/GroupedPermissionsSelector";
+import { useGetGroupedPermissionsQuery } from "@/redux/services/dashboard/hr/permissionsApi";
 
 interface EmployeeFormProps {
   onSubmit: (data: EmployeeFormValues) => Promise<void>;
@@ -35,6 +37,7 @@ export interface EmployeeFormValues {
   password: string;
   is_user: boolean;
   custom_permissions: number[];
+  leader?: string;
 }
 
 const EmployeeForm = ({
@@ -56,6 +59,7 @@ const EmployeeForm = ({
       password: "",
       is_user: false,
       custom_permissions: [],
+      leader: "",
     },
   });
   const globalTranslate = useTranslations();
@@ -63,6 +67,8 @@ const EmployeeForm = ({
   const { data: branches } = useGetBranchesQuery({});
   const { data: departments } = useGetDepartmentsQuery({});
   const { data: jobs } = useGetJobsQuery({});
+  const { data: employees } = useGetEmployeesQuery({});
+  const { data: groupedPermissions } = useGetGroupedPermissionsQuery({});
 
   const branchesOptions =
     branches?.results?.map((branch: listItems) => ({
@@ -82,11 +88,15 @@ const EmployeeForm = ({
       label: job.name,
     })) || [];
 
+  const employeesOptions =
+    employees?.results?.map((employee: listItems) => ({
+      value: String(employee.id),
+      label: employee.name,
+    })) || [];
+
   // Watch the selected job
   const selectedJobId = form.watch("job_title");
-  const [jobPermissions, setJobPermissions] = useState<
-    { value: string; label: string }[]
-  >([]);
+  const [jobPermissions, setJobPermissions] = useState<number[]>([]);
 
   useEffect(() => {
     // Find the selected job and update permissions
@@ -95,10 +105,7 @@ const EmployeeForm = ({
     );
     if (selectedJob) {
       setJobPermissions(
-        selectedJob.permissions.map((p: { id: string; name: string }) => ({
-          value: String(p.id),
-          label: p.name,
-        }))
+        selectedJob.permissions.map((p: { id: number }) => p.id)
       );
     } else {
       setJobPermissions([]);
@@ -159,6 +166,13 @@ const EmployeeForm = ({
             placeholder={t("department")}
             options={departmentsOptions}
           />
+          <CustomSelect
+            control={form.control}
+            name="leader"
+            label={t("leader")}
+            placeholder={t("leader")}
+            options={employeesOptions}
+          />
           <TextInput
             control={form.control}
             name="password"
@@ -173,12 +187,12 @@ const EmployeeForm = ({
           />
         </section>
         {jobPermissions.length > 0 && (
-          <MultiSelect
+          <GroupedPermissionsSelector
             control={form.control}
             name="custom_permissions"
             label={t("permissions")}
-            placeholder={t("permissions")}
-            options={jobPermissions}
+            groups={groupedPermissions || []}
+            filterPermissions={jobPermissions}
             className="mt-2 xl:mt-5"
           />
         )}

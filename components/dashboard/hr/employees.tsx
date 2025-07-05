@@ -10,6 +10,9 @@ interface Employee {
   branch: {
     name: string;
   };
+  leader?: {
+    name: string;
+  };
   email_address: string;
   phone: string;
   address: string;
@@ -30,6 +33,7 @@ export default function Employees() {
     data?.results?.map((employee: Employee) => ({
       ...employee,
       branch: employee.branch.name,
+      leader: employee.leader?.name || "-",
     })) || [];
 
   const columns = [
@@ -38,6 +42,7 @@ export default function Employees() {
     { field: "phone", header: t("phone") },
     { field: "address", header: t("address") },
     { field: "branch", header: t("branch") },
+    { field: "leader", header: t("leader") },
   ];
 
   const cardsData = [

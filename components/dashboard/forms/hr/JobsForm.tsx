@@ -7,8 +7,8 @@ import { jobsSchema } from "@/lib/validations/dashboard/hr/jobsSchema";
 import { Form } from "@/components/ui/form";
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
-import { useGetPermissionsQuery } from "@/redux/services/dashboard/hr/permissionsApi";
-import MultiSelect from "@/components/formFields/MultiSelect";
+import GroupedPermissionsSelector from "@/components/formFields/GroupedPermissionsSelector";
+import { useGetGroupedPermissionsQuery } from "@/redux/services/dashboard/hr/permissionsApi";
 
 interface JobsFormProps {
   onSubmit: (data: JobsFormValues) => Promise<void>;
@@ -36,38 +36,26 @@ const JobsForm: React.FC<JobsFormProps> = ({
 
   const globalTranslate = useTranslations();
   const t = useTranslations("hr.jobs");
-  const {
-    data: permissionsData,
-    // isLoading: isLoadingPermissions,
-    // error: permissionsError
-  } = useGetPermissionsQuery({});
+  const { data: groupedPermissions } = useGetGroupedPermissionsQuery({});
 
-  // Prepare permissions options for MultiSelect
-  const permissionsOptions =
-    permissionsData?.map(
-      (permission: { id: { toString: () => string }; name: string }) => ({
-        value: permission.id.toString(),
-        label: permission.name,
-      })
-    ) || [];
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <section className="min-h-[60vh]">
-          <div className="grid sm:grid-cols-2 gap-x-4 gap-y-2 xl:gap-y-5 lg:gap-x-10">
+          <div className="grid gap-x-4 gap-y-2 xl:gap-y-5 lg:gap-x-10">
             <TextInput
               control={form.control}
               name="name"
               label={t("name")}
               placeholder={t("name")}
+              className="mb-4"
             />
 
-            <MultiSelect
+            <GroupedPermissionsSelector
               control={form.control}
               name="permissions"
               label={t("permissions")}
-              placeholder={t("permissionSelection")}
-              options={permissionsOptions}
+              groups={groupedPermissions || []}
             />
           </div>
         </section>

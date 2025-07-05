@@ -188,6 +188,7 @@
       "address": "Address",
       "branch": "Branch",
       "department": "Department",
+      "leader": "Leader",
       "password": "Password",
       "isUser": "User",
       "permissions": "Permissions",

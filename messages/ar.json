@@ -188,6 +188,7 @@
       "address": "العنوان",
       "branch": "الفرع",
       "department": "القسم",
+      "leader": "القائد",
       "password": "كلمة المرور",
       "isUser": "مستخدم",
       "permissions": "الصلاحيات",
