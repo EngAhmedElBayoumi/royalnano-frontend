@@ -61,6 +61,8 @@ import { receiptVoucherApi } from "./services/dashboard/finance/receiptVoucherAp
 import { consumedItemsApi } from "./services/dashboard/sales/salesConsumedItemsApi";
 import { attachmentsApi } from "./services/dashboard/sales/salesCustomerAttachmentsApi";
 import { followUpTypesApi } from "./services/dashboard/sales/followUpTypesApi";
+import { analyticsApi } from "./services/analytics/analyticsApi";
+import { reportsApi } from "./services/reports/reportsApi";
 
 // Create separate configs for each reducer
 const authPersistConfig = {
@@ -140,6 +142,8 @@ export const store = configureStore({
     [consumedItemsApi.reducerPath]: consumedItemsApi.reducer,
     [attachmentsApi.reducerPath]: attachmentsApi.reducer,
     [followUpTypesApi.reducerPath]: followUpTypesApi.reducer,
+    [analyticsApi.reducerPath]: analyticsApi.reducer,
+    [reportsApi.reducerPath]: reportsApi.reducer,
     auth: persistedAuthReducer,
     profile: persistedProfileReducer,
   },
@@ -205,6 +209,8 @@ export const store = configureStore({
       .concat(consumedItemsApi.middleware)
       .concat(followUpTypesApi.middleware)
       .concat(attachmentsApi.middleware)
+      .concat(analyticsApi.middleware)
+      .concat(reportsApi.middleware)
     
   },
 });

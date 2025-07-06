@@ -24,7 +24,9 @@
     "settings": "الإعدادات",
     "logout": "تسجيل الخروج",
     "purchase": "المشتريات",
-    "finance": "المالية"
+    "finance": "المالية",
+    "analytics": "الإحصائيات",
+    "reports": "التقارير"
   },
   "branches": {
     "tabs": {

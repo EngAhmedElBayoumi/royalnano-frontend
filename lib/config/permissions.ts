@@ -48,4 +48,6 @@ export const permissionRoutes = {
     "warehouse",
   ],
    "/dashboard/finance": ["customer"],
+   "/dashboard/analytics": ["analytics"],
+   "/dashboard/reports": ["reports"],
 };

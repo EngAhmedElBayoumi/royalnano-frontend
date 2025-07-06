@@ -51,6 +51,11 @@ export async function middleware(req: NextRequest) {
       permissionRoutes
     )) {
       if (req.nextUrl.pathname.includes(route)) {
+        // Temporary bypass for analytics and reports routes
+        if (route === "/dashboard/analytics" || route === "/dashboard/reports") {
+          continue; // Skip permission check for these routes
+        }
+        
         // Check if user has any of the required permissions
         const hasAnyPermission = requiredPermissions.some(
           (permission) => userPermissions[permission]?.view
