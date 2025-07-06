@@ -24,7 +24,9 @@
     "settings": "Settings",
     "logout": "Logout",
     "purchase": "Purchase",
-    "finance": "Finance"
+    "finance": "Finance",
+    "analytics": "Analytics",
+    "reports": "Reports"
   },
   "branches": {
     "tabs": {

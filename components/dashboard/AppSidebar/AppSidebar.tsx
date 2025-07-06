@@ -64,6 +64,8 @@ export function AppSidebar() {
 
                 const hasPermission =
                   link.name === "home" ||
+                  link.name === "analytics" ||
+                  link.name === "reports" ||
                   link.permissions?.some(
                     (permission) => permissions[permission]?.view
                   );
