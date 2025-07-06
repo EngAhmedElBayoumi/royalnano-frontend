@@ -63,7 +63,7 @@ export default function SalesCustomer() {
         city: customer.city,
         country: customer.country,
         notes: customer.notes,
-        branch_name: customer.branch.name,
+        branch_name: customer.branch?.name,
         customer_type: customer.customer_type,
         tax_number: customer.tax_number || "N/A",
         national_id: customer.national_id,
