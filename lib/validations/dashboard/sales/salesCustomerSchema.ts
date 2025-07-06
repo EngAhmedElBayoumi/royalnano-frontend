@@ -6,24 +6,12 @@ export const SalesCustomerFormValuesSchema = z.object({
 
   phone_numbers: z.any().optional(),
 
-  email: z.string().email("Invalid email address"),
-  address: z.string().min(1, "Address is required"),
-  city: z.string().min(1, "City is required"),
-  country: z.string().min(1, "Country is required"),
-  notes: z.string().optional(),
-
-  branch: z.coerce
-    .number()
-    .int()
-    .positive("Branch ID must be a positive integer"),
-
-  customer_type: z.enum(["individual", "company"]), // <-- عدلتها عشان backend enum مكتوب كده
-
-  tax_number: z.string().optional(), // <-- لأنها nullable على الباك اند
-  national_id: z.string().optional(),
-
-  extra_fields: z.record(z.any()).optional(),
-
+  email: z.string().email("Invalid email address").optional().or(z.literal("")),
+  address: z.string().optional().or(z.literal("")),
+  city: z.string().optional().or(z.literal("")),
+  country: z.string().optional().or(z.literal("")),
+  branch: z.coerce.number().int().positive("Branch ID must be a positive integer").nullable().optional(),
+  customer_type: z.enum(["individual", "company"]).optional(),
   source: z.enum([
     "facebook",
     "instagram",
@@ -31,10 +19,9 @@ export const SalesCustomerFormValuesSchema = z.object({
     "twitter",
     "recommendation",
     "other",
-  ]),
-
+  ]).optional(),
   assigned_to: z.coerce.number().nullable().optional(),
-  recommended_by: z.coerce.number().nullable().optional(), // <== مهمة جدًا
+  recommended_by: z.coerce.number().nullable().optional(),
 });
 
 export type SalesCustomerFormValues = z.infer<
