@@ -56,8 +56,9 @@ export default function SalesCustomer() {
         contact_person: customer.contact_person,
         phone_number:
           customer.phone_number ||
+          customer.contact_person ||
           customer.phone_numbers[0]?.phone_number ||
-          "N/A",
+          "No Phone number",
         email: customer.email,
         address: customer.address,
         city: customer.city,
