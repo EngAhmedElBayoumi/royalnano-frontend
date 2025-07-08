@@ -38,6 +38,7 @@ export interface SalesQuotationFormValues {
     discount_percent: string;
     tax_rate: string;
     total: string;
+    supplier?: number;
   }[];
 }
 
@@ -96,6 +97,7 @@ const EditSalesQuotationForm = ({
       discount_percent: "0",
       tax_rate: "0",
       total: "0",
+      supplier: null,
     });
   };
 

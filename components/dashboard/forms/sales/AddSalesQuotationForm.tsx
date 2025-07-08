@@ -22,8 +22,8 @@ export interface SalesQuotationFormValues {
   date: string;
   customer: number;
   validity_period: string;
-  // quotation_number: string;
-  // status: string;
+  
+  
   items: {
     item_name: string;
     quantity: number;
@@ -32,6 +32,7 @@ export interface SalesQuotationFormValues {
     discount_percent: string;
     tax_rate: string;
     total: string;
+    supplier?: number;
   }[];
 }
 
@@ -56,8 +57,8 @@ const AddSalesQuotationForm = ({
       date: new Date().toISOString().split("T")[0],
       customer: initialCustomerId ?? 1, // Use the customerId from query params
       validity_period: new Date().toISOString().split("T")[0],
-      // quotation_number: "",
-      // status: "sent",
+      quotation_number: "",
+      status: "draft",
       items: [],
     },
   });
@@ -76,6 +77,7 @@ const AddSalesQuotationForm = ({
       discount_percent: "0",
       tax_rate: "0",
       total: "0",
+      supplier: null,
     });
   };
 
@@ -160,24 +162,8 @@ const AddSalesQuotationForm = ({
               label={t("SalesQuotation.validityPeriod")}
               placeholder={t("SalesQuotation.validityPeriod")}
             />
-            {/* <TextInput
-              control={form.control}
-              name="quotation_number"
-              label={t("SalesQuotation.quotationNumber")}
-              placeholder={t("SalesQuotation.quotationNumber")}
-            /> */}
-            {/* <CustomSelect
-              control={form.control}
-              name="status"
-              label={t("SalesQuotation.status")} // ترجمته مثلاً: "Status"
-              placeholder={t("SalesQuotation.status")} // مثال: "Select status"
-              options={[
-                { value: "sent", label: "Sent" },
-                { value: "accepted", label: "Accepted" },
-                { value: "draft", label: "Draft" },
-                { value: "rejected", label: "Rejected" },
-              ]}
-            /> */}
+            
+            
           </div>
 
           <div className="mt-6">

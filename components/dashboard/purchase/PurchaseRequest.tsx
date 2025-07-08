@@ -71,7 +71,7 @@ export default function PurchaseRequest() {
       request_date: request.request_date,
       description: request.description,
       request_by: supplierNames[request.request_by] || "Loading...", // Map request_by to supplier name
-      branch: request.branch.name,
+      branch: request.branch?.name,
       items: request.items.map((item) => item.item_name).join(", "), // Display item names as a comma-separated string
     })) || [];
 

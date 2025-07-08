@@ -50,14 +50,14 @@ const SalesCustomerForm = ({
       city: "",
       country: "",
       notes: "",
-      branch: undefined,
+      branch: 41,
       customer_type: "individual",
       tax_number: "",
       national_id: "",
       extra_fields: {},
       source: "other",
-      assigned_to: null,
-      recommended_by: undefined,
+      assigned_to: 1,
+      recommended_by: 1,
     },
   });
 

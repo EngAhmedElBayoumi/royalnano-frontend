@@ -15,12 +15,8 @@ const itemSchema = z.object({
 export const purchaseRequestSchema = z.object({
   request_date: z.string().min(1, "Request date is required"),
   description: z.string().min(1, "Description is required"),
-  id: z.number().int().positive("ID must be a positive integer"),
-  request_by: z
-    .number()
-    .int()
-    .positive("Request by must be a positive integer"),
-  branch: z.number().int().positive("Branch must be a positive integer"),
+  request_by: z.string().min(1, "Request by is required"),
+  branch: z.string().min(1, "Branch is required"),
   items: z.array(itemSchema).nonempty("At least one item is required"),
 });
 

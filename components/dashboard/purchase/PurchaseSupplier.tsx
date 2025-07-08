@@ -79,7 +79,6 @@ export default function PurchaseSupplier() {
       cardData={cardsData}
       emptyMessage={t("noDataFound")}
       editRoute="/dashboard/purchase/purchase-supplier/edit/"
-      viewRoute="/dashboard/purchase/purchase-supplier/view/"
       buttonText={t("addSupplier")}
       ButtonEvent={handleClick}
       onPageChange={handlePageChange}

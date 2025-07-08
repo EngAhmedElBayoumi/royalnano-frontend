@@ -4,8 +4,12 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
+import CustomSelect from "@/components/formFields/CustomSelect";
+import DatePicker from "@/components/formFields/DatePicker";
 import { useTranslations } from "next-intl";
 import { purchaseRequestSchema } from "@/lib/validations/dashboard/purchase/purchaseRequestSchema";
+import { useGetBranchesQuery } from "@/redux/services/dashboard/inventory/branchesApi";
+import { useGetEmployeesQuery } from "@/redux/services/dashboard/hr/employeeApi";
 
 interface PurchaseRequestFormProps {
   onSubmit: (data: PurchaseRequestFormValues) => Promise<void>;
@@ -16,9 +20,8 @@ interface PurchaseRequestFormProps {
 export interface PurchaseRequestFormValues {
   request_date: string;
   description: string;
-  id: number;
-  request_by: number;
-  branch: number;
+  request_by: string;
+  branch: string;
   items: {
     kind: string;
     item_kind: string;
@@ -42,9 +45,8 @@ const PurchaseRequestForm = ({
     defaultValues: defaultValues || {
       request_date: "",
       description: "",
-      id: 1,
-      request_by: 1,
-      branch: 1,
+      request_by: "",
+      branch: "",
       items: [
         {
           kind: "",
@@ -62,18 +64,31 @@ const PurchaseRequestForm = ({
   });
 
   const t = useTranslations("Purchase.Request");
+  const { data: branchesData } = useGetBranchesQuery({});
+  const { data: employeesData } = useGetEmployeesQuery({});
+
+  const branchOptions = branchesData?.results?.map((branch: any) => ({
+    label: branch.name,
+    value: branch.id.toString(),
+  })) || [];
+
+  const employeeOptions = employeesData?.results?.map((employee: any) => ({
+    label: employee.name, // Assuming user.email is the employee name
+    value: employee.id.toString(),
+  })) || [];
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <section className="min-h-[60vh]">
           <div className="grid sm:grid-cols-2 gap-x-4 gap-y-2 xl:gap-y-5 lg:gap-x-10">
-            <TextInput
+            <DatePicker
               control={form.control}
               name="request_date"
               label={t("requestDate")}
               placeholder={t("requestDate")}
               readonly={isView}
+              format="yyyy-MM-dd"
             />
             <TextInput
               control={form.control}
@@ -82,28 +97,20 @@ const PurchaseRequestForm = ({
               placeholder={t("description")}
               readonly={isView}
             />
-            <TextInput
-              control={form.control}
-              name="id"
-              label={t("id")}
-              placeholder={t("id")}
-              type="number"
-              readonly={isView}
-            />
-            <TextInput
+            <CustomSelect
               control={form.control}
               name="request_by"
               label={t("requestBy")}
               placeholder={t("requestBy")}
-              type="number"
+              options={employeeOptions}
               readonly={isView}
             />
-            <TextInput
+            <CustomSelect
               control={form.control}
               name="branch"
               label={t("branch")}
               placeholder={t("branch")}
-              type="number"
+              options={branchOptions}
               readonly={isView}
             />
           </div>

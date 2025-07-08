@@ -3,13 +3,8 @@ export const salesQuotationSchema = z.object({
   date: z.string().min(1, "Date is required"),
   customer: z.number().min(1, "Customer is required"),
   validity_period: z.string().min(1, "Validity period is required"),
-  quotation_number: z
-    .string()
-    .min(1, "Quotation number is required")
-    .optional(),
-  status: z.enum(["sent", "accepted", "draft", "rejected"], {
-    errorMap: () => ({ message: "Status is required" }),
-  }),
+  quotation_number: z.string().optional(),
+  
   items: z
     .array(
       z.object({
@@ -19,6 +14,7 @@ export const salesQuotationSchema = z.object({
         discount: z.string().optional(),
         discount_percent: z.string().optional(),
         tax_rate: z.string().optional(),
+        supplier: z.number().optional().nullable(),
       })
     )
     .nonempty("At least one item is required"),

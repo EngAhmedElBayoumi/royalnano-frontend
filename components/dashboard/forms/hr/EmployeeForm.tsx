@@ -23,6 +23,7 @@ interface EmployeeFormProps {
   onSubmit: (data: EmployeeFormValues) => Promise<void>;
   defaultValues?: EmployeeFormValues;
   isLoading?: boolean;
+  schema?: any;
 }
 
 export interface EmployeeFormValues {
@@ -44,9 +45,10 @@ const EmployeeForm = ({
   onSubmit,
   defaultValues,
   isLoading,
+  schema,
 }: EmployeeFormProps) => {
   const form = useForm({
-    resolver: zodResolver(employeeSchema),
+    resolver: zodResolver(schema || employeeSchema),
     defaultValues: defaultValues || {
       name: "",
       email_address: "",

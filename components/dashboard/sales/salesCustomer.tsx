@@ -63,10 +63,11 @@ export default function SalesCustomer() {
         city: customer.city,
         country: customer.country,
         notes: customer.notes,
-        branch_name: customer.branch?.name,
+        branch_name: customer.branch.name,
         customer_type: customer.customer_type,
         tax_number: customer.tax_number || "N/A",
         national_id: customer.national_id,
+        assigned_to_name: customer.assigned_to_name,
       })
     ) || [];
 
@@ -78,6 +79,7 @@ export default function SalesCustomer() {
     { field: "phone_number", header: "Phone Number" },
     { field: "email", header: "Email" },
     { field: "branch_name", header: "Branch Name" },
+    { field: "assigned_to_name", header: "Assigned To" },
   ];
 
   const cardsData = [

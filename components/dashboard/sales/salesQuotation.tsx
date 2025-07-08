@@ -60,6 +60,7 @@ export default function SalesQuotation({ customerId }: SalesQuotationProps) {
 
   const columns = [
     { field: "customer_name", header: "Customer Name" },
+    { field: "quotation_number", header: "Quotation Number" },
     { field: "date", header: "Date" },
     {
       field: "status",

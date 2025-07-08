@@ -716,12 +716,15 @@
       }
     },
     "Warehouse": {
-      "itemCode": "Item Code",
-      "purchaseWarehouseLevel": "Purchase Warehouse Level",
+      "name": "Name",
+      "location": "Location",
       "description": "Description",
       "noDataFound": "No warehouse data found.",
       "addWarehouse": "Add Warehouse",
+      "itemCode": "Item Code",
+      "purchaseWarehouseLevel": "Purchase Warehouse Level",
       "cards": {
+        "totalWarehouses": "Total Warehouses",
         "newRequests": "New Requests",
         "complete": "Complete",
         "pending": "Pending",

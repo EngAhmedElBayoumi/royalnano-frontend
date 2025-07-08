@@ -19,8 +19,8 @@ export const supplierSchema = z.object({
   id: z.number().int().positive("ID must be a positive integer"),
   suffix: z.string().min(1, "Suffix is required"),
   additional_info: z.string().min(1, "Additional info is required"),
-  branch: z.number().int().positive("Branch must be a positive integer"),
-  accounting_expenses_category: z.number().int().positive("Accounting expenses category must be a positive integer"),
+  branch: z.number().int().positive("Branch must be a positive integer").optional().nullable(),
+  accounting_expenses_category: z.number().int().positive("Accounting expenses category must be a positive integer").optional().nullable(),
 });
 
 export type SupplierFormValues = z.infer<typeof supplierSchema>;

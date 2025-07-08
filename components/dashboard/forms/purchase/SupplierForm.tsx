@@ -6,6 +6,9 @@ import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
 import { useTranslations } from "next-intl";
 import { supplierSchema } from "@/lib/validations/dashboard/purchase/supplierSchema";
+import CustomSelect from "@/components/formFields/CustomSelect";
+import { useGetBranchesQuery } from "@/redux/services/dashboard/inventory/branchesApi";
+import { useGetExpenseCategorysQuery } from "@/redux/services/dashboard/purchase/expenseCategory";
 
 interface SupplierFormProps {
   onSubmit: (data: SupplierFormValues) => Promise<void>;
@@ -74,6 +77,19 @@ const SupplierForm = ({
   });
 
   const t = useTranslations("Purchase.Supplier");
+
+  const { data: branchesData } = useGetBranchesQuery({});
+  const { data: expenseCategoriesData } = useGetExpenseCategorysQuery({});
+
+  const branchOptions = branchesData?.results?.map((branch: { id: number; name: string }) => ({
+    value: String(branch.id),
+    label: branch.name,
+  })) || [];
+
+  const expenseCategoryOptions = expenseCategoriesData?.results?.map((category: { id: number; name: string }) => ({
+    value: String(category.id),
+    label: category.name,
+  })) || [];
 
   return (
     <Form {...form}>
@@ -208,21 +224,23 @@ const SupplierForm = ({
               placeholder={t("additionalInfo")}
               readonly={isView}
             />
-            <TextInput
+            <CustomSelect
               control={form.control}
               name="branch"
               label={t("branch")}
               placeholder={t("branch")}
-              type="number"
+              options={branchOptions}
               readonly={isView}
+              valueType="number"
             />
-            <TextInput
+            <CustomSelect
               control={form.control}
               name="accounting_expenses_category"
               label={t("accountingExpensesCategory")}
               placeholder={t("accountingExpensesCategory")}
-              type="number"
+              options={expenseCategoryOptions}
               readonly={isView}
+              valueType="number"
             />
           </div>
         </section>
