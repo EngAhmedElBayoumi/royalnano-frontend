@@ -700,19 +700,18 @@
       "editExpenseCategory": "Edit Expense Category",
       "viewExpenseCategory": "View Expense Category",
       "save": "Save",
-      "cancel": "cancel",
-      "Name": "Name",
+      "cancel": "Cancel",
+      "name": "Name",
       "itemCode": "Item Code",
       "purchaseExpenseCategoryLevel": "Purchase Expense Category Level",
       "description": "Description",
       "noDataFound": "No expense category data found.",
       "addExpenseCategory": "Add Expense Category",
       "cards": {
-        "newRequests": "New Requests",
-        "complete": "Complete",
-        "pending": "Pending",
-        "failed": "Failed",
-        "paid": "Paid"
+        "totalCategories": "Total Categories",
+        "activeCategories": "Active Categories",
+        "withDescription": "With Description",
+        "recentlyAdded": "Recently Added"
       }
     },
     "Warehouse": {
@@ -725,11 +724,9 @@
       "purchaseWarehouseLevel": "Purchase Warehouse Level",
       "cards": {
         "totalWarehouses": "Total Warehouses",
-        "newRequests": "New Requests",
-        "complete": "Complete",
-        "pending": "Pending",
-        "failed": "Failed",
-        "paid": "Paid"
+        "activeWarehouses": "Active Warehouses",
+        "withLocation": "With Location",
+        "withDescription": "With Description"
       }
     },
     "Request": {
@@ -741,16 +738,17 @@
       "description": "Description",
       "requestBy": "Request By",
       "branch": "Branch",
+      "status": "Status",
       "items": "Items",
+      "itemsCount": "Items Count",
       "noDataFound": "No request data found.",
       "addRequest": "Add Request",
       "request": "Request",
       "cards": {
         "newRequests": "New Requests",
-        "complete": "Complete",
         "pending": "Pending",
-        "failed": "Failed",
-        "paid": "Paid"
+        "approved": "Approved",
+        "completed": "Completed"
       },
       "kind": "Kind",
       "itemKind": "Item Kind",
@@ -766,18 +764,32 @@
       "status": "Status",
       "description": "Description",
       "dueDate": "Due Date",
-      "createdAt": "created at",
+      "createdAt": "Created At",
       "voucherDate": "Voucher Date",
       "prefix": "Prefix",
       "totalAmount": "Total Amount",
       "noDataFound": "No invoice data found.",
       "addInvoice": "Add Invoice",
+      "warehouse": "Warehouse",
+      "closeKind": "Close Kind",
+      "branch": "Branch",
+      "supplier": "Supplier",
+      "purchaseOrder": "Purchase Order",
+      "items": "Items",
+      "item": "Item",
+      "quantity": "Quantity",
+      "unitPrice": "Unit Price",
+      "discount": "Discount",
+      "tax": "Tax",
+      "total": "Total",
+      "cancel": "Cancel",
+      "save": "Save",
       "cards": {
-        "newRequests": "New Requests",
-        "complete": "Complete",
+        "draft": "Draft",
         "pending": "Pending",
-        "failed": "Failed",
-        "paid": "Paid"
+        "approved": "Approved",
+        "paid": "Paid",
+        "cancelled": "Cancelled"
       }
     },
     "Order": {

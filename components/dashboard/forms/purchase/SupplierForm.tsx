@@ -4,11 +4,13 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
+import DatePicker from "@/components/formFields/DatePicker";
 import { useTranslations } from "next-intl";
 import { supplierSchema } from "@/lib/validations/dashboard/purchase/supplierSchema";
 import CustomSelect from "@/components/formFields/CustomSelect";
 import { useGetBranchesQuery } from "@/redux/services/dashboard/inventory/branchesApi";
 import { useGetExpenseCategorysQuery } from "@/redux/services/dashboard/purchase/expenseCategory";
+import { Link } from "@/i18n/routing";
 
 interface SupplierFormProps {
   onSubmit: (data: SupplierFormValues) => Promise<void>;
@@ -17,12 +19,6 @@ interface SupplierFormProps {
 }
 
 export interface SupplierFormValues {
-  items: {
-    id: number;
-    item_name: string;
-    item_code: string;
-  };
-  supplier_by(supplier_by: { id: number; name: string }): unknown;
   title: string;
   full_name: string;
   supplier_name: string;
@@ -38,7 +34,6 @@ export interface SupplierFormValues {
   account_no: string;
   opening_balance: string;
   as_of: string;
-  id: number;
   suffix: string;
   additional_info: string;
   branch: number;
@@ -53,26 +48,25 @@ const SupplierForm = ({
   const form = useForm<SupplierFormValues>({
     resolver: zodResolver(supplierSchema),
     defaultValues: defaultValues || {
-      title: "Mr.",
-      full_name: "John Doe",
-      supplier_name: "Doe Supplies",
-      phone_number: "+9146964038",
-      street_address: "123 Main St",
-      city: "New York",
-      province: "NY",
-      country: "USA",
-      postal_code: "10001",
-      taxes_business_id: "TX123",
-      expenses_rates_billing_rate: "50.00",
-      payment_terms: "Net 30",
-      account_no: "ACC123",
-      opening_balance: "1000.00",
-      as_of: "2023-10-01",
-      id: 1,
-      suffix: "Jr.",
-      additional_info: "Sample additional information.",
-      branch: 1,
-      accounting_expenses_category: 2,
+      title: "",
+      full_name: "",
+      supplier_name: "",
+      phone_number: "",
+      street_address: "",
+      city: "",
+      province: "",
+      country: "",
+      postal_code: "",
+      taxes_business_id: "",
+      expenses_rates_billing_rate: "",
+      payment_terms: "",
+      account_no: "",
+      opening_balance: "",
+      as_of: "",
+      suffix: "",
+      additional_info: "",
+      branch: 0,
+      accounting_expenses_category: 0,
     },
   });
 
@@ -173,6 +167,7 @@ const SupplierForm = ({
               label={t("billingRate")}
               placeholder={t("billingRate")}
               readonly={isView}
+              type="number"
             />
             <TextInput
               control={form.control}
@@ -194,20 +189,13 @@ const SupplierForm = ({
               label={t("openingBalance")}
               placeholder={t("openingBalance")}
               readonly={isView}
+              type="number"
             />
-            <TextInput
+            <DatePicker
               control={form.control}
               name="as_of"
               label={t("asOf")}
               placeholder={t("asOf")}
-              readonly={isView}
-            />
-            <TextInput
-              control={form.control}
-              name="id"
-              label={t("id")}
-              placeholder={t("id")}
-              type="number"
               readonly={isView}
             />
             <TextInput
@@ -248,7 +236,9 @@ const SupplierForm = ({
         {/* Buttons */}
         {!isView && (
           <div className="flex justify-end gap-2 mt-5 flex-col-reverse xs:flex-row">
-            <CustomButton text={t("cancel")} variant="secondary" />
+            <Link href="/dashboard/purchase?tab=supplier" passHref>
+              <CustomButton text={t("cancel")} variant="secondary" />
+            </Link>
             <CustomButton text={t("save")} type="submit" />
           </div>
         )}
@@ -258,3 +248,4 @@ const SupplierForm = ({
 };
 
 export default SupplierForm;
+

@@ -11,21 +11,21 @@ export interface Supplier {
   full_name: string;
   supplier_name: string;
   phone_number: string;
-  suffix: string;
+  suffix?: string;
   street_address: string;
   city: string;
   province: string;
   country: string;
   postal_code: string;
-  additional_info: string;
+  additional_info?: string;
   taxes_business_id: string;
   expenses_rates_billing_rate: string;
   payment_terms: string;
   account_no: string;
   opening_balance: string;
   as_of: string;
-  branch: null | { name: string };
-  accounting_expenses_category: null | { name: string };
+  branch?: { id: number; name: string } | null;
+  accounting_expenses_category?: { id: number; name: string } | null;
 }
 
 export default function PurchaseSupplier() {
@@ -38,21 +38,20 @@ export default function PurchaseSupplier() {
   const t = useTranslations("Purchase.Supplier");
 
   const columns = [
-    { field: "id", header: t("id") },
     { field: "supplier_name", header: t("supplierName") },
     { field: "full_name", header: t("fullName") },
     { field: "phone_number", header: t("phoneNumber") },
     { field: "city", header: t("city") },
     { field: "country", header: t("country") },
     { field: "expenses_rates_billing_rate", header: t("billingRate") },
+    { field: "branch_name", header: t("branch") },
   ];
 
   const cardsData = [
-    { title: t("cards.newRequests"), num: 145 },
-    { title: t("cards.complete"), num: 87 },
-    { title: t("cards.pending"), num: 3200 },
-    { title: t("cards.failed"), num: 48 },
-    { title: t("cards.paid"), num: 48 },
+    { title: t("cards.totalSuppliers"), num: suppliers?.count || 0 },
+    { title: t("cards.activeSuppliers"), num: suppliers?.results?.length || 0 },
+    { title: t("cards.newThisMonth"), num: 12 },
+    { title: t("cards.pendingApproval"), num: 3 },
   ];
 
   const formattedData =
@@ -64,6 +63,7 @@ export default function PurchaseSupplier() {
       city: supplier.city,
       country: supplier.country,
       expenses_rates_billing_rate: supplier.expenses_rates_billing_rate,
+      branch_name: supplier.branch?.name || "N/A",
     })) || [];
 
   const handleClick = () => {
@@ -86,3 +86,4 @@ export default function PurchaseSupplier() {
     />
   );
 }
+

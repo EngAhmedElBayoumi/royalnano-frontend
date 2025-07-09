@@ -1,9 +1,10 @@
-'use client';
+"use client";
 
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { Link } from "@/i18n/routing";
+import { useTranslations } from "next-intl";
 
 import { Form } from '@/components/ui/form';
 import CustomButton from "@/components/formFields/CustomButton";
@@ -29,6 +30,9 @@ const WarehouseForm: React.FC<WarehouseFormProps> = ({
   isLoading,
   defaultValues,
 }) => {
+  const t = useTranslations("Purchase.Warehouse");
+  const tGlobal = useTranslations();
+
   const form = useForm<WarehouseFormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: defaultValues || {
@@ -46,22 +50,22 @@ const WarehouseForm: React.FC<WarehouseFormProps> = ({
             <TextInput 
               control={form.control} 
               name="name" 
-              label="Name" 
-              placeholder="Warehouse Name" 
+              label={t("name")} 
+              placeholder={t("name")} 
             />
             <TextInput 
               control={form.control} 
               name="location" 
-              label="Location" 
-              placeholder="Warehouse Location" 
+              label={t("location")} 
+              placeholder={t("location")} 
             />
           </div>
           
           <CustomTextArea
             control={form.control}
             name="description"
-            label="Description"
-            placeholder="Warehouse Description"
+            label={t("description")} 
+            placeholder={t("description")} 
             className="mt-2 xl:mt-5"
           />
 
@@ -74,11 +78,11 @@ const WarehouseForm: React.FC<WarehouseFormProps> = ({
 
         <div className="flex justify-end gap-2 mt-5 flex-col-reverse xs:flex-row">
           <Link href="/dashboard/purchase?tab=warehouse" passHref>
-            <CustomButton text="Cancel" variant="secondary" />
+            <CustomButton text={tGlobal("cancel")} variant="secondary" />
           </Link>
 
           <CustomButton
-            text={isLoading ? "Saving..." : "Save"}
+            text={isLoading ? tGlobal("saving") : tGlobal("save")}
             isDisabled={isLoading}
           />
         </div>
@@ -88,4 +92,6 @@ const WarehouseForm: React.FC<WarehouseFormProps> = ({
 };
 
 export default WarehouseForm;
+
+
 

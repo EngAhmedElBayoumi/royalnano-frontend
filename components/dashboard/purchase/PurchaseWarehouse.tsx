@@ -31,15 +31,17 @@ export default function PurchaseWarehouse() {
 
   const cardsData = [
     { title: t("cards.totalWarehouses"), num: warehousesData?.count || 0 },
-    // Add more relevant cards for warehouses if needed
+    { title: t("cards.activeWarehouses"), num: warehousesData?.results?.length || 0 },
+    { title: t("cards.withLocation"), num: warehousesData?.results?.filter((wh: Warehouse) => wh.location && wh.location.trim() !== '').length || 0 },
+    { title: t("cards.withDescription"), num: warehousesData?.results?.filter((wh: Warehouse) => wh.description && wh.description.trim() !== '').length || 0 },
   ];
 
   const formattedData =
     warehousesData?.results?.map((warehouse: Warehouse) => ({
       id: warehouse.id,
-      name: warehouse.name,
-      location: warehouse.location,
-      description: warehouse.description,
+      name: warehouse.name || "-",
+      location: warehouse.location || "-",
+      description: warehouse.description || "-",
     })) || [];
 
   const handleClick = () => {
@@ -54,7 +56,8 @@ export default function PurchaseWarehouse() {
       columns={columns}
       cardData={cardsData}
       emptyMessage={t("noDataFound")}
-      editRoute={`/${locale}/dashboard/purchase/warehouse/edit/`}
+      editRoute={`/${locale}/dashboard/purchase/warehouse/`}
+      viewRoute={`/${locale}/dashboard/purchase/warehouse/`}
       buttonText={t("addWarehouse")}
       ButtonEvent={handleClick}
       onPageChange={handlePageChange}
@@ -62,3 +65,4 @@ export default function PurchaseWarehouse() {
     />
   );
 }
+

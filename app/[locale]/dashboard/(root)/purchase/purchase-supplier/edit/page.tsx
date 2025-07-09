@@ -19,8 +19,8 @@ export default function EditPurchaseSupplier() {
   const { data, isLoading, error } = useGetSupplierByIdQuery(id);
   const [updateSupplier, { isLoading: submitting }] =
     useUpdateSupplierMutation();
+    
   const defaultValues: SupplierFormValues | undefined = data && {
-    ...data,
     title: data.title || "",
     full_name: data.full_name || "",
     supplier_name: data.supplier_name || "",
@@ -38,16 +38,15 @@ export default function EditPurchaseSupplier() {
     as_of: data.as_of || "",
     suffix: data.suffix || "",
     additional_info: data.additional_info || "",
-    branch: data.branch || 0,
-    accounting_expenses_category: data.accounting_expenses_category || 0,
+    branch: data.branch?.id || 0,
+    accounting_expenses_category: data.accounting_expenses_category?.id || 0,
   };
 
-  const handleSubmit = async (data: SupplierFormValues) => {
+  const handleSubmit = async (formData: SupplierFormValues) => {
     const payload = {
-      ...data,
-      id: Number(data.id),
-      branch: Number(data.branch),
-      accounting_expenses_category: Number(data.accounting_expenses_category),
+      ...formData,
+      branch: formData.branch || null,
+      accounting_expenses_category: formData.accounting_expenses_category || null,
     };
     const response = await updateSupplier({ id, data: payload });
     if (response.error) handleApiError(response.error);
@@ -66,3 +65,4 @@ export default function EditPurchaseSupplier() {
     />
   );
 }
+
