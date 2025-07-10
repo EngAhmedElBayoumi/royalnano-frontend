@@ -75,7 +75,11 @@ const BranchForm = ({
     },
   });
 
-  const handleLocationSelect = (lat: number, lng: number, locationName: string) => {
+  const handleLocationSelect = (
+    lat: number,
+    lng: number,
+    locationName: string
+  ) => {
     form.setValue("location", locationName);
     form.setValue("latitude", lat);
     form.setValue("longitude", lng);
@@ -143,6 +147,7 @@ const BranchForm = ({
               </button>
             </div>
             <CustomModal
+              className="max-h-[96vh] overflow-y-auto"
               isOpen={isModalOpen}
               onChange={() => setIsModalOpen(false)}
               title={t("setLocation")}

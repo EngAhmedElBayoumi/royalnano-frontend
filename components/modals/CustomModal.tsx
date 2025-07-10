@@ -27,7 +27,7 @@ function CustomModal({
   return (
     <Dialog open={isOpen} onOpenChange={onChange}>
       <DialogContent
-        className={`custom-modal w-[50vw] sm:w-[80%] md:w-[70%] lg:w-[60%] xl:w-[50%] 2xl:w-[40%] ${className}`}
+        className={`custom-modal w-full sm:w-[80%] md:w-[70%] lg:w-[60%] xl:w-[50%] 2xl:w-[40%] ${className}`}
       >
         <DialogHeader>
           <DialogTitle className="text-start">{title}</DialogTitle>
