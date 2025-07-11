@@ -55,7 +55,7 @@ export default function Jobs() {
       columns={columns}
       cardData={cardsData}
       emptyMessage={t("noJobsDataFound")}
-      editRoute="/dashboard/hr/jobs/edit/"
+      editRoute="/dashboard/hr/jobs/edit"
       buttonText={t("addJob")}
       ButtonEvent={handleClick}
       onPageChange={handlePageChange}

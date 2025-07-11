@@ -6,7 +6,7 @@ const itemSchema = z.object({
   item_name: z.string().min(1, "Item name is required"),
   unit: z.string().min(1, "Unit is required"),
   quantity: z.number().min(0.01, "Quantity must be greater than 0"),
-  unit_price: z.string().min(1, "Unit price is required"),
+  unit_price: z.number().min(1, "Unit price is required"),
   total: z.string().optional(),
   description: z.string().optional(),
 });

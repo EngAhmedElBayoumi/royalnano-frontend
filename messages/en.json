@@ -662,13 +662,14 @@
     "supplier": "Supplier",
     "warehouse": "Warehouse",
     "Supplier": {
-      "editPurchaseSupplier": "Edit Purchase Supplier",
+      "editPurchaseSupplier": "Edit Supplier",
+      "editSupplier": "Edit Supplier",
+      "viewSupplier": "View Supplier",
       "cards": {
-        "newRequests": "New Requests",
-        "complete": "Complete",
-        "pending": "Pending",
-        "failed": "Failed",
-        "paid": "Paid"
+        "totalSuppliers": "Total Suppliers",
+        "activeSuppliers": "Active Suppliers",
+        "newThisMonth": "New This Month",
+        "pendingApproval": "Pending Approval"
       },
       "noDataFound": "No Data Found",
       "supplier": "Supplier",
@@ -720,6 +721,9 @@
       "description": "Description",
       "noDataFound": "No warehouse data found.",
       "addWarehouse": "Add Warehouse",
+      "editWarehouse": "Edit Warehouse",
+      "viewWarehouse": "View Warehouse",
+      "createWarehouse": "Create Warehouse",
       "itemCode": "Item Code",
       "purchaseWarehouseLevel": "Purchase Warehouse Level",
       "cards": {

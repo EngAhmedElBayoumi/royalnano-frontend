@@ -46,7 +46,7 @@ import { clientRequestAPi } from "./services/clientRequestApi";
 import { purchaseOrderApi } from "./services/dashboard/purchase/orderApi";
 import { purchaseExpenseCategoryApi } from "./services/dashboard/purchase/expenseCategory";
 import { purchaseInvoiceApi } from "./services/dashboard/purchase/invoiceApi";
-import { purchaseRequestApi } from "./services/dashboard/purchase/request";
+import { purchaseRequestApi } from "./services/dashboard/purchase/requestApi";
 import { purchaseWarehouseApi } from "./services/dashboard/purchase/warehouseApi";
 import { jobsApi } from "./services/dashboard/hr/jobsApi";
 import { permissionsApi } from "./services/dashboard/hr/permissionsApi";

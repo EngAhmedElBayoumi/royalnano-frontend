@@ -19,10 +19,10 @@ export interface Supplier {
   postal_code: string;
   additional_info?: string;
   taxes_business_id: string;
-  expenses_rates_billing_rate: string;
+  expenses_rates_billing_rate: number;
   payment_terms: string;
   account_no: string;
-  opening_balance: string;
+  opening_balance: number;
   as_of: string;
   branch?: { id: number; name: string } | null;
   accounting_expenses_category?: { id: number; name: string } | null;
@@ -67,7 +67,7 @@ export default function PurchaseSupplier() {
     })) || [];
 
   const handleClick = () => {
-    router.push("/dashboard/purchase/purchase-supplier/create");
+    router.push("/dashboard/purchase/supplier/create");
   };
 
   return (
@@ -78,7 +78,7 @@ export default function PurchaseSupplier() {
       columns={columns}
       cardData={cardsData}
       emptyMessage={t("noDataFound")}
-      editRoute="/dashboard/purchase/purchase-supplier/edit/"
+      editRoute="/dashboard/purchase/supplier/edit"
       buttonText={t("addSupplier")}
       ButtonEvent={handleClick}
       onPageChange={handlePageChange}

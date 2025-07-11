@@ -140,7 +140,7 @@ export default function SalesCustomer() {
         <>
           <CustomTable
             emptyMessage="No sales customers data found"
-            editRoute="/dashboard/sales/sales-customer/edit/"
+            editRoute="/dashboard/sales/sales-customer/edit"
             data={transformedData}
             rows={10}
             viewRoute="/dashboard/sales/sales-customer/view"

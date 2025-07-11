@@ -74,8 +74,8 @@ export default function Movement() {
       columns={columns}
       cardData={cardsData}
       emptyMessage={t("noMovementsDataFound") || "No movements data found"}
-      editRoute="/dashboard/inventory/movement/edit/"
-      viewRoute="/dashboard/inventory/movement/view/"
+      editRoute="/dashboard/inventory/movement/edit"
+      viewRoute="/dashboard/inventory/movement/view"
       buttonText={t("addMovement")}
       ButtonEvent={handleClick}
       onPageChange={handlePageChange}

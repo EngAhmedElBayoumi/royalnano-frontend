@@ -58,8 +58,8 @@ export default function Preorder() {
       columns={columns}
       cardData={cardsData}
       emptyMessage={t("noPreorderDataFound")}
-      editRoute="/dashboard/inventory/preorder/edit/"
-      viewRoute="/dashboard/inventory/preorder/view/"
+      editRoute="/dashboard/inventory/preorder/edit"
+      viewRoute="/dashboard/inventory/preorder/view"
       buttonText={t("addPreorder")}
       ButtonEvent={handleClick}
       onPageChange={handlePageChange}

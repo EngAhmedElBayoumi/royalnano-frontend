@@ -34,7 +34,7 @@ export default function Departments() {
       columns={columns}
       cardData={cardsData}
       emptyMessage={t("noDepartmentsDataFound")}
-      editRoute="/dashboard/hr/departments/edit/"
+      editRoute="/dashboard/hr/departments/edit"
       buttonText={t("addDepartment")}
       ButtonEvent={handleClick}
       onPageChange={handlePageChange}

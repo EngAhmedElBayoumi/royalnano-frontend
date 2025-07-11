@@ -92,7 +92,7 @@ export default function PurchaseOrder() {
     })) || [];
 
   const handleClick = () => {
-    router.push("/dashboard/purchase/purchase-order/create");
+    router.push("/dashboard/purchase/order/create");
   };
 
   return (
@@ -103,8 +103,8 @@ export default function PurchaseOrder() {
       columns={columns}
       cardData={cardsData}
       emptyMessage={t("noDataFound")}
-      editRoute="/dashboard/purchase/purchase-order/edit/"
-      viewRoute="/dashboard/purchase/purchase-order/view/"
+      editRoute="/dashboard/purchase/order/edit"
+      viewRoute="/dashboard/purchase/order/view"
       buttonText={t("addOrder")}
       ButtonEvent={handleClick}
       onPageChange={handlePageChange}

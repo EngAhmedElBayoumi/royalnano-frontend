@@ -60,7 +60,7 @@ export default function Vacations() {
       columns={columns}
       cardData={cardsData}
       emptyMessage={t("noVacationDataFound")}
-      editRoute="/dashboard/hr/vacations/edit/"
+      editRoute="/dashboard/hr/vacations/edit"
       buttonText={t("addVacation")}
       ButtonEvent={handleClick}
       onPageChange={handlePageChange}

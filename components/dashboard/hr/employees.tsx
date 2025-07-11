@@ -65,7 +65,7 @@ export default function Employees() {
       columns={columns}
       cardData={cardsData}
       emptyMessage={t("noEmployeesDataFound")}
-      editRoute="/dashboard/hr/employees/edit/"
+      editRoute="/dashboard/hr/employees/edit"
       buttonText={t("addEmployee")}
       ButtonEvent={handleClick}
       onPageChange={handlePageChange}

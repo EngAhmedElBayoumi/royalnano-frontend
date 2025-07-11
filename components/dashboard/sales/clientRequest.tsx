@@ -176,7 +176,7 @@ export default function ClientRequest() {
       ) : (
         <CustomTable
           emptyMessage="No client requests data found"
-          editRoute="/dashboard/sales/client-requests/edit/"
+          editRoute="/dashboard/sales/client-requests/edit"
           data={transformedData}
           rows={10}
           columns={columns}

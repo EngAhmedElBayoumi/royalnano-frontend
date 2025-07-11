@@ -54,7 +54,7 @@ export default function PurchaseInvoice() {
     })) || [];
 
   const handleClick = () => {
-    router.push("/dashboard/purchase/purchase-invoice/create");
+    router.push("/dashboard/purchase/invoice/create");
   };
 
   return (
@@ -65,8 +65,7 @@ export default function PurchaseInvoice() {
       columns={columns}
       cardData={cardsData}
       emptyMessage={t("noDataFound")}
-      editRoute="/dashboard/purchase/purchase-invoice/edit/"
-      viewRoute="/dashboard/purchase/purchase-invoice/view/"
+      editRoute="/dashboard/purchase/invoice/edit"
       buttonText={t("addInvoice")}
       ButtonEvent={handleClick}
       onPageChange={handlePageChange}

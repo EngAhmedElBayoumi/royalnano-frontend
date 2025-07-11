@@ -716,11 +716,10 @@
     "Supplier": {
       "editPurchaseSupplier": "تعديل مورد الشراء",
       "cards": {
-        "newRequests": "طلبات جديدة",
-        "complete": "مكتمل",
-        "pending": "قيد الانتظار",
-        "failed": "فشل",
-        "paid": "مدفوع"
+        "totalSuppliers": "إجمالي الموردين",
+        "activeSuppliers": "الموردين النشطين",
+        "newThisMonth": "الجدد هذا الشهر",
+        "pendingApproval": "في انتظار الموافقة"
       },
       "noDataFound": "لا توجد بيانات",
       "supplier": "المورد",

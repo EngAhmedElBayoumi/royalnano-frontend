@@ -60,7 +60,7 @@ export default function About() {
     <>
       <CustomTable
         emptyMessage="no About data found"
-        editRoute="/dashboard/website/about/edit/"
+        editRoute="/dashboard/website/about/edit"
         data={data}
         rows={10}
         columns={columns}

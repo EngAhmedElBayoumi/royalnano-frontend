@@ -38,7 +38,7 @@ export default function Units() {
       columns={columns}
       cardData={cardsData}
       emptyMessage={t("noUnitsDataFound")}
-      editRoute="/dashboard/inventory/units/edit/"
+      editRoute="/dashboard/inventory/units/edit"
       buttonText={t("addUnit")}
       ButtonEvent={handleClick}
       onPageChange={handlePageChange}

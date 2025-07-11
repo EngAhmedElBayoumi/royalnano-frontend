@@ -38,8 +38,8 @@ export default function Category() {
       columns={columns}
       cardData={cardsData}
       emptyMessage={t("noCategoriesDataFound") || "No categories data found"}
-      editRoute="/dashboard/inventory/category-models/edit/"
-      viewRoute="/dashboard/inventory/category-models/view/"
+      editRoute="/dashboard/inventory/category-models/edit"
+      viewRoute="/dashboard/inventory/category-models/view"
       buttonText={t("addCategory")}
       ButtonEvent={handleClick}
       onPageChange={handlePageChange}

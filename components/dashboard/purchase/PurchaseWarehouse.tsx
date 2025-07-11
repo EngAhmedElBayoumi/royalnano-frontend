@@ -45,7 +45,7 @@ export default function PurchaseWarehouse() {
     })) || [];
 
   const handleClick = () => {
-    router.push(`/${locale}/dashboard/purchase/warehouse/create`);
+    router.push("/dashboard/purchase/warehouse/create");
   };
 
   return (
@@ -56,8 +56,7 @@ export default function PurchaseWarehouse() {
       columns={columns}
       cardData={cardsData}
       emptyMessage={t("noDataFound")}
-      editRoute={`/${locale}/dashboard/purchase/warehouse/`}
-      viewRoute={`/${locale}/dashboard/purchase/warehouse/`}
+      editRoute="/dashboard/purchase/warehouse/edit"
       buttonText={t("addWarehouse")}
       ButtonEvent={handleClick}
       onPageChange={handlePageChange}

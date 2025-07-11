@@ -38,7 +38,7 @@ const FollowUpTypes = () => {
       columns={columns}
       cardData={cardsData}
       emptyMessage={t("noFollowUpTypesDataFound")}
-      editRoute="/dashboard/sales/followup/types/edit/"
+      editRoute="/dashboard/sales/followup/types/edit"
       buttonText={t("addFollowUpType")}
       ButtonEvent={handleClick}
       onPageChange={handlePageChange}

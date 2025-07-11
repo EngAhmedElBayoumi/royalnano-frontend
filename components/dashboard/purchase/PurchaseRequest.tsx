@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import TableWrapper from "@/components/dashboard/tables/TableWrapper";
 import { useTableData } from "@/hooks/useTableData";
-import { useGetRequestsQuery } from "@/redux/services/dashboard/purchase/request";
+import { useGetRequestsQuery } from "@/redux/services/dashboard/purchase/requestApi";
 import { useGetEmployeesQuery } from "@/redux/services/dashboard/hr/employeeApi";
 import { useEffect, useState } from "react";
 
@@ -76,7 +76,7 @@ export default function PurchaseRequest() {
     })) || [];
 
   const handleClick = () => {
-    router.push("/dashboard/purchase/purchase-request/create");
+    router.push("/dashboard/purchase/request/create");
   };
 
   return (
@@ -87,8 +87,7 @@ export default function PurchaseRequest() {
       columns={columns}
       cardData={cardsData}
       emptyMessage={t("noDataFound")}
-      editRoute="/dashboard/purchase/purchase-request/edit/"
-      viewRoute="/dashboard/purchase/purchase-request/view/"
+      editRoute="/dashboard/purchase/request/edit"
       buttonText={t("addRequest")}
       ButtonEvent={handleClick}
       onPageChange={handlePageChange}

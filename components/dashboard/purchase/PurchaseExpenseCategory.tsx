@@ -46,7 +46,7 @@ export default function PurchaseExpenseCategory() {
     })) || [];
 
   const handleClick = () => {
-    router.push("/dashboard/purchase/purchase-expense-category/create");
+    router.push("/dashboard/purchase/expense-category/create");
   };
 
   return (
@@ -57,8 +57,8 @@ export default function PurchaseExpenseCategory() {
       columns={columns}
       cardData={cardsData}
       emptyMessage={t("noDataFound")}
-      editRoute="/dashboard/purchase/purchase-expense-category/edit/"
-      viewRoute="/dashboard/purchase/purchase-expense-category/view/"
+      editRoute="/dashboard/purchase/expense-category/edit"
+      viewRoute="/dashboard/purchase/expense-category/view"
       buttonText={t("addExpenseCategory")}
       ButtonEvent={handleClick}
       onPageChange={handlePageChange}

@@ -77,8 +77,8 @@ export default function StockAdjustment() {
       emptyMessage={
         t("noStockAdjustmentsDataFound") || "No stock adjustment data found"
       }
-      editRoute="/dashboard/inventory/stock-adjustment/edit/"
-      viewRoute="/dashboard/inventory/stock-adjustment/view/"
+      editRoute="/dashboard/inventory/stock-adjustment/edit"
+      viewRoute="/dashboard/inventory/stock-adjustment/view"
       buttonText={t("addStockAdjustment")}
       ButtonEvent={handleClick}
       onPageChange={handlePageChange}

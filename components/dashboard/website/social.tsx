@@ -44,7 +44,7 @@ export default function Social() {
       columns={columns}
       cardData={cardsData}
       emptyMessage={t("no_social_data_found")}
-      editRoute="/dashboard/website/social/edit/"
+      editRoute="/dashboard/website/social/edit"
       buttonText={t("add_social")}
       ButtonEvent={handleClick}
       onPageChange={handlePageChange}

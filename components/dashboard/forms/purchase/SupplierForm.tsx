@@ -29,10 +29,10 @@ export interface SupplierFormValues {
   country: string;
   postal_code: string;
   taxes_business_id: string;
-  expenses_rates_billing_rate: string;
+  expenses_rates_billing_rate: number;
   payment_terms: string;
   account_no: string;
-  opening_balance: string;
+  opening_balance: number;
   as_of: string;
   suffix: string;
   additional_info: string;
@@ -58,10 +58,10 @@ const SupplierForm = ({
       country: "",
       postal_code: "",
       taxes_business_id: "",
-      expenses_rates_billing_rate: "",
+      expenses_rates_billing_rate: 0,
       payment_terms: "",
       account_no: "",
-      opening_balance: "",
+      opening_balance: 0,
       as_of: "",
       suffix: "",
       additional_info: "",

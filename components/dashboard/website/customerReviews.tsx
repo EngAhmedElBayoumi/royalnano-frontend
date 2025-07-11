@@ -36,7 +36,7 @@ export default function CustomerReviews() {
       columns={columns}
       cardData={cardsData}
       emptyMessage={t("noCustomerReviewsFound")}
-      editRoute="/dashboard/website/customer-reviews/edit/"
+      editRoute="/dashboard/website/customer-reviews/edit"
       buttonText={t("addCustomerReview")}
       ButtonEvent={handleClick}
       onPageChange={handlePageChange}

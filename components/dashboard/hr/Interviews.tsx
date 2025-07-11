@@ -61,7 +61,7 @@ export default function Interviews() {
       columns={columns}
       cardData={cardsData}
       emptyMessage={t("noInterviewDataFound")}
-      editRoute="/dashboard/hr/interviews/edit/"
+      editRoute="/dashboard/hr/interviews/edit"
       buttonText={t("addInterview")}
       ButtonEvent={handleClick}
       onPageChange={handlePageChange}
