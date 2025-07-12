@@ -26,6 +26,7 @@ import { itemCategoryApi } from "./services/dashboard/inventory/itemCategoryApi"
 import { stockApi } from "./services/dashboard/inventory/stockApi";
 import { bonusesApi } from "./services/dashboard/hr/bonusesApi";
 import { employeeApi } from "./services/dashboard/hr/employeeApi";
+import { employeeAttachmentApi } from "./services/dashboard/hr/employeeAttachmentApi";
 import { salesQuotationApi } from "./services/dashboard/sales/salesQuotationsApi";
 import { salesCustomerApi } from "./services/dashboard/sales/salesCustomerApi";
 import { salesInvoiceApi } from "./services/dashboard/sales/salesInvoiceApi";
@@ -107,6 +108,7 @@ export const store = configureStore({
     [salesCustomerApi.reducerPath]: salesCustomerApi.reducer,
     [salesInvoiceApi.reducerPath]: salesInvoiceApi.reducer,
     [employeeApi.reducerPath]: employeeApi.reducer,
+    [employeeAttachmentApi.reducerPath]: employeeAttachmentApi.reducer,
     [bonusesApi.reducerPath]: bonusesApi.reducer,
     [departmentApi.reducerPath]: departmentApi.reducer,
     [attendanceApi.reducerPath]: attendanceApi.reducer,
@@ -177,6 +179,7 @@ export const store = configureStore({
       .concat(salesCustomerApi.middleware)
       .concat(salesInvoiceApi.middleware)
       .concat(employeeApi.middleware)
+      .concat(employeeAttachmentApi.middleware)
       .concat(bonusesApi.middleware)
       .concat(departmentApi.middleware)
       .concat(vacationApi.middleware)
