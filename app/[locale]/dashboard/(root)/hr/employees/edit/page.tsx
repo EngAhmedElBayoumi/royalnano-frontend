@@ -10,7 +10,6 @@ import EmployeeForm, {
   EmployeeFormValues,
 } from "@/components/dashboard/forms/hr/EmployeeForm";
 import { handleApiError } from "@/lib/utils/handleApiError";
-import { employeeEditSchema } from "@/lib/validations/dashboard/hr/employeeEditSchema";
 
 export default function EditEmployee() {
   const searchParams = useSearchParams();
@@ -55,7 +54,7 @@ export default function EditEmployee() {
       error={error}
       submitting={submitting}
       onSubmit={handleSubmit}
-      Form={(props: any) => <EmployeeForm {...props} schema={employeeEditSchema} />}
+      Form={EmployeeForm}
       redirectPath="/dashboard/hr?tab=employees"
     />
   );

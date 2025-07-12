@@ -20,18 +20,24 @@ export default function Jobs() {
   const router = useRouter();
   const t = useTranslations("hr.jobs");
 
-  const { data, isLoading, error, permissions, handlePageChange } = useTableData({
-    permissionKey: "permission",
-    useQueryHook: useGetJobsQuery,
-  });
+  const { data, isLoading, error, permissions, handlePageChange } =
+    useTableData({
+      permissionKey: "permission",
+      useQueryHook: useGetJobsQuery,
+    });
 
   // Transform permissions array to string for display
-  const transformedData = data?.results?.map((job: Job) => ({
-    id: job.id,
-    name: job.name,
-    created_at: job.created_at,
-    permissions: job.permissions.map(p => p.name).join(", "),
-  })) || [];
+  const transformedData =
+    data?.results?.map((job: Job) => ({
+      id: job.id,
+      name: job.name,
+      created_at: job.created_at,
+      permissions:
+        job.permissions
+          .map((p) => p.name)
+          .join(", ")
+          .substring(0, 50) + (job.permissions.length > 3 ? "..." : ""),
+    })) || [];
 
   const columns = [
     { field: "name", header: t("name") },
@@ -39,9 +45,7 @@ export default function Jobs() {
     { field: "permissions", header: t("permissions") },
   ];
 
-  const cardsData = [
-    { title: t("totalJobs"), num: data?.count || 0 },
-  ];
+  const cardsData = [{ title: t("totalJobs"), num: data?.count || 0 }];
 
   const handleClick = () => {
     router.push("/dashboard/hr/jobs/create");

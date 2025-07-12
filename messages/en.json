@@ -260,7 +260,7 @@
       "noEvaluationDataFound": "No evaluation data found"
     },
     "jobs": {
-      "editJob": "Add Job",
+      "editJob": "Edit Job",
       "addJob": "Add Job",
       "name": "Name",
       "permissions": "Permissions",
