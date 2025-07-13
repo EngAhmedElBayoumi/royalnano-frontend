@@ -29,7 +29,10 @@ export default function EditEmployee() {
     job_title: String(data?.job_title?.id) || "",
     leader: String(data?.leader?.id) || "",
     custom_permissions: data.custom_permissions.map(
-      (custom_permission: number) => String(custom_permission)
+      (custom_permission: any) => 
+        typeof custom_permission === 'object' 
+          ? String(custom_permission.id) 
+          : String(custom_permission)
     ),
     password: "",
   };

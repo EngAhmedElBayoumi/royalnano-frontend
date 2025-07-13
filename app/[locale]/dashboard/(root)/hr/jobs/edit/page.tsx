@@ -20,7 +20,7 @@ export default function EditJobs() {
     ? {
         name: jobData.name,
         permissions: jobData.permissions.map(
-          (p: { id: { toString: () => number } }) => p.id.toString()
+          (p: { id: number }) => String(p.id)
         ),
       }
     : undefined;

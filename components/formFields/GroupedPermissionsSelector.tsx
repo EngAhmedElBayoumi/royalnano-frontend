@@ -88,7 +88,7 @@ const GroupedPermissionsSelector = <
           group.permissions.map((p) => p.id)
         );
 
-        const selectedPermissions = field.value || [];
+        const selectedPermissions = (field.value || []).map(id => Number(id));
         const isAllSelected = allPermissionIds.length > 0 && selectedPermissions.length === allPermissionIds.length;
         const isPartiallySelected =
           selectedPermissions.length > 0 && !isAllSelected;
@@ -172,7 +172,7 @@ const GroupedPermissionsSelector = <
                               className="flex items-center space-x-2 pl-6"
                             >
                               <Checkbox
-                                checked={selectedPermissions.includes(permission.id)}
+                                checked={selectedPermissions.includes(Number(permission.id))}
                                 onCheckedChange={(checked) => {
                                   const currentSelected = new Set(selectedPermissions);
                                   if (checked) {
