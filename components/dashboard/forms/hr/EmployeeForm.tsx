@@ -4,7 +4,10 @@ import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { employeeSchema } from "@/lib/validations/dashboard/hr/employeeSchema";
+import {
+  employeeSchema,
+  employeeSchemaWithOptionalPassword,
+} from "@/lib/validations/dashboard/hr/employeeSchema";
 import { useGetBranchesQuery } from "@/redux/services/dashboard/inventory/branchesApi";
 import { useGetDepartmentsQuery } from "@/redux/services/dashboard/hr/departmentApi";
 import { useGetJobsQuery } from "@/redux/services/dashboard/hr/jobsApi";
@@ -23,7 +26,6 @@ interface EmployeeFormProps {
   onSubmit: (data: EmployeeFormValues) => Promise<void>;
   defaultValues?: EmployeeFormValues;
   isLoading?: boolean;
-  schema?: any;
 }
 
 export interface EmployeeFormValues {
@@ -45,10 +47,11 @@ const EmployeeForm = ({
   onSubmit,
   defaultValues,
   isLoading,
-  schema,
 }: EmployeeFormProps) => {
   const form = useForm({
-    resolver: zodResolver(schema || employeeSchema),
+    resolver: zodResolver(
+      defaultValues ? employeeSchemaWithOptionalPassword : employeeSchema
+    ),
     defaultValues: defaultValues || {
       name: "",
       email_address: "",
