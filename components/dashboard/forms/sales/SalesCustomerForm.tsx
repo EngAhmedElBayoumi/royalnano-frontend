@@ -79,8 +79,8 @@ const SalesCustomerForm = ({
 
   const employeeOptions =
     employeesData?.results?.map((employee: listItems) => ({
-      value: employee.id,
-      label: employee.name,
+      value: String(employee.id),
+      label: String(employee.name),
     })) || [];
   const {
     extraFields,
