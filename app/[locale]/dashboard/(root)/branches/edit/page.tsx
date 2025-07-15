@@ -18,10 +18,19 @@ export default function EditBranch() {
   const { data, isLoading, error } = useGetBranchByIdQuery(id);
   const [updateBranch, { isLoading: submitting }] = useUpdateBranchMutation();
 
-  const defaultValues = data && {
-    ...data,
-    manager: Number(data.manager),
-  };
+const defaultValues = data
+  ? {
+      ...data,
+      manager: data.manager !== null && data.manager !== undefined
+        ? Number(data.manager)
+        : null,
+      phone_number: data.phone_number !== null && data.phone_number !== undefined
+        ? String(data.phone_number)
+        : "", // Ensure phone_number is a string or empty string
+    }
+  : undefined;
+
+
 
   const handleSubmit = async (data: BranchFormValues) => {
     const payload = {
