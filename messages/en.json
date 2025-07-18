@@ -794,6 +794,7 @@
       "total": "Total",
       "cancel": "Cancel",
       "save": "Save",
+      "createInvoice": "Create Invoice",
       "cards": {
         "draft": "Draft",
         "pending": "Pending",

@@ -842,6 +842,7 @@
       "total": "الإجمالي",
       "cancel": "إلغاء",
       "save": "حفظ",
+      "createInvoice": "إنشاء فاتورة",
       "cards": {
         "draft": "مسودة",
         "pending": "قيد الانتظار",
