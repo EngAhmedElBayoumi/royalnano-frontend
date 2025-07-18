@@ -77,7 +77,7 @@ export default function TableWrapper({
       emptyMessage={emptyMessage}
       editRoute={permissions.canUpdate ? editRoute : undefined}
       viewRoute={viewRoute}
-      data={data.results ?? data}
+      data={Array.isArray(data) ? data : data.results}
       rows={10}
       columns={columns}
       cardData={cardData}

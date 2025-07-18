@@ -39,7 +39,7 @@ export interface ReportExecution {
   executed_by: number;
   filters_applied: ReportFilter;
   status: "pending" | "running" | "completed" | "failed";
-  results: Record<string, unknown>;
+  result_data: Record<string, unknown>;
   execution_time?: number;
   error_message?: string;
   created_at: string;
@@ -148,7 +148,7 @@ export const reportsApi = createApi({
 
     // Report Executions
     getReportExecutions: builder.query<
-      ReportExecution[],
+      { results: ReportExecution[]; count: number },
       {
         template?: number;
         status?: string;

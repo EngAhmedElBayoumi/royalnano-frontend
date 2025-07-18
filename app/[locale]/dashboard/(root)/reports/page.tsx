@@ -174,10 +174,10 @@ export default function ReportsPage() {
       <div className="bg-dashboardBg px-4 sm:px-6 pt-5 pb-8 ltr:rounded-r-[20px] ltr:rounded-bl-[20px] rtl:rounded-l-[20px] rtl:rounded-br-[20px]">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsList className="grid w-full grid-cols-4">
-            <TabsTrigger value="generate">Generate Report</TabsTrigger>
-            <TabsTrigger value="results">Results</TabsTrigger>
-            <TabsTrigger value="history">History</TabsTrigger>
-            <TabsTrigger value="statistics">Statistics</TabsTrigger>
+            <TabsTrigger value="generate">{t("generate")}</TabsTrigger>
+            <TabsTrigger value="results">{t("results")}</TabsTrigger>
+            <TabsTrigger value="history">{t("history")}</TabsTrigger>
+            <TabsTrigger value="statistics">{t("statistics")}</TabsTrigger>
           </TabsList>
 
           {/* Generate Report Tab */}

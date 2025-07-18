@@ -1105,6 +1105,9 @@
     "mostUsedType": "أكثر الأنواع استخدامًا",
     "avgExecutionTime": "متوسط وقت التنفيذ",
     "recentExecutions": "التقارير الأحدث",
-    "noRecentExecutions": "لم يتم إنشاء تقرير مؤخرًا."
+    "noRecentExecutions": "لم يتم إنشاء تقرير مؤخرًا.",
+    "results": "النتائج",
+    "history": "التاريخ",
+    "statistics": "الإحصائيات"
   }
 }
