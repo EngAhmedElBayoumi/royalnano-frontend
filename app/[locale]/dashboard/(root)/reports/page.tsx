@@ -425,7 +425,7 @@ export default function ReportsPage() {
                         </TableRow>
                       </TableHeader>
                       <TableBody>
-                        {(executions?.results || []).map((execution) => (
+                        {(executions?.results).map((execution) => (
                           <TableRow key={execution.id}>
                             <TableCell>
                               {execution.template?.name || "Dynamic Report"}
