@@ -35,7 +35,7 @@ export default function PurchaseSupplier() {
   });
 
   const router = useRouter();
-  const t = useTranslations("Purchase.Supplier");
+  const t = useTranslations("purchase.Supplier");
 
   const columns = [
     { field: "supplier_name", header: t("supplierName") },

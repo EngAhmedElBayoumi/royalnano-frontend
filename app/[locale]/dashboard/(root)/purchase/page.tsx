@@ -13,7 +13,7 @@ import PurchaseSupplier from "@/components/dashboard/purchase/PurchaseSupplier";
 import PurchaseWarehouse from "@/components/dashboard/purchase/PurchaseWarehouse";
 
 function PurchasePage() {
-  const t = useTranslations("Purchase");
+  const t = useTranslations("purchase");
   const permissions = useSelector(
     (state: RootState) => state.profile.permissions
   );

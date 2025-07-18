@@ -712,7 +712,7 @@
       "requiredError": "التعليق مطلوب"
     }
   },
-  "Purchase": {
+  "purchase": {
     "expenseCategory": "فئة المصروفات",
     "invoice": "فاتورة",
     "order": "أمر",
@@ -858,6 +858,7 @@
       "purchaseOrderModel": "نموذج أمر الشراء",
       "purchaseOrderLevel": "مستوى أمر الشراء",
       "description": "الوصف",
+      "status": "الحالة",
       "noDataFound": "لا توجد بيانات للأمر",
       "addOrder": "إضافة أمر",
       "cards": {

@@ -21,7 +21,7 @@ export default function PurchaseWarehouse() {
   const router = useRouter();
   const params = useParams();
   const { locale } = params;
-  const t = useTranslations("Purchase.Warehouse");
+  const t = useTranslations("purchase.Warehouse");
 
   const columns = [
     { field: "name", header: t("name") },

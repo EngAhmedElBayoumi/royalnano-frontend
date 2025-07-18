@@ -660,7 +660,7 @@
       "requiredError": "Comment is required"
     }
   },
-  "Purchase": {
+  "purchase": {
     "expenseCategory": "Expense Category",
     "invoice": "Invoice",
     "order": "Order",
@@ -812,6 +812,7 @@
       "purchaseOrderModel": "purchase Order Model",
       "purchaseOrderLevel": "Purchase Order Level",
       "description": "Description",
+      "status": "Status",
       "noDataFound": "No order data found.",
       "addOrder": "Add Order",
       "cards": {

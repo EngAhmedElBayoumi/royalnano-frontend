@@ -30,7 +30,7 @@ const WarehouseForm: React.FC<WarehouseFormProps> = ({
   isLoading,
   defaultValues,
 }) => {
-  const t = useTranslations("Purchase.Warehouse");
+  const t = useTranslations("purchase.Warehouse");
   const tGlobal = useTranslations();
 
   const form = useForm<WarehouseFormValues>({
