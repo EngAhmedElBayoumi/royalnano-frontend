@@ -802,6 +802,8 @@
       "status": "الحالة",
       "itemsCount": "عدد العناصر",
       "cards": {
+        "approved": "موافق",
+        "completed": "مكتمل",
         "newRequests": "طلبات جديدة",
         "complete": "مكتمل",
         "pending": "قيد الانتظار",
