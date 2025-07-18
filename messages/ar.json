@@ -20,7 +20,6 @@
   },
   "Sidebar": {
     "home": "الرئيسية",
-    "clients": "العملاء",
     "customerRequests": "طلبات العملاء",
     "branches": "الفروع",
     "hr": "الموارد البشرية",
@@ -377,26 +376,7 @@
       "errorDescription": "حدث خطأ أثناء إنشاء العميل"
     }
   },
-  "clients": {
-    "title": "العملاء",
-    "addClient": "إضافة عميل",
-    "editClient": "تعديل عميل",
-    "clientForm": {
-      "clientName": "اسم العميل",
-      "email": "البريد الإلكتروني",
-      "phoneNumber": "رقم الهاتف",
-      "facilityName": "اسم المنشأة",
-      "taxNumber": "الرقم الضريبي",
-      "address": "العنوان",
-      "city": "المدينة",
-      "area": "المنطقة",
-      "buildingNumber": "رقم المبنى",
-      "website": "الموقع الإلكتروني",
-      "condition": "الحالة",
-      "save": "حفظ",
-      "cancel": "إلغاء"
-    }
-  },
+
   "customerRequests": {
     "title": "طلبات العملاء",
     "addCustomerRequest": "إضافة طلب عميل",

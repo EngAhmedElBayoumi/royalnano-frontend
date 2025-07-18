@@ -20,8 +20,6 @@
   },
   "Sidebar": {
     "home": "Home",
-    "clients": "Clients",
-    "customerRequests": "Customer Requests",
     "branches": "Branches",
     "hr": "HR",
     "inventory": "Inventory",
@@ -852,26 +850,6 @@
       "subtotal": "Subtotal",
       "freeQuantity": "Free Quantity",
       "vat": "VAT"
-    }
-  },
-  "clients": {
-    "title": "Clients",
-    "addClient": "Add Client",
-    "editClient": "Edit Client",
-    "clientForm": {
-      "clientName": "Client Name",
-      "email": "Email",
-      "phoneNumber": "Phone Number",
-      "facilityName": "Facility Name",
-      "taxNumber": "Tax Number",
-      "address": "Address",
-      "city": "City",
-      "area": "Area",
-      "buildingNumber": "Building Number",
-      "website": "Website",
-      "condition": "Condition",
-      "save": "Save",
-      "cancel": "Cancel"
     }
   },
   "customerRequests": {
