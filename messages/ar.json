@@ -15,7 +15,8 @@
   "tableControls": {
     "exportToCSV": "تصدير إلى CSV",
     "exportToExcel": "تصدير إلى Excel",
-    "exportToPDF": "تصدير إلى PDF"
+    "exportToPDF": "تصدير إلى PDF",
+    "actions": "الخيارات"
   },
   "Sidebar": {
     "home": "الرئيسية",
