@@ -51,7 +51,7 @@ export default function BranchTransactions() {
         columns={columns}
         cardData={cardsData}
         emptyMessage={t("no_branches_transaction_data_found")}
-        editRoute="/dashboard/branches/transactions/edit/"
+        editRoute="/dashboard/branches/transactions/edit"
         buttonText={t("add_branch_transaction")}
         ButtonEvent={handleClick}
         onPageChange={handlePageChange}

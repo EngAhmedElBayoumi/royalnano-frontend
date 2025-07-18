@@ -6,9 +6,12 @@ import Image from "next/image";
 import { useRouter } from "@/i18n/routing";
 import { useState } from "react";
 import { useGetSalesCustomerQuery } from "@/redux/services/dashboard/sales/salesCustomerApi";
+import ReassignDialog from "./ReassignDialog";
 
 export default function SalesCustomer() {
   const [page, setPage] = useState(1);
+  const [selectedCustomerIds, setSelectedCustomerIds] = useState<number[]>([]);
+  const [isReassignDialogOpen, setIsReassignDialogOpen] = useState(false);
 
   const handlePageChange = (newPage: number) => {
     setPage(newPage);
@@ -18,15 +21,16 @@ export default function SalesCustomer() {
     isLoading,
     error,
     data: salesCustomers,
+    refetch,
   } = useGetSalesCustomerQuery({
     search: "",
     ordering: "id",
     page,
     page_size: 10,
   });
+  
   console.log(salesCustomers);
   const router = useRouter();
-  // console.log("page",page)
   console.log("Sales Customers API Response:", salesCustomers);
 
   const transformedData =
@@ -37,7 +41,6 @@ export default function SalesCustomer() {
         id: number;
         customer_name: string;
         contact_person: string;
-        // phone_number: number;
         email: string;
         address: string;
         city: string;
@@ -52,18 +55,20 @@ export default function SalesCustomer() {
         customer_name: customer.customer_name,
         contact_person: customer.contact_person,
         phone_number:
-          customer.phone_number ||
+        customer.phone_number ||
+        customer.contact_person ||
           customer.phone_numbers[0]?.phone_number ||
-          "N/A",
+          "No Phone Number",
         email: customer.email,
         address: customer.address,
         city: customer.city,
         country: customer.country,
         notes: customer.notes,
-        branch_name: customer.branch.name,
+        branch_name: customer.branch?.name,
         customer_type: customer.customer_type,
         tax_number: customer.tax_number || "N/A",
         national_id: customer.national_id,
+        assigned_to_name: customer.assigned_to_name,
       })
     ) || [];
 
@@ -72,12 +77,10 @@ export default function SalesCustomer() {
   const columns = [
     { field: "id", header: "ID" },
     { field: "customer_name", header: "Customer Name" },
-    // { field: "contact_person", header: "Contact Person" },
     { field: "phone_number", header: "Phone Number" },
     { field: "email", header: "Email" },
-    // { field: "address", header: "Address" },
     { field: "branch_name", header: "Branch Name" },
-    // { field: "tax_number", header: "taxxx" },
+    { field: "assigned_to_name", header: "Assigned To" },
   ];
 
   const cardsData = [
@@ -90,6 +93,19 @@ export default function SalesCustomer() {
 
   const handleClick = () => {
     router.push("/dashboard/sales/sales-customer/create");
+  };
+
+  const handleSelectionChange = (selectedIds: number[]) => {
+    setSelectedCustomerIds(selectedIds);
+  };
+
+  const handleReassignClick = () => {
+    setIsReassignDialogOpen(true);
+  };
+
+  const handleReassignSuccess = () => {
+    setSelectedCustomerIds([]);
+    refetch(); // Refresh the data
   };
 
   console.log("CustomTable Props in SalesCustomer:", {
@@ -121,19 +137,33 @@ export default function SalesCustomer() {
           Error loading data
         </div>
       ) : (
-        <CustomTable
-          emptyMessage="No sales customers data found"
-          editRoute="/dashboard/sales/sales-customer/edit/"
-          data={transformedData}
-          rows={10}
-          viewRoute="/dashboard/sales/sales-customer/view"
-          columns={columns}
-          cardData={cardsData}
-          buttonText="Add Sales Customer"
-          ButtonEvent={handleClick}
-          onPageChange={handlePageChange}
-          totalRecords={salesCustomers?.count || 0}
-        />
+        <>
+          <CustomTable
+            emptyMessage="No sales customers data found"
+            editRoute="/dashboard/sales/sales-customer/edit"
+            data={transformedData}
+            rows={10}
+            viewRoute="/dashboard/sales/sales-customer/view"
+            columns={columns}
+            cardData={cardsData}
+            buttonText="Add Sales Customer"
+            ButtonEvent={handleClick}
+            onPageChange={handlePageChange}
+            totalRecords={salesCustomers?.count || 0}
+            enableSelection={true}
+            selectedRows={selectedCustomerIds}
+            onSelectionChange={handleSelectionChange}
+            onReassignClick={handleReassignClick}
+            reassignButtonText="إعادة التعيين"
+          />
+          
+          <ReassignDialog
+            isOpen={isReassignDialogOpen}
+            onClose={() => setIsReassignDialogOpen(false)}
+            selectedCustomerIds={selectedCustomerIds}
+            onSuccess={handleReassignSuccess}
+          />
+        </>
       )}
     </>
   );

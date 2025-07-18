@@ -13,9 +13,18 @@ export const employeeSchema = z.object({
   address: z.string().nonempty("Address is required"),
   branch: z.string().nonempty("Branch must be selected"),
   department: z.string().nonempty("Department must be selected"),
+  leader: z.string().optional(),
   password: z.string().nonempty("Password is required"),
   is_user: z.boolean(),
   custom_permissions: z
     .array(z.coerce.number().min(1, "At least one permission is required"))
     .min(1, "At least one permission is required"),
 });
+
+export const employeeSchemaWithOptionalPassword = employeeSchema.extend({
+  password: z.string().optional(),
+});
+export type EmployeeSchemaDTO = z.infer<typeof employeeSchema>;
+export type EmployeeSchemaWithOptionalPasswordDTO = z.infer<
+  typeof employeeSchemaWithOptionalPassword
+>;

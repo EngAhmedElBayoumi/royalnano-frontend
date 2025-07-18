@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { MouseEventHandler, ReactNode } from "react";
 import { InfoCardInterface } from "../cards/InfoCard";
 
@@ -10,6 +9,7 @@ export interface DataInTable {
 export interface ColumnConfig {
   field: string;
   header: string;
+  /* eslint-disable @typescript-eslint/no-explicit-any */
   render?: (row: any) => React.ReactNode;
 }
 
@@ -34,5 +34,11 @@ export interface CustomTableProps {
   onPageChange?: (page: number) => void;
   totalRecords?: number;
   isClientRequest?: boolean;
-  onSetInitialPrice?: (requestId: number) => void; // Add this prop
+  onSetInitialPrice?: (requestId: number) => void;
+  // New props for selection
+  enableSelection?: boolean;
+  selectedRows?: number[];
+  onSelectionChange?: (selectedIds: number[]) => void;
+  onReassignClick?: () => void;
+  reassignButtonText?: string;
 }

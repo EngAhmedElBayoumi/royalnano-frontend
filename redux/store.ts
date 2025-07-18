@@ -26,6 +26,7 @@ import { itemCategoryApi } from "./services/dashboard/inventory/itemCategoryApi"
 import { stockApi } from "./services/dashboard/inventory/stockApi";
 import { bonusesApi } from "./services/dashboard/hr/bonusesApi";
 import { employeeApi } from "./services/dashboard/hr/employeeApi";
+import { employeeAttachmentApi } from "./services/dashboard/hr/employeeAttachmentApi";
 import { salesQuotationApi } from "./services/dashboard/sales/salesQuotationsApi";
 import { salesCustomerApi } from "./services/dashboard/sales/salesCustomerApi";
 import { salesInvoiceApi } from "./services/dashboard/sales/salesInvoiceApi";
@@ -46,7 +47,7 @@ import { clientRequestAPi } from "./services/clientRequestApi";
 import { purchaseOrderApi } from "./services/dashboard/purchase/orderApi";
 import { purchaseExpenseCategoryApi } from "./services/dashboard/purchase/expenseCategory";
 import { purchaseInvoiceApi } from "./services/dashboard/purchase/invoiceApi";
-import { purchaseRequestApi } from "./services/dashboard/purchase/request";
+import { purchaseRequestApi } from "./services/dashboard/purchase/requestApi";
 import { purchaseWarehouseApi } from "./services/dashboard/purchase/warehouseApi";
 import { jobsApi } from "./services/dashboard/hr/jobsApi";
 import { permissionsApi } from "./services/dashboard/hr/permissionsApi";
@@ -56,9 +57,14 @@ import { initializePaymentApi } from "./services/dashboard/sales/initialPriceApi
 import { setPriceApi } from "./services/dashboard/sales/setPriceApi";
 import { followUpApi } from "./services/dashboard/sales/followUpApi";
 import { financeApi } from "./services/dashboard/finance/financeApi";
+import { paymentVoucherApi } from "./services/dashboard/finance/paymentVoucherApi";
+import { receiptVoucherApi } from "./services/dashboard/finance/receiptVoucherApi";
 import { consumedItemsApi } from "./services/dashboard/sales/salesConsumedItemsApi";
 import { attachmentsApi } from "./services/dashboard/sales/salesCustomerAttachmentsApi";
 import { followUpTypesApi } from "./services/dashboard/sales/followUpTypesApi";
+import { analyticsApi } from "./services/analytics/analyticsApi";
+import { reportsApi } from "./services/reports/reportsApi";
+
 // Create separate configs for each reducer
 const authPersistConfig = {
   key: "auth",
@@ -102,6 +108,7 @@ export const store = configureStore({
     [salesCustomerApi.reducerPath]: salesCustomerApi.reducer,
     [salesInvoiceApi.reducerPath]: salesInvoiceApi.reducer,
     [employeeApi.reducerPath]: employeeApi.reducer,
+    [employeeAttachmentApi.reducerPath]: employeeAttachmentApi.reducer,
     [bonusesApi.reducerPath]: bonusesApi.reducer,
     [departmentApi.reducerPath]: departmentApi.reducer,
     [attendanceApi.reducerPath]: attendanceApi.reducer,
@@ -132,9 +139,13 @@ export const store = configureStore({
     [setPriceApi.reducerPath]: setPriceApi.reducer,
     [followUpApi.reducerPath]: followUpApi.reducer,
     [financeApi.reducerPath]: financeApi.reducer,
+    [paymentVoucherApi.reducerPath]: paymentVoucherApi.reducer,
+    [receiptVoucherApi.reducerPath]: receiptVoucherApi.reducer,
     [consumedItemsApi.reducerPath]: consumedItemsApi.reducer,
     [attachmentsApi.reducerPath]: attachmentsApi.reducer,
     [followUpTypesApi.reducerPath]: followUpTypesApi.reducer,
+    [analyticsApi.reducerPath]: analyticsApi.reducer,
+    [reportsApi.reducerPath]: reportsApi.reducer,
     auth: persistedAuthReducer,
     profile: persistedProfileReducer,
   },
@@ -168,6 +179,7 @@ export const store = configureStore({
       .concat(salesCustomerApi.middleware)
       .concat(salesInvoiceApi.middleware)
       .concat(employeeApi.middleware)
+      .concat(employeeAttachmentApi.middleware)
       .concat(bonusesApi.middleware)
       .concat(departmentApi.middleware)
       .concat(vacationApi.middleware)
@@ -194,10 +206,15 @@ export const store = configureStore({
       .concat(commentsAPi.middleware)
       .concat(socialApi.middleware)
       .concat(followUpApi.middleware)
-      .concat(followUpTypesApi.middleware)
+      .concat(financeApi.middleware)
+      .concat(paymentVoucherApi.middleware)
+      .concat(receiptVoucherApi.middleware)
       .concat(consumedItemsApi.middleware)
+      .concat(followUpTypesApi.middleware)
       .concat(attachmentsApi.middleware)
-      .concat(financeApi.middleware);
+      .concat(analyticsApi.middleware)
+      .concat(reportsApi.middleware)
+    
   },
 });
 

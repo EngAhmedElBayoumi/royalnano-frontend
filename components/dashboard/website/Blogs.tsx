@@ -36,7 +36,7 @@ export default function Blogs() {
       columns={columns}
       cardData={cardsData}
       emptyMessage={t("noBlogsDataFound")}
-      editRoute="/dashboard/website/blogs/edit/"
+      editRoute="/dashboard/website/blogs/edit"
       buttonText={t("addBlog")}
       ButtonEvent={handleClick}
       onPageChange={handlePageChange}

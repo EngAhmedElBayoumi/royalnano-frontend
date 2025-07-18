@@ -28,7 +28,7 @@ export const purchaseInvoiceApi = createApi({
       }),
     }),
     updateInvoice: builder.mutation({
-      query: ({ id, data }) => ({
+      query: ({ id, ...data }) => ({
         url: `purchase/purchase-invoice/${id}/`,
         method: "PATCH",
         body: data,

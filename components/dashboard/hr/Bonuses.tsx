@@ -58,7 +58,7 @@ export default function Bonuses() {
       columns={columns}
       cardData={cardsData}
       emptyMessage={t("noBonusesDataFound")}
-      editRoute="/dashboard/hr/bonuses/edit/"
+      editRoute="/dashboard/hr/bonuses/edit"
       buttonText={t("addBonus")}
       ButtonEvent={handleClick}
       onPageChange={handlePageChange}

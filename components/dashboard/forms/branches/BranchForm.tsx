@@ -3,9 +3,6 @@ import { useState } from "react";
 import Image from "next/image";
 import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
-import MapGL, { Marker } from "react-map-gl/maplibre";
-import { MapLayerMouseEvent } from "react-map-gl/maplibre";
-import "maplibre-gl/dist/maplibre-gl.css";
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -22,6 +19,7 @@ import CustomModal from "@/components/modals/CustomModal";
 import CustomSelect from "@/components/formFields/CustomSelect";
 import useExtraFields from "@/hooks/useExtraFields";
 import ExtraFields from "@/components/formFields/ExtraFields";
+import SimpleMap from "@/components/map/SimpleMap";
 
 interface BranchFormProps {
   onSubmit: (data: BranchFormValues) => Promise<void>;
@@ -43,20 +41,6 @@ export interface BranchFormValues {
   balance?: string;
   extra_fields?: Record<string, string> | null;
 }
-
-interface Viewport {
-  latitude: number;
-  longitude: number;
-  zoom: number;
-  width: string;
-  height: string;
-}
-
-interface ExtendedMapGLProps extends React.ComponentProps<typeof MapGL> {
-  onViewportChange?: (viewport: Viewport) => void;
-}
-
-const ExtendedMapGL = MapGL as React.ComponentType<ExtendedMapGLProps>;
 
 const BranchForm = ({
   onSubmit,
@@ -82,47 +66,24 @@ const BranchForm = ({
       branch_code: "",
       email: "",
       location: "",
-      longitude: 31,
-      latitude: 30,
+      longitude: 31.2357,
+      latitude: 30.0444,
       description: "",
       manager: 1,
       balance: "0.00",
       extra_fields: {},
     },
   });
-  const [viewport, setViewport] = useState({
-    latitude: defaultValues?.latitude ?? 30,
-    longitude: defaultValues?.longitude ?? 31,
-    zoom: 5,
-    width: "100%",
-    height: "400px",
-  });
 
-  const [marker, setMarker] = useState({
-    latitude: defaultValues?.latitude ?? 30,
-    longitude: defaultValues?.longitude ?? 31,
-  });
-
-  const handleMapClick = async (event: MapLayerMouseEvent) => {
-    const { lng, lat } = event.lngLat;
-    setMarker({ latitude: lat, longitude: lng });
-
-    // Fetch location name from a reverse geocoding service
-    const response = await fetch(
-      `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`
-    );
-    const data = await response.json();
-    // Set the location name if available
-    const locationName = data.display_name || `lat: ${lat}, long: ${lng}`;
+  const handleLocationSelect = (
+    lat: number,
+    lng: number,
+    locationName: string
+  ) => {
     form.setValue("location", locationName);
     form.setValue("latitude", lat);
     form.setValue("longitude", lng);
-
-    setViewport((prev) => ({
-      ...prev,
-      latitude: lat,
-      longitude: lng,
-    }));
+    setIsModalOpen(false); // Close modal after selection
   };
 
   const {
@@ -171,33 +132,33 @@ const BranchForm = ({
                 placeholder={t("location")}
                 readonly={true}
               />
-              <Image
-                src="/assets/icons/dashboard/branches/mdi_add-location.svg"
-                alt="location"
-                width="24"
-                height="24"
-                className="absolute top-0 ltr:right-0 rtl:left-0 cursor-pointer"
+              <button
+                type="button"
+                className="absolute top-8 ltr:right-2 rtl:left-2 p-2 hover:bg-gray-100 rounded-md transition-colors"
                 onClick={() => setIsModalOpen(true)}
-              />
+                title="تحديد الموقع على الخريطة"
+              >
+                <Image
+                  src="/assets/icons/dashboard/branches/mdi_add-location.svg"
+                  alt="location"
+                  width="20"
+                  height="20"
+                />
+              </button>
             </div>
             <CustomModal
+              className="max-h-[96vh] overflow-y-auto"
               isOpen={isModalOpen}
               onChange={() => setIsModalOpen(false)}
               title={t("setLocation")}
               description={t("selectBranchLocation")}
             >
-              <ExtendedMapGL
-                initialViewState={viewport}
-                style={{ height: 400 }}
-                mapStyle="https://api.maptiler.com/maps/streets/style.json?key=5jmaQWxsSn2zFDJSXmK4"
-                onViewportChange={(nextViewport) => setViewport(nextViewport)}
-                onClick={handleMapClick}
-              >
-                <Marker
-                  latitude={marker.latitude}
-                  longitude={marker.longitude}
-                />
-              </ExtendedMapGL>
+              <SimpleMap
+                latitude={defaultValues?.latitude || 30.0444}
+                longitude={defaultValues?.longitude || 31.2357}
+                onLocationSelect={handleLocationSelect}
+                height={500}
+              />
             </CustomModal>
 
             <TextInput

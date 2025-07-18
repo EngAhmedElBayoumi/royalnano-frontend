@@ -5,21 +5,9 @@ import TableWrapper from "@/components/dashboard/tables/TableWrapper";
 import { useTableData } from "@/hooks/useTableData";
 import { useGetInvoicesQuery } from "@/redux/services/dashboard/purchase/invoiceApi";
 
-// export interface Item {
-//   item: {
-//     id: number;
-//     item_code: string;
-//     item_name: string;
-//   };
-//   created_at: string;
-//   PurchaseInvoice_level: number;
-//   description: string;
-//   id: string;
-// }
-
 export default function PurchaseInvoice() {
   const {
-    data: inventoryItems,
+    data: invoices,
     isLoading,
     error,
     permissions,
@@ -33,51 +21,51 @@ export default function PurchaseInvoice() {
   const t = useTranslations("Purchase.Invoice");
 
   const columns = [
-    { field: "invoiceNumber", header: t("invoiceNumber") },
+    { field: "invoice_number", header: t("invoiceNumber") },
+    { field: "supplier_name", header: t("supplier") },
+    { field: "branch_name", header: t("branch") },
+    { field: "warehouse_name", header: t("warehouse") },
     { field: "status", header: t("status") },
-    { field: "description", header: t("description") },
-    { field: "dueDate", header: t("dueDate") },
-    { field: "createdAt", header: t("createdAt") },
-    { field: "voucherDate", header: t("voucherDate") },
-    // { field: "prefix", header: t("prefix") },
-    { field: "totalAmount", header: t("totalAmount") },
+    { field: "voucher_date", header: t("voucherDate") },
+    { field: "due_date", header: t("dueDate") },
+    { field: "total_amount", header: t("totalAmount") },
   ];
 
   const cardsData = [
-    { title: t("cards.newRequests"), num: 145 },
-    { title: t("cards.complete"), num: 87 },
-    { title: t("cards.pending"), num: 3200 },
-    { title: t("cards.failed"), num: 48 },
-    { title: t("cards.paid"), num: 48 },
+    { title: t("cards.draft"), num: invoices?.results?.filter((inv: any) => inv.status === 'draft').length || 0 },
+    { title: t("cards.pending"), num: invoices?.results?.filter((inv: any) => inv.status === 'pending').length || 0 },
+    { title: t("cards.approved"), num: invoices?.results?.filter((inv: any) => inv.status === 'approved').length || 0 },
+    { title: t("cards.paid"), num: invoices?.results?.filter((inv: any) => inv.status === 'paid').length || 0 },
+    { title: t("cards.cancelled"), num: invoices?.results?.filter((inv: any) => inv.status === 'cancelled').length || 0 },
   ];
 
   const formattedData =
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    inventoryItems?.results?.map((invoice: any) => ({
+    invoices?.results?.map((invoice: any) => ({
       id: invoice.id,
-      invoiceNumber: invoice.invoice_number || "-",
-      status: invoice.status || "-",
+      invoice_number: invoice.invoice_number || "-",
+      supplier_name: invoice.supplier?.supplier_name || "N/A",
+      branch_name: invoice.branch?.name || "N/A",
+      warehouse_name: invoice.warehouse?.name || "N/A",
+      status: invoice.status || "pending",
+      voucher_date: invoice.voucher_date || "-",
+      due_date: invoice.due_date || "-",
+      total_amount: invoice.total_amount || "0.00",
       description: invoice.description || "-",
-      dueDate: invoice.due_date || "-",
-      createdAt: invoice.created_at || "-",
-      voucherDate: invoice.voucher_date || "-",
-      prefix: invoice.prefix || "-",
-      totalAmount: invoice.total_amount || "0.00",
     })) || [];
+
   const handleClick = () => {
-    router.push("/dashboard/purchase/purchase-invoice/create");
+    router.push("/dashboard/purchase/invoice/create");
   };
 
   return (
     <TableWrapper
       isLoading={isLoading}
       error={error}
-      data={{ results: formattedData, count: inventoryItems?.count || 0 }}
+      data={{ results: formattedData, count: invoices?.count || 0 }}
       columns={columns}
       cardData={cardsData}
       emptyMessage={t("noDataFound")}
-      editRoute="/dashboard/purchase/purchase-invoice/edit/"
-      viewRoute="/dashboard/purchase/purchase-invoice/view/"
+      editRoute="/dashboard/purchase/invoice/edit"
       buttonText={t("addInvoice")}
       ButtonEvent={handleClick}
       onPageChange={handlePageChange}
@@ -85,3 +73,4 @@ export default function PurchaseInvoice() {
     />
   );
 }
+

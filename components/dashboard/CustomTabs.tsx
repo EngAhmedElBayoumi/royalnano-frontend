@@ -70,7 +70,7 @@ function CustomTabs({
         <TabsContent key={index} value={tab.id}>
           <div className="px-6 pb-25">
             <div
-              className={`bg-dashboardBg pt-4 mb-5 ${
+              className={`bg-dashboardBg pt-4 mb-5 px-5 ${
                 activeTab === defaultTab
                   ? "rounded-b-[20px] ltr:rounded-tr-[20px] rtl:rounded-tl-[20px]"
                   : "rounded-[20px]"

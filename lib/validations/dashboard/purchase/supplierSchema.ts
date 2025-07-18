@@ -11,16 +11,16 @@ export const supplierSchema = z.object({
   country: z.string().min(1, "Country is required"),
   postal_code: z.string().min(1, "Postal code is required"),
   taxes_business_id: z.string().min(1, "Taxes business ID is required"),
-  expenses_rates_billing_rate: z.string().min(1, "Billing rate is required"),
+  expenses_rates_billing_rate: z.number().min(1, "Billing rate is required"),
   payment_terms: z.string().min(1, "Payment terms are required"),
   account_no: z.string().min(1, "Account number is required"),
-  opening_balance: z.string().min(1, "Opening balance is required"),
+  opening_balance: z.number().min(1, "Opening balance is required"),
   as_of: z.string().min(1, "As of date is required"),
-  id: z.number().int().positive("ID must be a positive integer"),
-  suffix: z.string().min(1, "Suffix is required"),
-  additional_info: z.string().min(1, "Additional info is required"),
-  branch: z.number().int().positive("Branch must be a positive integer"),
-  accounting_expenses_category: z.number().int().positive("Accounting expenses category must be a positive integer"),
+  suffix: z.string().optional(),
+  additional_info: z.string().optional(),
+  branch: z.number().int().positive("Branch must be selected").optional().nullable(),
+  accounting_expenses_category: z.number().int().positive("Accounting expenses category must be selected").optional().nullable(),
 });
 
 export type SupplierFormValues = z.infer<typeof supplierSchema>;
+

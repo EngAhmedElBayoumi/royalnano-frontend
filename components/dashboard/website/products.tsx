@@ -56,7 +56,7 @@ export default function Products() {
     <>
       <CustomTable
         emptyMessage="no products data found"
-        editRoute="/dashboard/website/products/edit/"
+        editRoute="/dashboard/website/products/edit"
         data={data}
         rows={10}
         columns={columns}

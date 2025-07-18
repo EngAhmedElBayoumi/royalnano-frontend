@@ -56,7 +56,7 @@ export default function Competitions() {
       columns={columns}
       cardData={cardsData}
       emptyMessage={t("noCompetitions")}
-      editRoute="/dashboard/hr/competitions/edit/"
+      editRoute="/dashboard/hr/competitions/edit"
       buttonText={t("createCompetition")}
       ButtonEvent={handleClick}
       onPageChange={handlePageChange}

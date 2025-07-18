@@ -38,7 +38,7 @@ export default function Services() {
       columns={columns}
       cardData={cardsData}
       emptyMessage={t("noServicesDataFound")}
-      editRoute="/dashboard/website/services/edit/"
+      editRoute="/dashboard/website/services/edit"
       buttonText={t("addService")}
       ButtonEvent={handleClick}
       onPageChange={handlePageChange}

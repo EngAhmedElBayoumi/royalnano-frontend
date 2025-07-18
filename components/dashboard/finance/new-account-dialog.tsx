@@ -1,6 +1,6 @@
 "use client";
 
-import { financeRow } from "@/app/[locale]/dashboard/(root)/finance/page";
+import { financeRow } from "./finance";
 import CustomSelect from "@/components/formFields/CustomSelect";
 import TextInput from "@/components/formFields/TextInput";
 import { Button } from "@/components/ui/button";

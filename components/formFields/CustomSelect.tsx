@@ -60,7 +60,7 @@ const CustomSelect = <T extends FieldValues>({
               <Select
                 onValueChange={(value) => {
                   const newValue =
-                    valueType === "number" ? parseFloat(value) : value;
+                    value === "" ? null : valueType === "number" ? parseFloat(value) : value;
                   field.onChange(newValue);
                 }}
                 value={fieldValueString}

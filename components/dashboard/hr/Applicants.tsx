@@ -43,7 +43,7 @@ export default function Applicants() {
       columns={columns}
       cardData={cardsData}
       emptyMessage={t("noApplicantDataFound")}
-      editRoute="/dashboard/hr/applicants/edit/"
+      editRoute="/dashboard/hr/applicants/edit"
       buttonText={t("addApplicant")}
       ButtonEvent={handleClick}
       onPageChange={handlePageChange}

@@ -5,16 +5,15 @@ import TableWrapper from "@/components/dashboard/tables/TableWrapper";
 import { useTableData } from "@/hooks/useTableData";
 import { useGetExpenseCategorysQuery } from "@/redux/services/dashboard/purchase/expenseCategory";
 
-export interface Item {
+export interface ExpenseCategory {
   id: number;
-  name: string;  // Matches API response
+  name: string;
   description: string;
-  // Note: API doesn't include item_code or PurchaseExpenseCategory_level
 }
 
 export default function PurchaseExpenseCategory() {
   const {
-    data: inventoryItems,
+    data: expenseCategories,
     isLoading,
     error,
     permissions,
@@ -28,40 +27,38 @@ export default function PurchaseExpenseCategory() {
   const t = useTranslations("Purchase.ExpenseCategory");
 
   const columns = [
-    { field: "name", header: t("Name") },  // Using "Name" from translations
+    { field: "name", header: t("name") },
     { field: "description", header: t("description") },
-    // Removed itemCode and purchaseExpenseCategoryLevel as they're not in API data
   ];
 
   const cardsData = [
-    { title: t("cards.newRequests"), num: 145 },
-    { title: t("cards.complete"), num: 87 },
-    { title: t("cards.pending"), num: 3200 },
-    { title: t("cards.failed"), num: 48 },
-    { title: t("cards.paid"), num: 48 },
+    { title: t("cards.totalCategories"), num: expenseCategories?.count || 0 },
+    { title: t("cards.activeCategories"), num: expenseCategories?.results?.length || 0 },
+    { title: t("cards.withDescription"), num: expenseCategories?.results?.filter((cat: ExpenseCategory) => cat.description && cat.description.trim() !== '').length || 0 },
+    { title: t("cards.recentlyAdded"), num: expenseCategories?.results?.slice(-7).length || 0 },
   ];
 
   const formattedData =
-    inventoryItems?.results?.map((item: Item) => ({
-      id: item.id,
-      name: item.name,  // Using name from API
-      description: item.description,
+    expenseCategories?.results?.map((category: ExpenseCategory) => ({
+      id: category.id,
+      name: category.name || "-",
+      description: category.description || "-",
     })) || [];
 
   const handleClick = () => {
-    router.push("/dashboard/purchase/purchase-expense-category/create");
+    router.push("/dashboard/purchase/expense-category/create");
   };
 
   return (
     <TableWrapper
       isLoading={isLoading}
       error={error}
-      data={{ results: formattedData, count: inventoryItems?.count || 0 }}
+      data={{ results: formattedData, count: expenseCategories?.count || 0 }}
       columns={columns}
       cardData={cardsData}
       emptyMessage={t("noDataFound")}
-      editRoute="/dashboard/purchase/purchase-expense-category/edit/"
-      viewRoute="/dashboard/purchase/purchase-expense-category/view/"
+      editRoute="/dashboard/purchase/expense-category/edit"
+      viewRoute="/dashboard/purchase/expense-category/view"
       buttonText={t("addExpenseCategory")}
       ButtonEvent={handleClick}
       onPageChange={handlePageChange}
@@ -69,3 +66,4 @@ export default function PurchaseExpenseCategory() {
     />
   );
 }
+

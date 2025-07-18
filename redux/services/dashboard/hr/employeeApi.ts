@@ -28,6 +28,13 @@ export const employeeApi = createApi({
         body: data,
       }),
     }),
+    uploadEmployeeAttachments: builder.mutation({
+      query: ({ id, formData }) => ({
+        url: `hr/employee/${id}/upload_attachments/`,
+        method: "POST",
+        body: formData,
+      }),
+    }),
   }),
 });
 
@@ -36,4 +43,5 @@ export const {
   useGetEmployeeByIdQuery,
   useCreateEmployeeMutation,
   useUpdateEmployeeMutation,
+  useUploadEmployeeAttachmentsMutation,
 } = employeeApi;

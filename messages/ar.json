@@ -1,4 +1,158 @@
 {
+  "reports": {
+    "title": "التقارير",
+    "tabs": {
+      "generate": "إنشاء تقرير",
+      "results": "النتائج",
+      "history": "السجل",
+      "statistics": "الإحصائيات"
+    },
+    "generate": {
+      "title": "إنشاء تقرير جديد",
+      "reportType": "نوع التقرير",
+      "reportTypePlaceholder": "اختر نوع التقرير",
+      "filters": {
+        "dateRange": "نطاق التاريخ",
+        "branch": "الفرع",
+        "branchPlaceholder": "جميع الفروع",
+        "allBranches": "جميع الفروع",
+        "status": "الحالة",
+        "statusPlaceholder": "جميع الحالات",
+        "allStatuses": "جميع الحالات",
+        "active": "نشط",
+        "inactive": "غير نشط",
+        "pending": "معلق",
+        "completed": "مكتمل"
+      },
+      "buttons": {
+        "generate": "إنشاء التقرير",
+        "generating": "جاري الإنشاء...",
+        "exportExcel": "تصدير إلى Excel",
+        "exportCsv": "تصدير إلى CSV",
+        "exportPdf": "تصدير إلى PDF"
+      }
+    },
+    "results": {
+      "totalRecords": "إجمالي السجلات",
+      "generated": "تم الإنشاء",
+      "executionTime": "وقت التنفيذ",
+      "showingRecords": "عرض أول 50 سجل من {total} إجمالي السجلات.",
+      "exportNote": "قم بتصدير التقرير الكامل لعرض جميع البيانات.",
+      "noReport": {
+        "title": "لم يتم إنشاء تقرير",
+        "description": "قم بإنشاء تقرير من علامة تبويب \"إنشاء تقرير\" لعرض النتائج هنا."
+      }
+    },
+    "history": {
+      "title": "سجل تنفيذ التقارير",
+      "table": {
+        "reportType": "نوع التقرير",
+        "status": "الحالة",
+        "executedBy": "تم التنفيذ بواسطة",
+        "executionTime": "وقت التنفيذ",
+        "createdAt": "تاريخ الإنشاء",
+        "actions": "الإجراءات"
+      },
+      "dynamicReport": "تقرير ديناميكي",
+      "viewButton": "عرض"
+    },
+    "statistics": {
+      "cards": {
+        "totalReports": "إجمالي التقارير",
+        "thisMonth": "هذا الشهر",
+        "mostUsedType": "النوع الأكثر استخداماً",
+        "avgExecutionTime": "متوسط وقت التنفيذ"
+      },
+      "recentExecutions": "التنفيذات الأخيرة",
+      "noRecentExecutions": "لا توجد تنفيذات حديثة."
+    },
+    "status": {
+      "completed": "مكتمل",
+      "running": "قيد التشغيل",
+      "failed": "فشل",
+      "pending": "معلق"
+    }
+  },
+  "tableControls": {
+    "search": "البحث...",
+    "exportToCsv": "تصدير إلى CSV",
+    "exportToExcel": "تصدير إلى Excel",
+    "exportToPdf": "تصدير إلى PDF"
+  },
+  "reports": {
+    "title": "التقارير",
+    "tabs": {
+      "generate": "إنشاء تقرير",
+      "results": "النتائج",
+      "history": "السجل",
+      "statistics": "الإحصائيات"
+    },
+    "generate": {
+      "title": "إنشاء تقرير جديد",
+      "reportType": "نوع التقرير",
+      "reportTypePlaceholder": "اختر نوع التقرير",
+      "filters": {
+        "dateRange": "نطاق التاريخ",
+        "branch": "الفرع",
+        "branchPlaceholder": "جميع الفروع",
+        "allBranches": "جميع الفروع",
+        "status": "الحالة",
+        "statusPlaceholder": "جميع الحالات",
+        "allStatuses": "جميع الحالات",
+        "active": "نشط",
+        "inactive": "غير نشط",
+        "pending": "معلق",
+        "completed": "مكتمل"
+      },
+      "buttons": {
+        "generate": "إنشاء التقرير",
+        "generating": "جاري الإنشاء...",
+        "exportExcel": "تصدير إلى Excel",
+        "exportCsv": "تصدير إلى CSV",
+        "exportPdf": "تصدير إلى PDF"
+      }
+    },
+    "results": {
+      "totalRecords": "إجمالي السجلات",
+      "generated": "تم الإنشاء",
+      "executionTime": "وقت التنفيذ",
+      "showingRecords": "عرض أول 50 سجل من {total} إجمالي السجلات.",
+      "exportNote": "قم بتصدير التقرير الكامل لعرض جميع البيانات.",
+      "noReport": {
+        "title": "لم يتم إنشاء تقرير",
+        "description": "قم بإنشاء تقرير من علامة تبويب \"إنشاء تقرير\" لعرض النتائج هنا."
+      }
+    },
+    "history": {
+      "title": "سجل تنفيذ التقارير",
+      "table": {
+        "reportType": "نوع التقرير",
+        "status": "الحالة",
+        "executedBy": "تم التنفيذ بواسطة",
+        "executionTime": "وقت التنفيذ",
+        "createdAt": "تاريخ الإنشاء",
+        "actions": "الإجراءات"
+      },
+      "dynamicReport": "تقرير ديناميكي",
+      "viewButton": "عرض"
+    },
+    "statistics": {
+      "cards": {
+        "totalReports": "إجمالي التقارير",
+        "thisMonth": "هذا الشهر",
+        "mostUsedType": "النوع الأكثر استخداماً",
+        "avgExecutionTime": "متوسط وقت التنفيذ"
+      },
+      "recentExecutions": "التنفيذات الأخيرة",
+      "noRecentExecutions": "لا توجد تنفيذات حديثة."
+    },
+    "status": {
+      "completed": "مكتمل",
+      "running": "قيد التشغيل",
+      "failed": "فشل",
+      "pending": "معلق"
+    }
+  },
   "edit": "تعديل",
   "view": "عرض",
   "save": "حفظ",
@@ -24,7 +178,9 @@
     "settings": "الإعدادات",
     "logout": "تسجيل الخروج",
     "purchase": "المشتريات",
-    "finance": "المالية"
+    "finance": "المالية",
+    "analytics": "الإحصائيات",
+    "reports": "التقارير"
   },
   "branches": {
     "tabs": {
@@ -51,9 +207,9 @@
       "selectBranchLocation": "اختر موقع الفرع",
       "balance": "الميزانية"
     },
-     "branches_transactions":{
-      "transaction_type":"نوع العملية",
-      "amount":"المبلغ",
+    "branches_transactions": {
+      "transaction_type": "نوع العملية",
+      "amount": "المبلغ",
       "description": "الوصف",
       "branch": "الفرع",
       "reset_image": "إعادة تعيين الصورة",
@@ -188,6 +344,7 @@
       "address": "العنوان",
       "branch": "الفرع",
       "department": "القسم",
+      "leader": "القائد",
       "password": "كلمة المرور",
       "isUser": "مستخدم",
       "permissions": "الصلاحيات",
@@ -366,6 +523,62 @@
       "nationalId": "الرقم القومي",
       "errorTitle": "خطأ",
       "errorDescription": "حدث خطأ أثناء إنشاء العميل"
+    }
+  },
+  "clients": {
+    "title": "العملاء",
+    "addClient": "إضافة عميل",
+    "editClient": "تعديل عميل",
+    "clientForm": {
+      "clientName": "اسم العميل",
+      "email": "البريد الإلكتروني",
+      "phoneNumber": "رقم الهاتف",
+      "facilityName": "اسم المنشأة",
+      "taxNumber": "الرقم الضريبي",
+      "address": "العنوان",
+      "city": "المدينة",
+      "area": "المنطقة",
+      "buildingNumber": "رقم المبنى",
+      "website": "الموقع الإلكتروني",
+      "condition": "الحالة",
+      "save": "حفظ",
+      "cancel": "إلغاء"
+    }
+  },
+  "customerRequests": {
+    "title": "طلبات العملاء",
+    "addCustomerRequest": "إضافة طلب عميل",
+    "editCustomerRequest": "تعديل طلب عميل",
+    "customerRequestForm": {
+      "clientName": "اسم العميل",
+      "phoneNumber": "رقم الهاتف",
+      "carType": "نوع السيارة",
+      "carModel": "موديل السيارة",
+      "service": "الخدمة",
+      "branch": "الفرع",
+      "additionalNotes": "ملاحظات إضافية",
+      "save": "حفظ",
+      "cancel": "إلغاء"
+    },
+    "carTypes": {
+      "sedan": "سيدان",
+      "suv": "دفع رباعي",
+      "truck": "شاحنة"
+    },
+    "carModels": {
+      "modelA": "موديل أ",
+      "modelB": "موديل ب",
+      "modelC": "موديل ج"
+    },
+    "services": {
+      "service1": "خدمة 1",
+      "service2": "خدمة 2",
+      "service3": "خدمة 3"
+    },
+    "branches": {
+      "branch1": "فرع 1",
+      "branch2": "فرع 2",
+      "branch3": "فرع 3"
     }
   },
   "customer_info": {
@@ -657,11 +870,10 @@
     "Supplier": {
       "editPurchaseSupplier": "تعديل مورد الشراء",
       "cards": {
-        "newRequests": "طلبات جديدة",
-        "complete": "مكتمل",
-        "pending": "قيد الانتظار",
-        "failed": "فشل",
-        "paid": "مدفوع"
+        "totalSuppliers": "إجمالي الموردين",
+        "activeSuppliers": "الموردين النشطين",
+        "newThisMonth": "الجدد هذا الشهر",
+        "pendingApproval": "في انتظار الموافقة"
       },
       "noDataFound": "لا توجد بيانات",
       "supplier": "المورد",
@@ -694,27 +906,27 @@
       "viewExpenseCategory": "عرض فئة المصروفات",
       "save": "حفظ",
       "cancel": "إلغاء",
-      "Name": "الاسم",
+      "name": "الاسم",
       "itemCode": "كود الصنف",
       "purchaseExpenseCategoryLevel": "مستوى فئة مصروفات الشراء",
       "description": "الوصف",
       "noDataFound": "لا توجد بيانات لفئة المصروفات",
       "addExpenseCategory": "إضافة فئة مصروفات",
       "cards": {
-        "newRequests": "طلبات جديدة",
-        "complete": "مكتمل",
-        "pending": "قيد الانتظار",
-        "failed": "فشل",
-        "paid": "مدفوع"
+        "totalCategories": "إجمالي الفئات",
+        "activeCategories": "الفئات النشطة",
+        "withDescription": "مع وصف",
+        "recentlyAdded": "المضافة حديثاً"
       }
     },
     "Warehouse": {
-      "itemCode": "كود الصنف",
-      "purchaseWarehouseLevel": "مستوى مستودع الشراء",
+      "name": "الاسم",
+      "location": "الموقع",
       "description": "الوصف",
-      "noDataFound": "لا توجد بيانات للمستودع",
+      "noDataFound": "لا توجد بيانات للمستودع.",
       "addWarehouse": "إضافة مستودع",
       "cards": {
+        "totalWarehouses": "إجمالي المستودعات",
         "newRequests": "طلبات جديدة",
         "complete": "مكتمل",
         "pending": "قيد الانتظار",
@@ -752,17 +964,36 @@
       "itemDescription": "وصف الصنف"
     },
     "Invoice": {
-      "itemCode": "كود الصنف",
-      "purchaseInvoiceLevel": "مستوى فاتورة الشراء",
+      "invoiceNumber": "رقم الفاتورة",
+      "status": "الحالة",
       "description": "الوصف",
+      "dueDate": "تاريخ الاستحقاق",
+      "createdAt": "تاريخ الإنشاء",
+      "voucherDate": "تاريخ القسيمة",
+      "prefix": "البادئة",
+      "totalAmount": "المبلغ الإجمالي",
       "noDataFound": "لا توجد بيانات للفاتورة",
       "addInvoice": "إضافة فاتورة",
+      "warehouse": "المستودع",
+      "closeKind": "نوع الإغلاق",
+      "branch": "الفرع",
+      "supplier": "المورد",
+      "purchaseOrder": "أمر الشراء",
+      "items": "الأصناف",
+      "item": "الصنف",
+      "quantity": "الكمية",
+      "unitPrice": "سعر الوحدة",
+      "discount": "الخصم",
+      "tax": "الضريبة",
+      "total": "الإجمالي",
+      "cancel": "إلغاء",
+      "save": "حفظ",
       "cards": {
-        "newRequests": "طلبات جديدة",
-        "complete": "مكتمل",
+        "draft": "مسودة",
         "pending": "قيد الانتظار",
-        "failed": "فشل",
-        "paid": "مدفوع"
+        "approved": "معتمد",
+        "paid": "مدفوع",
+        "cancelled": "ملغي"
       }
     },
     "Order": {
@@ -844,7 +1075,72 @@
   "finance": {
     "finance": "المالية",
     "parent": "الرئيسي",
-    "addFinance": "إضافة حساب"
+    "addFinance": "إضافة حساب",
+    "accountTree": "شجرة الحسابات",
+    "noChildAccountsAvailable": "لا توجد حسابات فرعية متاحة",
+    "tabs": {
+      "finance": "المالية",
+      "payment-voucher": "إيصالات الدفع",
+      "receipt-voucher": "إيصالات الاستلام"
+    },
+    "paymentVoucher": {
+      "title": "إيصال الدفع",
+      "editPaymentVoucher": "تعديل إيصال الدفع",
+      "viewPaymentVoucher": "عرض إيصال الدفع",
+      "addPaymentVoucher": "إضافة إيصال دفع",
+      "noDataFound": "لا توجد بيانات لإيصالات الدفع",
+      "voucherNumber": "رقم الإيصال",
+      "date": "التاريخ",
+      "amount": "المبلغ",
+      "description": "الوصف",
+      "branch": "الفرع",
+      "account": "الحساب",
+      "selectAccount": "اختر الحساب",
+      "supplier": "المورد",
+      "selectSupplier": "اختر المورد",
+      "amountPaid": "المبلغ المدفوع",
+      "enterAmountPaid": "أدخل المبلغ المدفوع",
+      "paymentMethod": "طريقة الدفع",
+      "selectPaymentMethod": "اختر طريقة الدفع",
+      "paymentDate": "تاريخ الدفع",
+      "selectPaymentDate": "اختر تاريخ الدفع",
+      "purchaseInvoice": "فاتورة الشراء",
+      "selectPurchaseInvoice": "اختر فاتورة الشراء",
+      "enterDescription": "أدخل الوصف",
+      "payee": "المستفيد",
+      "save": "حفظ",
+      "cancel": "إلغاء"
+    },
+    "receiptVoucher": {
+      "title": "إيصال الاستلام",
+      "editReceiptVoucher": "تعديل إيصال الاستلام",
+      "viewReceiptVoucher": "عرض إيصال الاستلام",
+      "addReceiptVoucher": "إضافة إيصال استلام",
+      "noDataFound": "لا توجد بيانات لإيصالات الاستلام",
+      "voucherNumber": "رقم الإيصال",
+      "invoice": "فاتورة",
+      "selectInvoice": "اختر الفاتورة",
+      "account": "الحساب",
+      "selectAccount": "اختر الحساب",
+      "customer": "العميل",
+      "selectCustomer": "اختر العميل",
+      "amountPaid": "المبلغ المدفوع",
+      "enterAmountPaid": "أدخل المبلغ المدفوع",
+      "amountReceived": "المبلغ المستلم",
+      "receivedDate": "تاريخ الاستلام",
+      "referenceNumber": "رقم المرجع",
+      "enterReferenceNumber": "أدخل الرقم المرجعي",
+      "status": "الحالة",
+      "notes": "ملاحظات",
+      "enterNotes": "أدخل الملاحظات",
+      "save": "حفظ",
+      "cancel": "إلغاء"
+    },
+    "paymentMethods": {
+      "cash": "نقدي",
+      "bankTransfer": "تحويل بنكي",
+      "cheque": "شيك"
+    }
   },
   "auth": {
     "authTemplate": {
@@ -882,7 +1178,6 @@
         "default": "حدث خطأ أثناء تسجيل الدخول"
       }
     },
-
     "forgetPassword": {
       "title": "نسيت كلمة المرور",
       "instruction1": "يرجى إدخال بريدك الإلكتروني لإرسال",

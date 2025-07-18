@@ -48,7 +48,7 @@ export default function Items() {
       isLoading={isLoading}
       error={error}
       emptyMessage={t("noItemsDataFound") || "No items data found"}
-      editRoute="/dashboard/inventory/items/edit/"
+      editRoute="/dashboard/inventory/items/edit"
       data={{ results: transformedData, count: data?.count || 0 }}
       columns={columns}
       cardData={cardsData}

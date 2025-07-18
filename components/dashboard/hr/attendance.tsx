@@ -63,7 +63,7 @@ export default function Attendance() {
       columns={columns}
       cardData={cardsData}
       emptyMessage={t("noAttendanceDataFound")}
-      editRoute="/dashboard/hr/attendance/edit/"
+      editRoute="/dashboard/hr/attendance/edit"
       buttonText={t("addAttendance")}
       ButtonEvent={handleClick}
       onPageChange={handlePageChange}

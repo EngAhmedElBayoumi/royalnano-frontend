@@ -1,4 +1,85 @@
 {
+  "reports": {
+    "title": "Reports",
+    "tabs": {
+      "generate": "Generate Report",
+      "results": "Results",
+      "history": "History",
+      "statistics": "Statistics"
+    },
+    "generate": {
+      "title": "Generate New Report",
+      "reportType": "Report Type",
+      "reportTypePlaceholder": "Select a report type",
+      "filters": {
+        "dateRange": "Date Range",
+        "branch": "Branch",
+        "branchPlaceholder": "All branches",
+        "allBranches": "All branches",
+        "status": "Status",
+        "statusPlaceholder": "All statuses",
+        "allStatuses": "All statuses",
+        "active": "Active",
+        "inactive": "Inactive",
+        "pending": "Pending",
+        "completed": "Completed"
+      },
+      "buttons": {
+        "generate": "Generate Report",
+        "generating": "Generating...",
+        "exportExcel": "Export to Excel",
+        "exportCsv": "Export to CSV",
+        "exportPdf": "Export to PDF"
+      }
+    },
+    "results": {
+      "totalRecords": "Total Records",
+      "generated": "Generated",
+      "executionTime": "Execution Time",
+      "showingRecords": "Showing first 50 records of {total} total records.",
+      "exportNote": "Export the full report to view all data.",
+      "noReport": {
+        "title": "No Report Generated",
+        "description": "Generate a report from the \"Generate Report\" tab to view results here."
+      }
+    },
+    "history": {
+      "title": "Report Execution History",
+      "table": {
+        "reportType": "Report Type",
+        "status": "Status",
+        "executedBy": "Executed By",
+        "executionTime": "Execution Time",
+        "createdAt": "Created At",
+        "actions": "Actions"
+      },
+      "dynamicReport": "Dynamic Report",
+      "viewButton": "View"
+    },
+    "statistics": {
+      "cards": {
+        "totalReports": "Total Reports",
+        "thisMonth": "This Month",
+        "mostUsedType": "Most Used Type",
+        "avgExecutionTime": "Avg. Execution Time"
+      },
+      "recentExecutions": "Recent Executions",
+      "noRecentExecutions": "No recent executions found."
+    },
+    "status": {
+      "completed": "completed",
+      "running": "running",
+      "failed": "failed",
+      "pending": "pending"
+    }
+  },
+  "tableControls": {
+    "search": "Search...",
+    "exportToCsv": "Export to CSV",
+    "exportToExcel": "Export to Excel",
+    "exportToPdf": "Export to PDF"
+  },
+
   "edit": "edit",
   "view": "view",
   "save": "save",
@@ -24,7 +105,9 @@
     "settings": "Settings",
     "logout": "Logout",
     "purchase": "Purchase",
-    "finance": "Finance"
+    "finance": "Finance",
+    "analytics": "Analytics",
+    "reports": "Reports"
   },
   "branches": {
     "tabs": {
@@ -188,6 +271,7 @@
       "address": "Address",
       "branch": "Branch",
       "department": "Department",
+      "leader": "Leader",
       "password": "Password",
       "isUser": "User",
       "permissions": "Permissions",
@@ -257,7 +341,7 @@
       "noEvaluationDataFound": "No evaluation data found"
     },
     "jobs": {
-      "editJob": "Add Job",
+      "editJob": "Edit Job",
       "addJob": "Add Job",
       "name": "Name",
       "permissions": "Permissions",
@@ -659,13 +743,14 @@
     "supplier": "Supplier",
     "warehouse": "Warehouse",
     "Supplier": {
-      "editPurchaseSupplier": "Edit Purchase Supplier",
+      "editPurchaseSupplier": "Edit Supplier",
+      "editSupplier": "Edit Supplier",
+      "viewSupplier": "View Supplier",
       "cards": {
-        "newRequests": "New Requests",
-        "complete": "Complete",
-        "pending": "Pending",
-        "failed": "Failed",
-        "paid": "Paid"
+        "totalSuppliers": "Total Suppliers",
+        "activeSuppliers": "Active Suppliers",
+        "newThisMonth": "New This Month",
+        "pendingApproval": "Pending Approval"
       },
       "noDataFound": "No Data Found",
       "supplier": "Supplier",
@@ -697,33 +782,36 @@
       "editExpenseCategory": "Edit Expense Category",
       "viewExpenseCategory": "View Expense Category",
       "save": "Save",
-      "cancel": "cancel",
-      "Name": "Name",
+      "cancel": "Cancel",
+      "name": "Name",
       "itemCode": "Item Code",
       "purchaseExpenseCategoryLevel": "Purchase Expense Category Level",
       "description": "Description",
       "noDataFound": "No expense category data found.",
       "addExpenseCategory": "Add Expense Category",
       "cards": {
-        "newRequests": "New Requests",
-        "complete": "Complete",
-        "pending": "Pending",
-        "failed": "Failed",
-        "paid": "Paid"
+        "totalCategories": "Total Categories",
+        "activeCategories": "Active Categories",
+        "withDescription": "With Description",
+        "recentlyAdded": "Recently Added"
       }
     },
     "Warehouse": {
-      "itemCode": "Item Code",
-      "purchaseWarehouseLevel": "Purchase Warehouse Level",
+      "name": "Name",
+      "location": "Location",
       "description": "Description",
       "noDataFound": "No warehouse data found.",
       "addWarehouse": "Add Warehouse",
+      "editWarehouse": "Edit Warehouse",
+      "viewWarehouse": "View Warehouse",
+      "createWarehouse": "Create Warehouse",
+      "itemCode": "Item Code",
+      "purchaseWarehouseLevel": "Purchase Warehouse Level",
       "cards": {
-        "newRequests": "New Requests",
-        "complete": "Complete",
-        "pending": "Pending",
-        "failed": "Failed",
-        "paid": "Paid"
+        "totalWarehouses": "Total Warehouses",
+        "activeWarehouses": "Active Warehouses",
+        "withLocation": "With Location",
+        "withDescription": "With Description"
       }
     },
     "Request": {
@@ -735,16 +823,17 @@
       "description": "Description",
       "requestBy": "Request By",
       "branch": "Branch",
+      "status": "Status",
       "items": "Items",
+      "itemsCount": "Items Count",
       "noDataFound": "No request data found.",
       "addRequest": "Add Request",
       "request": "Request",
       "cards": {
         "newRequests": "New Requests",
-        "complete": "Complete",
         "pending": "Pending",
-        "failed": "Failed",
-        "paid": "Paid"
+        "approved": "Approved",
+        "completed": "Completed"
       },
       "kind": "Kind",
       "itemKind": "Item Kind",
@@ -760,18 +849,32 @@
       "status": "Status",
       "description": "Description",
       "dueDate": "Due Date",
-      "createdAt": "created at",
+      "createdAt": "Created At",
       "voucherDate": "Voucher Date",
       "prefix": "Prefix",
       "totalAmount": "Total Amount",
       "noDataFound": "No invoice data found.",
       "addInvoice": "Add Invoice",
+      "warehouse": "Warehouse",
+      "closeKind": "Close Kind",
+      "branch": "Branch",
+      "supplier": "Supplier",
+      "purchaseOrder": "Purchase Order",
+      "items": "Items",
+      "item": "Item",
+      "quantity": "Quantity",
+      "unitPrice": "Unit Price",
+      "discount": "Discount",
+      "tax": "Tax",
+      "total": "Total",
+      "cancel": "Cancel",
+      "save": "Save",
       "cards": {
-        "newRequests": "New Requests",
-        "complete": "Complete",
+        "draft": "Draft",
         "pending": "Pending",
-        "failed": "Failed",
-        "paid": "Paid"
+        "approved": "Approved",
+        "paid": "Paid",
+        "cancelled": "Cancelled"
       }
     },
     "Order": {
@@ -817,6 +920,62 @@
       "subtotal": "Subtotal",
       "freeQuantity": "Free Quantity",
       "vat": "VAT"
+    }
+  },
+  "clients": {
+    "title": "Clients",
+    "addClient": "Add Client",
+    "editClient": "Edit Client",
+    "clientForm": {
+      "clientName": "Client Name",
+      "email": "Email",
+      "phoneNumber": "Phone Number",
+      "facilityName": "Facility Name",
+      "taxNumber": "Tax Number",
+      "address": "Address",
+      "city": "City",
+      "area": "Area",
+      "buildingNumber": "Building Number",
+      "website": "Website",
+      "condition": "Condition",
+      "save": "Save",
+      "cancel": "Cancel"
+    }
+  },
+  "customerRequests": {
+    "title": "Customer Requests",
+    "addCustomerRequest": "Add Customer Request",
+    "editCustomerRequest": "Edit Customer Request",
+    "customerRequestForm": {
+      "clientName": "Client Name",
+      "phoneNumber": "Phone Number",
+      "carType": "Car Type",
+      "carModel": "Car Model",
+      "service": "Service",
+      "branch": "Branch",
+      "additionalNotes": "Additional Notes",
+      "save": "Save",
+      "cancel": "Cancel"
+    },
+    "carTypes": {
+      "sedan": "Sedan",
+      "suv": "SUV",
+      "truck": "Truck"
+    },
+    "carModels": {
+      "modelA": "Model A",
+      "modelB": "Model B",
+      "modelC": "Model C"
+    },
+    "services": {
+      "service1": "Service 1",
+      "service2": "Service 2",
+      "service3": "Service 3"
+    },
+    "branches": {
+      "branch1": "Branch 1",
+      "branch2": "Branch 2",
+      "branch3": "Branch 3"
     }
   },
   "customer_info": {
@@ -877,7 +1036,70 @@
   "finance": {
     "finance": "Finance",
     "parent": "Parent",
-    "addFinance": "Add Account"
+    "addFinance": "Add Account",
+    "accountTree": "Account Tree",
+    "noChildAccountsAvailable": "No child accounts available",
+    "tabs": {
+      "finance": "Finance",
+      "payment-voucher": " Payment Voucher",
+      "receipt-voucher": " Receipt Voucher"
+    },
+    "paymentVoucher": {
+      "title": "Payment Voucher",
+      "addPaymentVoucher": "Add Payment Voucher",
+      "editPaymentVoucher": "Edit Payment Voucher",
+      "noDataFound": "No payment voucher data found.",
+      "voucherNumber": "Voucher Number",
+      "date": "Date",
+      "amount": "Amount",
+      "description": "Description",
+      "branch": "Branch",
+      "account": "Account",
+      "selectAccount": "Select Account",
+      "supplier": "Supplier",
+      "selectSupplier": "Select Supplier",
+      "amountPaid": "Amount Paid",
+      "enterAmountPaid": "Enter Amount Paid",
+      "paymentMethod": "Payment Method",
+      "selectPaymentMethod": "Select Payment Method",
+      "paymentDate": "Payment Date",
+      "selectPaymentDate": "Select Payment Date",
+      "purchaseInvoice": "Purchase Invoice",
+      "selectPurchaseInvoice": "Select Purchase Invoice",
+      "enterDescription": "Enter Description",
+      "payee": "Payee",
+      "save": "Save",
+      "cancel": "Cancel"
+    },
+    "receiptVoucher": {
+      "title": "Receipt Voucher",
+      "addReceiptVoucher": "Add Receipt Voucher",
+      "editReceiptVoucher": "Edit Receipt Voucher",
+      "noDataFound": "No receipt voucher data found.",
+      "voucherNumber": "Voucher Number",
+      "invoice": "Invoice",
+      "selectInvoice": "Select Invoice",
+      "account": "Account",
+      "selectAccount": "Select Account",
+      "customer": "Customer",
+      "selectCustomer": "Select Customer",
+      "amountPaid": "Amount Paid",
+      "enterAmountPaid": "Enter Amount Paid",
+      "amountReceived": "Amount Received",
+      "receivedDate": "Received Date",
+      "referenceNumber": "Reference Number",
+      "enterReferenceNumber": "Enter Reference Number",
+      "status": "Status",
+      "notes": "Notes",
+      "enterNotes": "Enter Notes",
+      "save": "Save",
+      "cancel": "Cancel"
+    },
+    "paymentMethods": {
+      "cash": "Cash",
+      "bankTransfer": "Bank Transfer",
+      "cheque": "Cheque"
+    }
   },
   "auth": {
     "authTemplate": {

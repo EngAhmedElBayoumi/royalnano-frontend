@@ -55,7 +55,7 @@ export default function Evaluations() {
       columns={columns}
       cardData={cardsData}
       emptyMessage={t("noEvaluationsDataFound")}
-      editRoute="/dashboard/hr/evaluations/edit/"
+      editRoute="/dashboard/hr/evaluations/edit"
       buttonText={t("addEvaluation")}
       ButtonEvent={handleClick}
       onPageChange={handlePageChange}

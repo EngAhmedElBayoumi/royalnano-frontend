@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
@@ -36,6 +37,10 @@ const CustomTable = ({
   totalRecords,
   isClientRequest,
   onSetInitialPrice,
+  enableSelection,
+  onSelectionChange,
+  onReassignClick,
+  reassignButtonText,
 }: CustomTableProps) => {
   const router = useRouter();
   const t = useTranslations();
@@ -50,6 +55,16 @@ const CustomTable = ({
     {}
   );
   const [visibleColumns, setVisibleColumns] = useState(columns);
+  const [selectedRowsState, setSelectedRowsState] = useState<DataInTable[]>([]);
+
+  // Handle selection changes
+  const handleSelectionChange = (e: { value: DataInTable[] }) => {
+    setSelectedRowsState(e.value);
+    if (onSelectionChange) {
+      const selectedIds = e.value.map((row) => row.id);
+      onSelectionChange(selectedIds);
+    }
+  };
 
   useEffect(() => {
     setTableData(data);
@@ -92,6 +107,9 @@ const CustomTable = ({
       t={t}
       tableData={tableData}
       dataTableRef={dataTableRef}
+      onReassignClick={onReassignClick}
+      reassignButtonText={reassignButtonText}
+      selectedRowsCount={selectedRowsState.length}
     />
   );
 
@@ -110,6 +128,7 @@ const CustomTable = ({
 
       {data.length ? (
         <div className="mb-5 bg-dashboardBg py-4 rounded-[20px]">
+          {/*  @ts-ignore eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
           <DataTable
             ref={dataTableRef}
             value={tableData}
@@ -118,6 +137,11 @@ const CustomTable = ({
             globalFilterFields={columns.map((c) => c.field)}
             header={header}
             dataKey="id"
+            selectionMode={enableSelection ? "multiple" : undefined}
+            selection={enableSelection ? selectedRowsState : undefined}
+            onSelectionChange={
+              enableSelection ? handleSelectionChange : undefined
+            }
             emptyMessage={
               <EmptyMessage onClick={ButtonEvent} emptyMessage={emptyMessage} />
             }
@@ -129,6 +153,17 @@ const CustomTable = ({
               }`
             }
           >
+            {enableSelection && (
+              <Column
+                selectionMode="multiple"
+                headerStyle={{
+                  backgroundColor: "#C8AE50",
+                  width: "3rem",
+                }}
+                className="text-center py-[13px] px-[10px] border-r border-white border-[2px]"
+                headerClassName="text-center text-white text-[16px] font-[500] py-[13px] px-[10px] border-r border-white border-[2px]"
+              />
+            )}
             {visibleColumns.map((col) => (
               <Column
                 key={col.field}
@@ -171,7 +206,6 @@ const CustomTable = ({
               />
             )}
           </DataTable>
-
           {totalRecords && totalRecords > rows && (
             <Paginator
               first={page}

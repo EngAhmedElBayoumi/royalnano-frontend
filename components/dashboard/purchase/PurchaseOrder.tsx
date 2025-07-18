@@ -14,30 +14,30 @@ export interface PurchaseOrder {
   prefix: string;
   delivery_date: string;
   due_date: string;
-  branch: {name:string};
-  supplier: number;
-  description: string;
-  items: {
+  branch?: { id: number; name: string } | null;
+  supplier?: { id: number; supplier_name: string } | number | null;
+  description?: string;
+  status?: string;
+  items?: {
     kind: string;
     name: string;
     unit: string;
     quantity: string;
     unit_price: string;
-    id: number;
-    bonus: string;
-    amount: string;
-    discount: string;
-    discount_percent: string;
-    vat_kd: string;
-    total: string;
+    bonus?: string;
+    amount?: string;
+    discount?: string;
+    discount_percent?: string;
+    vat_kd?: string;
+    total?: string;
   }[];
-  invoice_detail: {
-    discount: string;
-    vat: string;
-    subtotal: string;
-    quantity: string;
-    free_quantity: string;
-    total: string;
+  invoice_detail?: {
+    discount?: string;
+    vat?: string;
+    subtotal?: string;
+    quantity?: string;
+    free_quantity?: string;
+    total?: string;
   };
 }
 
@@ -46,60 +46,53 @@ export default function PurchaseOrder() {
     permissionKey: "purchaseorder",
     useQueryHook: useGetOrdersQuery,
   });
-  const {
-    data: suppliersData,
-  
-  } = useGetSuppliersQuery({});
-    const [supplierNames, setSupplierNames] = useState<{ [key: number]: string }>({}); 
-  
-   useEffect(() => {
-      if (suppliersData?.results) {
-        const supplierMap = suppliersData.results.reduce((acc: { [x: string]: string; }, supplier: { id: string | number; supplier_name: string; }) => {
-          acc[supplier.id] = supplier.supplier_name;
-          return acc;
-        }, {} as { [key: number]: string });
-        setSupplierNames(supplierMap);
-      }
-    }, [suppliersData]);
+  const { data: suppliersData } = useGetSuppliersQuery({});
+  const [supplierNames, setSupplierNames] = useState<{ [key: number]: string }>({});
+
+  useEffect(() => {
+    if (suppliersData?.results) {
+      const supplierMap = suppliersData.results.reduce((acc: { [x: string]: string }, supplier: { id: string | number; supplier_name: string }) => {
+        acc[supplier.id] = supplier.supplier_name;
+        return acc;
+      }, {} as { [key: number]: string });
+      setSupplierNames(supplierMap);
+    }
+  }, [suppliersData]);
+
   const router = useRouter();
   const t = useTranslations("Purchase.Order");
 
   const columns = [
-    { field: "id", header: t("id") },
-    { field: "order_date", header: t("orderDate") },
-    { field: "offer_expiry", header: t("offerExpiry") },
     { field: "prefix", header: t("prefix") },
+    { field: "order_date", header: t("orderDate") },
     { field: "delivery_date", header: t("deliveryDate") },
     { field: "due_date", header: t("dueDate") },
-    { field: "branch", header: t("branch") },
-    { field: "supplier", header: t("supplier") },
-    { field: "description", header: t("description") },
+    { field: "branch_name", header: t("branch") },
+    { field: "supplier_name", header: t("supplier") },
+    { field: "status", header: t("status") },
   ];
 
   const cardsData = [
-    { title: t("cards.newRequests"), num: 145 },
-    { title: t("cards.complete"), num: 87 },
-    { title: t("cards.pending"), num: 3200 },
-    { title: t("cards.failed"), num: 48 },
-    { title: t("cards.paid"), num: 48 },
+    { title: t("cards.totalOrders"), num: purchaseOrders?.count || 0 },
+    { title: t("cards.pendingOrders"), num: purchaseOrders?.results?.filter((order: PurchaseOrder) => order.status === "pending").length || 0 },
+    { title: t("cards.completedOrders"), num: purchaseOrders?.results?.filter((order: PurchaseOrder) => order.status === "completed").length || 0 },
+    { title: t("cards.thisMonth"), num: 12 },
   ];
 
   const formattedData =
     purchaseOrders?.results?.map((order: PurchaseOrder) => ({
       id: order.id,
-      order_date: order.order_date,
-      offer_expiry: order.offer_expiry,
       prefix: order.prefix,
+      order_date: order.order_date,
       delivery_date: order.delivery_date,
       due_date: order.due_date,
-      branch: order.branch.name,
-      supplier: supplierNames[order.supplier] || "Loading...", 
-
-      description: order.description,
+      branch_name: order.branch?.name || "N/A",
+      supplier_name: typeof order.supplier === "object" ? order.supplier?.supplier_name : supplierNames[order.supplier as number] || "N/A",
+      status: order.status || "pending",
     })) || [];
 
   const handleClick = () => {
-    router.push("/dashboard/purchase/purchase-order/create");
+    router.push("/dashboard/purchase/order/create");
   };
 
   return (
@@ -110,8 +103,8 @@ export default function PurchaseOrder() {
       columns={columns}
       cardData={cardsData}
       emptyMessage={t("noDataFound")}
-      editRoute="/dashboard/purchase/purchase-order/edit/"
-      viewRoute="/dashboard/purchase/purchase-order/view/"
+      editRoute="/dashboard/purchase/order/edit"
+      viewRoute="/dashboard/purchase/order/view"
       buttonText={t("addOrder")}
       ButtonEvent={handleClick}
       onPageChange={handlePageChange}
@@ -119,3 +112,4 @@ export default function PurchaseOrder() {
     />
   );
 }
+

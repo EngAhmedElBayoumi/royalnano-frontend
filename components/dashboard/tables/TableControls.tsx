@@ -17,6 +17,10 @@ interface TableControlsProps {
   t: (key: string) => string;
   tableData: Record<string, any>[];
   dataTableRef: React.RefObject<DataTable<any>>;
+  // New props for reassign functionality
+  onReassignClick?: () => void;
+  reassignButtonText?: string;
+  selectedRowsCount?: number;
 }
 
 const TableControls = ({
@@ -30,11 +34,15 @@ const TableControls = ({
   t,
   tableData,
   dataTableRef,
+  onReassignClick,
+  reassignButtonText,
+  selectedRowsCount,
 }: TableControlsProps) => {
   const exportColumns = columns.map((col) => ({
     title: col.header,
     dataKey: col.field,
   }));
+
   const exportCSV = (selectionOnly: boolean) => {
     if (dataTableRef.current) {
       dataTableRef.current.exportCSV({ selectionOnly });
@@ -86,6 +94,7 @@ const TableControls = ({
       }
     });
   };
+
   return (
     <div className="flex mb-4 flex-col flex-wrap gap-2">
       <div className="flex gap-2 items-center w-full xs:flex-1 flex-wrap">
@@ -109,19 +118,19 @@ const TableControls = ({
           className="bg-primary text-white capitalize"
           onClick={() => exportCSV(false)}
         >
-          export to csv
+          {t("exportToCsv")}
         </Button>
         <Button
           className="bg-primary text-white capitalize"
           onClick={exportExcel}
         >
-          Export to Excel
+          {t("exportToExcel")}
         </Button>
         <Button
           className="bg-primary text-white capitalize"
           onClick={exportPdf}
         >
-          Export to pdf
+          {t("exportToPdf")}
         </Button>
         {buttonText && (
           <Button
@@ -129,6 +138,16 @@ const TableControls = ({
             onClick={ButtonEvent}
           >
             {buttonText}
+          </Button>
+        )}
+        {onReassignClick && reassignButtonText && (
+          <Button
+            className="bg-primary text-white capitalize"
+            onClick={onReassignClick}
+            disabled={!selectedRowsCount || selectedRowsCount === 0}
+          >
+            {reassignButtonText}{" "}
+            {selectedRowsCount ? `(${selectedRowsCount})` : ""}
           </Button>
         )}
       </div>

@@ -25,7 +25,7 @@ export default function EditSalesCustomer() {
     : 0;
   const defaultValues = data && {
     ...data,
-    branch: data.branch.id,
+    branch: data.branch?.id,
   };
   console.log(data);
   const handleSubmit = async (data: SalesCustomerFormValues) => {

@@ -17,6 +17,7 @@ export default function CreateEmployee() {
       branch: Number(data.branch),
       department: Number(data.department),
       job_title: Number(data.job_title),
+      leader: data.leader ? Number(data.leader) : null,
     };
 
     const response = await createEmployee(payload);

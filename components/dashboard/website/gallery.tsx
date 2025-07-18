@@ -51,7 +51,7 @@ export default function Gallery() {
       columns={columns}
       cardData={cardsData}
       emptyMessage={t("noGalleryDataFound")}
-      editRoute="/dashboard/website/gallery/edit/"
+      editRoute="/dashboard/website/gallery/edit"
       buttonText={t("addGallery")}
       ButtonEvent={handleClick}
       onPageChange={handlePageChange}
