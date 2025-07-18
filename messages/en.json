@@ -12,6 +12,11 @@
   "fieldName": "Field Name",
   "fieldValue": "Field Value",
   "removeField": "Remove Field",
+  "tableControls": {
+    "exportToCSV": "Export to CSV",
+    "exportToExcel": "Export to Excel",
+    "exportToPDF": "Export to PDF"
+  },
   "Sidebar": {
     "home": "Home",
     "clients": "Clients",

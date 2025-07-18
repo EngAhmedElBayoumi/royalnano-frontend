@@ -12,6 +12,11 @@
   "fieldName": "اسم الحقل",
   "fieldValue": "قيمة الحقل",
   "removeField": "إزالة الحقل",
+  "tableControls": {
+    "exportToCSV": "تصدير إلى CSV",
+    "exportToExcel": "تصدير إلى Excel",
+    "exportToPDF": "تصدير إلى PDF"
+  },
   "Sidebar": {
     "home": "الرئيسية",
     "clients": "العملاء",
@@ -53,9 +58,9 @@
       "selectBranchLocation": "اختر موقع الفرع",
       "balance": "الميزانية"
     },
-     "branches_transactions":{
-      "transaction_type":"نوع العملية",
-      "amount":"المبلغ",
+    "branches_transactions": {
+      "transaction_type": "نوع العملية",
+      "amount": "المبلغ",
       "description": "الوصف",
       "branch": "الفرع",
       "reset_image": "إعادة تعيين الصورة",
@@ -929,7 +934,7 @@
       "payment-voucher": "إيصالات الدفع",
       "receipt-voucher": "إيصالات الاستلام"
     },
-  "paymentVoucher": {
+    "paymentVoucher": {
       "title": "إيصال الدفع",
       "editPaymentVoucher": "تعديل إيصال الدفع",
       "viewPaymentVoucher": "عرض إيصال الدفع",
@@ -987,8 +992,8 @@
       "bankTransfer": "تحويل بنكي",
       "cheque": "شيك"
     }
-     },
-    "auth": {
+  },
+  "auth": {
     "authTemplate": {
       "Welcome To": "مرحبًا بك في",
       "Royal": "رويال",
@@ -1064,6 +1069,5 @@
         "default": "حدث خطأ أثناء التسجيل"
       }
     }
-    
   }
 }
