@@ -17,7 +17,7 @@ export default function EditInvoicePage() {
   const searchParams = useSearchParams();
   const invoiceId = searchParams.get("id");
 
-  const [updateInvoice, { isLoading: isUpdating }] = useUpdateInvoiceMutation();
+  const [updateInvoice] = useUpdateInvoiceMutation();
   const {
     data: invoiceData,
     isLoading: isFetching,
@@ -41,14 +41,23 @@ export default function EditInvoicePage() {
         description: invoiceData.description || "",
         status: invoiceData.status || "pending",
         items:
-          invoiceData.items?.map((item: any) => ({
-            item: item.item?.id || 0,
-            quantity: item.quantity || 1,
-            unit_price: item.unit_price?.toString() || "",
-            discount: item.discount?.toString() || "",
-            tax: item.tax?.toString() || "",
-            total: item.total?.toString() || "",
-          })) || [],
+          invoiceData.items?.map(
+            (item: {
+              item?: { id?: number };
+              quantity?: number;
+              unit_price?: number;
+              discount?: number;
+              tax?: number;
+              total?: number;
+            }) => ({
+              item: item.item?.id || 0,
+              quantity: item.quantity || 1,
+              unit_price: item.unit_price?.toString() || "",
+              discount: item.discount?.toString() || "",
+              tax: item.tax?.toString() || "",
+              total: item.total?.toString() || "",
+            })
+          ) || [],
       });
     }
   }, [invoiceData]);
@@ -60,8 +69,7 @@ export default function EditInvoicePage() {
       await updateInvoice({ id: invoiceId, ...data }).unwrap();
       toast.success(t("invoiceUpdatedSuccessfully"));
       router.push("/dashboard/purchase?tab=invoice");
-    } catch (error: any) {
-      console.error("Error updating invoice:", error);
+    } catch (error) {
       toast.error(error?.data?.message || t("errorUpdatingInvoice"));
     }
   };
