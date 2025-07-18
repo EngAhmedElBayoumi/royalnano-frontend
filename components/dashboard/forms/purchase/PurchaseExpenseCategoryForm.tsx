@@ -30,7 +30,7 @@ const ExpenseCategoryForm = ({
     },
   });
 
-  const t = useTranslations("Purchase.ExpenseCategory");
+  const t = useTranslations("purchase.ExpenseCategory");
 
   return (
     <Form {...form}>
@@ -67,4 +67,3 @@ const ExpenseCategoryForm = ({
 };
 
 export default ExpenseCategoryForm;
-

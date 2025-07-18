@@ -8,8 +8,9 @@ import WarehouseForm, {
 import CreatePage from "@/components/dashboard/CreatePage";
 
 export default function CreateWarehouse() {
-  const t = useTranslations("Purchase.Warehouse");
-  const [createWarehouse, { isLoading: submitting, error }] = useCreateWarehouseMutation();
+  const t = useTranslations("purchase.Warehouse");
+  const [createWarehouse, { isLoading: submitting, error }] =
+    useCreateWarehouseMutation();
 
   const handleSubmit = async (formData: WarehouseFormValues) => {
     const response = await createWarehouse(formData);
@@ -27,4 +28,3 @@ export default function CreateWarehouse() {
     />
   );
 }
-

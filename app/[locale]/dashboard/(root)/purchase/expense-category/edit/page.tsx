@@ -13,7 +13,7 @@ import EditPage from "@/components/dashboard/EditPage";
 export default function EditExpenseCategory() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
-  const t = useTranslations("Purchase.ExpenseCategory");
+  const t = useTranslations("purchase.ExpenseCategory");
 
   const { data, isLoading, error } = useGetExpenseCategoryByIdQuery(id);
   const [updateExpenseCategory, { isLoading: submitting }] =

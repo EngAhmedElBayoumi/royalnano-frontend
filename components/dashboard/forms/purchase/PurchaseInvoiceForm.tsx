@@ -48,7 +48,9 @@ const PurchaseInvoiceForm = ({
   defaultValues,
   isView = false,
 }: PurchaseInvoiceFormProps) => {
-  const [inventoryItems, setInventoryItems] = useState<{ value: string; label: string }[]>([]);
+  const [inventoryItems, setInventoryItems] = useState<
+    { value: string; label: string }[]
+  >([]);
 
   const form = useForm<PurchaseInvoiceFormValues>({
     resolver: zodResolver(purchaseInvoiceSchema),
@@ -76,32 +78,38 @@ const PurchaseInvoiceForm = ({
     },
   });
 
-  const t = useTranslations("Purchase.Invoice");
+  const t = useTranslations("purchase.Invoice");
   const { data: branchesData } = useGetBranchesQuery({});
   const { data: suppliersData } = useGetSuppliersQuery({});
   const { data: warehousesData } = useGetWarehousesQuery({});
   const { data: ordersData } = useGetOrdersQuery({});
   const { data: itemsData, isError, error } = useGetItemsQuery({});
 
-  const branchOptions = branchesData?.results?.map((branch: any) => ({
-    label: branch.name,
-    value: branch.id.toString(),
-  })) || [];
+  const branchOptions =
+    branchesData?.results?.map((branch: any) => ({
+      label: branch.name,
+      value: branch.id.toString(),
+    })) || [];
 
-  const supplierOptions = suppliersData?.results?.map((supplier: any) => ({
-    label: supplier.supplier_name,
-    value: supplier.id.toString(),
-  })) || [];
+  const supplierOptions =
+    suppliersData?.results?.map((supplier: any) => ({
+      label: supplier.supplier_name,
+      value: supplier.id.toString(),
+    })) || [];
 
-  const warehouseOptions = warehousesData?.results?.map((warehouse: any) => ({
-    label: warehouse.name,
-    value: warehouse.id.toString(),
-  })) || [];
+  const warehouseOptions =
+    warehousesData?.results?.map((warehouse: any) => ({
+      label: warehouse.name,
+      value: warehouse.id.toString(),
+    })) || [];
 
-  const orderOptions = ordersData?.results?.map((order: any) => ({
-    label: `${order.prefix} - ${order.supplier?.supplier_name || "No Supplier"}`,
-    value: order.id.toString(),
-  })) || [];
+  const orderOptions =
+    ordersData?.results?.map((order: any) => ({
+      label: `${order.prefix} - ${
+        order.supplier?.supplier_name || "No Supplier"
+      }`,
+      value: order.id.toString(),
+    })) || [];
 
   const statusOptions = [
     { value: "draft", label: "Draft" },

@@ -2,11 +2,13 @@
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import PurchaseInvoiceForm, { PurchaseInvoiceFormValues } from "@/components/dashboard/forms/purchase/PurchaseInvoiceForm";
+import PurchaseInvoiceForm, {
+  PurchaseInvoiceFormValues,
+} from "@/components/dashboard/forms/purchase/PurchaseInvoiceForm";
 import { useCreateInvoiceMutation } from "@/redux/services/dashboard/purchase/invoiceApi";
 
 export default function CreateInvoicePage() {
-  const t = useTranslations("Purchase.Invoice");
+  const t = useTranslations("purchase.Invoice");
   const router = useRouter();
   const [createInvoice, { isLoading }] = useCreateInvoiceMutation();
 
@@ -27,11 +29,10 @@ export default function CreateInvoicePage() {
         <h1 className="text-2xl font-bold">{t("createInvoice")}</h1>
         <p className="text-gray-600">{t("createInvoiceDescription")}</p>
       </div>
-      
+
       <div className="bg-white rounded-lg shadow-sm border p-6">
         <PurchaseInvoiceForm onSubmit={handleSubmit} />
       </div>
     </div>
   );
 }
-

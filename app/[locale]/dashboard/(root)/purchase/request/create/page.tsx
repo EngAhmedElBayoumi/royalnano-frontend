@@ -8,7 +8,7 @@ import PurchaseRequestForm, {
 import { useCreateRequestMutation } from "@/redux/services/dashboard/purchase/requestApi";
 
 export default function CreateRequest() {
-  const t = useTranslations("Purchase.Request");
+  const t = useTranslations("purchase.Request");
   const [createRequest, { isLoading }] = useCreateRequestMutation();
 
   const handleSubmit = async (data: PurchaseRequestFormValues) => {

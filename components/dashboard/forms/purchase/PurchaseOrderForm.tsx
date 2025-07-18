@@ -54,8 +54,12 @@ const PurchaseOrderForm = ({
   defaultValues,
   isView,
 }: PurchaseOrderFormProps) => {
-  const [branches, setBranches] = useState<{ value: string; label: string }[]>([]);
-  const [suppliers, setSuppliers] = useState<{ value: string; label: string }[]>([]);
+  const [branches, setBranches] = useState<{ value: string; label: string }[]>(
+    []
+  );
+  const [suppliers, setSuppliers] = useState<
+    { value: string; label: string }[]
+  >([]);
   const [units, setUnits] = useState<{ value: string; label: string }[]>([]);
   const [kinds, setKinds] = useState<{ value: string; label: string }[]>([]);
 
@@ -96,40 +100,52 @@ const PurchaseOrderForm = ({
     },
   });
 
-  const t = useTranslations("Purchase.Order");
+  const t = useTranslations("purchase.Order");
 
   // Fetch dropdown data
   useEffect(() => {
     const fetchDropdownData = async () => {
       try {
         // Fetch branches
-        const branchesResponse = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}api/branches/`);
+        const branchesResponse = await fetch(
+          `${process.env.NEXT_PUBLIC_BASE_URL}api/branches/`
+        );
         if (branchesResponse.ok) {
           const branchesData = await branchesResponse.json();
-          setBranches(branchesData.map((branch: any) => ({
-            value: branch.id.toString(),
-            label: branch.name
-          })));
+          setBranches(
+            branchesData.map((branch: any) => ({
+              value: branch.id.toString(),
+              label: branch.name,
+            }))
+          );
         }
 
         // Fetch suppliers
-        const suppliersResponse = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}api/suppliers/`);
+        const suppliersResponse = await fetch(
+          `${process.env.NEXT_PUBLIC_BASE_URL}api/suppliers/`
+        );
         if (suppliersResponse.ok) {
           const suppliersData = await suppliersResponse.json();
-          setSuppliers(suppliersData.map((supplier: any) => ({
-            value: supplier.id.toString(),
-            label: supplier.supplier_name
-          })));
+          setSuppliers(
+            suppliersData.map((supplier: any) => ({
+              value: supplier.id.toString(),
+              label: supplier.supplier_name,
+            }))
+          );
         }
 
         // Fetch units (assuming there's a units endpoint)
-        const unitsResponse = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}api/units/`);
+        const unitsResponse = await fetch(
+          `${process.env.NEXT_PUBLIC_BASE_URL}api/units/`
+        );
         if (unitsResponse.ok) {
           const unitsData = await unitsResponse.json();
-          setUnits(unitsData.map((unit: any) => ({
-            value: unit.name,
-            label: unit.name
-          })));
+          setUnits(
+            unitsData.map((unit: any) => ({
+              value: unit.name,
+              label: unit.name,
+            }))
+          );
         } else {
           // Fallback units if API doesn't exist
           setUnits([
@@ -142,13 +158,17 @@ const PurchaseOrderForm = ({
         }
 
         // Fetch kinds (assuming there's a categories endpoint)
-        const kindsResponse = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}api/categories/`);
+        const kindsResponse = await fetch(
+          `${process.env.NEXT_PUBLIC_BASE_URL}api/categories/`
+        );
         if (kindsResponse.ok) {
           const kindsData = await kindsResponse.json();
-          setKinds(kindsData.map((kind: any) => ({
-            value: kind.name,
-            label: kind.name
-          })));
+          setKinds(
+            kindsData.map((kind: any) => ({
+              value: kind.name,
+              label: kind.name,
+            }))
+          );
         } else {
           // Fallback kinds if API doesn't exist
           setKinds([
@@ -403,4 +423,3 @@ const PurchaseOrderForm = ({
 };
 
 export default PurchaseOrderForm;
-

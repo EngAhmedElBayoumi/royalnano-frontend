@@ -70,20 +70,24 @@ const SupplierForm = ({
     },
   });
 
-  const t = useTranslations("Purchase.Supplier");
+  const t = useTranslations("purchase.Supplier");
 
   const { data: branchesData } = useGetBranchesQuery({});
   const { data: expenseCategoriesData } = useGetExpenseCategorysQuery({});
 
-  const branchOptions = branchesData?.results?.map((branch: { id: number; name: string }) => ({
-    value: String(branch.id),
-    label: branch.name,
-  })) || [];
+  const branchOptions =
+    branchesData?.results?.map((branch: { id: number; name: string }) => ({
+      value: String(branch.id),
+      label: branch.name,
+    })) || [];
 
-  const expenseCategoryOptions = expenseCategoriesData?.results?.map((category: { id: number; name: string }) => ({
-    value: String(category.id),
-    label: category.name,
-  })) || [];
+  const expenseCategoryOptions =
+    expenseCategoriesData?.results?.map(
+      (category: { id: number; name: string }) => ({
+        value: String(category.id),
+        label: category.name,
+      })
+    ) || [];
 
   return (
     <Form {...form}>
@@ -248,4 +252,3 @@ const SupplierForm = ({
 };
 
 export default SupplierForm;
-
