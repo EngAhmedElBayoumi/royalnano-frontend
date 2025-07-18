@@ -816,6 +816,7 @@
       "noDataFound": "No order data found.",
       "addOrder": "Add Order",
       "cards": {
+        "totalOrders": "Total Orders",
         "newRequests": "New Requests",
         "complete": "Complete",
         "pending": "Pending",

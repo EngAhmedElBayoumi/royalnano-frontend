@@ -863,6 +863,7 @@
       "addOrder": "إضافة أمر",
       "cards": {
         "newRequests": "طلبات جديدة",
+        "totalOrders": "إجمالي الأوامر",
         "complete": "مكتمل",
         "pending": "قيد الانتظار",
         "failed": "فشل",
