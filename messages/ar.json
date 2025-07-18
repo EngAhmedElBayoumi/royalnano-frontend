@@ -780,11 +780,8 @@
       "cards": {
         "activeWarehouses": "المستودعات النشطة",
         "totalWarehouses": "إجمالي المستودعات",
-        "newRequests": "طلبات جديدة",
-        "complete": "مكتمل",
-        "pending": "قيد الانتظار",
-        "failed": "فشل",
-        "paid": "مدفوع"
+        "withLocation": "مع موقع",
+        "withDescription": "مع وصف"
       }
     },
     "Request": {
