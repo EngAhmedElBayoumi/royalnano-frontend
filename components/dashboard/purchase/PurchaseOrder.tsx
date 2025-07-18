@@ -6,6 +6,7 @@ import { useTableData } from "@/hooks/useTableData";
 import { useGetOrdersQuery } from "@/redux/services/dashboard/purchase/orderApi";
 import { useGetSuppliersQuery } from "@/redux/services/dashboard/purchase/supplierApi";
 import { useEffect, useState } from "react";
+import { listItems } from "@/lib/utils/types";
 
 export interface PurchaseOrder {
   id: number;
@@ -14,7 +15,7 @@ export interface PurchaseOrder {
   prefix: string;
   delivery_date: string;
   due_date: string;
-  branch?: { id: number; name: string } | null;
+  branch?: listItems | null;
   supplier?: { id: number; supplier_name: string } | number | null;
   description?: string;
   status?: string;
