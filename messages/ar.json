@@ -720,7 +720,8 @@
     "supplier": "المورد",
     "warehouse": "المستودع",
     "Supplier": {
-      "editPurchaseSupplier": "تعديل مورد الشراء",
+      "editSupplier": "تعديل المورد",
+      "viewSupplier": "عرض المورد",
       "cards": {
         "totalSuppliers": "إجمالي الموردين",
         "activeSuppliers": "الموردين النشطين",

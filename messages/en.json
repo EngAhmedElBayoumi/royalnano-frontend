@@ -668,7 +668,6 @@
     "supplier": "Supplier",
     "warehouse": "Warehouse",
     "Supplier": {
-      "editPurchaseSupplier": "Edit Supplier",
       "editSupplier": "Edit Supplier",
       "viewSupplier": "View Supplier",
       "cards": {
