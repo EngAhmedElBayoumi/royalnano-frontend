@@ -12,7 +12,7 @@ import PurchaseOrderForm, {
 export default function ViewOrder() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
-  const t = useTranslations("Purchase.Order");
+  const t = useTranslations("purchase.Order");
 
   const { data, isLoading, error } = useGetOrderByIdQuery(id);
   const defaultValues: PurchaseOrderFormValues = data && {

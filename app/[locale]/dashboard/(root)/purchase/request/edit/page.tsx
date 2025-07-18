@@ -14,7 +14,7 @@ import EditPage from "@/components/dashboard/EditPage";
 export default function EditOrder() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
-  const t = useTranslations("Purchase.Order");
+  const t = useTranslations("purchase.Order");
 
   const { data, isLoading, error } = useGetOrderByIdQuery(id);
   const [updatePreorder] = useUpdateOrderMutation();

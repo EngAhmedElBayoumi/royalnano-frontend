@@ -2,11 +2,11 @@ import { z } from "zod";
 
 const itemSchema = z.object({
   item: z.number().int().positive("Item must be selected"),
-  quantity: z.number().min(0.01, "Quantity must be greater than 0"),
-  unit_price: z.string().min(1, "Unit price is required"),
-  discount: z.string().optional(),
-  tax: z.string().optional(),
-  total: z.string().optional(),
+  quantity: z.number().min(1, "Quantity must be greater than 0"),
+  unit_price: z.number().min(0.01, "Unit price must be greater than 0"),
+  discount: z.number().min(0.01, "Discount must be greater than 0"),
+  tax: z.number().min(0.01, "Tax must be greater than 0"),
+  total: z.number().min(0.01, "Total must be greater than 0"),
 });
 
 export const purchaseInvoiceSchema = z.object({
@@ -24,4 +24,3 @@ export const purchaseInvoiceSchema = z.object({
 });
 
 export type PurchaseInvoiceFormValues = z.infer<typeof purchaseInvoiceSchema>;
-

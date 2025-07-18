@@ -66,32 +66,38 @@ const PurchaseRequestForm = ({
     },
   });
 
-  const t = useTranslations("Purchase.Request");
+  const t = useTranslations("purchase.Request");
   const { data: branchesData } = useGetBranchesQuery({});
   const { data: employeesData } = useGetEmployeesQuery({});
 
-  const branchOptions = branchesData?.results?.map((branch: any) => ({
-    label: branch.name,
-    value: branch.id.toString(),
-  })) || [];
+  const branchOptions =
+    branchesData?.results?.map((branch: any) => ({
+      label: branch.name,
+      value: branch.id.toString(),
+    })) || [];
 
-  const employeeOptions = employeesData?.results?.map((employee: any) => ({
-    label: employee.user?.email || employee.name || `Employee ${employee.id}`,
-    value: employee.id.toString(),
-  })) || [];
+  const employeeOptions =
+    employeesData?.results?.map((employee: any) => ({
+      label: employee.user?.email || employee.name || `Employee ${employee.id}`,
+      value: employee.id.toString(),
+    })) || [];
 
   // Fetch dropdown data
   useEffect(() => {
     const fetchDropdownData = async () => {
       try {
         // Fetch units (assuming there's a units endpoint)
-        const unitsResponse = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}api/units/`);
+        const unitsResponse = await fetch(
+          `${process.env.NEXT_PUBLIC_BASE_URL}api/units/`
+        );
         if (unitsResponse.ok) {
           const unitsData = await unitsResponse.json();
-          setUnits(unitsData.map((unit: any) => ({
-            value: unit.name,
-            label: unit.name
-          })));
+          setUnits(
+            unitsData.map((unit: any) => ({
+              value: unit.name,
+              label: unit.name,
+            }))
+          );
         } else {
           // Fallback units if API doesn't exist
           setUnits([
@@ -104,13 +110,17 @@ const PurchaseRequestForm = ({
         }
 
         // Fetch kinds (assuming there's a categories endpoint)
-        const kindsResponse = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}api/categories/`);
+        const kindsResponse = await fetch(
+          `${process.env.NEXT_PUBLIC_BASE_URL}api/categories/`
+        );
         if (kindsResponse.ok) {
           const kindsData = await kindsResponse.json();
-          setKinds(kindsData.map((kind: any) => ({
-            value: kind.name,
-            label: kind.name
-          })));
+          setKinds(
+            kindsData.map((kind: any) => ({
+              value: kind.name,
+              label: kind.name,
+            }))
+          );
         } else {
           // Fallback kinds if API doesn't exist
           setKinds([
@@ -255,4 +265,3 @@ const PurchaseRequestForm = ({
 };
 
 export default PurchaseRequestForm;
-

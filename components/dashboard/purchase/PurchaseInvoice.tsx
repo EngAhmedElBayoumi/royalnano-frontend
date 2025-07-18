@@ -18,7 +18,7 @@ export default function PurchaseInvoice() {
   });
 
   const router = useRouter();
-  const t = useTranslations("Purchase.Invoice");
+  const t = useTranslations("purchase.Invoice");
 
   const columns = [
     { field: "invoice_number", header: t("invoiceNumber") },
@@ -32,15 +32,38 @@ export default function PurchaseInvoice() {
   ];
 
   const cardsData = [
-    { title: t("cards.draft"), num: invoices?.results?.filter((inv: any) => inv.status === 'draft').length || 0 },
-    { title: t("cards.pending"), num: invoices?.results?.filter((inv: any) => inv.status === 'pending').length || 0 },
-    { title: t("cards.approved"), num: invoices?.results?.filter((inv: any) => inv.status === 'approved').length || 0 },
-    { title: t("cards.paid"), num: invoices?.results?.filter((inv: any) => inv.status === 'paid').length || 0 },
-    { title: t("cards.cancelled"), num: invoices?.results?.filter((inv: any) => inv.status === 'cancelled').length || 0 },
+    {
+      title: t("cards.draft"),
+      num:
+        invoices?.results?.filter((inv) => inv.status === "draft").length || 0,
+    },
+    {
+      title: t("cards.pending"),
+      num:
+        invoices?.results?.filter((inv) => inv.status === "pending").length ||
+        0,
+    },
+    {
+      title: t("cards.approved"),
+      num:
+        invoices?.results?.filter((inv) => inv.status === "approved").length ||
+        0,
+    },
+    {
+      title: t("cards.paid"),
+      num:
+        invoices?.results?.filter((inv) => inv.status === "paid").length || 0,
+    },
+    {
+      title: t("cards.cancelled"),
+      num:
+        invoices?.results?.filter((inv) => inv.status === "cancelled").length ||
+        0,
+    },
   ];
 
   const formattedData =
-    invoices?.results?.map((invoice: any) => ({
+    invoices?.results?.map((invoice) => ({
       id: invoice.id,
       invoice_number: invoice.invoice_number || "-",
       supplier_name: invoice.supplier?.supplier_name || "N/A",
@@ -73,4 +96,3 @@ export default function PurchaseInvoice() {
     />
   );
 }
-

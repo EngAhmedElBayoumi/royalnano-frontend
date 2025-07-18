@@ -2,18 +2,6 @@ import { permissionRoutes } from "@/lib/config/permissions";
 
 export const sidebarLinks = [
   { path: "/", name: "home", icon: "home.svg", permissions: ["home"] },
-  // {
-  //   path: "/clients",
-  //   name: "clients",
-  //   icon: "clients.svg",
-  //   permissions: ["customer"],
-  // },
-  // {
-  //   path: "/customer-requests",
-  //   name: "customerRequests",
-  //   icon: "customer_requests.svg",
-  //   permissions: ["clientrequest"],
-  // },
   {
     path: "/branches",
     name: "branches",

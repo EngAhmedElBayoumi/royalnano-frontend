@@ -6,6 +6,7 @@ import { useTableData } from "@/hooks/useTableData";
 import { useGetOrdersQuery } from "@/redux/services/dashboard/purchase/orderApi";
 import { useGetSuppliersQuery } from "@/redux/services/dashboard/purchase/supplierApi";
 import { useEffect, useState } from "react";
+import { listItems } from "@/lib/utils/types";
 
 export interface PurchaseOrder {
   id: number;
@@ -14,7 +15,7 @@ export interface PurchaseOrder {
   prefix: string;
   delivery_date: string;
   due_date: string;
-  branch?: { id: number; name: string } | null;
+  branch?: listItems | null;
   supplier?: { id: number; supplier_name: string } | number | null;
   description?: string;
   status?: string;
@@ -42,25 +43,39 @@ export interface PurchaseOrder {
 }
 
 export default function PurchaseOrder() {
-  const { data: purchaseOrders, isLoading, error, permissions, handlePageChange } = useTableData({
+  const {
+    data: purchaseOrders,
+    isLoading,
+    error,
+    permissions,
+    handlePageChange,
+  } = useTableData({
     permissionKey: "purchaseorder",
     useQueryHook: useGetOrdersQuery,
   });
   const { data: suppliersData } = useGetSuppliersQuery({});
-  const [supplierNames, setSupplierNames] = useState<{ [key: number]: string }>({});
+  const [supplierNames, setSupplierNames] = useState<{ [key: number]: string }>(
+    {}
+  );
 
   useEffect(() => {
     if (suppliersData?.results) {
-      const supplierMap = suppliersData.results.reduce((acc: { [x: string]: string }, supplier: { id: string | number; supplier_name: string }) => {
-        acc[supplier.id] = supplier.supplier_name;
-        return acc;
-      }, {} as { [key: number]: string });
+      const supplierMap = suppliersData.results.reduce(
+        (
+          acc: { [x: string]: string },
+          supplier: { id: string | number; supplier_name: string }
+        ) => {
+          acc[supplier.id] = supplier.supplier_name;
+          return acc;
+        },
+        {} as { [key: number]: string }
+      );
       setSupplierNames(supplierMap);
     }
   }, [suppliersData]);
 
   const router = useRouter();
-  const t = useTranslations("Purchase.Order");
+  const t = useTranslations("purchase.Order");
 
   const columns = [
     { field: "prefix", header: t("prefix") },
@@ -74,8 +89,20 @@ export default function PurchaseOrder() {
 
   const cardsData = [
     { title: t("cards.totalOrders"), num: purchaseOrders?.count || 0 },
-    { title: t("cards.pendingOrders"), num: purchaseOrders?.results?.filter((order: PurchaseOrder) => order.status === "pending").length || 0 },
-    { title: t("cards.completedOrders"), num: purchaseOrders?.results?.filter((order: PurchaseOrder) => order.status === "completed").length || 0 },
+    {
+      title: t("cards.pendingOrders"),
+      num:
+        purchaseOrders?.results?.filter(
+          (order: PurchaseOrder) => order.status === "pending"
+        ).length || 0,
+    },
+    {
+      title: t("cards.completedOrders"),
+      num:
+        purchaseOrders?.results?.filter(
+          (order: PurchaseOrder) => order.status === "completed"
+        ).length || 0,
+    },
     { title: t("cards.thisMonth"), num: 12 },
   ];
 
@@ -87,7 +114,10 @@ export default function PurchaseOrder() {
       delivery_date: order.delivery_date,
       due_date: order.due_date,
       branch_name: order.branch?.name || "N/A",
-      supplier_name: typeof order.supplier === "object" ? order.supplier?.supplier_name : supplierNames[order.supplier as number] || "N/A",
+      supplier_name:
+        typeof order.supplier === "object"
+          ? order.supplier?.supplier_name
+          : supplierNames[order.supplier as number] || "N/A",
       status: order.status || "pending",
     })) || [];
 
@@ -112,4 +142,3 @@ export default function PurchaseOrder() {
     />
   );
 }
-

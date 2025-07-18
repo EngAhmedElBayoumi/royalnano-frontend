@@ -11,6 +11,7 @@ import CustomSelect from "@/components/formFields/CustomSelect";
 import { useGetBranchesQuery } from "@/redux/services/dashboard/inventory/branchesApi";
 import { useGetExpenseCategorysQuery } from "@/redux/services/dashboard/purchase/expenseCategory";
 import { Link } from "@/i18n/routing";
+import { listItems } from "@/lib/utils/types";
 
 interface SupplierFormProps {
   onSubmit: (data: SupplierFormValues) => Promise<void>;
@@ -70,20 +71,22 @@ const SupplierForm = ({
     },
   });
 
-  const t = useTranslations("Purchase.Supplier");
+  const t = useTranslations("purchase.Supplier");
 
   const { data: branchesData } = useGetBranchesQuery({});
   const { data: expenseCategoriesData } = useGetExpenseCategorysQuery({});
 
-  const branchOptions = branchesData?.results?.map((branch: { id: number; name: string }) => ({
-    value: String(branch.id),
-    label: branch.name,
-  })) || [];
+  const branchOptions =
+    branchesData?.results?.map((branch: listItems) => ({
+      value: String(branch.id),
+      label: branch.name,
+    })) || [];
 
-  const expenseCategoryOptions = expenseCategoriesData?.results?.map((category: { id: number; name: string }) => ({
-    value: String(category.id),
-    label: category.name,
-  })) || [];
+  const expenseCategoryOptions =
+    expenseCategoriesData?.results?.map((category: listItems) => ({
+      value: String(category.id),
+      label: category.name,
+    })) || [];
 
   return (
     <Form {...form}>
@@ -248,4 +251,3 @@ const SupplierForm = ({
 };
 
 export default SupplierForm;
-

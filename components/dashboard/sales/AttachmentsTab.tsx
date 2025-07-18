@@ -6,6 +6,9 @@ import { useGetAttachmentsByIdQuery } from "@/redux/services/dashboard/sales/sal
 import Image from "next/image";
 import { Key, useState } from "react";
 import UploadAttachmentForm from "../forms/sales/addAttachmentForm";
+import config from "@/lib/config";
+
+const baseUrl = config.apiUrl;
 
 export default function AttachmentsTab({ customerId }: { customerId: number }) {
   const [showForm, setShowForm] = useState(false);
@@ -30,7 +33,7 @@ export default function AttachmentsTab({ customerId }: { customerId: number }) {
             >
               <strong>File: </strong>
               <Image
-                src={attachment.file}
+                src={`${baseUrl}${attachment.file.substring(1)}`}
                 width={100}
                 height={100}
                 alt={attachment.description}

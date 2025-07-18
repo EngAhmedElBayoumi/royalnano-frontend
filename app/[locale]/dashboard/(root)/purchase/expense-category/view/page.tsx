@@ -11,7 +11,7 @@ import { ExpenseCategoryFormValues } from "@/lib/validations/dashboard/purchase/
 export default function ViewExpenseCategory() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
-  const t = useTranslations("Purchase.ExpenseCategory");
+  const t = useTranslations("purchase.ExpenseCategory");
 
   const { data, isLoading, error } = useGetExpenseCategoryByIdQuery(id);
   const defaultValues: ExpenseCategoryFormValues = data && {

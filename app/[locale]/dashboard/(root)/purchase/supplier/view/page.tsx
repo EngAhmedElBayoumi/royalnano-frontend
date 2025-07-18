@@ -1,9 +1,7 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
-import {
-  useGetSupplierByIdQuery,
-} from "@/redux/services/dashboard/purchase/supplierApi";
+import { useGetSupplierByIdQuery } from "@/redux/services/dashboard/purchase/supplierApi";
 import SupplierForm, {
   SupplierFormValues,
 } from "@/components/dashboard/forms/purchase/SupplierForm";
@@ -12,10 +10,10 @@ import ViewPage from "@/components/dashboard/ViewPage";
 export default function ViewSupplier() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
-  const t = useTranslations("Purchase.Supplier");
+  const t = useTranslations("purchase.Supplier");
 
   const { data, isLoading, error } = useGetSupplierByIdQuery(id);
-  
+
   const defaultValues: SupplierFormValues | undefined = data && {
     title: data.title || "",
     full_name: data.full_name || "",
@@ -53,4 +51,3 @@ export default function ViewSupplier() {
     />
   );
 }
-

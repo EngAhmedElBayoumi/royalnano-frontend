@@ -96,12 +96,11 @@
   "tableControls": {
     "exportToCSV": "Export to CSV",
     "exportToExcel": "Export to Excel",
-    "exportToPDF": "Export to PDF"
+    "exportToPDF": "Export to PDF",
+    "actions": "Actions"
   },
   "Sidebar": {
     "home": "Home",
-    "clients": "Clients",
-    "customerRequests": "Customer Requests",
     "branches": "Branches",
     "hr": "HR",
     "inventory": "Inventory",
@@ -740,7 +739,7 @@
       "requiredError": "Comment is required"
     }
   },
-  "Purchase": {
+  "purchase": {
     "expenseCategory": "Expense Category",
     "invoice": "Invoice",
     "order": "Order",
@@ -748,7 +747,6 @@
     "supplier": "Supplier",
     "warehouse": "Warehouse",
     "Supplier": {
-      "editPurchaseSupplier": "Edit Supplier",
       "editSupplier": "Edit Supplier",
       "viewSupplier": "View Supplier",
       "cards": {
@@ -809,7 +807,6 @@
       "addWarehouse": "Add Warehouse",
       "editWarehouse": "Edit Warehouse",
       "viewWarehouse": "View Warehouse",
-      "createWarehouse": "Create Warehouse",
       "itemCode": "Item Code",
       "purchaseWarehouseLevel": "Purchase Warehouse Level",
       "cards": {
@@ -820,6 +817,7 @@
       }
     },
     "Request": {
+      "editPurchaseRequest": "Edit Purchase Request",
       "viewPurchaseRequest": "View Purchase Request",
       "cancel": "Cancel",
       "save": "Save",
@@ -874,6 +872,9 @@
       "total": "Total",
       "cancel": "Cancel",
       "save": "Save",
+      "createInvoice": "Create Invoice",
+      "editInvoice": "Edit Invoice",
+      "invalidInvoiceId": "Invalid Invoice ID",
       "cards": {
         "draft": "Draft",
         "pending": "Pending",
@@ -892,9 +893,14 @@
       "purchaseOrderModel": "purchase Order Model",
       "purchaseOrderLevel": "Purchase Order Level",
       "description": "Description",
+      "status": "Status",
       "noDataFound": "No order data found.",
       "addOrder": "Add Order",
       "cards": {
+        "totalOrders": "Total Orders",
+        "pendingOrders": "Pending Orders",
+        "completedOrders": "Completed Orders",
+        "thisMonth": "This Month",
         "newRequests": "New Requests",
         "complete": "Complete",
         "pending": "Pending",
@@ -927,62 +933,7 @@
       "vat": "VAT"
     }
   },
-  "clients": {
-    "title": "Clients",
-    "addClient": "Add Client",
-    "editClient": "Edit Client",
-    "clientForm": {
-      "clientName": "Client Name",
-      "email": "Email",
-      "phoneNumber": "Phone Number",
-      "facilityName": "Facility Name",
-      "taxNumber": "Tax Number",
-      "address": "Address",
-      "city": "City",
-      "area": "Area",
-      "buildingNumber": "Building Number",
-      "website": "Website",
-      "condition": "Condition",
-      "save": "Save",
-      "cancel": "Cancel"
-    }
-  },
-  "customerRequests": {
-    "title": "Customer Requests",
-    "addCustomerRequest": "Add Customer Request",
-    "editCustomerRequest": "Edit Customer Request",
-    "customerRequestForm": {
-      "clientName": "Client Name",
-      "phoneNumber": "Phone Number",
-      "carType": "Car Type",
-      "carModel": "Car Model",
-      "service": "Service",
-      "branch": "Branch",
-      "additionalNotes": "Additional Notes",
-      "save": "Save",
-      "cancel": "Cancel"
-    },
-    "carTypes": {
-      "sedan": "Sedan",
-      "suv": "SUV",
-      "truck": "Truck"
-    },
-    "carModels": {
-      "modelA": "Model A",
-      "modelB": "Model B",
-      "modelC": "Model C"
-    },
-    "services": {
-      "service1": "Service 1",
-      "service2": "Service 2",
-      "service3": "Service 3"
-    },
-    "branches": {
-      "branch1": "Branch 1",
-      "branch2": "Branch 2",
-      "branch3": "Branch 3"
-    }
-  },
+
   "customer_info": {
     "title": "Customer Information",
     "basic_info": "Basic Information",

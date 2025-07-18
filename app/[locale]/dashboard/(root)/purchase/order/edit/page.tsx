@@ -14,7 +14,7 @@ import EditPage from "@/components/dashboard/EditPage";
 export default function EditRequest() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
-  const t = useTranslations("Purchase.Request");
+  const t = useTranslations("purchase.Request");
 
   const { data, isLoading, error } = useGetRequestByIdQuery(id);
   const [updatePreRequest, { isLoading: submitting }] =

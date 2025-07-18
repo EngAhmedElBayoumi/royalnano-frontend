@@ -28,14 +28,13 @@ export default function SalesCustomer() {
     page,
     page_size: 10,
   });
-  
-  console.log(salesCustomers);
+
   const router = useRouter();
-  console.log("Sales Customers API Response:", salesCustomers);
 
   const transformedData =
     salesCustomers?.results?.map(
       (customer: {
+        assigned_to_name: string;
         phone_number: string;
         phone_numbers: { phone_number: string }[];
         id: number;
@@ -55,8 +54,8 @@ export default function SalesCustomer() {
         customer_name: customer.customer_name,
         contact_person: customer.contact_person,
         phone_number:
-        customer.phone_number ||
-        customer.contact_person ||
+          customer.phone_number ||
+          customer.contact_person ||
           customer.phone_numbers[0]?.phone_number ||
           "No Phone Number",
         email: customer.email,
@@ -71,8 +70,6 @@ export default function SalesCustomer() {
         assigned_to_name: customer.assigned_to_name,
       })
     ) || [];
-
-  console.log("Transformed Data:", transformedData);
 
   const columns = [
     { field: "id", header: "ID" },
@@ -156,7 +153,7 @@ export default function SalesCustomer() {
             onReassignClick={handleReassignClick}
             reassignButtonText="إعادة التعيين"
           />
-          
+
           <ReassignDialog
             isOpen={isReassignDialogOpen}
             onClose={() => setIsReassignDialogOpen(false)}

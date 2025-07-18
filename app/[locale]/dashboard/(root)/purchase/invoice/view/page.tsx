@@ -2,20 +2,25 @@
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import PurchaseInvoiceForm, { PurchaseInvoiceFormValues } from "@/components/dashboard/forms/purchase/PurchaseInvoiceForm";
+import PurchaseInvoiceForm, {
+  PurchaseInvoiceFormValues,
+} from "@/components/dashboard/forms/purchase/PurchaseInvoiceForm";
 import { useGetInvoiceByIdQuery } from "@/redux/services/dashboard/purchase/invoiceApi";
 
 export default function ViewInvoicePage() {
-  const t = useTranslations("Purchase.Invoice");
+  const t = useTranslations("purchase.Invoice");
   const searchParams = useSearchParams();
   const invoiceId = searchParams.get("id");
-  
-  const { data: invoiceData, isLoading: isFetching, error } = useGetInvoiceByIdQuery(
-    { id: invoiceId! },
-    { skip: !invoiceId }
-  );
 
-  const [defaultValues, setDefaultValues] = useState<PurchaseInvoiceFormValues | undefined>();
+  const {
+    data: invoiceData,
+    isLoading: isFetching,
+    error,
+  } = useGetInvoiceByIdQuery({ id: invoiceId! }, { skip: !invoiceId });
+
+  const [defaultValues, setDefaultValues] = useState<
+    PurchaseInvoiceFormValues | undefined
+  >();
 
   useEffect(() => {
     if (invoiceData) {
@@ -30,14 +35,15 @@ export default function ViewInvoicePage() {
         purchase_order: invoiceData.purchase_order?.id || 0,
         description: invoiceData.description || "",
         status: invoiceData.status || "pending",
-        items: invoiceData.items?.map((item: any) => ({
-          item: item.item?.id || 0,
-          quantity: item.quantity || 1,
-          unit_price: item.unit_price?.toString() || "",
-          discount: item.discount?.toString() || "",
-          tax: item.tax?.toString() || "",
-          total: item.total?.toString() || "",
-        })) || [],
+        items:
+          invoiceData.items?.map((item: any) => ({
+            item: item.item?.id || 0,
+            quantity: item.quantity || 1,
+            unit_price: item.unit_price?.toString() || "",
+            discount: item.discount?.toString() || "",
+            tax: item.tax?.toString() || "",
+            total: item.total?.toString() || "",
+          })) || [],
       });
     }
   }, [invoiceData]);
@@ -51,7 +57,9 @@ export default function ViewInvoicePage() {
     return (
       <div className="container mx-auto p-6">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-red-600">{t("invalidInvoiceId")}</h1>
+          <h1 className="text-2xl font-bold text-red-600">
+            {t("invalidInvoiceId")}
+          </h1>
         </div>
       </div>
     );
@@ -71,7 +79,9 @@ export default function ViewInvoicePage() {
     return (
       <div className="container mx-auto p-6">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-red-600">{t("errorLoadingInvoice")}</h1>
+          <h1 className="text-2xl font-bold text-red-600">
+            {t("errorLoadingInvoice")}
+          </h1>
         </div>
       </div>
     );
@@ -83,10 +93,10 @@ export default function ViewInvoicePage() {
         <h1 className="text-2xl font-bold">{t("viewInvoice")}</h1>
         <p className="text-gray-600">{t("viewInvoiceDescription")}</p>
       </div>
-      
+
       <div className="bg-white rounded-lg shadow-sm border p-6">
-        <PurchaseInvoiceForm 
-          onSubmit={handleSubmit} 
+        <PurchaseInvoiceForm
+          onSubmit={handleSubmit}
           defaultValues={defaultValues}
           isView={true}
         />
@@ -94,4 +104,3 @@ export default function ViewInvoicePage() {
     </div>
   );
 }
-

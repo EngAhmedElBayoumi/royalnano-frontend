@@ -14,12 +14,12 @@ import EditPage from "@/components/dashboard/EditPage";
 export default function EditWarehouse() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
-  const t = useTranslations("Purchase.Warehouse");
+  const t = useTranslations("purchase.Warehouse");
 
   const { data, isLoading, error } = useGetWarehouseByIdQuery(id);
   const [updateWarehouse, { isLoading: submitting }] =
     useUpdateWarehouseMutation();
-    
+
   const defaultValues: WarehouseFormValues | undefined = data && {
     name: data.name || "",
     location: data.location || "",
@@ -44,4 +44,3 @@ export default function EditWarehouse() {
     />
   );
 }
-

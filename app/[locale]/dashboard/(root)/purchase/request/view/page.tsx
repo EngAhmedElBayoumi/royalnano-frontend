@@ -13,7 +13,7 @@ import { useGetRequestByIdQuery } from "@/redux/services/dashboard/purchase/requ
 export default function ViewRequest() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
-  const t = useTranslations("Purchase.Request");
+  const t = useTranslations("purchase.Request");
 
   const { data, isLoading, error } = useGetRequestByIdQuery(id);
   console.log(data);

@@ -12,6 +12,7 @@ import { useGetServicesQuery } from "@/redux/services/website/servicesApi";
 import { useGetBranchesQuery } from "@/redux/services/dashboard/inventory/branchesApi";
 import { clientRequestSchema } from "@/lib/validations/dashboard/sales/clientRequestSchema";
 import PhoneInputField from "@/components/formFields/PhoneInputField";
+import { listItems } from "@/lib/utils/types";
 
 interface ClientRequestFormProps {
   defaultValues?: ClientRequestFormValues;
@@ -41,19 +42,15 @@ const ClientRequestForm = ({
   const { data: services = [], isLoading: isServicesLoading } =
     useGetServicesQuery({});
 
-  const branchOptions = branches?.results?.map(
-    (branch: { id: number; name: string }) => ({
-      value: branch.id.toString(),
-      label: branch.name,
-    })
-  );
+  const branchOptions = branches?.results?.map((branch: listItems) => ({
+    value: branch.id.toString(),
+    label: branch.name,
+  }));
 
-  const serviceOptions = services?.results?.map(
-    (service: { id: number; name: string }) => ({
-      value: service.id.toString(),
-      label: service.name,
-    })
-  );
+  const serviceOptions = services?.results?.map((service: listItems) => ({
+    value: service.id.toString(),
+    label: service.name,
+  }));
 
   const form = useForm<ClientRequestFormValues>({
     resolver: zodResolver(clientRequestSchema),

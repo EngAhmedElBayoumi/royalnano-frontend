@@ -187,7 +187,7 @@ const CustomTable = ({
 
             {(viewRoute || editRoute || isClientRequest) && (
               <Column
-                header="Actions"
+                header={t("tableControls.actions")}
                 headerClassName="text-center text-white text-[16px] font-[500] py-[13px] px-[38px] border-r border-white border-[2px] bg-primary rounded-tr-[10px]"
                 style={{ width: "5rem", textAlign: "center" }}
                 body={(rowData: DataInTable) => (

@@ -8,7 +8,7 @@ import SupplierForm, {
 import CreatePage from "@/components/dashboard/CreatePage";
 
 export default function CreateSupplier() {
-  const t = useTranslations("Purchase.Supplier");
+  const t = useTranslations("purchase.Supplier");
   const [createSupplier, { isLoading }] = useCreateSupplierMutation();
 
   const handleSubmit = async (data: SupplierFormValues) => {
@@ -32,4 +32,3 @@ export default function CreateSupplier() {
     />
   );
 }
-

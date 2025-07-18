@@ -8,7 +8,7 @@ import PurchaseOrderForm, {
 import CreatePage from "@/components/dashboard/CreatePage";
 
 export default function CreateOrder() {
-  const t = useTranslations("Purchase.Order");
+  const t = useTranslations("purchase.Order");
   const [createOrder, { isLoading }] = useCreateOrderMutation();
 
   const handleSubmit = async (data: PurchaseOrderFormValues) => {

@@ -169,11 +169,11 @@
   "tableControls": {
     "exportToCSV": "تصدير إلى CSV",
     "exportToExcel": "تصدير إلى Excel",
-    "exportToPDF": "تصدير إلى PDF"
+    "exportToPDF": "تصدير إلى PDF",
+    "actions": "الخيارات"
   },
   "Sidebar": {
     "home": "الرئيسية",
-    "clients": "العملاء",
     "customerRequests": "طلبات العملاء",
     "branches": "الفروع",
     "hr": "الموارد البشرية",
@@ -530,62 +530,7 @@
       "errorDescription": "حدث خطأ أثناء إنشاء العميل"
     }
   },
-  "clients": {
-    "title": "العملاء",
-    "addClient": "إضافة عميل",
-    "editClient": "تعديل عميل",
-    "clientForm": {
-      "clientName": "اسم العميل",
-      "email": "البريد الإلكتروني",
-      "phoneNumber": "رقم الهاتف",
-      "facilityName": "اسم المنشأة",
-      "taxNumber": "الرقم الضريبي",
-      "address": "العنوان",
-      "city": "المدينة",
-      "area": "المنطقة",
-      "buildingNumber": "رقم المبنى",
-      "website": "الموقع الإلكتروني",
-      "condition": "الحالة",
-      "save": "حفظ",
-      "cancel": "إلغاء"
-    }
-  },
-  "customerRequests": {
-    "title": "طلبات العملاء",
-    "addCustomerRequest": "إضافة طلب عميل",
-    "editCustomerRequest": "تعديل طلب عميل",
-    "customerRequestForm": {
-      "clientName": "اسم العميل",
-      "phoneNumber": "رقم الهاتف",
-      "carType": "نوع السيارة",
-      "carModel": "موديل السيارة",
-      "service": "الخدمة",
-      "branch": "الفرع",
-      "additionalNotes": "ملاحظات إضافية",
-      "save": "حفظ",
-      "cancel": "إلغاء"
-    },
-    "carTypes": {
-      "sedan": "سيدان",
-      "suv": "دفع رباعي",
-      "truck": "شاحنة"
-    },
-    "carModels": {
-      "modelA": "موديل أ",
-      "modelB": "موديل ب",
-      "modelC": "موديل ج"
-    },
-    "services": {
-      "service1": "خدمة 1",
-      "service2": "خدمة 2",
-      "service3": "خدمة 3"
-    },
-    "branches": {
-      "branch1": "فرع 1",
-      "branch2": "فرع 2",
-      "branch3": "فرع 3"
-    }
-  },
+
   "customer_info": {
     "title": "معلومات العميل",
     "basic_info": "المعلومات الأساسية",
@@ -865,7 +810,7 @@
       "requiredError": "التعليق مطلوب"
     }
   },
-  "Purchase": {
+  "purchase": {
     "expenseCategory": "فئة المصروفات",
     "invoice": "فاتورة",
     "order": "أمر",
@@ -873,7 +818,8 @@
     "supplier": "المورد",
     "warehouse": "المستودع",
     "Supplier": {
-      "editPurchaseSupplier": "تعديل مورد الشراء",
+      "editSupplier": "تعديل المورد",
+      "viewSupplier": "عرض المورد",
       "cards": {
         "totalSuppliers": "إجمالي الموردين",
         "activeSuppliers": "الموردين النشطين",
@@ -930,13 +876,12 @@
       "description": "الوصف",
       "noDataFound": "لا توجد بيانات للمستودع.",
       "addWarehouse": "إضافة مستودع",
+      "editWarehouse": "تعديل المستودع",
       "cards": {
+        "activeWarehouses": "المستودعات النشطة",
         "totalWarehouses": "إجمالي المستودعات",
-        "newRequests": "طلبات جديدة",
-        "complete": "مكتمل",
-        "pending": "قيد الانتظار",
-        "failed": "فشل",
-        "paid": "مدفوع"
+        "withLocation": "مع موقع",
+        "withDescription": "مع وصف"
       }
     },
     "Request": {
@@ -951,8 +896,13 @@
       "items": "العناصر",
       "noDataFound": "لا توجد بيانات للطلب",
       "addRequest": "إضافة طلب",
+      "editPurchaseRequest": "تعديل طلب الشراء",
       "request": "طلب",
+      "status": "الحالة",
+      "itemsCount": "عدد العناصر",
       "cards": {
+        "approved": "موافق",
+        "completed": "مكتمل",
         "newRequests": "طلبات جديدة",
         "complete": "مكتمل",
         "pending": "قيد الانتظار",
@@ -993,6 +943,9 @@
       "total": "الإجمالي",
       "cancel": "إلغاء",
       "save": "حفظ",
+      "createInvoice": "إنشاء فاتورة",
+      "editInvoice": "تعديل فاتورة",
+      "invalidInvoiceId": "رقم الفاتورة غير صالح",
       "cards": {
         "draft": "مسودة",
         "pending": "قيد الانتظار",
@@ -1011,10 +964,15 @@
       "purchaseOrderModel": "نموذج أمر الشراء",
       "purchaseOrderLevel": "مستوى أمر الشراء",
       "description": "الوصف",
+      "status": "الحالة",
       "noDataFound": "لا توجد بيانات للأمر",
       "addOrder": "إضافة أمر",
       "cards": {
         "newRequests": "طلبات جديدة",
+        "totalOrders": "إجمالي الأوامر",
+        "pendingOrders": "أوامر قيد الانتظار",
+        "completedOrders": "أوامر مكتملة",
+        "thisMonth": "هذا الشهر",
         "complete": "مكتمل",
         "pending": "قيد الانتظار",
         "failed": "فشل",

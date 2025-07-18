@@ -7,7 +7,7 @@ import ExpenseCategoryForm from "@/components/dashboard/forms/purchase/PurchaseE
 import CreatePage from "@/components/dashboard/CreatePage";
 
 export default function CreateExpenseCategory() {
-  const t = useTranslations("Purchase.ExpenseCategory");
+  const t = useTranslations("purchase.ExpenseCategory");
   const [createExpenseCategory, { isLoading }] =
     useCreateExpenseCategoryMutation();
 

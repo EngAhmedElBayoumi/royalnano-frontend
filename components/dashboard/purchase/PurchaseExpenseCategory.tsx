@@ -24,7 +24,7 @@ export default function PurchaseExpenseCategory() {
   });
 
   const router = useRouter();
-  const t = useTranslations("Purchase.ExpenseCategory");
+  const t = useTranslations("purchase.ExpenseCategory");
 
   const columns = [
     { field: "name", header: t("name") },
@@ -33,9 +33,22 @@ export default function PurchaseExpenseCategory() {
 
   const cardsData = [
     { title: t("cards.totalCategories"), num: expenseCategories?.count || 0 },
-    { title: t("cards.activeCategories"), num: expenseCategories?.results?.length || 0 },
-    { title: t("cards.withDescription"), num: expenseCategories?.results?.filter((cat: ExpenseCategory) => cat.description && cat.description.trim() !== '').length || 0 },
-    { title: t("cards.recentlyAdded"), num: expenseCategories?.results?.slice(-7).length || 0 },
+    {
+      title: t("cards.activeCategories"),
+      num: expenseCategories?.results?.length || 0,
+    },
+    {
+      title: t("cards.withDescription"),
+      num:
+        expenseCategories?.results?.filter(
+          (cat: ExpenseCategory) =>
+            cat.description && cat.description.trim() !== ""
+        ).length || 0,
+    },
+    {
+      title: t("cards.recentlyAdded"),
+      num: expenseCategories?.results?.slice(-7).length || 0,
+    },
   ];
 
   const formattedData =
@@ -66,4 +79,3 @@ export default function PurchaseExpenseCategory() {
     />
   );
 }
-

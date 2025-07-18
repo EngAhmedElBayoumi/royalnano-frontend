@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import TableWrapper from "@/components/dashboard/tables/TableWrapper";
 import { useTableData } from "@/hooks/useTableData";
 import { useGetSuppliersQuery } from "@/redux/services/dashboard/purchase/supplierApi";
+import { listItems } from "@/lib/utils/types";
 
 export interface Supplier {
   id: number;
@@ -24,18 +25,24 @@ export interface Supplier {
   account_no: string;
   opening_balance: number;
   as_of: string;
-  branch?: { id: number; name: string } | null;
-  accounting_expenses_category?: { id: number; name: string } | null;
+  branch?: listItems | null;
+  accounting_expenses_category?: listItems | null;
 }
 
 export default function PurchaseSupplier() {
-  const { data: suppliers, isLoading, error, permissions, handlePageChange } = useTableData({
+  const {
+    data: suppliers,
+    isLoading,
+    error,
+    permissions,
+    handlePageChange,
+  } = useTableData({
     permissionKey: "supplier",
     useQueryHook: useGetSuppliersQuery,
   });
 
   const router = useRouter();
-  const t = useTranslations("Purchase.Supplier");
+  const t = useTranslations("purchase.Supplier");
 
   const columns = [
     { field: "supplier_name", header: t("supplierName") },
@@ -86,4 +93,3 @@ export default function PurchaseSupplier() {
     />
   );
 }
-

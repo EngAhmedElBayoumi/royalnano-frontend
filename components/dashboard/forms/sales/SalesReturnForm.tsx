@@ -14,6 +14,7 @@ import { useState } from "react";
 import { useGetItemsQuery } from "@/redux/services/dashboard/inventory/itemsApi";
 import { useGetBranchesQuery } from "@/redux/services/dashboard/inventory/branchesApi";
 import { salesReturnSchema } from "@/lib/validations/dashboard/sales/salesReturnSchema";
+import { listItems } from "@/lib/utils/types";
 
 interface SalesReturnFormProps {
   onSubmit: (data: SalesReturnFormValues) => Promise<void>;
@@ -38,9 +39,7 @@ export interface SalesReturnFormValues {
 }
 
 const SalesReturnForm = ({ onSubmit, defaultValues }: SalesReturnFormProps) => {
-  //   const { data: customers } = useGetMiniSalesCustomerQuery({});
   const { data: branchesData } = useGetBranchesQuery({});
-  // console.log(branchesData.results)
   const form = useForm<SalesReturnFormValues>({
     resolver: zodResolver(salesReturnSchema),
     defaultValues: defaultValues || {
@@ -69,13 +68,6 @@ const SalesReturnForm = ({ onSubmit, defaultValues }: SalesReturnFormProps) => {
   const existingItems = itemsData?.results || [];
 
   const t = useTranslations("Sales");
-  //   const customerOptions = customers
-  //     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  //     ? customers.map((customer: { id: { toString: () => any; }; customer_name: any; }) => ({
-  //         value: customer.id.toString(),
-  //         label: customer.customer_name,
-  //       }))
-  //     : [];
 
   const [itemTypes, setItemTypes] = useState<("existing" | "custom")[]>([]);
 
@@ -106,7 +98,7 @@ const SalesReturnForm = ({ onSubmit, defaultValues }: SalesReturnFormProps) => {
     setItemTypes((prev) => [...prev, "existing"]);
   };
   const branchesOptions =
-    branchesData?.results?.map((branch: { id: number; name: string }) => ({
+    branchesData?.results?.map((branch: listItems) => ({
       value: branch.id.toString(),
       label: branch.name,
     })) || [];

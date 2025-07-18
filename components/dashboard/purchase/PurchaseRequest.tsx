@@ -27,26 +27,41 @@ export interface PurchaseRequest {
 }
 
 export default function PurchaseRequest() {
-  const { data: purchaseRequests, isLoading, error, permissions, handlePageChange } = useTableData({
+  const {
+    data: purchaseRequests,
+    isLoading,
+    error,
+    permissions,
+    handlePageChange,
+  } = useTableData({
     permissionKey: "purchaserequest",
     useQueryHook: useGetRequestsQuery,
   });
 
   const { data: employeesData } = useGetEmployeesQuery({});
-  const [employeeNames, setEmployeeNames] = useState<{ [key: number]: string }>({});
+  const [employeeNames, setEmployeeNames] = useState<{ [key: number]: string }>(
+    {}
+  );
 
   useEffect(() => {
     if (employeesData?.results) {
-      const employeeMap = employeesData.results.reduce((acc: { [key: number]: string }, employee: { id: number; user?: { email: string }; name?: string }) => {
-        acc[employee.id] = employee.user?.email || employee.name || `Employee ${employee.id}`;
-        return acc;
-      }, {});
+      const employeeMap = employeesData.results.reduce(
+        (
+          acc: { [key: number]: string },
+          employee: { id: number; user?: { email: string }; name?: string }
+        ) => {
+          acc[employee.id] =
+            employee.user?.email || employee.name || `Employee ${employee.id}`;
+          return acc;
+        },
+        {}
+      );
       setEmployeeNames(employeeMap);
     }
   }, [employeesData]);
 
   const router = useRouter();
-  const t = useTranslations("Purchase.Request");
+  const t = useTranslations("purchase.Request");
 
   const columns = [
     { field: "request_date", header: t("requestDate") },
@@ -58,10 +73,34 @@ export default function PurchaseRequest() {
   ];
 
   const cardsData = [
-    { title: t("cards.newRequests"), num: purchaseRequests?.results?.filter((r: PurchaseRequest) => r.status === 'draft').length || 0 },
-    { title: t("cards.pending"), num: purchaseRequests?.results?.filter((r: PurchaseRequest) => r.status === 'pending').length || 0 },
-    { title: t("cards.approved"), num: purchaseRequests?.results?.filter((r: PurchaseRequest) => r.status === 'approved').length || 0 },
-    { title: t("cards.completed"), num: purchaseRequests?.results?.filter((r: PurchaseRequest) => r.status === 'completed').length || 0 },
+    {
+      title: t("cards.newRequests"),
+      num:
+        purchaseRequests?.results?.filter(
+          (r: PurchaseRequest) => r.status === "draft"
+        ).length || 0,
+    },
+    {
+      title: t("cards.pending"),
+      num:
+        purchaseRequests?.results?.filter(
+          (r: PurchaseRequest) => r.status === "pending"
+        ).length || 0,
+    },
+    {
+      title: t("cards.approved"),
+      num:
+        purchaseRequests?.results?.filter(
+          (r: PurchaseRequest) => r.status === "approved"
+        ).length || 0,
+    },
+    {
+      title: t("cards.completed"),
+      num:
+        purchaseRequests?.results?.filter(
+          (r: PurchaseRequest) => r.status === "completed"
+        ).length || 0,
+    },
   ];
 
   const formattedData =
@@ -95,4 +134,3 @@ export default function PurchaseRequest() {
     />
   );
 }
-

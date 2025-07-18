@@ -14,7 +14,8 @@ import { useGetSuppliersQuery } from "@/redux/services/dashboard/purchase/suppli
 import { useGetWarehousesQuery } from "@/redux/services/dashboard/purchase/warehouseApi";
 import { useGetOrdersQuery } from "@/redux/services/dashboard/purchase/orderApi";
 import { useGetItemsQuery } from "@/redux/services/dashboard/inventory/itemsApi";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { listItems } from "@/lib/utils/types";
 
 interface PurchaseInvoiceFormProps {
   onSubmit: (data: PurchaseInvoiceFormValues) => Promise<void>;
@@ -36,10 +37,10 @@ export interface PurchaseInvoiceFormValues {
   items: {
     item: number;
     quantity: number;
-    unit_price: string;
-    discount: string;
-    tax: string;
-    total: string;
+    unit_price: number;
+    discount: number;
+    tax: number;
+    total: number;
   }[];
 }
 
@@ -48,8 +49,6 @@ const PurchaseInvoiceForm = ({
   defaultValues,
   isView = false,
 }: PurchaseInvoiceFormProps) => {
-  const [inventoryItems, setInventoryItems] = useState<{ value: string; label: string }[]>([]);
-
   const form = useForm<PurchaseInvoiceFormValues>({
     resolver: zodResolver(purchaseInvoiceSchema),
     defaultValues: defaultValues || {
@@ -67,41 +66,63 @@ const PurchaseInvoiceForm = ({
         {
           item: 0,
           quantity: 1,
-          unit_price: "",
-          discount: "",
-          tax: "",
-          total: "",
+          unit_price: 0,
+          discount: 0,
+          tax: 0,
+          total: 0,
         },
       ],
     },
   });
 
-  const t = useTranslations("Purchase.Invoice");
+  const t = useTranslations("purchase.Invoice");
   const { data: branchesData } = useGetBranchesQuery({});
   const { data: suppliersData } = useGetSuppliersQuery({});
   const { data: warehousesData } = useGetWarehousesQuery({});
   const { data: ordersData } = useGetOrdersQuery({});
-  const { data: itemsData, isError, error } = useGetItemsQuery({});
+  const { data: itemsData } = useGetItemsQuery({});
 
-  const branchOptions = branchesData?.results?.map((branch: any) => ({
-    label: branch.name,
-    value: branch.id.toString(),
-  })) || [];
+  const branchOptions =
+    branchesData?.results?.map((branch: listItems) => ({
+      label: branch.name,
+      value: branch.id.toString(),
+    })) || [];
 
-  const supplierOptions = suppliersData?.results?.map((supplier: any) => ({
-    label: supplier.supplier_name,
-    value: supplier.id.toString(),
-  })) || [];
+  const supplierOptions =
+    suppliersData?.results?.map(
+      (supplier: { id: string; supplier_name: string }) => ({
+        label: supplier.supplier_name,
+        value: supplier.id.toString(),
+      })
+    ) || [];
 
-  const warehouseOptions = warehousesData?.results?.map((warehouse: any) => ({
-    label: warehouse.name,
-    value: warehouse.id.toString(),
-  })) || [];
+  const warehouseOptions =
+    warehousesData?.results?.map((warehouse: listItems) => ({
+      label: warehouse.name,
+      value: warehouse.id.toString(),
+    })) || [];
 
-  const orderOptions = ordersData?.results?.map((order: any) => ({
-    label: `${order.prefix} - ${order.supplier?.supplier_name || "No Supplier"}`,
-    value: order.id.toString(),
-  })) || [];
+  const orderOptions =
+    ordersData?.results?.map(
+      (order: {
+        id: string;
+        prefix: string;
+        supplier: { supplier_name: string };
+      }) => ({
+        label: `${order.prefix} - ${
+          order.supplier?.supplier_name || "No Supplier"
+        }`,
+        value: order.id.toString(),
+      })
+    ) || [];
+
+  const itemsOptions =
+    itemsData?.results?.map(
+      (item: { id: string; item_code: string; item_name: string }) => ({
+        label: `${item.item_code} - ${item.item_name}`,
+        value: item.id.toString(),
+      })
+    ) || [];
 
   const statusOptions = [
     { value: "draft", label: "Draft" },
@@ -117,24 +138,27 @@ const PurchaseInvoiceForm = ({
     { value: "pending", label: "Pending" },
   ];
 
-  // Set inventory items from itemsApi
+  const itemsWatch = form.watch("items");
+  // Auto-calculate total for each item when relevant fields change
   useEffect(() => {
-    if (itemsData?.results) {
-      setInventoryItems(
-        itemsData.results.map((item: any) => ({
-          value: item.id.toString(),
-          label: `${item.item_code} - ${item.item_name}`,
-        })) || []
-      );
+    const items = form.getValues("items");
+    const updatedItems = items.map((item) => {
+      const quantity = Number(item.quantity) || 0;
+      const unit_price = Number(item.unit_price) || 0;
+      const discount = Number(item.discount) || 0;
+      const tax = Number(item.tax) || 0;
+      const subtotal = quantity * unit_price - discount;
+      const total = subtotal * (1 + tax / 100);
+      return {
+        ...item,
+        total: Number.isFinite(total) ? Number(total.toFixed(2)) : 0,
+      };
+    });
+    // Only update if values actually changed to avoid infinite loop
+    if (JSON.stringify(items) !== JSON.stringify(updatedItems)) {
+      form.setValue("items", updatedItems);
     }
-  }, [itemsData]);
-
-  // Handle error if items fetch fails
-  useEffect(() => {
-    if (isError) {
-      console.error("Error fetching inventory items:", error);
-    }
-  }, [isError, error]);
+  }, [form, itemsWatch]);
 
   return (
     <Form {...form}>
@@ -227,7 +251,7 @@ const PurchaseInvoiceForm = ({
           <div className="mt-6">
             <h3 className="text-lg font-semibold mb-4">{t("items")}</h3>
             {form.watch("items")?.map((item, index) => (
-              <div
+              <section
                 key={index}
                 className="grid sm:grid-cols-2 gap-x-4 gap-y-2 xl:gap-y-5 lg:gap-x-10 mb-4 p-4 border rounded-lg"
               >
@@ -236,7 +260,7 @@ const PurchaseInvoiceForm = ({
                   name={`items.${index}.item`}
                   label={t("item")}
                   placeholder={t("item")}
-                  options={inventoryItems}
+                  options={itemsOptions}
                   readonly={isView}
                   valueType="number"
                 />
@@ -280,7 +304,7 @@ const PurchaseInvoiceForm = ({
                   readonly={true}
                   type="number"
                 />
-              </div>
+              </section>
             ))}
           </div>
         </section>
