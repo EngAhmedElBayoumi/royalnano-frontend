@@ -36,10 +36,10 @@ export interface PurchaseInvoiceFormValues {
   items: {
     item: number;
     quantity: number;
-    unit_price: string;
-    discount: string;
-    tax: string;
-    total: string;
+    unit_price: number;
+    discount: number;
+    tax: number;
+    total: number;
   }[];
 }
 
@@ -69,10 +69,10 @@ const PurchaseInvoiceForm = ({
         {
           item: 0,
           quantity: 1,
-          unit_price: "",
-          discount: "",
-          tax: "",
-          total: "",
+          unit_price: 0,
+          discount: 0,
+          tax: 0,
+          total: 0,
         },
       ],
     },
@@ -86,25 +86,25 @@ const PurchaseInvoiceForm = ({
   const { data: itemsData, isError, error } = useGetItemsQuery({});
 
   const branchOptions =
-    branchesData?.results?.map((branch: any) => ({
+    branchesData?.results?.map((branch) => ({
       label: branch.name,
       value: branch.id.toString(),
     })) || [];
 
   const supplierOptions =
-    suppliersData?.results?.map((supplier: any) => ({
+    suppliersData?.results?.map((supplier) => ({
       label: supplier.supplier_name,
       value: supplier.id.toString(),
     })) || [];
 
   const warehouseOptions =
-    warehousesData?.results?.map((warehouse: any) => ({
+    warehousesData?.results?.map((warehouse) => ({
       label: warehouse.name,
       value: warehouse.id.toString(),
     })) || [];
 
   const orderOptions =
-    ordersData?.results?.map((order: any) => ({
+    ordersData?.results?.map((order) => ({
       label: `${order.prefix} - ${
         order.supplier?.supplier_name || "No Supplier"
       }`,
@@ -129,7 +129,7 @@ const PurchaseInvoiceForm = ({
   useEffect(() => {
     if (itemsData?.results) {
       setInventoryItems(
-        itemsData.results.map((item: any) => ({
+        itemsData.results.map((item) => ({
           value: item.id.toString(),
           label: `${item.item_code} - ${item.item_name}`,
         })) || []
