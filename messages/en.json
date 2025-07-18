@@ -1113,5 +1113,42 @@
         "login": "Log in"
       }
     }
+  },
+  "reports": {
+    "title": "Reports",
+    "generate": "Generate Report",
+    "generating": "Generating...",
+    "reportType": "Report Type",
+    "dateRange": "Date Range",
+    "branch": "Branch",
+    "allBranches": "All Branches",
+    "status": "Status",
+    "allStatuses": "All Statuses",
+    "active": "Active",
+    "inactive": "Inactive",
+    "pending": "Pending",
+    "completed": "Completed",
+    "export": "Export",
+    "exportToCSV": "Export to CSV",
+    "exportToExcel": "Export to Excel",
+    "exportToPDF": "Export to PDF",
+    "totalRecords": "Total Records",
+    "generated": "Generated",
+    "executionTime": "Execution Time",
+    "showingFirst50Records": "Showing first 50 records of",
+    "exportFullReport": "Export the full report to view all data.",
+    "generateReportFromTab": "Generate a report from the 'Generate Report' tab to view results here.",
+    "noReportGenerated": "No Report Generated",
+    "reportExecutionHistory": "Report Execution History",
+    "executedBy": "Executed By",
+    "createdAt": "Created At",
+    "actions": "Actions",
+    "view": "View",
+    "totalReports": "Total Reports",
+    "thisMonth": "This Month",
+    "mostUsedType": "Most Used Type",
+    "avgExecutionTime": "Avg. Execution Time",
+    "recentExecutions": "Recent Executions",
+    "noRecentExecutions": "No recent executions found."
   }
 }

@@ -1069,5 +1069,42 @@
         "default": "حدث خطأ أثناء التسجيل"
       }
     }
+  },
+  "reports": {
+    "title": "التقارير",
+    "generate": "إنشاء تقرير",
+    "generating": "جاري الإنشاء...",
+    "reportType": "نوع التقرير",
+    "dateRange": "مدة التقرير",
+    "branch": "الفرع",
+    "allBranches": "جميع الفروع",
+    "status": "الحالة",
+    "allStatuses": "جميع الحالات",
+    "active": "مفعل",
+    "inactive": "معطل",
+    "pending": "قيد الانتظار",
+    "completed": "مكتمل",
+    "export": "تصدير",
+    "exportToCSV": "تصدير إلى CSV",
+    "exportToExcel": "تصدير إلى Excel",
+    "exportToPDF": "تصدير إلى PDF",
+    "totalRecords": "إجمالي التقارير",
+    "generated": "منشور",
+    "executionTime": "وقت التنفيذ",
+    "showingFirst50Records": "إظهار أول 50 تقرير ",
+    "exportFullReport": "تصدير التقرير الكامل لعرض جميع البيانات.",
+    "generateReportFromTab": "إنشاء تقرير من علامة التبويب 'إنشاء تقرير' لعرض النتائج هنا.",
+    "noReportGenerated": "لم يتم إنشاء تقرير",
+    "reportExecutionHistory": "تاريخ تنفيذ التقارير",
+    "executedBy": "تنفيذ من",
+    "createdAt": "تاريخ الإنشاء",
+    "actions": "الإجراءات",
+    "view": "عرض",
+    "totalReports": "إجمالي التقارير",
+    "thisMonth": "هذا الشهر",
+    "mostUsedType": "أكثر الأنواع استخدامًا",
+    "avgExecutionTime": "متوسط وقت التنفيذ",
+    "recentExecutions": "التقارير الأحدث",
+    "noRecentExecutions": "لم يتم إنشاء تقرير مؤخرًا."
   }
 }
