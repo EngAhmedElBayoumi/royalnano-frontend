@@ -118,19 +118,19 @@ const TableControls = ({
           className="bg-primary text-white capitalize"
           onClick={() => exportCSV(false)}
         >
-          {t("exportToCsv")}
+          Export to CSV
         </Button>
         <Button
           className="bg-primary text-white capitalize"
           onClick={exportExcel}
         >
-          {t("exportToExcel")}
+          Export to Excel
         </Button>
         <Button
           className="bg-primary text-white capitalize"
           onClick={exportPdf}
         >
-          {t("exportToPdf")}
+          Export to PDF
         </Button>
         {buttonText && (
           <Button

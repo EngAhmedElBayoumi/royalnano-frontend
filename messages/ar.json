@@ -166,6 +166,11 @@
   "fieldName": "اسم الحقل",
   "fieldValue": "قيمة الحقل",
   "removeField": "إزالة الحقل",
+  "tableControls": {
+    "exportToCSV": "تصدير إلى CSV",
+    "exportToExcel": "تصدير إلى Excel",
+    "exportToPDF": "تصدير إلى PDF"
+  },
   "Sidebar": {
     "home": "الرئيسية",
     "clients": "العملاء",

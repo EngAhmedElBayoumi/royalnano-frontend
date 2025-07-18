@@ -19,7 +19,7 @@ export interface ReportTemplate {
   name: string;
   report_type: string;
   description?: string;
-  filters_config: Record<string, any>;
+  filters_config: Record<string, unknown>;
   columns_config: Array<{
     key: string;
     label: string;
@@ -38,8 +38,8 @@ export interface ReportExecution {
   template: ReportTemplate;
   executed_by: number;
   filters_applied: ReportFilter;
-  status: 'pending' | 'running' | 'completed' | 'failed';
-  result_data: Record<string, any>;
+  status: "pending" | "running" | "completed" | "failed";
+  result_data: Record<string, unknown>;
   execution_time?: number;
   error_message?: string;
   created_at: string;
@@ -49,7 +49,7 @@ export interface ScheduledReport {
   id: number;
   template: ReportTemplate;
   name: string;
-  frequency: 'daily' | 'weekly' | 'monthly' | 'quarterly' | 'yearly';
+  frequency: "daily" | "weekly" | "monthly" | "quarterly" | "yearly";
   recipients: string[];
   filters_config: ReportFilter;
   next_execution: string;
@@ -62,7 +62,7 @@ export interface ScheduledReport {
 export interface ReportData {
   report_type: string;
   title: string;
-  data: Array<Record<string, any>>;
+  data: Array<Record<string, unknown>>;
   columns: Array<{
     key: string;
     label: string;
@@ -73,7 +73,7 @@ export interface ReportData {
   filters_applied: ReportFilter;
   generated_at: string;
   execution_time: number;
-  summary?: Record<string, any>;
+  summary?: Record<string, unknown>;
 }
 
 export interface ReportType {
@@ -88,45 +88,54 @@ export interface ReportType {
 export const reportsApi = createApi({
   reducerPath: "reportsApi",
   baseQuery,
-  tagTypes: ['ReportTemplate', 'ReportExecution', 'ScheduledReport'],
+  tagTypes: ["ReportTemplate", "ReportExecution", "ScheduledReport"],
   endpoints: (builder) => ({
     // Report Templates
-    getReportTemplates: builder.query<ReportTemplate[], { 
-      search?: string; 
-      report_type?: string; 
-      is_active?: boolean 
-    }>({
+    getReportTemplates: builder.query<
+      ReportTemplate[],
+      {
+        search?: string;
+        report_type?: string;
+        is_active?: boolean;
+      }
+    >({
       query: (params) => ({
         url: "reports/templates/",
         params,
       }),
-      providesTags: ['ReportTemplate'],
+      providesTags: ["ReportTemplate"],
     }),
 
     getReportTemplate: builder.query<ReportTemplate, number>({
       query: (id) => `reports/templates/${id}/`,
-      providesTags: ['ReportTemplate'],
+      providesTags: ["ReportTemplate"],
     }),
 
-    createReportTemplate: builder.mutation<ReportTemplate, Partial<ReportTemplate>>({
+    createReportTemplate: builder.mutation<
+      ReportTemplate,
+      Partial<ReportTemplate>
+    >({
       query: (template) => ({
         url: "reports/templates/",
         method: "POST",
         body: template,
       }),
-      invalidatesTags: ['ReportTemplate'],
+      invalidatesTags: ["ReportTemplate"],
     }),
 
-    updateReportTemplate: builder.mutation<ReportTemplate, { 
-      id: number; 
-      template: Partial<ReportTemplate> 
-    }>({
+    updateReportTemplate: builder.mutation<
+      ReportTemplate,
+      {
+        id: number;
+        template: Partial<ReportTemplate>;
+      }
+    >({
       query: ({ id, template }) => ({
         url: `reports/templates/${id}/`,
         method: "PATCH",
         body: template,
       }),
-      invalidatesTags: ['ReportTemplate'],
+      invalidatesTags: ["ReportTemplate"],
     }),
 
     deleteReportTemplate: builder.mutation<void, number>({
@@ -134,64 +143,76 @@ export const reportsApi = createApi({
         url: `reports/templates/${id}/`,
         method: "DELETE",
       }),
-      invalidatesTags: ['ReportTemplate'],
+      invalidatesTags: ["ReportTemplate"],
     }),
 
     // Report Executions
-    getReportExecutions: builder.query<ReportExecution[], { 
-      template?: number; 
-      status?: string 
-    }>({
+    getReportExecutions: builder.query<
+      { results: ReportExecution[]; count: number },
+      {
+        template?: number;
+        status?: string;
+      }
+    >({
       query: (params) => ({
         url: "reports/executions/",
         params,
       }),
-      providesTags: ['ReportExecution'],
+      providesTags: ["ReportExecution"],
     }),
 
     getReportExecution: builder.query<ReportExecution, number>({
       query: (id) => `reports/executions/${id}/`,
-      providesTags: ['ReportExecution'],
+      providesTags: ["ReportExecution"],
     }),
 
     // Scheduled Reports
-    getScheduledReports: builder.query<ScheduledReport[], { 
-      search?: string; 
-      template?: number; 
-      frequency?: string; 
-      is_active?: boolean 
-    }>({
+    getScheduledReports: builder.query<
+      ScheduledReport[],
+      {
+        search?: string;
+        template?: number;
+        frequency?: string;
+        is_active?: boolean;
+      }
+    >({
       query: (params) => ({
         url: "reports/scheduled/",
         params,
       }),
-      providesTags: ['ScheduledReport'],
+      providesTags: ["ScheduledReport"],
     }),
 
     getScheduledReport: builder.query<ScheduledReport, number>({
       query: (id) => `reports/scheduled/${id}/`,
-      providesTags: ['ScheduledReport'],
+      providesTags: ["ScheduledReport"],
     }),
 
-    createScheduledReport: builder.mutation<ScheduledReport, Partial<ScheduledReport>>({
+    createScheduledReport: builder.mutation<
+      ScheduledReport,
+      Partial<ScheduledReport>
+    >({
       query: (report) => ({
         url: "reports/scheduled/",
         method: "POST",
         body: report,
       }),
-      invalidatesTags: ['ScheduledReport'],
+      invalidatesTags: ["ScheduledReport"],
     }),
 
-    updateScheduledReport: builder.mutation<ScheduledReport, { 
-      id: number; 
-      report: Partial<ScheduledReport> 
-    }>({
+    updateScheduledReport: builder.mutation<
+      ScheduledReport,
+      {
+        id: number;
+        report: Partial<ScheduledReport>;
+      }
+    >({
       query: ({ id, report }) => ({
         url: `reports/scheduled/${id}/`,
         method: "PATCH",
         body: report,
       }),
-      invalidatesTags: ['ScheduledReport'],
+      invalidatesTags: ["ScheduledReport"],
     }),
 
     deleteScheduledReport: builder.mutation<void, number>({
@@ -199,7 +220,7 @@ export const reportsApi = createApi({
         url: `reports/scheduled/${id}/`,
         method: "DELETE",
       }),
-      invalidatesTags: ['ScheduledReport'],
+      invalidatesTags: ["ScheduledReport"],
     }),
 
     // Report Generator
@@ -207,23 +228,29 @@ export const reportsApi = createApi({
       query: () => "reports/generator/available_types/",
     }),
 
-    generateReport: builder.mutation<ReportData, {
-      report_type: string;
-      filters?: ReportFilter;
-    }>({
+    generateReport: builder.mutation<
+      ReportData,
+      {
+        report_type: string;
+        filters?: ReportFilter;
+      }
+    >({
       query: (body) => ({
         url: "reports/generator/generate/",
         method: "POST",
         body,
       }),
-      invalidatesTags: ['ReportExecution'],
+      invalidatesTags: ["ReportExecution"],
     }),
 
-    exportReport: builder.mutation<Blob, {
-      report_type: string;
-      filters?: ReportFilter;
-      format: 'excel' | 'csv' | 'pdf';
-    }>({
+    exportReport: builder.mutation<
+      Blob,
+      {
+        report_type: string;
+        filters?: ReportFilter;
+        format: "excel" | "csv" | "pdf";
+      }
+    >({
       query: (body) => ({
         url: "reports/generator/export/",
         method: "POST",
@@ -232,26 +259,32 @@ export const reportsApi = createApi({
       }),
     }),
 
-    getReportFiltersSchema: builder.query<Record<string, any>, void>({
+    getReportFiltersSchema: builder.query<Record<string, unknown>, void>({
       query: () => "reports/generator/filters_schema/",
     }),
 
     // Report Categories and Statistics
-    getReportCategories: builder.query<Array<{
-      category: string;
-      count: number;
-      types: ReportType[];
-    }>, void>({
+    getReportCategories: builder.query<
+      Array<{
+        category: string;
+        count: number;
+        types: ReportType[];
+      }>,
+      void
+    >({
       query: () => "reports/generator/categories/",
     }),
 
-    getReportStatistics: builder.query<{
-      total_reports: number;
-      reports_this_month: number;
-      most_used_type: string;
-      average_execution_time: number;
-      recent_executions: ReportExecution[];
-    }, void>({
+    getReportStatistics: builder.query<
+      {
+        total_reports: number;
+        reports_this_month: number;
+        most_used_type: string;
+        average_execution_time: number;
+        recent_executions: ReportExecution[];
+      },
+      void
+    >({
       query: () => "reports/generator/statistics/",
     }),
   }),
@@ -286,4 +319,3 @@ export const {
   useGetReportCategoriesQuery,
   useGetReportStatisticsQuery,
 } = reportsApi;
-
