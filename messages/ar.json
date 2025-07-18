@@ -796,6 +796,7 @@
       "items": "العناصر",
       "noDataFound": "لا توجد بيانات للطلب",
       "addRequest": "إضافة طلب",
+      "editPurchaseRequest": "تعديل طلب الشراء",
       "request": "طلب",
       "status": "الحالة",
       "itemsCount": "عدد العناصر",
