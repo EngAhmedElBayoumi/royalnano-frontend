@@ -799,6 +799,8 @@
       "noDataFound": "لا توجد بيانات للطلب",
       "addRequest": "إضافة طلب",
       "request": "طلب",
+      "status": "الحالة",
+      "itemsCount": "عدد العناصر",
       "cards": {
         "newRequests": "طلبات جديدة",
         "complete": "مكتمل",
