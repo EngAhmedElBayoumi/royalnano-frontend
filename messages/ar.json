@@ -377,42 +377,6 @@
     }
   },
 
-  "customerRequests": {
-    "title": "طلبات العملاء",
-    "addCustomerRequest": "إضافة طلب عميل",
-    "editCustomerRequest": "تعديل طلب عميل",
-    "customerRequestForm": {
-      "clientName": "اسم العميل",
-      "phoneNumber": "رقم الهاتف",
-      "carType": "نوع السيارة",
-      "carModel": "موديل السيارة",
-      "service": "الخدمة",
-      "branch": "الفرع",
-      "additionalNotes": "ملاحظات إضافية",
-      "save": "حفظ",
-      "cancel": "إلغاء"
-    },
-    "carTypes": {
-      "sedan": "سيدان",
-      "suv": "دفع رباعي",
-      "truck": "شاحنة"
-    },
-    "carModels": {
-      "modelA": "موديل أ",
-      "modelB": "موديل ب",
-      "modelC": "موديل ج"
-    },
-    "services": {
-      "service1": "خدمة 1",
-      "service2": "خدمة 2",
-      "service3": "خدمة 3"
-    },
-    "branches": {
-      "branch1": "فرع 1",
-      "branch2": "فرع 2",
-      "branch3": "فرع 3"
-    }
-  },
   "customer_info": {
     "title": "معلومات العميل",
     "basic_info": "المعلومات الأساسية",

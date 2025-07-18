@@ -852,42 +852,7 @@
       "vat": "VAT"
     }
   },
-  "customerRequests": {
-    "title": "Customer Requests",
-    "addCustomerRequest": "Add Customer Request",
-    "editCustomerRequest": "Edit Customer Request",
-    "customerRequestForm": {
-      "clientName": "Client Name",
-      "phoneNumber": "Phone Number",
-      "carType": "Car Type",
-      "carModel": "Car Model",
-      "service": "Service",
-      "branch": "Branch",
-      "additionalNotes": "Additional Notes",
-      "save": "Save",
-      "cancel": "Cancel"
-    },
-    "carTypes": {
-      "sedan": "Sedan",
-      "suv": "SUV",
-      "truck": "Truck"
-    },
-    "carModels": {
-      "modelA": "Model A",
-      "modelB": "Model B",
-      "modelC": "Model C"
-    },
-    "services": {
-      "service1": "Service 1",
-      "service2": "Service 2",
-      "service3": "Service 3"
-    },
-    "branches": {
-      "branch1": "Branch 1",
-      "branch2": "Branch 2",
-      "branch3": "Branch 3"
-    }
-  },
+
   "customer_info": {
     "title": "Customer Information",
     "basic_info": "Basic Information",
