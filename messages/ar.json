@@ -864,6 +864,9 @@
       "cards": {
         "newRequests": "طلبات جديدة",
         "totalOrders": "إجمالي الأوامر",
+        "pendingOrders": "أوامر قيد الانتظار",
+        "completedOrders": "أوامر مكتملة",
+        "thisMonth": "هذا الشهر",
         "complete": "مكتمل",
         "pending": "قيد الانتظار",
         "failed": "فشل",
