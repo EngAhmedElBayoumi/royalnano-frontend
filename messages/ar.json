@@ -778,6 +778,7 @@
       "noDataFound": "لا توجد بيانات للمستودع.",
       "addWarehouse": "إضافة مستودع",
       "cards": {
+        "activeWarehouses": "المستودعات النشطة",
         "totalWarehouses": "إجمالي المستودعات",
         "newRequests": "طلبات جديدة",
         "complete": "مكتمل",
