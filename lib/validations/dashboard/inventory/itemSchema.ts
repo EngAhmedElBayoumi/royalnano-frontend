@@ -7,7 +7,7 @@ export const itemSchema = z.object({
   unit: z.coerce.number().min(1, "Unit must be selected"),
   branch: z.coerce.number().min(1, "Branch must be selected"),
   category: z.coerce.number().min(1, "Category must be selected"),
-  supplier: z.coerce.number().min(1, "Supplier must be selected"),
+  supplier: z.coerce.number().nullable().optional(),
   purchase_price: z
     .number()
     .min(0, "Purchase price must be a non-negative number"),

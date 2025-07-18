@@ -32,7 +32,7 @@ export interface ItemFormValues {
   purchase_price: number;
   selling_price: number;
   branch: number;
-  supplier: number;
+  supplier: number | null;
   description: string;
   extra_fields?: Record<string, string> | null;
 }
@@ -49,7 +49,7 @@ const ItemForm = ({ onSubmit, defaultValues, isLoading }: ItemFormProps) => {
       purchase_price: 0,
       selling_price: 0,
       branch: 1,
-      supplier: 1,
+      supplier: null,
       description: "",
       extra_fields: {},
     },
