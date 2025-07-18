@@ -843,6 +843,8 @@
       "cancel": "إلغاء",
       "save": "حفظ",
       "createInvoice": "إنشاء فاتورة",
+      "editInvoice": "تعديل فاتورة",
+      "invalidInvoiceId": "رقم الفاتورة غير صالح",
       "cards": {
         "draft": "مسودة",
         "pending": "قيد الانتظار",

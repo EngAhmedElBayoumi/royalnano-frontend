@@ -795,6 +795,8 @@
       "cancel": "Cancel",
       "save": "Save",
       "createInvoice": "Create Invoice",
+      "editInvoice": "Edit Invoice",
+      "invalidInvoiceId": "Invalid Invoice ID",
       "cards": {
         "draft": "Draft",
         "pending": "Pending",
