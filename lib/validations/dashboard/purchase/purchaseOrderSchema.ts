@@ -2,27 +2,33 @@ import { z } from "zod";
 
 // Schema for an individual item in the `items` array
 const itemSchema = z.object({
-  kind: z.string().min(1, "Kind is required"),
+  kind: z.coerce.number().min(1, "Kind must be selected"),
   name: z.string().min(1, "Name is required"),
-  unit: z.string().min(1, "Unit is required"),
-  quantity: z.number().min(0.01, "Quantity must be greater than 0"),
-  unit_price: z.string().min(1, "Unit price is required"),
-  bonus: z.string().optional(),
-  amount: z.string().optional(),
-  discount: z.string().optional(),
-  discount_percent: z.string().optional(),
-  vat_kd: z.string().optional(),
-  total: z.string().optional(),
+  unit: z.coerce.number().min(1, "Unit must be selected"),
+  quantity: z.number().min(1, "Quantity must be greater than 0"),
+  unit_price: z.number().min(0.01, "Unit price must be greater than 0"),
+  bonus: z.number().min(0, "Bonus must be non-negative").optional(),
+  amount: z.number().min(0, "Amount must be non-negative").optional(),
+  discount: z.number().min(0, "Discount must be non-negative").optional(),
+  discount_percent: z
+    .number()
+    .min(0, "Discount percent must be non-negative")
+    .optional(),
+  vat_kd: z.number().min(0, "VAT KD must be non-negative").optional(),
+  total: z.number().min(0, "Total must be non-negative").optional(),
 });
 
 // Schema for the `invoice_detail` object
 const invoiceDetailSchema = z.object({
-  discount: z.string().optional(),
-  vat: z.string().optional(),
-  subtotal: z.string().optional(),
+  discount: z.number().min(0, "Discount must be non-negative").optional(),
+  vat: z.number().min(0, "VAT must be non-negative").optional(),
+  subtotal: z.number().min(0, "Subtotal must be non-negative").optional(),
   quantity: z.number().min(0, "Quantity must be non-negative").optional(),
-  free_quantity: z.number().min(0, "Free quantity must be non-negative").optional(),
-  total: z.string().optional(),
+  free_quantity: z
+    .number()
+    .min(0, "Free quantity must be non-negative")
+    .optional(),
+  total: z.number().min(0, "Total must be non-negative").optional(),
 });
 
 // Schema for the entire form
@@ -32,8 +38,8 @@ export const purchaseOrderSchema = z.object({
   prefix: z.string().min(1, "Prefix is required"),
   delivery_date: z.string().min(1, "Delivery date is required"),
   due_date: z.string().min(1, "Due date is required"),
-  branch: z.number().int().positive("Branch must be selected"),
-  supplier: z.number().int().positive("Supplier must be selected"),
+  branch: z.coerce.number().min(1, "Branch must be selected"),
+  supplier: z.coerce.number().min(1, "Supplier must be selected"),
   description: z.string().optional(),
   items: z.array(itemSchema).nonempty("At least one item is required"),
   invoice_detail: invoiceDetailSchema,
@@ -41,4 +47,3 @@ export const purchaseOrderSchema = z.object({
 
 // Type for TypeScript inference
 export type PurchaseOrderFormValues = z.infer<typeof purchaseOrderSchema>;
-
