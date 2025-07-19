@@ -9,7 +9,11 @@ import DatePicker from "@/components/formFields/DatePicker";
 import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
 import { purchaseOrderSchema } from "@/lib/validations/dashboard/purchase/purchaseOrderSchema";
-import { useState, useEffect } from "react";
+import { useGetBranchesQuery } from "@/redux/services/dashboard/inventory/branchesApi";
+import { listItems } from "@/lib/utils/types";
+import { useGetSuppliersMiniQuery } from "@/redux/services/dashboard/purchase/supplierApi";
+import { useGetItemCategoryQuery } from "@/redux/services/dashboard/inventory/itemCategoryApi";
+import { useGetUnitsQuery } from "@/redux/services/dashboard/inventory/unitsApi";
 
 interface PurchaseOrderFormProps {
   onSubmit: (data: PurchaseOrderFormValues) => Promise<void>;
@@ -54,15 +58,6 @@ const PurchaseOrderForm = ({
   defaultValues,
   isView,
 }: PurchaseOrderFormProps) => {
-  const [branches, setBranches] = useState<{ value: string; label: string }[]>(
-    []
-  );
-  const [suppliers, setSuppliers] = useState<
-    { value: string; label: string }[]
-  >([]);
-  const [units, setUnits] = useState<{ value: string; label: string }[]>([]);
-  const [kinds, setKinds] = useState<{ value: string; label: string }[]>([]);
-
   const form = useForm<PurchaseOrderFormValues>({
     resolver: zodResolver(purchaseOrderSchema),
     defaultValues: defaultValues || {
@@ -102,89 +97,36 @@ const PurchaseOrderForm = ({
 
   const t = useTranslations("purchase.Order");
 
-  // Fetch dropdown data
-  useEffect(() => {
-    const fetchDropdownData = async () => {
-      try {
-        // Fetch branches
-        const branchesResponse = await fetch(
-          `${process.env.NEXT_PUBLIC_BASE_URL}api/branches/`
-        );
-        if (branchesResponse.ok) {
-          const branchesData = await branchesResponse.json();
-          setBranches(
-            branchesData.map((branch: any) => ({
-              value: branch.id.toString(),
-              label: branch.name,
-            }))
-          );
-        }
+  const { data: branches } = useGetBranchesQuery({});
+  const { data: suppliers } = useGetSuppliersMiniQuery({});
+  const { data: categories } = useGetItemCategoryQuery({});
+  const { data: units } = useGetUnitsQuery({});
 
-        // Fetch suppliers
-        const suppliersResponse = await fetch(
-          `${process.env.NEXT_PUBLIC_BASE_URL}api/suppliers/`
-        );
-        if (suppliersResponse.ok) {
-          const suppliersData = await suppliersResponse.json();
-          setSuppliers(
-            suppliersData.map((supplier: any) => ({
-              value: supplier.id.toString(),
-              label: supplier.supplier_name,
-            }))
-          );
-        }
+  const branchesOptions =
+    branches?.results?.map((branch: listItems) => ({
+      value: String(branch.id),
+      label: branch.name,
+    })) || [];
 
-        // Fetch units (assuming there's a units endpoint)
-        const unitsResponse = await fetch(
-          `${process.env.NEXT_PUBLIC_BASE_URL}api/units/`
-        );
-        if (unitsResponse.ok) {
-          const unitsData = await unitsResponse.json();
-          setUnits(
-            unitsData.map((unit: any) => ({
-              value: unit.name,
-              label: unit.name,
-            }))
-          );
-        } else {
-          // Fallback units if API doesn't exist
-          setUnits([
-            { value: "kg", label: "Kilogram" },
-            { value: "pieces", label: "Pieces" },
-            { value: "liters", label: "Liters" },
-            { value: "meters", label: "Meters" },
-            { value: "boxes", label: "Boxes" },
-          ]);
-        }
+  const suppliersOptions =
+    suppliers?.results?.map(
+      (supplier: { id: number; supplier_name: string }) => ({
+        value: String(supplier.id),
+        label: supplier.supplier_name,
+      })
+    ) || [];
 
-        // Fetch kinds (assuming there's a categories endpoint)
-        const kindsResponse = await fetch(
-          `${process.env.NEXT_PUBLIC_BASE_URL}api/categories/`
-        );
-        if (kindsResponse.ok) {
-          const kindsData = await kindsResponse.json();
-          setKinds(
-            kindsData.map((kind: any) => ({
-              value: kind.name,
-              label: kind.name,
-            }))
-          );
-        } else {
-          // Fallback kinds if API doesn't exist
-          setKinds([
-            { value: "raw_materials", label: "Raw Materials" },
-            { value: "finished_goods", label: "Finished Goods" },
-            { value: "supplies", label: "Supplies" },
-            { value: "equipment", label: "Equipment" },
-          ]);
-        }
-      } catch (error) {
-        console.error("Error fetching dropdown data:", error);
-      }
-    };
+  const categoriesOptions =
+    categories?.map((category: listItems) => ({
+      value: String(category.id),
+      label: category.name,
+    })) || [];
 
-    fetchDropdownData();
-  }, []);
+  const unitsOptions =
+    units?.results?.map((unit: listItems) => ({
+      value: String(unit.id),
+      label: unit.name,
+    })) || [];
 
   return (
     <Form {...form}>
@@ -232,7 +174,7 @@ const PurchaseOrderForm = ({
               name="branch"
               label={t("branch")}
               placeholder={t("branch")}
-              options={branches}
+              options={branchesOptions}
               readonly={isView}
               valueType="number"
             />
@@ -241,7 +183,7 @@ const PurchaseOrderForm = ({
               name="supplier"
               label={t("supplier")}
               placeholder={t("supplier")}
-              options={suppliers}
+              options={suppliersOptions}
               readonly={isView}
               valueType="number"
             />
@@ -267,7 +209,7 @@ const PurchaseOrderForm = ({
                   name={`items.${index}.kind`}
                   label={t("kind")}
                   placeholder={t("kind")}
-                  options={kinds}
+                  options={categoriesOptions}
                   readonly={isView}
                 />
                 <TextInput
@@ -282,7 +224,7 @@ const PurchaseOrderForm = ({
                   name={`items.${index}.unit`}
                   label={t("unit")}
                   placeholder={t("unit")}
-                  options={units}
+                  options={unitsOptions}
                   readonly={isView}
                 />
                 <TextInput
