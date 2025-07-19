@@ -5,6 +5,10 @@ import TableWrapper from "@/components/dashboard/tables/TableWrapper";
 import { useTableData } from "@/hooks/useTableData";
 import { useGetSuppliersQuery } from "@/redux/services/dashboard/purchase/supplierApi";
 import { listItems } from "@/lib/utils/types";
+import {
+  useGetBranchByIdQuery,
+  useGetBranchesQuery,
+} from "@/redux/services/dashboard/inventory/branchesApi";
 
 export interface Supplier {
   id: number;
@@ -60,19 +64,26 @@ export default function PurchaseSupplier() {
     { title: t("cards.newThisMonth"), num: 12 },
     { title: t("cards.pendingApproval"), num: 3 },
   ];
-
+  const { data: allBranches } = useGetBranchesQuery({});
   const formattedData =
-    suppliers?.results?.map((supplier: Supplier) => ({
-      id: supplier.id,
-      supplier_name: supplier.supplier_name,
-      full_name: supplier.full_name,
-      phone_number: supplier.phone_number,
-      city: supplier.city,
-      country: supplier.country,
-      expenses_rates_billing_rate: supplier.expenses_rates_billing_rate,
-      branch_name: supplier.branch?.name || "N/A",
-    })) || [];
+    suppliers?.results?.map((supplier: Supplier) => {
+      const branchName =
+        allBranches?.results?.find((branch) => branch.id === supplier.branch)
+          ?.name || "N/A";
 
+      return {
+        id: supplier.id,
+        supplier_name: supplier.supplier_name,
+        full_name: supplier.full_name,
+        phone_number: supplier.phone_number,
+        city: supplier.city,
+        country: supplier.country,
+        expenses_rates_billing_rate: supplier.expenses_rates_billing_rate,
+        branch_name: branchName,
+      };
+    }) || [];
+
+  console.log(formattedData.branch_name);
   const handleClick = () => {
     router.push("/dashboard/purchase/supplier/create");
   };
