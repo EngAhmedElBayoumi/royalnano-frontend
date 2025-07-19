@@ -12,6 +12,7 @@ import { useGetBranchesQuery } from "@/redux/services/dashboard/inventory/branch
 import { useGetExpenseCategorysQuery } from "@/redux/services/dashboard/purchase/expenseCategory";
 import { Link } from "@/i18n/routing";
 import { listItems } from "@/lib/utils/types";
+import { useEffect } from "react";
 
 interface SupplierFormProps {
   onSubmit: (data: SupplierFormValues) => Promise<void>;
@@ -46,6 +47,11 @@ const SupplierForm = ({
   defaultValues,
   isView = false,
 }: SupplierFormProps) => {
+  useEffect(() => {
+    if (defaultValues) {
+      form.reset(defaultValues);
+    }
+  }, [defaultValues]);
   const form = useForm<SupplierFormValues>({
     resolver: zodResolver(supplierSchema),
     defaultValues: defaultValues || {
@@ -87,7 +93,6 @@ const SupplierForm = ({
       value: String(category.id),
       label: category.name,
     })) || [];
-
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>

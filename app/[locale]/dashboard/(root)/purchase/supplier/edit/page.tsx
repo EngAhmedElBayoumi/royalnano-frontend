@@ -17,6 +17,7 @@ export default function EditSupplier() {
   const t = useTranslations("purchase.Supplier");
 
   const { data, isLoading, error } = useGetSupplierByIdQuery(id);
+  console.log(data);
   const [updateSupplier, { isLoading: submitting }] =
     useUpdateSupplierMutation();
 
@@ -31,15 +32,17 @@ export default function EditSupplier() {
     country: data.country || "",
     postal_code: data.postal_code || "",
     taxes_business_id: data.taxes_business_id || "",
-    expenses_rates_billing_rate: data.expenses_rates_billing_rate || 0,
+    expenses_rates_billing_rate: Math.floor(
+      data.expenses_rates_billing_rate || 0
+    ),
     payment_terms: data.payment_terms || "",
     account_no: data.account_no || "",
-    opening_balance: data.opening_balance || 0,
+    opening_balance: Math.floor(data.opening_balance || 0),
     as_of: data.as_of || "",
     suffix: data.suffix || "",
     additional_info: data.additional_info || "",
-    branch: data.branch?.id || 0,
-    accounting_expenses_category: data.accounting_expenses_category?.id || 0,
+    branch: data.branch?.id || 11,
+    accounting_expenses_category: data.accounting_expenses_category?.id || 9,
   };
 
   const handleSubmit = async (formData: SupplierFormValues) => {

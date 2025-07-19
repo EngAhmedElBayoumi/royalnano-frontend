@@ -83,7 +83,7 @@ export default function PurchaseSupplier() {
       };
     }) || [];
 
-  console.log(formattedData.branch_name);
+  console.log(formattedData);
   const handleClick = () => {
     router.push("/dashboard/purchase/supplier/create");
   };
