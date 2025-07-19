@@ -530,7 +530,6 @@
       "errorDescription": "حدث خطأ أثناء إنشاء العميل"
     }
   },
-
   "customer_info": {
     "title": "معلومات العميل",
     "basic_info": "المعلومات الأساسية",
