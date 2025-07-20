@@ -24,11 +24,24 @@ export default function EditClientRequest() {
     const response = await updateClientRequest({ id, data }).unwrap();
     if (response.error) handleApiError(response.error);
   };
+  data && console.log(data);
+  // const defaultValues: ClientRequestFormValues = {
+  //   branch: data.branch || "",
+  //   car_model: data.car_model || "",
 
+  //   full_name: data.full_name || "",
+  //   description: data.description || "",
+  //   car_type: data.car_type || "",
+  //   order_note: data.order_note || "",
+  //   phone_number: data.phone_number || "",
+  //   service: data.service.id || "",
+  //   status: data.status || "",
+  // };
   return (
     <EditPage
       title={t("editCustomer")}
-      data={data}
+      // data={defaultValues}
+      data={{ ...data, service: data?.service?.id }}
       isLoading={isLoading}
       submitting={submitting}
       error={error}

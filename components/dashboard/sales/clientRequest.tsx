@@ -87,31 +87,18 @@ export default function ClientRequest() {
     refetch();
   }, [refetch]);
   const transformedData =
-    clientRequests?.results?.map(
-      (request: {
-        id: number;
-        full_name: string;
-        phone_number: number;
-        car_type: string;
-        car_model: string;
-        status: string;
-        description: string;
-        order_note: string;
-        service: string;
-        branch: number;
-      }) => ({
-        id: request.id,
-        full_name: request.full_name,
-        phone_number: request.phone_number,
-        car_type: request.car_type,
-        car_model: request.car_model,
-        status: request.status,
-        description: request.description,
-        order_note: request.order_note,
-        service: request.service,
-        branch_name: branchNames[request.branch] || "Loading...",
-      })
-    ) || [];
+    clientRequests?.results?.map((request) => ({
+      id: request.id,
+      full_name: request.full_name,
+      phone_number: request.phone_number,
+      car_type: request.car_type,
+      car_model: request.car_model,
+      status: request.status,
+      description: request.description,
+      order_note: request.order_note,
+      service_name: request.service?.name || "—",
+      branch_name: branchNames[request.branch] || "Loading...",
+    })) || [];
 
   const columns = [
     { field: "id", header: "ID" },
@@ -119,6 +106,8 @@ export default function ClientRequest() {
     { field: "phone_number", header: "Phone Number" },
     { field: "car_model", header: "Car Model" },
     { field: "branch_name", header: "Branch Name" },
+    { field: "service_name", header: "Service" },
+
     { field: "status", header: "Status" },
   ];
 
