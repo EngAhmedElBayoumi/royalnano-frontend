@@ -767,6 +767,12 @@
       "itemDescription": "Item Description"
     },
     "Invoice": {
+      "productId": "Product ID",
+
+      "discountPercent": "Discount (%)",
+
+      "removeItem": "Remove Item",
+      "addItem": "Add Item",
       "invoiceNumber": "Invoice Number",
       "status": "Status",
       "description": "Description",
