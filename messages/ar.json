@@ -766,7 +766,6 @@
     },
     "Invoice": {
       "productId": "معرّف المنتج",
-
       "discountPercent": "نسبة الخصم (%)",
       "removeItem": "حذف العنصر",
       "addItem": "إضافة عنصر",

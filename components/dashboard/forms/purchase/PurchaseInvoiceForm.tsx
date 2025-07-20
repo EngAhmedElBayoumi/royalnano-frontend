@@ -13,9 +13,9 @@ import { useGetBranchesQuery } from "@/redux/services/dashboard/inventory/branch
 import { useGetSuppliersQuery } from "@/redux/services/dashboard/purchase/supplierApi";
 import { useGetWarehousesQuery } from "@/redux/services/dashboard/purchase/warehouseApi";
 import { useGetOrdersQuery } from "@/redux/services/dashboard/purchase/orderApi";
-import { useGetItemsQuery } from "@/redux/services/dashboard/inventory/itemsApi";
-import { useEffect } from "react";
+// import { useGetItemsQuery } from "@/redux/services/dashboard/inventory/itemsApi";
 import { listItems } from "@/lib/utils/types";
+// import { useEffect } from "react";
 
 interface PurchaseInvoiceFormProps {
   onSubmit: (data: PurchaseInvoiceFormValues) => Promise<void>;
@@ -82,7 +82,7 @@ const PurchaseInvoiceForm = ({
   const { data: suppliersData } = useGetSuppliersQuery({});
   const { data: warehousesData } = useGetWarehousesQuery({});
   const { data: ordersData } = useGetOrdersQuery({});
-  const { data: itemsData } = useGetItemsQuery({});
+  // const { data: itemsData } = useGetItemsQuery({});
   const { fields, append, remove } = useFieldArray({
     control: form.control,
     name: "items",
@@ -121,13 +121,13 @@ const PurchaseInvoiceForm = ({
       })
     ) || [];
 
-  const itemsOptions =
-    itemsData?.results?.map(
-      (item: { id: string; item_code: string; item_name: string }) => ({
-        label: `${item.item_code} - ${item.item_name}`,
-        value: item.id.toString(),
-      })
-    ) || [];
+  // const itemsOptions =
+  //   itemsData?.results?.map(
+  //     (item: { id: string; item_code: string; item_name: string }) => ({
+  //       label: `${item.item_code} - ${item.item_name}`,
+  //       value: item.id.toString(),
+  //     })
+  //   ) || [];
 
   const statusOptions = [
     { value: "draft", label: "Draft" },
