@@ -1,6 +1,5 @@
 "use client";
-
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -26,11 +25,7 @@ import {
   Download,
   Play,
   Clock,
-  Filter,
-  Search,
   Calendar,
-  Building,
-  User,
   Package,
 } from "lucide-react";
 import IconWithTitle from "@/components/dashboard/IconWithTitle";
@@ -67,8 +62,7 @@ export default function ReportsPage() {
     useGetReportExecutionsQuery({});
   const { data: statistics, isLoading: statsLoading } =
     useGetReportStatisticsQuery();
-  const { data: branchesData, isLoading: branchesLoading } =
-    useGetBranchesQuery({});
+  const { data: branchesData } = useGetBranchesQuery({});
   const [generateReport, { isLoading: generating }] =
     useGenerateReportMutation();
   const [exportReport, { isLoading: exporting }] = useExportReportMutation();
@@ -124,11 +118,7 @@ export default function ReportsPage() {
       failed: "destructive",
       pending: "outline",
     };
-    return (
-      <Badge variant={variants[status] || "outline"}>
-        {t(`status.${status}`)}
-      </Badge>
-    );
+    return <Badge variant={variants[status] || "outline"}>{status}</Badge>;
   };
 
   if (typesLoading) {
@@ -137,7 +127,7 @@ export default function ReportsPage() {
         <div className="flex">
           <IconWithTitle
             imageSrc="/assets/icons/sidebar/reports.svg"
-            title={t("title")}
+            title="Reports"
             backgroundColor="#F8F7F7"
             textColor="primary"
           />
@@ -158,7 +148,7 @@ export default function ReportsPage() {
         <div className="flex">
           <IconWithTitle
             imageSrc="/assets/icons/sidebar/reports.svg"
-            title={t("title")}
+            title="Reports"
             backgroundColor="#F8F7F7"
             textColor="primary"
           />
@@ -175,7 +165,7 @@ export default function ReportsPage() {
       <div className="flex">
         <IconWithTitle
           imageSrc="/assets/icons/sidebar/reports.svg"
-          title={t("title")}
+          title="Reports"
           backgroundColor="#F8F7F7"
           textColor="primary"
         />
@@ -184,10 +174,10 @@ export default function ReportsPage() {
       <div className="bg-dashboardBg px-4 sm:px-6 pt-5 pb-8 ltr:rounded-r-[20px] ltr:rounded-bl-[20px] rtl:rounded-l-[20px] rtl:rounded-br-[20px]">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsList className="grid w-full grid-cols-4">
-            <TabsTrigger value="generate">Generate Report</TabsTrigger>
-            <TabsTrigger value="results">Results</TabsTrigger>
-            <TabsTrigger value="history">History</TabsTrigger>
-            <TabsTrigger value="statistics">Statistics</TabsTrigger>
+            <TabsTrigger value="generate">{t("generate")}</TabsTrigger>
+            <TabsTrigger value="results">{t("results")}</TabsTrigger>
+            <TabsTrigger value="history">{t("history")}</TabsTrigger>
+            <TabsTrigger value="statistics">{t("statistics")}</TabsTrigger>
           </TabsList>
 
           {/* Generate Report Tab */}
@@ -196,21 +186,19 @@ export default function ReportsPage() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <FileText className="h-5 w-5" />
-                  Generate New Report
+                  {t("generate")}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-6">
                 {/* Report Type Selection */}
                 <div className="space-y-2">
-                  <Label htmlFor="report-type">Report Type</Label>
+                  <Label htmlFor="report-type">{t("reportType")}</Label>
                   <Select
                     value={selectedReportType}
                     onValueChange={setSelectedReportType}
                   >
                     <SelectTrigger>
-                      <SelectValue
-                        placeholder={t("generate.reportTypePlaceholder")}
-                      />
+                      <SelectValue placeholder="Select a report type" />
                     </SelectTrigger>
                     <SelectContent>
                       {reportTypes?.map((type) => (
@@ -230,7 +218,7 @@ export default function ReportsPage() {
                 {/* Filters Section */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   <div className="space-y-2">
-                    <Label>Date Range</Label>
+                    <Label>{t("dateRange")}</Label>
                     <DateRangeFilter
                       value={filters}
                       onChange={(newFilters) =>
@@ -240,7 +228,7 @@ export default function ReportsPage() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="branch">Branch</Label>
+                    <Label htmlFor="branch">{t("branch")}</Label>
                     <Select
                       value={filters.branch_id?.toString() || ""}
                       onValueChange={(value) =>
@@ -251,12 +239,10 @@ export default function ReportsPage() {
                       }
                     >
                       <SelectTrigger>
-                        <SelectValue
-                          placeholder={t("generate.filters.branchPlaceholder")}
-                        />
+                        <SelectValue placeholder="All branches" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="0">All branches</SelectItem>
+                        <SelectItem value="0">{t("allBranches")}</SelectItem>
                         {branchesData?.results?.map((branch) => (
                           <SelectItem
                             key={branch.id}
@@ -270,7 +256,7 @@ export default function ReportsPage() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="status">Status</Label>
+                    <Label htmlFor="status">{t("status")}</Label>
                     <Select
                       value={filters.status || ""}
                       onValueChange={(value) =>
@@ -278,16 +264,18 @@ export default function ReportsPage() {
                       }
                     >
                       <SelectTrigger>
-                        <SelectValue
-                          placeholder={t("generate.filters.statusPlaceholder")}
-                        />
+                        <SelectValue placeholder="All statuses" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="0">All statuses</SelectItem>
-                        <SelectItem value="active">Active</SelectItem>
-                        <SelectItem value="inactive">Inactive</SelectItem>
-                        <SelectItem value="pending">Pending</SelectItem>
-                        <SelectItem value="completed">Completed</SelectItem>
+                        <SelectItem value="0">{t("allStatuses")}</SelectItem>
+                        <SelectItem value="active">{t("active")}</SelectItem>
+                        <SelectItem value="inactive">
+                          {t("inactive")}
+                        </SelectItem>
+                        <SelectItem value="pending">{t("pending")}</SelectItem>
+                        <SelectItem value="completed">
+                          {t("completed")}
+                        </SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
@@ -301,7 +289,7 @@ export default function ReportsPage() {
                     className="flex items-center gap-2"
                   >
                     <Play className="h-4 w-4" />
-                    {generating ? "Generating..." : "Generate Report"}
+                    {generating ? t("generating") : t("generate")}
                   </Button>
 
                   <Button
@@ -311,7 +299,7 @@ export default function ReportsPage() {
                     className="flex items-center gap-2"
                   >
                     <Download className="h-4 w-4" />
-                    Export to Excel
+                    {t("exportToExcel")}
                   </Button>
 
                   <Button
@@ -321,7 +309,7 @@ export default function ReportsPage() {
                     className="flex items-center gap-2"
                   >
                     <Download className="h-4 w-4" />
-                    Export to CSV
+                    {t("exportToCSV")}
                   </Button>
 
                   <Button
@@ -331,7 +319,7 @@ export default function ReportsPage() {
                     className="flex items-center gap-2"
                   >
                     <Download className="h-4 w-4" />
-                    Export to PDF
+                    {t("exportToPDF")}
                   </Button>
                 </div>
               </CardContent>
@@ -345,13 +333,15 @@ export default function ReportsPage() {
                 <CardHeader>
                   <CardTitle>{generatedReport.title}</CardTitle>
                   <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                    <span>Total Records: {generatedReport.total_records}</span>
                     <span>
-                      Generated:{" "}
+                      {t("totalRecords")}: {generatedReport.total_records}
+                    </span>
+                    <span>
+                      {t("generated")}:{" "}
                       {new Date(generatedReport.generated_at).toLocaleString()}
                     </span>
                     <span>
-                      Execution Time:{" "}
+                      {t("executionTime")}:{" "}
                       {generatedReport.execution_time.toFixed(2)}s
                     </span>
                   </div>
@@ -383,9 +373,9 @@ export default function ReportsPage() {
                   </div>
                   {generatedReport.data.length > 50 && (
                     <div className="mt-4 text-center text-sm text-muted-foreground">
-                      Showing first 50 records of{" "}
-                      {generatedReport.total_records} total records. Export the
-                      full report to view all data.
+                      {t("showingFirst50Records")}
+                      {generatedReport.total_records} {t("totalRecords")}.{" "}
+                      {t("exportFullReport")}
                     </div>
                   )}
                 </CardContent>
@@ -395,11 +385,10 @@ export default function ReportsPage() {
                 <CardContent className="flex flex-col items-center justify-center py-12">
                   <FileText className="h-12 w-12 text-muted-foreground mb-4" />
                   <h3 className="text-lg font-semibold mb-2">
-                    No Report Generated
+                    {t("noReportGenerated")}
                   </h3>
                   <p className="text-muted-foreground text-center">
-                    Generate a report from the "Generate Report" tab to view
-                    results here.
+                    {t("generateReportFromTab")}
                   </p>
                 </CardContent>
               </Card>
@@ -412,7 +401,7 @@ export default function ReportsPage() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Clock className="h-5 w-5" />
-                  Report Execution History
+                  {t("reportExecutionHistory")}
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -427,12 +416,12 @@ export default function ReportsPage() {
                     <Table>
                       <TableHeader>
                         <TableRow>
-                          <TableHead>Report Type</TableHead>
-                          <TableHead>Status</TableHead>
-                          <TableHead>Executed By</TableHead>
-                          <TableHead>Execution Time</TableHead>
-                          <TableHead>Created At</TableHead>
-                          <TableHead>Actions</TableHead>
+                          <TableHead>{t("reportType")}</TableHead>
+                          <TableHead>{t("status")}</TableHead>
+                          <TableHead>{t("executedBy")}</TableHead>
+                          <TableHead>{t("executionTime")}</TableHead>
+                          <TableHead>{t("createdAt")}</TableHead>
+                          <TableHead>{t("actions")}</TableHead>
                         </TableRow>
                       </TableHeader>
                       <TableBody>
@@ -455,7 +444,7 @@ export default function ReportsPage() {
                             </TableCell>
                             <TableCell>
                               <Button variant="outline" size="sm">
-                                View
+                                {t("view")}
                               </Button>
                             </TableCell>
                           </TableRow>
@@ -474,7 +463,7 @@ export default function ReportsPage() {
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium">
-                    Total Reports
+                    {t("totalReports")}
                   </CardTitle>
                   <FileText className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
@@ -492,7 +481,7 @@ export default function ReportsPage() {
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium">
-                    This Month
+                    {t("thisMonth")}
                   </CardTitle>
                   <Calendar className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
@@ -510,7 +499,7 @@ export default function ReportsPage() {
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium">
-                    Most Used Type
+                    {t("mostUsedType")}
                   </CardTitle>
                   <Package className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
@@ -528,7 +517,7 @@ export default function ReportsPage() {
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium">
-                    Avg. Execution Time
+                    {t("avgExecutionTime")}
                   </CardTitle>
                   <Clock className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
@@ -547,7 +536,7 @@ export default function ReportsPage() {
             {/* Recent Executions */}
             <Card>
               <CardHeader>
-                <CardTitle>Recent Executions</CardTitle>
+                <CardTitle>{t("recentExecutions")}</CardTitle>
               </CardHeader>
               <CardContent>
                 {statsLoading ? (
@@ -574,13 +563,13 @@ export default function ReportsPage() {
                         <div className="flex items-center gap-2">
                           {getStatusBadge(execution.status)}
                           <Button variant="outline" size="sm">
-                            View
+                            {t("view")}
                           </Button>
                         </div>
                       </div>
                     )) || (
                       <p className="text-center text-muted-foreground py-8">
-                        No recent executions found.
+                        {t("noRecentExecutions")}
                       </p>
                     )}
                   </div>

@@ -1,158 +1,4 @@
 {
-  "reports": {
-    "title": "التقارير",
-    "tabs": {
-      "generate": "إنشاء تقرير",
-      "results": "النتائج",
-      "history": "السجل",
-      "statistics": "الإحصائيات"
-    },
-    "generate": {
-      "title": "إنشاء تقرير جديد",
-      "reportType": "نوع التقرير",
-      "reportTypePlaceholder": "اختر نوع التقرير",
-      "filters": {
-        "dateRange": "نطاق التاريخ",
-        "branch": "الفرع",
-        "branchPlaceholder": "جميع الفروع",
-        "allBranches": "جميع الفروع",
-        "status": "الحالة",
-        "statusPlaceholder": "جميع الحالات",
-        "allStatuses": "جميع الحالات",
-        "active": "نشط",
-        "inactive": "غير نشط",
-        "pending": "معلق",
-        "completed": "مكتمل"
-      },
-      "buttons": {
-        "generate": "إنشاء التقرير",
-        "generating": "جاري الإنشاء...",
-        "exportExcel": "تصدير إلى Excel",
-        "exportCsv": "تصدير إلى CSV",
-        "exportPdf": "تصدير إلى PDF"
-      }
-    },
-    "results": {
-      "totalRecords": "إجمالي السجلات",
-      "generated": "تم الإنشاء",
-      "executionTime": "وقت التنفيذ",
-      "showingRecords": "عرض أول 50 سجل من {total} إجمالي السجلات.",
-      "exportNote": "قم بتصدير التقرير الكامل لعرض جميع البيانات.",
-      "noReport": {
-        "title": "لم يتم إنشاء تقرير",
-        "description": "قم بإنشاء تقرير من علامة تبويب \"إنشاء تقرير\" لعرض النتائج هنا."
-      }
-    },
-    "history": {
-      "title": "سجل تنفيذ التقارير",
-      "table": {
-        "reportType": "نوع التقرير",
-        "status": "الحالة",
-        "executedBy": "تم التنفيذ بواسطة",
-        "executionTime": "وقت التنفيذ",
-        "createdAt": "تاريخ الإنشاء",
-        "actions": "الإجراءات"
-      },
-      "dynamicReport": "تقرير ديناميكي",
-      "viewButton": "عرض"
-    },
-    "statistics": {
-      "cards": {
-        "totalReports": "إجمالي التقارير",
-        "thisMonth": "هذا الشهر",
-        "mostUsedType": "النوع الأكثر استخداماً",
-        "avgExecutionTime": "متوسط وقت التنفيذ"
-      },
-      "recentExecutions": "التنفيذات الأخيرة",
-      "noRecentExecutions": "لا توجد تنفيذات حديثة."
-    },
-    "status": {
-      "completed": "مكتمل",
-      "running": "قيد التشغيل",
-      "failed": "فشل",
-      "pending": "معلق"
-    }
-  },
-  "tableControls": {
-    "search": "البحث...",
-    "exportToCsv": "تصدير إلى CSV",
-    "exportToExcel": "تصدير إلى Excel",
-    "exportToPdf": "تصدير إلى PDF"
-  },
-  "reports": {
-    "title": "التقارير",
-    "tabs": {
-      "generate": "إنشاء تقرير",
-      "results": "النتائج",
-      "history": "السجل",
-      "statistics": "الإحصائيات"
-    },
-    "generate": {
-      "title": "إنشاء تقرير جديد",
-      "reportType": "نوع التقرير",
-      "reportTypePlaceholder": "اختر نوع التقرير",
-      "filters": {
-        "dateRange": "نطاق التاريخ",
-        "branch": "الفرع",
-        "branchPlaceholder": "جميع الفروع",
-        "allBranches": "جميع الفروع",
-        "status": "الحالة",
-        "statusPlaceholder": "جميع الحالات",
-        "allStatuses": "جميع الحالات",
-        "active": "نشط",
-        "inactive": "غير نشط",
-        "pending": "معلق",
-        "completed": "مكتمل"
-      },
-      "buttons": {
-        "generate": "إنشاء التقرير",
-        "generating": "جاري الإنشاء...",
-        "exportExcel": "تصدير إلى Excel",
-        "exportCsv": "تصدير إلى CSV",
-        "exportPdf": "تصدير إلى PDF"
-      }
-    },
-    "results": {
-      "totalRecords": "إجمالي السجلات",
-      "generated": "تم الإنشاء",
-      "executionTime": "وقت التنفيذ",
-      "showingRecords": "عرض أول 50 سجل من {total} إجمالي السجلات.",
-      "exportNote": "قم بتصدير التقرير الكامل لعرض جميع البيانات.",
-      "noReport": {
-        "title": "لم يتم إنشاء تقرير",
-        "description": "قم بإنشاء تقرير من علامة تبويب \"إنشاء تقرير\" لعرض النتائج هنا."
-      }
-    },
-    "history": {
-      "title": "سجل تنفيذ التقارير",
-      "table": {
-        "reportType": "نوع التقرير",
-        "status": "الحالة",
-        "executedBy": "تم التنفيذ بواسطة",
-        "executionTime": "وقت التنفيذ",
-        "createdAt": "تاريخ الإنشاء",
-        "actions": "الإجراءات"
-      },
-      "dynamicReport": "تقرير ديناميكي",
-      "viewButton": "عرض"
-    },
-    "statistics": {
-      "cards": {
-        "totalReports": "إجمالي التقارير",
-        "thisMonth": "هذا الشهر",
-        "mostUsedType": "النوع الأكثر استخداماً",
-        "avgExecutionTime": "متوسط وقت التنفيذ"
-      },
-      "recentExecutions": "التنفيذات الأخيرة",
-      "noRecentExecutions": "لا توجد تنفيذات حديثة."
-    },
-    "status": {
-      "completed": "مكتمل",
-      "running": "قيد التشغيل",
-      "failed": "فشل",
-      "pending": "معلق"
-    }
-  },
   "edit": "تعديل",
   "view": "عرض",
   "save": "حفظ",
@@ -530,6 +376,7 @@
       "errorDescription": "حدث خطأ أثناء إنشاء العميل"
     }
   },
+
   "customer_info": {
     "title": "معلومات العميل",
     "basic_info": "المعلومات الأساسية",
@@ -918,10 +765,6 @@
       "itemDescription": "وصف الصنف"
     },
     "Invoice": {
-      "productId": "معرّف المنتج",
-      "discountPercent": "نسبة الخصم (%)",
-      "removeItem": "حذف العنصر",
-      "addItem": "إضافة عنصر",
       "invoiceNumber": "رقم الفاتورة",
       "status": "الحالة",
       "description": "الوصف",
@@ -1184,5 +1027,45 @@
         "default": "حدث خطأ أثناء التسجيل"
       }
     }
+  },
+  "reports": {
+    "title": "التقارير",
+    "generate": "إنشاء تقرير",
+    "generating": "جاري الإنشاء...",
+    "reportType": "نوع التقرير",
+    "dateRange": "مدة التقرير",
+    "branch": "الفرع",
+    "allBranches": "جميع الفروع",
+    "status": "الحالة",
+    "allStatuses": "جميع الحالات",
+    "active": "مفعل",
+    "inactive": "معطل",
+    "pending": "قيد الانتظار",
+    "completed": "مكتمل",
+    "export": "تصدير",
+    "exportToCSV": "تصدير إلى CSV",
+    "exportToExcel": "تصدير إلى Excel",
+    "exportToPDF": "تصدير إلى PDF",
+    "totalRecords": "إجمالي التقارير",
+    "generated": "منشور",
+    "executionTime": "وقت التنفيذ",
+    "showingFirst50Records": "إظهار أول 50 تقرير ",
+    "exportFullReport": "تصدير التقرير الكامل لعرض جميع البيانات.",
+    "generateReportFromTab": "إنشاء تقرير من علامة التبويب 'إنشاء تقرير' لعرض النتائج هنا.",
+    "noReportGenerated": "لم يتم إنشاء تقرير",
+    "reportExecutionHistory": "تاريخ تنفيذ التقارير",
+    "executedBy": "تنفيذ من",
+    "createdAt": "تاريخ الإنشاء",
+    "actions": "الإجراءات",
+    "view": "عرض",
+    "totalReports": "إجمالي التقارير",
+    "thisMonth": "هذا الشهر",
+    "mostUsedType": "أكثر الأنواع استخدامًا",
+    "avgExecutionTime": "متوسط وقت التنفيذ",
+    "recentExecutions": "التقارير الأحدث",
+    "noRecentExecutions": "لم يتم إنشاء تقرير مؤخرًا.",
+    "results": "النتائج",
+    "history": "التاريخ",
+    "statistics": "الإحصائيات"
   }
 }

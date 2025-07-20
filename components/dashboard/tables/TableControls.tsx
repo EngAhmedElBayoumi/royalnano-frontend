@@ -42,7 +42,6 @@ const TableControls = ({
     title: col.header,
     dataKey: col.field,
   }));
-
   const exportCSV = (selectionOnly: boolean) => {
     if (dataTableRef.current) {
       dataTableRef.current.exportCSV({ selectionOnly });
@@ -94,7 +93,6 @@ const TableControls = ({
       }
     });
   };
-
   return (
     <div className="flex mb-4 flex-col flex-wrap gap-2">
       <div className="flex gap-2 items-center w-full xs:flex-1 flex-wrap">
@@ -118,19 +116,19 @@ const TableControls = ({
           className="bg-primary text-white capitalize"
           onClick={() => exportCSV(false)}
         >
-          Export to CSV
+          {t("tableControls.exportToCSV")}
         </Button>
         <Button
           className="bg-primary text-white capitalize"
           onClick={exportExcel}
         >
-          Export to Excel
+          {t("tableControls.exportToExcel")}
         </Button>
         <Button
           className="bg-primary text-white capitalize"
           onClick={exportPdf}
         >
-          Export to PDF
+          {t("tableControls.exportToPDF")}
         </Button>
         {buttonText && (
           <Button

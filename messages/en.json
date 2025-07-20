@@ -1,85 +1,4 @@
 {
-  "reports": {
-    "title": "Reports",
-    "tabs": {
-      "generate": "Generate Report",
-      "results": "Results",
-      "history": "History",
-      "statistics": "Statistics"
-    },
-    "generate": {
-      "title": "Generate New Report",
-      "reportType": "Report Type",
-      "reportTypePlaceholder": "Select a report type",
-      "filters": {
-        "dateRange": "Date Range",
-        "branch": "Branch",
-        "branchPlaceholder": "All branches",
-        "allBranches": "All branches",
-        "status": "Status",
-        "statusPlaceholder": "All statuses",
-        "allStatuses": "All statuses",
-        "active": "Active",
-        "inactive": "Inactive",
-        "pending": "Pending",
-        "completed": "Completed"
-      },
-      "buttons": {
-        "generate": "Generate Report",
-        "generating": "Generating...",
-        "exportExcel": "Export to Excel",
-        "exportCsv": "Export to CSV",
-        "exportPdf": "Export to PDF"
-      }
-    },
-    "results": {
-      "totalRecords": "Total Records",
-      "generated": "Generated",
-      "executionTime": "Execution Time",
-      "showingRecords": "Showing first 50 records of {total} total records.",
-      "exportNote": "Export the full report to view all data.",
-      "noReport": {
-        "title": "No Report Generated",
-        "description": "Generate a report from the \"Generate Report\" tab to view results here."
-      }
-    },
-    "history": {
-      "title": "Report Execution History",
-      "table": {
-        "reportType": "Report Type",
-        "status": "Status",
-        "executedBy": "Executed By",
-        "executionTime": "Execution Time",
-        "createdAt": "Created At",
-        "actions": "Actions"
-      },
-      "dynamicReport": "Dynamic Report",
-      "viewButton": "View"
-    },
-    "statistics": {
-      "cards": {
-        "totalReports": "Total Reports",
-        "thisMonth": "This Month",
-        "mostUsedType": "Most Used Type",
-        "avgExecutionTime": "Avg. Execution Time"
-      },
-      "recentExecutions": "Recent Executions",
-      "noRecentExecutions": "No recent executions found."
-    },
-    "status": {
-      "completed": "completed",
-      "running": "running",
-      "failed": "failed",
-      "pending": "pending"
-    }
-  },
-  "tableControls": {
-    "search": "Search...",
-    "exportToCsv": "Export to CSV",
-    "exportToExcel": "Export to Excel",
-    "exportToPdf": "Export to PDF"
-  },
-
   "edit": "edit",
   "view": "view",
   "save": "save",
@@ -848,10 +767,6 @@
       "itemDescription": "Item Description"
     },
     "Invoice": {
-      "productId": "Product ID",
-      "discountPercent": "Discount (%)",
-      "removeItem": "Remove Item",
-      "addItem": "Add Item",
       "invoiceNumber": "Invoice Number",
       "status": "Status",
       "description": "Description",
