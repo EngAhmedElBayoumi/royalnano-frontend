@@ -1,6 +1,6 @@
 "use client";
 import { Form } from "@/components/ui/form";
-import { useForm } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import CustomButton from "@/components/formFields/CustomButton";
 import TextInput from "@/components/formFields/TextInput";
@@ -35,12 +35,13 @@ export interface PurchaseInvoiceFormValues {
   description: string;
   status: string;
   items: {
-    item: number;
     quantity: number;
-    unit_price: number;
-    discount: number;
-    tax: number;
-    total: number;
+    unit_price: string;
+    discount: string;
+    discount_percent: string;
+    total: string;
+    item: string; // Product ID
+    extra_fields: Record<string, string>;
   }[];
 }
 
@@ -64,12 +65,13 @@ const PurchaseInvoiceForm = ({
       status: "pending",
       items: [
         {
-          item: 0,
+          item: "",
           quantity: 1,
-          unit_price: 0,
-          discount: 0,
-          tax: 0,
-          total: 0,
+          unit_price: "0.00",
+          discount: "0.00",
+          discount_percent: "0",
+          total: "0.00",
+          extra_fields: {},
         },
       ],
     },
@@ -81,7 +83,10 @@ const PurchaseInvoiceForm = ({
   const { data: warehousesData } = useGetWarehousesQuery({});
   const { data: ordersData } = useGetOrdersQuery({});
   const { data: itemsData } = useGetItemsQuery({});
-
+  const { fields, append, remove } = useFieldArray({
+    control: form.control,
+    name: "items",
+  });
   const branchOptions =
     branchesData?.results?.map((branch: listItems) => ({
       label: branch.name,
@@ -138,27 +143,38 @@ const PurchaseInvoiceForm = ({
     { value: "pending", label: "Pending" },
   ];
 
-  const itemsWatch = form.watch("items");
+  // const itemsWatch = form.watch("items");
   // Auto-calculate total for each item when relevant fields change
-  useEffect(() => {
-    const items = form.getValues("items");
-    const updatedItems = items.map((item) => {
-      const quantity = Number(item.quantity) || 0;
-      const unit_price = Number(item.unit_price) || 0;
-      const discount = Number(item.discount) || 0;
-      const tax = Number(item.tax) || 0;
-      const subtotal = quantity * unit_price - discount;
-      const total = subtotal * (1 + tax / 100);
-      return {
-        ...item,
-        total: Number.isFinite(total) ? Number(total.toFixed(2)) : 0,
-      };
+  // useEffect(() => {
+  //   const items = form.getValues("items");
+  //   const updatedItems = items.map((item) => {
+  //     const quantity = Number(item.quantity) || 0;
+  //     const unit_price = Number(item.unit_price) || 0;
+  //     const discount = Number(item.discount) || 0;
+  //     const tax = Number(item.tax) || 0;
+  //     const subtotal = quantity * unit_price - discount;
+  //     const total = subtotal * (1 + tax / 100);
+  //     return {
+  //       ...item,
+  //       total: Number.isFinite(total) ? Number(total.toFixed(2)) : 0,
+  //     };
+  //   });
+  //   // Only update if values actually changed to avoid infinite loop
+  //   if (JSON.stringify(items) !== JSON.stringify(updatedItems)) {
+  //     form.setValue("items", updatedItems);
+  //   }
+  // }, [form, itemsWatch]);
+  const handleAddItem = () => {
+    append({
+      quantity: 1,
+      unit_price: "0.00",
+      discount: "0.00",
+      discount_percent: "0",
+      total: "0.00",
+      item: "nerm",
+      extra_fields: {},
     });
-    // Only update if values actually changed to avoid infinite loop
-    if (JSON.stringify(items) !== JSON.stringify(updatedItems)) {
-      form.setValue("items", updatedItems);
-    }
-  }, [form, itemsWatch]);
+  };
 
   return (
     <Form {...form}>
@@ -249,27 +265,23 @@ const PurchaseInvoiceForm = ({
 
           {/* Items Array */}
           <div className="mt-6">
-            <h3 className="text-lg font-semibold mb-4">{t("items")}</h3>
-            {form.watch("items")?.map((item, index) => (
-              <section
-                key={index}
-                className="grid sm:grid-cols-2 gap-x-4 gap-y-2 xl:gap-y-5 lg:gap-x-10 mb-4 p-4 border rounded-lg"
+            {fields.map((field, index) => (
+              <div
+                key={field.id}
+                className="col-span-2 border p-4 rounded-lg mb-4"
               >
-                <CustomSelect
+                <TextInput
                   control={form.control}
                   name={`items.${index}.item`}
-                  label={t("item")}
-                  placeholder={t("item")}
-                  options={itemsOptions}
-                  readonly={isView}
-                  valueType="number"
+                  label={t("productId")}
+                  placeholder={t("productId")}
+                  type="text"
                 />
                 <TextInput
                   control={form.control}
                   name={`items.${index}.quantity`}
                   label={t("quantity")}
                   placeholder={t("quantity")}
-                  readonly={isView}
                   type="number"
                 />
                 <TextInput
@@ -277,35 +289,43 @@ const PurchaseInvoiceForm = ({
                   name={`items.${index}.unit_price`}
                   label={t("unitPrice")}
                   placeholder={t("unitPrice")}
-                  readonly={isView}
-                  type="number"
                 />
                 <TextInput
                   control={form.control}
                   name={`items.${index}.discount`}
                   label={t("discount")}
                   placeholder={t("discount")}
-                  readonly={isView}
-                  type="number"
                 />
                 <TextInput
                   control={form.control}
-                  name={`items.${index}.tax`}
-                  label={t("tax")}
-                  placeholder={t("tax")}
-                  readonly={isView}
-                  type="number"
+                  name={`items.${index}.discount_percent`}
+                  label={t("discountPercent")}
+                  placeholder={t("discountPercent")}
                 />
                 <TextInput
                   control={form.control}
                   name={`items.${index}.total`}
                   label={t("total")}
                   placeholder={t("total")}
-                  readonly={true}
-                  type="number"
                 />
-              </section>
+                {fields.length > 1 && (
+                  <button
+                    type="button"
+                    onClick={() => remove(index)}
+                    className="text-red-500 mt-2"
+                  >
+                    {t("removeItem")}
+                  </button>
+                )}
+              </div>
             ))}
+            <button
+              type="button"
+              onClick={handleAddItem}
+              className="bg-primary text-white p-2 rounded-lg mt-4"
+            >
+              {t("addItem")}
+            </button>
           </div>
         </section>
 
