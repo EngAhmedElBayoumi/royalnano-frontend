@@ -88,7 +88,7 @@ export default function ReportsPage() {
             accessToken = JSON.parse(authState.accessToken);
           }
 
-          const response = await fetch("http://localhost:8000/reports/generator/available_types/", {
+          const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/reports/generator/available_types/`, {
             headers: {
               "Authorization": `Bearer ${accessToken}`,
               "Content-Type": "application/json"
@@ -119,7 +119,7 @@ export default function ReportsPage() {
       console.log("Generating report with type:", selectedReportType);
       console.log("Filters:", filters);
       
-      const response = await fetch("http://localhost:8000/reports/generator/generate/", {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/reports/generator/generate/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -150,7 +150,7 @@ export default function ReportsPage() {
     try {
       console.log("Exporting report with type:", selectedReportType, "format:", format);
       
-      const response = await fetch("http://localhost:8000/reports/generator/export/", {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/reports/generator/export/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
