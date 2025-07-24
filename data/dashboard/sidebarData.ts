@@ -44,12 +44,12 @@ export const sidebarLinks = [
     icon: "sales.svg",
     permissions: permissionRoutes["/dashboard/sales"],
   },
-  {
-    path: "/analytics",
-    name: "analytics",
-    icon: "analytics.svg",
-    permissions: permissionRoutes["/dashboard/analytics"],
-  },
+  // {
+  //   path: "/analytics",
+  //   name: "analytics",
+  //   icon: "analytics.svg",
+  //   permissions: permissionRoutes["/dashboard/analytics"],
+  // },
   {
     path: "/reports",
     name: "reports",

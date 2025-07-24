@@ -1107,6 +1107,20 @@
     "noRecentExecutions": "No recent executions found.",
     "results": "Results",
     "history": "History",
-    "statistics": "Statistics"
+    "statistics": "Statistics",
+    "downloadTableCSV": "Download Table CSV" ,
+    "sales_orders": "Sales Orders Report",
+    "quotations": "Quotations Report",
+    "customers": "Customers Report",
+    "current_inventory": "Current Inventory Report",
+    "employees": "Employees Report",
+    "attendance": "Attendance Report",
+    "salary": "Salary Report",
+    "items_usage": "Items Usage Report",
+    "branches": "Branches Report",
+    "enhanced_customers": "Enhanced Customers Report",
+    "branch_balance": "Branch Balance Report",
+    "reports": "Reports",
+    "select_a_report_type": "Select a report type"
   }
 }

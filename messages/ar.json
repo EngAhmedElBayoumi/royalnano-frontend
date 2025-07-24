@@ -1070,6 +1070,20 @@
     "noRecentExecutions": "لم يتم إنشاء تقرير مؤخرًا.",
     "results": "النتائج",
     "history": "التاريخ",
-    "statistics": "الإحصائيات"
+    "statistics": "الإحصائيات",
+    "downloadTableCSV": "تنزيل الجدول كـ CSV",
+    "sales_orders": "تقرير طلبات المبيعات",
+    "quotations": "تقرير عروض الأسعار",
+    "customers": "تقرير العملاء",
+    "current_inventory": "تقرير المخزون الحالي",
+    "employees": "تقرير الموظفين",
+    "attendance": "تقرير الحضور",
+    "salary": "تقرير الرواتب",
+    "items_usage": "تقرير استخدام الأصناف",
+    "branches": "تقرير الفروع",
+    "enhanced_customers": "تقرير العملاء المحسن",
+    "branch_balance": "تقرير رصيد الفرع",
+    "reports":"التقارير",
+    "select_a_report_type": "اختر نوع التقرير"
   }
 }

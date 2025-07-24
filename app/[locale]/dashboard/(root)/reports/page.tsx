@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -39,6 +39,7 @@ import {
   useGetReportStatisticsQuery,
   ReportFilter,
   ReportData,
+  ReportType,
 } from "@/redux/services/reports/reportsApi";
 import { useGetBranchesQuery } from "@/redux/services/dashboard/inventory/branchesApi";
 import { useTranslations } from "next-intl";
@@ -51,12 +52,14 @@ export default function ReportsPage() {
     null
   );
   const [activeTab, setActiveTab] = useState("generate");
+  const [manualReportTypes, setManualReportTypes] = useState<ReportType[]>([]);
 
   // API hooks
   const {
     data: reportTypes,
     isLoading: typesLoading,
     error: typesError,
+    refetch: refetchReportTypes,
   } = useGetAvailableReportTypesQuery();
   const { data: executions, isLoading: executionsLoading } =
     useGetReportExecutionsQuery({});
@@ -67,14 +70,73 @@ export default function ReportsPage() {
     useGenerateReportMutation();
   const [exportReport, { isLoading: exporting }] = useExportReportMutation();
 
+  // Manual API call fallback
+  useEffect(() => {
+    const fetchReportTypesManually = async () => {
+      try {
+        console.log("Redux reportTypes:", reportTypes);
+        console.log("Redux typesLoading:", typesLoading);
+        console.log("Redux typesError:", typesError);
+        
+        // If Redux query failed or returned incomplete data, fetch manually
+        if (!reportTypes || reportTypes.length < 10) {
+          console.log("Fetching report types manually...");
+          
+          const authState = JSON.parse(localStorage.getItem("persist:auth") || "{}");
+          let accessToken = null;
+          if (authState.accessToken) {
+            accessToken = JSON.parse(authState.accessToken);
+          }
+
+          const response = await fetch("http://localhost:8000/reports/generator/available_types/", {
+            headers: {
+              "Authorization": `Bearer ${accessToken}`,
+              "Content-Type": "application/json"
+            }
+          });
+          
+          if (response.ok) {
+            const data = await response.json();
+            console.log("Manual fetch successful, got", data.length, "reports");
+            setManualReportTypes(data);
+          }
+        }
+      } catch (error) {
+        console.error("Manual fetch failed:", error);
+      }
+    };
+
+    fetchReportTypesManually();
+  }, [reportTypes, typesLoading, typesError]);
+
+  // Use manual report types if Redux query failed
+  const finalReportTypes = reportTypes && reportTypes.length >= 10 ? reportTypes : manualReportTypes;
+
   const handleGenerateReport = async () => {
     if (!selectedReportType) return;
 
     try {
-      const result = await generateReport({
-        report_type: selectedReportType,
-        filters,
-      }).unwrap();
+      console.log("Generating report with type:", selectedReportType);
+      console.log("Filters:", filters);
+      
+      const response = await fetch("http://localhost:8000/reports/generator/generate/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          report_type: selectedReportType,
+          filters: filters
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const result = await response.json();
+      console.log("Report generated successfully:", result);
+      
       setGeneratedReport(result);
       setActiveTab("results");
     } catch (error) {
@@ -86,14 +148,29 @@ export default function ReportsPage() {
     if (!selectedReportType) return;
 
     try {
-      const result = await exportReport({
-        report_type: selectedReportType,
-        filters,
-        format,
-      }).unwrap();
+      console.log("Exporting report with type:", selectedReportType, "format:", format);
+      
+      const response = await fetch("http://localhost:8000/reports/generator/export/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          report_type: selectedReportType,
+          filters: filters,
+          format: format
+        })
+      });
 
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      // Get the blob from response
+      const blob = await response.blob();
+      
       // Create download link
-      const url = window.URL.createObjectURL(result);
+      const url = window.URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = url;
       link.download = `${selectedReportType}_report.${
@@ -103,9 +180,42 @@ export default function ReportsPage() {
       link.click();
       document.body.removeChild(link);
       window.URL.revokeObjectURL(url);
+      
+      console.log("Report exported successfully");
     } catch (error) {
       console.error("Failed to export report:", error);
     }
+  };
+
+  const handleDownloadTable = (format: "csv" | "excel") => {
+    if (!generatedReport || !generatedReport.data || generatedReport.data.length === 0) {
+      console.warn("No report data to download.");
+      return;
+    }
+
+    const columns = generatedReport.columns.map(col => col.label);
+    const rows = generatedReport.data.map(row => 
+      generatedReport.columns.map(col => {
+        let value = row[col.key];
+        if (col.type === 'currency' && typeof value === 'number') {
+          value = value.toFixed(2); // Format currency
+        } else if (col.type === 'percentage' && typeof value === 'number') {
+          value = `${value.toFixed(2)}%`; // Format percentage
+        }
+        return `"${(value !== undefined && value !== null) ? String(value).replace(/"/g, "''") : ""}"`;
+      }).join(",")
+    );
+
+    const csvContent = [columns.join(","), ...rows].join("\n");
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute("download", `${generatedReport.report_type}_report.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
   };
 
   const getStatusBadge = (status: string) => {
@@ -121,13 +231,13 @@ export default function ReportsPage() {
     return <Badge variant={variants[status] || "outline"}>{status}</Badge>;
   };
 
-  if (typesLoading) {
+  if (typesLoading && finalReportTypes.length === 0) {
     return (
       <main className="mx-4 sm:mx-7 my-5">
         <div className="flex">
           <IconWithTitle
             imageSrc="/assets/icons/sidebar/reports.svg"
-            title="Reports"
+            title={t("reports")}
             backgroundColor="#F8F7F7"
             textColor="primary"
           />
@@ -142,13 +252,13 @@ export default function ReportsPage() {
     );
   }
 
-  if (typesError) {
+  if (typesError && finalReportTypes.length === 0) {
     return (
       <main className="mx-4 sm:mx-7 my-5">
         <div className="flex">
           <IconWithTitle
             imageSrc="/assets/icons/sidebar/reports.svg"
-            title="Reports"
+            title={t("reports")}
             backgroundColor="#F8F7F7"
             textColor="primary"
           />
@@ -165,7 +275,7 @@ export default function ReportsPage() {
       <div className="flex">
         <IconWithTitle
           imageSrc="/assets/icons/sidebar/reports.svg"
-          title="Reports"
+         title={t("reports")}
           backgroundColor="#F8F7F7"
           textColor="primary"
         />
@@ -173,11 +283,11 @@ export default function ReportsPage() {
 
       <div className="bg-dashboardBg px-4 sm:px-6 pt-5 pb-8 ltr:rounded-r-[20px] ltr:rounded-bl-[20px] rtl:rounded-l-[20px] rtl:rounded-br-[20px]">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-4">
+          <TabsList className="grid w-full grid-cols-2"> {/* تم تغيير grid-cols-4 إلى grid-cols-2 */}
             <TabsTrigger value="generate">{t("generate")}</TabsTrigger>
             <TabsTrigger value="results">{t("results")}</TabsTrigger>
-            <TabsTrigger value="history">{t("history")}</TabsTrigger>
-            <TabsTrigger value="statistics">{t("statistics")}</TabsTrigger>
+            {/* <TabsTrigger value="history">{t("history")}</TabsTrigger> */}
+            {/* <TabsTrigger value="statistics">{t("statistics")}</TabsTrigger> */}
           </TabsList>
 
           {/* Generate Report Tab */}
@@ -198,13 +308,13 @@ export default function ReportsPage() {
                     onValueChange={setSelectedReportType}
                   >
                     <SelectTrigger>
-                      <SelectValue placeholder="Select a report type" />
+                      <SelectValue placeholder={t("select_a_report_type")} />
                     </SelectTrigger>
                     <SelectContent>
-                      {reportTypes?.map((type) => (
+                      {finalReportTypes?.map((type) => (
                         <SelectItem key={type.key} value={type.key}>
                           <div className="flex flex-col">
-                            <span>{type.name}</span>
+                             <span>{t(type.key)}</span>
                             <span className="text-xs text-muted-foreground">
                               {type.description}
                             </span>
@@ -292,6 +402,8 @@ export default function ReportsPage() {
                     {generating ? t("generating") : t("generate")}
                   </Button>
 
+                  {/* تم إزالة أزرار التصدير */}
+                  {/*
                   <Button
                     variant="outline"
                     onClick={() => handleExportReport("excel")}
@@ -321,6 +433,7 @@ export default function ReportsPage() {
                     <Download className="h-4 w-4" />
                     {t("exportToPDF")}
                   </Button>
+                  */}
                 </div>
               </CardContent>
             </Card>
@@ -344,6 +457,17 @@ export default function ReportsPage() {
                       {t("executionTime")}:{" "}
                       {generatedReport.execution_time.toFixed(2)}s
                     </span>
+                  </div>
+                  {/* زر تنزيل الجدول */}
+                  <div className="mt-4">
+                    <Button
+                      onClick={() => handleDownloadTable("csv")}
+                      disabled={!generatedReport || generatedReport.data.length === 0}
+                      className="flex items-center gap-2"
+                    >
+                      <Download className="h-4 w-4" />
+                      {t("downloadTableCSV")}
+                    </Button>
                   </div>
                 </CardHeader>
                 <CardContent>
@@ -582,3 +706,5 @@ export default function ReportsPage() {
     </main>
   );
 }
+
+
